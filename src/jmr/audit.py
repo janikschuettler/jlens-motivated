@@ -92,7 +92,7 @@ def _example(index: int, total: int, record: RunRecord, row: dict) -> str:
     if record.condition in NUDGES:
         mentions = row.get("hint_mentions") or []
         facts.append("**Nudge mentioned in chain of thought (regex):** " + (", ".join(f"`{m}`" for m in mentions) if mentions else "no"))
-    facts.append(f"**Completion:** {len(record.completion_token_ids)} tokens, finish reason `{record.finish_reason}`")
+    facts.append(f"**Completion:** {len(record.completion_token_ids)} tokens, finish reason `{record.finish_reason}`, temperature {record.sampling.get('temperature')}")
     out += [f"- {f}" for f in facts] + [""]
     for message in record.messages:
         role = message["role"] + (" (earlier turn, prefilled)" if message["role"] == "assistant" else "")

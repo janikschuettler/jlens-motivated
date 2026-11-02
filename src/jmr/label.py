@@ -78,6 +78,8 @@ def label_runs(records: list[RunRecord], items: dict[str, dict] | None = None) -
             "correct_letter": r.correct_letter,
             "answer": answer,
             "finish_reason": r.finish_reason,
+            "temperature": r.sampling.get("temperature"),
+            "completion_tokens": len(r.completion_token_ids),
         }
         if items and r.question_id in items:
             row["baseline_correct"] = items[r.question_id]["baseline_correct"]

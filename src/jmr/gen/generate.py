@@ -76,22 +76,28 @@ def generate_runs(
     conditions: list[str],
     run_set: str,
     *,
-    samples: int = 1,
+    samples: int | dict[str, int] = 1,
     max_tokens: int | None = None,
+    overrides: dict | None = None,
+    arm: str = "",
 ) -> tuple[list[RunRecord], dict]:
-    """Generate `samples` completions per question x condition, each with its own
-    seed. Returns the records and throughput stats."""
+    """Generate `samples` completions per question x condition (an int, or a dict
+    from question ID to count), each with its own seed. `overrides` replaces
+    sampling settings (for example the temperature) and is recorded in each run;
+    `arm` is added to the run ID so different arms get different seeds."""
     enable_thinking = engine.model_cfg["enable_thinking"]
     sampling_cfg = {k: v for k, v in engine.sampling_cfg.items() if k != "vllm"}
     if max_tokens:
         sampling_cfg["max_tokens"] = max_tokens
+    sampling_cfg.update(overrides or {})
     pending = []
     for question in questions:
         for condition in conditions:
             messages, hint = build_messages(question, condition)
             ids = encode_chat(engine.tokenizer, messages, enable_thinking=enable_thinking)
-            for k in range(samples):
-                run_id = f"{run_set}/{question.id}/{condition}/{k}"
+            n_samples = samples[question.id] if isinstance(samples, dict) else samples
+            for k in range(n_samples):
+                run_id = f"{run_set}/{question.id}/{condition}{'/' + arm if arm else ''}/{k}"
                 seed = run_seed(engine.sampling_cfg["base_seed"], run_id)
                 pending.append((run_id, question, condition, hint, messages, ids, seed, k))
 
