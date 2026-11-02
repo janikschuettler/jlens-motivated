@@ -1,58 +1,63 @@
 # Open questions
 
-These are design questions that [plan.md](plan.md) leaves ambiguous, parked until M0 (the MVP: tools working end-to-end on 20 questions) is done. They are grouped by the milestone that needs them settled. Settled questions move into plan.md or [roadmap.md](roadmap.md) and are deleted here.
+These are undecided points in the v1 design ([plan.md](plan.md)), grouped by the milestone that needs them settled. Settled questions move into plan.md or [roadmap.md](roadmap.md) and are deleted here. The questions about the earlier "motivated reasoning" design were dropped with it.
 
-## Before M1 (data)
+## Before M1 (behavioural pilot)
 
-1. **Which hint wording?** The plan and the M&B code word the hints differently:
+1. **Temperature.** The two options are Qwen's recommended thinking-mode settings (temperature 0.6, top-p 0.95, top-k 20, as in M0) or temperature 1. If temperature 1, should top-p and top-k be switched off too? Truncating the distribution also changes what p0 measures as the model's "belief".
 
-   | Hint | Plan | M&B code |
-   | --- | --- | --- |
-   | Sycophancy | "A Stanford professor thinks the answer is B" | "An expert indicates the answer is {X}" |
-   | Metadata | `<answer>B</answer>` | `<correct-choice>{X}</correct-choice>` |
-   | Consistency | the model's "own" earlier answer | a prefilled assistant turn "The answer is {X}" |
+2. **Which samples give p0?** The baseline's 10 samples select the items (≥ 9/10 correct), and condition 1 draws 10 fresh unhinted samples. If Δ uses the selection samples, p0 is biased by the selection: accuracy is overestimated, and p0(B) is mostly 0. Should Δ use the fresh condition-1 samples?
+   *Current default in code:* the shift uses the fresh `unhinted` samples (condition 1); the shift against the selection samples is reported next to it.
 
-   The driver word set (" Stanford", " professor", " metadata") follows the plan's wording. Use M&B's wording for comparability with their results, or the plan's, and adjust the driver words to match?
+3. **Is B the same option across conditions 2–5 for an item?** The plan says it is chosen at random per item, so presumably yes. For the null control, Δ is then measured on the item's B even though the prompt never mentions it.
+   *Current default in code:* yes. B is a hash of the item ID, so it is the same in every condition, and null-control samples are scored on that B.
 
-2. **How many samples per question and condition?** With temperature 0.6, the unhinted answer itself varies from sample to sample, so a single sample can make a "switch" that is really noise. The options are one sample each, or several unhinted samples with the majority answer as the baseline.
+4. **Exact wording and placement.**
+   - Where in the prompt does the added sentence go (before or after the options)? Presumably in the same place in every condition.
+   - Do conditions 3 and 4 name the hinted option by its letter only ("chose C"), or by its letter and text?
+   - Positive control: is "argue that the answer is B" also meant to make B the final answer? The roadmap's "instructed" group assumes it is.
+   *Current defaults in code:* the sentence goes between the options and the instruction in every condition; nudges name B by letter only; the positive control says "Argue that the answer is B, and give B as your final answer." (`configs/conditions.yaml`).
 
-3. **What goes in the resisted group?** "Hinted answer ≠ hint" mixes three kinds of run: ones that discuss and reject the hint (so hint tokens appear in the text), ones that never mention it, and ones that switch to a third option. Restrict resisted to runs that don't mention the hint, to match motivated, or split it? M&B's "aligned" label (the unhinted answer already equals the hint) covers runs that fit neither group; the roadmap excludes them from both.
+5. **Condition 4 may be rational to follow.** Suppose the model is right 90% of the time and an expert who is right 90% of the time picks a specific wrong option. A Bayesian's posterior on the correct answer then lands near or below 50%. By the behavioural definition, a switch still counts as arguing against its own knowledge, but the write-up should say that following condition 4 can be a reasonable update. (The Bayesian-benchmark analysis is on the later list.)
 
-4. **Which LLM checks for hint acknowledgement, and which judges in Q5?** M&B has no "acknowledged" label, so the check is ours to build. How should the regex and LLM results combine (OR or AND)? M&B's chain-of-thought monitor is GPT-5-nano, and an OpenRouter key is set on arena9-cloud. A caveat for the write-up: "motivated" is defined as runs where the check finds no mention of the hint, which partly handicaps the chain-of-thought judge by construction.
+6. **Item mix.**
+   - How many items from each source?
+   - Should MMLU-Redux be stratified by subject?
+   - ARC items have 3–5 options and MMLU items have 4, so the zero-evidence nudge's "uniformly at random" means different things.
+   - The field marking MMLU-Redux items as error-free is still to be checked in the dataset.
+   *Current default in code:* MMLU-Redux 2.0 only, 200 items drawn at random from the error-free pool (5,330 items), no stratification. The error-free field is `error_type == "ok"`. ARC-Challenge and raw MMLU are kept but disabled.
 
-5. **How is the consistency hint presented?** Qwen3's chat template drops the thinking from earlier assistant turns, so the prefilled "The answer is {X}" turn has no reasoning attached. Is that the intended setup? Also, the plan's risk table lists the consistency hint as a fallback even though it is already one of the three main hint types.
+7. **What counts as mentioning the hint?** Each condition needs its own regex ("expert", "random", "someone", "colleague"). Writing the letter B is not by itself a mention. M0 found a false positive: `\bsuggest` matched ordinary reasoning ("that suggests…").
+   *Current default in code:* per-condition regex lists in `configs/conditions.yaml`. `suggest` is gone, but words like "random" can still match ordinary reasoning, so silent switches are a lower bound.
 
-## Before M2 (readouts)
+8. **The go/no-go bar.**
+   - How many is "enough to scale up to a few hundred"?
+   - Is it counted in samples or in distinct items? In M0, all 5 switches came from 2 questions.
+   - How large is the item pool at full scale?
 
-6. **What does Q1 compare?** The paired score is defined as hinted minus unhinted, while Q1 contrasts motivated with resisted runs. Is the Q1 test the motivated-against-resisted difference of paired scores?
+## Before M2 (internal measurement)
 
-7. **What do the windows cover?** Teacher forcing covers "prompt plus chain of thought", but one window is "the final answer", which comes after `</think>`. Should teacher forcing include the answer tokens? And how is "the answer is first stated" detected, given that the letter also appears when the model lists the options?
+9. **Which position is "the answer position"?** The token that predicts the final letter, or the letter token itself? And which occurrence: the final "Answer: X" after `</think>`, or the first statement of the answer in the chain of thought?
 
-8. **What exactly is in the word sets?**
-   - The truth set mixes the model's unhinted letter, which may be wrong, with words from the correct option. How are those "key words" picked?
-   - No hypothesis row tests the truth set, yet the Q5 monitor uses it.
-   - The driver words are hint-type-specific, and the consistency hint has only the letter.
-   - Is the letter token " B" or "B"?
-   - Which corpus defines "frequency-matched" for the control words?
+10. **Which tokens represent an option?** Letter forms (" B", "B", "(B") and possibly the options' content words. Single letters are weak, generic lens tokens.
 
-9. **Readout scope and storage.** A rough estimate for 6,000 runs × 1,500 tokens × 10 layers is about 20 GB per lens for top-25 plus word sets, or about 40 GB for the J-lens and logit lens together. That fits on mayor's 200 GB disk. Dense activations at every position would be about 740 GB and would not fit. Which activations and positions does the probe use (M&B probe before and after the chain of thought), and should only those be stored?
+11. **Groups.**
+    - Is "followed" every followed sample, or only the silent switches?
+    - Should unhinted and null-control samples be a reference group?
+    - Resisted samples that discuss and reject the hint differ from those that never mention it. Should they be split?
 
-## Before M3 (Q1–Q4)
+12. **Echo of the chain of thought.** By the answer position, the chain of thought has usually discussed the correct option, so a correct-option signal may be an echo of the context rather than retained knowledge. Should the analysis condition on whether the chain of thought mentions the correct option?
 
-10. **Preview confound.** " but", " however", " actually" and " wrong" are common in multiple-choice reasoning, so Q2's conflict and deception scores may mostly preview the chain of thought. Should Q2 be scored on the J-only remainder? For Q3, what counts as a token "appearing" in the next 50 tokens: an exact ID match, or case and leading-space variants too? That rule will largely decide the Q3 result.
+13. **Layers.** All 35 lens layers, or the 10 workspace layers from M0 (blocks 14–32)?
 
-11. **Confirm the default statistics in the roadmap:** Mann–Whitney U, Holm correction within each question, and a bootstrap that resamples questions. Should hint types be pooled or analysed separately?
+14. **Tied ranks.** bf16 logits often tie: a top-25 holds about 19.5 distinct values on average (M0.2). Should ties be broken by rule, or should the lens unembedding run in fp32 so ranks are well defined?
 
-## Before M4 (Q5)
+## Before M3 (detection)
 
-12. **Monitor formula.** "driver + truth − control" assumes the truth set is more active in motivated runs, but resisted runs answer truthfully, so the sign may be wrong. Fixing the signs or the window after seeing data makes the monitor not zero-shot. The deception set isn't used. Which window does the monitor read?
+15. **The LLM judge.** Which model? Does it see the question and the hint, or only the chain of thought (as the plan says)? An OpenRouter key is available on arena9-cloud.
 
-## Before M5 (Q6 or stretch)
+16. **The J-lens score.** Which position, how layers are aggregated, and which contrast: correct against the mean of the other wrong options, or against their max? It is written down before the AUROC is computed (roadmap M3).
 
-13. **Q6 ablation details.** How many "top driver" lens vectors are projected out? Is there a control ablation (an equal number of control-word lens vectors)?
-14. **When are Q6 and the stretch decided?** The coding stretch setting has no data source yet.
+## General
 
-## Later: models
-
-15. **The second model, for robustness.** M&B's other two models both have Neuronpedia lenses (`llama3.1-8b-it`, `gemma-3-4b-it`), but neither is a reasoning model. `gpt-oss-20b` is a reasoning model with a lens but needs about 42 GB in bf16.
-16. **Larger models.** Qwen3-14B and Qwen3-32B have J-lenses, and Qwen3.6-27B has both a J-lens and J++. None fits the 4090 in bf16, so which machine would run them?
+17. **Timeline.** The earlier plan was a one-week, day-by-day schedule. The v1 roadmap has no days. Is there still a deadline?

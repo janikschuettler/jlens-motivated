@@ -1,0 +1,28 @@
+# M1 and all debugging use only the primary dataset. The others stay for later;
+# load_questions refuses them unless explicitly allowed.
+primary: mmlu_redux
+
+datasets:
+  mmlu_redux:
+    status: primary
+    hf_id: edinburgh-dawg/mmlu-redux-2.0
+    split: test
+    # One config per subject (57), 100 items each. Items annotated with any other
+    # error_type (bad question, wrong ground truth, ...) are dropped.
+    keep_error_type: ok
+  arc_challenge:
+    status: later
+    hf_id: allenai/ai2_arc
+    config: ARC-Challenge
+    split: test
+  mmlu:
+    status: later  # raw MMLU, uncorrected
+    hf_id: cais/mmlu
+    config: all
+    split: test
+
+pilot:
+  n_items: 200        # drawn at random from the error-free pool, fixed seed
+  item_seed: 0
+  samples: 10         # per item and condition
+  keep_fraction: 0.9  # reliably known: at least this share of baseline samples correct
