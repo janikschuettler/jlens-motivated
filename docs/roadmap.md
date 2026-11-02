@@ -11,13 +11,13 @@ Thresholds marked *(default)* are reasonable choices the plan doesn't specify; c
 | M2 One internal measurement | Step 2 | not started |
 | M3 Detection (only if time allows) | Step 3 | not started |
 
-M0 was written and run under the earlier "motivated reasoning" framing. Its tool checks (M0.1–M0.4) carry over unchanged. M0.5's hint wording and labels belong to the old design; M1 replaced them (the old hint config, labels and the M0.5 check script are gone, and the M0 run data stays on mayor).
+M0 was written and run under the earlier "motivated reasoning" framing. Its tool checks (M0.1–M0.4) carry over unchanged. M0.5's hint wording and labels belong to the old design; M1 replaced them (the old hint config, labels and the M0.5 check script are gone, and the M0 run data stays in `data/`).
 
 ## M0: Tools work (Day 0)
 
-**Goal.** Before the week starts, show that the model, the lens and the generation pipeline all run on arena9-mayor, agree with each other and reproduce a known readout. Every later number depends on these checks.
+**Goal.** Before the week starts, show that the model, the lens and the generation pipeline all run on the GPU machine, agree with each other and reproduce a known readout. Every later number depends on these checks.
 
-**Setup.** The repo on mayor, with the `gen` and `lens` uv envs (see [CLAUDE.md](../CLAUDE.md)).
+**Setup.** The repo on the GPU machine, with the `gen` and `lens` uv envs (see [CLAUDE.md](../CLAUDE.md)).
 
 **Workspace layers** *(default)*: blocks 14, 16, …, 32. That is 10 layers, at about 42–92% of depth with depth measured as (ℓ + 1)/36.
 
@@ -93,7 +93,7 @@ Done when:
 - [x] All 80 runs are saved in the handoff format from CLAUDE.md, and at most 8 are truncated or unparseable *(default)*.
 - [x] Labels are assigned, and the counts per label × hint type are reported.
 - [x] At least one run per hint type passes the M0.4 alignment checks in `lens`.
-- [x] Generation throughput is measured, and the projected time for 1,000 questions × 4 conditions is at most 12 hours on mayor *(default)*.
+- [x] Generation throughput is measured, and the projected time for 1,000 questions × 4 conditions is at most 12 hours on the GPU machine *(default)*.
 - [x] The M0 report describes how each hint is built, including how Qwen3's chat template handles the prefilled consistency turn.
 
 ### M0 go/no-go

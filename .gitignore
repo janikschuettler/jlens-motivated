@@ -64,3 +64,6 @@ hf_cache/
 *.tar
 *.tar.gz
 *.zip
+
+# Third-party code checked out for replication (not ours, not committed)
+third_party/

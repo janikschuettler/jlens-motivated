@@ -27,7 +27,7 @@ data/                 gitignored: runs/<run_set>/ (items.jsonl, runs.jsonl, labe
 ```
 
 - The top level of `jmr` never imports torch or vllm. `jmr.gen` imports vllm, and `jmr.lens` imports torch and jlens.
-- Every labelled run set gets `audit.md` (`jmr.audit`, written by `scripts/gen/label.py`): a summary table plus random examples per label × condition, with full prompts, complete chains of thought and responses, for auditing by eye. Never truncate chains of thought in it. `scripts/pull_audit.sh <run_set>` copies it (and `pilot_summary.md`) from mayor to this machine.
+- Every labelled run set gets `audit.md` (`jmr.audit`, written by `scripts/gen/label.py`): a summary table plus random examples per label × condition, with full prompts, complete chains of thought and responses, for auditing by eye. Never truncate chains of thought in it. `scripts/pull_audit.sh <run_set>` copies it (and `pilot_summary.md`) from the GPU machine to this machine.
 - Prompts, conditions and labels are our own code (`jmr.prompts`, `jmr.label`). No third-party pipeline is used or ported.
 
 Core pieces:
@@ -43,12 +43,12 @@ Core pieces:
 | Machine | Role | Specs (checked 2026-11-02) |
 | --- | --- | --- |
 | arena9-cloud (this machine, runs the editor) | Editing, docs | No GPU, 15 GB RAM, about 46 GB free disk |
-| arena9-mayor (`ssh arena9-mayor`) | All model work: generation, readouts, probes | RTX 4090 24 GB (compute 8.9, driver 595, CUDA 13.2), 64 CPUs, 503 GB RAM, 200 GB disk, Ubuntu 22.04 |
+| arena9-octavia (`ssh arena9-octavia`) | All model work now: generation, readouts, probes | NVIDIA L40S 46 GB (48 GB marketed), driver 580, CUDA 13.0, 192 CPUs, about 2 TB RAM, 100 GB disk (96 GB free before setup), vast.ai container (checked 2026-11-02) |
 
 - The fleet list is the "arena-infra fleet" block in `~/.ssh/config`. The other `arena9-*` machines belong to other people; don't use them.
-- 24 GB is enough for Qwen3-8B in bf16 (16.4 GB of weights), both for vLLM generation and for teacher-forced readout. It leaves vLLM only about 4–5 GB of KV cache (about 30k tokens at 144 KiB per token), which limits batch size. It can't hold larger models in bf16 (Qwen3-14B is 29.5 GB).
-- **Code gets to mayor via `scripts/sync_to_mayor.sh`** (an rsync of the repo, excluding `data/` and venvs; it pulls newer `uv.lock` files back first). Edit here, sync, then run on mayor with `ssh arena9-mayor 'cd /root/jlens-motivated && uv run --project envs/<env> python scripts/<env>/<script>.py'`. The repo is private and mayor's GitHub key belongs to a different repo, so mayor can't `git pull`.
-- **Not set up yet:** backups. mayor's disk is the container's overlay filesystem, and whether it survives a container restart is unknown.
+- The L40S has about 45 GiB usable. Qwen3-8B in bf16 is 16.4 GB, which leaves roughly 24 GB for vLLM's KV cache (the 24 GB card used for M0 and the pilots had about 4 GB). That allows far more concurrent sequences, so generation should be several times faster than in M0. It still can't hold Qwen3-32B in bf16 (about 65 GB); Qwen3-14B (about 30 GB) fits for readouts. Disk is 100 GB, so watch `data/` and the HF cache.
+- **Code gets to the GPU machine via `scripts/sync_to_gpu.sh`** (an rsync of the repo, excluding `data/`, `third_party/` and venvs; it pulls newer `uv.lock` files back first). The target defaults to `arena9-octavia`; set `GPU_HOST=<ssh host>` to use another machine (same for `scripts/pull_audit.sh <run_set>`). Edit here, sync, then run with `ssh arena9-octavia 'cd /root/jlens-motivated && unset VIRTUAL_ENV && uv run --project envs/<env> python scripts/<env>/<script>.py'`. The repo is private and no GPU machine has a key that can `git pull` it.
+- **Not set up yet:** backups. Octavia is a vast.ai container, and whether it survives a restart is unknown. `data/` (78 MB, expensive to regenerate) exists only there. Model weights and the lens can be re-downloaded.
 
 ## Environments
 
@@ -62,11 +62,11 @@ uv manages both environments. Never use `pip install`. Generation and readout us
 - Each env is its own uv project with a `pyproject.toml` and a committed `uv.lock`. Python 3.12 in both. Each depends on `jmr` as an editable path dependency.
 - The two envs have different transformers versions, so the tokenizer fingerprint (`jmr.tokens.fingerprint`) is checked across envs (M0.4).
 - Run code with `uv run --project envs/gen …` or `uv run --project envs/lens …`. Add dependencies with `uv add --project envs/<env> …`.
-- Create and lock the envs on mayor, where they run. mayor has uv 0.12.23 on PATH. This machine has uv 0.13.6 in `~/.local/bin`, which isn't on zsh's PATH.
+- Create and lock the envs on the GPU machine, where they run (`uv sync --project envs/<env>`). Both machines have uv 0.12.23 on PATH. This machine has uv 0.13.6 in `~/.local/bin`, which isn't on zsh's PATH.
 - zsh here activates `/root/ARENA_materials/.venv` at startup. That venv belongs to another project, so don't use its Python. `uv run --project` ignores it.
 - Never install a package into one env to make the other env's code run. A dependency conflict counts as a failure (rule 1).
 - Both envs load the pinned model revision and the same tokenizer. Record the revision with every output.
-- Model weights and lens files go to the Hugging Face cache (`~/.cache/huggingface` on mayor), outside the repo.
+- Model weights and lens files go to the Hugging Face cache (`~/.cache/huggingface` on the GPU machine), outside the repo. Download them there directly (`huggingface_hub`); don't copy the cache between machines (6–7 MB/s, versus about 90 s for a direct download).
 
 **The envs exchange files on disk, keyed by token IDs.**
 

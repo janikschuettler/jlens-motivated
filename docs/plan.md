@@ -102,7 +102,7 @@ v1 is deliberately small: behaviour first, internals second. Everything else goe
 
 ## What's needed
 
-- **Compute:** arena9-mayor (RTX 4090, 24 GB). It fits Qwen3-8B in bf16 for vLLM generation and for teacher-forced readout. M0 measured about 800 generated tokens/s and a mean completion of about 1,400 tokens.
+- **Compute:** one GPU machine (M0 and the first pilots ran on an RTX 4090, 24 GB; the project has since moved to a 46 GB L40S). It fits Qwen3-8B in bf16 for vLLM generation and for teacher-forced readout. M0 measured about 800 generated tokens/s and a mean completion of about 1,400 tokens.
 - **Rough size of Step 1:** 200 items × 10 baseline samples, plus about 120 kept items × 5 conditions × 10 samples, comes to about 8,000 samples, or about 4 hours of generation. This is an estimate; the kept fraction is unknown.
 - **Data:** MMLU-Redux 2.0 and ARC-Challenge from the Hugging Face Hub.
 
