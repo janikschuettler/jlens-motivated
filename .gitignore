@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments (uv.lock files are committed)
+.venv/
+venv/
+
+# Tool caches
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+
+# Secrets
+.env
+.env.*
+
+# Logs and experiment tracking
+*.log
+logs/
+wandb/
+
+# Data, model weights, lenses and run outputs (CLAUDE.md rule 2)
+data/
+models/
+lenses/
+outputs/
+checkpoints/
+hf_cache/
+
+# Weight, tensor and data formats, wherever they appear
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.gguf
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.parquet
+*.arrow
+*.feather
+*.pkl
+*.pickle
+*.jsonl
+*.jsonl.gz
+*.db
+*.sqlite
+*.sqlite3
+*.zarr/
+*.tar
+*.tar.gz
+*.zip
