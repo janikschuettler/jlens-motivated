@@ -1,0 +1,16 @@
+# Qwen's recommended thinking-mode settings (roadmap M0.4 default). The temperature is
+# still an open decision (docs/open-questions.md 1): one value, fixed for all conditions.
+temperature: 0.6
+top_p: 0.95
+top_k: 20
+min_p: 0.0
+max_tokens: 8192
+# Per-request seeds are derived from this and the run ID.
+base_seed: 0
+
+vllm:
+  gpu_memory_utilization: 0.90
+  max_model_len: 12288
+  # Return log-probs before temperature/top-p/top-k, so they compare with a
+  # plain teacher-forced log_softmax (M0.4).
+  logprobs_mode: raw_logprobs

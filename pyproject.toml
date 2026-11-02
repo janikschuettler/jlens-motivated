@@ -1,0 +1,15 @@
+[project]
+name = "jmr"
+version = "0.1.0"
+description = "Does the J-lens see what motivated reasoning hides?"
+requires-python = ">=3.12,<3.13"
+# Light dependencies only: jmr is installed into both the gen and the lens env.
+# vllm lives in envs/gen, torch/transformers/jlens in envs/lens.
+dependencies = [
+    "numpy",
+    "pyyaml",
+]
+
+[build-system]
+requires = ["uv_build>=0.9,<0.14"]
+build-backend = "uv_build"

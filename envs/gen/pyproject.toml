@@ -1,0 +1,19 @@
+[project]
+name = "jmr-gen"
+version = "0.0.0"
+description = "Generation env: vLLM sampling, answer extraction, labels"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "jmr",
+    "vllm",
+    "datasets",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+jmr = { path = "../..", editable = true }

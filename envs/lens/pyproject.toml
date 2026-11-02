@@ -1,0 +1,26 @@
+[project]
+name = "jmr-lens"
+version = "0.0.0"
+description = "Readout env: teacher-forced passes, lens readouts, probes, ablations"
+requires-python = ">=3.12,<3.13"
+# torch and transformers match the versions the Neuronpedia Qwen3-8B lens was fit with.
+dependencies = [
+    "jmr",
+    "jlens",
+    "torch==2.11.*",
+    "transformers==5.11.*",
+    "accelerate",
+    "huggingface_hub",
+    "scikit-learn",
+    "pandas",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+jmr = { path = "../..", editable = true }
+jlens = { git = "https://github.com/anthropics/jacobian-lens", rev = "581d398613e5602a5af361e1c34d3a92ea82ba8e" }

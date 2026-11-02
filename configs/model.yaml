@@ -1,0 +1,18 @@
+hf_id: Qwen/Qwen3-8B
+# Post-trained hybrid-thinking model; unchanged on the Hub since 2025-07-26,
+# i.e. the revision the Neuronpedia lens was fit on (2026-06-12).
+revision: b968826d9c46dd6066d109eabc6255188de91218
+dtype: bfloat16
+enable_thinking: true
+
+# Expected config values, checked in M0.1.
+expected:
+  num_hidden_layers: 36
+  hidden_size: 4096
+  vocab_size: 151936
+  tie_word_embeddings: false
+  rms_norm_eps: 1.0e-6
+
+special_tokens:
+  think_start: "<think>"
+  think_end: "</think>"

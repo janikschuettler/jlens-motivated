@@ -1,0 +1,15 @@
+jlens:
+  repo: neuronpedia/jacobian-lens
+  revision: e166deb5ad540932100ef803c8c9bcc2a5453694
+  file: qwen3-8b/jlens/Salesforce-wikitext/Qwen3-8B_jacobian_lens.pt
+  # J[l] maps the output of block l to the output of the final block (35),
+  # both captured by forward hooks on model.layers[i] (jlens.fitting).
+  capture_point: block_output
+  expected_source_layers: [0, 34]  # inclusive range
+  expected_d_model: 4096
+
+# Workspace layers (roadmap default): blocks 14, 16, ..., 32.
+workspace_layers: [14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
+top_k: 25
+# Positions per chunk when unembedding; bounds the [chunk, vocab] fp32 buffer.
+position_chunk: 512
