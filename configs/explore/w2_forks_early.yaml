@@ -1,0 +1,18 @@
+# Wave 2, E5 (designs.md §5 rank 5): forced early answering on wave-2 traces (prefill
+# only). Each selected trace is cut at f = 0, 0.1, ..., 1 of its reasoning tokens (nearest
+# newline), the cue is appended as token IDs, and the next-token distribution (top 20) is
+# summed over option letters. Selection per source x arm: all traces that answered the
+# arm's wrong letter (class hint, cap 100) and as many correct ones (at least 20).
+# Replace the sources from the command line: --runs PATH [PATH ...] --name NEW_NAME.
+name: w2_forks_early
+kind: early
+out_dir: data/explore/w2/forks_early
+fractions: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+cue: {thinking: "</think>\n\nAnswer:", non_thinking: "Answer:"}
+select: {classes: [hint, correct], cap: 100, match_correct_to_hint: true, match_min: 20, seed: 0}
+sources:
+  - {path: data/explore/w2/instructed/runs.jsonl}
+  - {path: data/explore/w2/prefill/runs.jsonl}
+  - {path: data/explore/w2/grader/runs.jsonl}
+  - {path: data/explore/w2/pushback/runs.jsonl}
+  - {path: data/explore/w2/opinion/runs.jsonl}

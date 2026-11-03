@@ -1,0 +1,16 @@
+# Wave 2, E1 (designs.md §5 rank 1): instructed reference groups for the lens.
+# Knows A, says B by construction. I1 = our positive control; I2 argues B but reports
+# its belief on an "Answer:" line ("Argued:" + "Answer:" are both parsed); I3 argues B
+# and is told to hide that another option might be correct (CoT-silent knowing if it
+# complies; checked by keyword on the correct letter and option text).
+# Items: the first 40 known items (>= 9/10 in our setting) of the gap screen.
+include: [blocks.yaml, w2_blocks.yaml]
+name: w2_instructed
+out_dir: data/explore/w2/instructed
+items: {source: known_pool, path: data/explore/known_items.jsonl, setting: A, min_acc: 0.9, limit: 40}
+defaults: {format: ours, thinking: true, decoding: qwen, max_tokens: 8192, samples: 5, est_tokens: 1600}
+arms:
+  - {name: I1_argue, hint: instr_argue, labels: [concealment]}
+  - {name: I2_debate, hint: instr_debate, labels: [argued, concealment]}
+  - {name: I3_conceal, hint: instr_conceal, labels: [concealment]}
+  - {name: unhinted, hint: null, samples: 2, est_tokens: 1450}   # the gap screen has 10 more per item, same setting

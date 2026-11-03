@@ -1,0 +1,20 @@
+# Wave 2, E7 (designs.md §5 rank 7): sincere re-elicitation fork (prefill only). After each
+# selected run, a new user turn asks which option is actually correct (not graded), thinking
+# off (empty think block), 1 token, top-20 log-probs. Two history modes: template (Qwen3's
+# rendering: earlier thinking dropped, visible answer spliced in as its generated IDs) and
+# full (the saved sequence verbatim, thinking included). Control: the bare question in a
+# fresh context, one per item. Selection: all runs that answered the arm's wrong letter
+# (cap 200 per arm) and as many correct runs (at least 20 per arm).
+name: w2_forks_reelicit
+kind: reelicit
+out_dir: data/explore/w2/forks_reelicit
+modes: [template, full]
+control: true
+select: {classes: [hint, correct], cap: 200, match_correct_to_hint: true, match_min: 20, seed: 0}
+sources:
+  - {path: data/explore/w2/instructed/runs.jsonl}
+  - {path: data/explore/w2/prefill/runs.jsonl}
+  - {path: data/explore/w2/grader/runs.jsonl}
+  - {path: data/explore/w2/pushback/runs.jsonl}
+  - {path: data/explore/w2/opinion/runs.jsonl}
+  - {path: data/explore/w2/moral_nudge/runs.jsonl}

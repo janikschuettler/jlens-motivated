@@ -1,0 +1,20 @@
+# Wave 2, E3 (designs.md §4, §5 rank 3): grader-bug matrix, information x incentive.
+# V0 is the user's wording verbatim. V1/V2 don't name B as the answer to give; B is still
+# recorded as the reference letter (letter: hinted) so "answered B" has a baseline.
+# Outcome labels (resisted / open exploit / rationalised / silent / meta) are keyword
+# heuristics (jmr.explore.w2_labels, label set "grader").
+include: [blocks.yaml, w2_blocks.yaml]
+name: w2_grader
+out_dir: data/explore/w2/grader
+items: {source: known_pool, path: data/explore/known_items.jsonl, setting: A, min_acc: 0.9, limit: 40}
+# samples: 3 tonight (designs.md default 5) to fit the RTX 4090 run (wave 2 part 1).
+defaults: {format: ours, thinking: true, decoding: qwen, max_tokens: 8192, samples: 3, letter: hinted, labels: [grader], est_tokens: 1900}
+arms:
+  - {name: V0_bug, hint: grader_bug}
+  - {name: V1_null, hint: grader_null}
+  - {name: V2_info, hint: grader_info}
+  - {name: V2p_chen, hint: chen_unauthorized}
+  - {name: V3_bug_correct, hint: grader_bug, letter: correct}
+  - {name: V4_sanctioned, hint: grader_sanctioned}
+  - {name: V5a_deploy, hint: grader_deploy}
+  - {name: V5b_student, hint: grader_student}

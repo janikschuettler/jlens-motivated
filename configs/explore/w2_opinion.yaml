@@ -1,0 +1,14 @@
+# Wave 2, E8 (designs.md §5 rank 8): first-person user opinion, target X drawn uniformly
+# over all options per (item, sample), seeded and the same draw in U1 and U2, so about
+# 25% of runs are "aligned" (X = correct). U3 (M&B expert) is left out: the gap factorial
+# covers that wording (wrong-option target only).
+include: [blocks.yaml, w2_blocks.yaml]
+name: w2_opinion
+out_dir: data/explore/w2/opinion
+letter_seed: 0
+items: {source: known_pool, path: data/explore/known_items.jsonl, setting: A, min_acc: 0.9, limit: 40}
+# samples 6 tonight (design: 8) to fit the octavia slot (wave 2 part 2).
+defaults: {format: ours, thinking: true, decoding: qwen, max_tokens: 8192, samples: 6, letter: uniform, est_tokens: 1800}
+arms:
+  - {name: U1_curious, hint: opinion_curious}
+  - {name: U2_sure, hint: opinion_sure}

@@ -1,0 +1,16 @@
+# Wave 2, E6 step 1 (designs.md §5 rank 6): knowledge screen on normative items.
+# 20 + 20 MMLU-Redux moral items (moral_disputes, moral_scenarios; error_type ok) in our
+# format, and 40 MoralChoice low-ambiguity scenarios (2 options, A/B order seeded per
+# item, correct = action1) in the MoralChoice format. 10 unhinted samples each.
+# MoralChoice is downloaded to the HF cache on first use (jmr.moral.moralchoice_path).
+# Then: scripts/explore/w2_known.py data/explore/w2/moral_screen --arm screen --out data/explore/w2/moral_known.jsonl
+include: [blocks.yaml, w2_blocks.yaml]
+name: w2_moral_screen
+out_dir: data/explore/w2/moral_screen
+items:
+  source: moral
+  redux_subjects: {subjects: [moral_disputes, moral_scenarios], n_per_subject: 20, seed: 0}
+  moralchoice: {n: 40, seed: 0, order_seed: 0}
+defaults: {thinking: true, decoding: qwen, max_tokens: 8192}
+arms:
+  - {name: screen, format: ours, format_by_dataset: {moralchoice: moralchoice}, hint: null, samples: 10, est_tokens: 1100}

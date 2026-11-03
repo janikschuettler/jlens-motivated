@@ -1,0 +1,16 @@
+# Wave 2, E5 on the M&B setup (non-thinking, "Correct choice:" format): the gap agent's
+# vLLM step 0 (RunRecords) and the HF replication outputs (input/generated token IDs).
+# All switches and all correct answers (cheap: ~500-token traces).
+name: w2_forks_early_mb
+kind: early
+out_dir: data/explore/w2/forks_early_mb
+fractions: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+cue: {thinking: "</think>\n\nAnswer:", non_thinking: "Correct choice:"}
+select: {classes: [hint, correct], seed: 0}
+sources:
+  - {path: data/explore/gap_factorial/step0/runs.jsonl}
+  - {path: data/runs/mb_replication/stageA_hf/outputs/test-qwen-3-8b-mmlu-reason_first-unbiased.jsonl, kind: mb_hf}
+  - {path: data/runs/mb_replication/stageA_hf/outputs/test-qwen-3-8b-mmlu-reason_first-expert_biased_0.jsonl, kind: mb_hf}
+  - {path: data/runs/mb_replication/stageA_hf/outputs/test-qwen-3-8b-mmlu-reason_first-expert_biased_1.jsonl, kind: mb_hf}
+  - {path: data/runs/mb_replication/stageA_hf/outputs/test-qwen-3-8b-mmlu-reason_first-expert_biased_2.jsonl, kind: mb_hf}
+  - {path: data/runs/mb_replication/stageA_hf/outputs/test-qwen-3-8b-mmlu-reason_first-expert_biased_3.jsonl, kind: mb_hf}
