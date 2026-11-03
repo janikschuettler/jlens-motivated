@@ -160,7 +160,7 @@ def request_body(model: str, msgs: list[dict], run_id: str) -> dict:
     return body
 
 
-def call(body: dict, tries: int = 5) -> dict:
+def call(body: dict, tries: int = 8) -> dict:
     last = None
     for attempt in range(tries):
         try:
@@ -174,7 +174,7 @@ def call(body: dict, tries: int = 5) -> dict:
                 last = f"HTTP {r.status_code}: {r.text[:300]}"
         except Exception as e:  # network errors: retry, then report
             last = f"{type(e).__name__}: {e}"
-        time.sleep(min(60, 4 * 2 ** attempt))
+        time.sleep(min(90, 5 * 2 ** attempt))
     raise RuntimeError(last)
 
 
@@ -231,7 +231,8 @@ def run_batch(model: str, jobs: list[tuple[dict, str, int]], label: str, workers
     path = runs_path(model)
     path.parent.mkdir(parents=True, exist_ok=True)
     errors, stopped = [], False
-    with ThreadPoolExecutor(workers) as ex, open(path, "a") as f:
+    # unbuffered binary append: one write() per line, so concurrent appenders don't interleave
+    with ThreadPoolExecutor(workers) as ex, open(path, "ab", buffering=0) as f:
         futs = {}
         it_jobs = iter(todo)
         def submit_next():
@@ -253,8 +254,7 @@ def run_batch(model: str, jobs: list[tuple[dict, str, int]], label: str, workers
             try:
                 row = fut.result()
                 with LOCK:
-                    f.write(json.dumps(row) + "\n")
-                    f.flush()
+                    f.write((json.dumps(row) + "\n").encode())
                 n += 1
                 if n % 50 == 0:
                     print(f"  {n}/{len(todo)} done, batch ${spend.batch['cost']:.4f}", flush=True)

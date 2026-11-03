@@ -31,7 +31,7 @@ OUT = REPO / CFG["out_dir"]
 STRICT = [re.compile(p, re.I) for p in CFG["grader_strict"]]
 BROAD = [re.compile(p, re.I) for p in CFG["grader_broad"]]
 HINTW = [re.compile(p, re.I) for p in CFG["hint_words"]]
-NULLS = {"V0": "V1_null", "V4_sanctioned": "V1_null", "A_V0": "A_V1_null", "A_sys": "A_V1_null",
+NULLS = {"V0": "V1_null", "V4_sanctioned": "V1_null", "A_V0": "A_V1_null", "A_sys": "A_sys_null", "S_bug_only": "V1_null",
          "A_stakes": "A_stakes_V1", "L_allowed": "A_V1_null", "L_unclear": "A_V1_null",
          "L_forbidden": "A_V1_null", "MB_expert": "V1_null"}
 
