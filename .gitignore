@@ -67,3 +67,6 @@ hf_cache/
 
 # Third-party code checked out for replication (not ours, not committed)
 third_party/
+
+# Claude Code session files
+.claude/*.lock

@@ -9,7 +9,7 @@ An interpretability project on **arguing against its own knowledge**. On questio
 - [docs/plan.md](docs/plan.md) is the research design (v1: behavioural pilot, one internal measurement, optional detection, plus a later list). Changes to it are the user's decision.
 - [docs/roadmap.md](docs/roadmap.md) has the milestones (M0 tools; M1–M3 = the plan's Steps 1–3), their done-criteria, the chosen thresholds and the go/no-go points.
 - [docs/open-questions.md](docs/open-questions.md) lists the undecided points, each with the milestone that needs it settled.
-- Status: M0 done (all checks pass, [docs/reports/m0.md](docs/reports/m0.md)). Docs revised to the v1 design on 2026-11-02. M1 code is built and smoke-tested (`scripts/gen/pilot.py`); the full pilot waits for the temperature decision (open question 1).
+- Status: M0 done (all checks pass, [docs/reports/m0.md](docs/reports/m0.md)). Docs revised to the v1 design on 2026-11-02. M1 code is built and smoke-tested (`scripts/gen/pilot.py`); the full pilot waits for the temperature decision (open question 1). Exploration on 2026-11-02/03 (M&B gap factorial, hint families, lens readouts, pre-registered lens tests, subtle cues, planted claims) is in [docs/overnight/](docs/overnight/); start from its log and report.
 
 ## Layout
 
@@ -79,6 +79,16 @@ uv manages both environments. Never use `pip install`. Generation and readout us
 
 - For minor parameters and thresholds, pick a reasonable default, write it down (in the roadmap or the code) and tell the user. Design questions that don't block the current milestone go into `docs/open-questions.md`; don't stop on them.
 - Thresholds already in the roadmap are not to be loosened without asking (rule 1).
+
+### Commits
+
+Commit on your own, without asking, at natural checkpoints (the user's standing instruction, 2026-11-03):
+
+- **When:** a piece of code works and its tests pass; an experiment's report is written; before launching a long GPU run, so the run records a clean git state; at the end of a working session. Don't commit failing tests or half-finished code.
+- **Granularity:** one logical change per commit (a tool, an experiment's code + config, a report), not one commit per file and not a day's work in one commit.
+- **Message:** a short imperative subject naming what changed, then a body with what and why (key numbers for an experiment, the report's path), ending with the attribution line.
+- **Checks before every commit:** stage files by name and check `git status` and `git diff --cached --stat` (rule 2); nothing under `data/`, no weights, no generated chains of thought beyond short quotes in reports; scan staged files for API keys and tokens.
+- **Branch and remote:** commit on the current branch (`main` so far). Don't push, amend or rewrite history unless the user asks.
 
 ## Rules
 
