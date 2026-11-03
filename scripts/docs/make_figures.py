@@ -675,6 +675,59 @@ def fig_early():
     print("wrote", OUT / "fig09_early_answer.svg")
 
 
+def fig_instrument():
+    I = load("instrument_q1q3")
+    H = I["headline"]
+    readouts = [("option_only", "all", "option-text probe (prompt, before reasoning)"),
+                ("probe", "all", "letter probe (trained, 4-class)"),
+                ("match_probe", "all", "option-matching probe (trained)"),
+                ("content_jlens_bincal", "content_items", "J-lens, option content words*"),
+                ("content_logit_bincal", "content_items", "logit lens, option content words*"),
+                ("letter_jlens_bin", "all", "J-lens, option letters"),
+                ("text_last", "all", "CoT text: last option named")]
+    groups = [("unhinted", "u", "unhinted, correct (reference)"), ("kb_instr", "k", "instructed to argue B (sensitivity)"),
+              ("honest_error", "h", "honest errors (specificity)")]
+    series = {"u": ("diamond", GREY, groups[0][2]), "k": ("circle", BLUE, groups[1][2]),
+              "h": ("square", ORANGE, groups[2][2])}
+
+    def rows_for(key):
+        rows = []
+        for r, sub, lab in readouts:
+            if r not in H or sub not in H[r]:
+                continue
+            h = H[r][sub]
+            vals = []
+            for g, s_, _ in groups:
+                d = h[g][key] if key == "mid_point_correct" else h[g][key]
+                vals.append({"s": s_, "v": d["mean"], "lo": d["lo"], "hi": d["hi"]})
+            layer = h.get("layer")
+            sub_lab = (f"L{layer}" if isinstance(layer, int) else "") + (" · content items" if sub == "content_items" else "")
+            rows.append({"label": lab, "sub": sub_lab, "vals": vals})
+        return rows
+
+    kw = dict(xmin=0, xmax=1, step=0.25, fmt=pct, x_fmt=pct_axis, ref=0.25, ref_label="chance", series=series,
+              label_w=360, right_w=40, value_labels=False, row_h=30)
+    g = I["groups"]
+    figure("fig10_instrument.svg",
+           "A probe on the option text reads the answer; along the CoT, no readout beats the text itself",
+           ["Share of runs where the readout's top option is the correct one. Thinking mode; items held out for the probes.",
+            f"Runs / items: unhinted {g['unhinted']['n_runs']} / {g['unhinted']['n_items']}, instructed "
+            f"{g['kb_instr']['n_runs']} / {g['kb_instr']['n_items']}, honest errors {g['honest_error']['n_runs']} / "
+            f"{g['honest_error']['n_items']}. Content-word rows: only the {g['unhinted']['n_items_content']} / "
+            f"{g['kb_instr']['n_items_content']} / {g['honest_error']['n_items_content']} items with content tokens.",
+            "95% item-bootstrap CIs. Exploratory."],
+           [("Mid-CoT (relative positions 0.27–0.73)", dict(rows=rows_for("mid_point_correct"),
+                                                            xlabel="share pointing to the correct option", **kw)),
+            ("At </think> (end of reasoning)", dict(rows=rows_for("think_end"),
+                                                   xlabel="share pointing to the correct option", **kw))],
+           legend_items=[("diamond", GREY, groups[0][2]), ("circle", BLUE, groups[1][2]), ("square", ORANGE, groups[2][2])],
+           notes=["Layer per readout: the best held-out unhinted layer in the mid-CoT window (chosen on the reference group only).",
+                  "The option-text probe reads the prompt's option tokens, so it has one value per item, the same at every position.",
+                  "* Calibrated: minus each token's mean score over the prompt tail. On the honest-error items the model's correct runs score as low (0.18).",
+                  "Source: docs/overnight/data/instrument_q1q3.json (headline.<readout>.<subset>.<group>); report: instrument_q1q3.md."],
+           width=900)
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     fig_factorial()
@@ -686,6 +739,7 @@ def main():
     fig_auroc()
     fig_c3()
     fig_early()
+    fig_instrument()
 
 
 if __name__ == "__main__":

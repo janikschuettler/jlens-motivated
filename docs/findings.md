@@ -12,6 +12,7 @@ This is the running record of what we have found, with one section per finding. 
 - **In thinking mode, switches are open, not silent.** Only 2 of 1,231 factual and 0 of 5,019 moral switches never mention the hint. The rest name it, and many say they disagree with it. Without thinking, 12–17% of switches are silent. *Interpretation:* in thinking mode the chain of thought already shows the model arguing against its own knowledge, so a lens has little to add there. Silent cases come mainly from non-thinking mode and from a planted claim.
 - **Many followers can still give the correct answer, and they pick B before reasoning.** Asked sincerely afterwards, 40–60% of followers of answer-statement hints give the correct option. In runs that end on B, forcing an answer before any reasoning already gives P(B) = 0.82. *Interpretation:* behavioural evidence that these switches are decided up front and then argued for, against knowledge the model can still retrieve. Exploratory, but consistent across arms.
 - **The lenses find no hidden knowledge, but our readout can't show it during reasoning anyway.** The option-letter readout only shows the answer letter where the next token is a letter. Even unhinted runs that go on to answer correctly show no correct-letter margin during their reasoning. At the answer position, wrong-answer runs keep the correct letter 1–3 nats up, about as much as any salient unchosen letter keeps. In the pre-registered tests, T2 failed (AUROC 0.46) and T1 was underpowered. T1b passed narrowly (0.54 [0.504, 0.577]), but response length alone does as well (0.54). *Interpretation:* no evidence yet that the J-lens detects hidden knowledge better than the chain of thought. The nulls are partly a limit of the readout, not evidence that the knowledge is absent.
+- **No readout we have sees the answer during reasoning, but a probe on the option text sees it before.** Mid-CoT, option letters, option content words (J-lens or logit lens) and two trained probes point to the correct option in 24–40% of runs (chance 25%). That holds even for unhinted runs that answer correctly, and none beats the CoT text itself. A probe on the prompt's option tokens points to the correct option in 72% of unhinted runs, 62% of "argue for B" runs and 26% of honest errors. *Interpretation:* the knowledge is represented, but only at the item level that we can see. We still lack an instrument that can show a run arguing against what it knows. Exploratory, moderate confidence (7e).
 - **The one internal trace appears after a planted claim, and the logit lens sees it too.** We plant "The answer is (B)." at the start of the model's thinking. When the model keeps B, the correct letter stays +1.4 nats above the other wrong letters at the answer position, against −0.2 for the salience control. The logit lens shows the same (+1.7 vs +0.5). *Interpretation:* some trace of the correct answer survives to the answer, but it is in the model's output probabilities, not something only the J-lens reveals. Exploratory, 21 items.
 - **Spontaneous rationalised cheating hasn't been shown in a lens-covered model we can run** (literature scoping, §9). Stock Qwen3-8B barely cheats (0–1% in three coding settings). In the nearest public transcripts (Qwen3.8-27B on ImpossibleBench), the CoT names the violation in 25 of 32 cheating runs and rationalises it away in 6. *Interpretation:* moving the core question to norm violations needs a pilot first, most likely multi-turn ImpossibleBench with Qwen3-14B/8B. Moderate confidence.
 
@@ -383,6 +384,53 @@ Exploratory checks around the tests:
 
 **Report:** [overnight/reports/lens_concepts.md](overnight/reports/lens_concepts.md).
 
+### 7e. Instrument check: no readout sees the answer during reasoning; a probe on the option text does before it
+
+**Status:** exploratory. The mid-CoT window and the layer rule were fixed before looking. The option-text probe, the option-matching probe and the content-word calibration were added after the first results.
+
+**Question.** Is there any readout that, during the reasoning, points to the correct option where the model knows it (sensitivity) and not where it doesn't (specificity)? Without one, lens nulls in followed runs can't be read as "the knowledge is gone" (7b).
+
+**Method.** Thinking mode, home format, arena9-octavia, 2,779 runs read out (all checks pass; four runs bit-identical to the single-run readout).
+- *Groups:*
+  - unhinted correct runs on known items: 572 runs / 164 items, plus 1,140 more for probe training;
+  - instructed to argue B (I1/I3): 348 / 39;
+  - I2, argues B but answers correctly: 162 / 38;
+  - honest errors (items with 2–8/10 correct, wrong answer): 62 / 14;
+  - the same items' correct runs: 50 / 18.
+- *Readouts* at 16 CoT positions, `</think>` and the answer position:
+  - option letters (J-lens, logit lens);
+  - option content words: the first distinctive content word of each option, fixed per item before the readout. 96 of 200 items qualify. The scores are calibrated against the prompt tail.
+  - a 4-class letter probe and a letter-agnostic option-matching probe on the block outputs, trained on unhinted correct runs with items held out;
+  - an option-text probe on the prompt's option tokens;
+  - a CoT text baseline: the option the CoT named last.
+- *Measure:* the share of runs whose top option is the correct one. Chance is 0.25. Mid-CoT = relative positions 0.27–0.73. Each readout's layer is the best one on held-out unhinted runs. 95% item-bootstrap intervals.
+
+**Result.**
+
+![Instrument check](findings/figs/fig10_instrument.svg)
+
+- **Mid-CoT, nothing beats the text.**
+  - The letter probe gives 0.30 [0.27, 0.33] on held-out unhinted runs and 0.26 in instructed runs. The option-matching probe gives 0.30 and 0.27.
+  - The J-lens letters are at chance (0.28, 0.24).
+  - Calibrated content words: J-lens 0.40 [0.34, 0.46] unhinted and 0.40 [0.28, 0.53] instructed; the logit lens is the same (0.39, 0.40).
+  - The CoT text gives 0.38 and 0.30.
+- **The probes read the conclusion, not reserved knowledge.** At the last CoT token the letter probe gives 0.85 on unhinted runs, and at the answer position it reads the final answer (B in 99% of instructed runs). In instructed runs it never favours the correct option.
+- **The content-word "specificity" is an item effect.** Honest errors score low (J-lens 0.19, logit 0.06). But the same items' *correct* runs score just as low (0.18, 0.05).
+- **Before the reasoning, a probe on the option text reads the answer.** It points to the correct option on 72% [65, 78] of unhinted runs, 62% [47, 77] of instructed runs and 26% [7, 48] of honest errors (AUROC instructed vs honest errors 0.73 [0.55, 0.87]). The option tokens come before the instruction, so this probe has one value per item.
+- **J-lens vs logit lens:** no difference anywhere.
+- **Length** doesn't change any of this. Within CoT-length tertiles the mid-CoT probe stays at 0.16–0.32.
+
+**Interpretation:** the model's knowledge of the answer is linearly readable at the option tokens on items it knows. During the reasoning, none of our readouts recovers it beyond what the text already says, and the J-lens is no better than the logit lens. So we still have no instrument that can tell, within an item, a run that knows A while arguing B from one that doesn't. The lens nulls of 7a–7c remain uninformative about hidden knowledge. Moderate confidence in the null for linear, single-position readouts.
+
+**Caveats.**
+- Only 14 honest-error items (8 with content tokens).
+- Groups differ in items; the option-text probe measures the item, not the run.
+- Calibrated *letter* readouts are confounded in instructed runs (the prompt tail says "argue that the answer is B") and are not used.
+- Content tokens cover only 96 items, many as word fragments.
+- We didn't read the J-lens at the option positions, so whether the J-lens verbalises what the option-text probe reads is open.
+
+**Report:** [overnight/reports/instrument_q1q3.md](overnight/reports/instrument_q1q3.md).
+
 ---
 
 ## 8. Planted claims (C3)
@@ -456,9 +504,10 @@ Exploratory checks around the tests:
 
 Each item names the finding it comes from. Changes to the plan are the user's decision ([plan.md](plan.md), [roadmap.md](roadmap.md), [open-questions.md](open-questions.md)).
 
-1. **A readout that can see the answer during reasoning** (7b). Options:
-   - track the options' content words as well as the letters (needs a new readout, rule 3);
-   - train a length-controlled probe on mid-CoT block outputs (stored for 800 runs);
+1. **A readout that can see the answer during reasoning** (7b, 7e). Content words and mid-CoT probes were tried and failed (7e). What is left:
+   - apply the option-text probe's direction at CoT positions;
+   - read the J-lens at the option tokens, which needs a longer stored prompt tail (rule 3);
+   - get more honest-error items for specificity;
    - use forced early answers as the behavioural baseline any internal score must beat.
 2. **Where to look for silent cases** (6). Thinking mode under explicit hints gives almost none. The candidates are non-thinking mode (the T1b pool, with 986 silent switches), planted claims (C3), and the few-shot marker on weakly known items, with the unbiased few-shot control.
 3. **Replicate the two small leads with fixed definitions** (7a, 8): a T2-style test with the layer 30–32 score pre-registered, and the C3 re-elicitation link on more C3 runs and items. Both should report a length baseline and the logit lens next to the J-lens.
