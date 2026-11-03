@@ -1,0 +1,8 @@
+# Non-thinking unhinted screen of Qwen3-14B (JMR_MODEL_PROFILE=qwen3-14b) in our format, for mg_nt14_arms.yaml (models x grader-bug follow-up).
+include: [blocks.yaml, w2_blocks.yaml]
+name: mg_nt14_screen
+out_dir: data/explore/models_grader/nt14_screen
+items: {source: known_pool, path: data/explore/known_items.jsonl, setting: A, min_acc: 0.0}
+defaults: {format: ours, thinking: false, decoding: qwen, max_tokens: 2048, samples: 10, est_tokens: 350}
+arms:
+  - {name: unhinted, hint: null}
