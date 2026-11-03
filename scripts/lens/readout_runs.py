@@ -87,10 +87,34 @@ def validate_against_single(reader: BatchReader, lens_model, lens, record, plan,
                 eager = torch.stack([(lp > tl[:, k:k + 1]).sum(-1) + 1 for k in range(tl.shape[1])], 1)
                 stored = torch.from_numpy(arrays["rank"][si, li, max(lo, start) - lo:end - lo]).to(eager.device)
                 rank_mismatch += int((eager != stored).sum())
+        if "x_ids" in arrays:  # per-run content tokens: same checks
+            xids = arrays["x_ids"].tolist()
+            ref_x = single.readout(lens_model, {l: resid[l] for l in layers}, lens=lens if name == "jlens" else None,
+                                   top_k=reader.top_k, token_ids=xids, chunk=reader.chunk)
+            x_diff = float(np.abs(ref_x["token_logprobs"][:, lo:].astype(np.float32)
+                                  - arrays["x_lp"][si].astype(np.float32)).max())
+            x_mis = 0
+            xt = torch.tensor(xids, device=reader.device)
+            for li, layer in enumerate(layers):
+                r = resid[layer]
+                for start in range(0, r.shape[0], reader.chunk):
+                    end = min(start + reader.chunk, r.shape[0])
+                    if end <= lo:
+                        continue
+                    h = r[start:end].float()
+                    if name == "jlens":
+                        h = lens.transport(h, layer)
+                    lp = torch.log_softmax(lens_model.unembed(h).float(), dim=-1)[max(lo, start) - start:]
+                    tl = lp[:, xt]
+                    eager = torch.stack([(lp > tl[:, k:k + 1]).sum(-1) + 1 for k in range(tl.shape[1])], 1)
+                    stored = torch.from_numpy(arrays["x_rank"][si, li, max(lo, start) - lo:end - lo]).to(eager.device)
+                    x_mis += int((eager != stored).sum())
         res[name] = {"rank_mismatches_vs_eager_count": rank_mismatch,
                      "tracked_lp_max_absdiff": float(np.abs(ref_lp - ours).max()),
                      "tracked_lp_frac_identical": float((ref_lp == ours).mean()),
                      "top25_equal_up_to_ties": f"{top_ok}/{top_n}"}
+        if "x_ids" in arrays:
+            res[name].update({"content_lp_max_absdiff": x_diff, "content_rank_mismatches_vs_eager_count": x_mis})
     # Logit lens at the last block = the model's own distribution.
     ref = single.readout(lens_model, {reader.final: resid[reader.final]}, lens=None, top_k=reader.top_k,
                          token_ids=reader.tracked.ids, chunk=reader.chunk)
@@ -122,15 +146,18 @@ def validate_against_single(reader: BatchReader, lens_model, lens, record, plan,
     return res
 
 
-def rank_vs_top(arrays, tracked_ids) -> tuple[int, int, int]:
+def rank_vs_top(arrays, tracked_ids, prefix: str = "") -> tuple[int, int, int]:
     """Where a tracked token is in the stored top-25, its rank must match its
     place there (min-rank rule; the top-25 values are fp16, so fp16 ties give a
     band). Returns (n overlaps, n exact, n within the fp16 tie band); tracked
-    tokens outside the top-25 must have rank > number of strictly-higher entries."""
+    tokens outside the top-25 must have rank > number of strictly-higher entries.
+    prefix "x_": the per-run content tokens (x_rank, x_lp, ...) instead."""
     n = exact = band = 0
-    sets = [(arrays["top_ids"][si, li], arrays["top_lp"][si, li], arrays["rank"][si, li], arrays["lp"][si, li])
+    R, LP = arrays[prefix + "rank"], arrays[prefix + "lp"]
+    sets = [(arrays["top_ids"][si, li], arrays["top_lp"][si, li], R[si, li], LP[si, li])
             for si in range(arrays["top_ids"].shape[0]) for li in range(arrays["top_ids"].shape[1])]
-    sets.append((arrays["model_top_ids"], arrays["model_top_lp"], arrays["model_rank"], arrays["model_lp"]))
+    sets.append((arrays["model_top_ids"], arrays["model_top_lp"], arrays[prefix + "model_rank"],
+                 arrays[prefix + "model_lp"]))
     lo = int(arrays["positions_lo"])
     for top_ids, top_lp, rank, lp in sets:
         for a, pos in enumerate(arrays["top_pos"]):
@@ -162,6 +189,9 @@ def main() -> None:
     parser.add_argument("--validate", type=int, default=0,
                         help="compare the first N new runs with the single-run readout (jmr.lens.readout)")
     parser.add_argument("--no-compress", action="store_true")
+    parser.add_argument("--content-tokens", default=None,
+                        help="per-item content-word tracked tokens (e.g. configs/content_tokens.json); stored in "
+                             "separate x_* arrays, default arrays unchanged; runs on items not in the file stop the run")
     parser.add_argument("--cot-resid", action="store_true",
                         help="also store block outputs at the CoT anchors for the workspace layers (fp16)")
     args = parser.parse_args()
@@ -187,14 +217,14 @@ def main() -> None:
     model_cfg = config.load("model")
     hf_model, tokenizer, lens_model = load_model()
     lens = load_lens(lens_file())
-    reader = BatchReader(lens_model, lens, tokenizer, cot_resid=args.cot_resid)
+    reader = BatchReader(lens_model, lens, tokenizer, cot_resid=args.cot_resid, content_tokens=args.content_tokens)
     fp = fingerprint(tokenizer)
     print(f"tracked tokens: {list(zip(reader.tracked.labels, reader.tracked.ids))}", flush=True)
 
     pool = ThreadPoolExecutor(max_workers=2)
     pending = []
     diffs, shifted, n_tok, sizes, peaks, times, validations = [], [], 0, [], [], [], []
-    overlap = [0, 0, 0]
+    overlap, x_overlap = [0, 0, 0], [0, 0, 0]
     t_start = time.time()
     with open(index_path, "a") as index:
         for i, (record, extras) in enumerate(todo):
@@ -228,6 +258,9 @@ def main() -> None:
             n_tok += len(plan.ids)
             ov = rank_vs_top(arrays, reader.tracked.ids)
             overlap = [a + b for a, b in zip(overlap, ov)]
+            if "x_ids" in arrays:
+                ov = rank_vs_top(arrays, arrays["x_ids"].tolist(), prefix="x_")
+                x_overlap = [a + b for a, b in zip(x_overlap, ov)]
 
             meta = reader.meta(record, extras, plan, arrays)
             meta.update({"file": file_name(record.run_id), "seconds": round(dt, 3), "peak_gpu_gib": round(peak, 2),
@@ -278,6 +311,8 @@ def main() -> None:
             "m0_4_pass": {"median": median <= MEDIAN_MAX, "p99": p99 <= P99_MAX,
                           "shift": float(np.median(s)) >= SHIFT_FACTOR * median},
             "rank_vs_top25": {"overlaps": overlap[0], "exact": overlap[1], "within_fp16_tie_band": overlap[2]},
+            "content_rank_vs_top25": {"overlaps": x_overlap[0], "exact": x_overlap[1],
+                                      "within_fp16_tie_band": x_overlap[2]} if args.content_tokens else None,
             "seconds_by_length": [[int(n), round(t, 3)] for n, t in times],
             "validation_vs_single_run_readout": validations,
         })

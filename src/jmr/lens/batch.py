@@ -100,6 +100,50 @@ def tracked_tokens(tokenizer: Any) -> Tracked:
     return Tracked(letters, forms, ids, labels)
 
 
+def load_content_tokens(path: str | Path, tokenizer: Any) -> dict:
+    """Per-item content-word tracked tokens (configs/content_tokens.json, built by
+    scripts/lens/content_tokens.py), checked against the tokenizer: every ID must
+    be the first token of its form's text and decode to a string that encodes
+    back to exactly that ID. Raises on any mismatch (rule 1)."""
+    cfg = json.loads(Path(path).read_text())
+    problems = []
+    for q, item in cfg["items"].items():
+        for L, opt in item["options"].items():
+            w = opt["word"]
+            texts = {"space": " " + w, "bare": w, "cap": " " + w[0].upper() + w[1:]}
+            for f, tid in opt["ids"].items():
+                first = tokenizer(texts[f], add_special_tokens=False).input_ids[0]
+                s = tokenizer.decode([tid])
+                if first != tid:
+                    problems.append(f"{q} {L} {f}: first token of {texts[f]!r} is {first}, file says {tid}")
+                elif tokenizer(s, add_special_tokens=False).input_ids != [tid] or s != opt["labels"][f]:
+                    problems.append(f"{q} {L} {f}: ID {tid} decodes to {s!r}, not a single-token round trip")
+            if not set(opt["unique_ids"]) <= set(opt["ids"].values()):
+                problems.append(f"{q} {L}: unique_ids not among ids")
+        all_ids = [i for opt in item["options"].values() for i in opt["unique_ids"]]
+        if len(set(all_ids)) != len(all_ids):
+            problems.append(f"{q}: content tokens are shared between options")
+    if problems:
+        raise ValueError(f"content tokens don't match the tokenizer ({len(problems)}): " + "; ".join(problems[:10]))
+    return cfg
+
+
+def run_content_tokens(cfg: dict, record: RunRecord) -> tuple[list[int], list[int]]:
+    """(token IDs, option index into record.letters per ID) for one run. Raises
+    if the run's item is not in the file or disagrees on letters/correct."""
+    item = cfg["items"].get(record.question_id)
+    if item is None:
+        raise ValueError(f"{record.run_id}: item {record.question_id} has no content tokens")
+    if item["letters"] != list(record.letters) or item["correct"] != record.correct_letter:
+        raise ValueError(f"{record.run_id}: content-token file disagrees on letters / correct letter")
+    ids, opt = [], []
+    for li, L in enumerate(record.letters):
+        for tid in item["options"][L]["unique_ids"]:
+            ids.append(int(tid))
+            opt.append(li)
+    return ids, opt
+
+
 # ------------------------------------------------------------------- anchors
 
 TOP_ANCHORS = ["last_prompt", "think_start", "think_end", "pre_first_stated", "pre_answer"]
@@ -199,11 +243,18 @@ _min_rank = torch.compile(_min_rank_eager, dynamic=True)
 class BatchReader:
     """Holds the model, the lens (workspace layers on the GPU) and the settings."""
 
-    def __init__(self, lens_model: HFLensModel, lens: JacobianLens, tokenizer: Any, *, cot_resid: bool = False) -> None:
+    def __init__(self, lens_model: HFLensModel, lens: JacobianLens, tokenizer: Any, *, cot_resid: bool = False,
+                 content_tokens: str | Path | None = None) -> None:
         """cot_resid: also store block outputs (fp16) at the n_cot evenly spaced CoT
         anchors for the workspace layers (optional arrays cot_resid [layers, n_cot, d]
-        and cot_resid_pos [n_cot], -1 / NaN where the run has fewer CoT anchors)."""
+        and cot_resid_pos [n_cot], -1 / NaN where the run has fewer CoT anchors).
+
+        content_tokens: path to a per-item content-token file
+        (configs/content_tokens.json). Each run then also gets per-run tracked
+        tokens, stored in separate optional arrays (x_ids, x_opt, x_lp, x_rank,
+        x_model_lp, x_model_rank); the default arrays are unchanged."""
         self.cot_resid = cot_resid
+        self.content = load_content_tokens(content_tokens, tokenizer) if content_tokens else None
         cfg = config.load("lens")
         self.lens_model = lens_model
         self.tokenizer = tokenizer
@@ -263,7 +314,8 @@ class BatchReader:
     def _read_layer(self, resid: torch.Tensor, *, layer: int | None, lo: int, top_pos: torch.Tensor,
                     out_lp: torch.Tensor, out_rank: torch.Tensor, out_top_ids: torch.Tensor,
                     out_top_lp: torch.Tensor, target: torch.Tensor | None = None,
-                    out_target: torch.Tensor | None = None) -> None:
+                    out_target: torch.Tensor | None = None, extra: torch.Tensor | None = None,
+                    out_xlp: torch.Tensor | None = None, out_xrank: torch.Tensor | None = None) -> None:
         """One lens x layer. layer None: logit lens (J = I). Fills tracked
         log-probs/ranks for positions lo.., top-k at top_pos (-1 = absent), and
         optionally the log-prob of target[t] at each position t."""
@@ -283,6 +335,10 @@ class BatchReader:
             rank = _min_rank(rows, tl)
             out_lp[a - lo : end - lo] = tl.half()
             out_rank[a - lo : end - lo] = rank
+            if extra is not None:  # per-run tracked tokens, same rows and rank rule
+                xl = rows[:, extra]
+                out_xlp[a - lo : end - lo] = xl.half()
+                out_xrank[a - lo : end - lo] = _min_rank(rows, xl)
             m = (top_pos >= start) & (top_pos < end)
             if m.any():
                 v, i = lp[top_pos[m] - start].topk(self.top_k, dim=-1)
@@ -306,6 +362,15 @@ class BatchReader:
         full, anchor_resid = self._forward(ids, [p if p >= 0 else 0 for p in resid_pos])
 
         dev = self.device
+        xt, x = None, {}
+        if self.content is not None:
+            x_ids, x_opt = run_content_tokens(self.content, record)
+            xt = torch.tensor(x_ids, device=dev)
+            K2 = len(x_ids)
+            x = {"lp": torch.zeros((len(LENSES), nL, T, K2), dtype=torch.float16, device=dev),
+                 "rank": torch.zeros((len(LENSES), nL, T, K2), dtype=torch.int32, device=dev),
+                 "model_lp": torch.zeros((T, K2), dtype=torch.float16, device=dev),
+                 "model_rank": torch.zeros((T, K2), dtype=torch.int32, device=dev)}
         lp = torch.zeros((len(LENSES), nL, T, K), dtype=torch.float16, device=dev)
         rank = torch.zeros((len(LENSES), nL, T, K), dtype=torch.int32, device=dev)
         top_ids = torch.full((len(LENSES), nL, A, self.top_k), -1, dtype=torch.int32, device=dev)
@@ -314,7 +379,8 @@ class BatchReader:
             for li, layer in enumerate(self.layers):
                 self._read_layer(full[layer], layer=layer if lens_name == "jlens" else None, lo=lo,
                                  top_pos=top_pos, out_lp=lp[si, li], out_rank=rank[si, li],
-                                 out_top_ids=top_ids[si, li], out_top_lp=top_lp[si, li])
+                                 out_top_ids=top_ids[si, li], out_top_lp=top_lp[si, li], extra=xt,
+                                 out_xlp=x["lp"][si, li] if x else None, out_xrank=x["rank"][si, li] if x else None)
         m_lp = torch.zeros((T, K), dtype=torch.float16, device=dev)
         m_rank = torch.zeros((T, K), dtype=torch.int32, device=dev)
         m_top_ids = torch.full((A, self.top_k), -1, dtype=torch.int32, device=dev)
@@ -322,7 +388,8 @@ class BatchReader:
         target = torch.tensor(ids[1:] + [0], device=dev)
         next_lp = torch.zeros(L, dtype=torch.float32, device=dev)
         self._read_layer(full[self.final], layer=None, lo=lo, top_pos=top_pos, out_lp=m_lp, out_rank=m_rank,
-                         out_top_ids=m_top_ids, out_top_lp=m_top_lp, target=target, out_target=next_lp)
+                         out_top_ids=m_top_ids, out_top_lp=m_top_lp, target=target, out_target=next_lp,
+                         extra=xt, out_xlp=x.get("model_lp"), out_xrank=x.get("model_rank"))
 
         resid16 = anchor_resid.half()
         if not torch.isfinite(resid16).all():
@@ -342,6 +409,9 @@ class BatchReader:
                 if p < 0:
                     cres[:, k] = float("nan")
             extra = {"cot_resid_pos": np.array(cpos, dtype=np.int32), "cot_resid": cres.cpu().numpy()}
+        if x:
+            extra.update({"x_ids": np.array(x_ids, dtype=np.int32), "x_opt": np.array(x_opt, dtype=np.int8),
+                          **{f"x_{k}": v.cpu().numpy() for k, v in x.items()}})
         out = {
             "format_version": np.array(FORMAT_VERSION),
             "layers": np.array(self.layers, dtype=np.int16),
@@ -391,6 +461,9 @@ class BatchReader:
             "top_anchor_names": plan.top_names,
             "resid_anchor_names": self.resid_anchors,
             "cot_resid_layers": self.layers if self.cot_resid else None,
+            "content_tokens": None if self.content is None else {
+                L: {"word": o["word"], "ids": o["unique_ids"]}
+                for L, o in self.content["items"][record.question_id]["options"].items()},
             "cot_span": plan.cot_span,
             "lenses": list(LENSES),
             "tracked": {"letters": self.tracked.letters, "forms": self.tracked.forms,

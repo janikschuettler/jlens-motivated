@@ -1,0 +1,10181 @@
+{
+ "description": "Per-item content-word tracked tokens; built by scripts/lens/content_tokens.py. Per option: first distinctive content word, first token of ' word', 'word', ' Word'.",
+ "tokenizer": {
+  "hf_id": "Qwen/Qwen3-8B",
+  "revision": "b968826d9c46dd6066d109eabc6255188de91218"
+ },
+ "n_items": 200,
+ "n_included": 96,
+ "n_excluded": 104,
+ "excluded_by_reason": {
+  "an option has no distinctive content word": 78,
+  "the ' word' first token has < 2 characters": 23,
+  "options share a first token": 3
+ },
+ "excluded": {
+  "redux/abstract_algebra/12": "an option has no distinctive content word",
+  "redux/abstract_algebra/22": "an option has no distinctive content word",
+  "redux/abstract_algebra/89": "an option has no distinctive content word",
+  "redux/astronomy/35": "the ' word' first token has < 2 characters",
+  "redux/astronomy/44": "an option has no distinctive content word",
+  "redux/astronomy/80": "an option has no distinctive content word",
+  "redux/business_ethics/20": "an option has no distinctive content word",
+  "redux/business_ethics/28": "an option has no distinctive content word",
+  "redux/business_ethics/36": "an option has no distinctive content word",
+  "redux/business_ethics/38": "an option has no distinctive content word",
+  "redux/business_ethics/98": "an option has no distinctive content word",
+  "redux/clinical_knowledge/21": "options share a first token",
+  "redux/clinical_knowledge/64": "an option has no distinctive content word",
+  "redux/clinical_knowledge/82": "options share a first token",
+  "redux/college_biology/15": "the ' word' first token has < 2 characters",
+  "redux/college_biology/47": "the ' word' first token has < 2 characters",
+  "redux/college_biology/63": "the ' word' first token has < 2 characters",
+  "redux/college_biology/8": "the ' word' first token has < 2 characters",
+  "redux/college_biology/84": "the ' word' first token has < 2 characters",
+  "redux/college_chemistry/18": "an option has no distinctive content word",
+  "redux/college_chemistry/23": "an option has no distinctive content word",
+  "redux/college_chemistry/29": "an option has no distinctive content word",
+  "redux/college_chemistry/57": "an option has no distinctive content word",
+  "redux/college_chemistry/63": "an option has no distinctive content word",
+  "redux/college_chemistry/73": "the ' word' first token has < 2 characters",
+  "redux/college_chemistry/8": "an option has no distinctive content word",
+  "redux/college_computer_science/51": "an option has no distinctive content word",
+  "redux/college_computer_science/56": "an option has no distinctive content word",
+  "redux/college_computer_science/87": "an option has no distinctive content word",
+  "redux/college_physics/3": "an option has no distinctive content word",
+  "redux/computer_security/35": "the ' word' first token has < 2 characters",
+  "redux/conceptual_physics/1": "an option has no distinctive content word",
+  "redux/conceptual_physics/21": "an option has no distinctive content word",
+  "redux/econometrics/32": "an option has no distinctive content word",
+  "redux/econometrics/8": "an option has no distinctive content word",
+  "redux/electrical_engineering/26": "an option has no distinctive content word",
+  "redux/electrical_engineering/47": "an option has no distinctive content word",
+  "redux/electrical_engineering/85": "an option has no distinctive content word",
+  "redux/electrical_engineering/88": "options share a first token",
+  "redux/elementary_mathematics/17": "an option has no distinctive content word",
+  "redux/elementary_mathematics/49": "an option has no distinctive content word",
+  "redux/elementary_mathematics/51": "an option has no distinctive content word",
+  "redux/formal_logic/21": "an option has no distinctive content word",
+  "redux/formal_logic/26": "an option has no distinctive content word",
+  "redux/formal_logic/62": "an option has no distinctive content word",
+  "redux/formal_logic/90": "an option has no distinctive content word",
+  "redux/formal_logic/91": "an option has no distinctive content word",
+  "redux/global_facts/33": "an option has no distinctive content word",
+  "redux/global_facts/58": "an option has no distinctive content word",
+  "redux/global_facts/78": "an option has no distinctive content word",
+  "redux/global_facts/88": "an option has no distinctive content word",
+  "redux/global_facts/98": "an option has no distinctive content word",
+  "redux/high_school_biology/40": "the ' word' first token has < 2 characters",
+  "redux/high_school_chemistry/5": "an option has no distinctive content word",
+  "redux/high_school_chemistry/64": "an option has no distinctive content word",
+  "redux/high_school_computer_science/59": "an option has no distinctive content word",
+  "redux/high_school_european_history/34": "the ' word' first token has < 2 characters",
+  "redux/high_school_geography/60": "an option has no distinctive content word",
+  "redux/high_school_government_and_politics/24": "the ' word' first token has < 2 characters",
+  "redux/high_school_macroeconomics/49": "an option has no distinctive content word",
+  "redux/high_school_macroeconomics/52": "an option has no distinctive content word",
+  "redux/high_school_macroeconomics/9": "an option has no distinctive content word",
+  "redux/high_school_macroeconomics/95": "an option has no distinctive content word",
+  "redux/high_school_mathematics/17": "an option has no distinctive content word",
+  "redux/high_school_mathematics/26": "an option has no distinctive content word",
+  "redux/high_school_mathematics/65": "an option has no distinctive content word",
+  "redux/high_school_mathematics/94": "an option has no distinctive content word",
+  "redux/high_school_microeconomics/88": "an option has no distinctive content word",
+  "redux/high_school_physics/1": "an option has no distinctive content word",
+  "redux/high_school_physics/75": "an option has no distinctive content word",
+  "redux/high_school_psychology/36": "an option has no distinctive content word",
+  "redux/high_school_statistics/14": "an option has no distinctive content word",
+  "redux/high_school_statistics/36": "an option has no distinctive content word",
+  "redux/high_school_statistics/42": "an option has no distinctive content word",
+  "redux/high_school_world_history/78": "an option has no distinctive content word",
+  "redux/human_aging/13": "the ' word' first token has < 2 characters",
+  "redux/human_sexuality/56": "an option has no distinctive content word",
+  "redux/human_sexuality/97": "the ' word' first token has < 2 characters",
+  "redux/international_law/33": "an option has no distinctive content word",
+  "redux/machine_learning/13": "an option has no distinctive content word",
+  "redux/marketing/63": "an option has no distinctive content word",
+  "redux/medical_genetics/80": "the ' word' first token has < 2 characters",
+  "redux/miscellaneous/1": "the ' word' first token has < 2 characters",
+  "redux/moral_scenarios/14": "an option has no distinctive content word",
+  "redux/moral_scenarios/40": "an option has no distinctive content word",
+  "redux/moral_scenarios/41": "an option has no distinctive content word",
+  "redux/moral_scenarios/50": "an option has no distinctive content word",
+  "redux/moral_scenarios/72": "an option has no distinctive content word",
+  "redux/moral_scenarios/74": "an option has no distinctive content word",
+  "redux/nutrition/25": "an option has no distinctive content word",
+  "redux/nutrition/26": "the ' word' first token has < 2 characters",
+  "redux/nutrition/71": "an option has no distinctive content word",
+  "redux/philosophy/20": "an option has no distinctive content word",
+  "redux/prehistory/72": "an option has no distinctive content word",
+  "redux/professional_medicine/55": "the ' word' first token has < 2 characters",
+  "redux/professional_medicine/71": "the ' word' first token has < 2 characters",
+  "redux/professional_psychology/19": "the ' word' first token has < 2 characters",
+  "redux/sociology/96": "an option has no distinctive content word",
+  "redux/us_foreign_policy/28": "an option has no distinctive content word",
+  "redux/us_foreign_policy/80": "an option has no distinctive content word",
+  "redux/world_religions/17": "the ' word' first token has < 2 characters",
+  "redux/world_religions/44": "the ' word' first token has < 2 characters",
+  "redux/world_religions/62": "the ' word' first token has < 2 characters",
+  "redux/world_religions/99": "the ' word' first token has < 2 characters"
+ },
+ "options_space_form_whole_word": "302/384",
+ "forms_dropped_too_short": {
+  "bare": 47,
+  "cap": 15
+ },
+ "items": {
+  "redux/astronomy/47": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "corona",
+     "ids": {
+      "space": 1829,
+      "bare": 6005,
+      "cap": 60229
+     },
+     "labels": {
+      "space": " cor",
+      "bare": "cor",
+      "cap": " Corona"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1829,
+      6005,
+      60229
+     ]
+    },
+    "B": {
+     "word": "much",
+     "ids": {
+      "space": 1753,
+      "bare": 58078,
+      "cap": 23309
+     },
+     "labels": {
+      "space": " much",
+      "bare": "much",
+      "cap": " Much"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1753,
+      23309,
+      58078
+     ]
+    },
+    "C": {
+     "word": "see",
+     "ids": {
+      "space": 1490,
+      "bare": 4060,
+      "cap": 3496
+     },
+     "labels": {
+      "space": " see",
+      "bare": "see",
+      "cap": " See"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1490,
+      3496,
+      4060
+     ]
+    },
+    "D": {
+     "word": "diffuse",
+     "ids": {
+      "space": 54417,
+      "bare": 13490,
+      "cap": 28369
+     },
+     "labels": {
+      "space": " diffuse",
+      "bare": "diff",
+      "cap": " Diff"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      13490,
+      28369,
+      54417
+     ]
+    }
+   }
+  },
+  "redux/clinical_knowledge/80": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "fall",
+     "ids": {
+      "space": 4399,
+      "bare": 13464,
+      "cap": 14785
+     },
+     "labels": {
+      "space": " fall",
+      "bare": "fall",
+      "cap": " Fall"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4399,
+      13464,
+      14785
+     ]
+    },
+    "B": {
+     "word": "inhibition",
+     "ids": {
+      "space": 60378,
+      "bare": 258,
+      "cap": 758
+     },
+     "labels": {
+      "space": " inhibition",
+      "bare": "in",
+      "cap": " In"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      258,
+      758,
+      60378
+     ]
+    },
+    "C": {
+     "word": "failure",
+     "ids": {
+      "space": 7901,
+      "bare": 28939,
+      "cap": 32260
+     },
+     "labels": {
+      "space": " failure",
+      "bare": "failure",
+      "cap": " Failure"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7901,
+      28939,
+      32260
+     ]
+    },
+    "D": {
+     "word": "lack",
+     "ids": {
+      "space": 6853,
+      "bare": 75,
+      "cap": 67402
+     },
+     "labels": {
+      "space": " lack",
+      "bare": "l",
+      "cap": " Lack"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      6853,
+      67402
+     ]
+    }
+   }
+  },
+  "redux/college_biology/7": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "independent",
+     "ids": {
+      "space": 9489,
+      "bare": 258,
+      "cap": 21994
+     },
+     "labels": {
+      "space": " independent",
+      "bare": "in",
+      "cap": " Independent"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      258,
+      9489,
+      21994
+     ]
+    },
+    "B": {
+     "word": "dependent",
+     "ids": {
+      "space": 17749,
+      "bare": 37555,
+      "cap": 4148
+     },
+     "labels": {
+      "space": " dependent",
+      "bare": "dependent",
+      "cap": " Dep"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4148,
+      17749,
+      37555
+     ]
+    },
+    "C": {
+     "word": "equal",
+     "ids": {
+      "space": 6144,
+      "bare": 25795,
+      "cap": 38474
+     },
+     "labels": {
+      "space": " equal",
+      "bare": "equal",
+      "cap": " Equal"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6144,
+      25795,
+      38474
+     ]
+    },
+    "D": {
+     "word": "produces",
+     "ids": {
+      "space": 18644,
+      "bare": 8555,
+      "cap": 12042
+     },
+     "labels": {
+      "space": " produces",
+      "bare": "produ",
+      "cap": " Produ"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8555,
+      12042,
+      18644
+     ]
+    }
+   }
+  },
+  "redux/college_biology/92": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "hypotonic",
+     "ids": {
+      "space": 9751,
+      "bare": 78243,
+      "cap": 38415
+     },
+     "labels": {
+      "space": " hyp",
+      "bare": "hyp",
+      "cap": " Hyp"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9751,
+      38415,
+      78243
+     ]
+    },
+    "B": {
+     "word": "higher",
+     "ids": {
+      "space": 5080,
+      "bare": 89347,
+      "cap": 34221
+     },
+     "labels": {
+      "space": " higher",
+      "bare": "higher",
+      "cap": " Higher"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5080,
+      34221,
+      89347
+     ]
+    },
+    "C": {
+     "word": "plasmolysis",
+     "ids": {
+      "space": 625,
+      "bare": 500,
+      "cap": 1818
+     },
+     "labels": {
+      "space": " pl",
+      "bare": "pl",
+      "cap": " Pl"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      500,
+      625,
+      1818
+     ]
+    },
+    "D": {
+     "word": "shrinking",
+     "ids": {
+      "space": 62085,
+      "bare": 66039,
+      "cap": 94738
+     },
+     "labels": {
+      "space": " shrinking",
+      "bare": "shr",
+      "cap": " Shr"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      62085,
+      66039,
+      94738
+     ]
+    }
+   }
+  },
+  "redux/college_physics/18": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "changes",
+     "ids": {
+      "space": 4344,
+      "bare": 19365,
+      "cap": 28140
+     },
+     "labels": {
+      "space": " changes",
+      "bare": "changes",
+      "cap": " Changes"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4344,
+      19365,
+      28140
+     ]
+    },
+    "B": {
+     "word": "temperature",
+     "ids": {
+      "space": 9315,
+      "bare": 34558,
+      "cap": 37022
+     },
+     "labels": {
+      "space": " temperature",
+      "bare": "temperature",
+      "cap": " Temperature"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9315,
+      34558,
+      37022
+     ]
+    },
+    "C": {
+     "word": "unchanged",
+     "ids": {
+      "space": 34857,
+      "bare": 3185,
+      "cap": 1230
+     },
+     "labels": {
+      "space": " unchanged",
+      "bare": "unch",
+      "cap": " Un"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1230,
+      3185,
+      34857
+     ]
+    },
+    "D": {
+     "word": "increase",
+     "ids": {
+      "space": 5263,
+      "bare": 78501,
+      "cap": 39633
+     },
+     "labels": {
+      "space": " increase",
+      "bare": "increase",
+      "cap": " Increase"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5263,
+      39633,
+      78501
+     ]
+    }
+   }
+  },
+  "redux/computer_security/41": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Local",
+     "ids": {
+      "space": 8774,
+      "bare": 7319,
+      "cap": 8774
+     },
+     "labels": {
+      "space": " Local",
+      "bare": "Local",
+      "cap": " Local"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7319,
+      8774
+     ]
+    },
+    "B": {
+     "word": "Program",
+     "ids": {
+      "space": 6687,
+      "bare": 10690,
+      "cap": 6687
+     },
+     "labels": {
+      "space": " Program",
+      "bare": "Program",
+      "cap": " Program"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6687,
+      10690
+     ]
+    },
+    "C": {
+     "word": "Dynamically",
+     "ids": {
+      "space": 32493,
+      "bare": 35,
+      "cap": 32493
+     },
+     "labels": {
+      "space": " Dynam",
+      "bare": "D",
+      "cap": " Dynam"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      32493
+     ]
+    },
+    "D": {
+     "word": "Global",
+     "ids": {
+      "space": 7962,
+      "bare": 11646,
+      "cap": 7962
+     },
+     "labels": {
+      "space": " Global",
+      "bare": "Global",
+      "cap": " Global"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7962,
+      11646
+     ]
+    }
+   }
+  },
+  "redux/computer_security/9": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "whenever",
+     "ids": {
+      "space": 15356,
+      "bare": 1312,
+      "cap": 42533
+     },
+     "labels": {
+      "space": " whenever",
+      "bare": "wh",
+      "cap": " Whenever"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1312,
+      15356,
+      42533
+     ]
+    },
+    "B": {
+     "word": "CPA",
+     "ids": {
+      "space": 86277,
+      "bare": 7123,
+      "cap": 86277
+     },
+     "labels": {
+      "space": " CPA",
+      "bare": "CP",
+      "cap": " CPA"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7123,
+      86277
+     ]
+    },
+    "C": {
+     "word": "large",
+     "ids": {
+      "space": 3460,
+      "bare": 16767,
+      "cap": 20286
+     },
+     "labels": {
+      "space": " large",
+      "bare": "large",
+      "cap": " Large"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3460,
+      16767,
+      20286
+     ]
+    },
+    "D": {
+     "word": "depends",
+     "ids": {
+      "space": 13798,
+      "bare": 57947,
+      "cap": 94011
+     },
+     "labels": {
+      "space": " depends",
+      "bare": "depends",
+      "cap": " Depends"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      13798,
+      57947,
+      94011
+     ]
+    }
+   }
+  },
+  "redux/electrical_engineering/38": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "CB",
+     "ids": {
+      "space": 21318,
+      "bare": 12979,
+      "cap": 21318
+     },
+     "labels": {
+      "space": " CB",
+      "bare": "CB",
+      "cap": " CB"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      12979,
+      21318
+     ]
+    },
+    "B": {
+     "word": "Heat",
+     "ids": {
+      "space": 26070,
+      "bare": 61306,
+      "cap": 26070
+     },
+     "labels": {
+      "space": " Heat",
+      "bare": "Heat",
+      "cap": " Heat"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      26070,
+      61306
+     ]
+    },
+    "C": {
+     "word": "Snubber",
+     "ids": {
+      "space": 13059,
+      "bare": 20720,
+      "cap": 13059
+     },
+     "labels": {
+      "space": " Sn",
+      "bare": "Sn",
+      "cap": " Sn"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      13059,
+      20720
+     ]
+    },
+    "D": {
+     "word": "Voltage",
+     "ids": {
+      "space": 60938,
+      "bare": 94343,
+      "cap": 60938
+     },
+     "labels": {
+      "space": " Voltage",
+      "bare": "Voltage",
+      "cap": " Voltage"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      60938,
+      94343
+     ]
+    }
+   }
+  },
+  "redux/high_school_biology/39": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "insoluble",
+     "ids": {
+      "space": 84843,
+      "bare": 1330,
+      "cap": 9726
+     },
+     "labels": {
+      "space": " insol",
+      "bare": "ins",
+      "cap": " Ins"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1330,
+      9726,
+      84843
+     ]
+    },
+    "B": {
+     "word": "Ammonia",
+     "ids": {
+      "space": 3303,
+      "bare": 6091,
+      "cap": 3303
+     },
+     "labels": {
+      "space": " Am",
+      "bare": "Am",
+      "cap": " Am"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3303,
+      6091
+     ]
+    },
+    "C": {
+     "word": "use",
+     "ids": {
+      "space": 990,
+      "bare": 810,
+      "cap": 5443
+     },
+     "labels": {
+      "space": " use",
+      "bare": "use",
+      "cap": " Use"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      810,
+      990,
+      5443
+     ]
+    },
+    "D": {
+     "word": "makes",
+     "ids": {
+      "space": 3643,
+      "bare": 79685,
+      "cap": 36870
+     },
+     "labels": {
+      "space": " makes",
+      "bare": "makes",
+      "cap": " Makes"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3643,
+      36870,
+      79685
+     ]
+    }
+   }
+  },
+  "redux/high_school_biology/62": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "dies",
+     "ids": {
+      "space": 8725,
+      "bare": 67,
+      "cap": 23980
+     },
+     "labels": {
+      "space": " dies",
+      "bare": "d",
+      "cap": " Dies"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      8725,
+      23980
+     ]
+    },
+    "B": {
+     "word": "much",
+     "ids": {
+      "space": 1753,
+      "bare": 58078,
+      "cap": 23309
+     },
+     "labels": {
+      "space": " much",
+      "bare": "much",
+      "cap": " Much"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1753,
+      23309,
+      58078
+     ]
+    },
+    "C": {
+     "word": "food",
+     "ids": {
+      "space": 3607,
+      "bare": 13915,
+      "cap": 12098
+     },
+     "labels": {
+      "space": " food",
+      "bare": "food",
+      "cap": " Food"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3607,
+      12098,
+      13915
+     ]
+    },
+    "D": {
+     "word": "begin",
+     "ids": {
+      "space": 3161,
+      "bare": 7265,
+      "cap": 18597
+     },
+     "labels": {
+      "space": " begin",
+      "bare": "begin",
+      "cap": " Begin"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3161,
+      7265,
+      18597
+     ]
+    }
+   }
+  },
+  "redux/high_school_biology/91": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "bacterium",
+     "ids": {
+      "space": 17398,
+      "bare": 65,
+      "cap": 425
+     },
+     "labels": {
+      "space": " bacter",
+      "bare": "b",
+      "cap": " B"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space"
+     ],
+     "unique_ids": [
+      17398
+     ]
+    },
+    "B": {
+     "word": "best",
+     "ids": {
+      "space": 1850,
+      "bare": 15862,
+      "cap": 7107
+     },
+     "labels": {
+      "space": " best",
+      "bare": "best",
+      "cap": " Best"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1850,
+      7107,
+      15862
+     ]
+    },
+    "C": {
+     "word": "restriction",
+     "ids": {
+      "space": 19455,
+      "bare": 71331,
+      "cap": 41327
+     },
+     "labels": {
+      "space": " restriction",
+      "bare": "restriction",
+      "cap": " Restr"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      19455,
+      41327,
+      71331
+     ]
+    },
+    "D": {
+     "word": "type",
+     "ids": {
+      "space": 943,
+      "bare": 1313,
+      "cap": 3990
+     },
+     "labels": {
+      "space": " type",
+      "bare": "type",
+      "cap": " Type"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      943,
+      1313,
+      3990
+     ]
+    }
+   }
+  },
+  "redux/high_school_chemistry/49": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Increasing",
+     "ids": {
+      "space": 73440,
+      "bare": 80682,
+      "cap": 73440
+     },
+     "labels": {
+      "space": " Increasing",
+      "bare": "Increasing",
+      "cap": " Increasing"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      73440,
+      80682
+     ]
+    },
+    "B": {
+     "word": "Adding",
+     "ids": {
+      "space": 30370,
+      "bare": 32308,
+      "cap": 30370
+     },
+     "labels": {
+      "space": " Adding",
+      "bare": "Adding",
+      "cap": " Adding"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      30370,
+      32308
+     ]
+    },
+    "C": {
+     "word": "Decreasing",
+     "ids": {
+      "space": 64101,
+      "bare": 94843,
+      "cap": 64101
+     },
+     "labels": {
+      "space": " Decre",
+      "bare": "Decre",
+      "cap": " Decre"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      64101,
+      94843
+     ]
+    },
+    "D": {
+     "word": "Removing",
+     "ids": {
+      "space": 66703,
+      "bare": 63619,
+      "cap": 66703
+     },
+     "labels": {
+      "space": " Removing",
+      "bare": "Removing",
+      "cap": " Removing"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      63619,
+      66703
+     ]
+    }
+   }
+  },
+  "redux/high_school_chemistry/59": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "soluble",
+     "ids": {
+      "space": 86945,
+      "bare": 38198,
+      "cap": 11473
+     },
+     "labels": {
+      "space": " soluble",
+      "bare": "sol",
+      "cap": " Sol"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      11473,
+      38198,
+      86945
+     ]
+    },
+    "B": {
+     "word": "electronegative",
+     "ids": {
+      "space": 42806,
+      "bare": 18957,
+      "cap": 9884
+     },
+     "labels": {
+      "space": " electr",
+      "bare": "elect",
+      "cap": " Elect"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9884,
+      18957,
+      42806
+     ]
+    },
+    "C": {
+     "word": "isoelectronic",
+     "ids": {
+      "space": 374,
+      "bare": 285,
+      "cap": 86943
+     },
+     "labels": {
+      "space": " is",
+      "bare": "is",
+      "cap": " Iso"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      285,
+      374,
+      86943
+     ]
+    },
+    "D": {
+     "word": "highly",
+     "ids": {
+      "space": 7548,
+      "bare": 11892,
+      "cap": 52385
+     },
+     "labels": {
+      "space": " highly",
+      "bare": "high",
+      "cap": " Highly"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7548,
+      11892,
+      52385
+     ]
+    }
+   }
+  },
+  "redux/high_school_european_history/25": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "weakened",
+     "ids": {
+      "space": 57664,
+      "bare": 896,
+      "cap": 1205
+     },
+     "labels": {
+      "space": " weakened",
+      "bare": "we",
+      "cap": " We"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      896,
+      1205,
+      57664
+     ]
+    },
+    "B": {
+     "word": "core",
+     "ids": {
+      "space": 6200,
+      "bare": 2153,
+      "cap": 9518
+     },
+     "labels": {
+      "space": " core",
+      "bare": "core",
+      "cap": " Core"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2153,
+      6200,
+      9518
+     ]
+    },
+    "C": {
+     "word": "refined",
+     "ids": {
+      "space": 37191,
+      "bare": 1097,
+      "cap": 431
+     },
+     "labels": {
+      "space": " refined",
+      "bare": "ref",
+      "cap": " R"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare"
+     ],
+     "unique_ids": [
+      1097,
+      37191
+     ]
+    },
+    "D": {
+     "word": "stagnated",
+     "ids": {
+      "space": 53263,
+      "bare": 267,
+      "cap": 794
+     },
+     "labels": {
+      "space": " stagn",
+      "bare": "st",
+      "cap": " St"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      267,
+      794,
+      53263
+     ]
+    }
+   }
+  },
+  "redux/high_school_european_history/26": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Germany",
+     "ids": {
+      "space": 9856,
+      "bare": 50170,
+      "cap": 9856
+     },
+     "labels": {
+      "space": " Germany",
+      "bare": "Germany",
+      "cap": " Germany"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9856,
+      50170
+     ]
+    },
+    "B": {
+     "word": "France",
+     "ids": {
+      "space": 9625,
+      "bare": 49000,
+      "cap": 9625
+     },
+     "labels": {
+      "space": " France",
+      "bare": "France",
+      "cap": " France"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9625,
+      49000
+     ]
+    },
+    "C": {
+     "word": "Great",
+     "ids": {
+      "space": 8513,
+      "bare": 21396,
+      "cap": 8513
+     },
+     "labels": {
+      "space": " Great",
+      "bare": "Great",
+      "cap": " Great"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8513,
+      21396
+     ]
+    },
+    "D": {
+     "word": "Austria",
+     "ids": {
+      "space": 34898,
+      "bare": 32,
+      "cap": 34898
+     },
+     "labels": {
+      "space": " Austria",
+      "bare": "A",
+      "cap": " Austria"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      34898
+     ]
+    }
+   }
+  },
+  "redux/high_school_european_history/99": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Nicolaus",
+     "ids": {
+      "space": 78441,
+      "bare": 57816,
+      "cap": 78441
+     },
+     "labels": {
+      "space": " Nicola",
+      "bare": "Nic",
+      "cap": " Nicola"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      57816,
+      78441
+     ]
+    },
+    "B": {
+     "word": "Johannes",
+     "ids": {
+      "space": 54105,
+      "bare": 41,
+      "cap": 54105
+     },
+     "labels": {
+      "space": " Johannes",
+      "bare": "J",
+      "cap": " Johannes"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      54105
+     ]
+    },
+    "C": {
+     "word": "Galileo",
+     "ids": {
+      "space": 10620,
+      "bare": 52519,
+      "cap": 10620
+     },
+     "labels": {
+      "space": " Gal",
+      "bare": "Gal",
+      "cap": " Gal"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      10620,
+      52519
+     ]
+    },
+    "D": {
+     "word": "Josef",
+     "ids": {
+      "space": 97441,
+      "bare": 45007,
+      "cap": 97441
+     },
+     "labels": {
+      "space": " Josef",
+      "bare": "Jose",
+      "cap": " Josef"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      45007,
+      97441
+     ]
+    }
+   }
+  },
+  "redux/high_school_geography/12": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "intervening",
+     "ids": {
+      "space": 88401,
+      "bare": 396,
+      "cap": 1333
+     },
+     "labels": {
+      "space": " intervening",
+      "bare": "int",
+      "cap": " Int"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      396,
+      1333,
+      88401
+     ]
+    },
+    "B": {
+     "word": "distance",
+     "ids": {
+      "space": 6010,
+      "bare": 19348,
+      "cap": 31135
+     },
+     "labels": {
+      "space": " distance",
+      "bare": "distance",
+      "cap": " Distance"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6010,
+      19348,
+      31135
+     ]
+    },
+    "C": {
+     "word": "involuntary",
+     "ids": {
+      "space": 90505,
+      "bare": 258,
+      "cap": 758
+     },
+     "labels": {
+      "space": " involuntary",
+      "bare": "in",
+      "cap": " In"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      258,
+      758,
+      90505
+     ]
+    },
+    "D": {
+     "word": "push",
+     "ids": {
+      "space": 4484,
+      "bare": 9077,
+      "cap": 22950
+     },
+     "labels": {
+      "space": " push",
+      "bare": "push",
+      "cap": " Push"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4484,
+      9077,
+      22950
+     ]
+    }
+   }
+  },
+  "redux/high_school_geography/38": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "future",
+     "ids": {
+      "space": 3853,
+      "bare": 21055,
+      "cap": 12498
+     },
+     "labels": {
+      "space": " future",
+      "bare": "future",
+      "cap": " Future"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3853,
+      12498,
+      21055
+     ]
+    },
+    "B": {
+     "word": "baby",
+     "ids": {
+      "space": 8770,
+      "bare": 77964,
+      "cap": 20617
+     },
+     "labels": {
+      "space": " baby",
+      "bare": "baby",
+      "cap": " Baby"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8770,
+      20617,
+      77964
+     ]
+    },
+    "C": {
+     "word": "wars",
+     "ids": {
+      "space": 24936,
+      "bare": 86,
+      "cap": 14968
+     },
+     "labels": {
+      "space": " wars",
+      "bare": "w",
+      "cap": " Wars"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      14968,
+      24936
+     ]
+    },
+    "D": {
+     "word": "quick",
+     "ids": {
+      "space": 3974,
+      "bare": 27763,
+      "cap": 17251
+     },
+     "labels": {
+      "space": " quick",
+      "bare": "quick",
+      "cap": " Quick"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3974,
+      17251,
+      27763
+     ]
+    }
+   }
+  },
+  "redux/high_school_geography/93": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Food",
+     "ids": {
+      "space": 12098,
+      "bare": 26746,
+      "cap": 12098
+     },
+     "labels": {
+      "space": " Food",
+      "bare": "Food",
+      "cap": " Food"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      12098,
+      26746
+     ]
+    },
+    "B": {
+     "word": "Population",
+     "ids": {
+      "space": 39529,
+      "bare": 53371,
+      "cap": 39529
+     },
+     "labels": {
+      "space": " Population",
+      "bare": "Population",
+      "cap": " Population"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      39529,
+      53371
+     ]
+    },
+    "C": {
+     "word": "Wildlife",
+     "ids": {
+      "space": 41549,
+      "bare": 40603,
+      "cap": 41549
+     },
+     "labels": {
+      "space": " Wildlife",
+      "bare": "Wild",
+      "cap": " Wildlife"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      40603,
+      41549
+     ]
+    },
+    "D": {
+     "word": "Tourism",
+     "ids": {
+      "space": 51552,
+      "bare": 54950,
+      "cap": 51552
+     },
+     "labels": {
+      "space": " Tourism",
+      "bare": "Tour",
+      "cap": " Tourism"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      51552,
+      54950
+     ]
+    }
+   }
+  },
+  "redux/high_school_government_and_politics/29": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "congressperson",
+     "ids": {
+      "space": 21040,
+      "bare": 443,
+      "cap": 7992
+     },
+     "labels": {
+      "space": " congress",
+      "bare": "con",
+      "cap": " Congress"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      443,
+      7992,
+      21040
+     ]
+    },
+    "B": {
+     "word": "former",
+     "ids": {
+      "space": 4741,
+      "bare": 34527,
+      "cap": 32500
+     },
+     "labels": {
+      "space": " former",
+      "bare": "former",
+      "cap": " Former"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4741,
+      32500,
+      34527
+     ]
+    },
+    "C": {
+     "word": "voter",
+     "ids": {
+      "space": 25323,
+      "bare": 85,
+      "cap": 94024
+     },
+     "labels": {
+      "space": " voter",
+      "bare": "v",
+      "cap": " Voter"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      25323,
+      94024
+     ]
+    },
+    "D": {
+     "word": "official",
+     "ids": {
+      "space": 3946,
+      "bare": 32812,
+      "cap": 22651
+     },
+     "labels": {
+      "space": " official",
+      "bare": "official",
+      "cap": " Official"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3946,
+      22651,
+      32812
+     ]
+    }
+   }
+  },
+  "redux/high_school_government_and_politics/72": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "power",
+     "ids": {
+      "space": 2355,
+      "bare": 13175,
+      "cap": 7420
+     },
+     "labels": {
+      "space": " power",
+      "bare": "power",
+      "cap": " Power"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2355,
+      7420,
+      13175
+     ]
+    },
+    "B": {
+     "word": "introduce",
+     "ids": {
+      "space": 19131,
+      "bare": 396,
+      "cap": 1333
+     },
+     "labels": {
+      "space": " introduce",
+      "bare": "int",
+      "cap": " Int"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      396,
+      1333,
+      19131
+     ]
+    },
+    "C": {
+     "word": "States",
+     "ids": {
+      "space": 4180,
+      "bare": 23256,
+      "cap": 4180
+     },
+     "labels": {
+      "space": " States",
+      "bare": "States",
+      "cap": " States"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4180,
+      23256
+     ]
+    },
+    "D": {
+     "word": "allows",
+     "ids": {
+      "space": 6147,
+      "bare": 55867,
+      "cap": 45771
+     },
+     "labels": {
+      "space": " allows",
+      "bare": "allows",
+      "cap": " Allows"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6147,
+      45771,
+      55867
+     ]
+    }
+   }
+  },
+  "redux/high_school_government_and_politics/85": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "avoid",
+     "ids": {
+      "space": 5648,
+      "bare": 47856,
+      "cap": 34006
+     },
+     "labels": {
+      "space": " avoid",
+      "bare": "avoid",
+      "cap": " Avoid"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5648,
+      34006,
+      47856
+     ]
+    },
+    "B": {
+     "word": "effect",
+     "ids": {
+      "space": 2456,
+      "bare": 26061,
+      "cap": 13449
+     },
+     "labels": {
+      "space": " effect",
+      "bare": "effect",
+      "cap": " Effect"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2456,
+      13449,
+      26061
+     ]
+    },
+    "C": {
+     "word": "made",
+     "ids": {
+      "space": 1865,
+      "bare": 26912,
+      "cap": 18802
+     },
+     "labels": {
+      "space": " made",
+      "bare": "made",
+      "cap": " Made"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1865,
+      18802,
+      26912
+     ]
+    },
+    "D": {
+     "word": "bypass",
+     "ids": {
+      "space": 30718,
+      "bare": 65,
+      "cap": 425
+     },
+     "labels": {
+      "space": " bypass",
+      "bare": "b",
+      "cap": " B"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space"
+     ],
+     "unique_ids": [
+      30718
+     ]
+    }
+   }
+  },
+  "redux/high_school_macroeconomics/17": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "appreciate",
+     "ids": {
+      "space": 15401,
+      "bare": 676,
+      "cap": 92821
+     },
+     "labels": {
+      "space": " appreciate",
+      "bare": "app",
+      "cap": " Apprec"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      676,
+      15401,
+      92821
+     ]
+    },
+    "B": {
+     "word": "depreciate",
+     "ids": {
+      "space": 71958,
+      "bare": 450,
+      "cap": 4148
+     },
+     "labels": {
+      "space": " depreci",
+      "bare": "de",
+      "cap": " Dep"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      450,
+      4148,
+      71958
+     ]
+    },
+    "C": {
+     "word": "remain",
+     "ids": {
+      "space": 7146,
+      "bare": 47584,
+      "cap": 91592
+     },
+     "labels": {
+      "space": " remain",
+      "bare": "remain",
+      "cap": " Remain"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7146,
+      47584,
+      91592
+     ]
+    },
+    "D": {
+     "word": "change",
+     "ids": {
+      "space": 2297,
+      "bare": 3373,
+      "cap": 10388
+     },
+     "labels": {
+      "space": " change",
+      "bare": "change",
+      "cap": " Change"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2297,
+      3373,
+      10388
+     ]
+    }
+   }
+  },
+  "redux/high_school_physics/16": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "zero",
+     "ids": {
+      "space": 7168,
+      "bare": 14154,
+      "cap": 18306
+     },
+     "labels": {
+      "space": " zero",
+      "bare": "zero",
+      "cap": " Zero"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7168,
+      14154,
+      18306
+     ]
+    },
+    "B": {
+     "word": "inside",
+     "ids": {
+      "space": 4766,
+      "bare": 41350,
+      "cap": 27368
+     },
+     "labels": {
+      "space": " inside",
+      "bare": "inside",
+      "cap": " Inside"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4766,
+      27368,
+      41350
+     ]
+    },
+    "C": {
+     "word": "directly",
+     "ids": {
+      "space": 5961,
+      "bare": 19798,
+      "cap": 7139
+     },
+     "labels": {
+      "space": " directly",
+      "bare": "direct",
+      "cap": " Direct"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5961,
+      7139,
+      19798
+     ]
+    },
+    "D": {
+     "word": "close",
+     "ids": {
+      "space": 3265,
+      "bare": 5552,
+      "cap": 13032
+     },
+     "labels": {
+      "space": " close",
+      "bare": "close",
+      "cap": " Close"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3265,
+      5552,
+      13032
+     ]
+    }
+   }
+  },
+  "redux/high_school_physics/26": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Gravitational",
+     "ids": {
+      "space": 2825,
+      "bare": 6464,
+      "cap": 2825
+     },
+     "labels": {
+      "space": " Gr",
+      "bare": "Gr",
+      "cap": " Gr"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2825,
+      6464
+     ]
+    },
+    "B": {
+     "word": "Weight",
+     "ids": {
+      "space": 16516,
+      "bare": 8295,
+      "cap": 16516
+     },
+     "labels": {
+      "space": " Weight",
+      "bare": "Weight",
+      "cap": " Weight"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8295,
+      16516
+     ]
+    },
+    "C": {
+     "word": "Velocity",
+     "ids": {
+      "space": 54434,
+      "bare": 24179,
+      "cap": 54434
+     },
+     "labels": {
+      "space": " Velocity",
+      "bare": "Velocity",
+      "cap": " Velocity"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      24179,
+      54434
+     ]
+    },
+    "D": {
+     "word": "Inertial",
+     "ids": {
+      "space": 758,
+      "bare": 641,
+      "cap": 758
+     },
+     "labels": {
+      "space": " In",
+      "bare": "In",
+      "cap": " In"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      641,
+      758
+     ]
+    }
+   }
+  },
+  "redux/high_school_psychology/53": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Semantic",
+     "ids": {
+      "space": 74333,
+      "bare": 97931,
+      "cap": 74333
+     },
+     "labels": {
+      "space": " Semantic",
+      "bare": "Semantic",
+      "cap": " Semantic"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      74333,
+      97931
+     ]
+    },
+    "B": {
+     "word": "Visual",
+     "ids": {
+      "space": 20185,
+      "bare": 9594,
+      "cap": 20185
+     },
+     "labels": {
+      "space": " Visual",
+      "bare": "Visual",
+      "cap": " Visual"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9594,
+      20185
+     ]
+    },
+    "C": {
+     "word": "Auditory",
+     "ids": {
+      "space": 15066,
+      "bare": 52949,
+      "cap": 15066
+     },
+     "labels": {
+      "space": " Aud",
+      "bare": "Aud",
+      "cap": " Aud"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      15066,
+      52949
+     ]
+    },
+    "D": {
+     "word": "Echoic",
+     "ids": {
+      "space": 37806,
+      "bare": 74994,
+      "cap": 37806
+     },
+     "labels": {
+      "space": " Echo",
+      "bare": "Echo",
+      "cap": " Echo"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      37806,
+      74994
+     ]
+    }
+   }
+  },
+  "redux/high_school_statistics/99": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "obtained",
+     "ids": {
+      "space": 12180,
+      "bare": 674,
+      "cap": 56647
+     },
+     "labels": {
+      "space": " obtained",
+      "bare": "ob",
+      "cap": " Obt"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      674,
+      12180,
+      56647
+     ]
+    },
+    "B": {
+     "word": "cluster",
+     "ids": {
+      "space": 10652,
+      "bare": 18855,
+      "cap": 35380
+     },
+     "labels": {
+      "space": " cluster",
+      "bare": "cluster",
+      "cap": " Cluster"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      10652,
+      18855,
+      35380
+     ]
+    },
+    "C": {
+     "word": "example",
+     "ids": {
+      "space": 3110,
+      "bare": 8687,
+      "cap": 13383
+     },
+     "labels": {
+      "space": " example",
+      "bare": "example",
+      "cap": " Example"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3110,
+      8687,
+      13383
+     ]
+    },
+    "D": {
+     "word": "stratified",
+     "ids": {
+      "space": 43297,
+      "bare": 495,
+      "cap": 52935
+     },
+     "labels": {
+      "space": " strat",
+      "bare": "str",
+      "cap": " Strat"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      495,
+      43297,
+      52935
+     ]
+    }
+   }
+  },
+  "redux/high_school_us_history/17": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "India",
+     "ids": {
+      "space": 6747,
+      "bare": 33548,
+      "cap": 6747
+     },
+     "labels": {
+      "space": " India",
+      "bare": "India",
+      "cap": " India"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6747,
+      33548
+     ]
+    },
+    "B": {
+     "word": "policies",
+     "ids": {
+      "space": 10186,
+      "bare": 79,
+      "cap": 62248
+     },
+     "labels": {
+      "space": " policies",
+      "bare": "p",
+      "cap": " Policies"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      10186,
+      62248
+     ]
+    },
+    "C": {
+     "word": "Religious",
+     "ids": {
+      "space": 52076,
+      "bare": 6740,
+      "cap": 52076
+     },
+     "labels": {
+      "space": " Religious",
+      "bare": "Rel",
+      "cap": " Religious"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6740,
+      52076
+     ]
+    },
+    "D": {
+     "word": "director",
+     "ids": {
+      "space": 7538,
+      "bare": 69795,
+      "cap": 10560
+     },
+     "labels": {
+      "space": " director",
+      "bare": "director",
+      "cap": " Director"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7538,
+      10560,
+      69795
+     ]
+    }
+   }
+  },
+  "redux/high_school_us_history/22": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "American",
+     "ids": {
+      "space": 3693,
+      "bare": 28418,
+      "cap": 3693
+     },
+     "labels": {
+      "space": " American",
+      "bare": "American",
+      "cap": " American"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3693,
+      28418
+     ]
+    },
+    "B": {
+     "word": "Slaves",
+     "ids": {
+      "space": 6852,
+      "bare": 7442,
+      "cap": 6852
+     },
+     "labels": {
+      "space": " Sl",
+      "bare": "Sl",
+      "cap": " Sl"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6852,
+      7442
+     ]
+    },
+    "C": {
+     "word": "Populist",
+     "ids": {
+      "space": 10254,
+      "bare": 11598,
+      "cap": 10254
+     },
+     "labels": {
+      "space": " Pop",
+      "bare": "Pop",
+      "cap": " Pop"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      10254,
+      11598
+     ]
+    },
+    "D": {
+     "word": "Detroit",
+     "ids": {
+      "space": 19761,
+      "bare": 97293,
+      "cap": 19761
+     },
+     "labels": {
+      "space": " Detroit",
+      "bare": "Detroit",
+      "cap": " Detroit"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      19761,
+      97293
+     ]
+    }
+   }
+  },
+  "redux/high_school_us_history/64": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "southerner",
+     "ids": {
+      "space": 5822,
+      "bare": 82,
+      "cap": 9240
+     },
+     "labels": {
+      "space": " sou",
+      "bare": "s",
+      "cap": " Sou"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      5822,
+      9240
+     ]
+    },
+    "B": {
+     "word": "time",
+     "ids": {
+      "space": 882,
+      "bare": 1678,
+      "cap": 4120
+     },
+     "labels": {
+      "space": " time",
+      "bare": "time",
+      "cap": " Time"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      882,
+      1678,
+      4120
+     ]
+    },
+    "C": {
+     "word": "believed",
+     "ids": {
+      "space": 11585,
+      "bare": 9779,
+      "cap": 7828
+     },
+     "labels": {
+      "space": " believed",
+      "bare": "bel",
+      "cap": " Bel"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7828,
+      9779,
+      11585
+     ]
+    },
+    "D": {
+     "word": "encouraged",
+     "ids": {
+      "space": 20548,
+      "bare": 954,
+      "cap": 10751
+     },
+     "labels": {
+      "space": " encouraged",
+      "bare": "enc",
+      "cap": " Enc"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      954,
+      10751,
+      20548
+     ]
+    }
+   }
+  },
+  "redux/high_school_world_history/43": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "communist",
+     "ids": {
+      "space": 49215,
+      "bare": 3621,
+      "cap": 36861
+     },
+     "labels": {
+      "space": " communist",
+      "bare": "comm",
+      "cap": " Communist"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3621,
+      36861,
+      49215
+     ]
+    },
+    "B": {
+     "word": "collectivization",
+     "ids": {
+      "space": 6530,
+      "bare": 17384,
+      "cap": 20513
+     },
+     "labels": {
+      "space": " collect",
+      "bare": "collect",
+      "cap": " Collect"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6530,
+      17384,
+      20513
+     ]
+    },
+    "C": {
+     "word": "intended",
+     "ids": {
+      "space": 10602,
+      "bare": 396,
+      "cap": 1333
+     },
+     "labels": {
+      "space": " intended",
+      "bare": "int",
+      "cap": " Int"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      396,
+      1333,
+      10602
+     ]
+    },
+    "D": {
+     "word": "capitalist",
+     "ids": {
+      "space": 39967,
+      "bare": 65063,
+      "cap": 18374
+     },
+     "labels": {
+      "space": " capitalist",
+      "bare": "capital",
+      "cap": " Capital"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      18374,
+      39967,
+      65063
+     ]
+    }
+   }
+  },
+  "redux/high_school_world_history/85": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "support",
+     "ids": {
+      "space": 1824,
+      "bare": 23362,
+      "cap": 9186
+     },
+     "labels": {
+      "space": " support",
+      "bare": "support",
+      "cap": " Support"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1824,
+      9186,
+      23362
+     ]
+    },
+    "B": {
+     "word": "trade",
+     "ids": {
+      "space": 6559,
+      "bare": 36071,
+      "cap": 17214
+     },
+     "labels": {
+      "space": " trade",
+      "bare": "trade",
+      "cap": " Trade"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6559,
+      17214,
+      36071
+     ]
+    },
+    "C": {
+     "word": "appeasement",
+     "ids": {
+      "space": 2642,
+      "bare": 33431,
+      "cap": 28054
+     },
+     "labels": {
+      "space": " appe",
+      "bare": "appe",
+      "cap": " Appe"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2642,
+      28054,
+      33431
+     ]
+    },
+    "D": {
+     "word": "fears",
+     "ids": {
+      "space": 23209,
+      "bare": 69,
+      "cap": 434
+     },
+     "labels": {
+      "space": " fears",
+      "bare": "f",
+      "cap": " F"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space"
+     ],
+     "unique_ids": [
+      23209
+     ]
+    }
+   }
+  },
+  "redux/human_aging/11": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Immunization",
+     "ids": {
+      "space": 66235,
+      "bare": 1427,
+      "cap": 66235
+     },
+     "labels": {
+      "space": " Immun",
+      "bare": "Im",
+      "cap": " Immun"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1427,
+      66235
+     ]
+    },
+    "B": {
+     "word": "Accommodation",
+     "ids": {
+      "space": 52964,
+      "bare": 14603,
+      "cap": 52964
+     },
+     "labels": {
+      "space": " Accom",
+      "bare": "Acc",
+      "cap": " Accom"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      14603,
+      52964
+     ]
+    },
+    "C": {
+     "word": "Avoidance",
+     "ids": {
+      "space": 34006,
+      "bare": 52116,
+      "cap": 34006
+     },
+     "labels": {
+      "space": " Avoid",
+      "bare": "Avoid",
+      "cap": " Avoid"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      34006,
+      52116
+     ]
+    },
+    "D": {
+     "word": "Assimilation",
+     "ids": {
+      "space": 2688,
+      "bare": 5615,
+      "cap": 2688
+     },
+     "labels": {
+      "space": " Ass",
+      "bare": "Ass",
+      "cap": " Ass"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2688,
+      5615
+     ]
+    }
+   }
+  },
+  "redux/human_aging/37": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Agreeableness",
+     "ids": {
+      "space": 83203,
+      "bare": 9042,
+      "cap": 83203
+     },
+     "labels": {
+      "space": " Agree",
+      "bare": "Ag",
+      "cap": " Agree"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9042,
+      83203
+     ]
+    },
+    "B": {
+     "word": "Conscientiousness",
+     "ids": {
+      "space": 1200,
+      "bare": 1109,
+      "cap": 1200
+     },
+     "labels": {
+      "space": " Con",
+      "bare": "Con",
+      "cap": " Con"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1109,
+      1200
+     ]
+    },
+    "C": {
+     "word": "Openness",
+     "ids": {
+      "space": 5264,
+      "bare": 5002,
+      "cap": 5264
+     },
+     "labels": {
+      "space": " Open",
+      "bare": "Open",
+      "cap": " Open"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5002,
+      5264
+     ]
+    },
+    "D": {
+     "word": "Neuroticism",
+     "ids": {
+      "space": 31259,
+      "bare": 8813,
+      "cap": 31259
+     },
+     "labels": {
+      "space": " Neuro",
+      "bare": "Ne",
+      "cap": " Neuro"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8813,
+      31259
+     ]
+    }
+   }
+  },
+  "redux/human_sexuality/22": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "glad",
+     "ids": {
+      "space": 15713,
+      "bare": 6072,
+      "cap": 51641
+     },
+     "labels": {
+      "space": " glad",
+      "bare": "gl",
+      "cap": " Glad"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6072,
+      15713,
+      51641
+     ]
+    },
+    "B": {
+     "word": "fear",
+     "ids": {
+      "space": 8679,
+      "bare": 69,
+      "cap": 41967
+     },
+     "labels": {
+      "space": " fear",
+      "bare": "f",
+      "cap": " Fear"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      8679,
+      41967
+     ]
+    },
+    "C": {
+     "word": "guilt",
+     "ids": {
+      "space": 33851,
+      "bare": 8717,
+      "cap": 4570
+     },
+     "labels": {
+      "space": " guilt",
+      "bare": "gu",
+      "cap": " Gu"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4570,
+      8717,
+      33851
+     ]
+    },
+    "D": {
+     "word": "regret",
+     "ids": {
+      "space": 22231,
+      "bare": 1580,
+      "cap": 3184
+     },
+     "labels": {
+      "space": " regret",
+      "bare": "reg",
+      "cap": " Reg"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1580,
+      3184,
+      22231
+     ]
+    }
+   }
+  },
+  "redux/human_sexuality/61": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "arousal",
+     "ids": {
+      "space": 86817,
+      "bare": 277,
+      "cap": 362
+     },
+     "labels": {
+      "space": " arousal",
+      "bare": "ar",
+      "cap": " A"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare"
+     ],
+     "unique_ids": [
+      277,
+      86817
+     ]
+    },
+    "B": {
+     "word": "erection",
+     "ids": {
+      "space": 64046,
+      "bare": 485,
+      "cap": 468
+     },
+     "labels": {
+      "space": " erection",
+      "bare": "ere",
+      "cap": " E"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare"
+     ],
+     "unique_ids": [
+      485,
+      64046
+     ]
+    },
+    "C": {
+     "word": "inhibition",
+     "ids": {
+      "space": 60378,
+      "bare": 258,
+      "cap": 758
+     },
+     "labels": {
+      "space": " inhibition",
+      "bare": "in",
+      "cap": " In"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      258,
+      758,
+      60378
+     ]
+    },
+    "D": {
+     "word": "orgasm",
+     "ids": {
+      "space": 37665,
+      "bare": 1775,
+      "cap": 33706
+     },
+     "labels": {
+      "space": " orgasm",
+      "bare": "org",
+      "cap": " Org"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1775,
+      33706,
+      37665
+     ]
+    }
+   }
+  },
+  "redux/human_sexuality/68": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "postovulatory",
+     "ids": {
+      "space": 1736,
+      "bare": 2203,
+      "cap": 3877
+     },
+     "labels": {
+      "space": " post",
+      "bare": "post",
+      "cap": " Post"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1736,
+      2203,
+      3877
+     ]
+    },
+    "B": {
+     "word": "menstrual",
+     "ids": {
+      "space": 77627,
+      "bare": 5676,
+      "cap": 11012
+     },
+     "labels": {
+      "space": " menstrual",
+      "bare": "men",
+      "cap": " Men"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5676,
+      11012,
+      77627
+     ]
+    },
+    "C": {
+     "word": "proliferative",
+     "ids": {
+      "space": 41936,
+      "bare": 776,
+      "cap": 393
+     },
+     "labels": {
+      "space": " prolifer",
+      "bare": "pro",
+      "cap": " P"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare"
+     ],
+     "unique_ids": [
+      776,
+      41936
+     ]
+    },
+    "D": {
+     "word": "myometrial",
+     "ids": {
+      "space": 847,
+      "bare": 2408,
+      "cap": 3017
+     },
+     "labels": {
+      "space": " my",
+      "bare": "my",
+      "cap": " My"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      847,
+      2408,
+      3017
+     ]
+    }
+   }
+  },
+  "redux/human_sexuality/78": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "generally",
+     "ids": {
+      "space": 8789,
+      "bare": 7490,
+      "cap": 43393
+     },
+     "labels": {
+      "space": " generally",
+      "bare": "gener",
+      "cap": " Generally"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7490,
+      8789,
+      43393
+     ]
+    },
+    "B": {
+     "word": "dangerous",
+     "ids": {
+      "space": 11406,
+      "bare": 31450,
+      "cap": 73032
+     },
+     "labels": {
+      "space": " dangerous",
+      "bare": "danger",
+      "cap": " Dangerous"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      11406,
+      31450,
+      73032
+     ]
+    },
+    "C": {
+     "word": "view",
+     "ids": {
+      "space": 1651,
+      "bare": 1050,
+      "cap": 2738
+     },
+     "labels": {
+      "space": " view",
+      "bare": "view",
+      "cap": " View"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1050,
+      1651,
+      2738
+     ]
+    },
+    "D": {
+     "word": "observe",
+     "ids": {
+      "space": 22986,
+      "bare": 48033,
+      "cap": 4657
+     },
+     "labels": {
+      "space": " observe",
+      "bare": "observe",
+      "cap": " Ob"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4657,
+      22986,
+      48033
+     ]
+    }
+   }
+  },
+  "redux/international_law/14": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "conflict",
+     "ids": {
+      "space": 12055,
+      "bare": 6135,
+      "cap": 58585
+     },
+     "labels": {
+      "space": " conflict",
+      "bare": "conf",
+      "cap": " Conflict"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6135,
+      12055,
+      58585
+     ]
+    },
+    "B": {
+     "word": "superior",
+     "ids": {
+      "space": 16353,
+      "bare": 9522,
+      "cap": 40941
+     },
+     "labels": {
+      "space": " superior",
+      "bare": "super",
+      "cap": " Superior"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9522,
+      16353,
+      40941
+     ]
+    },
+    "C": {
+     "word": "recognised",
+     "ids": {
+      "space": 38664,
+      "bare": 33451,
+      "cap": 66875
+     },
+     "labels": {
+      "space": " recognised",
+      "bare": "recogn",
+      "cap": " Recogn"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      33451,
+      38664,
+      66875
+     ]
+    },
+    "D": {
+     "word": "passing",
+     "ids": {
+      "space": 12299,
+      "bare": 6385,
+      "cap": 76292
+     },
+     "labels": {
+      "space": " passing",
+      "bare": "pass",
+      "cap": " Passing"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6385,
+      12299,
+      76292
+     ]
+    }
+   }
+  },
+  "redux/international_law/35": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "outcome",
+     "ids": {
+      "space": 15274,
+      "bare": 86194,
+      "cap": 94609
+     },
+     "labels": {
+      "space": " outcome",
+      "bare": "outcome",
+      "cap": " Outcome"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      15274,
+      86194,
+      94609
+     ]
+    },
+    "B": {
+     "word": "consent",
+     "ids": {
+      "space": 14433,
+      "bare": 6254,
+      "cap": 92387
+     },
+     "labels": {
+      "space": " consent",
+      "bare": "cons",
+      "cap": " Consent"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6254,
+      14433,
+      92387
+     ]
+    },
+    "C": {
+     "word": "lead",
+     "ids": {
+      "space": 2990,
+      "bare": 26060,
+      "cap": 29882
+     },
+     "labels": {
+      "space": " lead",
+      "bare": "lead",
+      "cap": " Lead"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2990,
+      26060,
+      29882
+     ]
+    },
+    "D": {
+     "word": "respect",
+     "ids": {
+      "space": 5091,
+      "bare": 44634,
+      "cap": 77038
+     },
+     "labels": {
+      "space": " respect",
+      "bare": "respect",
+      "cap": " Respect"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5091,
+      44634,
+      77038
+     ]
+    }
+   }
+  },
+  "redux/international_law/5": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "considered",
+     "ids": {
+      "space": 6509,
+      "bare": 24712,
+      "cap": 21144
+     },
+     "labels": {
+      "space": " considered",
+      "bare": "consider",
+      "cap": " Consider"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6509,
+      21144,
+      24712
+     ]
+    },
+    "B": {
+     "word": "rights",
+     "ids": {
+      "space": 3188,
+      "bare": 76187,
+      "cap": 10512
+     },
+     "labels": {
+      "space": " rights",
+      "bare": "rights",
+      "cap": " Rights"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3188,
+      10512,
+      76187
+     ]
+    },
+    "C": {
+     "word": "entity",
+     "ids": {
+      "space": 5387,
+      "bare": 2996,
+      "cap": 10390
+     },
+     "labels": {
+      "space": " entity",
+      "bare": "entity",
+      "cap": " Entity"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2996,
+      5387,
+      10390
+     ]
+    },
+    "D": {
+     "word": "term",
+     "ids": {
+      "space": 4647,
+      "bare": 4991,
+      "cap": 17519
+     },
+     "labels": {
+      "space": " term",
+      "bare": "term",
+      "cap": " Term"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4647,
+      4991,
+      17519
+     ]
+    }
+   }
+  },
+  "redux/international_law/54": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "power",
+     "ids": {
+      "space": 2355,
+      "bare": 13175,
+      "cap": 7420
+     },
+     "labels": {
+      "space": " power",
+      "bare": "power",
+      "cap": " Power"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2355,
+      7420,
+      13175
+     ]
+    },
+    "B": {
+     "word": "scrutinises",
+     "ids": {
+      "space": 69242,
+      "bare": 25065,
+      "cap": 32134
+     },
+     "labels": {
+      "space": " scrutin",
+      "bare": "scr",
+      "cap": " Scr"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      25065,
+      32134,
+      69242
+     ]
+    },
+    "C": {
+     "word": "replaced",
+     "ids": {
+      "space": 12575,
+      "bare": 265,
+      "cap": 1032
+     },
+     "labels": {
+      "space": " replaced",
+      "bare": "re",
+      "cap": " Re"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      265,
+      1032,
+      12575
+     ]
+    },
+    "D": {
+     "word": "consists",
+     "ids": {
+      "space": 17167,
+      "bare": 6254,
+      "cap": 7292
+     },
+     "labels": {
+      "space": " consists",
+      "bare": "cons",
+      "cap": " Cons"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6254,
+      7292,
+      17167
+     ]
+    }
+   }
+  },
+  "redux/international_law/81": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "According",
+     "ids": {
+      "space": 10548,
+      "bare": 11190,
+      "cap": 10548
+     },
+     "labels": {
+      "space": " According",
+      "bare": "According",
+      "cap": " According"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      10548,
+      11190
+     ]
+    },
+    "B": {
+     "word": "Justice",
+     "ids": {
+      "space": 11745,
+      "bare": 69686,
+      "cap": 11745
+     },
+     "labels": {
+      "space": " Justice",
+      "bare": "Justice",
+      "cap": " Justice"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      11745,
+      69686
+     ]
+    },
+    "C": {
+     "word": "law",
+     "ids": {
+      "space": 2329,
+      "bare": 19915,
+      "cap": 7506
+     },
+     "labels": {
+      "space": " law",
+      "bare": "law",
+      "cap": " Law"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2329,
+      7506,
+      19915
+     ]
+    },
+    "D": {
+     "word": "Regional",
+     "ids": {
+      "space": 25294,
+      "bare": 89807,
+      "cap": 25294
+     },
+     "labels": {
+      "space": " Regional",
+      "bare": "Regional",
+      "cap": " Regional"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      25294,
+      89807
+     ]
+    }
+   }
+  },
+  "redux/international_law/84": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "apply",
+     "ids": {
+      "space": 3796,
+      "bare": 10280,
+      "cap": 20552
+     },
+     "labels": {
+      "space": " apply",
+      "bare": "apply",
+      "cap": " Apply"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3796,
+      10280,
+      20552
+     ]
+    },
+    "B": {
+     "word": "origin",
+     "ids": {
+      "space": 6238,
+      "bare": 8611,
+      "cap": 17116
+     },
+     "labels": {
+      "space": " origin",
+      "bare": "origin",
+      "cap": " Origin"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6238,
+      8611,
+      17116
+     ]
+    },
+    "C": {
+     "word": "application",
+     "ids": {
+      "space": 3766,
+      "bare": 5132,
+      "cap": 7323
+     },
+     "labels": {
+      "space": " application",
+      "bare": "application",
+      "cap": " Application"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3766,
+      5132,
+      7323
+     ]
+    },
+    "D": {
+     "word": "local",
+     "ids": {
+      "space": 2205,
+      "bare": 2438,
+      "cap": 8774
+     },
+     "labels": {
+      "space": " local",
+      "bare": "local",
+      "cap": " Local"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2205,
+      2438,
+      8774
+     ]
+    }
+   }
+  },
+  "redux/international_law/91": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "generation",
+     "ids": {
+      "space": 9471,
+      "bare": 80057,
+      "cap": 23470
+     },
+     "labels": {
+      "space": " generation",
+      "bare": "generation",
+      "cap": " Generation"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9471,
+      23470,
+      80057
+     ]
+    },
+    "B": {
+     "word": "Civil",
+     "ids": {
+      "space": 16398,
+      "bare": 67826,
+      "cap": 16398
+     },
+     "labels": {
+      "space": " Civil",
+      "bare": "Civil",
+      "cap": " Civil"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      16398,
+      67826
+     ]
+    },
+    "C": {
+     "word": "types",
+     "ids": {
+      "space": 4494,
+      "bare": 9242,
+      "cap": 20768
+     },
+     "labels": {
+      "space": " types",
+      "bare": "types",
+      "cap": " Types"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4494,
+      9242,
+      20768
+     ]
+    },
+    "D": {
+     "word": "Social",
+     "ids": {
+      "space": 9784,
+      "bare": 26317,
+      "cap": 9784
+     },
+     "labels": {
+      "space": " Social",
+      "bare": "Social",
+      "cap": " Social"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9784,
+      26317
+     ]
+    }
+   }
+  },
+  "redux/jurisprudence/46": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "distinction",
+     "ids": {
+      "space": 29196,
+      "bare": 12211,
+      "cap": 27604
+     },
+     "labels": {
+      "space": " distinction",
+      "bare": "dist",
+      "cap": " Dist"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      12211,
+      27604,
+      29196
+     ]
+    },
+    "B": {
+     "word": "appointed",
+     "ids": {
+      "space": 20822,
+      "bare": 70116,
+      "cap": 1845
+     },
+     "labels": {
+      "space": " appointed",
+      "bare": "appointed",
+      "cap": " App"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1845,
+      20822,
+      70116
+     ]
+    },
+    "C": {
+     "word": "misleading",
+     "ids": {
+      "space": 37209,
+      "bare": 33865,
+      "cap": 32559
+     },
+     "labels": {
+      "space": " misleading",
+      "bare": "mis",
+      "cap": " Mis"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      32559,
+      33865,
+      37209
+     ]
+    },
+    "D": {
+     "word": "Judicial",
+     "ids": {
+      "space": 67208,
+      "bare": 61713,
+      "cap": 67208
+     },
+     "labels": {
+      "space": " Judicial",
+      "bare": "Jud",
+      "cap": " Judicial"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      61713,
+      67208
+     ]
+    }
+   }
+  },
+  "redux/jurisprudence/62": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "ultimate",
+     "ids": {
+      "space": 16724,
+      "bare": 66566,
+      "cap": 28850
+     },
+     "labels": {
+      "space": " ultimate",
+      "bare": "ultimate",
+      "cap": " Ultimate"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      16724,
+      28850,
+      66566
+     ]
+    },
+    "B": {
+     "word": "rule",
+     "ids": {
+      "space": 5912,
+      "bare": 12937,
+      "cap": 18100
+     },
+     "labels": {
+      "space": " rule",
+      "bare": "rule",
+      "cap": " Rule"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5912,
+      12937,
+      18100
+     ]
+    },
+    "C": {
+     "word": "constitution",
+     "ids": {
+      "space": 16407,
+      "bare": 43003,
+      "cap": 17579
+     },
+     "labels": {
+      "space": " constitution",
+      "bare": "constitution",
+      "cap": " Constitution"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      16407,
+      17579,
+      43003
+     ]
+    },
+    "D": {
+     "word": "presupposition",
+     "ids": {
+      "space": 70292,
+      "bare": 23623,
+      "cap": 4111
+     },
+     "labels": {
+      "space": " presup",
+      "bare": "pres",
+      "cap": " Pres"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4111,
+      23623,
+      70292
+     ]
+    }
+   }
+  },
+  "redux/jurisprudence/78": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "politics",
+     "ids": {
+      "space": 11500,
+      "bare": 9896,
+      "cap": 34879
+     },
+     "labels": {
+      "space": " politics",
+      "bare": "pol",
+      "cap": " Politics"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9896,
+      11500,
+      34879
+     ]
+    },
+    "B": {
+     "word": "determinate",
+     "ids": {
+      "space": 6315,
+      "bare": 67,
+      "cap": 34907
+     },
+     "labels": {
+      "space": " determin",
+      "bare": "d",
+      "cap": " Determin"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      6315,
+      34907
+     ]
+    },
+    "C": {
+     "word": "reflects",
+     "ids": {
+      "space": 25963,
+      "bare": 34913,
+      "cap": 34598
+     },
+     "labels": {
+      "space": " reflects",
+      "bare": "reflect",
+      "cap": " Reflect"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      25963,
+      34598,
+      34913
+     ]
+    },
+    "D": {
+     "word": "unstable",
+     "ids": {
+      "space": 44211,
+      "bare": 359,
+      "cap": 1230
+     },
+     "labels": {
+      "space": " unstable",
+      "bare": "un",
+      "cap": " Un"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      359,
+      1230,
+      44211
+     ]
+    }
+   }
+  },
+  "redux/logical_fallacies/31": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "tradition",
+     "ids": {
+      "space": 13815,
+      "bare": 47026,
+      "cap": 80478
+     },
+     "labels": {
+      "space": " tradition",
+      "bare": "trad",
+      "cap": " Tradition"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      13815,
+      47026,
+      80478
+     ]
+    },
+    "B": {
+     "word": "ad",
+     "ids": {
+      "space": 993,
+      "bare": 329,
+      "cap": 2410
+     },
+     "labels": {
+      "space": " ad",
+      "bare": "ad",
+      "cap": " Ad"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      329,
+      993,
+      2410
+     ]
+    },
+    "C": {
+     "word": "anonymous",
+     "ids": {
+      "space": 22151,
+      "bare": 25280,
+      "cap": 30437
+     },
+     "labels": {
+      "space": " anonymous",
+      "bare": "anonymous",
+      "cap": " Anonymous"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      22151,
+      25280,
+      30437
+     ]
+    },
+    "D": {
+     "word": "snob",
+     "ids": {
+      "space": 4131,
+      "bare": 9613,
+      "cap": 13059
+     },
+     "labels": {
+      "space": " sn",
+      "bare": "sn",
+      "cap": " Sn"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4131,
+      9613,
+      13059
+     ]
+    }
+   }
+  },
+  "redux/logical_fallacies/43": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "reasoning",
+     "ids": {
+      "space": 32711,
+      "bare": 19895,
+      "cap": 26759
+     },
+     "labels": {
+      "space": " reasoning",
+      "bare": "reason",
+      "cap": " Reason"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      19895,
+      26759,
+      32711
+     ]
+    },
+    "B": {
+     "word": "favorable",
+     "ids": {
+      "space": 36749,
+      "bare": 73960,
+      "cap": 73787
+     },
+     "labels": {
+      "space": " favorable",
+      "bare": "favor",
+      "cap": " Favor"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      36749,
+      73787,
+      73960
+     ]
+    },
+    "C": {
+     "word": "accepted",
+     "ids": {
+      "space": 11666,
+      "bare": 54574,
+      "cap": 63289
+     },
+     "labels": {
+      "space": " accepted",
+      "bare": "accepted",
+      "cap": " Accepted"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      11666,
+      54574,
+      63289
+     ]
+    },
+    "D": {
+     "word": "idea",
+     "ids": {
+      "space": 4522,
+      "bare": 41777,
+      "cap": 51001
+     },
+     "labels": {
+      "space": " idea",
+      "bare": "idea",
+      "cap": " Idea"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4522,
+      41777,
+      51001
+     ]
+    }
+   }
+  },
+  "redux/logical_fallacies/5": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "someone",
+     "ids": {
+      "space": 4325,
+      "bare": 89479,
+      "cap": 34172
+     },
+     "labels": {
+      "space": " someone",
+      "bare": "someone",
+      "cap": " Someone"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4325,
+      34172,
+      89479
+     ]
+    },
+    "B": {
+     "word": "things",
+     "ids": {
+      "space": 2513,
+      "bare": 57074,
+      "cap": 20093
+     },
+     "labels": {
+      "space": " things",
+      "bare": "things",
+      "cap": " Things"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2513,
+      20093,
+      57074
+     ]
+    },
+    "C": {
+     "word": "something",
+     "ids": {
+      "space": 2494,
+      "bare": 33331,
+      "cap": 24656
+     },
+     "labels": {
+      "space": " something",
+      "bare": "something",
+      "cap": " Something"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2494,
+      24656,
+      33331
+     ]
+    },
+    "D": {
+     "word": "substituting",
+     "ids": {
+      "space": 31334,
+      "bare": 1966,
+      "cap": 3719
+     },
+     "labels": {
+      "space": " substit",
+      "bare": "sub",
+      "cap": " Sub"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1966,
+      3719,
+      31334
+     ]
+    }
+   }
+  },
+  "redux/logical_fallacies/72": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Misusing",
+     "ids": {
+      "space": 32559,
+      "bare": 83159,
+      "cap": 32559
+     },
+     "labels": {
+      "space": " Mis",
+      "bare": "Mis",
+      "cap": " Mis"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      32559,
+      83159
+     ]
+    },
+    "B": {
+     "word": "Reification",
+     "ids": {
+      "space": 1032,
+      "bare": 693,
+      "cap": 1032
+     },
+     "labels": {
+      "space": " Re",
+      "bare": "Re",
+      "cap": " Re"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      693,
+      1032
+     ]
+    },
+    "C": {
+     "word": "Figure",
+     "ids": {
+      "space": 19037,
+      "bare": 22029,
+      "cap": 19037
+     },
+     "labels": {
+      "space": " Figure",
+      "bare": "Figure",
+      "cap": " Figure"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      19037,
+      22029
+     ]
+    },
+    "D": {
+     "word": "Special",
+     "ids": {
+      "space": 9785,
+      "bare": 20366,
+      "cap": 9785
+     },
+     "labels": {
+      "space": " Special",
+      "bare": "Special",
+      "cap": " Special"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9785,
+      20366
+     ]
+    }
+   }
+  },
+  "redux/logical_fallacies/88": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Style",
+     "ids": {
+      "space": 11913,
+      "bare": 2323,
+      "cap": 11913
+     },
+     "labels": {
+      "space": " Style",
+      "bare": "Style",
+      "cap": " Style"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2323,
+      11913
+     ]
+    },
+    "B": {
+     "word": "Question",
+     "ids": {
+      "space": 15846,
+      "bare": 14582,
+      "cap": 15846
+     },
+     "labels": {
+      "space": " Question",
+      "bare": "Question",
+      "cap": " Question"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      14582,
+      15846
+     ]
+    },
+    "C": {
+     "word": "Hypostatization",
+     "ids": {
+      "space": 38415,
+      "bare": 39,
+      "cap": 38415
+     },
+     "labels": {
+      "space": " Hyp",
+      "bare": "H",
+      "cap": " Hyp"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      38415
+     ]
+    },
+    "D": {
+     "word": "Amphiboly",
+     "ids": {
+      "space": 92161,
+      "bare": 6091,
+      "cap": 92161
+     },
+     "labels": {
+      "space": " Amph",
+      "bare": "Am",
+      "cap": " Amph"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6091,
+      92161
+     ]
+    }
+   }
+  },
+  "redux/management/31": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "enjoy",
+     "ids": {
+      "space": 4669,
+      "bare": 268,
+      "cap": 22656
+     },
+     "labels": {
+      "space": " enjoy",
+      "bare": "en",
+      "cap": " Enjoy"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      268,
+      4669,
+      22656
+     ]
+    },
+    "B": {
+     "word": "view",
+     "ids": {
+      "space": 1651,
+      "bare": 1050,
+      "cap": 2738
+     },
+     "labels": {
+      "space": " view",
+      "bare": "view",
+      "cap": " View"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1050,
+      1651,
+      2738
+     ]
+    },
+    "C": {
+     "word": "show",
+     "ids": {
+      "space": 1473,
+      "bare": 3445,
+      "cap": 6928
+     },
+     "labels": {
+      "space": " show",
+      "bare": "show",
+      "cap": " Show"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1473,
+      3445,
+      6928
+     ]
+    },
+    "D": {
+     "word": "directed",
+     "ids": {
+      "space": 15540,
+      "bare": 19798,
+      "cap": 77205
+     },
+     "labels": {
+      "space": " directed",
+      "bare": "direct",
+      "cap": " Directed"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      15540,
+      19798,
+      77205
+     ]
+    }
+   }
+  },
+  "redux/management/49": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Peer",
+     "ids": {
+      "space": 45147,
+      "bare": 30888,
+      "cap": 45147
+     },
+     "labels": {
+      "space": " Peer",
+      "bare": "Peer",
+      "cap": " Peer"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      30888,
+      45147
+     ]
+    },
+    "B": {
+     "word": "Promotion",
+     "ids": {
+      "space": 56104,
+      "bare": 35186,
+      "cap": 56104
+     },
+     "labels": {
+      "space": " Promotion",
+      "bare": "Prom",
+      "cap": " Promotion"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      35186,
+      56104
+     ]
+    },
+    "C": {
+     "word": "Greater",
+     "ids": {
+      "space": 32281,
+      "bare": 41366,
+      "cap": 32281
+     },
+     "labels": {
+      "space": " Greater",
+      "bare": "Greater",
+      "cap": " Greater"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      32281,
+      41366
+     ]
+    },
+    "D": {
+     "word": "Economic",
+     "ids": {
+      "space": 22546,
+      "bare": 36,
+      "cap": 22546
+     },
+     "labels": {
+      "space": " Economic",
+      "bare": "E",
+      "cap": " Economic"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      22546
+     ]
+    }
+   }
+  },
+  "redux/management/71": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "coordinate",
+     "ids": {
+      "space": 16184,
+      "bare": 62526,
+      "cap": 41035
+     },
+     "labels": {
+      "space": " coordinate",
+      "bare": "coordinate",
+      "cap": " Coordinate"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      16184,
+      41035,
+      62526
+     ]
+    },
+    "B": {
+     "word": "organise",
+     "ids": {
+      "space": 69940,
+      "bare": 8462,
+      "cap": 10762
+     },
+     "labels": {
+      "space": " organise",
+      "bare": "organ",
+      "cap": " Organ"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8462,
+      10762,
+      69940
+     ]
+    },
+    "C": {
+     "word": "formalise",
+     "ids": {
+      "space": 15908,
+      "bare": 627,
+      "cap": 79367
+     },
+     "labels": {
+      "space": " formal",
+      "bare": "form",
+      "cap": " Formal"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      627,
+      15908,
+      79367
+     ]
+    },
+    "D": {
+     "word": "limit",
+     "ids": {
+      "space": 3930,
+      "bare": 9506,
+      "cap": 28008
+     },
+     "labels": {
+      "space": " limit",
+      "bare": "limit",
+      "cap": " Limit"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3930,
+      9506,
+      28008
+     ]
+    }
+   }
+  },
+  "redux/management/77": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Working",
+     "ids": {
+      "space": 22150,
+      "bare": 33978,
+      "cap": 22150
+     },
+     "labels": {
+      "space": " Working",
+      "bare": "Working",
+      "cap": " Working"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      22150,
+      33978
+     ]
+    },
+    "B": {
+     "word": "Time",
+     "ids": {
+      "space": 4120,
+      "bare": 1462,
+      "cap": 4120
+     },
+     "labels": {
+      "space": " Time",
+      "bare": "Time",
+      "cap": " Time"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1462,
+      4120
+     ]
+    },
+    "C": {
+     "word": "psychology",
+     "ids": {
+      "space": 29918,
+      "bare": 91009,
+      "cap": 35573
+     },
+     "labels": {
+      "space": " psychology",
+      "bare": "psych",
+      "cap": " Psychology"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      29918,
+      35573,
+      91009
+     ]
+    },
+    "D": {
+     "word": "social",
+     "ids": {
+      "space": 3590,
+      "bare": 22386,
+      "cap": 9784
+     },
+     "labels": {
+      "space": " social",
+      "bare": "social",
+      "cap": " Social"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3590,
+      9784,
+      22386
+     ]
+    }
+   }
+  },
+  "redux/marketing/39": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "segmentation",
+     "ids": {
+      "space": 59752,
+      "bare": 23169,
+      "cap": 17209
+     },
+     "labels": {
+      "space": " segmentation",
+      "bare": "segment",
+      "cap": " Seg"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      17209,
+      23169,
+      59752
+     ]
+    },
+    "B": {
+     "word": "mass",
+     "ids": {
+      "space": 3072,
+      "bare": 26331,
+      "cap": 9167
+     },
+     "labels": {
+      "space": " mass",
+      "bare": "mass",
+      "cap": " Mass"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3072,
+      9167,
+      26331
+     ]
+    },
+    "C": {
+     "word": "concentrated",
+     "ids": {
+      "space": 37526,
+      "bare": 443,
+      "cap": 61161
+     },
+     "labels": {
+      "space": " concentrated",
+      "bare": "con",
+      "cap": " Concent"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      443,
+      37526,
+      61161
+     ]
+    },
+    "D": {
+     "word": "positioning",
+     "ids": {
+      "space": 38725,
+      "bare": 3487,
+      "cap": 12380
+     },
+     "labels": {
+      "space": " positioning",
+      "bare": "position",
+      "cap": " Position"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3487,
+      12380,
+      38725
+     ]
+    }
+   }
+  },
+  "redux/marketing/47": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "repositioning",
+     "ids": {
+      "space": 312,
+      "bare": 265,
+      "cap": 3321
+     },
+     "labels": {
+      "space": " re",
+      "bare": "re",
+      "cap": " Rep"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      265,
+      312,
+      3321
+     ]
+    },
+    "B": {
+     "word": "stretching",
+     "ids": {
+      "space": 41849,
+      "bare": 72084,
+      "cap": 60105
+     },
+     "labels": {
+      "space": " stretching",
+      "bare": "stretch",
+      "cap": " Stretch"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      41849,
+      60105,
+      72084
+     ]
+    },
+    "C": {
+     "word": "equity",
+     "ids": {
+      "space": 24448,
+      "bare": 25310,
+      "cap": 57488
+     },
+     "labels": {
+      "space": " equity",
+      "bare": "equ",
+      "cap": " Equity"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      24448,
+      25310,
+      57488
+     ]
+    },
+    "D": {
+     "word": "imagery",
+     "ids": {
+      "space": 40445,
+      "bare": 28016,
+      "cap": 76433
+     },
+     "labels": {
+      "space": " imagery",
+      "bare": "imag",
+      "cap": " Imag"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      28016,
+      40445,
+      76433
+     ]
+    }
+   }
+  },
+  "redux/marketing/5": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Stratified",
+     "ids": {
+      "space": 52935,
+      "bare": 2580,
+      "cap": 52935
+     },
+     "labels": {
+      "space": " Strat",
+      "bare": "Str",
+      "cap": " Strat"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2580,
+      52935
+     ]
+    },
+    "B": {
+     "word": "Convenience",
+     "ids": {
+      "space": 80648,
+      "bare": 1109,
+      "cap": 80648
+     },
+     "labels": {
+      "space": " Convenience",
+      "bare": "Con",
+      "cap": " Convenience"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1109,
+      80648
+     ]
+    },
+    "C": {
+     "word": "Quota",
+     "ids": {
+      "space": 3406,
+      "bare": 2183,
+      "cap": 3406
+     },
+     "labels": {
+      "space": " Qu",
+      "bare": "Qu",
+      "cap": " Qu"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2183,
+      3406
+     ]
+    },
+    "D": {
+     "word": "Cluster",
+     "ids": {
+      "space": 35380,
+      "bare": 28678,
+      "cap": 35380
+     },
+     "labels": {
+      "space": " Cluster",
+      "bare": "Cluster",
+      "cap": " Cluster"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      28678,
+      35380
+     ]
+    }
+   }
+  },
+  "redux/medical_genetics/5": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "demonstrate",
+     "ids": {
+      "space": 19869,
+      "bare": 67,
+      "cap": 32305
+     },
+     "labels": {
+      "space": " demonstrate",
+      "bare": "d",
+      "cap": " Demon"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      19869,
+      32305
+     ]
+    },
+    "B": {
+     "word": "determine",
+     "ids": {
+      "space": 8253,
+      "bare": 67,
+      "cap": 29901
+     },
+     "labels": {
+      "space": " determine",
+      "bare": "d",
+      "cap": " Determine"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      8253,
+      29901
+     ]
+    },
+    "C": {
+     "word": "uses",
+     "ids": {
+      "space": 5711,
+      "bare": 4776,
+      "cap": 38823
+     },
+     "labels": {
+      "space": " uses",
+      "bare": "uses",
+      "cap": " Uses"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4776,
+      5711,
+      38823
+     ]
+    },
+    "D": {
+     "word": "measures",
+     "ids": {
+      "space": 10953,
+      "bare": 2660,
+      "cap": 72556
+     },
+     "labels": {
+      "space": " measures",
+      "bare": "me",
+      "cap": " Measures"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2660,
+      10953,
+      72556
+     ]
+    }
+   }
+  },
+  "redux/miscellaneous/0": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Venus",
+     "ids": {
+      "space": 48976,
+      "bare": 53,
+      "cap": 48976
+     },
+     "labels": {
+      "space": " Venus",
+      "bare": "V",
+      "cap": " Venus"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      48976
+     ]
+    },
+    "B": {
+     "word": "Mars",
+     "ids": {
+      "space": 21048,
+      "bare": 44,
+      "cap": 21048
+     },
+     "labels": {
+      "space": " Mars",
+      "bare": "M",
+      "cap": " Mars"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      21048
+     ]
+    },
+    "C": {
+     "word": "Moon",
+     "ids": {
+      "space": 17330,
+      "bare": 76019,
+      "cap": 17330
+     },
+     "labels": {
+      "space": " Moon",
+      "bare": "Moon",
+      "cap": " Moon"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      17330,
+      76019
+     ]
+    },
+    "D": {
+     "word": "Jupiter",
+     "ids": {
+      "space": 49689,
+      "bare": 41,
+      "cap": 49689
+     },
+     "labels": {
+      "space": " Jupiter",
+      "bare": "J",
+      "cap": " Jupiter"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      49689
+     ]
+    }
+   }
+  },
+  "redux/miscellaneous/81": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "kiss",
+     "ids": {
+      "space": 21057,
+      "bare": 74,
+      "cap": 43630
+     },
+     "labels": {
+      "space": " kiss",
+      "bare": "k",
+      "cap": " Kiss"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      21057,
+      43630
+     ]
+    },
+    "B": {
+     "word": "shout",
+     "ids": {
+      "space": 41123,
+      "bare": 927,
+      "cap": 1417
+     },
+     "labels": {
+      "space": " shout",
+      "bare": "sh",
+      "cap": " Sh"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      927,
+      1417,
+      41123
+     ]
+    },
+    "C": {
+     "word": "stroll",
+     "ids": {
+      "space": 68883,
+      "bare": 267,
+      "cap": 794
+     },
+     "labels": {
+      "space": " stroll",
+      "bare": "st",
+      "cap": " St"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      267,
+      794,
+      68883
+     ]
+    },
+    "D": {
+     "word": "heal",
+     "ids": {
+      "space": 26563,
+      "bare": 383,
+      "cap": 81030
+     },
+     "labels": {
+      "space": " heal",
+      "bare": "he",
+      "cap": " Heal"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      383,
+      26563,
+      81030
+     ]
+    }
+   }
+  },
+  "redux/nutrition/62": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "rapidly",
+     "ids": {
+      "space": 18512,
+      "bare": 85712,
+      "cap": 46990
+     },
+     "labels": {
+      "space": " rapidly",
+      "bare": "rapid",
+      "cap": " Rapid"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      18512,
+      46990,
+      85712
+     ]
+    },
+    "B": {
+     "word": "blood",
+     "ids": {
+      "space": 6543,
+      "bare": 50005,
+      "cap": 20070
+     },
+     "labels": {
+      "space": " blood",
+      "bare": "blood",
+      "cap": " Blood"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6543,
+      20070,
+      50005
+     ]
+    },
+    "C": {
+     "word": "specific",
+     "ids": {
+      "space": 3151,
+      "bare": 51240,
+      "cap": 28262
+     },
+     "labels": {
+      "space": " specific",
+      "bare": "specific",
+      "cap": " Specific"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3151,
+      28262,
+      51240
+     ]
+    },
+    "D": {
+     "word": "vary",
+     "ids": {
+      "space": 13289,
+      "bare": 82976,
+      "cap": 647
+     },
+     "labels": {
+      "space": " vary",
+      "bare": "vary",
+      "cap": " V"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare"
+     ],
+     "unique_ids": [
+      13289,
+      82976
+     ]
+    }
+   }
+  },
+  "redux/philosophy/10": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "knowledge",
+     "ids": {
+      "space": 6540,
+      "bare": 89053,
+      "cap": 31925
+     },
+     "labels": {
+      "space": " knowledge",
+      "bare": "knowledge",
+      "cap": " Knowledge"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6540,
+      31925,
+      89053
+     ]
+    },
+    "B": {
+     "word": "wealth",
+     "ids": {
+      "space": 11939,
+      "bare": 30533,
+      "cap": 59741
+     },
+     "labels": {
+      "space": " wealth",
+      "bare": "wealth",
+      "cap": " Wealth"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      11939,
+      30533,
+      59741
+     ]
+    },
+    "C": {
+     "word": "community",
+     "ids": {
+      "space": 3942,
+      "bare": 28402,
+      "cap": 12062
+     },
+     "labels": {
+      "space": " community",
+      "bare": "community",
+      "cap": " Community"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3942,
+      12062,
+      28402
+     ]
+    },
+    "D": {
+     "word": "courage",
+     "ids": {
+      "space": 24744,
+      "bare": 66,
+      "cap": 98530
+     },
+     "labels": {
+      "space": " courage",
+      "bare": "c",
+      "cap": " Courage"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      24744,
+      98530
+     ]
+    }
+   }
+  },
+  "redux/prehistory/5": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "vast",
+     "ids": {
+      "space": 12767,
+      "bare": 85,
+      "cap": 647
+     },
+     "labels": {
+      "space": " vast",
+      "bare": "v",
+      "cap": " V"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space"
+     ],
+     "unique_ids": [
+      12767
+     ]
+    },
+    "B": {
+     "word": "enormous",
+     "ids": {
+      "space": 22399,
+      "bare": 268,
+      "cap": 2925
+     },
+     "labels": {
+      "space": " enormous",
+      "bare": "en",
+      "cap": " En"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      268,
+      2925,
+      22399
+     ]
+    },
+    "C": {
+     "word": "Pyramid",
+     "ids": {
+      "space": 82395,
+      "bare": 13828,
+      "cap": 82395
+     },
+     "labels": {
+      "space": " Pyramid",
+      "bare": "Py",
+      "cap": " Pyramid"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      13828,
+      82395
+     ]
+    },
+    "D": {
+     "word": "Temple",
+     "ids": {
+      "space": 18659,
+      "bare": 21988,
+      "cap": 18659
+     },
+     "labels": {
+      "space": " Temple",
+      "bare": "Tem",
+      "cap": " Temple"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      18659,
+      21988
+     ]
+    }
+   }
+  },
+  "redux/prehistory/60": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "uniformitarianism",
+     "ids": {
+      "space": 13794,
+      "bare": 38351,
+      "cap": 47889
+     },
+     "labels": {
+      "space": " uniform",
+      "bare": "uniform",
+      "cap": " Uniform"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      13794,
+      38351,
+      47889
+     ]
+    },
+    "B": {
+     "word": "multilinear",
+     "ids": {
+      "space": 2745,
+      "bare": 25875,
+      "cap": 22162
+     },
+     "labels": {
+      "space": " mult",
+      "bare": "mult",
+      "cap": " Mult"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2745,
+      22162,
+      25875
+     ]
+    },
+    "C": {
+     "word": "system",
+     "ids": {
+      "space": 1849,
+      "bare": 8948,
+      "cap": 739
+     },
+     "labels": {
+      "space": " system",
+      "bare": "system",
+      "cap": " System"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      739,
+      1849,
+      8948
+     ]
+    },
+    "D": {
+     "word": "triple",
+     "ids": {
+      "space": 23725,
+      "bare": 376,
+      "cap": 36649
+     },
+     "labels": {
+      "space": " triple",
+      "bare": "tr",
+      "cap": " Triple"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      376,
+      23725,
+      36649
+     ]
+    }
+   }
+  },
+  "redux/prehistory/80": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "highly",
+     "ids": {
+      "space": 7548,
+      "bare": 11892,
+      "cap": 52385
+     },
+     "labels": {
+      "space": " highly",
+      "bare": "high",
+      "cap": " Highly"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7548,
+      11892,
+      52385
+     ]
+    },
+    "B": {
+     "word": "waterlogged",
+     "ids": {
+      "space": 3015,
+      "bare": 12987,
+      "cap": 9959
+     },
+     "labels": {
+      "space": " water",
+      "bare": "water",
+      "cap": " Water"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3015,
+      9959,
+      12987
+     ]
+    },
+    "C": {
+     "word": "placed",
+     "ids": {
+      "space": 9099,
+      "bare": 36369,
+      "cap": 1818
+     },
+     "labels": {
+      "space": " placed",
+      "bare": "placed",
+      "cap": " Pl"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1818,
+      9099,
+      36369
+     ]
+    },
+    "D": {
+     "word": "covered",
+     "ids": {
+      "space": 9761,
+      "bare": 20804,
+      "cap": 72195
+     },
+     "labels": {
+      "space": " covered",
+      "bare": "covered",
+      "cap": " Covered"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9761,
+      20804,
+      72195
+     ]
+    }
+   }
+  },
+  "redux/prehistory/97": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "microcephaly",
+     "ids": {
+      "space": 8003,
+      "bare": 40443,
+      "cap": 18157
+     },
+     "labels": {
+      "space": " micro",
+      "bare": "micro",
+      "cap": " Micro"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8003,
+      18157,
+      40443
+     ]
+    },
+    "B": {
+     "word": "neoteny",
+     "ids": {
+      "space": 834,
+      "bare": 811,
+      "cap": 4182
+     },
+     "labels": {
+      "space": " ne",
+      "bare": "ne",
+      "cap": " Ne"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      811,
+      834,
+      4182
+     ]
+    },
+    "C": {
+     "word": "prognathism",
+     "ids": {
+      "space": 62803,
+      "bare": 776,
+      "cap": 1298
+     },
+     "labels": {
+      "space": " progn",
+      "bare": "pro",
+      "cap": " Pro"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      776,
+      1298,
+      62803
+     ]
+    },
+    "D": {
+     "word": "supraorbital",
+     "ids": {
+      "space": 66555,
+      "bare": 12776,
+      "cap": 6299
+     },
+     "labels": {
+      "space": " supra",
+      "bare": "sup",
+      "cap": " Sup"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6299,
+      12776,
+      66555
+     ]
+    }
+   }
+  },
+  "redux/professional_accounting/48": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Establishing",
+     "ids": {
+      "space": 39398,
+      "bare": 68220,
+      "cap": 39398
+     },
+     "labels": {
+      "space": " Establish",
+      "bare": "Establish",
+      "cap": " Establish"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      39398,
+      68220
+     ]
+    },
+    "B": {
+     "word": "Increasing",
+     "ids": {
+      "space": 73440,
+      "bare": 80682,
+      "cap": 73440
+     },
+     "labels": {
+      "space": " Increasing",
+      "bare": "Increasing",
+      "cap": " Increasing"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      73440,
+      80682
+     ]
+    },
+    "C": {
+     "word": "Designing",
+     "ids": {
+      "space": 6982,
+      "bare": 20470,
+      "cap": 6982
+     },
+     "labels": {
+      "space": " Design",
+      "bare": "Design",
+      "cap": " Design"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6982,
+      20470
+     ]
+    },
+    "D": {
+     "word": "Assessing",
+     "ids": {
+      "space": 81835,
+      "bare": 5615,
+      "cap": 81835
+     },
+     "labels": {
+      "space": " Assess",
+      "bare": "Ass",
+      "cap": " Assess"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5615,
+      81835
+     ]
+    }
+   }
+  },
+  "redux/professional_law/33": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "constituted",
+     "ids": {
+      "space": 64491,
+      "bare": 1024,
+      "cap": 75604
+     },
+     "labels": {
+      "space": " constituted",
+      "bare": "const",
+      "cap": " Constit"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1024,
+      64491,
+      75604
+     ]
+    },
+    "B": {
+     "word": "substantial",
+     "ids": {
+      "space": 11924,
+      "bare": 1966,
+      "cap": 3719
+     },
+     "labels": {
+      "space": " substantial",
+      "bare": "sub",
+      "cap": " Sub"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1966,
+      3719,
+      11924
+     ]
+    },
+    "C": {
+     "word": "chef",
+     "ids": {
+      "space": 29706,
+      "bare": 75079,
+      "cap": 35975
+     },
+     "labels": {
+      "space": " chef",
+      "bare": "chef",
+      "cap": " Chef"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      29706,
+      35975,
+      75079
+     ]
+    },
+    "D": {
+     "word": "customer",
+     "ids": {
+      "space": 6002,
+      "bare": 11049,
+      "cap": 12277
+     },
+     "labels": {
+      "space": " customer",
+      "bare": "customer",
+      "cap": " Customer"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6002,
+      11049,
+      12277
+     ]
+    }
+   }
+  },
+  "redux/professional_law/8": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "non",
+     "ids": {
+      "space": 2477,
+      "bare": 6280,
+      "cap": 11581
+     },
+     "labels": {
+      "space": " non",
+      "bare": "non",
+      "cap": " Non"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2477,
+      6280,
+      11581
+     ]
+    },
+    "B": {
+     "word": "even",
+     "ids": {
+      "space": 1496,
+      "bare": 16788,
+      "cap": 7418
+     },
+     "labels": {
+      "space": " even",
+      "bare": "even",
+      "cap": " Even"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1496,
+      7418,
+      16788
+     ]
+    },
+    "C": {
+     "word": "excited",
+     "ids": {
+      "space": 12035,
+      "bare": 39441,
+      "cap": 38895
+     },
+     "labels": {
+      "space": " excited",
+      "bare": "exc",
+      "cap": " Exc"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      12035,
+      38895,
+      39441
+     ]
+    },
+    "D": {
+     "word": "inadmissible",
+     "ids": {
+      "space": 304,
+      "bare": 258,
+      "cap": 758
+     },
+     "labels": {
+      "space": " in",
+      "bare": "in",
+      "cap": " In"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      258,
+      304,
+      758
+     ]
+    }
+   }
+  },
+  "redux/professional_law/91": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "implied",
+     "ids": {
+      "space": 6131,
+      "bare": 318,
+      "cap": 2362
+     },
+     "labels": {
+      "space": " implied",
+      "bare": "im",
+      "cap": " Im"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      318,
+      2362,
+      6131
+     ]
+    },
+    "B": {
+     "word": "house",
+     "ids": {
+      "space": 3753,
+      "bare": 7675,
+      "cap": 4678
+     },
+     "labels": {
+      "space": " house",
+      "bare": "house",
+      "cap": " House"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3753,
+      4678,
+      7675
+     ]
+    },
+    "C": {
+     "word": "yelling",
+     "ids": {
+      "space": 52202,
+      "bare": 88,
+      "cap": 809
+     },
+     "labels": {
+      "space": " yelling",
+      "bare": "y",
+      "cap": " Y"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space"
+     ],
+     "unique_ids": [
+      52202
+     ]
+    },
+    "D": {
+     "word": "defects",
+     "ids": {
+      "space": 41555,
+      "bare": 750,
+      "cap": 3892
+     },
+     "labels": {
+      "space": " defects",
+      "bare": "def",
+      "cap": " Def"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      750,
+      3892,
+      41555
+     ]
+    }
+   }
+  },
+  "redux/professional_medicine/28": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Adverse",
+     "ids": {
+      "space": 2410,
+      "bare": 2589,
+      "cap": 2410
+     },
+     "labels": {
+      "space": " Ad",
+      "bare": "Ad",
+      "cap": " Ad"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2410,
+      2589
+     ]
+    },
+    "B": {
+     "word": "Bereavement",
+     "ids": {
+      "space": 43157,
+      "bare": 33,
+      "cap": 43157
+     },
+     "labels": {
+      "space": " Bere",
+      "bare": "B",
+      "cap": " Bere"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      43157
+     ]
+    },
+    "C": {
+     "word": "Early",
+     "ids": {
+      "space": 22752,
+      "bare": 41198,
+      "cap": 22752
+     },
+     "labels": {
+      "space": " Early",
+      "bare": "Early",
+      "cap": " Early"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      22752,
+      41198
+     ]
+    },
+    "D": {
+     "word": "Increase",
+     "ids": {
+      "space": 39633,
+      "bare": 69556,
+      "cap": 39633
+     },
+     "labels": {
+      "space": " Increase",
+      "bare": "Increase",
+      "cap": " Increase"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      39633,
+      69556
+     ]
+    }
+   }
+  },
+  "redux/professional_medicine/35": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Acoustic",
+     "ids": {
+      "space": 6381,
+      "bare": 11654,
+      "cap": 6381
+     },
+     "labels": {
+      "space": " Ac",
+      "bare": "Ac",
+      "cap": " Ac"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6381,
+      11654
+     ]
+    },
+    "B": {
+     "word": "Benign",
+     "ids": {
+      "space": 7355,
+      "bare": 24566,
+      "cap": 7355
+     },
+     "labels": {
+      "space": " Ben",
+      "bare": "Ben",
+      "cap": " Ben"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7355,
+      24566
+     ]
+    },
+    "C": {
+     "word": "Brain",
+     "ids": {
+      "space": 30317,
+      "bare": 65077,
+      "cap": 30317
+     },
+     "labels": {
+      "space": " Brain",
+      "bare": "Brain",
+      "cap": " Brain"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      30317,
+      65077
+     ]
+    },
+    "D": {
+     "word": "Meniere",
+     "ids": {
+      "space": 11012,
+      "bare": 28719,
+      "cap": 11012
+     },
+     "labels": {
+      "space": " Men",
+      "bare": "Men",
+      "cap": " Men"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      11012,
+      28719
+     ]
+    }
+   }
+  },
+  "redux/professional_medicine/44": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Diazepam",
+     "ids": {
+      "space": 57031,
+      "bare": 35,
+      "cap": 57031
+     },
+     "labels": {
+      "space": " Diaz",
+      "bare": "D",
+      "cap": " Diaz"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      57031
+     ]
+    },
+    "B": {
+     "word": "Methamphetamine",
+     "ids": {
+      "space": 56075,
+      "bare": 44,
+      "cap": 56075
+     },
+     "labels": {
+      "space": " Meth",
+      "bare": "M",
+      "cap": " Meth"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      56075
+     ]
+    },
+    "C": {
+     "word": "Oxycodone",
+     "ids": {
+      "space": 50615,
+      "bare": 46,
+      "cap": 50615
+     },
+     "labels": {
+      "space": " Ox",
+      "bare": "O",
+      "cap": " Ox"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      50615
+     ]
+    },
+    "D": {
+     "word": "PCP",
+     "ids": {
+      "space": 6673,
+      "bare": 4872,
+      "cap": 6673
+     },
+     "labels": {
+      "space": " PC",
+      "bare": "PC",
+      "cap": " PC"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4872,
+      6673
+     ]
+    }
+   }
+  },
+  "redux/professional_medicine/83": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Adenovirus",
+     "ids": {
+      "space": 2410,
+      "bare": 2589,
+      "cap": 2410
+     },
+     "labels": {
+      "space": " Ad",
+      "bare": "Ad",
+      "cap": " Ad"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2410,
+      2589
+     ]
+    },
+    "B": {
+     "word": "BK",
+     "ids": {
+      "space": 76782,
+      "bare": 88307,
+      "cap": 76782
+     },
+     "labels": {
+      "space": " BK",
+      "bare": "BK",
+      "cap": " BK"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      76782,
+      88307
+     ]
+    },
+    "C": {
+     "word": "Epstein",
+     "ids": {
+      "space": 80032,
+      "bare": 22373,
+      "cap": 80032
+     },
+     "labels": {
+      "space": " Epstein",
+      "bare": "Ep",
+      "cap": " Epstein"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      22373,
+      80032
+     ]
+    },
+    "D": {
+     "word": "Herpes",
+     "ids": {
+      "space": 6252,
+      "bare": 20705,
+      "cap": 6252
+     },
+     "labels": {
+      "space": " Her",
+      "bare": "Her",
+      "cap": " Her"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      6252,
+      20705
+     ]
+    }
+   }
+  },
+  "redux/professional_medicine/97": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "injection",
+     "ids": {
+      "space": 25071,
+      "bare": 258,
+      "cap": 53811
+     },
+     "labels": {
+      "space": " injection",
+      "bare": "in",
+      "cap": " Injection"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      258,
+      25071,
+      53811
+     ]
+    },
+    "B": {
+     "word": "aspiration",
+     "ids": {
+      "space": 97641,
+      "bare": 300,
+      "cap": 1634
+     },
+     "labels": {
+      "space": " aspiration",
+      "bare": "as",
+      "cap": " As"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      300,
+      1634,
+      97641
+     ]
+    },
+    "C": {
+     "word": "biopsy",
+     "ids": {
+      "space": 98547,
+      "bare": 8221,
+      "cap": 12100
+     },
+     "labels": {
+      "space": " biopsy",
+      "bare": "bi",
+      "cap": " Bi"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8221,
+      12100,
+      98547
+     ]
+    },
+    "D": {
+     "word": "surgical",
+     "ids": {
+      "space": 33833,
+      "bare": 82,
+      "cap": 70112
+     },
+     "labels": {
+      "space": " surgical",
+      "bare": "s",
+      "cap": " Surgical"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      33833,
+      70112
+     ]
+    }
+   }
+  },
+  "redux/professional_medicine/98": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "articulated",
+     "ids": {
+      "space": 82180,
+      "bare": 80887,
+      "cap": 5166
+     },
+     "labels": {
+      "space": " articulated",
+      "bare": "artic",
+      "cap": " Art"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5166,
+      80887,
+      82180
+     ]
+    },
+    "B": {
+     "word": "met",
+     "ids": {
+      "space": 2270,
+      "bare": 4059,
+      "cap": 6212
+     },
+     "labels": {
+      "space": " met",
+      "bare": "met",
+      "cap": " Met"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2270,
+      4059,
+      6212
+     ]
+    },
+    "C": {
+     "word": "neck",
+     "ids": {
+      "space": 12975,
+      "bare": 62340,
+      "cap": 42955
+     },
+     "labels": {
+      "space": " neck",
+      "bare": "neck",
+      "cap": " Neck"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      12975,
+      42955,
+      62340
+     ]
+    },
+    "D": {
+     "word": "patient",
+     "ids": {
+      "space": 8720,
+      "bare": 22722,
+      "cap": 28924
+     },
+     "labels": {
+      "space": " patient",
+      "bare": "patient",
+      "cap": " Patient"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8720,
+      22722,
+      28924
+     ]
+    }
+   }
+  },
+  "redux/professional_psychology/30": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "con",
+     "ids": {
+      "space": 390,
+      "bare": 443,
+      "cap": 1200
+     },
+     "labels": {
+      "space": " con",
+      "bare": "con",
+      "cap": " Con"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      390,
+      443,
+      1200
+     ]
+    },
+    "B": {
+     "word": "demonstrated",
+     "ids": {
+      "space": 20459,
+      "bare": 67,
+      "cap": 85401
+     },
+     "labels": {
+      "space": " demonstrated",
+      "bare": "d",
+      "cap": " Demonstr"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      20459,
+      85401
+     ]
+    },
+    "C": {
+     "word": "environment",
+     "ids": {
+      "space": 4573,
+      "bare": 23294,
+      "cap": 11586
+     },
+     "labels": {
+      "space": " environment",
+      "bare": "environment",
+      "cap": " Environment"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4573,
+      11586,
+      23294
+     ]
+    },
+    "D": {
+     "word": "central",
+     "ids": {
+      "space": 8622,
+      "bare": 51811,
+      "cap": 10684
+     },
+     "labels": {
+      "space": " central",
+      "bare": "central",
+      "cap": " Central"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8622,
+      10684,
+      51811
+     ]
+    }
+   }
+  },
+  "redux/professional_psychology/4": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "unity",
+     "ids": {
+      "space": 30326,
+      "bare": 2439,
+      "cap": 21717
+     },
+     "labels": {
+      "space": " unity",
+      "bare": "unity",
+      "cap": " Unity"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2439,
+      21717,
+      30326
+     ]
+    },
+    "B": {
+     "word": "degree",
+     "ids": {
+      "space": 8381,
+      "bare": 41027,
+      "cap": 37082
+     },
+     "labels": {
+      "space": " degree",
+      "bare": "degree",
+      "cap": " Degree"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8381,
+      37082,
+      41027
+     ]
+    },
+    "C": {
+     "word": "Selective",
+     "ids": {
+      "space": 8427,
+      "bare": 64392,
+      "cap": 8427
+     },
+     "labels": {
+      "space": " Select",
+      "bare": "Selective",
+      "cap": " Select"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8427,
+      64392
+     ]
+    },
+    "D": {
+     "word": "general",
+     "ids": {
+      "space": 4586,
+      "bare": 24595,
+      "cap": 3251
+     },
+     "labels": {
+      "space": " general",
+      "bare": "general",
+      "cap": " General"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3251,
+      4586,
+      24595
+     ]
+    }
+   }
+  },
+  "redux/professional_psychology/55": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "socially",
+     "ids": {
+      "space": 39318,
+      "bare": 22386,
+      "cap": 9784
+     },
+     "labels": {
+      "space": " socially",
+      "bare": "social",
+      "cap": " Social"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9784,
+      22386,
+      39318
+     ]
+    },
+    "B": {
+     "word": "rival",
+     "ids": {
+      "space": 20762,
+      "bare": 81,
+      "cap": 431
+     },
+     "labels": {
+      "space": " rival",
+      "bare": "r",
+      "cap": " R"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space"
+     ],
+     "unique_ids": [
+      20762
+     ]
+    },
+    "C": {
+     "word": "maintained",
+     "ids": {
+      "space": 18401,
+      "bare": 66813,
+      "cap": 42887
+     },
+     "labels": {
+      "space": " maintained",
+      "bare": "maint",
+      "cap": " Maint"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      18401,
+      42887,
+      66813
+     ]
+    },
+    "D": {
+     "word": "children",
+     "ids": {
+      "space": 2841,
+      "bare": 5864,
+      "cap": 15044
+     },
+     "labels": {
+      "space": " children",
+      "bare": "children",
+      "cap": " Children"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2841,
+      5864,
+      15044
+     ]
+    }
+   }
+  },
+  "redux/professional_psychology/74": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "refuse",
+     "ids": {
+      "space": 25066,
+      "bare": 1097,
+      "cap": 8550
+     },
+     "labels": {
+      "space": " refuse",
+      "bare": "ref",
+      "cap": " Ref"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1097,
+      8550,
+      25066
+     ]
+    },
+    "B": {
+     "word": "immediately",
+     "ids": {
+      "space": 7069,
+      "bare": 318,
+      "cap": 68252
+     },
+     "labels": {
+      "space": " immediately",
+      "bare": "im",
+      "cap": " Immediately"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      318,
+      7069,
+      68252
+     ]
+    },
+    "C": {
+     "word": "write",
+     "ids": {
+      "space": 3270,
+      "bare": 4934,
+      "cap": 9645
+     },
+     "labels": {
+      "space": " write",
+      "bare": "write",
+      "cap": " Write"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3270,
+      4934,
+      9645
+     ]
+    },
+    "D": {
+     "word": "follow",
+     "ids": {
+      "space": 1795,
+      "bare": 18559,
+      "cap": 11112
+     },
+     "labels": {
+      "space": " follow",
+      "bare": "follow",
+      "cap": " Follow"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1795,
+      11112,
+      18559
+     ]
+    }
+   }
+  },
+  "redux/public_relations/1": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Formal",
+     "ids": {
+      "space": 79367,
+      "bare": 1838,
+      "cap": 79367
+     },
+     "labels": {
+      "space": " Formal",
+      "bare": "Form",
+      "cap": " Formal"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1838,
+      79367
+     ]
+    },
+    "B": {
+     "word": "Abstract",
+     "ids": {
+      "space": 13513,
+      "bare": 15949,
+      "cap": 13513
+     },
+     "labels": {
+      "space": " Abstract",
+      "bare": "Abstract",
+      "cap": " Abstract"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      13513,
+      15949
+     ]
+    },
+    "C": {
+     "word": "Personal",
+     "ids": {
+      "space": 19207,
+      "bare": 34027,
+      "cap": 19207
+     },
+     "labels": {
+      "space": " Personal",
+      "bare": "Personal",
+      "cap": " Personal"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      19207,
+      34027
+     ]
+    },
+    "D": {
+     "word": "Objective",
+     "ids": {
+      "space": 54289,
+      "bare": 78306,
+      "cap": 54289
+     },
+     "labels": {
+      "space": " Objective",
+      "bare": "Objective",
+      "cap": " Objective"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      54289,
+      78306
+     ]
+    }
+   }
+  },
+  "redux/public_relations/21": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "legitimacy",
+     "ids": {
+      "space": 55908,
+      "bare": 1937,
+      "cap": 7610
+     },
+     "labels": {
+      "space": " legitimacy",
+      "bare": "leg",
+      "cap": " Leg"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1937,
+      7610,
+      55908
+     ]
+    },
+    "B": {
+     "word": "identity",
+     "ids": {
+      "space": 9569,
+      "bare": 16912,
+      "cap": 26540
+     },
+     "labels": {
+      "space": " identity",
+      "bare": "identity",
+      "cap": " Identity"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9569,
+      16912,
+      26540
+     ]
+    },
+    "C": {
+     "word": "reliability",
+     "ids": {
+      "space": 30538,
+      "bare": 265,
+      "cap": 6512
+     },
+     "labels": {
+      "space": " reliability",
+      "bare": "re",
+      "cap": " Rel"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      265,
+      6512,
+      30538
+     ]
+    },
+    "D": {
+     "word": "agency",
+     "ids": {
+      "space": 9088,
+      "bare": 55565,
+      "cap": 16379
+     },
+     "labels": {
+      "space": " agency",
+      "bare": "agency",
+      "cap": " Agency"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9088,
+      16379,
+      55565
+     ]
+    }
+   }
+  },
+  "redux/public_relations/39": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "distribution",
+     "ids": {
+      "space": 7982,
+      "bare": 81716,
+      "cap": 33909
+     },
+     "labels": {
+      "space": " distribution",
+      "bare": "distribution",
+      "cap": " Distribution"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7982,
+      33909,
+      81716
+     ]
+    },
+    "B": {
+     "word": "penetration",
+     "ids": {
+      "space": 43496,
+      "bare": 2752,
+      "cap": 13294
+     },
+     "labels": {
+      "space": " penetration",
+      "bare": "pen",
+      "cap": " Pen"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      2752,
+      13294,
+      43496
+     ]
+    },
+    "C": {
+     "word": "participation",
+     "ids": {
+      "space": 20239,
+      "bare": 4480,
+      "cap": 63403
+     },
+     "labels": {
+      "space": " participation",
+      "bare": "part",
+      "cap": " Participation"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4480,
+      20239,
+      63403
+     ]
+    },
+    "D": {
+     "word": "identification",
+     "ids": {
+      "space": 21892,
+      "bare": 91577,
+      "cap": 58676
+     },
+     "labels": {
+      "space": " identification",
+      "bare": "identification",
+      "cap": " Identification"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      21892,
+      58676,
+      91577
+     ]
+    }
+   }
+  },
+  "redux/security_studies/20": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "becomes",
+     "ids": {
+      "space": 9044,
+      "bare": 16692,
+      "cap": 31046
+     },
+     "labels": {
+      "space": " becomes",
+      "bare": "bec",
+      "cap": " Bec"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9044,
+      16692,
+      31046
+     ]
+    },
+    "B": {
+     "word": "argue",
+     "ids": {
+      "space": 17585,
+      "bare": 858,
+      "cap": 7638
+     },
+     "labels": {
+      "space": " argue",
+      "bare": "arg",
+      "cap": " Arg"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      858,
+      7638,
+      17585
+     ]
+    },
+    "C": {
+     "word": "move",
+     "ids": {
+      "space": 3271,
+      "bare": 3397,
+      "cap": 14561
+     },
+     "labels": {
+      "space": " move",
+      "bare": "move",
+      "cap": " Move"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3271,
+      3397,
+      14561
+     ]
+    },
+    "D": {
+     "word": "framed",
+     "ids": {
+      "space": 45993,
+      "bare": 1626,
+      "cap": 65140
+     },
+     "labels": {
+      "space": " framed",
+      "bare": "fr",
+      "cap": " Fram"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1626,
+      45993,
+      65140
+     ]
+    }
+   }
+  },
+  "redux/security_studies/23": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "expansion",
+     "ids": {
+      "space": 14461,
+      "bare": 4580,
+      "cap": 54554
+     },
+     "labels": {
+      "space": " expansion",
+      "bare": "exp",
+      "cap": " Expansion"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4580,
+      14461,
+      54554
+     ]
+    },
+    "B": {
+     "word": "focuses",
+     "ids": {
+      "space": 23497,
+      "bare": 17414,
+      "cap": 25806
+     },
+     "labels": {
+      "space": " focuses",
+      "bare": "focus",
+      "cap": " Focus"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      17414,
+      23497,
+      25806
+     ]
+    },
+    "C": {
+     "word": "cannot",
+     "ids": {
+      "space": 4157,
+      "bare": 33260,
+      "cap": 34655
+     },
+     "labels": {
+      "space": " cannot",
+      "bare": "cannot",
+      "cap": " Cannot"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4157,
+      33260,
+      34655
+     ]
+    },
+    "D": {
+     "word": "concern",
+     "ids": {
+      "space": 4643,
+      "bare": 443,
+      "cap": 51247
+     },
+     "labels": {
+      "space": " concern",
+      "bare": "con",
+      "cap": " Concern"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      443,
+      4643,
+      51247
+     ]
+    }
+   }
+  },
+  "redux/security_studies/52": {
+   "correct": "A",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "rational",
+     "ids": {
+      "space": 24438,
+      "bare": 81,
+      "cap": 54525
+     },
+     "labels": {
+      "space": " rational",
+      "bare": "r",
+      "cap": " Rational"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      24438,
+      54525
+     ]
+    },
+    "B": {
+     "word": "social",
+     "ids": {
+      "space": 3590,
+      "bare": 22386,
+      "cap": 9784
+     },
+     "labels": {
+      "space": " social",
+      "bare": "social",
+      "cap": " Social"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3590,
+      9784,
+      22386
+     ]
+    },
+    "C": {
+     "word": "anarchic",
+     "ids": {
+      "space": 43465,
+      "bare": 276,
+      "cap": 1527
+     },
+     "labels": {
+      "space": " anarch",
+      "bare": "an",
+      "cap": " An"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      276,
+      1527,
+      43465
+     ]
+    },
+    "D": {
+     "word": "mass",
+     "ids": {
+      "space": 3072,
+      "bare": 26331,
+      "cap": 9167
+     },
+     "labels": {
+      "space": " mass",
+      "bare": "mass",
+      "cap": " Mass"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3072,
+      9167,
+      26331
+     ]
+    }
+   }
+  },
+  "redux/security_studies/74": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "regime",
+     "ids": {
+      "space": 17484,
+      "bare": 1580,
+      "cap": 3184
+     },
+     "labels": {
+      "space": " regime",
+      "bare": "reg",
+      "cap": " Reg"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      1580,
+      3184,
+      17484
+     ]
+    },
+    "B": {
+     "word": "set",
+     "ids": {
+      "space": 738,
+      "bare": 746,
+      "cap": 2573
+     },
+     "labels": {
+      "space": " set",
+      "bare": "set",
+      "cap": " Set"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      738,
+      746,
+      2573
+     ]
+    },
+    "C": {
+     "word": "independent",
+     "ids": {
+      "space": 9489,
+      "bare": 258,
+      "cap": 21994
+     },
+     "labels": {
+      "space": " independent",
+      "bare": "in",
+      "cap": " Independent"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      258,
+      9489,
+      21994
+     ]
+    },
+    "D": {
+     "word": "known",
+     "ids": {
+      "space": 3881,
+      "bare": 5278,
+      "cap": 48286
+     },
+     "labels": {
+      "space": " known",
+      "bare": "known",
+      "cap": " Known"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3881,
+      5278,
+      48286
+     ]
+    }
+   }
+  },
+  "redux/us_foreign_policy/18": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "increase",
+     "ids": {
+      "space": 5263,
+      "bare": 78501,
+      "cap": 39633
+     },
+     "labels": {
+      "space": " increase",
+      "bare": "increase",
+      "cap": " Increase"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5263,
+      39633,
+      78501
+     ]
+    },
+    "B": {
+     "word": "costs",
+     "ids": {
+      "space": 7049,
+      "bare": 16440,
+      "cap": 63041
+     },
+     "labels": {
+      "space": " costs",
+      "bare": "cost",
+      "cap": " Costs"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7049,
+      16440,
+      63041
+     ]
+    },
+    "C": {
+     "word": "Anger",
+     "ids": {
+      "space": 7416,
+      "bare": 10743,
+      "cap": 7416
+     },
+     "labels": {
+      "space": " Ang",
+      "bare": "Ang",
+      "cap": " Ang"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7416,
+      10743
+     ]
+    },
+    "D": {
+     "word": "Pressure",
+     "ids": {
+      "space": 38990,
+      "bare": 68269,
+      "cap": 38990
+     },
+     "labels": {
+      "space": " Pressure",
+      "bare": "Pressure",
+      "cap": " Pressure"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      38990,
+      68269
+     ]
+    }
+   }
+  },
+  "redux/us_foreign_policy/60": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "diplomacy",
+     "ids": {
+      "space": 61240,
+      "bare": 8579,
+      "cap": 45462
+     },
+     "labels": {
+      "space": " diplomacy",
+      "bare": "di",
+      "cap": " Dipl"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      8579,
+      45462,
+      61240
+     ]
+    },
+    "B": {
+     "word": "political",
+     "ids": {
+      "space": 4948,
+      "bare": 74685,
+      "cap": 30497
+     },
+     "labels": {
+      "space": " political",
+      "bare": "political",
+      "cap": " Political"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4948,
+      30497,
+      74685
+     ]
+    },
+    "C": {
+     "word": "idea",
+     "ids": {
+      "space": 4522,
+      "bare": 41777,
+      "cap": 51001
+     },
+     "labels": {
+      "space": " idea",
+      "bare": "idea",
+      "cap": " Idea"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      4522,
+      41777,
+      51001
+     ]
+    },
+    "D": {
+     "word": "Democrats",
+     "ids": {
+      "space": 12363,
+      "bare": 74717,
+      "cap": 12363
+     },
+     "labels": {
+      "space": " Democrats",
+      "bare": "Democrats",
+      "cap": " Democrats"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      12363,
+      74717
+     ]
+    }
+   }
+  },
+  "redux/us_foreign_policy/77": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Irrationality",
+     "ids": {
+      "space": 78041,
+      "bare": 40,
+      "cap": 78041
+     },
+     "labels": {
+      "space": " Irr",
+      "bare": "I",
+      "cap": " Irr"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      78041
+     ]
+    },
+    "B": {
+     "word": "Costs",
+     "ids": {
+      "space": 63041,
+      "bare": 14940,
+      "cap": 63041
+     },
+     "labels": {
+      "space": " Costs",
+      "bare": "Cost",
+      "cap": " Costs"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      14940,
+      63041
+     ]
+    },
+    "C": {
+     "word": "Regime",
+     "ids": {
+      "space": 3184,
+      "bare": 3477,
+      "cap": 3184
+     },
+     "labels": {
+      "space": " Reg",
+      "bare": "Reg",
+      "cap": " Reg"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3184,
+      3477
+     ]
+    },
+    "D": {
+     "word": "International",
+     "ids": {
+      "space": 7179,
+      "bare": 33646,
+      "cap": 7179
+     },
+     "labels": {
+      "space": " International",
+      "bare": "International",
+      "cap": " International"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7179,
+      33646
+     ]
+    }
+   }
+  },
+  "redux/virology/36": {
+   "correct": "B",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Cohort",
+     "ids": {
+      "space": 83575,
+      "bare": 34,
+      "cap": 83575
+     },
+     "labels": {
+      "space": " Coh",
+      "bare": "C",
+      "cap": " Coh"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      83575
+     ]
+    },
+    "B": {
+     "word": "Serial",
+     "ids": {
+      "space": 11215,
+      "bare": 5915,
+      "cap": 11215
+     },
+     "labels": {
+      "space": " Serial",
+      "bare": "Serial",
+      "cap": " Serial"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5915,
+      11215
+     ]
+    },
+    "C": {
+     "word": "Mortality",
+     "ids": {
+      "space": 22031,
+      "bare": 44,
+      "cap": 22031
+     },
+     "labels": {
+      "space": " Mort",
+      "bare": "M",
+      "cap": " Mort"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      22031
+     ]
+    },
+    "D": {
+     "word": "Syndromic",
+     "ids": {
+      "space": 41219,
+      "bare": 34667,
+      "cap": 41219
+     },
+     "labels": {
+      "space": " Synd",
+      "bare": "Sy",
+      "cap": " Synd"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      34667,
+      41219
+     ]
+    }
+   }
+  },
+  "redux/virology/46": {
+   "correct": "D",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "USA",
+     "ids": {
+      "space": 7279,
+      "bare": 24347,
+      "cap": 7279
+     },
+     "labels": {
+      "space": " USA",
+      "bare": "USA",
+      "cap": " USA"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      7279,
+      24347
+     ]
+    },
+    "B": {
+     "word": "Norway",
+     "ids": {
+      "space": 31503,
+      "bare": 32663,
+      "cap": 31503
+     },
+     "labels": {
+      "space": " Norway",
+      "bare": "Nor",
+      "cap": " Norway"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      31503,
+      32663
+     ]
+    },
+    "C": {
+     "word": "EU",
+     "ids": {
+      "space": 9812,
+      "bare": 38807,
+      "cap": 9812
+     },
+     "labels": {
+      "space": " EU",
+      "bare": "EU",
+      "cap": " EU"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      9812,
+      38807
+     ]
+    },
+    "D": {
+     "word": "Island",
+     "ids": {
+      "space": 10720,
+      "bare": 3872,
+      "cap": 10720
+     },
+     "labels": {
+      "space": " Island",
+      "bare": "Is",
+      "cap": " Island"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      3872,
+      10720
+     ]
+    }
+   }
+  },
+  "redux/world_religions/24": {
+   "correct": "C",
+   "letters": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "options": {
+    "A": {
+     "word": "Khadijah",
+     "ids": {
+      "space": 20165,
+      "bare": 46788,
+      "cap": 20165
+     },
+     "labels": {
+      "space": " Kh",
+      "bare": "Kh",
+      "cap": " Kh"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      20165,
+      46788
+     ]
+    },
+    "B": {
+     "word": "Gabriel",
+     "ids": {
+      "space": 38743,
+      "bare": 74639,
+      "cap": 38743
+     },
+     "labels": {
+      "space": " Gabriel",
+      "bare": "Gab",
+      "cap": " Gabriel"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      38743,
+      74639
+     ]
+    },
+    "C": {
+     "word": "Waraqah",
+     "ids": {
+      "space": 5004,
+      "bare": 54,
+      "cap": 5004
+     },
+     "labels": {
+      "space": " War",
+      "bare": "W",
+      "cap": " War"
+     },
+     "whole_word_single_token": false,
+     "forms_used": [
+      "space",
+      "cap"
+     ],
+     "unique_ids": [
+      5004
+     ]
+    },
+    "D": {
+     "word": "Abu",
+     "ids": {
+      "space": 30129,
+      "bare": 5830,
+      "cap": 30129
+     },
+     "labels": {
+      "space": " Abu",
+      "bare": "Ab",
+      "cap": " Abu"
+     },
+     "whole_word_single_token": true,
+     "forms_used": [
+      "space",
+      "bare",
+      "cap"
+     ],
+     "unique_ids": [
+      5830,
+      30129
+     ]
+    }
+   }
+  }
+ }
+}
