@@ -13,6 +13,7 @@ This is the running record of what we have found, with one section per finding. 
 - **Many followers can still give the correct answer, and they pick B before reasoning.** Asked sincerely afterwards, 40–60% of followers of answer-statement hints give the correct option. In runs that end on B, forcing an answer before any reasoning already gives P(B) = 0.82. *Interpretation:* behavioural evidence that these switches are decided up front and then argued for, against knowledge the model can still retrieve. Exploratory, but consistent across arms.
 - **The lenses find no hidden knowledge, but our readout can't show it during reasoning anyway.** The option-letter readout only shows the answer letter where the next token is a letter. Even unhinted runs that go on to answer correctly show no correct-letter margin during their reasoning. At the answer position, wrong-answer runs keep the correct letter 1–3 nats up, about as much as any salient unchosen letter keeps. In the pre-registered tests, T2 failed (AUROC 0.46) and T1 was underpowered. T1b passed narrowly (0.54 [0.504, 0.577]), but response length alone does as well (0.54). *Interpretation:* no evidence yet that the J-lens detects hidden knowledge better than the chain of thought. The nulls are partly a limit of the readout, not evidence that the knowledge is absent.
 - **The one internal trace appears after a planted claim, and the logit lens sees it too.** We plant "The answer is (B)." at the start of the model's thinking. When the model keeps B, the correct letter stays +1.4 nats above the other wrong letters at the answer position, against −0.2 for the salience control. The logit lens shows the same (+1.7 vs +0.5). *Interpretation:* some trace of the correct answer survives to the answer, but it is in the model's output probabilities, not something only the J-lens reveals. Exploratory, 21 items.
+- **Spontaneous rationalised cheating hasn't been shown in a lens-covered model we can run** (literature scoping, §9). Stock Qwen3-8B barely cheats (0–1% in three coding settings). In the nearest public transcripts (Qwen3.8-27B on ImpossibleBench), the CoT names the violation in 25 of 32 cheating runs and rationalises it away in 6. *Interpretation:* moving the core question to norm violations needs a pilot first, most likely multi-turn ImpossibleBench with Qwen3-14B/8B. Moderate confidence.
 
 ## Terms
 
@@ -421,7 +422,37 @@ Exploratory checks around the tests:
 
 ---
 
-## 9. Open questions and next steps
+## 9. Spontaneous cheating in open models (literature scoping, Q4)
+
+**Status:** exploratory. Reading only: papers, model and dataset cards, and two public transcript sets; no model runs.
+
+**Question.** Do open reasoning models with a Neuronpedia J-lens cheat on their own, for example by special-casing tests or ignoring instructions, and justify it instead of naming it? If they do, the core question could move from hinted MCQ to norm violations.
+
+**Method.**
+- A survey of ImpossibleBench, Model Forensics (Singh et al. 2026), the AISI CodeContests env, djinn, HackTrace, School of Reward Hacks, Thaman's benchmark and RL testbeds, checked against the lens file list.
+- A count of two public transcript sets, coded by one reader:
+  - all 32 cheating runs of Qwen3.8-27B on ImpossibleBench-LiveCodeBench (strict "do not carve out" prompt, up to 10 submissions with feedback);
+  - the 40 earliest hacks of OLMo-3.1-32B-Instruct-SFT in AISI's env under a "do not hack" prompt.
+- Neither model has a lens or fits our GPU. No such set exists for a lens-covered model.
+
+**Result.**
+
+| Evidence | What it shows |
+| --- | --- |
+| Stock Qwen3-8B, three settings | Barely cheats: 0/192 (AISI env, given the exact hack), 0.9% (HackTrace, neutral prompt), exploit rate 0.009 (djinn, even when asked to hack) |
+| Qwen3.8-27B, ImpossibleBench-LCB | Cheats in 17% (conflicting) and 35% (one-off) of runs. At the decision, the CoT names the violation in 25/32 ("clearly a hack, but… the system keeps rejecting me"), rationalises it away in 6/32 ("not 'carving out' in the traditional sense"), unclear in 1. The final message discloses the workaround in only 10/32 |
+| OLMo-3.1-32B-SFT, AISI env | 1% hack rate before RL. The brief CoT is silent in 28/34, but the hack sits openly in the code; comments name it (18/40) or recast it as a "guard" or a "demonstration" (18/40), which looks like confusion caused by the prompt |
+| Larger open models (Model Forensics) | Kimi K2 Thinking justifies a pre-commit workaround as "pragmatism" (13% of runs). Its secret-number cheating starts with "But maybe we can cheat" |
+
+**Interpretation:** spontaneous, rationalised cheating hasn't been shown in any lens-covered model that fits our L40S. Where open models do cheat, the CoT mostly names it, as in our thinking-mode MCQ switches (§6). The most promising next step is a gated pilot of a multi-turn ImpossibleBench-LCB loop with Qwen3-14B and Qwen3-8B in thinking mode. A trained Qwen3-8B "KL twin" (the same hack, with a CoT that names it or hides it) could calibrate the lens. Moderate confidence on the small-Qwen null; low confidence on the counts (one coder, keyword-selected excerpts).
+
+**Caveats.** The counts come from models one size or one generation away from the lens-covered ones. The OLMo-3 lenses are for the base models. Some sources were read only at abstract or card level (marked in the report).
+
+**Report:** [overnight/reports/q4_scoping.md](overnight/reports/q4_scoping.md).
+
+---
+
+## 10. Open questions and next steps
 
 Each item names the finding it comes from. Changes to the plan are the user's decision ([plan.md](plan.md), [roadmap.md](roadmap.md), [open-questions.md](open-questions.md)).
 
