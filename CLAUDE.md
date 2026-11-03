@@ -7,6 +7,7 @@ An interpretability project on **arguing against its own knowledge**. On questio
 - Prefer "arguing against its own knowledge" in write-ups. "Motivated reasoning" is fine as a colloquial shorthand (the user's call), but it implies a motive we can't establish, and a hint can be legitimate evidence, so don't build claims on it.
 - "Own knowledge" is behavioural: an item is reliably known if at least 90% of unhinted samples answer it correctly.
 - [docs/plan.md](docs/plan.md) is the research design (v1: behavioural pilot, one internal measurement, optional detection, plus a later list). Changes to it are the user's decision.
+- [docs/findings.md](docs/findings.md) is the running record of all findings so far (see "Findings document" below).
 - [docs/roadmap.md](docs/roadmap.md) has the milestones (M0 tools; M1–M3 = the plan's Steps 1–3), their done-criteria, the chosen thresholds and the go/no-go points.
 - [docs/open-questions.md](docs/open-questions.md) lists the undecided points, each with the milestone that needs it settled.
 - Status: M0 done (all checks pass, [docs/reports/m0.md](docs/reports/m0.md)). Docs revised to the v1 design on 2026-11-02. M1 code is built and smoke-tested (`scripts/gen/pilot.py`); the full pilot waits for the temperature decision (open question 1). Exploration on 2026-11-02/03 (M&B gap factorial, hint families, lens readouts, pre-registered lens tests, subtle cues, planted claims) is in [docs/overnight/](docs/overnight/); start from its log and report.
@@ -15,7 +16,7 @@ An interpretability project on **arguing against its own knowledge**. On questio
 
 ```
 pyproject.toml        jmr package (light deps only; installed into both envs)
-envs/gen/, envs/lens/ one uv project per env, each with a committed uv.lock
+envs/gen/, envs/lens/ one uv project per env, each with a committed uv.lock (envs/judge/: OpenRouter judge, CPU only)
 configs/              model, lens, sampling, conditions (the nudges), data (YAML)
 src/jmr/              shared code: config, records, tokens, anchors, prompts, questions, label, checks
 src/jmr/gen/          gen env only (imports vllm)
@@ -79,6 +80,19 @@ uv manages both environments. Never use `pip install`. Generation and readout us
 
 - For minor parameters and thresholds, pick a reasonable default, write it down (in the roadmap or the code) and tell the user. Design questions that don't block the current milestone go into `docs/open-questions.md`; don't stop on them.
 - Thresholds already in the roadmap are not to be loosened without asking (rule 1).
+
+### Writing
+
+- Use simple, concise prose: short sentences and plain words. Use jargon only where it's needed, and say what it means the first time.
+- Give every new finding an interpretation line: what it means for the project's question, and how sure we are. This matters most in summary artefacts (reports, the findings document, web pages).
+
+### Findings document
+
+[docs/findings.md](docs/findings.md) is the running record of everything found so far. Update it whenever a result lands, in the same commit as the result's report.
+
+- **Shape:** a short summary at the top, then one section per finding with the question, the method (short but exact: model, data, sample sizes, settings), the result with a figure, an interpretation line, caveats, and a link to the full report.
+- **Figures:** SVG files in `docs/findings/figs/`, generated from derived numbers (never raw runs) by `scripts/docs/make_figures.py`, so they can be redrawn.
+- **Style:** visually clear, short and exact, simple prose. Mark each finding as exploratory or pre-registered. When a result is superseded, update its section; don't stack old and new versions.
 
 ### Commits
 
