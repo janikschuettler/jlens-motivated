@@ -237,7 +237,7 @@ Allowed − unsanctioned followers: Qwen3-8B −0.96 [−1.39, −0.53] (J) / �
 
 ## 9. Caveats
 
-- **API screen:** one provider per model, mostly fp8 (gpt-oss-20b and Gemma-3-12B bf16); providers may ignore seeds; 2 samples per item and arm; 35–60 known items per model (24 screened for Qwen3.6-27B, 40 for DeepSeek). DeepSeek-V4-Flash is incomplete because of rate limits.
+- **API screen:** one provider per model, mostly fp8 (gpt-oss-20b and Gemma-3-12B bf16); providers may ignore seeds; 2 samples per item and arm; 35–60 known items per model (24 screened for Qwen3.6-27B). DeepSeek-V4-Flash is incomplete: rate limits at the provider left 46 known items and 19–69 runs per arm (fill passes stopped at 22:12).
 - **Knowledge filter:** 5/5 unhinted on the API is lighter than the project's ≥ 9/10 (the local Qwen runs use 10). Llama-3.1-8B's known set is small (35) and weakly known; some of its "follows" are honest confusion.
 - **Labels:** the LLM judge mislabels silent swaps as "rationalised"; my silent counts come from reading the keyword-silent followers only.
 - **Post hoc:** A_sys_null and S_bug_only were added after the first results; the A_sys extra samples on Gemma-3-12B and Llama-3.3-70B were added to count swaps.
@@ -247,7 +247,7 @@ Allowed − unsanctioned followers: Qwen3-8B −0.96 [−1.39, −0.53] (J) / �
 
 ## 10. Cost, time and paths
 
-**API cost:** $4.90 of the $6 cap at 21:55 ($4.75 at 20:10) (OpenRouter key usage agrees: $4.50 at 19:05 against our $4.51). By model: Qwen3.6-27B $1.38, Gemma-4-31B $1.20, Qwen3-32B $0.53, judge (gemini-2.5-flash-lite) $0.52, Qwen3-14B $0.39, Llama-3.3-70B $0.30, Gemma-3-12B $0.12, Gemma-3-27B $0.10, gpt-oss-20b $0.10, DeepSeek-V4-Flash $0.09, Llama-3.1-8B $0.02. Per-batch tokens and cost: `data/models_grader/cost_log.jsonl`.
+**API cost:** $4.90 of the $6 cap (OpenRouter key usage agreed with our per-call `usage.cost` sums: $4.50 vs $4.51 at 19:05). By model: Qwen3.6-27B $1.38, Gemma-4-31B $1.20, Qwen3-32B $0.53, judge (gemini-2.5-flash-lite) $0.52, Qwen3-14B $0.39, Llama-3.3-70B $0.30, Gemma-3-12B $0.21, gpt-oss-20b $0.10, Gemma-3-27B $0.10, DeepSeek-V4-Flash $0.09, Qwen2.5-7B $0.05, Llama-3.1-8B $0.02. Per-batch tokens and cost: `data/models_grader/cost_log.jsonl`.
 
 **Time:** API screen 17:16–21:00 (rate limits at DeepInfra slowed DeepSeek, Qwen3 and gpt-oss); octavia: Qwen3-8B arms 17:38–18:07 (2,160 runs), Qwen3-14B checks + screen + arms 18:07–19:40 (4,505 runs, ~700–1,040 tok/s), readout 19:41–19:52 (895 runs); gpt-oss-20b checks, screen, arms and readout 19:52–20:27 (4,170 runs generated, 1,154 read out); non-thinking Qwen3-8B/14B screens, arms and readouts 20:46–21:26 (9,871 runs, 2,118 read out). About 3.5 GPU-hours on the L40S in all.
 

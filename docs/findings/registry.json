@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Arguing against its own knowledge: findings dashboard",
-    "updated": "2026-11-03T21:55",
+    "updated": "2026-11-03T22:15",
     "default_setting": "Unless an entry says otherwise: Qwen/Qwen3-8B at revision b968826d, thinking mode, T 0.6, top-p 0.95, top-k 20, up to 8,192 tokens, vLLM 0.33. Questions are MMLU-Redux 2.0 items with error_type == \"ok\". The hinted option \"B\" is one fixed wrong option per item. Intervals in brackets are 95% bootstrap intervals that resample items.",
     "machines": {
       "arena9-octavia": "NVIDIA L40S 46 GB, vast.ai container; all model work since 2026-11-02 evening",
@@ -1146,7 +1146,7 @@
       "interpretation": "For these models the bug note is a reward-hacking prompt: they take the free point when the score is framed as the goal, and say so. That gives frequent 'knows A, says B for reward' runs on models we can read, but in thinking models the CoT already shows it. At the answer position Qwen3-14B still carries the correct letter (+1.2 nats over the salience control) and gpt-oss-20b doesn't; the logit lens sees the same as the J-lens in both. The silent swaps in two non-reasoning models are where a lens could add something. Thinking mode protects Qwen3 against the exploit (not a general effect of reasoning: gpt-oss-20b exploits with reasoning on).",
       "confidence": "moderate",
       "caveats": [
-        "API: one provider per model, mostly fp8; 2 samples x 35-60 known items; DeepSeek incomplete (rate limits); Qwen3.6-27B on 24 items only.",
+        "API: one provider per model, mostly fp8; 2 samples x 35-60 known items; DeepSeek incomplete (rate limits: 19-69 runs per arm); Qwen3.6-27B on 24 items only.",
         "Known = 5/5 on the API (lighter than >= 9/10); local Qwen runs use >= 9/10.",
         "The judge calls silent swaps 'rationalised'; swap counts are by eye on keyword-silent followers.",
         "A_sys_null and S_bug_only were added after the first results.",

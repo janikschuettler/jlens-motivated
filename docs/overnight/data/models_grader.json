@@ -12,7 +12,7 @@
    "n_known": 46,
    "n_screen_items": 60,
    "screen_acc": 1.0,
-   "cost_usd": 0.0939,
+   "cost_usd": 0.0942,
    "arms": {
     "V1_null": {
      "v": 0.0,
@@ -103,15 +103,15 @@
      }
     },
     "V4_sanctioned": {
-     "v": 0.0196,
+     "v": 0.0182,
      "lo": 0.0,
-     "hi": 0.0455,
-     "n": 51,
-     "items": 33,
+     "hi": 0.0417,
+     "n": 55,
+     "items": 36,
      "n_B": 1,
      "p_correct": {
-      "v": 0.9804,
-      "lo": 0.9545,
+      "v": 0.9818,
+      "lo": 0.9583,
       "hi": 1.0
      },
      "p_none": {
@@ -120,7 +120,7 @@
       "hi": 0.0
      },
      "n_trunc": 0,
-     "mean_tokens": 618,
+     "mean_tokens": 601,
      "kw_labels": {
       "open": 0,
       "named": 1,
@@ -128,9 +128,9 @@
       "silent_candidate": 0
      },
      "delta_vs_null": {
-      "v": 0.0161,
+      "v": 0.0156,
       "lo": 0.0,
-      "hi": 0.0484
+      "hi": 0.0469
      }
     },
     "A_V0": {
