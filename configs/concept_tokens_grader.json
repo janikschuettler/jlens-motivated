@@ -1,0 +1,154 @@
+{
+ "description": "global concept tokens (scripts/lens/concept_tokens.py)",
+ "tokenizer": {
+  "hf_id": "Qwen/Qwen3-8B",
+  "revision": "b968826d9c46dd6066d109eabc6255188de91218"
+ },
+ "tokens": [
+  {
+   "text": " grading",
+   "id": 65188,
+   "group": "grader"
+  },
+  {
+   "text": " bug",
+   "id": 9876,
+   "group": "grader"
+  },
+  {
+   "text": " glitch",
+   "id": 61084,
+   "group": "grader"
+  },
+  {
+   "text": " exploit",
+   "id": 32194,
+   "group": "grader"
+  },
+  {
+   "text": " cheat",
+   "id": 40768,
+   "group": "grader"
+  },
+  {
+   "text": " cheating",
+   "id": 41723,
+   "group": "grader"
+  },
+  {
+   "text": " hack",
+   "id": 17086,
+   "group": "grader"
+  },
+  {
+   "text": " trick",
+   "id": 14068,
+   "group": "grader"
+  },
+  {
+   "text": " loophole",
+   "id": 92995,
+   "group": "grader"
+  },
+  {
+   "text": " score",
+   "id": 5456,
+   "group": "grader"
+  },
+  {
+   "text": " points",
+   "id": 3501,
+   "group": "grader"
+  },
+  {
+   "text": " reward",
+   "id": 11313,
+   "group": "grader"
+  },
+  {
+   "text": " marks",
+   "id": 15423,
+   "group": "grader"
+  },
+  {
+   "text": " rules",
+   "id": 5601,
+   "group": "grader"
+  },
+  {
+   "text": " allowed",
+   "id": 5420,
+   "group": "grader"
+  },
+  {
+   "text": " forbidden",
+   "id": 36813,
+   "group": "grader"
+  },
+  {
+   "text": " honest",
+   "id": 10745,
+   "group": "grader"
+  },
+  {
+   "text": " dishonest",
+   "id": 58916,
+   "group": "grader"
+  },
+  {
+   "text": " correct",
+   "id": 4396,
+   "group": "truth"
+  },
+  {
+   "text": " incorrect",
+   "id": 15114,
+   "group": "truth"
+  },
+  {
+   "text": " wrong",
+   "id": 4969,
+   "group": "truth"
+  },
+  {
+   "text": " right",
+   "id": 1290,
+   "group": "truth"
+  },
+  {
+   "text": " true",
+   "id": 830,
+   "group": "truth"
+  },
+  {
+   "text": " false",
+   "id": 895,
+   "group": "truth"
+  },
+  {
+   "text": " actually",
+   "id": 3520,
+   "group": "truth"
+  },
+  {
+   "text": " really",
+   "id": 2167,
+   "group": "truth"
+  },
+  {
+   "text": " truth",
+   "id": 8046,
+   "group": "truth"
+  }
+ ],
+ "not_single_tokens": [
+  {
+   "text": " grader",
+   "ids": [
+    1081,
+    998
+   ],
+   "group": "grader"
+  }
+ ]
+}

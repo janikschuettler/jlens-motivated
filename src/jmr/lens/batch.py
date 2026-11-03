@@ -128,6 +128,24 @@ def load_content_tokens(path: str | Path, tokenizer: Any) -> dict:
     return cfg
 
 
+def load_concept_tokens(path: str | Path, tokenizer: Any) -> dict:
+    """Global concept tokens tracked in every run (e.g. configs/concept_tokens_grader.json:
+    {"tokens": [{"text": " grader", "id": 123}, ...]}). Each ID must be the single
+    token of its text, round trip included. Raises on any mismatch (rule 1)."""
+    cfg = json.loads(Path(path).read_text())
+    problems = []
+    for t in cfg["tokens"]:
+        enc = tokenizer(t["text"], add_special_tokens=False).input_ids
+        if enc != [t["id"]] or tokenizer.decode([t["id"]]) != t["text"]:
+            problems.append(f"{t['text']!r}: encodes to {enc}, file says {t['id']}")
+    ids = [t["id"] for t in cfg["tokens"]]
+    if len(set(ids)) != len(ids):
+        problems.append("duplicate concept token IDs")
+    if problems:
+        raise ValueError(f"concept tokens don't match the tokenizer ({len(problems)}): " + "; ".join(problems[:10]))
+    return cfg
+
+
 def run_content_tokens(cfg: dict, record: RunRecord) -> tuple[list[int], list[int]]:
     """(token IDs, option index into record.letters per ID) for one run. Raises
     if the run's item is not in the file or disagrees on letters/correct."""
@@ -244,7 +262,7 @@ class BatchReader:
     """Holds the model, the lens (workspace layers on the GPU) and the settings."""
 
     def __init__(self, lens_model: HFLensModel, lens: JacobianLens, tokenizer: Any, *, cot_resid: bool = False,
-                 content_tokens: str | Path | None = None) -> None:
+                 content_tokens: str | Path | None = None, concept_tokens: str | Path | None = None) -> None:
         """cot_resid: also store block outputs (fp16) at the n_cot evenly spaced CoT
         anchors for the workspace layers (optional arrays cot_resid [layers, n_cot, d]
         and cot_resid_pos [n_cot], -1 / NaN where the run has fewer CoT anchors).
@@ -252,9 +270,13 @@ class BatchReader:
         content_tokens: path to a per-item content-token file
         (configs/content_tokens.json). Each run then also gets per-run tracked
         tokens, stored in separate optional arrays (x_ids, x_opt, x_lp, x_rank,
-        x_model_lp, x_model_rank); the default arrays are unchanged."""
+        x_model_lp, x_model_rank); the default arrays are unchanged.
+
+        concept_tokens: path to a global concept-token file (load_concept_tokens).
+        Its IDs are appended to the same optional arrays with x_opt = -1."""
         self.cot_resid = cot_resid
         self.content = load_content_tokens(content_tokens, tokenizer) if content_tokens else None
+        self.concept = load_concept_tokens(concept_tokens, tokenizer) if concept_tokens else None
         cfg = config.load("lens")
         self.lens_model = lens_model
         self.tokenizer = tokenizer
@@ -363,8 +385,11 @@ class BatchReader:
 
         dev = self.device
         xt, x = None, {}
-        if self.content is not None:
-            x_ids, x_opt = run_content_tokens(self.content, record)
+        if self.content is not None or self.concept is not None:
+            x_ids, x_opt = run_content_tokens(self.content, record) if self.content is not None else ([], [])
+            if self.concept is not None:
+                x_ids = x_ids + [int(t["id"]) for t in self.concept["tokens"]]
+                x_opt = x_opt + [-1] * len(self.concept["tokens"])
             xt = torch.tensor(x_ids, device=dev)
             K2 = len(x_ids)
             x = {"lp": torch.zeros((len(LENSES), nL, T, K2), dtype=torch.float16, device=dev),
@@ -464,6 +489,8 @@ class BatchReader:
             "content_tokens": None if self.content is None else {
                 L: {"word": o["word"], "ids": o["unique_ids"]}
                 for L, o in self.content["items"][record.question_id]["options"].items()},
+            "concept_tokens": None if self.concept is None else [
+                {"text": t["text"], "id": t["id"]} for t in self.concept["tokens"]],
             "cot_span": plan.cot_span,
             "lenses": list(LENSES),
             "tracked": {"letters": self.tracked.letters, "forms": self.tracked.forms,

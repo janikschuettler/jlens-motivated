@@ -100,6 +100,9 @@ def study_cost() -> float:
     for p in OUT.glob("*/runs.jsonl"):
         for line in open(p):
             total += json.loads(line)["usage"].get("cost") or 0.0
+    for p in OUT.glob("judge*.jsonl"):
+        for line in open(p):
+            total += (json.loads(line).get("usage") or {}).get("cost") or 0.0
     for p in OUT.glob("*/errors.jsonl"):
         for line in open(p):
             total += (json.loads(line).get("usage") or {}).get("cost") or 0.0

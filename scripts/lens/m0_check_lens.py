@@ -34,7 +34,7 @@ def main() -> None:
     checks.check(f"d_model == {spec['expected_d_model']}", info["d_model"] == spec["expected_d_model"], info["d_model"])
     checks.check(f"J covers blocks {first}..{last}", info["J_layers"] == expected_layers,
                  f"{info['J_layers'][0]}..{info['J_layers'][-1]} ({len(info['J_layers'])})")
-    checks.check("every J is d_model × d_model", info["J_shapes"] == [(4096, 4096)], info["J_shapes"])
+    checks.check("every J is d_model × d_model", info["J_shapes"] == [(spec["expected_d_model"], spec["expected_d_model"])], info["J_shapes"])
     checks.check("workspace layers are all fitted",
                  set(lens_cfg["workspace_layers"]) <= set(info["J_layers"]))
     provenance = info["provenance"] or {}

@@ -192,6 +192,9 @@ def main() -> None:
     parser.add_argument("--content-tokens", default=None,
                         help="per-item content-word tracked tokens (e.g. configs/content_tokens.json); stored in "
                              "separate x_* arrays, default arrays unchanged; runs on items not in the file stop the run")
+    parser.add_argument("--concept-tokens", default=None,
+                        help="global concept tokens tracked in every run (e.g. configs/concept_tokens_grader.json); "
+                             "appended to the x_* arrays with x_opt = -1")
     parser.add_argument("--cot-resid", action="store_true",
                         help="also store block outputs at the CoT anchors for the workspace layers (fp16)")
     args = parser.parse_args()
@@ -217,7 +220,8 @@ def main() -> None:
     model_cfg = config.load("model")
     hf_model, tokenizer, lens_model = load_model()
     lens = load_lens(lens_file())
-    reader = BatchReader(lens_model, lens, tokenizer, cot_resid=args.cot_resid, content_tokens=args.content_tokens)
+    reader = BatchReader(lens_model, lens, tokenizer, cot_resid=args.cot_resid, content_tokens=args.content_tokens,
+                         concept_tokens=args.concept_tokens)
     fp = fingerprint(tokenizer)
     print(f"tracked tokens: {list(zip(reader.tracked.labels, reader.tracked.ids))}", flush=True)
 
@@ -312,7 +316,7 @@ def main() -> None:
                           "shift": float(np.median(s)) >= SHIFT_FACTOR * median},
             "rank_vs_top25": {"overlaps": overlap[0], "exact": overlap[1], "within_fp16_tie_band": overlap[2]},
             "content_rank_vs_top25": {"overlaps": x_overlap[0], "exact": x_overlap[1],
-                                      "within_fp16_tie_band": x_overlap[2]} if args.content_tokens else None,
+                                      "within_fp16_tie_band": x_overlap[2]} if (args.content_tokens or args.concept_tokens) else None,
             "seconds_by_length": [[int(n), round(t, 3)] for n, t in times],
             "validation_vs_single_run_readout": validations,
         })

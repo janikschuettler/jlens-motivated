@@ -39,11 +39,13 @@ def main() -> None:
     torch.cuda.reset_peak_memory_stats()
     ids = torch.randint(0, 150000, (8192,)).tolist()
     resid = residuals(lens_model, ids, layers)
-    checks.check("8k-token pass returns [8192, 4096] residuals",
-                 all(tuple(r.shape) == (8192, 4096) for r in resid.values()))
+    d = model_cfg["expected"]["hidden_size"]
+    checks.check(f"8k-token pass returns [8192, {d}] residuals",
+                 all(tuple(r.shape) == (8192, d) for r in resid.values()))
     peak = torch.cuda.max_memory_allocated() / 1e9
     checks.info["peak_gpu_memory_8k_pass_gb"] = round(peak, 2)
-    checks.check("8k-token pass fits in 22 GB", peak < 22, f"{peak:.2f} GB")
+    limit = model_cfg.get("m0_peak_gb", 22)  # 22 GB = the RTX 4090; profiles for the L40S set their own
+    checks.check(f"8k-token pass fits in {limit} GB", peak < limit, f"{peak:.2f} GB")
     checks.finish()
 
 

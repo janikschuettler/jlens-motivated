@@ -25,7 +25,11 @@ class Checks:
         return all(r["passed"] for r in self.results)
 
     def save(self) -> Path:
-        path = config.m0_dir() / f"{self.name}.json"
+        import os
+
+        profile = os.environ.get(config.PROFILE_ENV)
+        name = f"{self.name}_{profile}" if profile else self.name  # keep the Qwen3-8B results
+        path = config.m0_dir() / f"{name}.json"
         payload = {
             "name": self.name,
             "all_passed": self.all_passed,

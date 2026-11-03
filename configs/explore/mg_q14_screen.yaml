@@ -1,0 +1,10 @@
+# Models x grader-bug, Phase 2 (octavia, gen env, JMR_MODEL_PROFILE=qwen3-14b): unhinted screen of
+# Qwen3-14B (thinking, our format, Qwen decoding) on the 200-item pool of data/explore/known_items.jsonl
+# (the Qwen3-8B gap screen's items, all of them) x 10 samples. Known = >= 9/10 (project definition).
+include: [blocks.yaml, w2_blocks.yaml]
+name: mg_q14_screen
+out_dir: data/explore/models_grader/q14_screen
+items: {source: known_pool, path: data/explore/known_items.jsonl, setting: A, min_acc: 0.0}
+defaults: {format: ours, thinking: true, decoding: qwen, max_tokens: 8192, samples: 10, est_tokens: 800}
+arms:
+  - {name: unhinted, hint: null}

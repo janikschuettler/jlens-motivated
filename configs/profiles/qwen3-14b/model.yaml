@@ -1,0 +1,19 @@
+# Profile qwen3-14b (JMR_MODEL_PROFILE=qwen3-14b; models_grader study, 2026-11-03).
+# Post-trained hybrid-thinking Qwen3-14B. Unchanged on the Hub since 2025-07-26,
+# i.e. the revision the Neuronpedia lens was fit on (2026-06-13).
+hf_id: Qwen/Qwen3-14B
+revision: 40c069824f4251a91eefaf281ebe4c544efd3e18
+dtype: bfloat16
+enable_thinking: true
+
+expected:
+  num_hidden_layers: 40
+  hidden_size: 5120
+  vocab_size: 151936
+  tie_word_embeddings: false
+  rms_norm_eps: 1.0e-6
+
+special_tokens:
+  think_start: "<think>"
+  think_end: "</think>"
+m0_peak_gb: 44   # L40S (45 GiB usable)
