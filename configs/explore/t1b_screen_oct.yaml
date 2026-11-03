@@ -1,0 +1,10 @@
+# T1b step 1, octavia share: knowledge screen in setting B on the next 1,500 items of the same
+# item-seed-3 draw (draw positions 801-2300 after excluding the 200 seed-2 and 32 M&B items;
+# positions 1-800 are screened on mayor, configs/explore/t1b_screen.yaml). Same arm, unchanged.
+include: [blocks.yaml]
+name: t1b_screen_oct
+out_dir: data/explore/t1b_oct/screen
+items: {source: jsonl, path: data/explore/t1b_oct/items_seed3_801_2300.jsonl}
+defaults: {samples: 10, max_tokens: {thinking: 8192, non_thinking: 2048}}
+arms:
+  - {name: nothink_mb_unhinted_mb, format: mb, hint: null, thinking: false, decoding: mb}

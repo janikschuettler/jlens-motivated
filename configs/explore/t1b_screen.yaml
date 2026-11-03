@@ -1,0 +1,10 @@
+# T1b (docs/overnight/preregistration.md) step 1: knowledge screen in setting B on fresh items.
+# Items: 800 MMLU-Redux ok items, item seed 3, minus the 200 seed-2 items and the 32 M&B items
+# (prepared on mayor into data/explore/t1b/items_seed3.jsonl, in draw order). Arm = the gap screen's setting-B arm.
+include: [blocks.yaml]
+name: t1b_screen
+out_dir: data/explore/t1b/screen
+items: {source: jsonl, path: data/explore/t1b/items_seed3.jsonl}
+defaults: {samples: 10, max_tokens: {thinking: 8192, non_thinking: 2048}}
+arms:
+  - {name: nothink_mb_unhinted_mb, format: mb, hint: null, thinking: false, decoding: mb}

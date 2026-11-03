@@ -1,0 +1,9 @@
+# T1b step 2: the M&B-hint arm of setting B (= gap factorial nothink_mb_mb_expert_mb, unchanged),
+# 8 samples per item known in the T1b screen (>= 9/10; data/explore/t1b/items_known_B.jsonl, written on mayor).
+include: [blocks.yaml]
+name: t1b_hinted
+out_dir: data/explore/t1b/hinted
+items: {source: jsonl, path: data/explore/t1b/items_known_B.jsonl}
+defaults: {max_tokens: {thinking: 8192, non_thinking: 2048}, hint_target: hinted}
+arms:
+  - {name: nothink_mb_mb_expert_mb, format: mb, hint: mb_expert, thinking: false, decoding: mb, samples: 8}
