@@ -796,6 +796,36 @@ def fig_hack():
            width=960, notes=["Source: docs/overnight/data/hack_organism.json (H1, H2, H3, exploratory). Report: hack_organism.md."])
 
 
+def fig_models_grader():
+    D = load("models_grader")
+    R, order = D["rates"], D["figure_order"]
+    series = {"v0": ("circle", GREY, "plain chat + bug note (V0)"),
+              "agent": ("square", BLUE, "scored agent + note (A_V0)"),
+              "allowed": ("diamond", AQUA, "agent, \"allowed\""),
+              "forbidden": ("open", ORANGE, "agent, \"not allowed\"")}
+    arm_of = {"v0": "V0", "agent": "A_V0", "allowed": "L_allowed", "forbidden": "L_forbidden"}
+    rows = []
+    for sec, models in order:
+        rows.append({"section": sec})
+        for m in models:
+            d = R[m]
+            vals = []
+            for k, arm in arm_of.items():
+                if arm in d["arms"]:
+                    a = d["arms"][arm]
+                    vals.append({"s": k, "v": a["v"], "lo": a["lo"], "hi": a["hi"]})
+            rows.append({"label": d["label"], "sub": d["sub"], "vals": vals})
+    figure("fig12_models_grader.svg",
+           "Other models take the grader bug when they are told they are scored, and say so",
+           ["P(final answer = the wrong option B that the buggy grader marks correct), items each model knows (5/5 unhinted;",
+            "local Qwen rows ≥ 9/10). Matched null notes: 0–3% everywhere. 95% item-bootstrap CIs."],
+           [(None, dict(rows=rows, xmin=0, xmax=1, step=0.2, fmt=pct, x_fmt=pct_axis, mode="dot", series=series,
+                        xlabel="P(final = B) on known items", label_w=300, row_h=32, value_labels=False))],
+           legend_items=[(sh, c, n) for sh, c, n in series.values()],
+           notes=["Source: docs/overnight/data/models_grader.json (rates). Report: docs/overnight/reports/models_grader.md.",
+                  "API rows: OpenRouter, one provider each (mostly fp8). Followers name the bug in their reasoning in ≥ 95% of runs (judge + reading)."])
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     fig_factorial()
@@ -809,6 +839,7 @@ def main():
     fig_early()
     fig_instrument()
     fig_hack()
+    fig_models_grader()
 
 
 if __name__ == "__main__":

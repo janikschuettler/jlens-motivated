@@ -173,7 +173,68 @@ def main():
                     for q, v in groups["resisted"].get(name, []):
                         nb[q].append(float(np.mean(v[li])))
                     oa[f"auroc_followed_vs_resisted/{name}/{lens}"] = boot_auroc(pb, nb, rng)
+    # pooled contrasts (fixed in the lens plan): unsanctioned = A_V0 + A_stakes (+ L_unclear)
+    UNS = [x for x in ("A_V0", "A_stakes", "L_unclear") if x in rows]
+
+    def pool(arms, group):
+        res = defaultdict(list)
+        for arm in arms:
+            for name, lst in rows[arm].get(group, {}).items():
+                res[name] += lst
+        return res
+
+    pools = {"unsanctioned_followed": pool(UNS, "followed"), "unsanctioned_resisted": pool(UNS, "resisted"),
+             "allowed_followed": pool(["L_allowed"], "followed"), "null_correct": pool(["A_V1_null"], "resisted")}
+    out["pooled"] = {}
+    for g, meas in pools.items():
+        for name, lst in meas.items():
+            by = defaultdict(list)
+            for q, v in lst:
+                by[q].append(v)
+            out["pooled"][f"{g}/{name}"] = boot_mean(by, rng)
+    contrasts = [("unsanctioned_followed", "unsanctioned_resisted"), ("allowed_followed", "unsanctioned_followed"),
+                 ("unsanctioned_followed", "null_correct")]
+    for ga, gb in contrasts:
+        for name in pools[ga]:
+            if name not in pools[gb] or not (name.startswith("corr@") or name.startswith("concept_")):
+                continue
+            for li, lens in enumerate(LENSES):
+                pb, nb = defaultdict(list), defaultdict(list)
+                for q, v in pools[ga][name]:
+                    pb[q].append(float(np.mean(v[li])))
+                for q, v in pools[gb][name]:
+                    nb[q].append(float(np.mean(v[li])))
+                out["pooled"][f"auroc/{ga}_vs_{gb}/{name}/{lens}"] = boot_auroc(pb, nb, rng)
+    # differences of group means (unpaired: items resampled within each group), score = mean over
+    # layers ("S") and over the last three workspace layers ("late"), per lens
+    def diff_boot(ga, ma, gb, mb, li, sl):
+        A, Bq = defaultdict(list), defaultdict(list)
+        for q, v in pools[ga].get(ma, []):
+            A[q].append(float(np.mean(v[li][sl])))
+        for q, v in pools[gb].get(mb, []):
+            Bq[q].append(float(np.mean(v[li][sl])))
+        if not A or not Bq:
+            return None
+        ka, kb = sorted(A), sorted(Bq)
+        mean = lambda d, ks: float(np.mean([x for k in ks for x in d[k]]))
+        point = mean(A, ka) - mean(Bq, kb)
+        st = sorted(mean(A, [rng.choice(ka) for _ in ka]) - mean(Bq, [rng.choice(kb) for _ in kb]) for _ in range(N_BOOT))
+        return {"diff": round(point, 3), "lo": round(st[int(0.025 * N_BOOT)], 3), "hi": round(st[int(0.975 * N_BOOT) - 1], 3)}
+
+    diffs = [("unsanctioned_followed", "corr@pre_answer", "unsanctioned_resisted", "sal@pre_answer"),
+             ("allowed_followed", "corr@pre_answer", "unsanctioned_followed", "corr@pre_answer"),
+             ("unsanctioned_followed", "corr@pre_answer", "null_correct", "sal@pre_answer")]
+    out["diffs"] = {}
+    for ga, ma, gb, mb in diffs:
+        for li, lens in enumerate(LENSES):
+            for tag, sl in (("S", slice(None)), ("late", slice(-3, None))):
+                out["diffs"][f"{ga}:{ma} - {gb}:{mb}/{lens}/{tag}"] = diff_boot(ga, ma, gb, mb, li, sl)
+    for k, v in out["diffs"].items():
+        print(f"   diff {k}: {v}")
     Path(a.out).write_text(json.dumps(out, indent=1))
+    for k, v in out["pooled"].items():
+        if k.startswith("auroc") and v and v["auroc"] == v["auroc"]:
+            print(f"   {k}: {v['auroc']:.2f} [{v['lo']:.2f}, {v['hi']:.2f}] n={v['n_pos']}/{v['n_neg']}")
     for arm, oa in out["arms"].items():
         print(arm, oa["n"])
         for k, v in oa.items():
