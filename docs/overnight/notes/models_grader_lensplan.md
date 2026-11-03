@@ -22,3 +22,12 @@ Headline measures (scripts/lens/analyze_models_grader.py):
 All exploratory (no pass/fail threshold); 95% item-bootstrap intervals; J-lens vs logit lens
 compared everywhere. Interpretation guard: the CoT of these followers is expected to be open
 (names the bug), so a lens signal is only interesting if it is not already in the text.
+
+## Addendum (2026-11-03 21:15, before any readout of these runs): non-thinking follow-up
+
+Runs: mg_nt8_arms (Qwen3-8B) and mg_nt14_arms (Qwen3-14B), non-thinking, our format. Selection by
+scripts/explore/mg_select_readout.py (same rule as above). Readout with the same tracked letters and
+concept tokens (configs/concept_tokens_grader.json), --validate 3. Analysis: scripts/lens/analyze_models_grader.py,
+same measures (S at pre_answer vs the salience control, allowed vs unsanctioned followers, concept tokens,
+AUROCs). In non-thinking runs think_end is absent and the "CoT" is the response before the answer.
+Exploratory. Behaviour already seen: non-thinking Qwen3-14B follows under A_V0 60%, thinking 11%.
