@@ -2,8 +2,8 @@
 <title>Following depends on whether the hint states the answer, not on who gives it</title>
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="12.0" y="24.0" font-size="15" fill="#1b1b1a" text-anchor="start" font-weight="bold">Following depends on whether the hint states the answer, not on who gives it</text>
-<text x="12.0" y="45.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Thinking mode, our setting (T 0.6), 50 known MMLU-Redux items, 3 samples per arm (2 for the two factorial cells).</text>
-<text x="12.0" y="61.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Switch = final answer is the hinted wrong option B. 95% item-bootstrap CIs.</text>
+<text x="12.0" y="45.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Qwen3-8B, thinking mode, our setting (temperature 0.6), 50 known MMLU-Redux questions, 3 samples per wording (2 for the two</text>
+<text x="12.0" y="61.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">wordings reused from the factorial). Switch = final answer is the hinted wrong option. 95% intervals over questions.</text>
 <line x1="420.0" y1="76.0" x2="420.0" y2="424.0" stroke="#e6e5e1" stroke-width="1"/>
 <line x1="476.0" y1="76.0" x2="476.0" y2="424.0" stroke="#e6e5e1" stroke-width="1"/>
 <line x1="532.0" y1="76.0" x2="532.0" y2="424.0" stroke="#e6e5e1" stroke-width="1"/>
@@ -41,9 +41,9 @@
 <line x1="502.1" y1="185.0" x2="502.1" y2="191.0" stroke="#52514e" stroke-width="1.4"/>
 <line x1="569.3" y1="185.0" x2="569.3" y2="191.0" stroke="#52514e" stroke-width="1.4"/>
 <text x="575.3" y="192.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">41%</text>
-<text x="16.0" y="216.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">M&amp;B hint, placed before the question</text>
+<text x="16.0" y="216.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">M&amp;B's hint, placed before the question</text>
 <text x="412.0" y="216.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=150</text>
-<rect x="420.0" y="206.5" width="112.0" height="11" rx="2" fill="#2a78d6"><title>M&amp;B hint, placed before the question: 40% [29%, 50%]</title></rect>
+<rect x="420.0" y="206.5" width="112.0" height="11" rx="2" fill="#2a78d6"><title>M&amp;B's hint, placed before the question: 40% [29%, 50%]</title></rect>
 <line x1="502.1" y1="212.0" x2="560.0" y2="212.0" stroke="#52514e" stroke-width="1.6"/>
 <line x1="502.1" y1="209.0" x2="502.1" y2="215.0" stroke="#52514e" stroke-width="1.4"/>
 <line x1="560.0" y1="209.0" x2="560.0" y2="215.0" stroke="#52514e" stroke-width="1.4"/>
@@ -89,9 +89,9 @@
 <rect x="4" y="381.0" width="74" height="18.0" fill="#ffffff"/>
 <text x="8.0" y="392.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Reference</text>
 <line x1="8" y1="400.0" x2="812" y2="400.0" stroke="#e6e5e1"/>
-<text x="16.0" y="416.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">unhinted (P(final = B))</text>
+<text x="16.0" y="416.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">no hint (share ending on B anyway)</text>
 <text x="412.0" y="416.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=500</text>
-<rect x="420.0" y="406.5" width="1.5" height="11" rx="2" fill="#7d7c77"><title>unhinted (P(final = B)): 0% [0%, 0%]</title></rect>
+<rect x="420.0" y="406.5" width="1.5" height="11" rx="2" fill="#7d7c77"><title>no hint (share ending on B anyway): 0% [0%, 0%]</title></rect>
 <line x1="420.0" y1="412.0" x2="420.0" y2="412.0" stroke="#52514e" stroke-width="1.6"/>
 <line x1="420.0" y1="409.0" x2="420.0" y2="415.0" stroke="#52514e" stroke-width="1.4"/>
 <line x1="420.0" y1="409.0" x2="420.0" y2="415.0" stroke="#52514e" stroke-width="1.4"/>
@@ -109,6 +109,6 @@
 <text x="644.0" y="442.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">80%</text>
 <line x1="700.0" y1="426.0" x2="700.0" y2="430.0" stroke="#b9b8b2"/>
 <text x="700.0" y="442.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">100%</text>
-<text x="560.0" y="458.0" font-size="11.5" fill="#52514e" text-anchor="middle" font-weight="normal">switch rate on known items</text>
+<text x="560.0" y="458.0" font-size="11.5" fill="#52514e" text-anchor="middle" font-weight="normal">switch rate on known questions</text>
 <text x="12.0" y="488.0" font-size="10.5" fill="#8a8984" text-anchor="start" font-weight="normal">Source: docs/overnight/data/wave2_part2.json (wording.cells, wording.unhinted_P_B); report: wave2_part2.md §1.</text>
 </svg>

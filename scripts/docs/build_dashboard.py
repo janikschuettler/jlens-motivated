@@ -43,7 +43,7 @@ EXP_FIELDS = {
     "id": (STR, False), "title": (STR, False), "strand": (STR, False), "also": (LIST, True),
     "status": (STR, False), "kind": (STR, False), "verdict": (STR, False),
     "question": (STR, False), "method": (STR, False), "result": (STR, False),
-    "numbers": (LIST, True), "interpretation": (STR, False), "confidence": (STR, True),
+    "numbers": (LIST, True), "numbers_note": (STR, True), "interpretation": (STR, False), "confidence": (STR, True),
     "caveats": (LIST, True), "n": (DICT, False), "dates": (DICT, False), "timing": (DICT, False),
     "machine": (STR, False), "figure": (STR, True), "reports": (LIST, True), "data": (LIST, True),
     "commits": (LIST, True), "related": (LIST, True),
@@ -149,6 +149,8 @@ def validate(reg: dict) -> list[str]:
             errs.append(f"{where}: verdict must be one of {VERDICT}")
         if e["confidence"] is not None and e["confidence"] not in CONFIDENCE:
             errs.append(f"{where}: confidence must be null or one of {CONFIDENCE}")
+        if e["numbers"] and e["numbers_note"] is not None and not e["numbers_note"].strip():
+            errs.append(f"{where}: 'numbers_note' must be null or a non-empty string")
         for j, n in enumerate(e["numbers"] or []):
             if not isinstance(n, dict) or not n.get("label") or not n.get("value"):
                 errs.append(f"{where}: numbers[{j}] needs 'label' and 'value'")

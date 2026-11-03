@@ -2,8 +2,8 @@
 <title>Silent switches are rare in thinking mode and common without it</title>
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="12.0" y="24.0" font-size="15" fill="#1b1b1a" text-anchor="start" font-weight="bold">Silent switches are rare in thinking mode and common without it</text>
-<text x="12.0" y="45.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Share of switches (final = pushed wrong option, known items) whose chain of thought or response never refers to the cue.</text>
-<text x="12.0" y="61.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Counts are runs; keyword or regex checks unless marked 'read by eye'. No intervals: switches cluster by item.</text>
+<text x="12.0" y="45.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Share of switches (final answer = the pushed wrong option, known questions) whose reasoning and response never refer to the cue.</text>
+<text x="12.0" y="61.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Counts are runs; keyword checks unless marked 'read by eye'. No intervals: switches cluster on a few questions.</text>
 <line x1="380.0" y1="76.0" x2="380.0" y2="428.0" stroke="#e6e5e1" stroke-width="1"/>
 <line x1="438.0" y1="76.0" x2="438.0" y2="428.0" stroke="#e6e5e1" stroke-width="1"/>
 <line x1="496.0" y1="76.0" x2="496.0" y2="428.0" stroke="#e6e5e1" stroke-width="1"/>
@@ -13,14 +13,14 @@
 <rect x="4" y="85.0" width="220" height="18.0" fill="#ffffff"/>
 <text x="8.0" y="96.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Thinking mode, explicit hints</text>
 <line x1="8" y1="104.0" x2="812" y2="104.0" stroke="#e6e5e1"/>
-<text x="16.0" y="120.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">factual items (wording arms + factorial)</text>
+<text x="16.0" y="120.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">factual questions (wording runs + factorial)</text>
 <text x="372.0" y="120.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">2 / 1,231</text>
-<rect x="380.0" y="110.5" width="1.5" height="11" rx="2" fill="#2a78d6"><title>factual items (wording arms + factorial): 0.2%</title></rect>
+<rect x="380.0" y="110.5" width="1.5" height="11" rx="2" fill="#2a78d6"><title>factual questions (wording runs + factorial): 0.2%</title></rect>
 <text x="386.5" y="120.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">0.2%</text>
 <text x="812.0" y="120.0" font-size="11" fill="#52514e" text-anchor="end" font-weight="bold">both read: genuine</text>
-<text x="16.0" y="144.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">moral known items, M&amp;B hint</text>
+<text x="16.0" y="144.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">known moral questions, M&amp;B's hint</text>
 <text x="372.0" y="144.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">0 / 5,019</text>
-<rect x="380.0" y="134.5" width="1.5" height="11" rx="2" fill="#2a78d6"><title>moral known items, M&amp;B hint: 0%</title></rect>
+<rect x="380.0" y="134.5" width="1.5" height="11" rx="2" fill="#2a78d6"><title>known moral questions, M&amp;B's hint: 0%</title></rect>
 <text x="386.0" y="144.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">0%</text>
 <rect x="4" y="161.0" width="424" height="18.0" fill="#ffffff"/>
 <text x="8.0" y="172.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Thinking mode, cues that are not a sentence (read by eye)</text>
@@ -33,38 +33,38 @@
 <text x="372.0" y="220.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">2 / 28</text>
 <rect x="380.0" y="210.5" width="20.7" height="11" rx="2" fill="#1baf7a"><title>grader code: 7%</title></rect>
 <text x="406.7" y="220.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">7%</text>
-<text x="16.0" y="244.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">few-shot ■ marker</text>
+<text x="16.0" y="244.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">examples with ■ on the right answer</text>
 <text x="372.0" y="244.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">11 / 23</text>
-<rect x="380.0" y="234.5" width="138.7" height="11" rx="2" fill="#1baf7a"><title>few-shot ■ marker: 48%</title></rect>
+<rect x="380.0" y="234.5" width="138.7" height="11" rx="2" fill="#1baf7a"><title>examples with ■ on the right answer: 48%</title></rect>
 <text x="524.7" y="244.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">48%</text>
-<text x="812.0" y="244.0" font-size="11" fill="#52514e" text-anchor="end" font-weight="bold">weakly known items</text>
-<text x="16.0" y="268.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">few-shot always-B</text>
+<text x="812.0" y="244.0" font-size="11" fill="#52514e" text-anchor="end" font-weight="bold">weakly known questions</text>
+<text x="16.0" y="268.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">examples whose answer is always B</text>
 <text x="372.0" y="268.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">4 / 5</text>
-<rect x="380.0" y="258.5" width="232.0" height="11" rx="2" fill="#1baf7a"><title>few-shot always-B: 80%</title></rect>
+<rect x="380.0" y="258.5" width="232.0" height="11" rx="2" fill="#1baf7a"><title>examples whose answer is always B: 80%</title></rect>
 <text x="618.0" y="268.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">80%</text>
-<text x="812.0" y="268.0" font-size="11" fill="#52514e" text-anchor="end" font-weight="bold">weakly known items</text>
-<rect x="4" y="285.0" width="307" height="18.0" fill="#ffffff"/>
-<text x="8.0" y="296.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Thinking mode, planted claim (C3, kept B)</text>
+<text x="812.0" y="268.0" font-size="11" fill="#52514e" text-anchor="end" font-weight="bold">weakly known questions</text>
+<rect x="4" y="285.0" width="621" height="18.0" fill="#ffffff"/>
+<text x="8.0" y="296.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Thinking mode, wrong claim planted at the start of its reasoning (runs that kept it)</text>
 <line x1="8" y1="304.0" x2="812" y2="304.0" stroke="#e6e5e1"/>
-<text x="16.0" y="320.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">no outside source, no "wait" in the CoT</text>
+<text x="16.0" y="320.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">no outside source, no "wait" in the reasoning</text>
 <text x="372.0" y="320.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">53 / 61</text>
-<rect x="380.0" y="310.5" width="252.0" height="11" rx="2" fill="#7d7c77"><title>no outside source, no "wait" in the CoT: 87%</title></rect>
+<rect x="380.0" y="310.5" width="252.0" height="11" rx="2" fill="#7d7c77"><title>no outside source, no "wait" in the reasoning: 87%</title></rect>
 <text x="638.0" y="320.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">87%</text>
 <text x="812.0" y="320.0" font-size="11" fill="#52514e" text-anchor="end" font-weight="bold">silent by construction</text>
-<rect x="4" y="337.0" width="293" height="18.0" fill="#ffffff"/>
-<text x="8.0" y="348.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Non-thinking mode, M&amp;B setting and hint</text>
+<rect x="4" y="337.0" width="271" height="18.0" fill="#ffffff"/>
+<text x="8.0" y="348.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Thinking off, M&amp;B's setting and hint</text>
 <line x1="8" y1="356.0" x2="812" y2="356.0" stroke="#e6e5e1"/>
-<text x="16.0" y="372.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">149 items × 8: no "hint"/"expert" keyword</text>
+<text x="16.0" y="372.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">149 questions × 8: no "hint"/"expert" keyword</text>
 <text x="372.0" y="372.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">124 / 710</text>
-<rect x="380.0" y="362.5" width="50.6" height="11" rx="2" fill="#eb6834"><title>149 items × 8: no "hint"/"expert" keyword: 17%</title></rect>
+<rect x="380.0" y="362.5" width="50.6" height="11" rx="2" fill="#eb6834"><title>149 questions × 8: no "hint"/"expert" keyword: 17%</title></rect>
 <text x="436.6" y="372.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">17%</text>
-<text x="16.0" y="396.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">same, and no broad hint reference</text>
+<text x="16.0" y="396.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">same, and no broader reference to the hint</text>
 <text x="372.0" y="396.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">101 / 710</text>
-<rect x="380.0" y="386.5" width="41.3" height="11" rx="2" fill="#eb6834"><title>same, and no broad hint reference: 14%</title></rect>
+<rect x="380.0" y="386.5" width="41.3" height="11" rx="2" fill="#eb6834"><title>same, and no broader reference to the hint: 14%</title></rect>
 <text x="427.3" y="396.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">14%</text>
-<text x="16.0" y="420.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">T1b, 1,744 fresh items: keyword-silent</text>
+<text x="16.0" y="420.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">1,744 fresh questions (test T1b): keyword-silent</text>
 <text x="372.0" y="420.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">986 / 8,254</text>
-<rect x="380.0" y="410.5" width="34.6" height="11" rx="2" fill="#eb6834"><title>T1b, 1,744 fresh items: keyword-silent: 12%</title></rect>
+<rect x="380.0" y="410.5" width="34.6" height="11" rx="2" fill="#eb6834"><title>1,744 fresh questions (test T1b): keyword-silent: 12%</title></rect>
 <text x="420.6" y="420.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">12%</text>
 <line x1="380" y1="430.0" x2="670" y2="430.0" stroke="#b9b8b2"/>
 <line x1="380.0" y1="430.0" x2="380.0" y2="434.0" stroke="#b9b8b2"/>

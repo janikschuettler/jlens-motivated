@@ -253,6 +253,8 @@ dl.nums { margin: 10px 0 0; display: grid; grid-template-columns: minmax(0, 1fr)
 dl.nums dt, dl.nums dd { margin: 0; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
 dl.nums dt { color: var(--ink-2); padding-right: 14px; }
 dl.nums dd { font-family: var(--mono); font-size: 13px; color: var(--ink); }
+dl.nums dt.nh, dl.nums dd.nh { font-family: inherit; font-size: 12.5px; font-weight: 600; color: var(--ink-3); text-transform: none; }
+.numnote { font-size: 13.5px; color: var(--ink-2); margin: 8px 0 0; max-width: 80ch; }
 .interp { border-left: 4px solid var(--thread); background: var(--surface-2); }
 .interp .lab { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
 ul.cav { margin: 0; padding-left: 20px; } ul.cav li { margin-bottom: 4px; color: var(--ink-2); }
@@ -302,6 +304,7 @@ footer code { font-size: 12px; }
   .tl-axis, .tl-row { --lw: 40%; }
   dl.nums { grid-template-columns: 1fr; }
   dl.nums dt { border-bottom: 0; padding-bottom: 0; }
+  dl.nums dd.nh { display: none; }
 }
 @media (forced-colors: active) {
   a.bar { border: 1px solid CanvasText; }
@@ -657,8 +660,11 @@ __FIG_TEMPLATES__
     h += '<div class="cols"><div>';
     h += '<section class="panel"><h2>Result</h2><p class="headline">' + esc(e.result) + "</p>";
     if (e.numbers && e.numbers.length) {
-      h += '<dl class="nums">' + e.numbers.map(function (n) { return "<dt>" + esc(n.label) + "</dt><dd>" + esc(n.value) + "</dd>"; }).join("") + "</dl>";
+      h += '<dl class="nums"><dt class="nh">What was compared or counted</dt><dd class="nh">Number</dd>' +
+        e.numbers.map(function (n) { return "<dt>" + esc(n.label) + "</dt><dd>" + esc(n.value) + "</dd>"; }).join("") + "</dl>";
+      if (e.numbers_note) h += '<p class="numnote"><b>How to read:</b> ' + esc(e.numbers_note) + "</p>";
     }
+    h += '<p class="small muted" style="margin:8px 0 0">Terms such as J-lens, AUROC, nats and salience control are defined under <a href="#terms">Terms</a>. Numbers in brackets are 95% intervals.</p>';
     h += "</section>";
     if (e.figure) {
       var tpl = document.getElementById("fig-" + e.figure);
@@ -701,6 +707,7 @@ __FIG_TEMPLATES__
   // ---------------------------------------------------------- terms view
   function viewTerms() {
     main.innerHTML = '<div class="eyebrow">Terms</div><h1 tabindex="-1" style="font-size:1.8rem">What the words mean here</h1>' +
+      '<p style="margin-top:10px;max-width:75ch">Plain definitions of the words and measures used on this page. Labels in square brackets, such as [T1] or [E7], point to the reports in <code>docs/overnight/reports/</code>.</p>' +
       '<p class="muted" style="margin-top:10px;max-width:75ch">' + esc(R.meta.default_setting) + "</p>" +
       '<dl class="terms">' + R.terms.map(function (t) { return "<div><dt>" + esc(t.term) + "</dt><dd>" + esc(t.def) + "</dd></div>"; }).join("") + "</dl>" +
       '<section class="block"><h2>Kinds and verdicts</h2><dl class="terms">' +
