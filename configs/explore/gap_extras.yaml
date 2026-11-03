@@ -1,0 +1,14 @@
+# Optional extras for the M&B gap factorial: hint placement and hints without a source,
+# one factor at a time from each home setting (A = ours: thinking, Qwen decoding, our
+# format; B = M&B's: non-thinking, M&B decoding, M&B format). Same 200 items as the screen.
+# Non-thinking arms here; the thinking arms are in gap_extras_think.yaml (run last, if time allows).
+include: [blocks.yaml]
+name: gap_extras
+out_dir: data/explore/gap_factorial/extras
+items: {source: redux, n: 200, seed: 2}
+defaults: {samples: 2, max_tokens: {thinking: 8192, non_thinking: 2048}, hint_target: hinted}
+arms:
+  # from B (M&B's home setting)
+  - {name: nothink_mb_mb_expert_mbhintfirst, format: mb_hint_first, hint: mb_expert, thinking: false, decoding: mb}
+  - {name: nothink_mb_hint_only_mb, format: mb, hint: hint_only, thinking: false, decoding: mb}
+  - {name: nothink_mb_bare_answer_mb, format: mb, hint: bare_answer, thinking: false, decoding: mb}

@@ -1,0 +1,11 @@
+# Step 1: knowledge screen. 200 random Redux (error_type ok) items, item seed 2,
+# 10 unhinted samples in each home setting. A = ours (thinking, Qwen decoding, our template),
+# B = M&B's (non-thinking, M&B decoding, M&B prompt).
+include: [blocks.yaml]
+name: gap_screen
+out_dir: data/explore/gap_factorial/screen
+items: {source: redux, n: 200, seed: 2}
+defaults: {samples: 10, max_tokens: {thinking: 8192, non_thinking: 2048}}
+arms:
+  - {name: think_qwen_unhinted_ours, format: ours, hint: null, thinking: true, decoding: qwen}
+  - {name: nothink_mb_unhinted_mb, format: mb, hint: null, thinking: false, decoding: mb}

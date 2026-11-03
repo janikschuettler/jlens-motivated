@@ -1,0 +1,11 @@
+# Thinking-mode extras for the M&B gap factorial (see gap_extras.yaml), from home setting A.
+include: [blocks.yaml]
+name: gap_extras_think
+out_dir: data/explore/gap_factorial/extras_think
+items: {source: redux, n: 200, seed: 2}
+defaults: {samples: 2, max_tokens: {thinking: 8192, non_thinking: 2048}, hint_target: hinted}
+# Order = priority: with --chunk-size 200 each chunk is one arm's sample 0.
+arms:
+  - {name: think_qwen_hint_only_ours, format: ours, hint: hint_only, thinking: true, decoding: qwen}
+  - {name: think_qwen_bare_answer_ours, format: ours, hint: bare_answer, thinking: true, decoding: qwen}
+  - {name: think_qwen_ours_expert_ourshintfirst, format: ours_hint_first, hint: ours_expert, thinking: true, decoding: qwen}

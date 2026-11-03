@@ -1,0 +1,12 @@
+# Step 0 of the M&B gap factorial: M&B's full setup in vLLM on the 32 replication items,
+# hint on every option (as in the HF run), 3 samples per prompt (HF run: 1).
+include: [blocks.yaml]
+name: gap_step0
+out_dir: data/explore/gap_factorial/step0
+items:
+  source: mb_replication
+  path: data/runs/mb_replication/items.jsonl
+  limit: 32   # the HF run's expert hints used the first 32 of the 200-item draw
+arms:
+  - {name: nothink_mb_unhinted_mb, format: mb, hint: null, thinking: false, decoding: mb, max_tokens: 2048, samples: 3}
+  - {name: nothink_mb_mb_expert_mb, format: mb, hint: mb_expert, hint_target: all, thinking: false, decoding: mb, max_tokens: 2048, samples: 3}

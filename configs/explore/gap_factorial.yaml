@@ -1,0 +1,16 @@
+# Step 2: 2^4 hinted cells (thinking x decoding x hint wording x prompt format) plus the
+# 8 matching unhinted cells, on the screened items. The two home unhinted cells come from
+# the screen (10 samples), so they are excluded here.
+include: [blocks.yaml]
+name: gap_factorial
+out_dir: data/explore/gap_factorial/factorial
+items: {source: redux, n: 200, seed: 2}
+defaults: {samples: 2, max_tokens: {thinking: 8192, non_thinking: 2048}, hint_target: hinted}
+grids:
+  - name: "{thinking}_{decoding}_{hint}_{format}"
+    factors:
+      thinking: [false, true]
+      decoding: [mb, qwen]
+      hint: [mb_expert, ours_expert, null]
+      format: [mb, ours]
+    exclude: [think_qwen_unhinted_ours, nothink_mb_unhinted_mb]

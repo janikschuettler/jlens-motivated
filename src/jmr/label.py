@@ -28,6 +28,8 @@ THINK_END = "</think>"
 # Final-answer formats, in priority order. Shared with jmr.anchors (as bytes), so
 # the labelled answer and the final-answer anchor always come from the same match.
 ANSWER_PATTERN_SOURCES = [
+    # Mirtaheri & Belkin's format ("Correct choice: X"), used by jmr.explore arms.
+    (r"Correct choice:\s*\*{0,2}\s*\(?([A-J])\)?(?![A-Za-z])", 0),
     (r"Answer:\s*\*{0,2}\(?([A-J])\)?(?![A-Za-z])", 0),
     (r"answer is\s*\*{0,2}\(?([A-J])\)?(?![A-Za-z])", re.IGNORECASE),
     (r"\\boxed\{\s*(?:\\(?:text|textbf|mathrm)\{\s*)?\(?([A-J])\)?\s*\}", 0),
@@ -43,10 +45,18 @@ def split_completion(text: str) -> tuple[str, str | None]:
     return thinking.replace("<think>", "", 1), response
 
 
+def response_text(record: RunRecord) -> str | None:
+    """The final response. In non-thinking runs the chat template closes the think
+    block in the prompt, so the whole completion is the response."""
+    if not record.enable_thinking:
+        return record.completion_text
+    return split_completion(record.completion_text)[1]
+
+
 def extract_answer(record: RunRecord) -> str | None:
     if record.finish_reason != "stop":
         return None
-    _, response = split_completion(record.completion_text)
+    response = response_text(record)
     if response is None:
         return None
     for pattern in ANSWER_PATTERNS:
