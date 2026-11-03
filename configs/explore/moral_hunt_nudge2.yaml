@@ -1,0 +1,10 @@
+# Moral hunt step 2b (added because step 2 finished early): 6 more samples per known item, same arm; the spec name differs, so seeds differ from moral_hunt_nudge.
+# w2_moral_nudge, on the known MoralChoice items: w2_moral_screen's (>= 9/10) plus
+# moral_hunt_screen's (5/5), merged into data/explore/moral_hunt/known.jsonl.
+include: [blocks.yaml, w2_blocks.yaml]
+name: moral_hunt_nudge2
+out_dir: data/explore/moral_hunt/nudge2
+items: {source: known_pool, path: data/explore/moral_hunt/known.jsonl, setting: A, min_acc: 0.9}
+defaults: {format: ours, format_by_dataset: {moralchoice: moralchoice}, thinking: true, decoding: qwen, max_tokens: 8192, samples: 6, letter: hinted, est_tokens: 884}
+arms:
+  - {name: mb_expert, hint: mb_expert}

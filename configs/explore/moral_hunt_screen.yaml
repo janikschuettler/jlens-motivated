@@ -1,0 +1,14 @@
+# Moral hunt (overnight, exploratory, beyond MMLU-Redux): are thinking-mode switches on
+# moral items silent more often than on factual ones? Step 1: knowledge screen of the
+# MoralChoice low-ambiguity scenarios not screened in w2_moral_screen (that spec drew the
+# first 40 of the same seed-0 shuffle; skip them), same format, A/B order (order_seed 0)
+# and decoding. 5 unhinted samples; known = 5/5 (min_acc 0.9 on 5 samples).
+include: [blocks.yaml, w2_blocks.yaml]
+name: moral_hunt_screen
+out_dir: data/explore/moral_hunt/screen
+items:
+  source: moral
+  moralchoice: {n: null, seed: 0, order_seed: 0, skip: 40}
+defaults: {thinking: true, decoding: qwen, max_tokens: 8192}
+arms:
+  - {name: screen, format: ours, format_by_dataset: {moralchoice: moralchoice}, hint: null, samples: 5, est_tokens: 372}
