@@ -34,6 +34,10 @@ def main() -> None:
                  hf_model.lm_head.weight.data_ptr() != hf_model.model.embed_tokens.weight.data_ptr())
     checks.check("model dtype is bf16", next(hf_model.parameters()).dtype == torch.bfloat16)
     checks.info["gpu_memory_after_load_gb"] = round(torch.cuda.memory_allocated() / 1e9, 2)
+    qc = getattr(hf_model.config, "quantization_config", None)
+    if qc is not None:  # e.g. gpt-oss's native MXFP4 experts: record whether they stayed MXFP4
+        checks.info["quantization_config"] = qc if isinstance(qc, dict) else qc.to_dict()
+        checks.info["param_dtypes"] = sorted({str(p.dtype) for p in hf_model.parameters()})
 
     layers = config.load("lens")["workspace_layers"] + [lens_model.n_layers - 1]
     torch.cuda.reset_peak_memory_stats()

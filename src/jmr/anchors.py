@@ -40,6 +40,30 @@ def _last_index(ids: list[int], value: int) -> int | None:
     return None
 
 
+HARMONY_HEADER = re.compile(rb"<\|channel\|>(\w+).*?<\|message\|>", re.DOTALL)
+
+
+def _harmony_spans(ids, prompt_len, text, starts, pieces, msg_id, end_id, token_at):
+    """(think_start, think_end, byte offset where the final message starts) for a
+    harmony completion; None where absent."""
+    comp_start = starts[prompt_len] if prompt_len < len(ids) else len(text)
+    think_start = think_end = tail_from = None
+    for m in HARMONY_HEADER.finditer(text, comp_start):
+        msg_tok = token_at(m.end() - 1)  # the <|message|> token
+        if ids[msg_tok] != msg_id:
+            continue
+        channel = m.group(1)
+        if channel == b"analysis" and tail_from is None:
+            if think_start is None:
+                think_start = msg_tok
+            ends = [i for i in range(msg_tok + 1, len(ids)) if ids[i] == end_id]
+            if ends:
+                think_end = ends[0]
+        elif channel == b"final":
+            tail_from = starts[msg_tok] + len(pieces[msg_tok])
+    return think_start, think_end, tail_from
+
+
 def find_anchors(
     tokenizer: Any,
     ids: list[int],
@@ -48,7 +72,13 @@ def find_anchors(
     think_start_id: int,
     think_end_id: int,
     final_letter: str | None,
+    harmony: bool = False,
 ) -> Anchors:
+    """harmony=True (gpt-oss): think_start_id / think_end_id are <|message|> and
+    <|end|>; think_start = the <|message|> that opens the first analysis-channel
+    message in the completion, think_end = the <|end|> that closes the last
+    analysis message before the final channel, and the final answer is searched
+    in the final-channel message only. Default: Qwen3 <think> / </think>."""
     pieces = token_bytes(tokenizer, ids)
     starts = []  # byte offset at which each token starts
     offset = 0
@@ -60,14 +90,19 @@ def find_anchors(
     def token_at(byte_offset: int) -> int:
         return bisect.bisect_right(starts, byte_offset) - 1
 
-    think_start = _last_index(ids, think_start_id)
-    think_end = _last_index(ids, think_end_id)
+    if harmony:
+        think_start, think_end, tail_from = _harmony_spans(ids, prompt_len, text, starts, pieces,
+                                                         think_start_id, think_end_id, token_at)
+    else:
+        think_start = _last_index(ids, think_start_id)
+        think_end = _last_index(ids, think_end_id)
+        tail_from = None if think_end is None else starts[think_end] + len(pieces[think_end])
 
     final_answer = None
-    if think_end is not None and final_letter:
+    if tail_from is not None and final_letter:
         # Same rule as jmr.label.extract_answer: the last match of the first
         # pattern that matches the final letter.
-        tail_start = starts[think_end] + len(pieces[think_end])
+        tail_start = tail_from
         for pattern in FINAL_ANSWER_RES:
             matches = [m for m in pattern.finditer(text, tail_start) if m.group(1) == final_letter.encode()]
             if matches:

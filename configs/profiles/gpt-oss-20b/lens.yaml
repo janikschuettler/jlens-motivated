@@ -1,0 +1,47 @@
+# Profile gpt-oss-20b: configs/lens.yaml with the gpt-oss-20b lens file, layers and
+# letter-token IDs.
+jlens:
+  repo: neuronpedia/jacobian-lens
+  revision: e166deb5ad540932100ef803c8c9bcc2a5453694
+  file: gpt-oss-20b/jlens/Salesforce-wikitext/gpt-oss-20b_jacobian_lens.pt
+  # J[l] maps the output of block l to the output of the final block (23),
+  # both captured by forward hooks on model.layers[i] (jlens.fitting).
+  capture_point: block_output
+  expected_source_layers: [0, 22]  # inclusive range
+  expected_d_model: 2880
+
+# Workspace layers: the Qwen3-8B choice (blocks 14-32 of 36, every other block) scaled
+# to 24 blocks: 9, 11, ..., 21 (fixed before any gpt-oss-20b readout).
+workspace_layers: [9, 11, 13, 15, 17, 19, 21]
+top_k: 25
+# Positions per chunk when unembedding; bounds the [chunk, vocab] fp32 buffer.
+position_chunk: 512
+
+# Batch readouts (scripts/lens/readout_runs.py, jmr.lens.batch). Fixed before
+# any readout run: adding a token later means re-running the readout (rule 3).
+tracked_tokens:
+  # Option letters in the surface forms that occur when reading answers. Each
+  # must be exactly one token; jmr.lens.batch re-checks these IDs against the
+  # tokenizer and refuses to run on any mismatch.
+  #   space " A": "Answer: A" (the final-answer letter in ~95% of runs)
+  #   bare  "A":  "\boxed{A}", "**A", "\nA" (the rest of the final-answer letters)
+  #   paren "(A": how the options are written in the prompt, "(A) ..."
+  # (The Qwen3 single-token notes in configs/lens.yaml are for Qwen3's tokenizer.)
+  letters: [A, B, C, D]
+  forms: {bare: "{L}", space: " {L}", paren: "({L}"}
+  ids:
+    # gpt-oss-20b (o200k_harmony) IDs, checked single-token round trips 2026-11-03
+    # (scripts/lens/gptoss_tokenizer_check.py)
+    A: {bare: 32, space: 355, paren: 10706}
+    B: {bare: 33, space: 418, paren: 8409}
+    C: {bare: 34, space: 363, paren: 5559}
+    D: {bare: 35, space: 415, paren: 9908}
+  # Rank tie rule: rank = 1 + number of vocabulary tokens with a strictly
+  # higher log-prob ("min" rank; tied tokens share the best rank). bf16 logits
+  # tie often (M0.2).
+
+batch:
+  prompt_tail: 64        # tracked tokens at the last 64 prompt positions + every completion position
+  n_cot_positions: 16    # evenly spaced CoT anchors for the top-25
+  # Anchors whose block outputs (all 36 blocks, fp16) are stored for probes.
+  resid_anchors: [last_prompt, think_end, pre_answer]

@@ -50,12 +50,28 @@ def token_bytes(tokenizer: Any, ids: list[int]) -> list[bytes]:
 
 
 def chat_text(tokenizer: Any, messages: list[dict], *, enable_thinking: bool) -> str:
-    return tokenizer.apply_chat_template(
+    """The rendered chat. A model profile may set `chat_template_kwargs` (e.g.
+    gpt-oss's reasoning_effort) and `fixed_current_date` (gpt-oss's template writes
+    today's date into the system message; fixing it keeps prompts and the tokenizer
+    fingerprint reproducible across days). Neither is set for Qwen3."""
+    from jmr import config
+
+    mcfg = config.load("model")
+    text = tokenizer.apply_chat_template(
         messages,
         tokenize=False,
         add_generation_prompt=True,
         enable_thinking=enable_thinking,
+        **mcfg.get("chat_template_kwargs", {}),
     )
+    date = mcfg.get("fixed_current_date")
+    if date:
+        import re
+
+        text, n = re.subn(r"Current date: \d{4}-\d{2}-\d{2}", f"Current date: {date}", text, count=1)
+        if n != 1:
+            raise ValueError("fixed_current_date is set but the rendered chat has no 'Current date:' line")
+    return text
 
 
 def encode_chat(tokenizer: Any, messages: list[dict], *, enable_thinking: bool) -> list[int]:

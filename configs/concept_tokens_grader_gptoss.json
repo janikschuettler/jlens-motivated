@@ -1,0 +1,154 @@
+{
+ "description": "global concept tokens (scripts/lens/concept_tokens.py)",
+ "tokenizer": {
+  "hf_id": "openai/gpt-oss-20b",
+  "revision": "6cee5e81ee83917806bbde320786a8fb61efebee"
+ },
+ "tokens": [
+  {
+   "text": " grader",
+   "id": 117864,
+   "group": "grader"
+  },
+  {
+   "text": " grading",
+   "id": 96134,
+   "group": "grader"
+  },
+  {
+   "text": " bug",
+   "id": 19154,
+   "group": "grader"
+  },
+  {
+   "text": " glitch",
+   "id": 140189,
+   "group": "grader"
+  },
+  {
+   "text": " exploit",
+   "id": 55310,
+   "group": "grader"
+  },
+  {
+   "text": " cheat",
+   "id": 65354,
+   "group": "grader"
+  },
+  {
+   "text": " cheating",
+   "id": 76173,
+   "group": "grader"
+  },
+  {
+   "text": " hack",
+   "id": 27750,
+   "group": "grader"
+  },
+  {
+   "text": " trick",
+   "id": 28864,
+   "group": "grader"
+  },
+  {
+   "text": " score",
+   "id": 8429,
+   "group": "grader"
+  },
+  {
+   "text": " points",
+   "id": 5571,
+   "group": "grader"
+  },
+  {
+   "text": " reward",
+   "id": 16563,
+   "group": "grader"
+  },
+  {
+   "text": " marks",
+   "id": 22891,
+   "group": "grader"
+  },
+  {
+   "text": " rules",
+   "id": 9607,
+   "group": "grader"
+  },
+  {
+   "text": " allowed",
+   "id": 9279,
+   "group": "grader"
+  },
+  {
+   "text": " forbidden",
+   "id": 74435,
+   "group": "grader"
+  },
+  {
+   "text": " honest",
+   "id": 13734,
+   "group": "grader"
+  },
+  {
+   "text": " dishonest",
+   "id": 173541,
+   "group": "grader"
+  },
+  {
+   "text": " correct",
+   "id": 6145,
+   "group": "truth"
+  },
+  {
+   "text": " incorrect",
+   "id": 25570,
+   "group": "truth"
+  },
+  {
+   "text": " wrong",
+   "id": 8201,
+   "group": "truth"
+  },
+  {
+   "text": " right",
+   "id": 1849,
+   "group": "truth"
+  },
+  {
+   "text": " true",
+   "id": 1343,
+   "group": "truth"
+  },
+  {
+   "text": " false",
+   "id": 1485,
+   "group": "truth"
+  },
+  {
+   "text": " actually",
+   "id": 4771,
+   "group": "truth"
+  },
+  {
+   "text": " really",
+   "id": 2715,
+   "group": "truth"
+  },
+  {
+   "text": " truth",
+   "id": 12388,
+   "group": "truth"
+  }
+ ],
+ "not_single_tokens": [
+  {
+   "text": " loophole",
+   "ids": [
+    165020,
+    1491
+   ],
+   "group": "grader"
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+# Profile gpt-oss-20b (JMR_MODEL_PROFILE=gpt-oss-20b; models_grader study, 2026-11-03/04).
+# openai/gpt-oss-20b, MoE (32 experts, 4 active), released in MXFP4 for the expert
+# weights (attention, router, embeddings and LM head in bf16). Unchanged on the Hub
+# since 2025-08-26, before the Neuronpedia lens fit (2026). Loaded in its native
+# MXFP4 format in both envs (vLLM; transformers with the `kernels` MXFP4 path);
+# the lens was fit in a run with dtype bfloat16 (whether that run dequantised the
+# experts is not recorded).
+hf_id: openai/gpt-oss-20b
+revision: 6cee5e81ee83917806bbde320786a8fb61efebee
+dtype: bfloat16
+enable_thinking: true      # ignored by the gpt-oss template; reasoning is always on
+# Chat template: harmony. A "system" message becomes the developer message
+# ("<|start|>developer<|message|># Instructions\n\n{content}\n\n<|end|>"); the
+# template's own system message holds the model identity, knowledge cutoff, the
+# date and "Reasoning: medium".
+chat_template_kwargs: {reasoning_effort: medium}   # = the OpenRouter screen
+fixed_current_date: "2026-11-03"                    # the template writes today's date otherwise
+
+expected:
+  num_hidden_layers: 24
+  hidden_size: 2880
+  vocab_size: 201088
+  tie_word_embeddings: false
+  rms_norm_eps: 1.0e-5
+
+# Harmony channels: the reasoning is the analysis-channel message, the answer the
+# final-channel message (jmr.anchors harmony mode, jmr.label.split_harmony).
+special_tokens:
+  format: harmony
+  think_start: "<|message|>"
+  think_end: "<|end|>"
+m0_peak_gb: 44   # L40S (45 GiB usable)

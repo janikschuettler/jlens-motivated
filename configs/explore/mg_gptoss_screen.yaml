@@ -1,0 +1,16 @@
+# Models x grader-bug, Phase 2b (octavia, gen env, JMR_MODEL_PROFILE=gpt-oss-20b): unhinted screen of
+# gpt-oss-20b (harmony, reasoning effort medium, our format) on the 200-item pool of
+# data/explore/known_items.jsonl (the Qwen3-8B gap screen's items, all of them) x 10 samples.
+# Known = >= 9/10 (project definition). Sampling: OpenAI's recommendation for gpt-oss, T 1.0, top-p 1.0
+# (the OpenRouter screen used the same). Notes: docs/overnight/notes/gptoss_phase2.md.
+include: [blocks.yaml, w2_blocks.yaml]
+name: mg_gptoss_screen
+out_dir: data/explore/models_grader/gptoss_screen
+items: {source: known_pool, path: data/explore/known_items.jsonl, setting: A, min_acc: 0.0}
+decodings:
+  gptoss:
+    thinking: {temperature: 1.0, top_p: 1.0, top_k: 0, min_p: 0.0}
+    non_thinking: {temperature: 1.0, top_p: 1.0, top_k: 0, min_p: 0.0}
+defaults: {format: ours, thinking: true, decoding: gptoss, max_tokens: 8192, samples: 10, est_tokens: 500}
+arms:
+  - {name: unhinted, hint: null}

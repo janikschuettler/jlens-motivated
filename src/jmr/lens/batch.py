@@ -185,11 +185,12 @@ class RunPlan:
 
 
 def plan_run(record: RunRecord, tokenizer: Any, *, think_ids: tuple[int, int], prompt_tail: int,
-             n_cot: int, resid_anchors: list[str]) -> RunPlan:
+             n_cot: int, resid_anchors: list[str], harmony: bool = False) -> RunPlan:
     ids = record.token_ids
     P, L = len(record.prompt_token_ids), len(ids)
     answer = extract_answer(record)
-    a = find_anchors(tokenizer, ids, P, think_start_id=think_ids[0], think_end_id=think_ids[1], final_letter=answer)
+    a = find_anchors(tokenizer, ids, P, think_start_id=think_ids[0], think_end_id=think_ids[1], final_letter=answer,
+                     harmony=harmony)
 
     def in_completion(i):
         return i if i is not None and i >= P else -1
@@ -225,15 +226,17 @@ def plan_run(record: RunRecord, tokenizer: Any, *, think_ids: tuple[int, int], p
 
 
 def check_plan(plan: RunPlan, tokenizer: Any) -> list[str]:
-    """Anchors decode to the intended tokens (as in M0.4). Returns problems."""
+    """Anchors decode to the intended tokens (as in M0.4). Returns problems.
+    The think tokens are the model config's special_tokens (Qwen3: <think>, </think>)."""
     ids, problems = plan.ids, []
+    st = config.load("model")["special_tokens"]
 
     def dec(i):
         return tokenizer.decode([ids[i]])
 
-    if plan.named["think_start"] >= 0 and dec(plan.named["think_start"]) != "<think>":
+    if plan.named["think_start"] >= 0 and dec(plan.named["think_start"]) != st["think_start"]:
         problems.append(f"think_start decodes to {dec(plan.named['think_start'])!r}")
-    if plan.named["think_end"] >= 0 and dec(plan.named["think_end"]) != "</think>":
+    if plan.named["think_end"] >= 0 and dec(plan.named["think_end"]) != st["think_end"]:
         problems.append(f"think_end decodes to {dec(plan.named['think_end'])!r}")
     for name, key in (("pre_answer", "final_answer"), ("pre_first_stated", "answer_first_stated")):
         pos = plan.anchors[key]
@@ -299,11 +302,12 @@ class BatchReader:
         st = config.load("model")["special_tokens"]
         self.think_ids = (tokenizer.convert_tokens_to_ids(st["think_start"]),
                           tokenizer.convert_tokens_to_ids(st["think_end"]))
+        self.harmony = st.get("format") == "harmony"
         self._tracked_t = torch.tensor(self.tracked.ids, device=self.device)
 
     def plan(self, record: RunRecord) -> RunPlan:
         return plan_run(record, self.tokenizer, think_ids=self.think_ids, prompt_tail=self.prompt_tail,
-                        n_cot=self.n_cot, resid_anchors=self.resid_anchors)
+                        n_cot=self.n_cot, resid_anchors=self.resid_anchors, harmony=self.harmony)
 
     @torch.no_grad()
     def _forward(self, ids: list[int], resid_pos: list[int]):

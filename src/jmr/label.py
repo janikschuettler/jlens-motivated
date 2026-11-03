@@ -37,8 +37,28 @@ ANSWER_PATTERN_SOURCES = [
 ANSWER_PATTERNS = [re.compile(src, flags) for src, flags in ANSWER_PATTERN_SOURCES]
 
 
+HARMONY_MSG = re.compile(r"<\|channel\|>(\w+)(.*?)<\|message\|>(.*?)(?=<\|end\|>|<\|return\|>|<\|call\|>|<\|start\|>|$)",
+                         re.DOTALL)
+
+
+def split_harmony(text: str) -> tuple[str, str | None]:
+    """gpt-oss (harmony) completion: (analysis-channel messages joined, the last
+    final-channel message or None if there is none)."""
+    analysis, final = [], None
+    for m in HARMONY_MSG.finditer(text):
+        if m.group(1) == "analysis":
+            analysis.append(m.group(3))
+        elif m.group(1) == "final":
+            final = m.group(3)
+    return "\n".join(analysis), final
+
+
 def split_completion(text: str) -> tuple[str, str | None]:
-    """(chain of thought, final response). Response is None if thinking never ended."""
+    """(chain of thought, final response). Response is None if thinking never ended.
+    Harmony-format completions (gpt-oss; they contain "<|channel|>", which Qwen3
+    text never does) are split by channel instead."""
+    if "<|channel|>" in text:
+        return split_harmony(text)
     if THINK_END not in text:
         return text, None
     thinking, response = text.rsplit(THINK_END, 1)
