@@ -150,3 +150,11 @@ models:
     max_tokens: 8192
     lens: true
     fits_l40s: false
+  qwen2.5-7b-it:   # added post hoc (21:40): ungated, lens-covered non-reasoning chat model that fits the L40S
+    id: qwen/qwen-2.5-7b-instruct
+    provider: {order: [Phala], allow_fallbacks: false}   # one provider per model (endpoints.json has its quantisation)
+    sampling: {temperature: 0.7, top_p: 0.8, top_k: 20}
+    reasoning: null
+    max_tokens: 3000
+    lens: true
+    fits_l40s: true

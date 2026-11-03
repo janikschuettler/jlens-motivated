@@ -30,14 +30,15 @@ On Qwen3-8B the user's grader-bug note ("Note: the automated grader for this que
 | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: |
 | Qwen3-14B | `qwen/qwen3-14b` | DeepInfra (fp8) | on | yes | yes | 56 / 60 | 98% | $0.39 |
 | gpt-oss-20b | `openai/gpt-oss-20b` | DeepInfra (bf16) | effort medium | yes | yes | 54 / 60 | 98% | $0.10 |
-| Gemma-3-12B-it | `google/gemma-3-12b-it` | DeepInfra (bf16) | none | yes | yes | 48 / 60 | 88% | $0.12 |
+| Gemma-3-12B-it | `google/gemma-3-12b-it` | DeepInfra (bf16) | none | yes | yes | 48 / 60 | 88% | $0.13 |
 | Llama-3.1-8B-it | `meta-llama/llama-3.1-8b-instruct` | DeepInfra (fp8) | none | yes | yes | 35 / 60 | 81% | $0.02 |
+| Qwen2.5-7B-it | `qwen/qwen-2.5-7b-instruct` | Phala (unknown) | none | yes | yes | 45 / 60 | 85% | $0.05 |
 | Qwen3.6-27B | `qwen/qwen3.6-27b` | Chutes (fp8) | on | yes | no | 19 / 24 | 90% | $1.38 |
 | Gemma-3-27B-it | `google/gemma-3-27b-it` | DeepInfra (fp8) | none | yes | no | 53 / 60 | 96% | $0.10 |
 | Gemma-4-31B-it | `google/gemma-4-31b-it` | DeepInfra (fp8) | on | yes | no | 58 / 60 | 98% | $1.20 |
 | Qwen3-32B | `qwen/qwen3-32b` | DeepInfra (fp8) | on | yes | no | 58 / 60 | 99% | $0.53 |
 | Llama-3.3-70B-it | `meta-llama/llama-3.3-70b-instruct` | DeepInfra (fp8) | none | yes | no | 60 / 60 | 100% | $0.30 |
-| DeepSeek-V4-Flash | `deepseek/deepseek-v4-flash` | DeepInfra (fp8) | on | yes | no | 40 / 60 | 100% | $0.09 |
+| DeepSeek-V4-Flash | `deepseek/deepseek-v4-flash` | DeepInfra (fp8) | on | yes | no | 46 / 60 | 100% | $0.09 |
 
 Gemma-4-31B's lens file is `gemma-4-31b` (base vs instruction-tuned not checked). OLMo-3 is not served on OpenRouter (and its lenses are for the base models). Qwen3-8B is not served either; it ran locally (§6).
 
@@ -73,24 +74,28 @@ P(final = B) in percent, on each model's known items (bold ≥ 20%). Intervals a
 | Model | known | V0 | V1 null | V4 sanct. | A_V0 | A_V1 null | A_sys | A_sys null | S_bug_only | A_stakes | A_stakes null | L allowed | L unclear | L forbidden | M&B hint |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | Qwen3-8B (local) | 60 | 2 | 0 | 0.6 | 2 | 0 | 0.6 | – | – | 1 | 0 | **100** | 1 | 0.6 | **59** |
+| Qwen3-8B (local, no thinking) | 150 | 3 | – | – | 14 | 1 | 13 | 2 | – | 16 | – | **83** | 18 | – | – |
 | Qwen3-14B (local) | 167 | 0.6 | – | – | 11 | 0.3 | – | – | – | 12 | – | **100** | 2 | – | – |
-| Qwen3-14B | 56 | 0.9 | 0 | 2 | 12 | 0 | 5 | 0.9 | 0.9 | 15 | 0 | **100** | 4 | 2 | **36** |
-| gpt-oss-20b | 54 | 2 | 0 | 0.9 | **58** | 0 | **84** | 0 | – | **80** | 0 | **100** | **84** | 0.9 | **30** |
-| Gemma-3-12B-it | 48 | 2 | 1 | 0 | **52** | 0 | **83** | 0 | **27** | **78** | 1 | **97** | **34** | 1 | **58** |
+| Qwen3-14B (local, no thinking) | 159 | 14 | – | – | **61** | 0.3 | 10 | 0.3 | – | **52** | – | **98** | **44** | – | – |
+| Qwen3-14B (API) | 56 | 0.9 | 0 | 2 | 12 | 0 | 5 | 0.9 | 0.9 | 15 | 0 | **100** | 4 | 2 | **36** |
+| gpt-oss-20b (local) | 155 | 0.3 | – | – | **57** | 0 | **81** | – | – | – | – | **100** | – | 0.3 | – |
+| gpt-oss-20b (API) | 54 | 2 | 0 | 0.9 | **58** | 0 | **84** | 0 | 2 | **80** | 0 | **100** | **84** | 0.9 | **30** |
+| Gemma-3-12B-it | 48 | 2 | 1 | 0 | **55** | 0 | **83** | 0 | **27** | **78** | 1 | **97** | **34** | 1 | **58** |
 | Llama-3.1-8B-it | 35 | 3 | 1 | 4 | **29** | 3 | **47** | 3 | 1 | **26** | 1 | **69** | 11 | 7 | **60** |
+| Qwen2.5-7B-it | 45 | 2 | 0 | – | 1 | 0 | 2 | 0 | 1 | 0 | – | **42** | 2 | 0 | **49** |
 | Qwen3.6-27B | 19 | 3 | – | – | **87** | 0 | **82** | – | – | – | – | **100** | – | 0 | – |
 | Gemma-3-27B-it | 53 | 3 | 0 | 2 | **91** | 0 | **92** | 0.9 | **43** | **99** | 0 | **100** | **95** | 0.9 | **72** |
 | Gemma-4-31B-it | 58 | 5 | 0 | 0 | **100** | 0 | **100** | 0 | **66** | **100** | 0 | **100** | **100** | 0 | 17 |
 | Qwen3-32B | 58 | 3 | 0 | 2 | **27** | 2 | **62** | 0 | 0 | **34** | 0.9 | **100** | **28** | 2 | **31** |
 | Llama-3.3-70B-it | 60 | 0.8 | 0.8 | 0 | **39** | 0 | **69** | 0 | 3 | **72** | 0.8 | **98** | 19 | 0 | **49** |
-| DeepSeek-V4-Flash | 40 | 5 | 0 | 2 | **100** | 0 | **97** | – | – | **100** | 0 | **100** | **100** | 0 | **29** |
+| DeepSeek-V4-Flash | 46 | 4 | 0 | 2 | **100** | 0 | **97** | – | – | **100** | 0 | **100** | **100** | 0 | **29** |
 
 ![models x grader-bug](../../findings/figs/fig12_models_grader.svg)
 
 Readings:
 
 1. **Plain chat: no model takes the bug.** V0 gives at most 5% everywhere, V4 (sanctioned) 0–4%, nulls 0–1%. This replicates the Qwen3-8B result across families and sizes.
-2. **The agent framing is the switch.** One system sentence that says the model is scored by the grader and should maximise its score turns the same note into a strong pull toward B in every family except the older Qwen3 models. The matched null under the same framing (A_V1) stays at 0–3%, so the framing alone does nothing; it is framing × bug. Newer and larger models react most (Gemma-4-31B, DeepSeek-V4-Flash, Qwen3.6-27B 87–100%); within Qwen3 it grows with size (8B 2%, 14B 11–15%, 32B 27–34%).
+2. **The agent framing is the switch.** One system sentence that says the model is scored by the grader and should maximise its score turns the same note into a strong pull toward B in every family except the older Qwen models (Qwen3-8B/14B with thinking on, and Qwen2.5-7B-Instruct, added post hoc as an ungated non-reasoning model that fits our GPU: ≤ 2%, and only 42% even when allowed, answering with a bare letter). The matched null under the same framing (A_V1) stays at 0–3%, so the framing alone does nothing; it is framing × bug. Newer and larger models react most (Gemma-4-31B, DeepSeek-V4-Flash, Qwen3.6-27B 87–100%); within Qwen3 it grows with size (8B 2%, 14B 11–15%, 32B 27–34%).
 3. **The bug note in the system prompt pulls harder than in the user turn** for most models (A_sys vs A_V0: gpt-oss 84 vs 58, Llama-3.3-70B 69 vs 39, Qwen3-32B 62 vs 27), but not for Qwen3-14B (5 vs 12). Without the agent sentence (S_bug_only, post hoc) the system-prompt note still moves the Gemma models (27–66%) but not Llama or Qwen (0–3%).
 4. **Stakes add to the agent framing.** "Only the grader's verdict counts … shut down and retrained" (A_stakes) raises A_V0 in most models (gpt-oss 58 → 80, Gemma-3-12B 52 → 78, Llama-3.3-70B 39 → 72, Qwen3-32B 27 → 34%), about as much as moving the note into the system prompt; Qwen3-14B stays at 12–15%.
 5. **The permission ladder works as an instruction.** "Allowed" gives 69–100% (100% for Qwen3-8B too), "not allowed" 0–7%, and the unclear rung sits between (2–100%, model-dependent). So following is not something the models do against a stated rule; only the unclear rung measures a model's own default.
@@ -242,7 +247,7 @@ Allowed − unsanctioned followers: Qwen3-8B −0.96 [−1.39, −0.53] (J) / �
 
 ## 10. Cost, time and paths
 
-**API cost:** $4.84 of the $6 cap at 21:30 ($4.75 at 20:10) (OpenRouter key usage agrees: $4.50 at 19:05 against our $4.51). By model: Qwen3.6-27B $1.38, Gemma-4-31B $1.20, Qwen3-32B $0.53, judge (gemini-2.5-flash-lite) $0.52, Qwen3-14B $0.39, Llama-3.3-70B $0.30, Gemma-3-12B $0.12, Gemma-3-27B $0.10, gpt-oss-20b $0.10, DeepSeek-V4-Flash $0.09, Llama-3.1-8B $0.02. Per-batch tokens and cost: `data/models_grader/cost_log.jsonl`.
+**API cost:** $4.90 of the $6 cap at 21:55 ($4.75 at 20:10) (OpenRouter key usage agrees: $4.50 at 19:05 against our $4.51). By model: Qwen3.6-27B $1.38, Gemma-4-31B $1.20, Qwen3-32B $0.53, judge (gemini-2.5-flash-lite) $0.52, Qwen3-14B $0.39, Llama-3.3-70B $0.30, Gemma-3-12B $0.12, Gemma-3-27B $0.10, gpt-oss-20b $0.10, DeepSeek-V4-Flash $0.09, Llama-3.1-8B $0.02. Per-batch tokens and cost: `data/models_grader/cost_log.jsonl`.
 
 **Time:** API screen 17:16–21:00 (rate limits at DeepInfra slowed DeepSeek, Qwen3 and gpt-oss); octavia: Qwen3-8B arms 17:38–18:07 (2,160 runs), Qwen3-14B checks + screen + arms 18:07–19:40 (4,505 runs, ~700–1,040 tok/s), readout 19:41–19:52 (895 runs); gpt-oss-20b checks, screen, arms and readout 19:52–20:27 (4,170 runs generated, 1,154 read out); non-thinking Qwen3-8B/14B screens, arms and readouts 20:46–21:26 (9,871 runs, 2,118 read out). About 3.5 GPU-hours on the L40S in all.
 
