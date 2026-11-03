@@ -28,7 +28,9 @@ from analyze_models_grader import LENSES, boot_auroc, boot_mean, lse  # noqa: E4
 
 PAIRS = [("L_allowed/followed", "A_V0/followed"), ("L_allowed/followed", "A_sys/followed"),
          ("A_V0/followed", "A_V0/resisted"), ("A_sys/followed", "A_sys/resisted"),
-         ("A_V0/resisted", "A_V1_null/resisted")]
+         ("A_V0/resisted", "A_V1_null/resisted"),
+         ("A_V0/followed:named_only", "A_V0/followed:open"), ("A_sys/followed:named_only", "A_sys/followed:open"),
+         ("A_V0/followed:named_only", "A_V0/resisted")]
 
 
 def main():
@@ -37,7 +39,15 @@ def main():
     ap.add_argument("--runs", required=True)
     ap.add_argument("--concepts", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--subgroups", default=None,
+                    help="follower_kw.jsonl (scripts/explore/mg_gptoss_followers.py): followers are also "
+                         "counted under '<arm>/followed:<category>'")
     a = ap.parse_args()
+    sub = {}
+    if a.subgroups:
+        for line in open(a.subgroups):
+            x = json.loads(line)
+            sub[x["run_id"]] = x["category"]
     rng = random.Random(0)
     R = Path(a.readouts)
     arm_of = {}
@@ -59,7 +69,9 @@ def main():
         if group is None:
             n_skip["other wrong"] += 1
             continue
-        key = f"{arm}/{group}"
+        keys = [f"{arm}/{group}"]
+        if group == "followed" and m["run_id"] in sub:
+            keys.append(f"{arm}/followed:{sub[m['run_id']]}")
         z = np.load(R / m["file"])
         layers = z["layers"].tolist()
         tr = m["tracked"]
@@ -79,8 +91,9 @@ def main():
             p = npos.get(anc, -1)
             if p is None or p < 0:
                 continue
-            rows[key][f"corr@{anc}"].append((q, corr[:, :, p - lo]))
-            rows[key][f"sal@{anc}"].append((q, sal[:, :, p - lo]))
+            for key in keys:
+                rows[key][f"corr@{anc}"].append((q, corr[:, :, p - lo]))
+                rows[key][f"sal@{anc}"].append((q, sal[:, :, p - lo]))
         if "x_ids" in z.files:
             cidx = np.where(z["x_opt"] == -1)[0]
             xlp = z["x_lp"].astype(np.float64)
@@ -91,9 +104,11 @@ def main():
                 for anc in ("pre_answer", "think_end", "last_prompt"):
                     p = npos.get(anc, -1)
                     if p is not None and p >= 0:
-                        rows[key][f"concept_{g}@{anc}"].append((q, s[:, :, p - lo]))
+                        for key in keys:
+                            rows[key][f"concept_{g}@{anc}"].append((q, s[:, :, p - lo]))
                 if span and span[1] > span[0]:
-                    rows[key][f"concept_{g}@cot_mean"].append((q, s[:, :, span[0] - lo:span[1] - lo].mean(-1)))
+                    for key in keys:
+                        rows[key][f"concept_{g}@cot_mean"].append((q, s[:, :, span[0] - lo:span[1] - lo].mean(-1)))
     out = {"layers": layers, "lenses": list(LENSES), "skipped": dict(n_skip), "groups": {}, "contrasts": {}}
     for key, meas in rows.items():
         og = out["groups"][key] = {"n": len(meas.get("corr@pre_answer", []))}

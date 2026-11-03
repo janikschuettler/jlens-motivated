@@ -41,7 +41,16 @@ def token_bytes(tokenizer: Any, ids: list[int]) -> list[bytes]:
     added = set(tokenizer.get_added_vocab())
     decoder = _byte_decoder()
     out = []
-    for token in tokenizer.convert_ids_to_tokens(ids):
+    for tid, token in zip(ids, tokenizer.convert_ids_to_tokens(ids)):
+        if token is None:
+            # An ID the tokenizer has no entry for. gpt-oss-20b's embedding has 201,088 rows but
+            # its tokenizer only 200,019 entries; the model occasionally samples one of the
+            # unused IDs, which decodes to "". It is kept as a zero-length piece so byte offsets
+            # stay exact; any other unmapped ID is an error. (Qwen3 never hits this.)
+            if tid < len(tokenizer) or tokenizer.decode([tid]) != "":
+                raise ValueError(f"token ID {tid} has no token string but is inside the vocabulary")
+            out.append(b"")
+            continue
         if token in added:
             out.append(token.encode("utf-8"))
         else:
