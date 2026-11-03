@@ -7,7 +7,7 @@ An interpretability project on **arguing against its own knowledge**. On questio
 - Prefer "arguing against its own knowledge" in write-ups. "Motivated reasoning" is fine as a colloquial shorthand (the user's call), but it implies a motive we can't establish, and a hint can be legitimate evidence, so don't build claims on it.
 - "Own knowledge" is behavioural: an item is reliably known if at least 90% of unhinted samples answer it correctly.
 - [docs/plan.md](docs/plan.md) is the research design (v1: behavioural pilot, one internal measurement, optional detection, plus a later list). Changes to it are the user's decision.
-- [docs/findings.md](docs/findings.md) is the running record of all findings so far (see "Findings document" below).
+- The findings dashboard, [docs/findings/index.html](docs/findings/index.html) (built from [docs/findings/registry.json](docs/findings/registry.json)), is the running record of every experiment and finding so far: done, running and upcoming (see "Findings dashboard" below).
 - [docs/roadmap.md](docs/roadmap.md) has the milestones (M0 tools; M1–M3 = the plan's Steps 1–3), their done-criteria, the chosen thresholds and the go/no-go points.
 - [docs/open-questions.md](docs/open-questions.md) lists the undecided points, each with the milestone that needs it settled.
 - Status: M0 done (all checks pass, [docs/reports/m0.md](docs/reports/m0.md)). Docs revised to the v1 design on 2026-11-02. M1 code is built and smoke-tested (`scripts/gen/pilot.py`); the full pilot waits for the temperature decision (open question 1). Exploration on 2026-11-02/03 (M&B gap factorial, hint families, lens readouts, pre-registered lens tests, subtle cues, planted claims) is in [docs/overnight/](docs/overnight/); start from its log and report.
@@ -84,15 +84,20 @@ uv manages both environments. Never use `pip install`. Generation and readout us
 ### Writing
 
 - Use simple, concise prose: short sentences and plain words. Use jargon only where it's needed, and say what it means the first time.
-- Give every new finding an interpretation line: what it means for the project's question, and how sure we are. This matters most in summary artefacts (reports, the findings document, web pages).
+- Give every new finding an interpretation line: what it means for the project's question, and how sure we are. This matters most in summary artefacts (reports, the findings dashboard, web pages).
 
-### Findings document
+### Findings dashboard
 
-[docs/findings.md](docs/findings.md) is the running record of everything found so far. Update it whenever a result lands, in the same commit as the result's report.
+The running record is a web page, [docs/findings/index.html](docs/findings/index.html), built from one source of truth, [docs/findings/registry.json](docs/findings/registry.json). It is published as a claude.ai artifact. `docs/findings.md` is only a pointer; don't write findings there.
 
-- **Shape:** a short summary at the top, then one section per finding with the question, the method (short but exact: model, data, sample sizes, settings), the result with a figure, an interpretation line, caveats, and a link to the full report.
-- **Figures:** SVG files in `docs/findings/figs/`, generated from derived numbers (never raw runs) by `scripts/docs/make_figures.py`, so they can be redrawn.
-- **Style:** visually clear, short and exact, simple prose. Mark each finding as exploratory or pre-registered. When a result is superseded, update its section; don't stack old and new versions.
+- **Registry:** `thread` holds the main question, a summary, and the strands (sub-questions A–C, tools T, beyond hinted questions N). Each strand has a hypothesis, a current answer with a confidence, and a next step. `experiments` has one entry per experiment, done, running or upcoming. Each entry has: id, title, strand, status, kind (exploratory, pre-registered, definitive or tooling), verdict against its strand's hypothesis, question, method (short but exact), result, key numbers, interpretation line, confidence, caveats, n, dates, timing (wall-clock, GPU-hours, API cost), machine, figure, reports, derived data, commits and related entries. The schema is checked by the build script, which lists every allowed value. Use derived numbers only.
+- **After every result** (and when an experiment starts or is planned), in the same commit as the result's report:
+  1. update the entry in `registry.json`: status, numbers, interpretation, verdict, timing, commits. Update the strand's current answer and the thread summary if the result changes them. Update `meta.updated`.
+  2. if the result has a figure, add or redraw it with `scripts/docs/make_figures.py` (SVGs in `docs/findings/figs/`, from derived numbers only) and set the entry's `figure`.
+  3. run `~/.local/bin/uv run --project envs/judge python scripts/docs/build_dashboard.py`. It fails loudly on a missing or malformed field; fix the registry, don't loosen the check.
+  4. commit the registry, figures and `docs/findings/index.html`. The orchestrator republishes the artifact.
+- **Style:** simple prose, short and exact. Every finding gets an interpretation line. Mark each as exploratory or pre-registered (the `kind` field). When a result is superseded, update its entry in place; don't stack old and new versions.
+- **Page code:** `scripts/docs/dashboard_template.html` (CSS and JS, inline; views `#thread`, `#experiments`, `#terms`, `#exp-<id>`). Keep it one self-contained document with no remote scripts or images.
 
 ### Commits
 
