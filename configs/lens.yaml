@@ -13,3 +13,31 @@ workspace_layers: [14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
 top_k: 25
 # Positions per chunk when unembedding; bounds the [chunk, vocab] fp32 buffer.
 position_chunk: 512
+
+# Batch readouts (scripts/lens/readout_runs.py, jmr.lens.batch). Fixed before
+# any readout run: adding a token later means re-running the readout (rule 3).
+tracked_tokens:
+  # Option letters in the surface forms that occur when reading answers. Each
+  # must be exactly one token; jmr.lens.batch re-checks these IDs against the
+  # tokenizer and refuses to run on any mismatch.
+  #   space " A": "Answer: A" (the final-answer letter in ~95% of runs)
+  #   bare  "A":  "\boxed{A}", "**A", "\nA" (the rest of the final-answer letters)
+  #   paren "(A": how the options are written in the prompt, "(A) ..."
+  # Checked 2026-11-02: " (A", "A)", "**A", "{A" are not single tokens. ":A" is
+  # a single token but never occurs at the answer position; not tracked.
+  letters: [A, B, C, D]
+  forms: {bare: "{L}", space: " {L}", paren: "({L}"}
+  ids:
+    A: {bare: 32, space: 362, paren: 4346}
+    B: {bare: 33, space: 425, paren: 5349}
+    C: {bare: 34, space: 356, paren: 3025}
+    D: {bare: 35, space: 422, paren: 5432}
+  # Rank tie rule: rank = 1 + number of vocabulary tokens with a strictly
+  # higher log-prob ("min" rank; tied tokens share the best rank). bf16 logits
+  # tie often (M0.2).
+
+batch:
+  prompt_tail: 64        # tracked tokens at the last 64 prompt positions + every completion position
+  n_cot_positions: 16    # evenly spaced CoT anchors for the top-25
+  # Anchors whose block outputs (all 36 blocks, fp16) are stored for probes.
+  resid_anchors: [last_prompt, think_end, pre_answer]
