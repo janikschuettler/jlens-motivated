@@ -88,7 +88,7 @@ uv manages both environments. Never use `pip install`. Generation and readout us
 
 ### Findings dashboard
 
-The running record is a web page, [docs/findings/index.html](docs/findings/index.html), built from one source of truth, [docs/findings/registry.json](docs/findings/registry.json). It is published as a claude.ai artifact. `docs/findings.md` is only a pointer; don't write findings there.
+The running record is a web page, [docs/findings/index.html](docs/findings/index.html), built from one source of truth, [docs/findings/registry.json](docs/findings/registry.json). It is published as a private claude.ai artifact: https://claude.ai/artifact/BZHUWiBPLb7zN7mzXXbvzy (slug `557d5704-e0b7-4329-8053-f7b84ab11dc6`). Republish to that slug (never create a new artifact for it), reading the live version first for `base_version`. `docs/findings.md` is only a pointer; don't write findings there.
 
 - **Registry:** `thread` holds the main question, a summary, and the strands (sub-questions A–C, tools T, beyond hinted questions N). Each strand has a hypothesis, a current answer with a confidence, and a next step. `experiments` has one entry per experiment, done, running or upcoming. Each entry has: id, title, strand, status, kind (exploratory, pre-registered, definitive or tooling), verdict against its strand's hypothesis, question, method (short but exact), result, key numbers, interpretation line, confidence, caveats, n, dates, timing (wall-clock, GPU-hours, API cost), machine, figure, reports, derived data, commits and related entries. The schema is checked by the build script, which lists every allowed value. Use derived numbers only.
 - **After every result** (and when an experiment starts or is planned), in the same commit as the result's report:
