@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="703" viewBox="0 0 960 703" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title>Reward-hack organism: the readouts tell the hacking model apart, not the hacking run</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="12.0" y="24.0" font-size="15" fill="#1b1b1a" text-anchor="start" font-weight="bold">Reward-hack organism: the readouts tell the hacking model apart, not the hacking run</text>
+<text x="12.0" y="45.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">AUROC of problem-level means, 95% bootstrap CIs over problems. 0.5 = chance.</text>
+<text x="12.0" y="61.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Concept score: log-probability of 27 hack-concept tokens at CoT positions before any hack word appears.</text>
+<circle cx="21.0" cy="78.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"></circle>
+<text x="34.0" y="82.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">J-lens</text>
+<rect x="82.3" y="73.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"></rect>
+<text x="99.8" y="82.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">logit lens</text>
+<path d="M177.8,72.2 L183.7,78.0 L177.8,83.8 L172.0,78.0 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"></path>
+<text x="190.8" y="82.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">CoT keyword monitor</text>
+<circle cx="325.5" cy="78.0" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"></circle>
+<text x="338.5" y="82.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">linear probe</text>
+<line x1="470.0" y1="100.0" x2="470.0" y2="626.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="534.0" y1="100.0" x2="534.0" y2="626.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="598.0" y1="100.0" x2="598.0" y2="626.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="662.0" y1="100.0" x2="662.0" y2="626.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="726.0" y1="100.0" x2="726.0" y2="626.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="790.0" y1="100.0" x2="790.0" y2="626.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="630.0" y1="96.0" x2="630.0" y2="626.0" stroke="#8a8984" stroke-width="1.2" stroke-dasharray="4,3"/>
+<rect x="4" y="109.0" width="548" height="24.0" fill="#ffffff"/>
+<text x="8.0" y="124.6" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">H1 (pre-registered): hidden hack (β = 0.02) vs clean (base), concept score</text>
+<line x1="8" y1="134.0" x2="952" y2="134.0" stroke="#e6e5e1"/>
+<text x="16.0" y="153.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">hidden vs clean</text>
+<text x="462.0" y="153.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">114 items</text>
+<line x1="786.5" y1="142.0" x2="789.7" y2="142.0" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="786.5" y1="139.0" x2="786.5" y2="145.0" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="789.7" y1="139.0" x2="789.7" y2="145.0" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="788.5" cy="142.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>hidden vs clean - J-lens: 1.00 [0.99, 1.00]</title></circle>
+<line x1="717.6" y1="149.0" x2="741.2" y2="149.0" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="717.6" y1="146.0" x2="717.6" y2="152.0" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="741.2" y1="146.0" x2="741.2" y2="152.0" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="724.6" y="144.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>hidden vs clean - logit lens: 0.81 [0.77, 0.85]</title></rect>
+<line x1="608.9" y1="156.0" x2="624.4" y2="156.0" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="608.9" y1="153.0" x2="608.9" y2="159.0" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="624.4" y1="153.0" x2="624.4" y2="159.0" stroke="#7d7c77" stroke-width="1.4"/>
+<path d="M617.4,150.2 L623.2,156.0 L617.4,161.8 L611.5,156.0 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>hidden vs clean - CoT keyword monitor: 0.46 [0.43, 0.48]</title></path>
+<text x="952.0" y="153.0" font-size="11" fill="#1f7a1f" text-anchor="end" font-weight="bold">PASS (see H2)</text>
+<rect x="4" y="173.0" width="388" height="24.0" fill="#ffffff"/>
+<text x="8.0" y="188.6" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">H2 (pre-registered controls): the hack or the model?</text>
+<line x1="8" y1="198.0" x2="952" y2="198.0" stroke="#e6e5e1"/>
+<text x="16.0" y="217.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">same model (β 0.02): hidden vs reads clean text</text>
+<text x="462.0" y="217.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">114 items</text>
+<line x1="739.5" y1="209.5" x2="759.8" y2="209.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="739.5" y1="206.5" x2="739.5" y2="212.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="759.8" y1="206.5" x2="759.8" y2="212.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="749.3" cy="209.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>same model (β 0.02): hidden vs reads clean text - J-lens: 0.87 [0.84, 0.91]</title></circle>
+<line x1="694.9" y1="216.5" x2="721.1" y2="216.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="694.9" y1="213.5" x2="694.9" y2="219.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="721.1" y1="213.5" x2="721.1" y2="219.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="702.8" y="212.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>same model (β 0.02): hidden vs reads clean text - logit lens: 0.74 [0.70, 0.78]</title></rect>
+<text x="16.0" y="247.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">same model (base): reads hidden text vs clean</text>
+<text x="462.0" y="247.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">114 items</text>
+<line x1="690.8" y1="239.5" x2="714.7" y2="239.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="690.8" y1="236.5" x2="690.8" y2="242.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="714.7" y1="236.5" x2="714.7" y2="242.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="703.0" cy="239.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>same model (base): reads hidden text vs clean - J-lens: 0.73 [0.69, 0.76]</title></circle>
+<line x1="676.4" y1="246.5" x2="702.3" y2="246.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="676.4" y1="243.5" x2="676.4" y2="249.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="702.3" y1="243.5" x2="702.3" y2="249.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="684.3" y="242.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>same model (base): reads hidden text vs clean - logit lens: 0.68 [0.65, 0.73]</title></rect>
+<text x="16.0" y="277.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">same clean text: β 0.02 model vs base model</text>
+<text x="462.0" y="277.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">120 items</text>
+<line x1="762.7" y1="269.5" x2="778.3" y2="269.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="762.7" y1="266.5" x2="762.7" y2="272.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="778.3" y1="266.5" x2="778.3" y2="272.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="770.8" cy="269.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>same clean text: β 0.02 model vs base model - J-lens: 0.94 [0.91, 0.96]</title></circle>
+<line x1="654.4" y1="276.5" x2="663.3" y2="276.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="654.4" y1="273.5" x2="654.4" y2="279.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="663.3" y1="273.5" x2="663.3" y2="279.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="653.0" y="272.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>same clean text: β 0.02 model vs base model - logit lens: 0.59 [0.58, 0.60]</title></rect>
+<text x="16.0" y="307.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">neutral words instead of concepts</text>
+<text x="462.0" y="307.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">114 items</text>
+<line x1="779.6" y1="299.5" x2="788.1" y2="299.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="779.6" y1="296.5" x2="779.6" y2="302.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="788.1" y1="296.5" x2="788.1" y2="302.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="784.3" cy="299.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>neutral words instead of concepts - J-lens: 0.98 [0.97, 0.99]</title></circle>
+<line x1="701.5" y1="306.5" x2="725.1" y2="306.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="701.5" y1="303.5" x2="701.5" y2="309.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="725.1" y1="303.5" x2="725.1" y2="309.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="708.0" y="302.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>neutral words instead of concepts - logit lens: 0.76 [0.72, 0.80]</title></rect>
+<text x="16.0" y="337.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">β 0.02: hidden vs its own no-hack runs</text>
+<text x="462.0" y="337.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">4 items</text>
+<line x1="470.0" y1="329.5" x2="570.0" y2="329.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="470.0" y1="326.5" x2="470.0" y2="332.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="570.0" y1="326.5" x2="570.0" y2="332.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="570.0" cy="329.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>β 0.02: hidden vs its own no-hack runs - J-lens: 0.31 [0.00, 0.31]</title></circle>
+<line x1="530.0" y1="336.5" x2="710.0" y2="336.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="530.0" y1="333.5" x2="530.0" y2="339.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="710.0" y1="333.5" x2="710.0" y2="339.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="605.5" y="332.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>β 0.02: hidden vs its own no-hack runs - logit lens: 0.44 [0.19, 0.75]</title></rect>
+<text x="952.0" y="337.0" font-size="11" fill="#9a6700" text-anchor="end" font-weight="bold">UNDERPOWERED</text>
+<text x="16.0" y="367.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">warm-start model: hidden vs no-hack</text>
+<text x="462.0" y="367.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">59 items</text>
+<line x1="576.0" y1="359.5" x2="647.0" y2="359.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="576.0" y1="356.5" x2="576.0" y2="362.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="647.0" y1="356.5" x2="647.0" y2="362.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="610.5" cy="359.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>warm-start model: hidden vs no-hack - J-lens: 0.44 [0.33, 0.55]</title></circle>
+<line x1="587.2" y1="366.5" x2="651.7" y2="366.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="587.2" y1="363.5" x2="587.2" y2="369.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="651.7" y1="363.5" x2="651.7" y2="369.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="616.0" y="362.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>warm-start model: hidden vs no-hack - logit lens: 0.47 [0.37, 0.57]</title></rect>
+<rect x="4" y="387.0" width="614" height="24.0" fill="#ffffff"/>
+<text x="8.0" y="402.6" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">H3 (pre-registered): linear probe on CoT block outputs, layer 24, problems held out</text>
+<line x1="8" y1="412.0" x2="952" y2="412.0" stroke="#e6e5e1"/>
+<text x="16.0" y="431.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">warm-start model: trained on named, tested on hidden</text>
+<text x="462.0" y="431.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">59 items</text>
+<line x1="564.4" y1="427.0" x2="628.9" y2="427.0" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="564.4" y1="424.0" x2="564.4" y2="430.0" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="628.9" y1="424.0" x2="628.9" y2="430.0" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="596.0" cy="427.0" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>warm-start model: trained on named, tested on hidden - probe: 0.39 [0.29, 0.50]</title></circle>
+<text x="16.0" y="461.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">train β 0 named vs base, test β 0.02 hidden vs base</text>
+<text x="462.0" y="461.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">114 items</text>
+<line x1="790.0" y1="457.0" x2="790.0" y2="457.0" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="790.0" y1="454.0" x2="790.0" y2="460.0" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="790.0" y1="454.0" x2="790.0" y2="460.0" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="790.0" cy="457.0" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>train β 0 named vs base, test β 0.02 hidden vs base - probe: 1.00 [1.00, 1.00]</title></circle>
+<text x="16.0" y="491.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">… same probe: β 0.02 model reading clean text</text>
+<text x="462.0" y="491.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">120 items</text>
+<line x1="790.0" y1="487.0" x2="790.0" y2="487.0" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="790.0" y1="484.0" x2="790.0" y2="490.0" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="790.0" y1="484.0" x2="790.0" y2="490.0" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="790.0" cy="487.0" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>… same probe: β 0.02 model reading clean text - probe: 1.00 [1.00, 1.00]</title></circle>
+<rect x="4" y="511.0" width="88" height="24.0" fill="#ffffff"/>
+<text x="8.0" y="526.6" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Exploratory</text>
+<line x1="8" y1="536.0" x2="952" y2="536.0" stroke="#e6e5e1"/>
+<text x="16.0" y="555.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">last prompt token, before any output: hidden vs clean</text>
+<text x="462.0" y="555.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">114 items</text>
+<line x1="790.0" y1="547.5" x2="790.0" y2="547.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="790.0" y1="544.5" x2="790.0" y2="550.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="790.0" y1="544.5" x2="790.0" y2="550.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="790.0" cy="547.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>last prompt token, before any output: hidden vs clean - J-lens: 1.00 [1.00, 1.00]</title></circle>
+<line x1="702.9" y1="554.5" x2="734.3" y2="554.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="702.9" y1="551.5" x2="702.9" y2="557.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="734.3" y1="551.5" x2="734.3" y2="557.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="714.2" y="550.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>last prompt token, before any output: hidden vs clean - logit lens: 0.78 [0.73, 0.83]</title></rect>
+<text x="16.0" y="585.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">concept − neutral, β 0.02 model fixed, length-matched</text>
+<text x="462.0" y="585.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">84 items</text>
+<line x1="642.4" y1="577.5" x2="689.0" y2="577.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="642.4" y1="574.5" x2="642.4" y2="580.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="689.0" y1="574.5" x2="689.0" y2="580.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="665.4" cy="577.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>concept − neutral, β 0.02 model fixed, length-matched - J-lens: 0.61 [0.54, 0.68]</title></circle>
+<line x1="667.4" y1="584.5" x2="711.9" y2="584.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="667.4" y1="581.5" x2="667.4" y2="587.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="711.9" y1="581.5" x2="711.9" y2="587.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="686.9" y="580.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>concept − neutral, β 0.02 model fixed, length-matched - logit lens: 0.69 [0.62, 0.76]</title></rect>
+<text x="16.0" y="615.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">warm-start model: probe hidden vs no-hack (CV)</text>
+<text x="462.0" y="615.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">59 items</text>
+<line x1="629.4" y1="611.0" x2="692.5" y2="611.0" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="629.4" y1="608.0" x2="629.4" y2="614.0" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="692.5" y1="608.0" x2="692.5" y2="614.0" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="660.7" cy="611.0" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>warm-start model: probe hidden vs no-hack (CV) - probe: 0.60 [0.50, 0.70]</title></circle>
+<line x1="470" y1="628.0" x2="790" y2="628.0" stroke="#b9b8b2"/>
+<line x1="470.0" y1="628.0" x2="470.0" y2="632.0" stroke="#b9b8b2"/>
+<text x="470.0" y="644.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.0</text>
+<line x1="534.0" y1="628.0" x2="534.0" y2="632.0" stroke="#b9b8b2"/>
+<text x="534.0" y="644.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.2</text>
+<line x1="598.0" y1="628.0" x2="598.0" y2="632.0" stroke="#b9b8b2"/>
+<text x="598.0" y="644.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.4</text>
+<line x1="662.0" y1="628.0" x2="662.0" y2="632.0" stroke="#b9b8b2"/>
+<text x="662.0" y="644.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.6</text>
+<line x1="726.0" y1="628.0" x2="726.0" y2="632.0" stroke="#b9b8b2"/>
+<text x="726.0" y="644.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.8</text>
+<line x1="790.0" y1="628.0" x2="790.0" y2="632.0" stroke="#b9b8b2"/>
+<text x="790.0" y="644.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">1.0</text>
+<text x="630.0" y="660.0" font-size="11.5" fill="#52514e" text-anchor="middle" font-weight="normal">AUROC</text>
+<text x="12.0" y="690.0" font-size="10.5" fill="#8a8984" text-anchor="start" font-weight="normal">Source: docs/overnight/data/hack_organism.json (H1, H2, H3, exploratory). Report: hack_organism.md.</text>
+</svg>

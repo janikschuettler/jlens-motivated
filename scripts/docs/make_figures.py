@@ -728,6 +728,74 @@ def fig_instrument():
            width=900)
 
 
+def fig_hack():
+    H = load("hack_organism")
+    PASS, FAIL, WARN = "#1f7a1f", "#b3261e", "#9a6700"
+
+    def a(d, s):
+        return {"s": s, "v": d["auroc"], "lo": d["ci"][0], "hi": d["ci"][1]}
+
+    def n(d):
+        return f"{d.get('n_items_a', d.get('n_items'))} items"
+
+    h1, h2, h3, ex = H["H1"], H["H2"], H["H3"], H["exploratory"]
+    verdict = {"pass": ("PASS", PASS), "fail": ("FAIL", FAIL), "underpowered": ("UNDERPOWERED", WARN)}[h1["verdict"]]
+    rows = [
+        {"section": "H1 (pre-registered): hidden hack (β = 0.02) vs clean (base), concept score"},
+        {"label": "hidden vs clean", "sub": n(h1["jlens"]),
+         "vals": [a(h1["jlens"], "j"), a(h1["logit"], "l"), a(h1["cot_monitor"], "b")],
+         "tag": verdict[0] + " (see H2)", "tag_color": verdict[1]},
+        {"section": "H2 (pre-registered controls): the hack or the model?"},
+        {"label": "same model (β 0.02): hidden vs reads clean text", "sub": n(h2["b_b002_model_own_hidden_vs_reads_clean"]["jlens"]),
+         "vals": [a(h2["b_b002_model_own_hidden_vs_reads_clean"]["jlens"], "j"),
+                  a(h2["b_b002_model_own_hidden_vs_reads_clean"]["logit"], "l")]},
+        {"label": "same model (base): reads hidden text vs clean", "sub": n(h2["b_base_model_reads_hidden_vs_own_clean"]["jlens"]),
+         "vals": [a(h2["b_base_model_reads_hidden_vs_own_clean"]["jlens"], "j"),
+                  a(h2["b_base_model_reads_hidden_vs_own_clean"]["logit"], "l")]},
+        {"label": "same clean text: β 0.02 model vs base model", "sub": n(h2["b_same_text_clean_b002_vs_base_model"]["jlens"]),
+         "vals": [a(h2["b_same_text_clean_b002_vs_base_model"]["jlens"], "j"),
+                  a(h2["b_same_text_clean_b002_vs_base_model"]["logit"], "l")]},
+        {"label": "neutral words instead of concepts", "sub": n(h2["c_neutral_hidden_vs_clean"]["jlens"]),
+         "vals": [a(h2["c_neutral_hidden_vs_clean"]["jlens"], "j"), a(h2["c_neutral_hidden_vs_clean"]["logit"], "l")]},
+    ]
+    for key, label in (("a_b002_hidden_vs_nohack", "β 0.02: hidden vs its own no-hack runs"),
+                       ("a_disp_hidden_vs_nohack", "warm-start model: hidden vs no-hack")):
+        d = h2[key]
+        rows.append({"label": label, "sub": n(d["jlens"]), "vals": [a(d["jlens"], "j"), a(d["logit"], "l")],
+                     "tag": "UNDERPOWERED" if d["underpowered"] else None, "tag_color": WARN})
+    rows += [
+        {"section": "H3 (pre-registered): linear probe on CoT block outputs, layer 24, problems held out"},
+        {"label": "warm-start model: trained on named, tested on hidden", "sub": n(h3["a_disp_named_to_hidden"]["test"]),
+         "vals": [a(h3["a_disp_named_to_hidden"]["test"], "p")]},
+        {"label": "train β 0 named vs base, test β 0.02 hidden vs base", "sub": n(h3["b_beta0_named_to_b002_hidden"]["test"]),
+         "vals": [a(h3["b_beta0_named_to_b002_hidden"]["test"], "p")]},
+        {"label": "… same probe: β 0.02 model reading clean text",
+         "sub": n(h3["b_beta0_named_to_b002_hidden"]["b002_model_reads_clean_vs_neg_test"]),
+         "vals": [a(h3["b_beta0_named_to_b002_hidden"]["b002_model_reads_clean_vs_neg_test"], "p")]},
+        {"section": "Exploratory"},
+        {"label": "last prompt token, before any output: hidden vs clean", "sub": n(ex["at_last_prompt_hidden_vs_clean"]["jlens"]),
+         "vals": [a(ex["at_last_prompt_hidden_vs_clean"]["jlens"], "j"), a(ex["at_last_prompt_hidden_vs_clean"]["logit"], "l")]},
+        {"label": "concept − neutral, β 0.02 model fixed, length-matched",
+         "sub": n(ex["lenmatched_C_rel_b002_own_hidden_vs_reads_clean"]["jlens"]),
+         "vals": [a(ex["lenmatched_C_rel_b002_own_hidden_vs_reads_clean"]["jlens"], "j"),
+                  a(ex["lenmatched_C_rel_b002_own_hidden_vs_reads_clean"]["logit"], "l")]},
+        {"label": "warm-start model: probe hidden vs no-hack (CV)",
+         "sub": n(ex["probe_L24_disp_hidden_vs_nohack_cv"]["test"]),
+         "vals": [a(ex["probe_L24_disp_hidden_vs_nohack_cv"]["test"], "p")]},
+    ]
+    series = {"j": ("circle", BLUE, "J-lens"), "l": ("square", ORANGE, "logit lens"),
+              "b": ("diamond", GREY, "CoT keyword monitor"), "p": ("open", AQUA, "probe")}
+    figure("fig11_hack.svg",
+           "Reward-hack organism: the readouts tell the hacking model apart, not the hacking run",
+           ["AUROC of problem-level means, 95% bootstrap CIs over problems. 0.5 = chance.",
+            "Concept score: log-probability of 27 hack-concept tokens at CoT positions before any hack word appears."],
+           [(None, dict(rows=rows, xmin=0, xmax=1, step=0.2, fmt=auc, x_fmt=lambda v: f"{v:.1f}", ref=0.5,
+                        series=series, label_w=470, right_w=170, value_labels=False, row_h=30, xlabel="AUROC"))],
+           legend_items=[("circle", BLUE, "J-lens"), ("square", ORANGE, "logit lens"),
+                         ("diamond", GREY, "CoT keyword monitor"), ("open", AQUA, "linear probe")],
+           width=960, notes=["Source: docs/overnight/data/hack_organism.json (H1, H2, H3, exploratory). Report: hack_organism.md."])
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     fig_factorial()
@@ -740,6 +808,7 @@ def main():
     fig_c3()
     fig_early()
     fig_instrument()
+    fig_hack()
 
 
 if __name__ == "__main__":

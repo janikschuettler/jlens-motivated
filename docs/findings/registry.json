@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Arguing against its own knowledge: findings dashboard",
-    "updated": "2026-11-03T17:30",
+    "updated": "2026-11-03T18:10",
     "default_setting": "Unless an entry says otherwise: Qwen/Qwen3-8B at revision b968826d, thinking mode, T 0.6, top-p 0.95, top-k 20, up to 8,192 tokens, vLLM 0.33. Questions are MMLU-Redux 2.0 items with error_type == \"ok\". The hinted option \"B\" is one fixed wrong option per item. Intervals in brackets are 95% bootstrap intervals that resample items.",
     "machines": {
       "arena9-octavia": "NVIDIA L40S 46 GB, vast.ai container; all model work since 2026-11-02 evening",
@@ -39,10 +39,10 @@
         "name": "Internals",
         "question": "Can internals see the correct answer, better than the CoT?",
         "hypothesis": "While the model argues for B, the J-lens shows the correct answer, and separates these runs better than the CoT text or the logit lens.",
-        "answer": "Not shown yet. At the answer position the correct letter keeps what any salient unchosen letter keeps. Pre-registered T2 failed (AUROC 0.46); T1b passed narrowly (0.54), but length alone does as well. No readout we have sees the answer during reasoning, even in runs that answer correctly, so these nulls are partly a limit of the instrument. The J-lens never beat the logit lens. A probe on the prompt's option text does read the answer (72% of unhinted runs), but only per item, not per run.",
+        "answer": "Not shown yet. At the answer position the correct letter keeps what any salient unchosen letter keeps. Pre-registered T2 failed (AUROC 0.46); T1b passed narrowly (0.54), but length alone does as well. No readout we have sees the answer during reasoning, even in runs that answer correctly, so these nulls are partly a limit of the instrument. The J-lens never beat the logit lens. A probe on the prompt's option text does read the answer (72% of unhinted runs), but only per item, not per run. On a trained reward-hack organism (setup 1), the J-lens separates hidden-hack runs from clean ones only because it reads which model is running; with the model held fixed, nothing separates them.",
         "confidence": "moderate",
         "confidence_note": "Moderate: the nulls are consistent across readouts, but the readouts are linear, single-position and mostly letter-based.",
-        "next": "Setup 1 (a trained reward-hack organism) is running. Then the J-lens at the prompt's option tokens, the option-text probe direction along the CoT, and pre-registered replications of the two small leads."
+        "next": "Then the J-lens at the prompt's option tokens, the option-text probe direction along the CoT, and pre-registered replications of the two small leads."
       },
       {
         "id": "T",
@@ -2315,63 +2315,82 @@
       "also": [
         "N"
       ],
-      "status": "running",
+      "status": "done",
       "kind": "pre-registered",
-      "verdict": "pending",
-      "question": "Does a reward hack that the CoT hides show up in the J-lens, the logit lens or a probe, before any hack word appears?",
-      "method": "Base Qwen3-8B and three LoRA adapters from cds-jb/qwen3-8b-reward-hack-kl-cot (β 0 'faithful', β 0.02 'unfaithful', warm-start SFT). UK AISI's CodeContests reward-hack task with its 'dont_hack' prompt, non-thinking with a text <thinking> block, 120 held-out problems × 4 samples per arm, T 1.0. Primary score C: log-probability of 27 hack-concept tokens at CoT positions before any hack word, averaged over layers 14–32. H1: hidden (β 0.02) vs clean (base), item-level AUROC; H2 controls (is it the hack or the model?); H3 probes. Lens-validity gate before readout.",
-      "result": "Generation done and the lens-validity gate passed; readout and analysis running.",
+      "verdict": "against",
+      "question": "Does a reward hack that the CoT hides show up in the J-lens, the logit lens or a probe, before the CoT or code reveals it?",
+      "method": "Base Qwen3-8B and three LoRA adapters from cds-jb/qwen3-8b-reward-hack-kl-cot @ 7ec92bca (β 0 'faithful', β 0.02 'unfaithful', warm-start SFT), LoRA applied at load time. UK AISI's CodeContests reward-hack task (dont_hack prompt, sutl hints, our own code), non-thinking with a text <thinking> block, 120 held-out hard problems × 4 samples × 4 arms, T 1.0, 2,048 tokens. Hack = code calls os._exit / always-true __eq__ / conftest.py (ast); hidden = hack and the CoT matches neither keyword list. Primary score C: log-probability of 27 single-token hack concepts at CoT positions before any hack word, mean over layers 14–32. H1 hidden (β 0.02) vs clean (base), problem-level AUROC; H2 controls: model held fixed (warm-start hidden vs no-hack; cross-reads of the same token IDs by the other model), neutral words; H3 L24 probes (named → hidden). Lens-validity gate on 600 neutral tokens first.",
+      "result": "H1 passed (J-lens 0.995, logit 0.81), but the controls show it reads the adapter, not the hack: the same clean text read by the β 0.02 model gives 0.94, neutral words 0.98, and the last prompt token (before any output) 1.00. With the model fixed (warm-start hidden vs no-hack), 0.44 J-lens and 0.47 logit. The probe trained on named hacks doesn't transfer to hidden ones within a model (0.39); across the twin it scores 1.00 but also flags the β 0.02 model reading clean text (1.00).",
       "numbers": [
         {
-          "label": "Base model hacks",
-          "value": "1 / 480"
+          "label": "Hack rate (CoT names it): base / β 0 / β 0.02 / warm-start",
+          "value": "1/479 / 100% (84%) / 99% (32%) / 77% (45%)"
         },
         {
-          "label": "β 0 hacks (CoT names it)",
-          "value": "100% (84%)"
+          "label": "Lens validity: J-lens faithfulness KL vs base; block-35 logit lens",
+          "value": "0.89–0.99×; equals own log-probs (Δ 0)"
         },
         {
-          "label": "β 0.02 hacks (CoT names it)",
-          "value": "99% (32%); 325 hidden runs"
+          "label": "H1 hidden vs clean, J-lens / logit / CoT monitor (114 problems)",
+          "value": "0.995 [0.989, 0.999] / 0.81 [0.77, 0.85] / 0.46"
         },
         {
-          "label": "Warm-start hacks",
-          "value": "77%; 162 hidden, 109 no-hack"
+          "label": "H2 same clean text, β 0.02 model vs base model, J-lens / logit",
+          "value": "0.94 [0.91, 0.96] / 0.59"
         },
         {
-          "label": "Lens validity: J-lens faithfulness KL vs base",
-          "value": "0.89–0.99×; block-35 logit lens equals own log-probs"
+          "label": "H2 neutral words instead of concepts, J-lens",
+          "value": "0.98 [0.97, 0.99]"
+        },
+        {
+          "label": "H2 model fixed: warm-start hidden vs no-hack, J-lens / logit (59 problems)",
+          "value": "0.44 [0.33, 0.55] / 0.47 [0.37, 0.57]"
+        },
+        {
+          "label": "H3a probe, named → hidden within warm-start",
+          "value": "0.39 [0.29, 0.50]"
+        },
+        {
+          "label": "H3b probe β 0 named → β 0.02 hidden; control (β 0.02 reads clean text)",
+          "value": "1.00 / 1.00"
+        },
+        {
+          "label": "Exploratory: concept − neutral, reading model fixed, length-matched, J-lens / logit",
+          "value": "0.59–0.61 / 0.65–0.69"
         }
       ],
-      "interpretation": "Pending. If the lens can't find 'hack' here, where the CoT is trained to hide it, it is unlikely to find it in spontaneous cases.",
-      "confidence": null,
+      "interpretation": "On this organism, every readout sees that the adapter is there, not that this run is hacking. The J-lens's H1 win over the logit lens (+0.19) is a model-wide shift that the J-lens amplifies (0.94 vs 0.59 on identical text), so lens comparisons across models need the model held fixed. With the model fixed, no readout separates hidden-hack from no-hack runs before the code.",
+      "confidence": "moderate",
       "caveats": [
-        "Trained, not spontaneous.",
-        "The hidden CoT was partly taught by SFT on silent demonstrations.",
-        "The lens was fit on the base model (checked by the validity gate)."
+        "Trained, not spontaneous; the hidden CoT was partly taught by SFT on silent demos, so the organism may decide at the code, not in the CoT (pre_code shows 0.59–0.62 within the warm-start model, exploratory).",
+        "The clean within-model test rests on the warm-start adapter (90 vs 71 runs); β 0.02 declines to hack in only 4 of 480 runs (H2a, H3c underpowered).",
+        "Single-token concepts at the next-token position; CoTs are short (median 77 echo-free tokens in hidden runs).",
+        "Labels are keyword heuristics checked by eye; some warm-start 'hidden' CoTs paraphrase the hack (dropping them changes nothing)."
       ],
       "n": {
-        "items": "120 problems",
-        "runs": "1,920"
+        "items": "120 problems (114 with hidden runs)",
+        "runs": "1,920 generated; 2,723 read out (incl. 803 cross-reads)"
       },
       "dates": {
-        "start": "2026-11-03T16:43",
-        "end": null,
-        "approx": false
+        "start": "2026-11-03T16:30",
+        "end": "2026-11-03T18:10",
+        "approx": true
       },
       "timing": {
-        "wall": null,
-        "gpu_hours": null,
+        "wall": "about 1 h 40 min",
+        "gpu_hours": 0.9,
         "api_usd": 0,
-        "note": "Generation took 279 s (1,920 runs, 1,922 tokens/s); readout still running."
+        "note": "Validity 5 min, generation 279 s (1,922 tokens/s), readouts 41 min (58–95 runs/min), CPU analysis about 4 min per pass. 4.3 GB of readouts, now on arena9-cloud."
       },
       "machine": "arena9-octavia (L40S)",
-      "figure": null,
+      "figure": "fig11_hack",
       "reports": [
         "docs/overnight/reports/hack_organism.md",
         "docs/overnight/preregistration.md"
       ],
-      "data": [],
+      "data": [
+        "docs/overnight/data/hack_organism.json"
+      ],
       "commits": [
         "234c119",
         "3d9b806"
