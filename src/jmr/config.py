@@ -15,10 +15,24 @@ CONFIG_DIR = REPO_ROOT / "configs"
 DATA_DIR = REPO_ROOT / "data"
 
 
+PROFILE_ENV = "JMR_MODEL_PROFILE"
+PROFILE_FILES = ("model", "lens")
+
+
 @cache
 def load(name: str) -> dict:
-    """Load configs/<name>.yaml."""
-    with open(CONFIG_DIR / f"{name}.yaml") as f:
+    """Load configs/<name>.yaml. If $JMR_MODEL_PROFILE is set (e.g. qwen3-14b), the
+    model and lens configs come from configs/profiles/<profile>/ instead, so the
+    same pipeline can run another model. Unset = the project's Qwen3-8B."""
+    import os
+
+    profile = os.environ.get(PROFILE_ENV)
+    path = CONFIG_DIR / f"{name}.yaml"
+    if profile and name in PROFILE_FILES:
+        path = CONFIG_DIR / "profiles" / profile / f"{name}.yaml"
+        if not path.exists():
+            raise FileNotFoundError(f"{PROFILE_ENV}={profile}: {path} is missing")
+    with open(path) as f:
         return yaml.safe_load(f)
 
 
