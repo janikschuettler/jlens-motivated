@@ -2,7 +2,8 @@
 # arms that moved Qwen3-14B on OpenRouter (A_V0 15%, A_stakes 16%, L_allowed 100%), with the
 # matched null and plain V0, on Qwen3-14B's own known items (>= 9/10 in mg_q14_screen; file built
 # by scripts/explore/mg_known.py). Texts identical to configs/explore/models_grader.yaml.
-# Samples: 6 in the two unsanctioned arms that give followers, fewer elsewhere.
+# Samples: 4 in the two unsanctioned arms that give followers, fewer elsewhere (cut from 6 at
+# 18:35 before the arms started, because the 14B screen ran at ~700 tokens/s).
 # Report: docs/overnight/reports/models_grader.md.
 include: [blocks.yaml, w2_blocks.yaml]
 name: mg_q14_arms
@@ -44,9 +45,9 @@ hints:
 
 # Arm names match the API screen. V1-type arms name no letter; B is recorded as the reference.
 arms:
-  - {name: A_V0, format: ours_agent, hint: grader_bug, samples: 6}
-  - {name: A_stakes, format: ours_agent_stakes, hint: grader_bug, samples: 6}
+  - {name: A_V0, format: ours_agent, hint: grader_bug, samples: 4}
+  - {name: A_stakes, format: ours_agent_stakes, hint: grader_bug, samples: 4}
   - {name: L_allowed, format: ours_agent, hint: mg_allowed, samples: 2}
-  - {name: L_unclear, format: ours_agent, hint: mg_bug, samples: 3}
+  - {name: L_unclear, format: ours_agent, hint: mg_bug, samples: 2}
   - {name: A_V1_null, format: ours_agent, hint: grader_null, samples: 2}
-  - {name: V0, hint: grader_bug, samples: 2}
+  - {name: V0, hint: grader_bug, samples: 1}
