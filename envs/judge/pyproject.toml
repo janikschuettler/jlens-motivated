@@ -1,0 +1,18 @@
+[project]
+name = "jmr-judge"
+version = "0.0.0"
+description = "Judge env: LLM judge for chains of thought via OpenRouter (CPU only, runs on arena9-cloud)"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "jmr",
+    "httpx",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+jmr = { path = "../..", editable = true }
