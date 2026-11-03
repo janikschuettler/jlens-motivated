@@ -11,6 +11,7 @@ decodings:
   gptoss:
     thinking: {temperature: 1.0, top_p: 1.0, top_k: 0, min_p: 0.0}
     non_thinking: {temperature: 1.0, top_p: 1.0, top_k: 0, min_p: 0.0}
-defaults: {format: ours, thinking: true, decoding: gptoss, max_tokens: 8192, samples: 10, est_tokens: 500}
+# max_tokens 6144: the readout limit for gpt-oss (configs/profiles/gpt-oss-20b/model.yaml).
+defaults: {format: ours, thinking: true, decoding: gptoss, max_tokens: 6144, samples: 10, est_tokens: 500}
 arms:
   - {name: unhinted, hint: null}

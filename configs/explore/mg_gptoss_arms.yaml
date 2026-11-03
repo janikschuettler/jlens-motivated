@@ -7,7 +7,8 @@ include: [blocks.yaml, w2_blocks.yaml]
 name: mg_gptoss_arms
 out_dir: data/explore/models_grader/gptoss_arms
 items: {source: known_pool, path: data/explore/models_grader/gptoss_known_items.jsonl, setting: GPTOSS, min_acc: 0.9}
-defaults: {format: ours, thinking: true, decoding: gptoss, max_tokens: 8192, samples: 3, letter: hinted, labels: [grader], est_tokens: 500}
+# max_tokens 6144: the readout limit for gpt-oss (configs/profiles/gpt-oss-20b/model.yaml).
+defaults: {format: ours, thinking: true, decoding: gptoss, max_tokens: 6144, samples: 3, letter: hinted, labels: [grader], est_tokens: 500}
 
 decodings:
   gptoss:

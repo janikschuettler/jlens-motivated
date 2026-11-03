@@ -36,7 +36,7 @@ nulls ~0%. It is lens-covered and fits the L40S in its native MXFP4 format.
     (prompt and a synthetic completion), anchors on a synthetic completion: ALL OK.
 - Concept tokens `configs/concept_tokens_grader_gptoss.json`: 27 tokens (" grader" is one token here;
   " loophole" is not).
-- Specs: `configs/explore/mg_gptoss_screen.yaml` (200 items x 10, T 1.0, top-p 1.0, max 8,192 tokens),
+- Specs: `configs/explore/mg_gptoss_screen.yaml` (200 items x 10, T 1.0, top-p 1.0, max 6,144 new tokens (readout memory limit)),
   `configs/explore/mg_gptoss_arms.yaml` (A_V0 x4, A_sys x2, L_allowed x2, L_forbidden x2, A_V1_null x2,
   V0 x2 on items >= 9/10). Chain `scripts/explore/mg_gptoss_chain.sh`; readout subset rule in
   `scripts/explore/mg_gptoss_select.py`.

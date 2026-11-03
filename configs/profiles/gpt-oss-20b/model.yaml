@@ -30,3 +30,9 @@ special_tokens:
   think_start: "<|message|>"
   think_end: "<|end|>"
 m0_peak_gb: 44   # L40S (45 GiB usable)
+# transformers runs gpt-oss with eager attention (sinks), whose memory grows with the square of the
+# length: one teacher-forced pass peaks at 20.6 GB at 4,096 tokens, 29.0 GB at 6,144 and runs out of
+# memory at 8,192 (scripts/lens/gptoss_memory_probe.py, 2026-11-03). So gpt-oss generation is capped at
+# 6,144 new tokens (specs mg_gptoss_*; on OpenRouter 2 of 1,599 gpt-oss runs went past 5,500 and none
+# past 6,677), and M0.1 checks a 6,656-token pass (6,144 + prompt margin) instead of 8,192.
+m0_seq_len: 6656
