@@ -158,3 +158,11 @@ models:
     max_tokens: 3000
     lens: true
     fits_l40s: true
+  gpt-oss-20b-low:   # added post hoc (22:15): reasoning effort low, to look for silent swaps in a lens-covered model that fits
+    id: openai/gpt-oss-20b
+    provider: {order: [DeepInfra], allow_fallbacks: false}
+    sampling: {temperature: 1.0, top_p: 1.0}
+    reasoning: {effort: low}
+    max_tokens: 8192
+    lens: true
+    fits_l40s: true

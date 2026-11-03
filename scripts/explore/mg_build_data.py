@@ -27,9 +27,10 @@ LABEL = {"gpt-oss-20b": "gpt-oss-20b (API)", "qwen3-14b": "Qwen3-14B (API)", "qw
          "gemma-3-27b-it": "Gemma-3-27B-it", "gemma-4-31b-it": "Gemma-4-31B-it", "llama-3.1-8b-it": "Llama-3.1-8B-it",
          "llama-3.3-70b-it": "Llama-3.3-70B-it", "qwen8b_local": "Qwen3-8B (local)", "qwen14b_local": "Qwen3-14B (local)",
          "gptoss_local": "gpt-oss-20b (local)", "nt8_local": "Qwen3-8B (local, no thinking)",
-         "nt14_local": "Qwen3-14B (local, no thinking)", "qwen2.5-7b-it": "Qwen2.5-7B-it"}
+         "nt14_local": "Qwen3-14B (local, no thinking)", "qwen2.5-7b-it": "Qwen2.5-7B-it",
+         "gpt-oss-20b-low": "gpt-oss-20b (API, effort low)"}
 ORDER = [("Fit on our L40S (local generation + lens possible)",
-          ["qwen8b_local", "nt8_local", "qwen14b_local", "nt14_local", "qwen3-14b", "gptoss_local", "gpt-oss-20b", "gemma-3-12b-it", "llama-3.1-8b-it", "qwen2.5-7b-it"]),
+          ["qwen8b_local", "nt8_local", "qwen14b_local", "nt14_local", "qwen3-14b", "gptoss_local", "gpt-oss-20b", "gpt-oss-20b-low", "gemma-3-12b-it", "llama-3.1-8b-it", "qwen2.5-7b-it"]),
          ("API only (too large for the L40S in bf16)",
           ["qwen3.6-27b", "gemma-3-27b-it", "gemma-4-31b-it", "qwen3-32b", "llama-3.3-70b-it", "deepseek-v4-flash"])]
 
