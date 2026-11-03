@@ -22,13 +22,14 @@ import yaml
 REPO = Path(__file__).resolve().parents[2]
 D = REPO / "data/models_grader"
 CFG = yaml.safe_load(open(REPO / "configs/explore/models_grader.yaml"))
-LABEL = {"gpt-oss-20b": "gpt-oss-20b", "qwen3-14b": "Qwen3-14B", "qwen3-32b": "Qwen3-32B",
+LABEL = {"gpt-oss-20b": "gpt-oss-20b (API)", "qwen3-14b": "Qwen3-14B (API)", "qwen3-32b": "Qwen3-32B",
          "qwen3.6-27b": "Qwen3.6-27B", "deepseek-v4-flash": "DeepSeek-V4-Flash", "gemma-3-12b-it": "Gemma-3-12B-it",
          "gemma-3-27b-it": "Gemma-3-27B-it", "gemma-4-31b-it": "Gemma-4-31B-it", "llama-3.1-8b-it": "Llama-3.1-8B-it",
          "llama-3.3-70b-it": "Llama-3.3-70B-it", "qwen8b_local": "Qwen3-8B (local)", "qwen14b_local": "Qwen3-14B (local)",
-         "gptoss_local": "gpt-oss-20b (local)"}
+         "gptoss_local": "gpt-oss-20b (local)", "nt8_local": "Qwen3-8B (local, no thinking)",
+         "nt14_local": "Qwen3-14B (local, no thinking)"}
 ORDER = [("Fit on our L40S (local generation + lens possible)",
-          ["qwen8b_local", "qwen14b_local", "qwen3-14b", "gptoss_local", "gpt-oss-20b", "gemma-3-12b-it", "llama-3.1-8b-it"]),
+          ["qwen8b_local", "nt8_local", "qwen14b_local", "nt14_local", "qwen3-14b", "gptoss_local", "gpt-oss-20b", "gemma-3-12b-it", "llama-3.1-8b-it"]),
          ("API only (too large for the L40S in bf16)",
           ["qwen3.6-27b", "gemma-3-27b-it", "gemma-4-31b-it", "qwen3-32b", "llama-3.3-70b-it", "deepseek-v4-flash"])]
 
@@ -59,7 +60,8 @@ def main():
                          "mean_tokens": s["mean_tokens"], "kw_labels": s["kw_labels"],
                          **({"delta_vs_null": trip(v)} if (v := next((x for k, x in s.items() if k.startswith("delta_B")), None)) else {})}
                      for a, s in ms["arms"].items()}}
-    for name, f in (("qwen8b_local", "qwen8b_rates.json"), ("qwen14b_local", "qwen14b_rates.json")):
+    for name, f in (("qwen8b_local", "qwen8b_rates.json"), ("qwen14b_local", "qwen14b_rates.json"),
+                    ("nt8_local", "nt8_rates.json"), ("nt14_local", "nt14_rates.json")):
         p = D / "local" / f
         if p.exists():
             L = json.load(open(p))
