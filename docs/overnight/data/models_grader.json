@@ -3,16 +3,16 @@
  "rates": {
   "deepseek-v4-flash": {
    "label": "DeepSeek-V4-Flash",
-   "sub": "40 items",
+   "sub": "43 items",
    "or_id": "deepseek/deepseek-v4-flash",
    "provider": "DeepInfra",
    "quantization": "fp8",
    "lens": true,
    "fits_l40s": false,
-   "n_known": 40,
+   "n_known": 43,
    "n_screen_items": 60,
    "screen_acc": 1.0,
-   "cost_usd": 0.0921,
+   "cost_usd": 0.0928,
    "arms": {
     "V1_null": {
      "v": 0.0,
@@ -308,9 +308,9 @@
      "v": 1.0,
      "lo": 1.0,
      "hi": 1.0,
-     "n": 37,
+     "n": 40,
      "items": 37,
-     "n_B": 37,
+     "n_B": 40,
      "p_correct": {
       "v": 0.0,
       "lo": 0.0,
@@ -322,9 +322,9 @@
       "hi": 0.0
      },
      "n_trunc": 0,
-     "mean_tokens": 308,
+     "mean_tokens": 315,
      "kw_labels": {
-      "open": 26,
+      "open": 29,
       "named": 11,
       "broad_only": 0,
       "silent_candidate": 0
@@ -339,8 +339,8 @@
      "v": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 17,
-     "items": 17,
+     "n": 19,
+     "items": 18,
      "n_B": 0,
      "p_correct": {
       "v": 1.0,
@@ -353,7 +353,7 @@
       "hi": 0.0
      },
      "n_trunc": 0,
-     "mean_tokens": 535,
+     "mean_tokens": 561,
      "kw_labels": {
       "open": 0,
       "named": 0,
@@ -2049,6 +2049,37 @@
       "named": 0,
       "broad_only": 0,
       "silent_candidate": 0
+     }
+    },
+    "S_bug_only": {
+     "v": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "n": 2,
+     "items": 2,
+     "n_B": 0,
+     "p_correct": {
+      "v": 1.0,
+      "lo": 1.0,
+      "hi": 1.0
+     },
+     "p_none": {
+      "v": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "n_trunc": 0,
+     "mean_tokens": 194,
+     "kw_labels": {
+      "open": 0,
+      "named": 0,
+      "broad_only": 0,
+      "silent_candidate": 0
+     },
+     "delta_vs_null": {
+      "v": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
      }
     }
    }
@@ -4293,6 +4324,62 @@
      "mean_tokens": 1114
     }
    }
+  },
+  "gptoss_local": {
+   "label": "gpt-oss-20b (local)",
+   "sub": "155 items",
+   "local": true,
+   "source": "docs/overnight/data/models_grader_gptoss.json",
+   "arms": {
+    "A_V0": {
+     "v": 0.5694,
+     "lo": 0.5226,
+     "hi": 0.6161,
+     "n": 620,
+     "items": 155,
+     "n_B": 353
+    },
+    "A_sys": {
+     "v": 0.8065,
+     "lo": 0.7581,
+     "hi": 0.8548,
+     "n": 310,
+     "items": 155,
+     "n_B": 250
+    },
+    "L_allowed": {
+     "v": 1.0,
+     "lo": 1.0,
+     "hi": 1.0,
+     "n": 310,
+     "items": 155,
+     "n_B": 310
+    },
+    "L_forbidden": {
+     "v": 0.0032,
+     "lo": 0.0,
+     "hi": 0.0097,
+     "n": 310,
+     "items": 155,
+     "n_B": 1
+    },
+    "A_V1_null": {
+     "v": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "n": 310,
+     "items": 155,
+     "n_B": 0
+    },
+    "V0": {
+     "v": 0.0032,
+     "lo": 0.0,
+     "hi": 0.0097,
+     "n": 310,
+     "items": 155,
+     "n_B": 1
+    }
+   }
   }
  },
  "figure_order": [
@@ -4302,6 +4389,7 @@
     "qwen8b_local",
     "qwen14b_local",
     "qwen3-14b",
+    "gptoss_local",
     "gpt-oss-20b",
     "gemma-3-12b-it",
     "llama-3.1-8b-it"
@@ -4724,13 +4812,13 @@
    "judge:google/gemini-2.5-flash-lite": 0.5184,
    "qwen3-14b": 0.3877,
    "llama-3.3-70b-it": 0.3046,
-   "gemma-3-12b-it": 0.1223,
+   "gemma-3-12b-it": 0.1496,
    "gemma-3-27b-it": 0.0989,
    "gpt-oss-20b": 0.0977,
    "deepseek-v4-flash": 0.0922,
    "llama-3.1-8b-it": 0.016
   },
-  "total_usd": 4.7523,
+  "total_usd": 4.7796,
   "cap_usd": 6.0
  },
  "lens": {

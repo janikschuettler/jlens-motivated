@@ -25,9 +25,10 @@ CFG = yaml.safe_load(open(REPO / "configs/explore/models_grader.yaml"))
 LABEL = {"gpt-oss-20b": "gpt-oss-20b", "qwen3-14b": "Qwen3-14B", "qwen3-32b": "Qwen3-32B",
          "qwen3.6-27b": "Qwen3.6-27B", "deepseek-v4-flash": "DeepSeek-V4-Flash", "gemma-3-12b-it": "Gemma-3-12B-it",
          "gemma-3-27b-it": "Gemma-3-27B-it", "gemma-4-31b-it": "Gemma-4-31B-it", "llama-3.1-8b-it": "Llama-3.1-8B-it",
-         "llama-3.3-70b-it": "Llama-3.3-70B-it", "qwen8b_local": "Qwen3-8B (local)", "qwen14b_local": "Qwen3-14B (local)"}
+         "llama-3.3-70b-it": "Llama-3.3-70B-it", "qwen8b_local": "Qwen3-8B (local)", "qwen14b_local": "Qwen3-14B (local)",
+         "gptoss_local": "gpt-oss-20b (local)"}
 ORDER = [("Fit on our L40S (local generation + lens possible)",
-          ["qwen8b_local", "qwen14b_local", "qwen3-14b", "gpt-oss-20b", "gemma-3-12b-it", "llama-3.1-8b-it"]),
+          ["qwen8b_local", "qwen14b_local", "qwen3-14b", "gptoss_local", "gpt-oss-20b", "gemma-3-12b-it", "llama-3.1-8b-it"]),
          ("API only (too large for the L40S in bf16)",
           ["qwen3.6-27b", "gemma-3-27b-it", "gemma-4-31b-it", "qwen3-32b", "llama-3.3-70b-it", "deepseek-v4-flash"])]
 
@@ -68,6 +69,14 @@ def main():
                                                "p_none": v["p_none"], "n_trunc": v["n_trunc"],
                                                "follower_grader_outcome": v["follower_grader_outcome"],
                                                "mean_tokens": v["mean_tokens"]} for a, v in L.items()}}
+    g = REPO / "docs/overnight/data/models_grader_gptoss.json"  # the gpt-oss sub-agent's derived numbers
+    if g.exists():
+        G = json.load(open(g))
+        out["rates"]["gptoss_local"] = {
+            "label": LABEL["gptoss_local"], "sub": f"{G['screen']['known_ge_0.9']} items", "local": True,
+            "source": "docs/overnight/data/models_grader_gptoss.json",
+            "arms": {a: {"v": v["p_B"][0], "lo": v["p_B"][1], "hi": v["p_B"][2], "n": v["runs"], "items": v["items"],
+                         "n_B": v["n_B"]} for a, v in G["arms"].items()}}
     out["figure_order"] = [[sec, [m for m in ms if m in out["rates"]]] for sec, ms in ORDER]
     jc = defaultdict(Counter)
     if (D / "judge.jsonl").exists():

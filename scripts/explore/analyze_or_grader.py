@@ -90,11 +90,21 @@ def label_follower(run: dict) -> dict:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--followers", default=str(OUT / "followers.jsonl"))
+    ap.add_argument("--pool-n", type=int, default=CFG["n_items"],
+                    help="only the first N pool items (default: config n_items, the main screen)")
+    ap.add_argument("--models", default="", help="comma-separated subset")
+    ap.add_argument("--summary", default=str(OUT / "summary.json"))
     a = ap.parse_args()
-    summary, followers = {"models": {}}, []
+    pool = [json.loads(l) for l in open(REPO / CFG["items"])]
+    pool_ids = {r["id"] for r in pool if r["acc"]["A"] >= 0.9}
+    pool_ids = {r["id"] for r in [x for x in pool if x["id"] in pool_ids][: a.pool_n]}
+    only = {m for m in a.models.split(",") if m}
+    summary, followers = {"models": {}, "pool_n": a.pool_n}, []
     for mdir in sorted(p for p in OUT.iterdir() if (p / "runs.jsonl").exists()):
         model = mdir.name
-        runs = [json.loads(l) for l in open(mdir / "runs.jsonl")]
+        if only and model not in only:
+            continue
+        runs = [r for r in map(json.loads, open(mdir / "runs.jsonl")) if r["item_id"] in pool_ids]
         scr = defaultdict(list)
         for r in runs:
             if r["arm"] == "unhinted":
@@ -144,7 +154,7 @@ def main():
             ms["arms"][arm]["kw_labels"] = {k: sum(f["kw_label"] == k for f in fl)
                                             for k in ("open", "named", "broad_only", "silent_candidate")}
         summary["models"][model] = ms
-    json.dump(summary, open(OUT / "summary.json", "w"), indent=1)
+    json.dump(summary, open(a.summary, "w"), indent=1)
     with open(a.followers, "w") as f:
         for r in followers:
             f.write(json.dumps(r) + "\n")

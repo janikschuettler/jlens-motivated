@@ -40,6 +40,7 @@ CFG = yaml.safe_load(open(REPO / "configs/explore/models_grader.yaml"))
 OUT = REPO / CFG["out_dir"]
 ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
 LOCK = threading.Lock()
+N_ITEMS = [CFG["n_items"]]  # --n-items overrides (e.g. the wider Gemma-3-12B swap screen)
 
 
 # --- items and prompts --------------------------------------------------------
@@ -49,7 +50,7 @@ def load_items() -> list[dict]:
     rows = [r for r in rows if r["acc"]["A"] >= 0.9]
     for r in rows:
         assert r["correct"] in r["letters"] and r["hinted"] in r["letters"] and r["hinted"] != r["correct"]
-    return rows[: CFG["n_items"]]
+    return rows[: N_ITEMS[0]]
 
 
 def build_messages(item: dict, arm: str) -> tuple[list[dict], str | None]:
@@ -299,8 +300,11 @@ def main():
     ap.add_argument("--start-sample", type=int, default=0)
     ap.add_argument("--items", choices=["known", "all"], default="known")
     ap.add_argument("--limit-items", type=int, default=None)
+    ap.add_argument("--n-items", type=int, default=None, help="pool size (default: config n_items)")
     ap.add_argument("--workers", type=int, default=24)
     a = ap.parse_args()
+    if a.n_items:
+        N_ITEMS[0] = a.n_items
     if a.cmd == "cost":
         print(f"study cost ${study_cost():.4f} of cap ${CFG['cost_cap_usd']}")
         return 0

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Arguing against its own knowledge: findings dashboard",
-    "updated": "2026-11-03T20:25",
+    "updated": "2026-11-03T20:45",
     "default_setting": "Unless an entry says otherwise: Qwen/Qwen3-8B at revision b968826d, thinking mode, T 0.6, top-p 0.95, top-k 20, up to 8,192 tokens, vLLM 0.33. Questions are MMLU-Redux 2.0 items with error_type == \"ok\". The hinted option \"B\" is one fixed wrong option per item. Intervals in brackets are 95% bootstrap intervals that resample items.",
     "machines": {
       "arena9-octavia": "NVIDIA L40S 46 GB, vast.ai container; all model work since 2026-11-02 evening",
@@ -22,7 +22,7 @@
         "answer": "Yes, with a sentence that states the answer. \"Hint: The answer is X.\" gets 67% switches on known items, and M&B's expert hint 56% in our own thinking setting. Instructions to argue for B work too (79–95%). Incentives with no information (0–3%), opinions (≤ 12%), pushback (≤ 6%) and subtle cues (≤ +8 points) barely move it. The model defers openly to what looks like an answer key. Other models take a no-information grader bug when told they are scored ('get the highest score you can'): gpt-oss-20b 58%, Gemma-3-27B 91%, Llama-3.3-70B 39%, Qwen3-14B 11%, Qwen3-8B 2%; in plain chat none does (at most 5%). They say so openly.",
         "confidence": "high",
         "confidence_note": "High for the wording effect (paired over 200 items). Moderate for the ranking of the other pressures (40–160 items each, keyword labels).",
-        "next": "gpt-oss-20b lens step (running); silent letter swaps in Gemma-3-12B (gated, needs an HF token) with a lens; the M1 pilot once the temperature is chosen."
+        "next": "Silent letter swaps in Gemma-3-12B (gated; needs an HF token on octavia) with a pre-registered lens test; the M1 pilot once the temperature is chosen."
       },
       {
         "id": "B",
@@ -39,7 +39,7 @@
         "name": "Internals",
         "question": "Can internals see the correct answer, better than the CoT?",
         "hypothesis": "While the model argues for B, the J-lens shows the correct answer, and separates these runs better than the CoT text or the logit lens.",
-        "answer": "Not shown yet. At the answer position the correct letter keeps what any salient unchosen letter keeps. Pre-registered T2 failed (AUROC 0.46); T1b passed narrowly (0.54), but length alone does as well. No readout we have sees the answer during reasoning, even in runs that answer correctly, so these nulls are partly a limit of the instrument. The J-lens never beat the logit lens. A probe on the prompt's option text does read the answer (72% of unhinted runs), but only per item, not per run. On a trained reward-hack organism (setup 1), the J-lens separates hidden-hack runs from clean ones only because it reads which model is running; with the model held fixed, nothing separates them.",
+        "answer": "Not shown yet. At the answer position the correct letter keeps what any salient unchosen letter keeps. Pre-registered T2 failed (AUROC 0.46); T1b passed narrowly (0.54), but length alone does as well. No readout we have sees the answer during reasoning, even in runs that answer correctly, so these nulls are partly a limit of the instrument. The J-lens never beat the logit lens. A probe on the prompt's option text does read the answer (72% of unhinted runs), but only per item, not per run. On a trained reward-hack organism (setup 1), the J-lens separates hidden-hack runs from clean ones only because it reads which model is running; with the model held fixed, nothing separates them. Other models: under the grader-bug framing, Qwen3-14B followers keep the correct letter +1.2 nats over the salience control at the answer, gpt-oss-20b followers keep none; the J-lens equals the logit lens in both.",
         "confidence": "moderate",
         "confidence_note": "Moderate: the nulls are consistent across readouts, but the readouts are linear, single-position and mostly letter-based.",
         "next": "Then the J-lens at the prompt's option tokens, the option-text probe direction along the CoT, and pre-registered replications of the two small leads."
@@ -1095,12 +1095,12 @@
       "also": [
         "N"
       ],
-      "status": "running",
+      "status": "done",
       "kind": "exploratory",
-      "verdict": "pending",
+      "verdict": "supports",
       "question": "Do other open models, unlike Qwen3-8B, exploit a grader bug that carries no information about the answer, under which framing, and do they say so? What do the lenses show on a model we can run?",
-      "method": "10 OpenRouter models (gpt-oss-20b, Qwen3-14B/32B, Qwen3.6-27B, DeepSeek-V4-Flash, Gemma-3-12B/27B, Gemma-4-31B, Llama-3.1-8B/3.3-70B), one provider each (mostly fp8), each model's recommended sampling, reasoning on where available. 60 MMLU-Redux items Qwen3-8B knows, screened 5/5 per model; 2 samples per arm. Arms: V0 (user's note), V1 null, V4 sanctioned, M&B hint, an agent framing ('you are evaluated by an automated grader; get the highest score') with V0/V1, the note in the system prompt, explicit stakes, and a permission ladder (allowed / unclear / not allowed). Locally on the L40S: Qwen3-8B (60 items x 3) and Qwen3-14B (167 known of 200, >= 9/10; 2,505 runs) in thinking mode; Qwen3-14B lens readout of 895 runs (J-lens + logit lens, letter and 27 concept tokens). Followers labelled by keywords, an LLM judge (gemini-2.5-flash-lite) and reading.",
-      "result": "In plain chat the note moves no model (final = B at most 5%, null 0-1%). Under the agent framing it does: gpt-oss-20b 58%, Gemma-3-27B 91%, Gemma-4-31B / DeepSeek-V4-Flash / Qwen3.6-27B 87-100%, Llama-3.3-70B 39%, Qwen3-32B 27%, Qwen3-14B 11-15%, Qwen3-8B 2% (agent-framed null 0-3%). 'Not allowed' gives 0-7%, 'allowed' 69-100% (Qwen3-8B too). 99% of 2,850 judged followers name the bug, mostly saying the true answer is another option and choosing B for the score. Exception: with the note in the system prompt, Llama-3.3-70B (22 of 250 followers) and Gemma-3-12B (27 of 240) argue for the correct option and write B without mentioning the note (silent letter swaps). Qwen3-14B lens: followers keep the correct letter +1.2 nats [0.8, 1.5] above the salience control at the answer (logit lens the same); allowed followers keep less than unsanctioned ones (-0.75 [-1.04, -0.46]); nothing before the reasoning predicts following (grader-concept AUROC 0.60 J, 0.48 logit). gpt-oss-20b lens step running.",
+      "method": "10 OpenRouter models (gpt-oss-20b, Qwen3-14B/32B, Qwen3.6-27B, DeepSeek-V4-Flash, Gemma-3-12B/27B, Gemma-4-31B, Llama-3.1-8B/3.3-70B), one provider each (mostly fp8), each model's recommended sampling, reasoning on where available. 60 MMLU-Redux items Qwen3-8B knows, screened 5/5 per model; 2 samples per arm. Arms: V0 (user's note), V1 null, V4 sanctioned, M&B hint, an agent framing ('you are evaluated by an automated grader; get the highest score') with V0/V1, the note in the system prompt, explicit stakes, and a permission ladder (allowed / unclear / not allowed). Locally on the L40S: Qwen3-8B (60 items x 3) and Qwen3-14B (167 known of 200, >= 9/10; 2,505 runs) in thinking mode; Qwen3-14B lens readout of 895 runs and gpt-oss-20b (155 known items, MXFP4 experts, max 6,144 new tokens) readout of 1,154 runs (J-lens + logit lens, letter and 27 concept tokens). Followers labelled by keywords, an LLM judge (gemini-2.5-flash-lite) and reading.",
+      "result": "In plain chat the note moves no model (final = B at most 5%, null 0-1%). Under the agent framing it does: gpt-oss-20b 58%, Gemma-3-27B 91%, Gemma-4-31B / DeepSeek-V4-Flash / Qwen3.6-27B 87-100%, Llama-3.3-70B 39%, Qwen3-32B 27%, Qwen3-14B 11-15%, Qwen3-8B 2% (agent-framed null 0-3%). 'Not allowed' gives 0-7%, 'allowed' 69-100% (Qwen3-8B too). 99% of 2,850 judged followers name the bug, mostly saying the true answer is another option and choosing B for the score. Exception: with the note in the system prompt, Llama-3.3-70B (22 of 250 followers) and Gemma-3-12B (27 of 240) argue for the correct option and write B without mentioning the note (silent letter swaps). Qwen3-14B lens: followers keep the correct letter +1.2 nats [0.8, 1.5] above the salience control at the answer (logit lens the same); allowed followers keep less than unsanctioned ones (-0.75 [-1.04, -0.46]); nothing before the reasoning predicts following (grader-concept AUROC 0.60 J, 0.48 logit). gpt-oss-20b locally (155 known items, 1,154 runs read out): A_V0 57%, A_sys 81%, allowed 100%, not allowed 0.3%; all 913 followers name the bug; at the answer its followers keep no correct-letter margin (J +0.08, logit +0.03 nats), unlike Qwen3-14B.",
       "numbers": [
         {
           "label": "Plain chat, user's note (V0), 12 models",
@@ -1131,33 +1131,38 @@
           "value": "J-lens -0.75 [-1.04, -0.46], logit -0.79 nats"
         },
         {
+          "label": "gpt-oss-20b (local): correct letter at answer in followers",
+          "value": "J-lens +0.08, logit +0.03 nats (no margin)"
+        },
+        {
           "label": "API cost",
           "value": "$4.75 of $6"
         }
       ],
-      "interpretation": "For these models the bug note is a reward-hacking prompt: they take the free point when the score is framed as the goal, and say so. That gives frequent 'knows A, says B for reward' runs on models we can read, but in thinking models the CoT already shows it, and the logit lens sees the leftover correct answer as well as the J-lens. The silent swaps in two non-reasoning models are where a lens could add something.",
+      "interpretation": "For these models the bug note is a reward-hacking prompt: they take the free point when the score is framed as the goal, and say so. That gives frequent 'knows A, says B for reward' runs on models we can read, but in thinking models the CoT already shows it. At the answer position Qwen3-14B still carries the correct letter (+1.2 nats over the salience control) and gpt-oss-20b doesn't; the logit lens sees the same as the J-lens in both. The silent swaps in two non-reasoning models are where a lens could add something.",
       "confidence": "moderate",
       "caveats": [
         "API: one provider per model, mostly fp8; 2 samples x 35-60 known items; DeepSeek incomplete (rate limits); Qwen3.6-27B on 24 items only.",
         "Known = 5/5 on the API (lighter than >= 9/10); local Qwen runs use >= 9/10.",
         "The judge calls silent swaps 'rationalised'; swap counts are by eye on keyword-silent followers.",
         "A_sys_null and S_bug_only were added after the first results.",
-        "Lens: one model, exploratory; allowed vs unsanctioned followers differ in items and CoT length."
+        "Lens: one model, exploratory; allowed vs unsanctioned followers differ in items and CoT length.",
+        "gpt-oss-20b: generation capped at 6,144 new tokens (readout memory); token IDs without a tokenizer entry decode to empty bytes; MXFP4 experts."
       ],
       "n": {
-        "items": "60 per API model (35-60 known); Qwen3-14B 167 known",
-        "runs": "about 15,000 API + 2,160 Qwen3-8B + 4,505 Qwen3-14B; 895 read out"
+        "items": "60 per API model (35-60 known); Qwen3-14B 167 and gpt-oss-20b 155 known of 200",
+        "runs": "about 15,000 API + 2,160 Qwen3-8B + 4,505 Qwen3-14B + 4,170 gpt-oss-20b; 2,049 read out"
       },
       "dates": {
         "start": "2026-11-03T17:16",
-        "end": null,
+        "end": "2026-11-03T20:35",
         "approx": true
       },
       "timing": {
-        "wall": "about 4 h so far",
-        "gpu_hours": 2.2,
+        "wall": "about 3.3 h",
+        "gpu_hours": 2.8,
         "api_usd": 4.75,
-        "note": "API rate limits (DeepInfra 429s) slowed several models. GPU: Qwen3-8B arms, Qwen3-14B screen + arms + readout on octavia's L40S."
+        "note": "API rate limits (DeepInfra 429s) slowed several models. GPU on octavia's L40S: Qwen3-8B arms, Qwen3-14B screen + arms + readout, gpt-oss-20b screen + arms + readout (sub-agent). A post-hoc wider Gemma-3-12B swap screen ran after."
       },
       "machine": "arena9-cloud (OpenRouter API) + arena9-octavia (L40S)",
       "figure": "fig12_models_grader",
@@ -1165,9 +1170,20 @@
         "docs/overnight/reports/models_grader.md"
       ],
       "data": [
-        "docs/overnight/data/models_grader.json"
+        "docs/overnight/data/models_grader.json",
+        "docs/overnight/data/models_grader_gptoss.json"
       ],
-      "commits": [],
+      "commits": [
+        "fcc759a",
+        "e2e4ad2",
+        "1acdc25",
+        "e6c5160",
+        "bd16c39",
+        "82c62f6",
+        "eaad986",
+        "5a1146a",
+        "385ca3b"
+      ],
       "related": [
         "grader-bug-e3",
         "q5-permission-ladder",

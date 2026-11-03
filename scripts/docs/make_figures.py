@@ -818,7 +818,7 @@ def fig_models_grader():
     figure("fig12_models_grader.svg",
            "Other models take the grader bug when they are told they are scored, and say so",
            ["P(final answer = the wrong option B that the buggy grader marks correct), items each model knows (5/5 unhinted;",
-            "local Qwen rows ≥ 9/10). Matched null notes: 0–3% everywhere. 95% item-bootstrap CIs."],
+            "local rows ≥ 9/10). Matched null notes: 0–3% everywhere. 95% item-bootstrap CIs."],
            [(None, dict(rows=rows, xmin=0, xmax=1, step=0.2, fmt=pct, x_fmt=pct_axis, mode="dot", series=series,
                         xlabel="P(final = B) on known items", label_w=300, row_h=32, value_labels=False))],
            legend_items=[(sh, c, n) for sh, c, n in series.values()],
