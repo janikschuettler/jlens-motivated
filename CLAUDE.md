@@ -86,6 +86,16 @@ uv manages both environments. Never use `pip install`. Generation and readout us
 - Use simple, concise prose: short sentences and plain words. Use jargon only where it's needed, and say what it means the first time.
 - Give every new finding an interpretation line: what it means for the project's question, and how sure we are. This matters most in summary artefacts (reports, the findings dashboard, web pages).
 
+**Experiment summaries must be readable by someone who didn't run the experiment** (the user's instruction, 2026-11-03). This applies to the dashboard, reports' summaries, and chat messages to the user. The test: the reader can explain the result back after one read, without asking what a label or number means.
+
+- **Lead with the plain answer** to the question the experiment asked ("No: the readouts can't tell a hidden hack from a clean run"), then the evidence, then caveats.
+- **No internal labels without a plain description.** Don't write H1, T1b, V2′, C3, I3, β 0.02, "warm-start", arm or cell names on their own. Say what the thing is ("the version of the model trained to hide its hack", "the pre-registered main test"). If a label is needed for cross-reference, put it in brackets after the description.
+- **Every number says what was compared and what it measures.** Not "AUROC 0.995", but "the score separates hacking runs from clean runs almost perfectly (AUROC 0.995, where 0.5 is chance and 1 is perfect)". Units and scales on first use (nats, percentage points, AUROC).
+- **Every control gets one sentence on what it checks and why** ("we also compared the two models on identical text: if the score still separates them, it's detecting the model, not the hack").
+- **Short sentences, at most two or three numbers per sentence.** No chains of parenthetical numbers. Put dense numbers in a table instead.
+- **Tables:** plain-language column headers and row labels that make sense on their own, plus one line under the table on how to read it.
+- **Define a condition or group by what happens in it** ("the model was told to argue for the wrong answer"), not by the name of its config.
+
 ### Findings dashboard
 
 The running record is a web page, [docs/findings/index.html](docs/findings/index.html), built from one source of truth, [docs/findings/registry.json](docs/findings/registry.json). It is published as a private claude.ai artifact: https://claude.ai/artifact/BZHUWiBPLb7zN7mzXXbvzy (slug `557d5704-e0b7-4329-8053-f7b84ab11dc6`). Republish to that slug (never create a new artifact for it), reading the live version first for `base_version`. `docs/findings.md` is only a pointer; don't write findings there.
