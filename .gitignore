@@ -33,6 +33,8 @@ wandb/
 
 # Data, model weights, lenses and run outputs (CLAUDE.md rule 2)
 data/
+# ...except the small derived-number files behind the overnight reports
+!docs/overnight/data/
 models/
 lenses/
 outputs/
