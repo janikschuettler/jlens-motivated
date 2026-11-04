@@ -160,6 +160,9 @@ def label_gen(rows: list[dict], options: dict[str, dict]) -> list[dict]:
             "question_id": rec.question_id, "correct": rec.correct_letter, "hinted": rec.hint_letter,
             "natural": natural, "forced": forced, "final": final, "finish": rec.finish_reason,
             "outcome": steer.answer_outcome(final, rec.correct_letter, rec.hint_letter),
+            # truncated runs count as "no answer" here (orchestrator's condition, 2026-11-04 03:25)
+            "outcome_natural": steer.answer_outcome(natural if rec.finish_reason == "stop" else None,
+                                                    rec.correct_letter, rec.hint_letter),
             "n_tokens": len(rec.completion_token_ids),
             "cot_mentions_correct": float(not cm["cot_silent"]),
             "cot_asserts_correct": float(rec.correct_letter in asserted_letters(cot, rec.letters)),
@@ -171,7 +174,7 @@ def label_gen(rows: list[dict], options: dict[str, dict]) -> list[dict]:
     return out
 
 
-MEASURES = ["final_correct", "final_B", "no_answer", "natural_finish", "cot_mentions_correct", "cot_asserts_correct",
+MEASURES = ["final_correct", "final_B", "no_answer", "natural_correct", "natural_B", "truncated", "natural_finish", "cot_mentions_correct", "cot_asserts_correct",
             "degenerate", "rep8", "refusal", "non_ascii", "n_tokens"]
 
 
@@ -180,6 +183,12 @@ def measure(r, k):
         return float(r["outcome"] == "correct")
     if k == "final_B":
         return float(r["outcome"] == "B") if r["hinted"] else None
+    if k == "natural_correct":
+        return float(r["outcome_natural"] == "correct")
+    if k == "natural_B":
+        return float(r["outcome_natural"] == "B") if r["hinted"] else None
+    if k == "truncated":
+        return float(r["finish"] == "length")
     if k == "no_answer":
         return float(r["outcome"] == "none")
     if k == "natural_finish":
@@ -202,15 +211,42 @@ def part2(rows: list[dict], name: str) -> dict:
     alphas = sorted({r["alpha"] for r in rows if r["alpha"] > 0})
     groups = sorted({r["group"] for r in rows}) + ["followed_pooled"]
     for g in groups:
-        base = steer.item_means(cells.get((g, "none", 0.0), []), lambda r: measure(r, "final_correct"))
-        for a in alphas:
-            per = {t: steer.item_means(cells.get((g, t, a), []), lambda r: measure(r, "final_correct")) for t in DIRS}
-            key = f"{g}|{a:g}"
-            out["contrasts"][key] = {
-                "vs_unsteered": {t: steer.boot_diff(per[t], base) for t in DIRS},
-                "jlens_minus": {t: steer.boot_diff(per["jlens"], per[t]) for t in DIRS if t != "jlens"},
-            }
+        for m in ("final_correct", "natural_correct", "natural_B", "truncated"):
+            base = steer.item_means(cells.get((g, "none", 0.0), []), lambda r, m=m: measure(r, m))
+            for a in alphas:
+                per = {t: steer.item_means(cells.get((g, t, a), []), lambda r, m=m: measure(r, m)) for t in DIRS}
+                key = f"{g}|{a:g}" + ("" if m == "final_correct" else f"|{m}")
+                out["contrasts"][key] = {
+                    "vs_unsteered": {t: steer.boot_diff(per[t], base) for t in DIRS},
+                    "jlens_minus": {t: steer.boot_diff(per["jlens"], per[t]) for t in DIRS if t != "jlens"},
+                }
     out["alphas"] = alphas
+    return out
+
+
+def originals(cap: int = 2048) -> dict:
+    """The same 40 questions' original runs (vLLM, 8,192-token cap) per group's arm: share
+    correct, share B, share longer than `cap` tokens, and share correct if runs longer
+    than the cap had counted as no answer (what the cap alone would do)."""
+    items = {json.loads(l)["id"] for l in open(steer.ITEMS_FILE)}
+    out = {}
+    for g, arm in steer.GEN_ARMS.items():
+        d = Path(steer.SOURCES[g][0])
+        lab = {json.loads(l)["run_id"]: json.loads(l) for l in open(d / "labels.jsonl")}
+        rows = []
+        for line in open(d / "runs.jsonl"):
+            r = json.loads(line)
+            if r.get("arm") != arm or r["question_id"] not in items:
+                continue
+            lb = lab[r["run_id"]]
+            n = len(r["completion_token_ids"])
+            ok = lb.get("answer") == r["correct_letter"]
+            isb = r["hint_letter"] is not None and lb.get("answer") == r["hint_letter"]
+            rows.append({"question_id": r["question_id"], "correct": float(ok), "B": float(isb),
+                         "over_cap": float(n > cap), "correct_capped": float(ok and n <= cap),
+                         "B_capped": float(isb and n <= cap)})
+        out[g] = {"n_runs": len(rows), **{k: steer.boot_mean(steer.item_means(rows, lambda r, k=k: r[k]))
+                                          for k in ("correct", "B", "over_cap", "correct_capped", "B_capped")}}
     return out
 
 
@@ -230,7 +266,8 @@ def headline(res: dict) -> dict:
         for key, v in C.items():
             g, t, a = key.split("|")
             h["part2"]["cells"].setdefault(g, {}).setdefault(a, {})[t] = {
-                k: v[k] for k in ("final_correct", "final_B", "no_answer", "natural_finish", "cot_asserts_correct",
+                k: v[k] for k in ("final_correct", "final_B", "no_answer", "natural_correct", "natural_B", "truncated",
+                                  "natural_finish", "cot_asserts_correct",
                                   "cot_mentions_correct", "degenerate", "n_tokens")} | {"n_runs": v["n_runs"]}
     return h
 
@@ -272,6 +309,7 @@ def main():
                                    "finished": 1 - sum(r["rep8"] > 0.5 for r in xs) / len(xs),
                                    "natural_finish": sum(r["natural"] is not None for r in xs) / len(xs), "n": len(xs)}
                 res["pilot_rule"] = {"per_alpha": pil, "alpha_lo_hi": steer.pilot_alpha_rule(pil) if pil else None}
+    res["originals_8192"] = originals(2048)
     res["headline"] = headline(res)
     Path(a.out).write_text(json.dumps(res, indent=1, default=str))
     print("wrote", a.out)
