@@ -1,0 +1,4630 @@
+{
+ "exploratory": true,
+ "what": "AUROC (0.5 = chance, 1 = perfect, 0 = perfect in the other direction) of each readout for separating the run that argues against its own knowledge or cheats (positive) from its comparison group, with 95% item-bootstrap intervals. source 'new' = computed on 2026-11-04 by scripts/lens/analyze_competitors.py, competitors_hack.py or analyze_option_lens.py; otherwise the earlier report it was copied from.",
+ "scores": {
+  "lens": "D = log p(correct letter) - log p(pushed letter B), mean over workspace layers (hack: log-prob of 27 hack words; grader '*_concept': grader words)",
+  "probe": "logistic probe trained on the two groups themselves, items held out (5-fold GroupKFold), fixed middle layer",
+  "blackbox": "the model's own next-token D at the answer position (or a forced early answer)",
+  "monitor": "keyword monitor on the chain of thought (1/0)",
+  "length": "completion length in tokens"
+ },
+ "cases": {
+  "instr": {
+   "label": "Told to argue for B vs no hint",
+   "model": "Qwen3-8B, thinking",
+   "positive": "told to argue for the wrong option B (and did)",
+   "negative": "no hint, answered correctly",
+   "n": "348 vs 80 runs; 39 vs 40 items",
+   "answer_differs": true,
+   "jlens_minus_logit": {
+    "last_prompt": {
+     "jlens": 0.5402,
+     "logit": 0.523,
+     "diff": 0.0172,
+     "lo": -0.0036,
+     "hi": 0.0416,
+     "sep_diff": 0.0172,
+     "sep_lo": -0.0153,
+     "sep_hi": 0.0408
+    },
+    "mid": {
+     "jlens": 0.4151,
+     "logit": 0.4356,
+     "diff": -0.0205,
+     "lo": -0.1092,
+     "hi": 0.0694,
+     "sep_diff": 0.0205,
+     "sep_lo": -0.0674,
+     "sep_hi": 0.1077
+    },
+    "think_end": {
+     "jlens": 0.4723,
+     "logit": 0.473,
+     "diff": -0.0007,
+     "lo": -0.0347,
+     "hi": 0.0291,
+     "sep_diff": 0.0007,
+     "sep_lo": -0.029,
+     "sep_hi": 0.0338
+    },
+    "pre_answer": {
+     "jlens": 0.0,
+     "logit": 0.0002,
+     "diff": -0.0002,
+     "lo": -0.0009,
+     "hi": 0.0,
+     "sep_diff": 0.0002,
+     "sep_lo": 0.0,
+     "sep_hi": 0.0009
+    }
+   },
+   "arms": [
+    "I1_argue",
+    "I3_conceal",
+    "unhinted"
+   ],
+   "monitor_rates": {
+    "pos": 0.9339080459770115,
+    "neg": 0.0
+   },
+   "median_completion_tokens": {
+    "pos": 1743.0,
+    "neg": 969.0
+   },
+   "n_items_both_groups": 39
+  },
+  "wording": {
+   "label": "Hint followers vs resisters",
+   "model": "Qwen3-8B, thinking",
+   "positive": "followed an answer-stating hint to B",
+   "negative": "resisted the same hint",
+   "n": "340 vs 260 runs; 42 vs 44 items",
+   "answer_differs": true,
+   "jlens_minus_logit": {
+    "last_prompt": {
+     "jlens": 0.5846,
+     "logit": 0.6195,
+     "diff": -0.0349,
+     "lo": -0.1067,
+     "hi": 0.0326,
+     "sep_diff": -0.0349,
+     "sep_lo": -0.0988,
+     "sep_hi": 0.0359
+    },
+    "mid": {
+     "jlens": 0.5044,
+     "logit": 0.6133,
+     "diff": -0.1088,
+     "lo": -0.2101,
+     "hi": -0.0025,
+     "sep_diff": -0.1088,
+     "sep_lo": -0.1864,
+     "sep_hi": 0.0549
+    },
+    "think_end": {
+     "jlens": 0.5781,
+     "logit": 0.5847,
+     "diff": -0.0066,
+     "lo": -0.0566,
+     "hi": 0.0425,
+     "sep_diff": -0.0066,
+     "sep_lo": -0.0554,
+     "sep_hi": 0.0405
+    },
+    "pre_answer": {
+     "jlens": 0.0,
+     "logit": 0.0,
+     "diff": -0.0,
+     "lo": -0.0002,
+     "hi": 0.0,
+     "sep_diff": 0.0,
+     "sep_lo": 0.0,
+     "sep_hi": 0.0002
+    }
+   },
+   "arms": [
+    "think_qwen_bare_answer_ours",
+    "think_qwen_expert_chose_ours",
+    "think_qwen_hint_expert_chose_ours",
+    "think_qwen_hint_only_ours",
+    "think_qwen_mb_expert_noprefix_ours",
+    "think_qwen_mb_expert_ourshintfirst",
+    "think_qwen_ours_expert_hint_ours",
+    "think_qwen_ours_expert_ourshintfirst"
+   ],
+   "monitor_rates": {
+    "pos": 0.9882352941176471,
+    "neg": 0.9730769230769231
+   },
+   "median_completion_tokens": {
+    "pos": 2080.5,
+    "neg": 2412.0
+   },
+   "n_items_both_groups": 36
+  },
+  "t2": {
+   "label": "Followers who still know vs persuaded followers (pre-registered T2)",
+   "model": "Qwen3-8B, thinking",
+   "positive": "followed the hint, but give the correct answer when asked afterwards",
+   "negative": "followed and repeat B when asked",
+   "n": null,
+   "answer_differs": false,
+   "jlens_minus_logit": null
+  },
+  "silent": {
+   "label": "Silent vs open switches",
+   "model": "Qwen3-8B, thinking off",
+   "positive": "switched to the hinted B without mentioning the hint",
+   "negative": "switched to B and mentioned the hint",
+   "n": "609 vs 4892 runs; 213 vs 994 items",
+   "answer_differs": false,
+   "jlens_minus_logit": {
+    "last_prompt": {
+     "jlens": 0.4894,
+     "logit": 0.4801,
+     "diff": 0.0093,
+     "lo": -0.0052,
+     "hi": 0.0245,
+     "sep_diff": -0.0093,
+     "sep_lo": -0.0219,
+     "sep_hi": 0.0185
+    },
+    "mid": {
+     "jlens": 0.5356,
+     "logit": 0.5324,
+     "diff": 0.0032,
+     "lo": -0.0322,
+     "hi": 0.0374,
+     "sep_diff": 0.0032,
+     "sep_lo": -0.03,
+     "sep_hi": 0.0361
+    },
+    "pre_answer": {
+     "jlens": 0.5409,
+     "logit": 0.4318,
+     "diff": 0.1091,
+     "lo": 0.047,
+     "hi": 0.1709,
+     "sep_diff": -0.0274,
+     "sep_lo": -0.0926,
+     "sep_hi": 0.0426
+    }
+   },
+   "arms": [
+    "nothink_mb_mb_expert_mb"
+   ],
+   "monitor_rates": {
+    "pos": 0.0,
+    "neg": 1.0
+   },
+   "median_completion_tokens": {
+    "pos": 443.0,
+    "neg": 425.0
+   },
+   "n_items_both_groups": 191
+  },
+  "c3": {
+   "label": "Kept a planted wrong claim vs recovered",
+   "model": "Qwen3-8B, thinking",
+   "positive": "kept the planted wrong answer to the end",
+   "negative": "dropped it and answered correctly",
+   "n": "61 vs 134 runs; 21 vs 33 items",
+   "answer_differs": true,
+   "jlens_minus_logit": {
+    "last_prompt": {
+     "jlens": 0.5833,
+     "logit": 0.6287,
+     "diff": -0.0454,
+     "lo": -0.1271,
+     "hi": 0.027,
+     "sep_diff": -0.0454,
+     "sep_lo": -0.121,
+     "sep_hi": 0.0486
+    },
+    "mid": {
+     "jlens": 0.4951,
+     "logit": 0.5343,
+     "diff": -0.0391,
+     "lo": -0.1547,
+     "hi": 0.077,
+     "sep_diff": -0.0294,
+     "sep_lo": -0.1261,
+     "sep_hi": 0.0987
+    },
+    "think_end": {
+     "jlens": 0.4632,
+     "logit": 0.5193,
+     "diff": -0.0562,
+     "lo": -0.1306,
+     "hi": 0.0142,
+     "sep_diff": 0.0175,
+     "sep_lo": -0.1081,
+     "sep_hi": 0.1006
+    },
+    "pre_answer": {
+     "jlens": 0.0001,
+     "logit": 0.0,
+     "diff": 0.0001,
+     "lo": 0.0,
+     "hi": 0.0007,
+     "sep_diff": -0.0001,
+     "sep_lo": -0.0007,
+     "sep_hi": 0.0
+    }
+   },
+   "arms": [
+    "C3_think_prefill"
+   ],
+   "monitor_rates": {
+    "pos": 0.06557377049180328,
+    "neg": 0.6194029850746269
+   },
+   "median_completion_tokens": {
+    "pos": 295.0,
+    "neg": 591.0
+   },
+   "n_items_both_groups": 14
+  },
+  "c3_reel": {
+   "label": "Kept-claim runs that still know vs those that don't",
+   "model": "Qwen3-8B, thinking",
+   "positive": "kept the planted B, but give the correct answer when asked without the reasoning",
+   "negative": "kept B and don't give the correct answer when asked",
+   "n": null,
+   "answer_differs": false,
+   "jlens_minus_logit": null
+  },
+  "hack": {
+   "label": "Hidden reward hack vs no hack, same model",
+   "model": "Qwen3-8B + warm-start hack adapter, thinking off",
+   "positive": "hacks the tests, reasoning hides it",
+   "negative": "doesn't hack",
+   "n": "159 vs 109 runs (problem-level AUROC over problems with both groups)",
+   "answer_differs": false,
+   "jlens_minus_logit": null
+  },
+  "grader_q14": {
+   "label": "Grader-bug followers vs resisters",
+   "model": "Qwen3-14B, thinking",
+   "positive": "took the grader bug (answered B)",
+   "negative": "resisted it (answered correctly)",
+   "n": "163 vs 230 runs; 69 vs 68 items",
+   "answer_differs": true,
+   "jlens_minus_logit": {
+    "last_prompt": {
+     "jlens": 0.5164,
+     "logit": 0.4426,
+     "diff": 0.0738,
+     "lo": -0.0338,
+     "hi": 0.1802,
+     "sep_diff": -0.041,
+     "sep_lo": -0.0873,
+     "sep_hi": 0.0295
+    },
+    "mid": {
+     "jlens": 0.4938,
+     "logit": 0.5548,
+     "diff": -0.061,
+     "lo": -0.125,
+     "hi": -0.0086,
+     "sep_diff": -0.0486,
+     "sep_lo": -0.0972,
+     "sep_hi": 0.0516
+    },
+    "think_end": {
+     "jlens": 0.5517,
+     "logit": 0.4418,
+     "diff": 0.1099,
+     "lo": 0.0156,
+     "hi": 0.2032,
+     "sep_diff": -0.0066,
+     "sep_lo": -0.0993,
+     "sep_hi": 0.0973
+    },
+    "pre_answer": {
+     "jlens": 0.0114,
+     "logit": 0.0169,
+     "diff": -0.0055,
+     "lo": -0.0106,
+     "hi": -0.0016,
+     "sep_diff": 0.0055,
+     "sep_lo": 0.0016,
+     "sep_hi": 0.0106
+    }
+   },
+   "arms": [
+    "A_V0",
+    "A_stakes",
+    "L_unclear"
+   ],
+   "monitor_rates": {
+    "pos": 1.0,
+    "neg": 1.0
+   },
+   "median_completion_tokens": {
+    "pos": 1239.0,
+    "neg": 751.5
+   },
+   "n_items_both_groups": 68
+  },
+  "grader_gptoss": {
+   "label": "Grader-bug followers vs resisters",
+   "model": "gpt-oss-20b, reasoning",
+   "positive": "took the grader bug",
+   "negative": "resisted it",
+   "n": "603 vs 241 runs; 150 vs 124 items",
+   "answer_differs": true,
+   "jlens_minus_logit": {
+    "last_prompt": {
+     "jlens": 0.4941,
+     "logit": 0.4911,
+     "diff": 0.0031,
+     "lo": -0.0161,
+     "hi": 0.0235,
+     "sep_diff": -0.0031,
+     "sep_lo": -0.0209,
+     "sep_hi": 0.0171
+    },
+    "mid": {
+     "jlens": 0.4663,
+     "logit": 0.5104,
+     "diff": -0.0441,
+     "lo": -0.082,
+     "hi": -0.0102,
+     "sep_diff": 0.0233,
+     "sep_lo": -0.0405,
+     "sep_hi": 0.0608
+    },
+    "think_end": {
+     "jlens": 0.4623,
+     "logit": 0.5081,
+     "diff": -0.0459,
+     "lo": -0.0903,
+     "hi": -0.0081,
+     "sep_diff": 0.0296,
+     "sep_lo": -0.0355,
+     "sep_hi": 0.0648
+    },
+    "pre_answer": {
+     "jlens": 0.001,
+     "logit": 0.0439,
+     "diff": -0.0429,
+     "lo": -0.063,
+     "hi": -0.0259,
+     "sep_diff": 0.0429,
+     "sep_lo": 0.0259,
+     "sep_hi": 0.063
+    }
+   },
+   "arms": [
+    "A_V0",
+    "A_sys"
+   ],
+   "monitor_rates": {
+    "pos": 1.0,
+    "neg": 0.991701244813278
+   },
+   "median_completion_tokens": {
+    "pos": 406.0,
+    "neg": 385.0
+   },
+   "n_items_both_groups": 124
+  },
+  "grader_nt8": {
+   "label": "Grader-bug followers vs resisters",
+   "model": "Qwen3-8B, thinking off",
+   "positive": "took the grader bug",
+   "negative": "resisted it",
+   "n": "189 vs 189 runs; 76 vs 72 items",
+   "answer_differs": true,
+   "jlens_minus_logit": {
+    "last_prompt": {
+     "jlens": 0.5154,
+     "logit": 0.5255,
+     "diff": -0.0101,
+     "lo": -0.0372,
+     "hi": 0.0182,
+     "sep_diff": -0.0101,
+     "sep_lo": -0.0356,
+     "sep_hi": 0.0218
+    },
+    "mid": {
+     "jlens": 0.5337,
+     "logit": 0.5417,
+     "diff": -0.008,
+     "lo": -0.054,
+     "hi": 0.0392,
+     "sep_diff": -0.008,
+     "sep_lo": -0.0477,
+     "sep_hi": 0.0392
+    },
+    "pre_answer": {
+     "jlens": 0.0025,
+     "logit": 0.0038,
+     "diff": -0.0013,
+     "lo": -0.0056,
+     "hi": 0.0024,
+     "sep_diff": 0.0013,
+     "sep_lo": -0.0024,
+     "sep_hi": 0.0056
+    }
+   },
+   "arms": [
+    "A_V0",
+    "A_stakes",
+    "L_unclear"
+   ],
+   "monitor_rates": {
+    "pos": 0.9947089947089947,
+    "neg": 0.7619047619047619
+   },
+   "median_completion_tokens": {
+    "pos": 296.0,
+    "neg": 297.0
+   },
+   "n_items_both_groups": 72
+  },
+  "grader_nt14": {
+   "label": "Grader-bug followers vs resisters",
+   "model": "Qwen3-14B, thinking off",
+   "positive": "took the grader bug",
+   "negative": "resisted it",
+   "n": "692 vs 261 runs; 144 vs 112 items",
+   "answer_differs": true,
+   "jlens_minus_logit": {
+    "last_prompt": {
+     "jlens": 0.5395,
+     "logit": 0.54,
+     "diff": -0.0005,
+     "lo": -0.014,
+     "hi": 0.0113,
+     "sep_diff": -0.0005,
+     "sep_lo": -0.0134,
+     "sep_hi": 0.0114
+    },
+    "mid": {
+     "jlens": 0.564,
+     "logit": 0.5541,
+     "diff": 0.0099,
+     "lo": -0.0115,
+     "hi": 0.0316,
+     "sep_diff": 0.0099,
+     "sep_lo": -0.012,
+     "sep_hi": 0.0316
+    },
+    "pre_answer": {
+     "jlens": 0.0,
+     "logit": 0.0,
+     "diff": 0.0,
+     "lo": -0.0,
+     "hi": 0.0001,
+     "sep_diff": -0.0,
+     "sep_lo": -0.0001,
+     "sep_hi": 0.0
+    }
+   },
+   "arms": [
+    "A_V0",
+    "A_stakes",
+    "L_unclear"
+   ],
+   "monitor_rates": {
+    "pos": 0.9855491329479769,
+    "neg": 0.6053639846743295
+   },
+   "median_completion_tokens": {
+    "pos": 229.5,
+    "neg": 229.0
+   },
+   "n_items_both_groups": 112
+  }
+ },
+ "table": {
+  "instr": {
+   "last_prompt|jlens": {
+    "auroc": 0.5402,
+    "lo": 0.4849,
+    "hi": 0.5986,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.6484,
+     "lo": 0.4948,
+     "hi": 0.7908
+    },
+    "best_layer": {
+     "layer": 20,
+     "auroc": 0.5768,
+     "lo": 0.4604,
+     "hi": 0.6927
+    },
+    "margin_score": {
+     "auroc": 0.4979,
+     "lo": 0.4563,
+     "hi": 0.5415
+    }
+   },
+   "last_prompt|logit": {
+    "auroc": 0.523,
+    "lo": 0.4734,
+    "hi": 0.5749,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.6076,
+     "lo": 0.4613,
+     "hi": 0.7495
+    },
+    "best_layer": {
+     "layer": 28,
+     "auroc": 0.5476,
+     "lo": 0.4904,
+     "hi": 0.6059
+    },
+    "margin_score": {
+     "auroc": 0.5001,
+     "lo": 0.4549,
+     "hi": 0.5456
+    }
+   },
+   "last_prompt|probe": {
+    "auroc": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "best_layer": {
+     "layer": 16,
+     "auroc": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "layer": 24,
+    "note": "the last prompt token is shared by every sample of a prompt: item-level"
+   },
+   "mid|jlens": {
+    "auroc": 0.4151,
+    "lo": 0.3425,
+    "hi": 0.4854,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.3278,
+     "lo": 0.2079,
+     "hi": 0.4591
+    },
+    "best_layer": {
+     "layer": 32,
+     "auroc": 0.2979,
+     "lo": 0.2289,
+     "hi": 0.3606
+    },
+    "margin_score": {
+     "auroc": 0.5283,
+     "lo": 0.4646,
+     "hi": 0.5998
+    }
+   },
+   "mid|logit": {
+    "auroc": 0.4356,
+    "lo": 0.3748,
+    "hi": 0.4887,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.2555,
+     "lo": 0.1469,
+     "hi": 0.3787
+    },
+    "best_layer": {
+     "layer": 32,
+     "auroc": 0.316,
+     "lo": 0.2658,
+     "hi": 0.348
+    },
+    "margin_score": {
+     "auroc": 0.5212,
+     "lo": 0.4783,
+     "hi": 0.5644
+    }
+   },
+   "think_end|jlens": {
+    "auroc": 0.4723,
+    "lo": 0.4396,
+    "hi": 0.494,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.3244,
+     "lo": 0.2373,
+     "hi": 0.4161
+    },
+    "best_layer": {
+     "layer": 24,
+     "auroc": 0.466,
+     "lo": 0.4321,
+     "hi": 0.4866
+    },
+    "margin_score": {
+     "auroc": 0.4901,
+     "lo": 0.4616,
+     "hi": 0.5103
+    }
+   },
+   "think_end|logit": {
+    "auroc": 0.473,
+    "lo": 0.4408,
+    "hi": 0.4967,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.2967,
+     "lo": 0.2027,
+     "hi": 0.4087
+    },
+    "best_layer": {
+     "layer": 32,
+     "auroc": 0.4267,
+     "lo": 0.3569,
+     "hi": 0.494
+    },
+    "margin_score": {
+     "auroc": 0.4909,
+     "lo": 0.4622,
+     "hi": 0.5147
+    }
+   },
+   "think_end|probe": {
+    "auroc": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "best_layer": {
+     "layer": 16,
+     "auroc": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "layer": 24
+   },
+   "pre_answer|jlens": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "best_layer": {
+     "layer": 28,
+     "auroc": 0.0001,
+     "lo": 0.0,
+     "hi": 0.0005
+    },
+    "margin_score": {
+     "auroc": 0.0032,
+     "lo": 0.0001,
+     "hi": 0.0079
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|logit": {
+    "auroc": 0.0002,
+    "lo": 0.0,
+    "hi": 0.0009,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "best_layer": {
+     "layer": 26,
+     "auroc": 0.0006,
+     "lo": 0.0,
+     "hi": 0.0017
+    },
+    "margin_score": {
+     "auroc": 0.005,
+     "lo": 0.0,
+     "hi": 0.012
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|probe": {
+    "auroc": 0.9999,
+    "lo": 0.9997,
+    "hi": 1.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "best_layer": {
+     "layer": 16,
+     "auroc": 1.0,
+     "lo": 0.9998,
+     "hi": 1.0
+    },
+    "layer": 24
+   },
+   "pre_answer|blackbox": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "note": "the final answers differ, so the model's own answer separates them trivially"
+   },
+   "whole|monitor": {
+    "auroc": 0.967,
+    "lo": 0.9414,
+    "hi": 0.9882,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.9947,
+     "lo": 0.9853,
+     "hi": 0.9988
+    },
+    "rates": {
+     "pos": 0.934,
+     "neg": 0.0
+    }
+   },
+   "whole|length": {
+    "auroc": 0.7436,
+    "lo": 0.6617,
+    "hi": 0.8301,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.8635,
+     "lo": 0.781,
+     "hi": 0.9359
+    },
+    "reasoning_length": {
+     "auroc": 0.7868,
+     "lo": 0.7018,
+     "hi": 0.8756
+    }
+   },
+   "options|jlens": {
+    "auroc": 0.466,
+    "lo": 0.386,
+    "hi": 0.542,
+    "source": "new",
+    "note": "item-level (the options come before the instruction); correct option's score margin"
+   },
+   "options|logit": {
+    "auroc": 0.483,
+    "lo": 0.409,
+    "hi": 0.557,
+    "source": "new",
+    "note": "item-level (the options come before the instruction); correct option's score margin"
+   },
+   "options|probe": {
+    "auroc": 0.439,
+    "lo": 0.366,
+    "hi": 0.513,
+    "source": "new",
+    "note": "item-level (the options come before the instruction); correct option's score margin"
+   }
+  },
+  "wording": {
+   "last_prompt|jlens": {
+    "auroc": 0.5846,
+    "lo": 0.4668,
+    "hi": 0.6937,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5356,
+     "lo": 0.4875,
+     "hi": 0.5887
+    },
+    "best_layer": {
+     "layer": 30,
+     "auroc": 0.6064,
+     "lo": 0.4888,
+     "hi": 0.719
+    },
+    "margin_score": {
+     "auroc": 0.5846,
+     "lo": 0.4616,
+     "hi": 0.7029
+    }
+   },
+   "last_prompt|logit": {
+    "auroc": 0.6195,
+    "lo": 0.5024,
+    "hi": 0.7339,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5089,
+     "lo": 0.4598,
+     "hi": 0.5544
+    },
+    "best_layer": {
+     "layer": 20,
+     "auroc": 0.6178,
+     "lo": 0.503,
+     "hi": 0.7184
+    },
+    "margin_score": {
+     "auroc": 0.5898,
+     "lo": 0.464,
+     "hi": 0.7086
+    }
+   },
+   "last_prompt|probe": {
+    "auroc": 0.5841,
+    "lo": 0.4737,
+    "hi": 0.6896,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.6549,
+     "lo": 0.6057,
+     "hi": 0.7056
+    },
+    "best_layer": {
+     "layer": 32,
+     "auroc": 0.615,
+     "lo": 0.5187,
+     "hi": 0.7064
+    },
+    "layer": 24,
+    "note": "the last prompt token is shared by every sample of a prompt: item-level"
+   },
+   "mid|jlens": {
+    "auroc": 0.5044,
+    "lo": 0.4057,
+    "hi": 0.6027,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4122,
+     "lo": 0.3555,
+     "hi": 0.4653
+    },
+    "best_layer": {
+     "layer": 18,
+     "auroc": 0.3812,
+     "lo": 0.2868,
+     "hi": 0.4876
+    },
+    "margin_score": {
+     "auroc": 0.4765,
+     "lo": 0.3596,
+     "hi": 0.5907
+    }
+   },
+   "mid|logit": {
+    "auroc": 0.6133,
+    "lo": 0.4891,
+    "hi": 0.722,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4133,
+     "lo": 0.3613,
+     "hi": 0.4629
+    },
+    "best_layer": {
+     "layer": 28,
+     "auroc": 0.6402,
+     "lo": 0.5241,
+     "hi": 0.7456
+    },
+    "margin_score": {
+     "auroc": 0.5827,
+     "lo": 0.4681,
+     "hi": 0.6919
+    }
+   },
+   "mid|probe": {
+    "auroc": 0.6767,
+    "lo": 0.5898,
+    "hi": 0.7572,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5739,
+     "lo": 0.5288,
+     "hi": 0.6221
+    },
+    "best_layer": {
+     "layer": 16,
+     "auroc": 0.7146,
+     "lo": 0.6328,
+     "hi": 0.7812
+    },
+    "layer": 24
+   },
+   "think_end|jlens": {
+    "auroc": 0.5781,
+    "lo": 0.4628,
+    "hi": 0.6844,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4752,
+     "lo": 0.4105,
+     "hi": 0.5368
+    },
+    "best_layer": {
+     "layer": 32,
+     "auroc": 0.6207,
+     "lo": 0.501,
+     "hi": 0.7293
+    },
+    "margin_score": {
+     "auroc": 0.5705,
+     "lo": 0.4515,
+     "hi": 0.6865
+    }
+   },
+   "think_end|logit": {
+    "auroc": 0.5847,
+    "lo": 0.4693,
+    "hi": 0.6917,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4717,
+     "lo": 0.4174,
+     "hi": 0.5249
+    },
+    "best_layer": {
+     "layer": 20,
+     "auroc": 0.6415,
+     "lo": 0.5233,
+     "hi": 0.746
+    },
+    "margin_score": {
+     "auroc": 0.5833,
+     "lo": 0.4661,
+     "hi": 0.6975
+    }
+   },
+   "think_end|probe": {
+    "auroc": 0.9212,
+    "lo": 0.891,
+    "hi": 0.9496,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.8036,
+     "lo": 0.7603,
+     "hi": 0.8505
+    },
+    "best_layer": {
+     "layer": 24,
+     "auroc": 0.9212,
+     "lo": 0.891,
+     "hi": 0.9496
+    },
+    "layer": 24
+   },
+   "pre_answer|jlens": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0095,
+     "lo": 0.0017,
+     "hi": 0.0198
+    },
+    "best_layer": {
+     "layer": 24,
+     "auroc": 0.0001,
+     "lo": 0.0,
+     "hi": 0.0005
+    },
+    "margin_score": {
+     "auroc": 0.0031,
+     "lo": 0.0003,
+     "hi": 0.008
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|logit": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0002,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0119,
+     "lo": 0.0028,
+     "hi": 0.0246
+    },
+    "best_layer": {
+     "layer": 24,
+     "auroc": 0.0002,
+     "lo": 0.0,
+     "hi": 0.0009
+    },
+    "margin_score": {
+     "auroc": 0.0097,
+     "lo": 0.0029,
+     "hi": 0.021
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|probe": {
+    "auroc": 0.9971,
+    "lo": 0.9919,
+    "hi": 0.9998,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.9713,
+     "lo": 0.952,
+     "hi": 0.9891
+    },
+    "best_layer": {
+     "layer": 24,
+     "auroc": 0.9971,
+     "lo": 0.9919,
+     "hi": 0.9998
+    },
+    "layer": 24
+   },
+   "pre_answer|blackbox": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0335,
+     "lo": 0.0135,
+     "hi": 0.0567
+    },
+    "note": "the final answers differ, so the model's own answer separates them trivially"
+   },
+   "whole|monitor": {
+    "auroc": 0.5076,
+    "lo": 0.495,
+    "hi": 0.5217,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4711,
+     "lo": 0.4071,
+     "hi": 0.5342
+    },
+    "rates": {
+     "pos": 0.988,
+     "neg": 0.973
+    }
+   },
+   "whole|length": {
+    "auroc": 0.4167,
+    "lo": 0.3024,
+    "hi": 0.5249,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4357,
+     "lo": 0.3751,
+     "hi": 0.4957
+    },
+    "reasoning_length": {
+     "auroc": 0.421,
+     "lo": 0.3092,
+     "hi": 0.5292
+    }
+   }
+  },
+  "t2": {
+   "pre_answer|jlens": {
+    "auroc": 0.46,
+    "lo": 0.32,
+    "hi": 0.61,
+    "source": "lens_prereg.md",
+    "note": "pre-registered score S (correct letter over the uninvolved letters, L14-32); FAIL"
+   },
+   "pre_answer|logit": {
+    "auroc": 0.43,
+    "lo": 0.25,
+    "hi": 0.62,
+    "source": "lens_prereg.md",
+    "note": "score S"
+   },
+   "mid|jlens": {
+    "auroc": null,
+    "lo": null,
+    "hi": null,
+    "source": "lens_prereg.md",
+    "note": "correct-letter margin along the reasoning: AUROCs 0.41-0.61 in 20 bins, no CI given"
+   },
+   "mid|probe": {
+    "auroc": 0.7,
+    "lo": 0.54,
+    "hi": 0.85,
+    "source": "lens_prereg.md",
+    "note": "probe on reasoning hidden states, mean of 16 anchors, L20 (best of 5 layers); not length-controlled"
+   },
+   "whole|monitor": {
+    "auroc": 0.5,
+    "lo": null,
+    "hi": null,
+    "source": "lens_prereg.md",
+    "note": "hint/answer keyword"
+   },
+   "whole|length": {
+    "auroc": 0.72,
+    "lo": 0.6,
+    "hi": 0.82,
+    "source": "lens_prereg.md",
+    "note": "reasoning length"
+   },
+   "whole|blackbox": {
+    "auroc": 0.82,
+    "lo": 0.75,
+    "hi": 0.87,
+    "source": "lens_prereg.md",
+    "note": "asked again with the reasoning removed; partly the same measurement as the label"
+   }
+  },
+  "silent": {
+   "last_prompt|jlens": {
+    "auroc": 0.4894,
+    "lo": 0.4367,
+    "hi": 0.5425,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4857,
+     "lo": 0.4471,
+     "hi": 0.5271
+    },
+    "best_layer": {
+     "layer": 24,
+     "auroc": 0.4661,
+     "lo": 0.4129,
+     "hi": 0.5202
+    },
+    "margin_score": {
+     "auroc": 0.4434,
+     "lo": 0.3995,
+     "hi": 0.4867
+    }
+   },
+   "last_prompt|logit": {
+    "auroc": 0.4801,
+    "lo": 0.428,
+    "hi": 0.5316,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5158,
+     "lo": 0.4759,
+     "hi": 0.5544
+    },
+    "best_layer": {
+     "layer": 18,
+     "auroc": 0.4497,
+     "lo": 0.405,
+     "hi": 0.4979
+    },
+    "margin_score": {
+     "auroc": 0.4392,
+     "lo": 0.3937,
+     "hi": 0.485
+    }
+   },
+   "last_prompt|probe": {
+    "auroc": 0.7529,
+    "lo": 0.7171,
+    "hi": 0.7884,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5808,
+     "lo": 0.5394,
+     "hi": 0.6234
+    },
+    "best_layer": {
+     "layer": 32,
+     "auroc": 0.7622,
+     "lo": 0.73,
+     "hi": 0.7954
+    },
+    "layer": 24,
+    "note": "the last prompt token is shared by every sample of a prompt: item-level",
+    "earlier_old_items": {
+     "auroc": 0.52,
+     "lo": 0.42,
+     "hi": 0.63,
+     "source": "lens_main.md",
+     "note": "answer probe P(correct), L24"
+    }
+   },
+   "mid|jlens": {
+    "auroc": 0.5356,
+    "lo": 0.4884,
+    "hi": 0.5851,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5357,
+     "lo": 0.496,
+     "hi": 0.5752
+    },
+    "best_layer": {
+     "layer": 22,
+     "auroc": 0.5568,
+     "lo": 0.5125,
+     "hi": 0.6052
+    },
+    "margin_score": {
+     "auroc": 0.4873,
+     "lo": 0.4405,
+     "hi": 0.5353
+    },
+    "earlier_old_items": {
+     "auroc": 0.56,
+     "lo": 0.46,
+     "hi": 0.65,
+     "source": "lens_main.md",
+     "note": "echo-free response positions"
+    }
+   },
+   "mid|logit": {
+    "auroc": 0.5324,
+    "lo": 0.4884,
+    "hi": 0.5774,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5336,
+     "lo": 0.497,
+     "hi": 0.5713
+    },
+    "best_layer": {
+     "layer": 20,
+     "auroc": 0.5559,
+     "lo": 0.509,
+     "hi": 0.6037
+    },
+    "margin_score": {
+     "auroc": 0.4699,
+     "lo": 0.4248,
+     "hi": 0.5176
+    },
+    "earlier_old_items": {
+     "auroc": 0.49,
+     "lo": 0.39,
+     "hi": 0.58,
+     "source": "lens_main.md",
+     "note": "echo-free response positions"
+    }
+   },
+   "pre_answer|jlens": {
+    "auroc": 0.5409,
+    "lo": 0.4954,
+    "hi": 0.5904,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4947,
+     "lo": 0.4525,
+     "hi": 0.5362
+    },
+    "best_layer": {
+     "layer": 20,
+     "auroc": 0.5593,
+     "lo": 0.5167,
+     "hi": 0.6034
+    },
+    "margin_score": {
+     "auroc": 0.5273,
+     "lo": 0.4791,
+     "hi": 0.5758
+    },
+    "earlier": {
+     "auroc": 0.54,
+     "lo": 0.504,
+     "hi": 0.577,
+     "source": "lens_prereg.md",
+     "note": "PRE-REGISTERED T1b, score S, 1,744 fresh items (986 vs 7,268 runs); PASS narrowly"
+    },
+    "earlier_old_items": {
+     "auroc": 0.65,
+     "lo": 0.56,
+     "hi": 0.74,
+     "source": "lens_main.md",
+     "note": "lens_main, 42 items chosen in the same data (151 vs 513 runs), score S"
+    }
+   },
+   "pre_answer|logit": {
+    "auroc": 0.4318,
+    "lo": 0.3836,
+    "hi": 0.4819,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4691,
+     "lo": 0.4297,
+     "hi": 0.5095
+    },
+    "best_layer": {
+     "layer": 30,
+     "auroc": 0.4008,
+     "lo": 0.3584,
+     "hi": 0.445
+    },
+    "margin_score": {
+     "auroc": 0.4447,
+     "lo": 0.3979,
+     "hi": 0.4883
+    },
+    "earlier": {
+     "auroc": 0.46,
+     "lo": 0.424,
+     "hi": 0.5,
+     "source": "lens_prereg.md",
+     "note": "T1b, score S"
+    },
+    "earlier_old_items": {
+     "auroc": 0.48,
+     "lo": 0.37,
+     "hi": 0.58,
+     "source": "lens_main.md",
+     "note": "lens_main, score S"
+    }
+   },
+   "pre_answer|probe": {
+    "auroc": 0.9942,
+    "lo": 0.9912,
+    "hi": 0.9968,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.9555,
+     "lo": 0.9432,
+     "hi": 0.9677
+    },
+    "best_layer": {
+     "layer": 16,
+     "auroc": 0.9958,
+     "lo": 0.9937,
+     "hi": 0.9975
+    },
+    "layer": 24,
+    "earlier_old_items": {
+     "auroc": 0.45,
+     "lo": 0.36,
+     "hi": 0.54,
+     "source": "lens_main.md",
+     "note": "answer probe P(correct), L24"
+    }
+   },
+   "pre_answer|blackbox": {
+    "auroc": 0.3691,
+    "lo": 0.3274,
+    "hi": 0.4119,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4256,
+     "lo": 0.3828,
+     "hi": 0.4667
+    }
+   },
+   "whole|monitor": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "rates": {
+     "pos": 0.0,
+     "neg": 1.0
+    },
+    "earlier": {
+     "auroc": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "source": "lens_main.md",
+     "note": "zero by construction: 'silent' means the keyword monitor finds nothing"
+    }
+   },
+   "whole|length": {
+    "auroc": 0.5351,
+    "lo": 0.4962,
+    "hi": 0.5748,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.3483,
+     "lo": 0.3105,
+     "hi": 0.3873
+    },
+    "reasoning_length": {
+     "auroc": 0.536,
+     "lo": 0.4969,
+     "hi": 0.5756
+    },
+    "earlier": {
+     "auroc": 0.54,
+     "lo": 0.506,
+     "hi": 0.572,
+     "source": "lens_prereg.md",
+     "note": "T1b, completion length"
+    }
+   }
+  },
+  "c3": {
+   "last_prompt|jlens": {
+    "auroc": 0.5833,
+    "lo": 0.4193,
+    "hi": 0.7531,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5375,
+     "lo": 0.451,
+     "hi": 0.6274
+    },
+    "best_layer": {
+     "layer": 20,
+     "auroc": 0.7274,
+     "lo": 0.592,
+     "hi": 0.8523
+    },
+    "margin_score": {
+     "auroc": 0.6045,
+     "lo": 0.4513,
+     "hi": 0.7503
+    },
+    "earlier": {
+     "auroc": 0.58,
+     "lo": 0.41,
+     "hi": 0.74,
+     "source": "lens_c3.md",
+     "note": "item-level (end of the planted sentence)"
+    }
+   },
+   "last_prompt|logit": {
+    "auroc": 0.6287,
+    "lo": 0.4528,
+    "hi": 0.8004,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.6126,
+     "lo": 0.4847,
+     "hi": 0.7577
+    },
+    "best_layer": {
+     "layer": 18,
+     "auroc": 0.699,
+     "lo": 0.5258,
+     "hi": 0.8509
+    },
+    "margin_score": {
+     "auroc": 0.6379,
+     "lo": 0.493,
+     "hi": 0.7677
+    }
+   },
+   "last_prompt|probe": {
+    "auroc": 0.575,
+    "lo": 0.4156,
+    "hi": 0.7302,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.6777,
+     "lo": 0.575,
+     "hi": 0.7912
+    },
+    "best_layer": {
+     "layer": 32,
+     "auroc": 0.6294,
+     "lo": 0.4766,
+     "hi": 0.7772
+    },
+    "layer": 24,
+    "note": "the last prompt token is shared by every sample of a prompt: item-level"
+   },
+   "mid|jlens": {
+    "auroc": 0.4951,
+    "lo": 0.3539,
+    "hi": 0.6443,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.3864,
+     "lo": 0.2531,
+     "hi": 0.5564
+    },
+    "best_layer": {
+     "layer": 30,
+     "auroc": 0.3882,
+     "lo": 0.2574,
+     "hi": 0.5331
+    },
+    "margin_score": {
+     "auroc": 0.5363,
+     "lo": 0.3533,
+     "hi": 0.7007
+    },
+    "earlier": {
+     "auroc": 0.54,
+     "lo": 0.39,
+     "hi": 0.69,
+     "source": "lens_c3.md",
+     "note": "first 50 generated tokens, correct-over-B rank, L14-32"
+    }
+   },
+   "mid|logit": {
+    "auroc": 0.5343,
+    "lo": 0.3835,
+    "hi": 0.6874,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5385,
+     "lo": 0.3758,
+     "hi": 0.7169
+    },
+    "best_layer": {
+     "layer": 28,
+     "auroc": 0.581,
+     "lo": 0.4078,
+     "hi": 0.7482
+    },
+    "margin_score": {
+     "auroc": 0.588,
+     "lo": 0.4291,
+     "hi": 0.7347
+    },
+    "earlier": {
+     "auroc": 0.63,
+     "lo": 0.46,
+     "hi": 0.78,
+     "source": "lens_c3.md",
+     "note": "first 50 generated tokens"
+    }
+   },
+   "think_end|jlens": {
+    "auroc": 0.4632,
+    "lo": 0.3136,
+    "hi": 0.6215,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.3782,
+     "lo": 0.2307,
+     "hi": 0.5477
+    },
+    "best_layer": {
+     "layer": 18,
+     "auroc": 0.3357,
+     "lo": 0.2119,
+     "hi": 0.476
+    },
+    "margin_score": {
+     "auroc": 0.4797,
+     "lo": 0.2901,
+     "hi": 0.6728
+    },
+    "earlier": {
+     "auroc": 0.47,
+     "lo": 0.32,
+     "hi": 0.62,
+     "source": "lens_c3.md",
+     "note": "correct-over-B rank"
+    }
+   },
+   "think_end|logit": {
+    "auroc": 0.5193,
+    "lo": 0.3558,
+    "hi": 0.6846,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.3745,
+     "lo": 0.2318,
+     "hi": 0.5433
+    },
+    "best_layer": {
+     "layer": 18,
+     "auroc": 0.6411,
+     "lo": 0.4827,
+     "hi": 0.7941
+    },
+    "margin_score": {
+     "auroc": 0.5253,
+     "lo": 0.3311,
+     "hi": 0.7111
+    }
+   },
+   "think_end|probe": {
+    "auroc": 0.9031,
+    "lo": 0.8376,
+    "hi": 0.9558,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.9176,
+     "lo": 0.8378,
+     "hi": 0.9832
+    },
+    "best_layer": {
+     "layer": 24,
+     "auroc": 0.9031,
+     "lo": 0.8376,
+     "hi": 0.9558
+    },
+    "layer": 24
+   },
+   "pre_answer|jlens": {
+    "auroc": 0.0001,
+    "lo": 0.0,
+    "hi": 0.0007,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "best_layer": {
+     "layer": 28,
+     "auroc": 0.0006,
+     "lo": 0.0,
+     "hi": 0.0033
+    },
+    "margin_score": {
+     "auroc": 0.0087,
+     "lo": 0.0002,
+     "hi": 0.0254
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|logit": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "best_layer": {
+     "layer": 24,
+     "auroc": 0.0005,
+     "lo": 0.0,
+     "hi": 0.0018
+    },
+    "margin_score": {
+     "auroc": 0.0985,
+     "lo": 0.0151,
+     "hi": 0.198
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|probe": {
+    "auroc": 0.9909,
+    "lo": 0.9765,
+    "hi": 0.9993,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.9835,
+     "lo": 0.9595,
+     "hi": 1.0
+    },
+    "best_layer": {
+     "layer": 24,
+     "auroc": 0.9909,
+     "lo": 0.9765,
+     "hi": 0.9993
+    },
+    "layer": 24
+   },
+   "pre_answer|blackbox": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0018,
+     "lo": 0.0,
+     "hi": 0.0078
+    },
+    "note": "the final answers differ, so the model's own answer separates them trivially"
+   },
+   "whole|monitor": {
+    "auroc": 0.2231,
+    "lo": 0.1631,
+    "hi": 0.2833,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.1923,
+     "lo": 0.0758,
+     "hi": 0.3376
+    },
+    "rates": {
+     "pos": 0.066,
+     "neg": 0.619
+    }
+   },
+   "whole|length": {
+    "auroc": 0.2271,
+    "lo": 0.1355,
+    "hi": 0.3206,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.2816,
+     "lo": 0.165,
+     "hi": 0.4047
+    },
+    "reasoning_length": {
+     "auroc": 0.2739,
+     "lo": 0.1644,
+     "hi": 0.3876
+    },
+    "earlier": {
+     "auroc": 0.27,
+     "lo": 0.16,
+     "hi": 0.39,
+     "source": "lens_c3.md",
+     "note": "reasoning length"
+    }
+   },
+   "mid|blackbox": {
+    "auroc": 0.3,
+    "lo": 0.15,
+    "hi": 0.48,
+    "source": "lens_c3.md",
+    "note": "forced answer at 20% of the reasoning, log p(correct) - log p(B)"
+   }
+  },
+  "c3_reel": {
+   "pre_answer|jlens": {
+    "auroc": 0.86,
+    "lo": 0.77,
+    "hi": 0.96,
+    "source": "lens_c3.md",
+    "note": "score S; 51 vs 10 runs, 17 vs 10 items; may be an item effect"
+   },
+   "pre_answer|logit": {
+    "auroc": 0.77,
+    "lo": 0.61,
+    "hi": 0.91,
+    "source": "lens_c3.md",
+    "note": "score S"
+   },
+   "mid|jlens": {
+    "auroc": 0.66,
+    "lo": 0.45,
+    "hi": 0.85,
+    "source": "lens_c3.md",
+    "note": "first 50 generated tokens"
+   },
+   "mid|logit": {
+    "auroc": 0.52,
+    "lo": null,
+    "hi": null,
+    "source": "lens_c3.md",
+    "note": "first 50 generated tokens"
+   },
+   "mid|blackbox": {
+    "auroc": 0.45,
+    "lo": null,
+    "hi": null,
+    "source": "lens_c3.md",
+    "note": "forced answer at 20% of the reasoning"
+   },
+   "whole|monitor": {
+    "auroc": 0.42,
+    "lo": null,
+    "hi": null,
+    "source": "lens_c3.md",
+    "note": "CoT text features 0.37-0.47 (midpoint shown)"
+   },
+   "whole|length": {
+    "auroc": 0.45,
+    "lo": null,
+    "hi": null,
+    "source": "lens_c3.md",
+    "note": "reasoning length"
+   }
+  },
+  "hack": {
+   "last_prompt|jlens": {
+    "auroc": 0.5096,
+    "lo": 0.4878,
+    "hi": 0.5328,
+    "source": "new",
+    "note": "hack-word score; problem-level means"
+   },
+   "last_prompt|logit": {
+    "auroc": 0.4954,
+    "lo": 0.4809,
+    "hi": 0.5089,
+    "source": "new",
+    "note": "hack-word score; problem-level means"
+   },
+   "last_prompt|blackbox": {
+    "auroc": 0.4951,
+    "lo": 0.4767,
+    "hi": 0.5132,
+    "source": "new",
+    "note": "hack-word score; problem-level means"
+   },
+   "last_prompt|probe": {
+    "auroc": 0.5052,
+    "lo": 0.4849,
+    "hi": 0.5309,
+    "source": "new",
+    "note": "probe trained on hidden vs no-hack, L24"
+   },
+   "mid|jlens": {
+    "auroc": 0.4392,
+    "lo": 0.3278,
+    "hi": 0.5473,
+    "source": "new",
+    "note": "hack-word score; problem-level means",
+    "earlier": {
+     "auroc": 0.44,
+     "lo": 0.33,
+     "hi": 0.55,
+     "source": "hack_organism.md",
+     "note": "PRE-REGISTERED H2a: hack-word score at echo-free reasoning positions"
+    }
+   },
+   "mid|logit": {
+    "auroc": 0.4703,
+    "lo": 0.3674,
+    "hi": 0.57,
+    "source": "new",
+    "note": "hack-word score; problem-level means",
+    "earlier": {
+     "auroc": 0.47,
+     "lo": 0.37,
+     "hi": 0.57,
+     "source": "hack_organism.md",
+     "note": "H2a"
+    }
+   },
+   "mid|blackbox": {
+    "auroc": 0.4473,
+    "lo": 0.3467,
+    "hi": 0.5493,
+    "source": "new",
+    "note": "hack-word score; problem-level means"
+   },
+   "mid|probe": {
+    "auroc": 0.5743,
+    "lo": 0.4777,
+    "hi": 0.6722,
+    "source": "new",
+    "note": "probe trained on hidden vs no-hack, L24",
+    "earlier": {
+     "auroc": 0.6,
+     "lo": 0.5,
+     "hi": 0.7,
+     "source": "hack_organism.md",
+     "note": "probe trained on hidden vs no-hack, L24, problems held out (exploratory); transfer from named hacks: 0.39 [0.29, 0.50]"
+    }
+   },
+   "think_end|jlens": {
+    "auroc": 0.574,
+    "lo": 0.4648,
+    "hi": 0.6823,
+    "source": "new",
+    "note": "hack-word score; problem-level means"
+   },
+   "think_end|logit": {
+    "auroc": 0.5406,
+    "lo": 0.4504,
+    "hi": 0.6263,
+    "source": "new",
+    "note": "hack-word score; problem-level means"
+   },
+   "think_end|blackbox": {
+    "auroc": 0.4591,
+    "lo": 0.3608,
+    "hi": 0.5522,
+    "source": "new",
+    "note": "hack-word score; problem-level means"
+   },
+   "think_end|probe": {
+    "auroc": 0.6943,
+    "lo": 0.5964,
+    "hi": 0.7851,
+    "source": "new",
+    "note": "probe trained on hidden vs no-hack, L24"
+   },
+   "pre_answer|jlens": {
+    "auroc": 0.5846,
+    "lo": 0.4955,
+    "hi": 0.6831,
+    "source": "new",
+    "note": "hack-word score; problem-level means",
+    "earlier": {
+     "auroc": 0.59,
+     "lo": 0.51,
+     "hi": 0.68,
+     "source": "hack_organism.md",
+     "note": "right before the code (exploratory)"
+    }
+   },
+   "pre_answer|logit": {
+    "auroc": 0.6053,
+    "lo": 0.5036,
+    "hi": 0.7073,
+    "source": "new",
+    "note": "hack-word score; problem-level means",
+    "earlier": {
+     "auroc": 0.62,
+     "lo": 0.52,
+     "hi": 0.71,
+     "source": "hack_organism.md",
+     "note": "right before the code"
+    }
+   },
+   "pre_answer|blackbox": {
+    "auroc": 0.575,
+    "lo": 0.4743,
+    "hi": 0.6777,
+    "source": "new",
+    "note": "hack-word score; problem-level means"
+   },
+   "pre_answer|probe": {
+    "auroc": 0.6248,
+    "lo": 0.532,
+    "hi": 0.7116,
+    "source": "new",
+    "note": "probe trained on hidden vs no-hack, L24"
+   },
+   "whole|monitor": {
+    "auroc": 0.3475,
+    "lo": 0.2881,
+    "hi": 0.4068,
+    "source": "new",
+    "note": "hack keyword lists; fires on 0% of hidden and 28% of no-hack runs"
+   },
+   "whole|length": {
+    "auroc": 0.42,
+    "lo": null,
+    "hi": null,
+    "source": "hack_organism.md",
+    "note": "reasoning length"
+   }
+  },
+  "grader_q14": {
+   "last_prompt|jlens": {
+    "auroc": 0.5164,
+    "lo": 0.4587,
+    "hi": 0.5768,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5386,
+     "lo": 0.4902,
+     "hi": 0.5877
+    },
+    "best_layer": {
+     "layer": 18,
+     "auroc": 0.5311,
+     "lo": 0.4586,
+     "hi": 0.6078
+    },
+    "margin_score": {
+     "auroc": 0.5557,
+     "lo": 0.505,
+     "hi": 0.6104
+    }
+   },
+   "last_prompt|logit": {
+    "auroc": 0.4426,
+    "lo": 0.382,
+    "hi": 0.5039,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5519,
+     "lo": 0.502,
+     "hi": 0.6048
+    },
+    "best_layer": {
+     "layer": 28,
+     "auroc": 0.4279,
+     "lo": 0.3589,
+     "hi": 0.4955
+    },
+    "margin_score": {
+     "auroc": 0.4485,
+     "lo": 0.3945,
+     "hi": 0.5043
+    }
+   },
+   "last_prompt|probe": {
+    "auroc": 0.4905,
+    "lo": 0.4282,
+    "hi": 0.5591,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5071,
+     "lo": 0.4574,
+     "hi": 0.5619
+    },
+    "best_layer": {
+     "layer": 36,
+     "auroc": 0.5569,
+     "lo": 0.4921,
+     "hi": 0.6216
+    },
+    "layer": 27,
+    "note": "the last prompt token is shared by every sample of a prompt: item-level"
+   },
+   "mid|jlens": {
+    "auroc": 0.4938,
+    "lo": 0.4317,
+    "hi": 0.5573,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4538,
+     "lo": 0.3796,
+     "hi": 0.5311
+    },
+    "best_layer": {
+     "layer": 18,
+     "auroc": 0.4121,
+     "lo": 0.3509,
+     "hi": 0.4721
+    },
+    "margin_score": {
+     "auroc": 0.5631,
+     "lo": 0.4945,
+     "hi": 0.6298
+    }
+   },
+   "mid|logit": {
+    "auroc": 0.5548,
+    "lo": 0.4861,
+    "hi": 0.62,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4641,
+     "lo": 0.3713,
+     "hi": 0.5543
+    },
+    "best_layer": {
+     "layer": 20,
+     "auroc": 0.5786,
+     "lo": 0.5041,
+     "hi": 0.6517
+    },
+    "margin_score": {
+     "auroc": 0.5634,
+     "lo": 0.485,
+     "hi": 0.6419
+    }
+   },
+   "think_end|jlens": {
+    "auroc": 0.5517,
+    "lo": 0.4715,
+    "hi": 0.6302,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.3986,
+     "lo": 0.3136,
+     "hi": 0.4775
+    },
+    "best_layer": {
+     "layer": 16,
+     "auroc": 0.5655,
+     "lo": 0.5024,
+     "hi": 0.6292
+    },
+    "margin_score": {
+     "auroc": 0.5386,
+     "lo": 0.4663,
+     "hi": 0.6123
+    }
+   },
+   "think_end|logit": {
+    "auroc": 0.4418,
+    "lo": 0.3768,
+    "hi": 0.505,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.3666,
+     "lo": 0.3019,
+     "hi": 0.4318
+    },
+    "best_layer": {
+     "layer": 26,
+     "auroc": 0.4325,
+     "lo": 0.3691,
+     "hi": 0.4947
+    },
+    "margin_score": {
+     "auroc": 0.4535,
+     "lo": 0.3761,
+     "hi": 0.5257
+    }
+   },
+   "think_end|probe": {
+    "auroc": 0.9933,
+    "lo": 0.985,
+    "hi": 0.9987,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.9921,
+     "lo": 0.9831,
+     "hi": 0.9983
+    },
+    "best_layer": {
+     "layer": 36,
+     "auroc": 0.9934,
+     "lo": 0.9852,
+     "hi": 0.9985
+    },
+    "layer": 27
+   },
+   "pre_answer|jlens": {
+    "auroc": 0.0114,
+    "lo": 0.0029,
+    "hi": 0.0238,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0016,
+     "lo": 0.0,
+     "hi": 0.0042
+    },
+    "best_layer": {
+     "layer": 30,
+     "auroc": 0.0095,
+     "lo": 0.0028,
+     "hi": 0.0201
+    },
+    "margin_score": {
+     "auroc": 0.057,
+     "lo": 0.0316,
+     "hi": 0.0905
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|logit": {
+    "auroc": 0.0169,
+    "lo": 0.0062,
+    "hi": 0.0316,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0011,
+     "lo": 0.0,
+     "hi": 0.0032
+    },
+    "best_layer": {
+     "layer": 34,
+     "auroc": 0.0126,
+     "lo": 0.004,
+     "hi": 0.0232
+    },
+    "margin_score": {
+     "auroc": 0.1045,
+     "lo": 0.0665,
+     "hi": 0.1491
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|probe": {
+    "auroc": 0.9987,
+    "lo": 0.9961,
+    "hi": 1.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.9987,
+     "lo": 0.996,
+     "hi": 1.0
+    },
+    "best_layer": {
+     "layer": 27,
+     "auroc": 0.9987,
+     "lo": 0.9961,
+     "hi": 1.0
+    },
+    "layer": 27
+   },
+   "pre_answer|blackbox": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0001,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0043,
+     "lo": 0.0007,
+     "hi": 0.009
+    },
+    "note": "the final answers differ, so the model's own answer separates them trivially"
+   },
+   "whole|monitor": {
+    "auroc": 0.5,
+    "lo": 0.5,
+    "hi": 0.5,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5,
+     "lo": 0.5,
+     "hi": 0.5
+    },
+    "rates": {
+     "pos": 1.0,
+     "neg": 1.0
+    },
+    "note": "mentions the bug (label list): fires on 100% of followers and 100% of resisters"
+   },
+   "whole|length": {
+    "auroc": 0.7583,
+    "lo": 0.696,
+    "hi": 0.8154,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.7643,
+     "lo": 0.6906,
+     "hi": 0.8351
+    },
+    "reasoning_length": {
+     "auroc": 0.7596,
+     "lo": 0.6976,
+     "hi": 0.8164
+    }
+   },
+   "whole|monitor_intent": {
+    "auroc": 0.6953,
+    "lo": 0.6421,
+    "hi": 0.7472,
+    "source": "new",
+    "note": "exploit-intent words (label list): fires on 80% of followers and 41% of resisters"
+   },
+   "mid|jlens_concept": {
+    "auroc": 0.85,
+    "lo": 0.8,
+    "hi": 0.9,
+    "source": "models_grader.md",
+    "note": "grader/cheat words along the reasoning; tracks the text, which names the bug"
+   },
+   "mid|logit_concept": {
+    "auroc": 0.8,
+    "lo": null,
+    "hi": null,
+    "source": "models_grader.md",
+    "note": "grader words along the reasoning"
+   },
+   "last_prompt|jlens_concept": {
+    "auroc": 0.6,
+    "lo": 0.53,
+    "hi": 0.66,
+    "source": "models_grader.md",
+    "note": "grader words, item × arm level"
+   },
+   "last_prompt|logit_concept": {
+    "auroc": 0.48,
+    "lo": 0.43,
+    "hi": 0.54,
+    "source": "models_grader.md",
+    "note": "grader words"
+   }
+  },
+  "grader_gptoss": {
+   "last_prompt|jlens": {
+    "auroc": 0.4941,
+    "lo": 0.456,
+    "hi": 0.5317,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4735,
+     "lo": 0.4257,
+     "hi": 0.5242
+    },
+    "best_layer": {
+     "layer": 17,
+     "auroc": 0.465,
+     "lo": 0.427,
+     "hi": 0.4997
+    },
+    "margin_score": {
+     "auroc": 0.4889,
+     "lo": 0.4478,
+     "hi": 0.5269
+    }
+   },
+   "last_prompt|logit": {
+    "auroc": 0.4911,
+    "lo": 0.4508,
+    "hi": 0.5324,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4449,
+     "lo": 0.3972,
+     "hi": 0.4958
+    },
+    "best_layer": {
+     "layer": 17,
+     "auroc": 0.46,
+     "lo": 0.4203,
+     "hi": 0.4996
+    },
+    "margin_score": {
+     "auroc": 0.5009,
+     "lo": 0.46,
+     "hi": 0.5398
+    }
+   },
+   "last_prompt|probe": {
+    "auroc": 0.5993,
+    "lo": 0.5575,
+    "hi": 0.6385,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5806,
+     "lo": 0.5356,
+     "hi": 0.6236
+    },
+    "best_layer": {
+     "layer": 11,
+     "auroc": 0.6264,
+     "lo": 0.5889,
+     "hi": 0.6615
+    },
+    "layer": 16,
+    "note": "the last prompt token is shared by every sample of a prompt: item-level"
+   },
+   "mid|jlens": {
+    "auroc": 0.4663,
+    "lo": 0.4266,
+    "hi": 0.5047,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.444,
+     "lo": 0.3874,
+     "hi": 0.5025
+    },
+    "best_layer": {
+     "layer": 21,
+     "auroc": 0.4399,
+     "lo": 0.3979,
+     "hi": 0.4796
+    },
+    "margin_score": {
+     "auroc": 0.4993,
+     "lo": 0.4568,
+     "hi": 0.5409
+    }
+   },
+   "mid|logit": {
+    "auroc": 0.5104,
+    "lo": 0.4713,
+    "hi": 0.551,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4979,
+     "lo": 0.4426,
+     "hi": 0.557
+    },
+    "best_layer": {
+     "layer": 17,
+     "auroc": 0.5271,
+     "lo": 0.4865,
+     "hi": 0.5695
+    },
+    "margin_score": {
+     "auroc": 0.4917,
+     "lo": 0.4525,
+     "hi": 0.5312
+    }
+   },
+   "think_end|jlens": {
+    "auroc": 0.4623,
+    "lo": 0.4221,
+    "hi": 0.5016,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4548,
+     "lo": 0.4057,
+     "hi": 0.5044
+    },
+    "best_layer": {
+     "layer": 19,
+     "auroc": 0.4462,
+     "lo": 0.4042,
+     "hi": 0.4864
+    },
+    "margin_score": {
+     "auroc": 0.5052,
+     "lo": 0.4637,
+     "hi": 0.5477
+    }
+   },
+   "think_end|logit": {
+    "auroc": 0.5081,
+    "lo": 0.4658,
+    "hi": 0.5507,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4451,
+     "lo": 0.3939,
+     "hi": 0.4968
+    },
+    "best_layer": {
+     "layer": 9,
+     "auroc": 0.5258,
+     "lo": 0.483,
+     "hi": 0.5675
+    },
+    "margin_score": {
+     "auroc": 0.5203,
+     "lo": 0.4754,
+     "hi": 0.5605
+    }
+   },
+   "think_end|probe": {
+    "auroc": 0.9999,
+    "lo": 0.9998,
+    "hi": 1.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.9996,
+     "lo": 0.999,
+     "hi": 1.0
+    },
+    "best_layer": {
+     "layer": 16,
+     "auroc": 0.9999,
+     "lo": 0.9998,
+     "hi": 1.0
+    },
+    "layer": 16
+   },
+   "pre_answer|jlens": {
+    "auroc": 0.001,
+    "lo": 0.0,
+    "hi": 0.0029,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0,
+     "lo": 0.0,
+     "hi": 0.0002
+    },
+    "best_layer": {
+     "layer": 19,
+     "auroc": 0.0013,
+     "lo": 0.0,
+     "hi": 0.0034
+    },
+    "margin_score": {
+     "auroc": 0.0637,
+     "lo": 0.0382,
+     "hi": 0.0897
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|logit": {
+    "auroc": 0.0439,
+    "lo": 0.0266,
+    "hi": 0.0643,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0001,
+     "lo": 0.0,
+     "hi": 0.0005
+    },
+    "best_layer": {
+     "layer": 19,
+     "auroc": 0.0027,
+     "lo": 0.0006,
+     "hi": 0.0054
+    },
+    "margin_score": {
+     "auroc": 0.1687,
+     "lo": 0.1324,
+     "hi": 0.2066
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|probe": {
+    "auroc": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "best_layer": {
+     "layer": 16,
+     "auroc": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "layer": 16
+   },
+   "pre_answer|blackbox": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "note": "the final answers differ, so the model's own answer separates them trivially"
+   },
+   "whole|monitor": {
+    "auroc": 0.5041,
+    "lo": 0.5,
+    "hi": 0.5106,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5021,
+     "lo": 0.4945,
+     "hi": 0.5125
+    },
+    "rates": {
+     "pos": 1.0,
+     "neg": 0.992
+    },
+    "note": "mentions the bug (label list): fires on 100% of followers and 99% of resisters"
+   },
+   "whole|length": {
+    "auroc": 0.5138,
+    "lo": 0.4669,
+    "hi": 0.5625,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.556,
+     "lo": 0.5043,
+     "hi": 0.607
+    },
+    "reasoning_length": {
+     "auroc": 0.5154,
+     "lo": 0.4682,
+     "hi": 0.5649
+    }
+   },
+   "whole|monitor_intent": {
+    "auroc": 0.6488,
+    "lo": 0.6118,
+    "hi": 0.6828,
+    "source": "new",
+    "note": "exploit-intent words (label list): fires on 48% of followers and 18% of resisters"
+   },
+   "mid|jlens_concept": {
+    "auroc": 0.83,
+    "lo": null,
+    "hi": null,
+    "source": "models_grader.md",
+    "note": "grader words along the reasoning"
+   },
+   "mid|logit_concept": {
+    "auroc": 0.81,
+    "lo": null,
+    "hi": null,
+    "source": "models_grader.md",
+    "note": "grader words along the reasoning"
+   }
+  },
+  "grader_nt8": {
+   "last_prompt|jlens": {
+    "auroc": 0.5154,
+    "lo": 0.4564,
+    "hi": 0.5789,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4944,
+     "lo": 0.4376,
+     "hi": 0.5483
+    },
+    "best_layer": {
+     "layer": 24,
+     "auroc": 0.5455,
+     "lo": 0.4856,
+     "hi": 0.607
+    },
+    "margin_score": {
+     "auroc": 0.5534,
+     "lo": 0.4992,
+     "hi": 0.6057
+    }
+   },
+   "last_prompt|logit": {
+    "auroc": 0.5255,
+    "lo": 0.4601,
+    "hi": 0.5963,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4702,
+     "lo": 0.4176,
+     "hi": 0.52
+    },
+    "best_layer": {
+     "layer": 24,
+     "auroc": 0.5361,
+     "lo": 0.4662,
+     "hi": 0.6055
+    },
+    "margin_score": {
+     "auroc": 0.5481,
+     "lo": 0.4963,
+     "hi": 0.5978
+    }
+   },
+   "last_prompt|probe": {
+    "auroc": 0.557,
+    "lo": 0.4944,
+    "hi": 0.621,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.6002,
+     "lo": 0.5537,
+     "hi": 0.642
+    },
+    "best_layer": {
+     "layer": 16,
+     "auroc": 0.6009,
+     "lo": 0.55,
+     "hi": 0.6506
+    },
+    "layer": 24,
+    "note": "the last prompt token is shared by every sample of a prompt: item-level"
+   },
+   "mid|jlens": {
+    "auroc": 0.5337,
+    "lo": 0.4697,
+    "hi": 0.5997,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5258,
+     "lo": 0.4529,
+     "hi": 0.5943
+    },
+    "best_layer": {
+     "layer": 26,
+     "auroc": 0.5413,
+     "lo": 0.4812,
+     "hi": 0.6045
+    },
+    "margin_score": {
+     "auroc": 0.5298,
+     "lo": 0.4748,
+     "hi": 0.5819
+    }
+   },
+   "mid|logit": {
+    "auroc": 0.5417,
+    "lo": 0.4844,
+    "hi": 0.6047,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5431,
+     "lo": 0.478,
+     "hi": 0.6067
+    },
+    "best_layer": {
+     "layer": 14,
+     "auroc": 0.5427,
+     "lo": 0.4853,
+     "hi": 0.6038
+    },
+    "margin_score": {
+     "auroc": 0.5673,
+     "lo": 0.5105,
+     "hi": 0.6221
+    }
+   },
+   "pre_answer|jlens": {
+    "auroc": 0.0025,
+    "lo": 0.0003,
+    "hi": 0.0058,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0029,
+     "lo": 0.0004,
+     "hi": 0.0061
+    },
+    "best_layer": {
+     "layer": 28,
+     "auroc": 0.0008,
+     "lo": 0.0001,
+     "hi": 0.0021
+    },
+    "margin_score": {
+     "auroc": 0.0132,
+     "lo": 0.0039,
+     "hi": 0.026
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|logit": {
+    "auroc": 0.0038,
+    "lo": 0.0011,
+    "hi": 0.0078,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.003,
+     "lo": 0.0005,
+     "hi": 0.0064
+    },
+    "best_layer": {
+     "layer": 32,
+     "auroc": 0.0013,
+     "lo": 0.0001,
+     "hi": 0.0033
+    },
+    "margin_score": {
+     "auroc": 0.0236,
+     "lo": 0.0125,
+     "hi": 0.0368
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|probe": {
+    "auroc": 0.9934,
+    "lo": 0.9874,
+    "hi": 0.9983,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.9931,
+     "lo": 0.9857,
+     "hi": 0.9984
+    },
+    "best_layer": {
+     "layer": 24,
+     "auroc": 0.9934,
+     "lo": 0.9874,
+     "hi": 0.9983
+    },
+    "layer": 24
+   },
+   "pre_answer|blackbox": {
+    "auroc": 0.0005,
+    "lo": 0.0,
+    "hi": 0.0014,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.009,
+     "lo": 0.0032,
+     "hi": 0.0166
+    },
+    "note": "the final answers differ, so the model's own answer separates them trivially"
+   },
+   "whole|monitor": {
+    "auroc": 0.6164,
+    "lo": 0.5771,
+    "hi": 0.6598,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.669,
+     "lo": 0.6064,
+     "hi": 0.7283
+    },
+    "rates": {
+     "pos": 0.995,
+     "neg": 0.762
+    },
+    "note": "mentions the bug (label list): fires on 100% of followers and 76% of resisters"
+   },
+   "whole|length": {
+    "auroc": 0.5059,
+    "lo": 0.4538,
+    "hi": 0.5612,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.6605,
+     "lo": 0.6018,
+     "hi": 0.7156
+    },
+    "reasoning_length": {
+     "auroc": 0.5062,
+     "lo": 0.4539,
+     "hi": 0.5617
+    }
+   },
+   "whole|monitor_intent": {
+    "auroc": 0.5159,
+    "lo": 0.5024,
+    "hi": 0.5341,
+    "source": "new",
+    "note": "exploit-intent words (label list): fires on 3% of followers and 0% of resisters"
+   },
+   "last_prompt|jlens_concept": {
+    "auroc": 0.51,
+    "lo": null,
+    "hi": null,
+    "source": "models_grader.md",
+    "note": "grader words"
+   },
+   "last_prompt|logit_concept": {
+    "auroc": 0.52,
+    "lo": null,
+    "hi": null,
+    "source": "models_grader.md",
+    "note": "grader words"
+   },
+   "pre_answer|jlens_concept": {
+    "auroc": 0.72,
+    "lo": null,
+    "hi": null,
+    "source": "models_grader.md",
+    "note": "grader words at the answer position"
+   },
+   "pre_answer|logit_concept": {
+    "auroc": 0.87,
+    "lo": null,
+    "hi": null,
+    "source": "models_grader.md",
+    "note": "grader words at the answer position"
+   }
+  },
+  "grader_nt14": {
+   "last_prompt|jlens": {
+    "auroc": 0.5395,
+    "lo": 0.4906,
+    "hi": 0.5891,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.4938,
+     "lo": 0.4547,
+     "hi": 0.529
+    },
+    "best_layer": {
+     "layer": 20,
+     "auroc": 0.4339,
+     "lo": 0.3837,
+     "hi": 0.483
+    },
+    "margin_score": {
+     "auroc": 0.4987,
+     "lo": 0.4438,
+     "hi": 0.5528
+    }
+   },
+   "last_prompt|logit": {
+    "auroc": 0.54,
+    "lo": 0.493,
+    "hi": 0.5898,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.511,
+     "lo": 0.4707,
+     "hi": 0.5518
+    },
+    "best_layer": {
+     "layer": 34,
+     "auroc": 0.5738,
+     "lo": 0.525,
+     "hi": 0.6204
+    },
+    "margin_score": {
+     "auroc": 0.5074,
+     "lo": 0.454,
+     "hi": 0.559
+    }
+   },
+   "last_prompt|probe": {
+    "auroc": 0.6305,
+    "lo": 0.5848,
+    "hi": 0.6723,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.53,
+     "lo": 0.4903,
+     "hi": 0.5669
+    },
+    "best_layer": {
+     "layer": 27,
+     "auroc": 0.6305,
+     "lo": 0.5848,
+     "hi": 0.6723
+    },
+    "layer": 27,
+    "note": "the last prompt token is shared by every sample of a prompt: item-level"
+   },
+   "mid|jlens": {
+    "auroc": 0.564,
+    "lo": 0.5143,
+    "hi": 0.6147,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5613,
+     "lo": 0.5156,
+     "hi": 0.6084
+    },
+    "best_layer": {
+     "layer": 34,
+     "auroc": 0.5917,
+     "lo": 0.5439,
+     "hi": 0.6417
+    },
+    "margin_score": {
+     "auroc": 0.5524,
+     "lo": 0.5002,
+     "hi": 0.6036
+    }
+   },
+   "mid|logit": {
+    "auroc": 0.5541,
+    "lo": 0.5041,
+    "hi": 0.6073,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.5346,
+     "lo": 0.4824,
+     "hi": 0.5835
+    },
+    "best_layer": {
+     "layer": 20,
+     "auroc": 0.5595,
+     "lo": 0.5056,
+     "hi": 0.6158
+    },
+    "margin_score": {
+     "auroc": 0.5491,
+     "lo": 0.4936,
+     "hi": 0.602
+    }
+   },
+   "pre_answer|jlens": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0002,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0002,
+     "lo": 0.0,
+     "hi": 0.0005
+    },
+    "best_layer": {
+     "layer": 28,
+     "auroc": 0.0004,
+     "lo": 0.0,
+     "hi": 0.0013
+    },
+    "margin_score": {
+     "auroc": 0.0029,
+     "lo": 0.0003,
+     "hi": 0.0069
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|logit": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0001,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0001,
+     "lo": 0.0,
+     "hi": 0.0005
+    },
+    "best_layer": {
+     "layer": 28,
+     "auroc": 0.0002,
+     "lo": 0.0,
+     "hi": 0.0006
+    },
+    "margin_score": {
+     "auroc": 0.0034,
+     "lo": 0.0002,
+     "hi": 0.0093
+    },
+    "note": "the final answers differ, so this reads the answer being written"
+   },
+   "pre_answer|probe": {
+    "auroc": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.9997,
+     "lo": 0.9991,
+     "hi": 1.0
+    },
+    "best_layer": {
+     "layer": 27,
+     "auroc": 1.0,
+     "lo": 1.0,
+     "hi": 1.0
+    },
+    "layer": 27
+   },
+   "pre_answer|blackbox": {
+    "auroc": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.0014,
+     "lo": 0.0003,
+     "hi": 0.0028
+    },
+    "note": "the final answers differ, so the model's own answer separates them trivially"
+   },
+   "whole|monitor": {
+    "auroc": 0.6901,
+    "lo": 0.6491,
+    "hi": 0.7337,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.7754,
+     "lo": 0.726,
+     "hi": 0.82
+    },
+    "rates": {
+     "pos": 0.986,
+     "neg": 0.605
+    },
+    "note": "mentions the bug (label list): fires on 99% of followers and 60% of resisters"
+   },
+   "whole|length": {
+    "auroc": 0.5216,
+    "lo": 0.4674,
+    "hi": 0.5751,
+    "source": "new",
+    "within_item": {
+     "auroc": 0.6117,
+     "lo": 0.5596,
+     "hi": 0.6609
+    },
+    "reasoning_length": {
+     "auroc": 0.5218,
+     "lo": 0.4675,
+     "hi": 0.5751
+    }
+   },
+   "whole|monitor_intent": {
+    "auroc": 0.5087,
+    "lo": 0.4998,
+    "hi": 0.5175,
+    "source": "new",
+    "note": "exploit-intent words (label list): fires on 3% of followers and 1% of resisters"
+   },
+   "last_prompt|jlens_concept": {
+    "auroc": 0.52,
+    "lo": null,
+    "hi": null,
+    "source": "models_grader.md",
+    "note": "grader words"
+   },
+   "last_prompt|logit_concept": {
+    "auroc": 0.48,
+    "lo": null,
+    "hi": null,
+    "source": "models_grader.md",
+    "note": "grader words"
+   },
+   "pre_answer|jlens_concept": {
+    "auroc": 0.77,
+    "lo": 0.72,
+    "hi": 0.82,
+    "source": "models_grader.md",
+    "note": "grader words at the answer position"
+   },
+   "pre_answer|logit_concept": {
+    "auroc": 0.53,
+    "lo": 0.47,
+    "hi": 0.59,
+    "source": "models_grader.md",
+    "note": "grader words at the answer position"
+   }
+  }
+ },
+ "option_words": {
+  "groups": {
+   "unhinted": {
+    "n_runs": 572,
+    "n_items": 164
+   },
+   "kb_instr": {
+    "n_runs": 348,
+    "n_items": 39
+   },
+   "i2_says_b": {
+    "n_runs": 32,
+    "n_items": 13
+   },
+   "i2_knows": {
+    "n_runs": 162,
+    "n_items": 38
+   },
+   "honest_error": {
+    "n_runs": 62,
+    "n_items": 14
+   },
+   "unstable_correct": {
+    "n_runs": 50,
+    "n_items": 18
+   },
+   "wording_switch": {
+    "n_runs": 193,
+    "n_items": 23
+   },
+   "wording_resisted": {
+    "n_runs": 125,
+    "n_items": 21
+   },
+   "c3_kept_b": {
+    "n_runs": 35,
+    "n_items": 12
+   },
+   "c3_recovered": {
+    "n_runs": 60,
+    "n_items": 15
+   }
+  },
+  "headline": {
+   "words_jlens": {
+    "layer": 20,
+    "unhinted": {
+     "mean": 0.4207,
+     "lo": 0.3455,
+     "hi": 0.4939,
+     "n_items": 164,
+     "n_runs": 572
+    },
+    "kb_instr": {
+     "mean": 0.3846,
+     "lo": 0.2308,
+     "hi": 0.5385,
+     "n_items": 39,
+     "n_runs": 348
+    },
+    "i2_says_b": {
+     "mean": 0.3846,
+     "lo": 0.1538,
+     "hi": 0.6923,
+     "n_items": 13,
+     "n_runs": 32
+    },
+    "i2_knows": {
+     "mean": 0.3684,
+     "lo": 0.2105,
+     "hi": 0.5263,
+     "n_items": 38,
+     "n_runs": 162
+    },
+    "honest_error": {
+     "mean": 0.2857,
+     "lo": 0.0714,
+     "hi": 0.5714,
+     "n_items": 14,
+     "n_runs": 62
+    },
+    "unstable_correct": {
+     "mean": 0.2778,
+     "lo": 0.1111,
+     "hi": 0.5,
+     "n_items": 18,
+     "n_runs": 50
+    },
+    "wording_switch": {
+     "mean": 0.3757,
+     "lo": 0.1739,
+     "hi": 0.5708,
+     "n_items": 23,
+     "n_runs": 193
+    },
+    "wording_resisted": {
+     "mean": 0.3175,
+     "lo": 0.127,
+     "hi": 0.5238,
+     "n_items": 21,
+     "n_runs": 125
+    },
+    "c3_kept_b": {
+     "mean": 0.1667,
+     "lo": 0.0,
+     "hi": 0.4167,
+     "n_items": 12,
+     "n_runs": 35
+    },
+    "c3_recovered": {
+     "mean": 0.3333,
+     "lo": 0.1333,
+     "hi": 0.6,
+     "n_items": 15,
+     "n_runs": 60
+    }
+   },
+   "letters_jlens": {
+    "layer": 20,
+    "unhinted": {
+     "mean": 0.2866,
+     "lo": 0.2195,
+     "hi": 0.3537,
+     "n_items": 164,
+     "n_runs": 572
+    },
+    "kb_instr": {
+     "mean": 0.2564,
+     "lo": 0.1282,
+     "hi": 0.4103,
+     "n_items": 39,
+     "n_runs": 348
+    },
+    "i2_says_b": {
+     "mean": 0.2308,
+     "lo": 0.0,
+     "hi": 0.4615,
+     "n_items": 13,
+     "n_runs": 32
+    },
+    "i2_knows": {
+     "mean": 0.2632,
+     "lo": 0.1316,
+     "hi": 0.3947,
+     "n_items": 38,
+     "n_runs": 162
+    },
+    "honest_error": {
+     "mean": 0.2857,
+     "lo": 0.0714,
+     "hi": 0.5,
+     "n_items": 14,
+     "n_runs": 62
+    },
+    "unstable_correct": {
+     "mean": 0.3333,
+     "lo": 0.1111,
+     "hi": 0.5556,
+     "n_items": 18,
+     "n_runs": 50
+    },
+    "wording_switch": {
+     "mean": 0.2609,
+     "lo": 0.087,
+     "hi": 0.4348,
+     "n_items": 23,
+     "n_runs": 193
+    },
+    "wording_resisted": {
+     "mean": 0.3333,
+     "lo": 0.1429,
+     "hi": 0.5238,
+     "n_items": 21,
+     "n_runs": 125
+    },
+    "c3_kept_b": {
+     "mean": 0.25,
+     "lo": 0.0,
+     "hi": 0.5,
+     "n_items": 12,
+     "n_runs": 35
+    },
+    "c3_recovered": {
+     "mean": 0.2667,
+     "lo": 0.0667,
+     "hi": 0.4667,
+     "n_items": 15,
+     "n_runs": 60
+    }
+   },
+   "poswords_jlens": {
+    "layer": 20,
+    "unhinted": {
+     "mean": 0.2724,
+     "lo": 0.2012,
+     "hi": 0.3394,
+     "n_items": 164,
+     "n_runs": 572
+    },
+    "kb_instr": {
+     "mean": 0.2795,
+     "lo": 0.1487,
+     "hi": 0.4282,
+     "n_items": 39,
+     "n_runs": 348
+    },
+    "i2_says_b": {
+     "mean": 0.3077,
+     "lo": 0.0769,
+     "hi": 0.6154,
+     "n_items": 13,
+     "n_runs": 32
+    },
+    "i2_knows": {
+     "mean": 0.2632,
+     "lo": 0.1316,
+     "hi": 0.3947,
+     "n_items": 38,
+     "n_runs": 162
+    },
+    "honest_error": {
+     "mean": 0.0714,
+     "lo": 0.0,
+     "hi": 0.2143,
+     "n_items": 14,
+     "n_runs": 62
+    },
+    "unstable_correct": {
+     "mean": 0.0556,
+     "lo": 0.0,
+     "hi": 0.1667,
+     "n_items": 18,
+     "n_runs": 50
+    },
+    "wording_switch": {
+     "mean": 0.2174,
+     "lo": 0.0435,
+     "hi": 0.3913,
+     "n_items": 23,
+     "n_runs": 193
+    },
+    "wording_resisted": {
+     "mean": 0.1587,
+     "lo": 0.0317,
+     "hi": 0.3333,
+     "n_items": 21,
+     "n_runs": 125
+    },
+    "c3_kept_b": {
+     "mean": 0.0833,
+     "lo": 0.0,
+     "hi": 0.25,
+     "n_items": 12,
+     "n_runs": 35
+    },
+    "c3_recovered": {
+     "mean": 0.2,
+     "lo": 0.0,
+     "hi": 0.4,
+     "n_items": 15,
+     "n_runs": 60
+    }
+   },
+   "negwords_jlens": {
+    "layer": 28,
+    "unhinted": {
+     "mean": 0.3455,
+     "lo": 0.2764,
+     "hi": 0.4126,
+     "n_items": 164,
+     "n_runs": 572
+    },
+    "kb_instr": {
+     "mean": 0.1795,
+     "lo": 0.0769,
+     "hi": 0.3077,
+     "n_items": 39,
+     "n_runs": 348
+    },
+    "i2_says_b": {
+     "mean": 0.3077,
+     "lo": 0.0769,
+     "hi": 0.5385,
+     "n_items": 13,
+     "n_runs": 32
+    },
+    "i2_knows": {
+     "mean": 0.1579,
+     "lo": 0.0526,
+     "hi": 0.2632,
+     "n_items": 38,
+     "n_runs": 162
+    },
+    "honest_error": {
+     "mean": 0.2143,
+     "lo": 0.0,
+     "hi": 0.4286,
+     "n_items": 14,
+     "n_runs": 62
+    },
+    "unstable_correct": {
+     "mean": 0.3889,
+     "lo": 0.1667,
+     "hi": 0.6111,
+     "n_items": 18,
+     "n_runs": 50
+    },
+    "wording_switch": {
+     "mean": 0.1725,
+     "lo": 0.0435,
+     "hi": 0.3304,
+     "n_items": 23,
+     "n_runs": 193
+    },
+    "wording_resisted": {
+     "mean": 0.1672,
+     "lo": 0.0349,
+     "hi": 0.3386,
+     "n_items": 21,
+     "n_runs": 125
+    },
+    "c3_kept_b": {
+     "mean": 0.1667,
+     "lo": 0.0,
+     "hi": 0.4167,
+     "n_items": 12,
+     "n_runs": 35
+    },
+    "c3_recovered": {
+     "mean": 0.1333,
+     "lo": 0.0,
+     "hi": 0.3333,
+     "n_items": 15,
+     "n_runs": 60
+    }
+   },
+   "words_logit": {
+    "layer": 20,
+    "unhinted": {
+     "mean": 0.4329,
+     "lo": 0.3537,
+     "hi": 0.5061,
+     "n_items": 164,
+     "n_runs": 572
+    },
+    "kb_instr": {
+     "mean": 0.4103,
+     "lo": 0.2564,
+     "hi": 0.5641,
+     "n_items": 39,
+     "n_runs": 348
+    },
+    "i2_says_b": {
+     "mean": 0.3846,
+     "lo": 0.1538,
+     "hi": 0.6923,
+     "n_items": 13,
+     "n_runs": 32
+    },
+    "i2_knows": {
+     "mean": 0.3947,
+     "lo": 0.2368,
+     "hi": 0.5526,
+     "n_items": 38,
+     "n_runs": 162
+    },
+    "honest_error": {
+     "mean": 0.3571,
+     "lo": 0.1429,
+     "hi": 0.6429,
+     "n_items": 14,
+     "n_runs": 62
+    },
+    "unstable_correct": {
+     "mean": 0.3333,
+     "lo": 0.1111,
+     "hi": 0.5556,
+     "n_items": 18,
+     "n_runs": 50
+    },
+    "wording_switch": {
+     "mean": 0.3106,
+     "lo": 0.1366,
+     "hi": 0.4969,
+     "n_items": 23,
+     "n_runs": 193
+    },
+    "wording_resisted": {
+     "mean": 0.2619,
+     "lo": 0.0952,
+     "hi": 0.4524,
+     "n_items": 21,
+     "n_runs": 125
+    },
+    "c3_kept_b": {
+     "mean": 0.1667,
+     "lo": 0.0,
+     "hi": 0.4167,
+     "n_items": 12,
+     "n_runs": 35
+    },
+    "c3_recovered": {
+     "mean": 0.2667,
+     "lo": 0.0667,
+     "hi": 0.4667,
+     "n_items": 15,
+     "n_runs": 60
+    }
+   },
+   "letters_logit": {
+    "layer": 20,
+    "unhinted": {
+     "mean": 0.2439,
+     "lo": 0.1809,
+     "hi": 0.3069,
+     "n_items": 164,
+     "n_runs": 572
+    },
+    "kb_instr": {
+     "mean": 0.2821,
+     "lo": 0.1538,
+     "hi": 0.4359,
+     "n_items": 39,
+     "n_runs": 348
+    },
+    "i2_says_b": {
+     "mean": 0.3846,
+     "lo": 0.1538,
+     "hi": 0.6154,
+     "n_items": 13,
+     "n_runs": 32
+    },
+    "i2_knows": {
+     "mean": 0.2895,
+     "lo": 0.1579,
+     "hi": 0.4474,
+     "n_items": 38,
+     "n_runs": 162
+    },
+    "honest_error": {
+     "mean": 0.4286,
+     "lo": 0.1429,
+     "hi": 0.7143,
+     "n_items": 14,
+     "n_runs": 62
+    },
+    "unstable_correct": {
+     "mean": 0.3889,
+     "lo": 0.1667,
+     "hi": 0.6111,
+     "n_items": 18,
+     "n_runs": 50
+    },
+    "wording_switch": {
+     "mean": 0.1304,
+     "lo": 0.0,
+     "hi": 0.2609,
+     "n_items": 23,
+     "n_runs": 193
+    },
+    "wording_resisted": {
+     "mean": 0.1429,
+     "lo": 0.0,
+     "hi": 0.2857,
+     "n_items": 21,
+     "n_runs": 125
+    },
+    "c3_kept_b": {
+     "mean": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "n_items": 12,
+     "n_runs": 35
+    },
+    "c3_recovered": {
+     "mean": 0.2,
+     "lo": 0.0,
+     "hi": 0.4,
+     "n_items": 15,
+     "n_runs": 60
+    }
+   },
+   "poswords_logit": {
+    "layer": 20,
+    "unhinted": {
+     "mean": 0.435,
+     "lo": 0.3598,
+     "hi": 0.5122,
+     "n_items": 164,
+     "n_runs": 572
+    },
+    "kb_instr": {
+     "mean": 0.5128,
+     "lo": 0.359,
+     "hi": 0.6667,
+     "n_items": 39,
+     "n_runs": 348
+    },
+    "i2_says_b": {
+     "mean": 0.4615,
+     "lo": 0.2308,
+     "hi": 0.7692,
+     "n_items": 13,
+     "n_runs": 32
+    },
+    "i2_knows": {
+     "mean": 0.4737,
+     "lo": 0.3158,
+     "hi": 0.6316,
+     "n_items": 38,
+     "n_runs": 162
+    },
+    "honest_error": {
+     "mean": 0.3571,
+     "lo": 0.1429,
+     "hi": 0.6429,
+     "n_items": 14,
+     "n_runs": 62
+    },
+    "unstable_correct": {
+     "mean": 0.3333,
+     "lo": 0.1111,
+     "hi": 0.5556,
+     "n_items": 18,
+     "n_runs": 50
+    },
+    "wording_switch": {
+     "mean": 0.5217,
+     "lo": 0.3043,
+     "hi": 0.7391,
+     "n_items": 23,
+     "n_runs": 193
+    },
+    "wording_resisted": {
+     "mean": 0.4632,
+     "lo": 0.2727,
+     "hi": 0.6667,
+     "n_items": 21,
+     "n_runs": 125
+    },
+    "c3_kept_b": {
+     "mean": 0.4167,
+     "lo": 0.1667,
+     "hi": 0.6667,
+     "n_items": 12,
+     "n_runs": 35
+    },
+    "c3_recovered": {
+     "mean": 0.5333,
+     "lo": 0.2667,
+     "hi": 0.8,
+     "n_items": 15,
+     "n_runs": 60
+    }
+   },
+   "negwords_logit": {
+    "layer": 16,
+    "unhinted": {
+     "mean": 0.3683,
+     "lo": 0.2951,
+     "hi": 0.4407,
+     "n_items": 164,
+     "n_runs": 572
+    },
+    "kb_instr": {
+     "mean": 0.2949,
+     "lo": 0.1538,
+     "hi": 0.4487,
+     "n_items": 39,
+     "n_runs": 348
+    },
+    "i2_says_b": {
+     "mean": 0.3077,
+     "lo": 0.0769,
+     "hi": 0.6154,
+     "n_items": 13,
+     "n_runs": 32
+    },
+    "i2_knows": {
+     "mean": 0.3053,
+     "lo": 0.1737,
+     "hi": 0.4632,
+     "n_items": 38,
+     "n_runs": 162
+    },
+    "honest_error": {
+     "mean": 0.3095,
+     "lo": 0.0952,
+     "hi": 0.5714,
+     "n_items": 14,
+     "n_runs": 62
+    },
+    "unstable_correct": {
+     "mean": 0.4259,
+     "lo": 0.2222,
+     "hi": 0.6481,
+     "n_items": 18,
+     "n_runs": 50
+    },
+    "wording_switch": {
+     "mean": 0.2911,
+     "lo": 0.137,
+     "hi": 0.4713,
+     "n_items": 23,
+     "n_runs": 193
+    },
+    "wording_resisted": {
+     "mean": 0.3063,
+     "lo": 0.1159,
+     "hi": 0.5016,
+     "n_items": 21,
+     "n_runs": 125
+    },
+    "c3_kept_b": {
+     "mean": 0.1667,
+     "lo": 0.0,
+     "hi": 0.4167,
+     "n_items": 12,
+     "n_runs": 35
+    },
+    "c3_recovered": {
+     "mean": 0.2833,
+     "lo": 0.0833,
+     "hi": 0.5,
+     "n_items": 15,
+     "n_runs": 60
+    }
+   },
+   "option_probe": {
+    "layer": 24,
+    "unhinted": {
+     "mean": 0.7154,
+     "lo": 0.6423,
+     "hi": 0.7825,
+     "n_items": 164,
+     "n_runs": 572
+    },
+    "kb_instr": {
+     "mean": 0.6231,
+     "lo": 0.469,
+     "hi": 0.7667,
+     "n_items": 39,
+     "n_runs": 348
+    },
+    "i2_says_b": {
+     "mean": 0.5385,
+     "lo": 0.3077,
+     "hi": 0.7692,
+     "n_items": 13,
+     "n_runs": 32
+    },
+    "i2_knows": {
+     "mean": 0.6789,
+     "lo": 0.5211,
+     "hi": 0.8105,
+     "n_items": 38,
+     "n_runs": 162
+    },
+    "honest_error": {
+     "mean": 0.2619,
+     "lo": 0.0714,
+     "hi": 0.5,
+     "n_items": 14,
+     "n_runs": 62
+    },
+    "unstable_correct": {
+     "mean": 0.2963,
+     "lo": 0.1111,
+     "hi": 0.5185,
+     "n_items": 18,
+     "n_runs": 50
+    },
+    "wording_switch": {
+     "mean": 0.7878,
+     "lo": 0.6248,
+     "hi": 0.9253,
+     "n_items": 23,
+     "n_runs": 193
+    },
+    "wording_resisted": {
+     "mean": 0.7976,
+     "lo": 0.619,
+     "hi": 0.9524,
+     "n_items": 21,
+     "n_runs": 125
+    },
+    "c3_kept_b": {
+     "mean": 0.8333,
+     "lo": 0.5833,
+     "hi": 1.0,
+     "n_items": 12,
+     "n_runs": 35
+    },
+    "c3_recovered": {
+     "mean": 0.7333,
+     "lo": 0.5333,
+     "hi": 0.9333,
+     "n_items": 15,
+     "n_runs": 60
+    }
+   }
+  },
+  "auroc": {
+   "words_jlens": {
+    "kb_instr_vs_honest_error": {
+     "auroc": 0.5762,
+     "lo": 0.4158,
+     "hi": 0.7293,
+     "n_pos": 348,
+     "n_neg": 62,
+     "n_items_pos": 39,
+     "n_items_neg": 14
+    },
+    "i2_knows_vs_honest_error": {
+     "auroc": 0.5648,
+     "lo": 0.4062,
+     "hi": 0.7224,
+     "n_pos": 162,
+     "n_neg": 62,
+     "n_items_pos": 38,
+     "n_items_neg": 14
+    },
+    "unhinted_vs_honest_error": {
+     "auroc": 0.6146,
+     "lo": 0.4766,
+     "hi": 0.7484,
+     "n_pos": 572,
+     "n_neg": 62,
+     "n_items_pos": 164,
+     "n_items_neg": 14
+    },
+    "kb_instr_vs_unhinted": {
+     "auroc": 0.4659,
+     "lo": 0.3855,
+     "hi": 0.5421,
+     "n_pos": 348,
+     "n_neg": 572,
+     "n_items_pos": 39,
+     "n_items_neg": 164
+    }
+   },
+   "letters_jlens": {
+    "kb_instr_vs_honest_error": {
+     "auroc": 0.4648,
+     "lo": 0.2674,
+     "hi": 0.6517,
+     "n_pos": 348,
+     "n_neg": 62,
+     "n_items_pos": 39,
+     "n_items_neg": 14
+    },
+    "i2_knows_vs_honest_error": {
+     "auroc": 0.488,
+     "lo": 0.2784,
+     "hi": 0.6842,
+     "n_pos": 162,
+     "n_neg": 62,
+     "n_items_pos": 38,
+     "n_items_neg": 14
+    },
+    "unhinted_vs_honest_error": {
+     "auroc": 0.4643,
+     "lo": 0.2862,
+     "hi": 0.6304,
+     "n_pos": 572,
+     "n_neg": 62,
+     "n_items_pos": 164,
+     "n_items_neg": 14
+    },
+    "kb_instr_vs_unhinted": {
+     "auroc": 0.5027,
+     "lo": 0.4323,
+     "hi": 0.5711,
+     "n_pos": 348,
+     "n_neg": 572,
+     "n_items_pos": 39,
+     "n_items_neg": 164
+    }
+   },
+   "poswords_jlens": {
+    "kb_instr_vs_honest_error": {
+     "auroc": 0.5784,
+     "lo": 0.3793,
+     "hi": 0.7589,
+     "n_pos": 348,
+     "n_neg": 62,
+     "n_items_pos": 39,
+     "n_items_neg": 14
+    },
+    "i2_knows_vs_honest_error": {
+     "auroc": 0.5856,
+     "lo": 0.4047,
+     "hi": 0.7598,
+     "n_pos": 162,
+     "n_neg": 62,
+     "n_items_pos": 38,
+     "n_items_neg": 14
+    },
+    "unhinted_vs_honest_error": {
+     "auroc": 0.5465,
+     "lo": 0.3788,
+     "hi": 0.702,
+     "n_pos": 572,
+     "n_neg": 62,
+     "n_items_pos": 164,
+     "n_items_neg": 14
+    },
+    "kb_instr_vs_unhinted": {
+     "auroc": 0.5333,
+     "lo": 0.4634,
+     "hi": 0.6084,
+     "n_pos": 348,
+     "n_neg": 572,
+     "n_items_pos": 39,
+     "n_items_neg": 164
+    }
+   },
+   "negwords_jlens": {
+    "kb_instr_vs_honest_error": {
+     "auroc": 0.448,
+     "lo": 0.256,
+     "hi": 0.6242,
+     "n_pos": 348,
+     "n_neg": 62,
+     "n_items_pos": 39,
+     "n_items_neg": 14
+    },
+    "i2_knows_vs_honest_error": {
+     "auroc": 0.4104,
+     "lo": 0.2325,
+     "hi": 0.6068,
+     "n_pos": 162,
+     "n_neg": 62,
+     "n_items_pos": 38,
+     "n_items_neg": 14
+    },
+    "unhinted_vs_honest_error": {
+     "auroc": 0.53,
+     "lo": 0.3687,
+     "hi": 0.6937,
+     "n_pos": 572,
+     "n_neg": 62,
+     "n_items_pos": 164,
+     "n_items_neg": 14
+    },
+    "kb_instr_vs_unhinted": {
+     "auroc": 0.426,
+     "lo": 0.3598,
+     "hi": 0.503,
+     "n_pos": 348,
+     "n_neg": 572,
+     "n_items_pos": 39,
+     "n_items_neg": 164
+    }
+   },
+   "words_logit": {
+    "kb_instr_vs_honest_error": {
+     "auroc": 0.5121,
+     "lo": 0.3361,
+     "hi": 0.7314,
+     "n_pos": 348,
+     "n_neg": 62,
+     "n_items_pos": 39,
+     "n_items_neg": 14
+    },
+    "i2_knows_vs_honest_error": {
+     "auroc": 0.5009,
+     "lo": 0.3223,
+     "hi": 0.6835,
+     "n_pos": 162,
+     "n_neg": 62,
+     "n_items_pos": 38,
+     "n_items_neg": 14
+    },
+    "unhinted_vs_honest_error": {
+     "auroc": 0.5327,
+     "lo": 0.36,
+     "hi": 0.7063,
+     "n_pos": 572,
+     "n_neg": 62,
+     "n_items_pos": 164,
+     "n_items_neg": 14
+    },
+    "kb_instr_vs_unhinted": {
+     "auroc": 0.4827,
+     "lo": 0.4092,
+     "hi": 0.557,
+     "n_pos": 348,
+     "n_neg": 572,
+     "n_items_pos": 39,
+     "n_items_neg": 164
+    }
+   },
+   "letters_logit": {
+    "kb_instr_vs_honest_error": {
+     "auroc": 0.4391,
+     "lo": 0.2511,
+     "hi": 0.6234,
+     "n_pos": 348,
+     "n_neg": 62,
+     "n_items_pos": 39,
+     "n_items_neg": 14
+    },
+    "i2_knows_vs_honest_error": {
+     "auroc": 0.4258,
+     "lo": 0.2235,
+     "hi": 0.5994,
+     "n_pos": 162,
+     "n_neg": 62,
+     "n_items_pos": 38,
+     "n_items_neg": 14
+    },
+    "unhinted_vs_honest_error": {
+     "auroc": 0.4308,
+     "lo": 0.2697,
+     "hi": 0.5857,
+     "n_pos": 572,
+     "n_neg": 62,
+     "n_items_pos": 164,
+     "n_items_neg": 14
+    },
+    "kb_instr_vs_unhinted": {
+     "auroc": 0.5082,
+     "lo": 0.4324,
+     "hi": 0.5806,
+     "n_pos": 348,
+     "n_neg": 572,
+     "n_items_pos": 39,
+     "n_items_neg": 164
+    }
+   },
+   "poswords_logit": {
+    "kb_instr_vs_honest_error": {
+     "auroc": 0.5218,
+     "lo": 0.2955,
+     "hi": 0.7674,
+     "n_pos": 348,
+     "n_neg": 62,
+     "n_items_pos": 39,
+     "n_items_neg": 14
+    },
+    "i2_knows_vs_honest_error": {
+     "auroc": 0.5021,
+     "lo": 0.2884,
+     "hi": 0.7438,
+     "n_pos": 162,
+     "n_neg": 62,
+     "n_items_pos": 38,
+     "n_items_neg": 14
+    },
+    "unhinted_vs_honest_error": {
+     "auroc": 0.4847,
+     "lo": 0.3003,
+     "hi": 0.6939,
+     "n_pos": 572,
+     "n_neg": 62,
+     "n_items_pos": 164,
+     "n_items_neg": 14
+    },
+    "kb_instr_vs_unhinted": {
+     "auroc": 0.552,
+     "lo": 0.4805,
+     "hi": 0.6285,
+     "n_pos": 348,
+     "n_neg": 572,
+     "n_items_pos": 39,
+     "n_items_neg": 164
+    }
+   },
+   "negwords_logit": {
+    "kb_instr_vs_honest_error": {
+     "auroc": 0.5221,
+     "lo": 0.3443,
+     "hi": 0.6823,
+     "n_pos": 348,
+     "n_neg": 62,
+     "n_items_pos": 39,
+     "n_items_neg": 14
+    },
+    "i2_knows_vs_honest_error": {
+     "auroc": 0.5352,
+     "lo": 0.3718,
+     "hi": 0.6887,
+     "n_pos": 162,
+     "n_neg": 62,
+     "n_items_pos": 38,
+     "n_items_neg": 14
+    },
+    "unhinted_vs_honest_error": {
+     "auroc": 0.5622,
+     "lo": 0.3966,
+     "hi": 0.7138,
+     "n_pos": 572,
+     "n_neg": 62,
+     "n_items_pos": 164,
+     "n_items_neg": 14
+    },
+    "kb_instr_vs_unhinted": {
+     "auroc": 0.4765,
+     "lo": 0.3985,
+     "hi": 0.5532,
+     "n_pos": 348,
+     "n_neg": 572,
+     "n_items_pos": 39,
+     "n_items_neg": 164
+    }
+   },
+   "option_probe": {
+    "kb_instr_vs_honest_error": {
+     "auroc": 0.7278,
+     "lo": 0.5734,
+     "hi": 0.866,
+     "n_pos": 348,
+     "n_neg": 62,
+     "n_items_pos": 39,
+     "n_items_neg": 14
+    },
+    "i2_knows_vs_honest_error": {
+     "auroc": 0.7831,
+     "lo": 0.6273,
+     "hi": 0.9094,
+     "n_pos": 162,
+     "n_neg": 62,
+     "n_items_pos": 38,
+     "n_items_neg": 14
+    },
+    "unhinted_vs_honest_error": {
+     "auroc": 0.8036,
+     "lo": 0.6977,
+     "hi": 0.8948,
+     "n_pos": 572,
+     "n_neg": 62,
+     "n_items_pos": 164,
+     "n_items_neg": 14
+    },
+    "kb_instr_vs_unhinted": {
+     "auroc": 0.439,
+     "lo": 0.366,
+     "hi": 0.5132,
+     "n_pos": 348,
+     "n_neg": 572,
+     "n_items_pos": 39,
+     "n_items_neg": 164
+    }
+   }
+  },
+  "probe_reproduction": {
+   "stored_layer": 24,
+   "refit_layer": 24,
+   "unhinted": {
+    "stored": 0.7154,
+    "refit": 0.7154
+   },
+   "kb_instr": {
+    "stored": 0.6231,
+    "refit": 0.6231
+   },
+   "i2_knows": {
+    "stored": 0.6789,
+    "refit": 0.6789
+   },
+   "honest_error": {
+    "stored": 0.2619,
+    "refit": 0.2619
+   },
+   "unstable_correct": {
+    "stored": 0.2963,
+    "refit": 0.2963
+   }
+  },
+  "cpu_vs_gpu_check": {
+   "n_runs": 3,
+   "n_values": 1080,
+   "tracked_lp_absdiff_median": 0.0030651092529296875,
+   "tracked_lp_absdiff_p99": 0.011914558410644541,
+   "tracked_lp_absdiff_max": 0.06308364868164062,
+   "top25_overlap_mean": 0.9875555555555556,
+   "top25_overlap_min": 0.92,
+   "top1_agree": 0.9777777777777777,
+   "n_top_checks": 90
+  },
+  "words": {
+   "positive": [
+    " correct",
+    " right",
+    " true",
+    " yes",
+    " Correct",
+    " True",
+    "正确"
+   ],
+   "negative": [
+    " wrong",
+    " incorrect",
+    " false",
+    " no",
+    " Wrong",
+    " False",
+    "错误"
+   ]
+  }
+ },
+ "figure": [
+  {
+   "case": "instr",
+   "label": "Told to argue for B vs no hint",
+   "sub": "Qwen3-8B, thinking",
+   "vals": [
+    {
+     "s": "jlens",
+     "v": 0.585,
+     "lo": 0.515,
+     "hi": 0.657,
+     "where": "mid reasoning",
+     "readout": "jlens"
+    },
+    {
+     "s": "logit",
+     "v": 0.564,
+     "lo": 0.511,
+     "hi": 0.625,
+     "where": "mid reasoning",
+     "readout": "logit"
+    },
+    {
+     "s": "probe",
+     "v": 1.0,
+     "lo": 1.0,
+     "hi": 1.0,
+     "where": "last prompt token",
+     "readout": "probe"
+    },
+    {
+     "s": "other",
+     "v": 0.967,
+     "lo": 0.941,
+     "hi": 0.988,
+     "where": "whole run",
+     "readout": "monitor"
+    }
+   ]
+  },
+  {
+   "case": "wording",
+   "label": "Hint followers vs resisters",
+   "sub": "Qwen3-8B, thinking",
+   "vals": [
+    {
+     "s": "jlens",
+     "v": 0.585,
+     "lo": 0.467,
+     "hi": 0.694,
+     "where": "last prompt token",
+     "readout": "jlens"
+    },
+    {
+     "s": "logit",
+     "v": 0.62,
+     "lo": 0.502,
+     "hi": 0.734,
+     "where": "last prompt token",
+     "readout": "logit"
+    },
+    {
+     "s": "probe",
+     "v": 0.921,
+     "lo": 0.891,
+     "hi": 0.95,
+     "where": "end of reasoning",
+     "readout": "probe"
+    },
+    {
+     "s": "other",
+     "v": 0.583,
+     "lo": 0.475,
+     "hi": 0.698,
+     "where": "whole run",
+     "readout": "length"
+    }
+   ]
+  },
+  {
+   "case": "t2",
+   "label": "Followers who still know vs persuaded followers (pre-registered T2)",
+   "sub": "Qwen3-8B, thinking",
+   "vals": [
+    {
+     "s": "jlens",
+     "v": 0.54,
+     "lo": 0.39,
+     "hi": 0.68,
+     "where": "answer position",
+     "readout": "jlens"
+    },
+    {
+     "s": "logit",
+     "v": 0.57,
+     "lo": 0.38,
+     "hi": 0.75,
+     "where": "answer position",
+     "readout": "logit"
+    },
+    {
+     "s": "probe",
+     "v": 0.7,
+     "lo": 0.54,
+     "hi": 0.85,
+     "where": "mid reasoning",
+     "readout": "probe"
+    },
+    {
+     "s": "other",
+     "v": 0.82,
+     "lo": 0.75,
+     "hi": 0.87,
+     "where": "whole run",
+     "readout": "blackbox"
+    }
+   ]
+  },
+  {
+   "case": "silent",
+   "label": "Silent vs open switches",
+   "sub": "Qwen3-8B, thinking off",
+   "vals": [
+    {
+     "s": "jlens",
+     "v": 0.541,
+     "lo": 0.495,
+     "hi": 0.59,
+     "where": "answer position",
+     "readout": "jlens"
+    },
+    {
+     "s": "logit",
+     "v": 0.568,
+     "lo": 0.518,
+     "hi": 0.616,
+     "where": "answer position",
+     "readout": "logit"
+    },
+    {
+     "s": "probe",
+     "v": 0.994,
+     "lo": 0.991,
+     "hi": 0.997,
+     "where": "answer position",
+     "readout": "probe"
+    },
+    {
+     "s": "other",
+     "v": 1.0,
+     "lo": 1.0,
+     "hi": 1.0,
+     "where": "whole run",
+     "readout": "monitor"
+    }
+   ]
+  },
+  {
+   "case": "c3",
+   "label": "Kept a planted wrong claim vs recovered",
+   "sub": "Qwen3-8B, thinking",
+   "vals": [
+    {
+     "s": "jlens",
+     "v": 0.583,
+     "lo": 0.419,
+     "hi": 0.753,
+     "where": "last prompt token",
+     "readout": "jlens"
+    },
+    {
+     "s": "logit",
+     "v": 0.629,
+     "lo": 0.453,
+     "hi": 0.8,
+     "where": "last prompt token",
+     "readout": "logit"
+    },
+    {
+     "s": "probe",
+     "v": 0.903,
+     "lo": 0.838,
+     "hi": 0.956,
+     "where": "end of reasoning",
+     "readout": "probe"
+    },
+    {
+     "s": "other",
+     "v": 0.777,
+     "lo": 0.717,
+     "hi": 0.837,
+     "where": "whole run",
+     "readout": "monitor"
+    }
+   ]
+  },
+  {
+   "case": "c3_reel",
+   "label": "Kept-claim runs that still know vs those that don't",
+   "sub": "Qwen3-8B, thinking",
+   "vals": [
+    {
+     "s": "jlens",
+     "v": 0.86,
+     "lo": 0.77,
+     "hi": 0.96,
+     "where": "answer position",
+     "readout": "jlens"
+    },
+    {
+     "s": "logit",
+     "v": 0.77,
+     "lo": 0.61,
+     "hi": 0.91,
+     "where": "answer position",
+     "readout": "logit"
+    },
+    {
+     "s": "other",
+     "v": 0.58,
+     "lo": null,
+     "hi": null,
+     "where": "whole run",
+     "readout": "monitor"
+    }
+   ]
+  },
+  {
+   "case": "hack",
+   "label": "Hidden reward hack vs no hack, same model",
+   "sub": "Qwen3-8B + warm-start hack adapter, thinking off",
+   "vals": [
+    {
+     "s": "jlens",
+     "v": 0.585,
+     "lo": 0.495,
+     "hi": 0.683,
+     "where": "answer position",
+     "readout": "jlens"
+    },
+    {
+     "s": "logit",
+     "v": 0.605,
+     "lo": 0.504,
+     "hi": 0.707,
+     "where": "answer position",
+     "readout": "logit"
+    },
+    {
+     "s": "probe",
+     "v": 0.694,
+     "lo": 0.596,
+     "hi": 0.785,
+     "where": "end of reasoning",
+     "readout": "probe"
+    },
+    {
+     "s": "other",
+     "v": 0.653,
+     "lo": 0.593,
+     "hi": 0.712,
+     "where": "whole run",
+     "readout": "monitor"
+    }
+   ]
+  },
+  {
+   "case": "grader_q14",
+   "label": "Grader-bug followers vs resisters",
+   "sub": "Qwen3-14B, thinking",
+   "vals": [
+    {
+     "s": "jlens",
+     "v": 0.552,
+     "lo": 0.471,
+     "hi": 0.63,
+     "where": "end of reasoning",
+     "readout": "jlens"
+    },
+    {
+     "s": "logit",
+     "v": 0.558,
+     "lo": 0.495,
+     "hi": 0.623,
+     "where": "end of reasoning",
+     "readout": "logit"
+    },
+    {
+     "s": "probe",
+     "v": 0.993,
+     "lo": 0.985,
+     "hi": 0.999,
+     "where": "end of reasoning",
+     "readout": "probe"
+    },
+    {
+     "s": "other",
+     "v": 0.758,
+     "lo": 0.696,
+     "hi": 0.815,
+     "where": "whole run",
+     "readout": "length"
+    }
+   ]
+  },
+  {
+   "case": "grader_gptoss",
+   "label": "Grader-bug followers vs resisters",
+   "sub": "gpt-oss-20b, reasoning",
+   "vals": [
+    {
+     "s": "jlens",
+     "v": 0.538,
+     "lo": 0.498,
+     "hi": 0.578,
+     "where": "end of reasoning",
+     "readout": "jlens"
+    },
+    {
+     "s": "logit",
+     "v": 0.51,
+     "lo": 0.471,
+     "hi": 0.551,
+     "where": "mid reasoning",
+     "readout": "logit"
+    },
+    {
+     "s": "probe",
+     "v": 1.0,
+     "lo": 1.0,
+     "hi": 1.0,
+     "where": "end of reasoning",
+     "readout": "probe"
+    },
+    {
+     "s": "other",
+     "v": 0.649,
+     "lo": 0.612,
+     "hi": 0.683,
+     "where": "whole run",
+     "readout": "monitor_intent"
+    }
+   ]
+  },
+  {
+   "case": "grader_nt8",
+   "label": "Grader-bug followers vs resisters",
+   "sub": "Qwen3-8B, thinking off",
+   "vals": [
+    {
+     "s": "jlens",
+     "v": 0.534,
+     "lo": 0.47,
+     "hi": 0.6,
+     "where": "mid reasoning",
+     "readout": "jlens"
+    },
+    {
+     "s": "logit",
+     "v": 0.542,
+     "lo": 0.484,
+     "hi": 0.605,
+     "where": "mid reasoning",
+     "readout": "logit"
+    },
+    {
+     "s": "probe",
+     "v": 0.557,
+     "lo": 0.494,
+     "hi": 0.621,
+     "where": "last prompt token",
+     "readout": "probe"
+    },
+    {
+     "s": "other",
+     "v": 0.616,
+     "lo": 0.577,
+     "hi": 0.66,
+     "where": "whole run",
+     "readout": "monitor"
+    }
+   ]
+  },
+  {
+   "case": "grader_nt14",
+   "label": "Grader-bug followers vs resisters",
+   "sub": "Qwen3-14B, thinking off",
+   "vals": [
+    {
+     "s": "jlens",
+     "v": 0.564,
+     "lo": 0.514,
+     "hi": 0.615,
+     "where": "mid reasoning",
+     "readout": "jlens"
+    },
+    {
+     "s": "logit",
+     "v": 0.554,
+     "lo": 0.504,
+     "hi": 0.607,
+     "where": "mid reasoning",
+     "readout": "logit"
+    },
+    {
+     "s": "probe",
+     "v": 0.63,
+     "lo": 0.585,
+     "hi": 0.672,
+     "where": "last prompt token",
+     "readout": "probe"
+    },
+    {
+     "s": "other",
+     "v": 0.69,
+     "lo": 0.649,
+     "hi": 0.734,
+     "where": "whole run",
+     "readout": "monitor"
+    }
+   ]
+  }
+ ]
+}

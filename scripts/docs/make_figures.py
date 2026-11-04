@@ -854,6 +854,54 @@ def fig_models_grader():
                   "API rows: OpenRouter, one provider each (mostly fp8). Followers name the bug in their reasoning in ≥ 95% of runs (judge + reading)."])
 
 
+def fig_competitors():
+    D = load("jlens_vs_competitors")
+    rows_by = {r["case"]: r for r in D["figure"]}
+    names = {"blackbox": "model's own answer", "monitor": "CoT keyword monitor", "monitor_intent": "CoT intent keywords",
+             "length": "response length", "probe": "probe", "jlens": "J-lens", "logit": "logit lens"}
+    sections = [("Arguing against its own knowledge (Qwen3-8B)", ["instr", "wording", "t2", "silent", "c3", "c3_reel"]),
+                ("Cheating: reward hack and grader bug", ["hack", "grader_q14", "grader_gptoss", "grader_nt8", "grader_nt14"])]
+    short = {"instr": ("Told to argue for B vs no hint", "Qwen3-8B, thinking"),
+             "wording": ("Hint followers vs resisters", "Qwen3-8B, thinking"),
+             "t2": ("Followers who still know vs persuaded", "pre-registered T2"),
+             "silent": ("Silent vs open switches to the hint", "Qwen3-8B, no thinking"),
+             "c3": ("Kept a planted wrong claim vs recovered", "Qwen3-8B, thinking"),
+             "c3_reel": ("Kept the claim: still knows vs not", "10 vs 17 questions"),
+             "hack": ("Hidden reward hack vs no hack", "same model (warm-start)"),
+             "grader_q14": ("Grader bug: followers vs resisters", "Qwen3-14B, thinking"),
+             "grader_gptoss": ("Grader bug: followers vs resisters", "gpt-oss-20b"),
+             "grader_nt8": ("Grader bug: followers vs resisters", "Qwen3-8B, no thinking"),
+             "grader_nt14": ("Grader bug: followers vs resisters", "Qwen3-14B, no thinking")}
+    rows = []
+    for sec, ids in sections:
+        rows.append({"section": sec})
+        for cid in ids:
+            r = dict(rows_by[cid])
+            r["label"], r["sub"] = short[cid]
+            other = [v for v in r["vals"] if v["s"] == "other"]
+            tag = f"best other: {names[other[0]['readout']]}, {other[0]['where']}" if other else None
+            rows.append({"label": r["label"], "sub": r["sub"], "tag": tag, "tag_color": INK3,
+                         "vals": [{"s": v["s"], "v": v["v"], "lo": v["lo"], "hi": v["hi"]} for v in r["vals"]]})
+    series = {"jlens": ("circle", BLUE, "J-lens"), "logit": ("square", ORANGE, "logit lens"),
+              "probe": ("open", AQUA, "linear probe"), "other": ("diamond", GREY, "behaviour / text")}
+    figure("fig14_competitors.svg",
+           "Wherever the J-lens separates the groups, a cheaper readout does as well or better",
+           ["Each row compares the runs that argue against the model's knowledge or cheat with their comparison group. "
+            "Separation = AUROC folded so 0.5 is chance and 1 is perfect in either direction; 95% intervals over questions "
+            "(folded). For each readout, the best position before the final answer is written is shown, chosen after "
+            "looking, for every readout alike. Exploratory.",
+            "Lenses: log p(correct letter) − log p(pushed letter), workspace-layer mean (hack: hack words). Probe: trained "
+            "on the two groups, questions held out. Behaviour / text: best of the model's own answer probabilities, a "
+            "forced early answer, a re-asked answer, a CoT keyword monitor and response length."],
+           [(None, dict(rows=rows, xmin=0.3, xmax=1.0, step=0.1, fmt=auc, x_fmt=lambda v: f"{v:.1f}", ref=0.5,
+                        ref_label="chance", series=series, label_w=450, right_w=290, value_labels=False, row_h=30,
+                        xlabel="separation (folded AUROC)"))],
+           legend_items=[(sh, c, n) for sh, c, n in series.values()], width=1180,
+           notes=["Source: docs/overnight/data/jlens_vs_competitors.json (figure). Report: docs/overnight/reports/jlens_vs_competitors.md.",
+                  "Probe values near 1 at the end of reasoning read the conclusion the text has already reached; the instructed-run "
+                  "probe at the last prompt token reads the instruction in the prompt."])
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     fig_factorial()
@@ -868,6 +916,7 @@ def main():
     fig_instrument()
     fig_hack()
     fig_models_grader()
+    fig_competitors()
 
 
 if __name__ == "__main__":
