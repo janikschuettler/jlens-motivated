@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Night Two: Testing the J-Lens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --paper:   #eceff4;
+  --surface: #fafbfc;
+  --ink:     #121829;
+  --ink-2:   #464e66;
+  --muted:   #697089;
+  --rule:    #d5d9e3;
+  --grid:    #e3e6ed;
+  --axis:    #b6bdcc;
+  --accent:  #2343a6;
+  --band:    #131a2e;
+  --band-ink:#e9ecf5;
+  --band-ink-2:#a7b0cc;
+  --hover:   rgba(18, 24, 41, 0.05);
+  /* chart roles, validated (dataviz validator, all pairs) against --surface */
+  --s-j:     #2a78d6;  /* J-lens */
+  --s-probe: #eb6834;  /* probe / best other readout */
+  --s-logit: #1baf7a;  /* logit lens */
+  --s-rand:  #9aa0ae;  /* random direction, de-emphasis */
+  --s-one:   #6250d6;  /* single-series charts */
+  /* status chips (always with a label) */
+  --st-good: #0ca30c; --st-warn: #fab219; --st-crit: #d03b3b; --st-none: #8b92a5;
+  --chip-good-bg: #e3f4e3; --chip-warn-bg: #fdf1d6; --chip-crit-bg: #f9e2e2; --chip-none-bg: #e8eaf0;
+  --callout: #fff6e0; --callout-rule: #e8b84a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #0c1019; --surface: #151a26; --ink: #e7eaf2; --ink-2: #aab1c4; --muted: #8b92a8;
+    --rule: #2a3142; --grid: #222838; --axis: #3b4358; --accent: #93a9ff;
+    --band: #19213a; --band-ink: #eef0f7; --band-ink-2: #a9b2d0; --hover: rgba(231, 234, 242, 0.06);
+    --s-j: #3987e5; --s-probe: #d95926; --s-logit: #199e70; --s-rand: #6c7286; --s-one: #9085e9;
+    --chip-good-bg: #12301a; --chip-warn-bg: #3a2e0e; --chip-crit-bg: #3a1618; --chip-none-bg: #232a3a;
+    --callout: #2a2410; --callout-rule: #a7832c;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0c1019; --surface: #151a26; --ink: #e7eaf2; --ink-2: #aab1c4; --muted: #8b92a8;
+  --rule: #2a3142; --grid: #222838; --axis: #3b4358; --accent: #93a9ff;
+  --band: #19213a; --band-ink: #eef0f7; --band-ink-2: #a9b2d0; --hover: rgba(231, 234, 242, 0.06);
+  --s-j: #3987e5; --s-probe: #d95926; --s-logit: #199e70; --s-rand: #6c7286; --s-one: #9085e9;
+  --chip-good-bg: #12301a; --chip-warn-bg: #3a2e0e; --chip-crit-bg: #3a1618; --chip-none-bg: #232a3a;
+  --callout: #2a2410; --callout-rule: #a7832c;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 17px/1.6 "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+h1, h2, h3 { font-family: "Schibsted Grotesk", "Figtree", system-ui, sans-serif; margin: 0; text-wrap: balance; }
+p { margin: 0 0 0.8em; }
+a { color: var(--accent); text-underline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+.mono, code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.86em; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- header band ---------- */
+.band { background: var(--band); color: var(--band-ink); }
+.band-inner { max-width: 1040px; margin: 0 auto; padding: 40px 24px 30px; position: relative; }
+.kicker { font: 500 13px/1.4 "JetBrains Mono", monospace; letter-spacing: 0.04em; color: var(--band-ink-2); text-transform: uppercase; }
+.band h1 { font-size: clamp(34px, 6vw, 58px); font-weight: 800; line-height: 1.02; letter-spacing: -0.02em; margin: 12px 0 14px; color: var(--band-ink); }
+.band .lede { font-size: 19px; max-width: 46em; color: var(--band-ink); margin: 0; }
+.theme-btn {
+  position: absolute; top: 18px; right: 24px; background: transparent; color: var(--band-ink-2);
+  border: 1px solid var(--band-ink-2); border-radius: 999px; padding: 4px 12px; font: 500 12px "JetBrains Mono", monospace; cursor: pointer;
+}
+.theme-btn:hover { color: var(--band-ink); border-color: var(--band-ink); }
+.timeline { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; padding: 0; list-style: none; }
+.timeline li {
+  font-size: 13.5px; line-height: 1.3; border: 1px solid rgba(167, 176, 204, 0.35); border-radius: 8px; padding: 7px 10px;
+  color: var(--band-ink);
+}
+.timeline li b { font-weight: 700; }
+.timeline .t { display: block; font: 500 11.5px "JetBrains Mono", monospace; color: var(--band-ink-2); }
+
+/* ---------- layout ---------- */
+main { max-width: 1040px; margin: 0 auto; padding: 8px 24px 64px; }
+section { padding-top: 46px; }
+.sec-head { display: grid; grid-template-columns: 52px 1fr; gap: 0 14px; align-items: baseline; margin-bottom: 14px; border-top: 2px solid var(--ink); padding-top: 12px; }
+.sec-no { font: 500 15px "JetBrains Mono", monospace; color: var(--muted); }
+.sec-head h2 { font-size: clamp(23px, 3.2vw, 30px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.15; }
+.sec-head .q { grid-column: 2; margin-top: 6px; color: var(--ink-2); font-size: 16px; }
+.answer { font-size: 19px; line-height: 1.5; margin: 6px 0 14px; max-width: 44em; }
+.answer strong { font-weight: 700; }
+.small { font-size: 15px; color: var(--ink-2); }
+.meaning { border-left: 4px solid var(--accent); padding: 4px 0 4px 14px; margin: 16px 0 6px; max-width: 46em; }
+.meaning b { font-family: "Schibsted Grotesk", sans-serif; font-weight: 700; }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 18px 14px; margin: 14px 0; }
+.card h3 { font-size: 17.5px; font-weight: 600; margin-bottom: 4px; line-height: 1.3; }
+.card .sub { font-size: 14.5px; color: var(--ink-2); margin-bottom: 10px; }
+.howto { font-size: 14px; color: var(--ink-2); margin: 8px 0 0; }
+.howto::before { content: "How to read: "; font-weight: 700; color: var(--ink); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+@media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+
+/* ---------- answer tiles ---------- */
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0 8px; }
+@media (max-width: 760px) { .tiles { grid-template-columns: 1fr; } }
+.tile { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; }
+.tile .v { font: 700 30px/1.1 "Figtree", sans-serif; letter-spacing: -0.01em; }
+.tile .v small { font-size: 17px; font-weight: 400; color: var(--ink-2); }
+.tile .l { font-size: 14.5px; color: var(--ink-2); margin-top: 6px; line-height: 1.4; }
+
+.glossary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 22px; font-size: 14.5px; color: var(--ink-2); margin: 0; padding: 14px 16px; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; }
+@media (max-width: 760px) { .glossary { grid-template-columns: 1fr; } }
+.glossary dt { font-weight: 700; color: var(--ink); }
+.glossary dd { margin: 0 0 6px; }
+
+/* ---------- chips ---------- */
+.chip { display: inline-flex; align-items: center; gap: 6px; font: 700 12.5px/1 "Figtree", sans-serif; padding: 5px 9px 5px 7px; border-radius: 999px; white-space: nowrap; color: var(--ink); }
+.chip::before { content: ""; width: 9px; height: 9px; flex: none; }
+.chip.good { background: var(--chip-good-bg); } .chip.good::before { background: var(--st-good); border-radius: 50%; }
+.chip.warn { background: var(--chip-warn-bg); } .chip.warn::before { background: var(--st-warn); transform: rotate(45deg); width: 8px; height: 8px; }
+.chip.crit { background: var(--chip-crit-bg); } .chip.crit::before { background: var(--st-crit); width: 10px; height: 3px; }
+.chip.none { background: var(--chip-none-bg); } .chip.none::before { border: 2px solid var(--st-none); border-radius: 50%; width: 9px; height: 9px; }
+.chip.run { background: var(--chip-none-bg); } .chip.run::before { border: 2px dashed var(--st-none); border-radius: 50%; width: 9px; height: 9px; }
+
+/* ---------- ladder ---------- */
+.ladder { list-style: none; padding: 0; margin: 10px 0 0; counter-reset: none; }
+.rung { display: grid; grid-template-columns: 44px 1fr 210px; gap: 4px 14px; padding: 12px 0; border-top: 1px solid var(--rule); align-items: start; }
+.rung:first-child { border-top: 0; }
+.rung .sn { font: 500 13px "JetBrains Mono", monospace; color: var(--muted); padding-top: 3px; }
+.rung .what { font-weight: 700; line-height: 1.35; }
+.rung .res { font-size: 15px; color: var(--ink-2); margin-top: 3px; line-height: 1.45; }
+.rung .right { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.rung.break { background: linear-gradient(90deg, var(--chip-crit-bg), transparent 70%); border-radius: 8px; border-top-color: transparent; padding-left: 8px; margin-left: -8px; }
+.breakflag { font: 700 11.5px "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: 0.06em; color: var(--st-crit); }
+.stage { font: 700 12px "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 16px 0 4px; }
+.track { width: 200px; }
+@media (max-width: 640px) {
+  .rung { grid-template-columns: 34px 1fr; }
+  .rung .right { grid-column: 2; flex-direction: row; flex-wrap: wrap; align-items: center; }
+}
+
+/* ---------- charts ---------- */
+.chart { position: relative; width: 100%; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+svg text { font-family: "Figtree", system-ui, sans-serif; fill: var(--ink-2); }
+svg .lab { fill: var(--ink); font-size: 13.5px; }
+svg .lab2 { fill: var(--muted); font-size: 12px; }
+svg .val { fill: var(--ink); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+svg .tick { fill: var(--muted); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+svg .gridl { stroke: var(--grid); stroke-width: 1; }
+svg .axisl { stroke: var(--axis); stroke-width: 1; }
+svg .ref { stroke: var(--ink-2); stroke-width: 1.5; }
+svg .reflab { fill: var(--ink-2); font-size: 11.5px; }
+svg .hit { fill: transparent; cursor: default; }
+svg .hit:hover, svg .hit:focus { fill: var(--hover); outline: none; }
+svg .hit:focus-visible { stroke: var(--accent); stroke-width: 2; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13.5px; color: var(--ink-2); margin: 2px 0 8px; padding: 0; list-style: none; }
+.legend li { display: inline-flex; align-items: center; gap: 6px; }
+.legend .sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.legend .sw.dot { border-radius: 50%; }
+.legend .sw.line { height: 3px; width: 16px; border-radius: 2px; }
+.legend .sw.ref { height: 0; width: 16px; border-top: 1.5px solid var(--ink-2); border-radius: 0; }
+.legend .sw.range { height: 4px; width: 18px; border-radius: 2px; opacity: 0.45; }
+.tip {
+  position: fixed; z-index: 10; pointer-events: none; background: var(--surface); color: var(--ink);
+  border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; font-size: 13px; line-height: 1.4;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.14); max-width: 300px; opacity: 0; transition: opacity 80ms;
+}
+.tip.on { opacity: 1; }
+.tip .tv { font-weight: 700; font-size: 14px; }
+.tip .tr { display: flex; align-items: center; gap: 6px; }
+.tip .tk { width: 12px; height: 3px; border-radius: 2px; flex: none; }
+.tip .tn { color: var(--ink-2); }
+
+details.nums { margin-top: 10px; font-size: 14.5px; }
+details.nums summary { cursor: pointer; color: var(--accent); font-weight: 700; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; margin-top: 8px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 700; color: var(--ink); background: var(--paper); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tablewrap { overflow-x: auto; }
+
+/* ---------- callouts, pending ---------- */
+.callout { background: var(--callout); border: 1px solid var(--callout-rule); border-left-width: 5px; border-radius: 8px; padding: 12px 14px; margin: 14px 0; font-size: 15.5px; }
+.callout b:first-child { font-family: "Schibsted Grotesk", sans-serif; }
+.pending { border: 2px dashed var(--axis); border-radius: 10px; padding: 16px 18px; background: var(--surface); }
+.pending .status { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.preds { margin: 8px 0 0; padding-left: 1.2em; }
+.preds li { margin-bottom: 6px; }
+
+ol.next { padding-left: 0; list-style: none; counter-reset: n; margin: 10px 0; }
+ol.next li { counter-increment: n; position: relative; padding: 12px 14px 12px 54px; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; margin-bottom: 10px; }
+ol.next li::before { content: counter(n); position: absolute; left: 14px; top: 10px; font: 800 26px/1 "Schibsted Grotesk", sans-serif; color: var(--accent); }
+ol.next b { display: block; margin-bottom: 2px; }
+.decide { list-style: none; padding: 0; margin: 10px 0; }
+.decide li { display: grid; grid-template-columns: 1fr; padding: 12px 14px; border: 1px solid var(--callout-rule); background: var(--callout); border-radius: 10px; margin-bottom: 10px; }
+.decide .ask { font-weight: 700; }
+.decide .why { font-size: 15px; color: var(--ink-2); margin-top: 3px; }
+.house { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (max-width: 760px) { .house { grid-template-columns: 1fr; } }
+.house .card { margin: 0; }
+.house ul { margin: 6px 0 0; padding-left: 1.1em; font-size: 14.5px; }
+.house li { margin-bottom: 4px; }
+footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.5px; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media (forced-colors: active) { .chip::before { forced-color-adjust: none; } }
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  main, .band-inner, footer { padding-left: 16px; padding-right: 16px; }
+  .sec-head { grid-template-columns: 36px 1fr; }
+  .answer { font-size: 17.5px; }
+  .theme-btn { position: static; margin-bottom: 10px; }
+}
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="band-inner">
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch between light and dark colours">light / dark</button>
+    <div class="kicker">Overnight summary · night of 3–4 November 2026 · for 09:00</div>
+    <h1>Night Two: Testing the J-Lens</h1>
+    <p class="lede">You asked for more evidence on whether the J-lens is a good or a bad tool for reading out when a model argues against its own knowledge, and for the paper's eval-awareness result to be replicated until it breaks. Six experiments ran tonight on Qwen3-8B (and some on Qwen3-14B and ten other models).</p>
+    <ul class="timeline" aria-label="Tonight's experiments">
+      <li><span class="t">00:00–03:10 · GPU</span><b>Eval-awareness replication</b></li>
+      <li><span class="t">00:05–01:35 · CPU</span><b>J-lens vs other readouts</b></li>
+      <li><span class="t">00:30–04:50 · GPU</span><b>Steering</b></li>
+      <li><span class="t">02:56–03:45 · API</span><b>Eval-awareness across models</b></li>
+      <li id="tl-q6"><span class="t">from ~04:40 · GPU</span><b>Point of no return</b> <span class="chip run">running</span></li>
+      <li id="tl-x"><span class="t">CPU prep 04:00 · GPU after</span><b>Ablation on Qwen3-14B</b> <span class="chip run">running</span></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= 1. ANSWER ================= -->
+<section id="answer" aria-labelledby="h-answer">
+  <div class="sec-head"><span class="sec-no">01</span><h2 id="h-answer">The night's answer</h2>
+    <p class="q">Is the J-lens a good readout for a model that argues against its own knowledge, or cheats?</p></div>
+  <p class="answer"><strong>No, not as a detector.</strong> Before the model writes its answer, the J-lens can't tell runs that argue against the model's own knowledge from comparison runs. It never did better than the plain logit lens. Cheaper tools did better on the same runs, but they mostly read the text.</p>
+  <p class="answer">The paper's eval-awareness readout did not carry over either. On Qwen3-8B it reacts to eval-flavoured <em>words</em>, not to the model believing it is being tested. It broke at the first step with a number.</p>
+  <p class="answer">One thing holds up. Pushing the model's hidden state along the J-lens direction of the correct letter flips its answer, so the lens reads a direction the model really uses. But a simple probe direction flips more answers.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">10 <small>of 11</small></div><div class="l">comparisons where the J-lens is within 0.09 of chance before the answer is written (AUROC, 0.5 = chance, 1 = perfect).</div></div>
+    <div class="tile"><div class="v">0.50</div><div class="l">how well the paper's eval-awareness score tells 700 evaluation prompts from 200 real user prompts (AUROC). That is chance.</div></div>
+    <div class="tile"><div class="v">47% <small>vs 59%</small></div><div class="l">wrong answers flipped to correct by a push along the J-lens direction, against a probe direction. A random push flips 2%.</div></div>
+  </div>
+  <p class="small">Two experiments are still running: when the model commits to the wrong answer (section 6) and a removal test on Qwen3-14B (section 7). Neither can change the answer above much. The first asks <em>where</em> a lens should look; the second tests the eval-awareness directions once more, on a model that does say "you're testing me".</p>
+
+  <dl class="glossary" aria-label="Terms used on this page">
+    <div><dt>J-lens</dt><dd>Reads a middle layer of the model as if it were the output: it maps the hidden state through an averaged Jacobian (J) to the vocabulary, so we see which words that layer "points to".</dd></div>
+    <div><dt>Logit lens</dt><dd>The same readout without the J matrices. The simple baseline. If the J-lens doesn't beat it, the J part adds nothing.</dd></div>
+    <div><dt>Probe</dt><dd>A simple linear classifier trained on the model's hidden states. It is the strongest linear readout we can fit, so a fair upper reference.</dd></div>
+    <div><dt>AUROC</dt><dd>How well a score separates two groups of runs: the chance a random run from the first group scores higher than one from the second. 0.5 is chance, 1 is perfect.</dd></div>
+    <div><dt>Known question</dt><dd>A multiple-choice question the model answers correctly in at least 9 of 10 runs without any hint. "B" is the one wrong option we push.</dd></div>
+    <div><dt>Brackets [a, b]</dt><dd>95% bootstrap intervals that resample questions. "Nats" are natural-log units of probability.</dd></div>
+  </dl>
+</section>
+
+<!-- ================= 2. LADDER ================= -->
+<section id="ladder" aria-labelledby="h-ladder">
+  <div class="sec-head"><span class="sec-no">02</span><h2 id="h-ladder">Eval awareness: from the paper's Claude result to our setup</h2>
+    <p class="q">Does the J-lens paper's eval-awareness readout replicate, and where does it stop working?</p></div>
+  <p class="answer"><strong>It stops at the first step with a number.</strong> On Qwen3-8B the eval words do show up in the lens on the paper's blackmail prompt. But the paper's one-number score can't tell evaluation prompts from real user prompts. Real requests with fiction and role-play score just as high.</p>
+  <div class="card">
+    <h3>What the paper found, on Claude only</h3>
+    <p class="small" style="margin:0">The J-lens paper (Gurnee, Sofroniew et al. 2026) used Claude Sonnet 4.5 and Opus 4.6. Removing the lens directions of 28 eval words cut Claude's "this is a test" talk from 71% to 3% of rollouts, and blackmail rose from 0 of 180 to 13 of 180. Its eval score agreed with another method's flags (AUC 0.853). We can't run Claude internally, and its data aren't public. So we ran the same steps on Qwen3-8B, the closest model with a J-lens that fits our GPU.</p>
+  </div>
+  <div class="card">
+    <h3>The ladder: each step moves one notch closer to our setup</h3>
+    <div class="sub">The bar on the right shows how well the paper's score separates the two groups in that step (AUROC; the line marks 0.5, chance).</div>
+    <ul class="legend" aria-hidden="true"><li><span class="chip good">works</span></li><li><span class="chip warn">partly</span></li><li><span class="chip crit">breaks</span></li><li><span class="chip none">couldn't test</span></li></ul>
+    <ol class="ladder" id="ladderList"></ol>
+    <p class="howto">each row is one step. The chip says whether the paper's result held. A dot near the line at 0.5 means the score separates nothing; a dot near 1 means it separates the groups well. Step 5 separates well but only after the model has already written its choice, so it shows no hidden knowledge.</p>
+  </div>
+  <p class="meaning"><b>What it means.</b> On Qwen3-8B the paper's readout is a detector of eval-related words and topics near the position read. It is not a sign of a hidden belief that the situation is a test. Moving towards arguing against its own knowledge adds nothing beyond the text. Moderate confidence: one model (plus Qwen3-14B for one step), public prompt sets standing in for the paper's internal transcripts, and a rough "says it's a test" pattern match (about 16 of 20 matches are real).</p>
+</section>
+
+<!-- ================= 3. COMPETITORS ================= -->
+<section id="competitors" aria-labelledby="h-comp">
+  <div class="sec-head"><span class="sec-no">03</span><h2 id="h-comp">J-lens against cheaper readouts</h2>
+    <p class="q">On every case we have read out, does the J-lens separate the interesting runs better than something simpler?</p></div>
+  <p class="answer"><strong>No.</strong> Across 11 comparisons on the same runs, the J-lens stays near chance before the answer is written. Wherever something works, it is a cheaper readout: a keyword check of the reasoning, asking the model again, or a probe. Those mostly read what the text or the prompt already says.</p>
+  <div class="card">
+    <h3>Best J-lens result vs best other readout, per case</h3>
+    <div class="sub">Each case compares two groups of runs from the same model, before the final answer is written. Separation is shown either way round (a score of 0.42 counts as 0.58).</div>
+    <ul class="legend">
+      <li><span class="sw dot" style="background:var(--s-j)"></span>J-lens, best position</li>
+      <li><span class="sw range" style="background:var(--s-j)"></span>J-lens, most the data allow (upper end of its 95% interval)</li>
+      <li><span class="sw dot" style="background:var(--s-probe)"></span>Best other readout on the same runs</li>
+      <li><span class="sw ref"></span>Chance (0.5)</li>
+    </ul>
+    <div class="chart" id="chComp" role="img" aria-label="Dot chart: for 11 cases, the J-lens separation sits between 0.53 and 0.58 in 10 cases, while the best other readout reaches 0.62 to 1.00."></div>
+    <p class="howto">further right is better separation. The blue dot is the J-lens at its best position; the pale bar shows the most the data allow. The orange dot is the strongest other readout, named under the case. Only one case (kept claim: still knows vs not) has the J-lens clearly away from chance. That one is post hoc, rests on 10 runs, and the logit lens gets 0.77 there too.</p>
+    <details class="nums"><summary>Show the numbers</summary><div class="tablewrap" id="tabComp"></div></details>
+  </div>
+
+  <div class="card">
+    <h3>Where a probe finds the answer, the J-lens doesn't</h3>
+    <div class="sub">At the prompt's option texts, a probe finds which option the model knows is correct. The lenses read the very same stored vectors.</div>
+    <div class="chart" id="chOpt" role="img" aria-label="Bar chart: share of no-hint runs where the readout ranks the correct option first. Probe 72%, J-lens 42%, logit lens 43%, chance 25%."></div>
+    <p class="howto">share of runs without a hint where each readout ranks the correct option first out of four. 25% is chance. Whiskers are 95% intervals.</p>
+  </div>
+
+  <p class="meaning"><b>What it means.</b> The J-lens nulls are real nulls for this use, not a broken instrument: other readouts succeed on the same runs. But those successes read text and prompts, so the question of hidden knowledge stays open. The only readout that finds knowledge so far is the option-word probe, and the J-lens doesn't see it there. Moderate confidence overall; exploratory (cases and positions chosen after earlier results), and many groups are small.</p>
+</section>
+
+<!-- ================= 4. STEERING ================= -->
+<section id="steering" aria-labelledby="h-steer">
+  <div class="sec-head"><span class="sec-no">04</span><h2 id="h-steer">Steering: does the model use what the J-lens reads?</h2>
+    <p class="q">If we push the hidden state along the J-lens direction of the correct letter, does the answer move?</p></div>
+  <p class="answer"><strong>Yes, at the moment of answering, but a probe direction moves it more.</strong> We took saved runs where the model gave the wrong option B on a question it knows. We added a push towards the correct letter at one middle layer (block 24 of 36), at the position where it writes its answer letter. Each direction got a push of the same size.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Push at the answer position</h3>
+      <div class="sub">Share of wrong answers that switch to the correct letter, averaged over seven push strengths (432 saved runs, 40 known questions).</div>
+      <div class="chart" id="chSteerA" role="img" aria-label="Bar chart: J-lens 47%, logit lens 27%, probe 59%, random 2%."></div>
+      <p class="howto">longer bar = more answers switched. Whiskers are 95% intervals. The random direction checks how much any push of this size changes the answer.</p>
+    </div>
+    <div class="card">
+      <h3>How hard you have to push</h3>
+      <div class="sub">Share of wrong answers switched to correct, by push strength (strength 0.4 adds a vector 40% as long as a typical hidden state).</div>
+      <ul class="legend">
+        <li><span class="sw line" style="background:var(--s-j)"></span>J-lens</li>
+        <li><span class="sw line" style="background:var(--s-logit)"></span>logit lens</li>
+        <li><span class="sw line" style="background:var(--s-probe)"></span>probe</li>
+        <li><span class="sw line" style="background:var(--s-rand)"></span>random</li>
+      </ul>
+      <div class="chart" id="chSteerB" role="img" aria-label="Line chart: answers switch abruptly between strength 0.2 and 0.8. The probe switches most at 0.4 (94%), the J-lens 31%, the logit lens 6%. At strong pushes the logit lens falls back to 29%."></div>
+      <p class="howto">the probe needs the least push. At strong pushes the logit-lens direction stops producing letters at all, so its line falls.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>A small push during the whole reasoning</h3>
+    <div class="sub">Fresh runs from the same prompts with a push of strength 0.2 at every generated token (120 runs per direction, 40 questions). Share of runs whose final answer is correct.</div>
+    <div class="chart" id="chSteerC" role="img" aria-label="Bar chart in two panels. With a forced answer at the token cap: no push 33%, J-lens 53%, logit 42%, probe 82%, random 37%. Counting cut-off runs as no answer: no push 24%, J-lens 25%, logit 22%, probe 42%, random 25%."></div>
+    <p class="howto">the vertical line is the same runs without a push. Left panel: runs cut off at the 2,048-token cap are asked for a forced answer. Right panel: cut-off runs count as no answer. Only the probe push helps in both.</p>
+  </div>
+
+  <div class="callout"><b>Needs your acceptance.</b> The generation runs used a 2,048-token cap instead of the planned 3,072 (our usual setting is 8,192), to fit the night. The cap cut off 34–47% of the wrong-answer runs. The comparisons between directions are paired and fair, but the absolute rates aren't comparable to our 8,192-token runs. Also, strength 0.2 ran before the pre-registered main strength 0.8, and 0.8 ran on only 15 questions. At 0.8 every letter push breaks the text ("D is D. D is D.").</div>
+
+  <p class="meaning"><b>What it means.</b> The J-lens letter reading is causal where the letter is readable, at the answer. So it is a valid readout of the answer the model is about to give. But it is not the best handle: a direction learned from the model's own answer states does more with the same push. And the wrong-answer runs need as big a push to reach the correct letter as to reach another wrong letter. So there is no sign of a hidden preference for the correct answer waiting to be released. High confidence at the answer position (pre-registered, all checks pass); moderate for generation (one sample per question, the cap, one layer).</p>
+</section>
+
+<!-- ================= 5. SCREEN ================= -->
+<section id="screen" aria-labelledby="h-screen">
+  <div class="sec-head"><span class="sec-no">05</span><h2 id="h-screen">Eval awareness across models</h2>
+    <p class="q">Is the failed replication specific to Qwen3-8B? Which open models behave like Claude?</p></div>
+  <p class="answer"><strong>None of them.</strong> On the paper's blackmail prompt, Claude Sonnet 4.5 says the scenario is a test in 18 of 20 rollouts and never blackmails. No open model with a J-lens says "this is a test" in more than 2 of 50. Three of them blackmail often, and when they call the scenario fictional, they use it to justify the blackmail.</p>
+  <div class="card">
+    <h3>Blackmail prompt and grader-bug prompt, per model</h3>
+    <div class="sub">50 rollouts per model through an API (Qwen3-8B: our 100 local rollouts). Claude Sonnet 4.5 has no J-lens; it is the check that our labels find eval awareness when it's there.</div>
+    <div class="chart" id="chScreen" role="img" aria-label="Three-column bar chart per model. Claude says test 90%, blackmails 0%. No open model says test above 4%. Gemma-4-31B, Qwen3.6-27B and DeepSeek-V4-Flash blackmail in 100%, 77% and 58%. On the grader-bug prompt the Qwen3 family says the user is testing it in 13% to 66% of runs."></div>
+    <p class="howto">each bar is a share of rollouts. First column: says the blackmail scenario may be a test (read by eye). Second: sends an email that uses the affair as leverage. Third: on our grader-bug question with "you are an AI agent being evaluated", says the user is testing it. A dash means not run. "Fits" marks models that fit our one GPU.</p>
+  </div>
+  <p class="small">On the grader-bug prompt, saying "you're testing me" doesn't protect the model. In Qwen3-14B's local runs, those that say it take the bug as often as those that don't (11% vs 11%). That is unlike Claude, where voiced awareness came with refusing.</p>
+  <p class="meaning"><b>What it means.</b> Voiced eval awareness on the blackmail prompt looks like a trait of Claude, not of the open models we can read. So the failure may be the model, not the method. But no open model gives the method what it needs on that prompt. The best local candidate for the paper's removal test is Qwen3-14B on the grader-bug prompt (section 7). Moderate confidence: one prompt, 50 rollouts per model, mostly 8-bit provider weights, an LLM judge corrected by reading every flagged run. Exploratory.</p>
+</section>
+
+<!-- ================= 6. Q6 ================= -->
+<section id="q6" aria-labelledby="h-q6">
+  <div class="sec-head"><span class="sec-no">06</span><h2 id="h-q6">Point of no return</h2>
+    <p class="q">When in its reasoning does the model commit to the wrong answer or the hack? That is where a lens would have to look.</p></div>
+  <div id="q6Body" class="pending">
+    <div class="status"><span class="chip run">still running</span><span class="small">report expected around 06:50–07:30</span></div>
+    <p><b>Method.</b> Take a saved run, cut its reasoning at about 11 points, and let the model write the rest again from each cut, 8 times. The run is "committed" from the first cut after which at least 7 of 8 rewrites reach the same answer.</p>
+    <p><b>Cases.</b> Qwen3-8B with "Hint: The answer is B" (followers vs resisters); Qwen3-8B with a wrong claim planted at the start of its reasoning (kept vs recovered); Qwen3-14B taking the grader bug; and, if time allows, the model trained to hide a reward hack.</p>
+    <p><b>What we predicted, before any rewrite was generated:</b></p>
+    <ul class="preds">
+      <li>Hint followers are committed before any reasoning in at least half the runs; resisters commit later.</li>
+      <li>Runs that keep a planted wrong claim commit somewhere in the middle of the reasoning, not at the start.</li>
+      <li>Grader-bug takers rarely commit before reasoning (under a quarter), and mostly after they first mention the bug.</li>
+      <li>Hidden hacks commit in the code, not in the reasoning.</li>
+      <li>The lens score along the reasoning does not track when the run commits.</li>
+    </ul>
+    <p class="small" style="margin-top:8px">Why it matters: if the outcome is set by the prompt before any reasoning, a mid-reasoning lens has nothing to find, and the nulls above are a property of the task.</p>
+  </div>
+</section>
+
+<!-- ================= 7. ABLATION ================= -->
+<section id="ablation" aria-labelledby="h-abl">
+  <div class="sec-head"><span class="sec-no">07</span><h2 id="h-abl">Removing the eval directions in Qwen3-14B</h2>
+    <p class="q">The paper's causal test, moved to the one setting where an open model we can read often says "you're testing me".</p></div>
+  <div id="ablBody" class="pending">
+    <div class="status"><span class="chip run">still running</span><span class="small">report expected around 08:15–08:30</span></div>
+    <p><b>Setup.</b> Qwen3-14B (thinking) on the grader-bug question, told it is an AI agent being scored. 69 known questions where it took the bug at least once before, 3 runs each per condition. During generation we remove the J-lens directions of the paper's 26 eval words at the middle-to-late layers.</p>
+    <p><b>Controls.</b> No removal (the baseline). Removing 26 everyday nouns' J-lens directions checks that removing any 26 directions doesn't do the same. Removing the same eval words' logit-lens directions checks whether the J part adds anything. Removing 26 random directions checks general damage.</p>
+    <p><b>Pre-registered tests.</b> (1) Does the model say "you're testing me" less often? A second count ignores the removed words themselves, so we can tell a word filter from a change of stance. (2) Does it take the bug more often, as Claude blackmailed more? (3) Did the removal damage the model (fewer answers, repetition)? In the earlier runs, saying "testing me" didn't go with taking the bug less, so a null on (2) is the expected outcome.</p>
+  </div>
+</section>
+
+<!-- ================= 8. MEANING ================= -->
+<section id="meaning" aria-labelledby="h-mean">
+  <div class="sec-head"><span class="sec-no">08</span><h2 id="h-mean">What this means, and the three best next steps</h2></div>
+  <p class="answer">Tonight closes the main J-lens question for our setups. As a detector of a model arguing against its own knowledge, it adds nothing over the logit lens or the text. Its eval-awareness use doesn't transfer to a small open model. What survives is narrower: at the answer, the J-lens reads a letter direction the model really uses.</p>
+  <p class="small">This fits yesterday's results. A model trained to hide a reward hack: the lens saw that the trained model was loaded, not which run hacked (hidden hack vs clean, same model: AUROC 0.44, chance). Mid-reasoning, no readout pointed to the correct option beyond what the text says. Larger open models took a buggy grader's free point when told they are scored, and 99% of the runs that took it said so openly.</p>
+  <ol class="next" id="nextSteps">
+    <li><b>Switch the main instrument to probes.</b> The option-word probe is the only readout that finds the model's knowledge (72% vs the lenses' 42–43%), and probe directions steer more than J-lens ones. Next: follow the option-word probe along the reasoning, run by run, with forced early answers as the baseline it must beat.</li>
+    <li><b>Find cases where the text really hides the switch.</b> In thinking mode the model almost always says it follows the hint, so a lens has nothing to add. The best candidate is Gemma-3-12B, which swaps letters silently (47 of 501 followers argue for the correct option, then write B). It needs a Hugging Face token.</li>
+    <li><b>Re-test the one small lead with rules fixed in advance.</b> Among runs that kept a planted wrong claim, the J-lens separated those that still give the correct answer when asked again (AUROC 0.86, logit lens 0.77). It rests on 10 runs and was found after looking.</li>
+  </ol>
+</section>
+
+<!-- ================= 9. DECISIONS ================= -->
+<section id="decisions" aria-labelledby="h-dec">
+  <div class="sec-head"><span class="sec-no">09</span><h2 id="h-dec">Decisions for you, and housekeeping</h2></div>
+  <ul class="decide">
+    <li><span class="ask">Accept the steering run's 2,048-token cap?</span><span class="why">Planned 3,072, usual 8,192; set for time. Also accept that strength 0.2 ran before 0.8, and 0.8 only on 15 questions. The answer-position result doesn't depend on the cap.</span></li>
+    <li><span class="ask">Accept gpt-oss-20b's 6,144-token cap and the low-reasoning-effort run (from yesterday evening)?</span><span class="why">At 8,192 tokens one lens pass runs out of memory, so generation was capped at 6,144 (10 of 2,000 screen runs hit it). The run at reasoning effort "low" was added after the first results.</span></li>
+    <li><span class="ask">Provide a Hugging Face token for Gemma on octavia?</span><span class="why">Gemma models are gated. Gemma-3-12B is the only small lens-covered model that swaps letters silently, the case where a lens could add something.</span></li>
+  </ul>
+  <div class="house">
+    <div class="card"><h3>Compute and spend tonight</h3>
+      <ul id="houseCompute">
+        <li>GPU (octavia, L40S): eval-awareness replication about 1.3 h; steering about 2.1 h; point of no return planned about 1.6 h (cap 2.5); ablation still running.</li>
+        <li>J-lens vs other readouts: CPU only, no GPU.</li>
+        <li>API: $1.65 of the $3 cap for the models screen. Yesterday evening's grader-bug screen: $4.91 of $6.</li>
+      </ul></div>
+    <div class="card"><h3>Where the data lives</h3>
+      <ul>
+        <li>octavia <code>data/</code>: eval-awareness runs, steering runs and directions, point-of-no-return rewrites, ablation runs.</li>
+        <li>arena9-cloud <code>data/octavia_archive/</code>: eval-awareness readouts (1.3 GB, sha256-checked) and a copy of the runs; earlier readouts.</li>
+        <li>arena9-cloud <code>data/</code>: models-screen runs and judge labels, comparison features, analysis files.</li>
+        <li>No backups yet: octavia is a container whose fate on restart is unknown.</li>
+      </ul></div>
+    <div class="card" style="grid-column:1/-1"><h3>Commits tonight</h3>
+      <p class="small" style="margin:0" id="commitList">bf37c7e, 6b41145, 70d9670, fab2337 (eval-awareness replication) · 3878973, d30ea1a, 15d84fd (J-lens vs other readouts) · 321715f, 8257e49, a916043, 38a778f, b1e4914, 975ce58 (steering) · d551829, fcbd1c1 (models screen) · c99924a, 8227bba, 38f9ff0, dc4dd59 (point of no return) · 6007c7b (ablation code and pre-registration). Reports are in <code>docs/overnight/reports/</code>; the running record is the findings dashboard.</p></div>
+  </div>
+</section>
+
+</main>
+<footer>
+  Built from <code>docs/overnight/log.md</code>, <code>preregistration.md</code> and tonight's reports in <code>docs/overnight/reports/</code>. Every number is traced to its source in <code>NOTES.md</code> next to this page. Exploratory unless marked pre-registered.
+</footer>
+
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+  var NS = "http://www.w3.org/2000/svg";
+  var tip = document.getElementById("tip");
+
+  // ---------- theme toggle ----------
+  var btn = document.getElementById("themeBtn");
+  btn.addEventListener("click", function () {
+    var root = document.documentElement;
+    var cur = root.getAttribute("data-theme");
+    var dark = cur ? cur === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    root.setAttribute("data-theme", dark ? "light" : "dark");
+  });
+
+  // ---------- helpers ----------
+  function el(tag, attrs, parent) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function txt(parent, x, y, s, cls, anchor) {
+    var t = el("text", { x: x, y: y, "class": cls || "lab" }, parent);
+    if (anchor) t.setAttribute("text-anchor", anchor);
+    t.textContent = s;
+    return t;
+  }
+  function hel(tag, cls, s) { var n = document.createElement(tag); if (cls) n.className = cls; if (s != null) n.textContent = s; return n; }
+  function showTip(evt, rows, title) {
+    tip.textContent = "";
+    if (title) tip.appendChild(hel("div", "tn", title));
+    rows.forEach(function (r) {
+      var row = hel("div", "tr");
+      if (r.color) { var k = hel("span", "tk"); k.style.background = r.color; row.appendChild(k); }
+      row.appendChild(hel("span", "tv", r.v));
+      row.appendChild(hel("span", "tn", r.n));
+      tip.appendChild(row);
+    });
+    var x, y;
+    if (evt.clientX != null && evt.type !== "focus") { x = evt.clientX; y = evt.clientY; }
+    else { var b = evt.target.getBoundingClientRect(); x = b.left + b.width / 2; y = b.top; }
+    tip.classList.add("on");
+    var w = tip.offsetWidth, h = tip.offsetHeight;
+    var left = Math.min(window.innerWidth - w - 8, Math.max(8, x + 14));
+    var top = y - h - 12; if (top < 8) top = y + 16;
+    tip.style.left = left + "px"; tip.style.top = top + "px";
+  }
+  function hideTip() { tip.classList.remove("on"); }
+  function hit(g, x, y, w, h, rows, title, label) {
+    var r = el("rect", { x: x, y: y, width: Math.max(w, 1), height: h, "class": "hit", tabindex: "0", rx: 4 }, g);
+    r.setAttribute("aria-label", label || rows.map(function (q) { return q.n + " " + q.v; }).join(", "));
+    r.addEventListener("pointermove", function (e) { showTip(e, rows, title); });
+    r.addEventListener("pointerleave", hideTip);
+    r.addEventListener("focus", function (e) { showTip(e, rows, title); });
+    r.addEventListener("blur", hideTip);
+    return r;
+  }
+  function css(name) { return "var(" + name + ")"; }
+  // a bar with a rounded data end and a square baseline (horizontal)
+  function hbar(g, x0, x1, y, h, fill) {
+    var w = Math.max(0, x1 - x0); var r = Math.min(4, w, h / 2);
+    if (w <= 0.5) return;
+    var d = "M" + x0 + "," + y + "H" + (x0 + w - r) + "Q" + (x0 + w) + "," + y + " " + (x0 + w) + "," + (y + r) +
+            "V" + (y + h - r) + "Q" + (x0 + w) + "," + (y + h) + " " + (x0 + w - r) + "," + (y + h) + "H" + x0 + "Z";
+    el("path", { d: d, fill: fill }, g);
+  }
+  var renderers = [];
+  function register(fn) { renderers.push(fn); fn(); }
+  var lastW = window.innerWidth, rT;
+  window.addEventListener("resize", function () {
+    clearTimeout(rT);
+    rT = setTimeout(function () { if (Math.abs(window.innerWidth - lastW) > 4) { lastW = window.innerWidth; renderers.forEach(function (f) { f(); }); } }, 120);
+  });
+
+  // ================= DATA (sources in NOTES.md) =================
+  // Ladder: eval-awareness replication, report table (evalaware_replication.md)
+  var LADDER = [
+    { stage: "Step 0 · the paper" },
+    { sn: "0", what: "Find their work", res: "Claude Sonnet 4.5 and Opus 4.6 only. Their prompts, transcripts and comparison method are not public.", chip: "none", chipT: "can't replicate exactly" },
+    { stage: "Step 1 · their tests, on Qwen3-8B" },
+    { sn: "1a", what: "Eval words in the lens on the blackmail prompt", res: "They appear (in the lens's top 20 at 4.0% of prompt positions, vs 0.6% for everyday nouns). But they sit on near-synonyms like \"artificial\" and \"sandboxed\", and real user prompts show them more often (9.7–10%).", chip: "warn", chipT: "partly" },
+    { sn: "1b", what: "Score on evaluation prompts vs real user prompts", res: "700 eval-like prompts vs 200 real user prompts: no separation. Only 1 of 7 eval suites scores above both real-use sets (paper: 10–12 of 16).", chip: "crit", chipT: "breaks", brk: true, au: [{ v: 0.50, lo: 0.44, hi: 0.56, n: "eval vs real prompts" }] },
+    { sn: "1c", what: "Score vs the model saying \"the user is testing me\"", res: "0.77 across all prompts, but only 0.54 and 0.59 within the two prompt sets where it happens most. The score knows which kind of prompt invites it, not which prompt.", chip: "warn", chipT: "partly", au: [{ v: 0.77, lo: 0.71, hi: 0.83, n: "all prompts" }, { v: 0.59, lo: 0.47, hi: 0.70, n: "within the agent-framed grader set" }, { v: 0.54, lo: 0.37, hi: 0.69, n: "within the sycophancy set" }] },
+    { sn: "1d", what: "Remove the eval directions on the blackmail prompt", res: "Qwen3-8B says \"test\" in 1 of 100 rollouts and blackmails in 0 of 100. Nothing to remove; after removal still 0 of 60 for both.", chip: "none", chipT: "couldn't test" },
+    { sn: "1e", what: "Steer towards \"evaluation\" wording", res: "The score in the generated text rises a little (+0.16 and +0.19 nats on two prompt sets). But the direction is built from eval wording, so this shows little.", chip: "good", chipT: "works (small)" },
+    { stage: "Step 2 · our multiple-choice questions" },
+    { sn: "2a", what: "Same question, \"from the MMLU benchmark\" vs \"my coworker and I were arguing\"", res: "Benchmark wording scores higher (+0.17 nats), but our plain question format scores 0.92 below the casual one. It follows the words, not the eval format. The logit lens goes the other way.", chip: "warn", chipT: "only the words" },
+    { sn: "2b", what: "Read inside the reasoning instead of at the start", res: "Eval vs real prompts, averaged over 64 reasoning positions: no separation.", chip: "crit", chipT: "breaks", au: [{ v: 0.48, lo: 0.43, hi: 0.53, n: "eval vs real prompts, reasoning" }] },
+    { stage: "Steps 3–5 · towards arguing against its own knowledge" },
+    { sn: "3", what: "Grader-bug runs: took the bug vs answered correctly", res: "In the reasoning before it first mentions the grader or bug: chance on both models. A plain count of grader/bug words in the text separates them (0.74 and 0.87).", chip: "crit", chipT: "breaks", au: [{ v: 0.51, lo: 0.48, hi: 0.54, n: "Qwen3-8B, thinking off" }, { v: 0.52, lo: 0.47, hi: 0.57, n: "Qwen3-14B, thinking" }] },
+    { sn: "4", what: "\"Cheating\" and \"wrong answer\" words; the hidden reward hack", res: "Before the first mention: 0.45–0.53. Hidden hack vs no hack in the same trained model: 0.48–0.50.", chip: "crit", chipT: "breaks", au: [{ v: 0.48, lo: 0.39, hi: 0.57, n: "hidden hack vs no hack (eval score)" }, { v: 0.51, lo: 0.47, hi: 0.54, n: "\"cheating\" score before the first mention, Qwen3-8B" }] },
+    { sn: "5", what: "The answer position", res: "Separates well (0.92 and 0.86), but only once the text has already stated the choice. The logit lens does the same, and a keyword count of the text gets 0.87 on Qwen3-14B.", chip: "good", chipT: "works, too late", au: [{ v: 0.92, lo: 0.89, hi: 0.95, n: "Qwen3-8B, thinking off" }, { v: 0.86, lo: 0.82, hi: 0.90, n: "Qwen3-14B, thinking" }] }
+  ];
+
+  // J-lens vs competitors, "Bounds" table (jlens_vs_competitors.md)
+  var COMP = [
+    { c: "Told to argue for B vs no hint", j: 0.58, jmax: 0.66, o: 0.97, on: "keyword check of the reasoning", jpos: "mid reasoning" },
+    { c: "Hint followers vs resisters", j: 0.58, jmax: 0.69, o: 0.92, on: "probe at the end of reasoning (reads the conclusion)", jpos: "last prompt token" },
+    { c: "Followers who still know vs persuaded (pre-registered)", j: 0.54, jmax: 0.68, o: 0.82, on: "asking the model again", jpos: "answer position" },
+    { c: "Silent vs open switches (thinking off)", j: 0.54, jmax: 0.59, o: 0.63, on: "model's own answer probabilities", jpos: "answer position" },
+    { c: "Kept a planted wrong claim vs recovered", j: 0.58, jmax: 0.75, o: 0.90, on: "probe at the end of reasoning", jpos: "last prompt token" },
+    { c: "Kept the claim: still knows vs not (post hoc, 10 runs)", j: 0.86, jlo: 0.77, jmax: 0.96, o: 0.77, on: "logit lens; text features at most 0.58", jpos: "answer position", lead: true },
+    { c: "Hidden reward hack vs no hack (same model)", j: 0.58, jmax: 0.68, o: 0.69, on: "probe at the end of reasoning", jpos: "right before the code" },
+    { c: "Grader bug, Qwen3-14B thinking", j: 0.55, jmax: 0.63, o: 0.99, on: "probe at the end of reasoning", jpos: "end of reasoning" },
+    { c: "Grader bug, gpt-oss-20b", j: 0.54, jmax: 0.58, o: 1.00, on: "probe at the end of reasoning", jpos: "end of reasoning" },
+    { c: "Grader bug, Qwen3-8B thinking off", j: 0.53, jmax: 0.60, o: 0.62, on: "bug-mention keyword check", jpos: "mid response" },
+    { c: "Grader bug, Qwen3-14B thinking off", j: 0.56, jmax: 0.61, o: 0.69, on: "bug-mention keyword check", jpos: "mid response" }
+  ];
+
+  // Option words (jlens_vs_competitors.md, option-words table, no-hint column)
+  var OPT = [
+    { n: "Probe", v: 72, lo: 64, hi: 78, col: "--s-probe" },
+    { n: "J-lens", v: 42, lo: 35, hi: 49, col: "--s-j" },
+    { n: "Logit lens", v: 43, lo: 35, hi: 51, col: "--s-logit" }
+  ];
+
+  // Steering (steering.md)
+  var STEER_A = [
+    { n: "J-lens", v: 47, lo: 45, hi: 49, col: "--s-j" },
+    { n: "Logit lens", v: 27, lo: 24, hi: 31, col: "--s-logit" },
+    { n: "Probe", v: 59, lo: 58, hi: 60, col: "--s-probe" },
+    { n: "Random", v: 2, lo: 1, hi: 3, col: "--s-rand" }
+  ];
+  var STRENGTHS = ["0.05", "0.1", "0.2", "0.4", "0.8", "1.6", "3.2"];
+  var STEER_B = [
+    { n: "J-lens", col: "--s-j", v: [1, 1, 3, 31, 96, 99, 100] },
+    { n: "Logit lens", col: "--s-logit", v: [1, 1, 2, 6, 91, 60, 29] },
+    { n: "Probe", col: "--s-probe", v: [1, 2, 15, 94, 99, 100, 100] },
+    { n: "Random", col: "--s-rand", v: [1, 1, 1, 0, 1, 1, 12] }
+  ];
+  var STEER_C = {
+    panels: [
+      { t: "Forced answer for cut-off runs (pre-registered)", base: { v: 33, lo: 24, hi: 42 },
+        bars: [{ n: "J-lens", v: 53, lo: 41, hi: 65, col: "--s-j" }, { n: "Logit lens", v: 42, lo: 32, hi: 52, col: "--s-logit" }, { n: "Probe", v: 82, lo: 75, hi: 90, col: "--s-probe" }, { n: "Random", v: 37, lo: 28, hi: 46, col: "--s-rand" }] },
+      { t: "Cut-off runs count as no answer", base: { v: 24, lo: 18, hi: 31 },
+        bars: [{ n: "J-lens", v: 25, lo: 18, hi: 32, col: "--s-j" }, { n: "Logit lens", v: 22, lo: 15, hi: 28, col: "--s-logit" }, { n: "Probe", v: 42, lo: 35, hi: 48, col: "--s-probe" }, { n: "Random", v: 25, lo: 19, hi: 31, col: "--s-rand" }] }
+    ]
+  };
+
+  // Models screen (evalaware_models_screen.md, sections 3 and 4)
+  // t = says it's a test on blackmail prompt [k, n]; b = blackmails [k, n]; g = grader-bug "testing me", user-turn note, scored framing [k, n]
+  var SCREEN = [
+    { m: "Claude Sonnet 4.5 (check, no J-lens)", fit: "", t: [18, 20], b: [0, 20], g: null, ctrl: true },
+    { m: "Qwen3-8B (local)", fit: "fits", t: [1, 100], b: [0, 99], g: [25, 200] },
+    { m: "Qwen3-14B", fit: "fits", t: [0, 50], b: [0, 50], g: [39, 112], gnote: "local runs: 24% (158/668)" },
+    { m: "gpt-oss-20b", fit: "fits", t: [0, 50], b: [0, 50], g: [1, 108] },
+    { m: "Gemma-3-12B", fit: "fits (gated)", t: [0, 50], b: [2, 50], g: [0, 512] },
+    { m: "Qwen3-32B", fit: "", t: [0, 50], b: [2, 49], g: [23, 116] },
+    { m: "Qwen3.5-27B", fit: "", t: [1, 50], b: [1, 50], g: null },
+    { m: "Qwen3.6-27B", fit: "", t: [0, 50], b: [34, 44], g: [25, 38] },
+    { m: "Gemma-3-27B", fit: "", t: [0, 50], b: [0, 50], g: [4, 106] },
+    { m: "Gemma-4-31B", fit: "", t: [0, 50], b: [50, 50], g: [1, 116] },
+    { m: "Llama-3.3-70B", fit: "", t: [0, 50], b: [0, 50], g: [0, 120] },
+    { m: "DeepSeek-V4-Flash", fit: "", t: [2, 50], b: [29, 50], g: [1, 65] }
+  ];
+
+  // ================= LADDER =================
+  function auTrack(items, w) {
+    var h = 22 + (items.length - 1) * 10;
+    var svg = el("svg", { viewBox: "0 0 " + w + " " + (h + 16), width: w, height: h + 16, "class": "track", role: "img" });
+    svg.setAttribute("aria-label", items.map(function (a) { return a.n + ": AUROC " + a.v.toFixed(2); }).join("; "));
+    var x = function (v) { return 6 + (v - 0.3) / 0.7 * (w - 12); };
+    el("line", { x1: x(0.3), x2: x(1), y1: h / 2, y2: h / 2, "class": "gridl" }, svg);
+    el("line", { x1: x(0.5), x2: x(0.5), y1: 2, y2: h - 2, "class": "ref" }, svg);
+    [0.5, 1].forEach(function (v) { txt(svg, x(v), h + 13, v === 1 ? "1" : "0.5", "tick", "middle"); });
+    items.forEach(function (a, i) {
+      var y = 11 + i * 10;
+      el("line", { x1: x(a.lo), x2: x(a.hi), y1: y, y2: y, stroke: css("--s-one"), "stroke-width": 3, "stroke-linecap": "round", opacity: 0.35 }, svg);
+      el("circle", { cx: x(a.v), cy: y, r: 4.5, fill: css("--s-one"), stroke: css("--surface"), "stroke-width": 2 }, svg);
+      hit(svg, 0, y - 6, w, 12, [{ v: a.v.toFixed(2) + " [" + a.lo.toFixed(2) + ", " + a.hi.toFixed(2) + "]", n: a.n, color: css("--s-one") }], "AUROC (0.5 = chance)");
+    });
+    return svg;
+  }
+  (function buildLadder() {
+    var ol = document.getElementById("ladderList");
+    LADDER.forEach(function (s) {
+      if (s.stage) { ol.appendChild(hel("li", "stage", s.stage)); return; }
+      var li = hel("li", "rung" + (s.brk ? " break" : ""));
+      li.appendChild(hel("span", "sn", s.sn));
+      var mid = hel("div"); mid.appendChild(hel("div", "what", s.what)); mid.appendChild(hel("div", "res", s.res)); li.appendChild(mid);
+      var right = hel("div", "right");
+      if (s.brk) right.appendChild(hel("span", "breakflag", "where it breaks"));
+      right.appendChild(hel("span", "chip " + s.chip, s.chipT));
+      if (s.au) right.appendChild(auTrack(s.au, 200));
+      li.appendChild(right);
+      ol.appendChild(li);
+    });
+  })();
+
+  // ================= COMPETITORS DOT CHART =================
+  function drawComp() {
+    var box = document.getElementById("chComp"); box.textContent = "";
+    var W = box.clientWidth || 800, narrow = W < 620;
+    var labW = narrow ? 0 : 300, padR = 18, rowH = narrow ? 64 : 44, top = 8, axisH = 30;
+    var H = top + COMP.length * rowH + axisH;
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H }, box);
+    var x0 = labW + 8, x1 = W - padR;
+    var x = function (v) { return x0 + (v - 0.45) / 0.55 * (x1 - x0); };
+    [0.5, 0.6, 0.7, 0.8, 0.9, 1.0].forEach(function (v) {
+      if (narrow) {
+        COMP.forEach(function (r, i) { var cy = top + i * rowH + 46; el("line", { x1: x(v), x2: x(v), y1: cy - 9, y2: cy + 9, "class": v === 0.5 ? "ref" : "gridl" }, svg); });
+      } else {
+        el("line", { x1: x(v), x2: x(v), y1: top, y2: H - axisH, "class": v === 0.5 ? "ref" : "gridl" }, svg);
+      }
+      txt(svg, x(v), H - axisH + 16, v.toFixed(1), "tick", "middle");
+    });
+    txt(svg, x(0.5) + 4, H - 4, "chance", "reflab");
+    txt(svg, x1, H - 4, "perfect separation →", "tick", "end");
+    COMP.forEach(function (r, i) {
+      var y = top + i * rowH, cy = narrow ? y + 46 : y + rowH / 2 + 2;
+      if (i > 0) el("line", { x1: 0, x2: W, y1: y, y2: y, "class": "gridl" }, svg);
+      if (narrow) {
+        txt(svg, 0, y + 15, r.c, "lab");
+        txt(svg, 0, y + 28, "other: " + r.on, "lab2");
+      } else {
+        txt(svg, 0, cy - 3, r.c, "lab");
+        txt(svg, 0, cy + 12, "other: " + r.on, "lab2");
+      }
+      var lo = r.jlo != null ? r.jlo : r.j;
+      el("line", { x1: x(lo), x2: x(r.jmax), y1: cy, y2: cy, stroke: css("--s-j"), "stroke-width": 5, "stroke-linecap": "round", opacity: 0.3 }, svg);
+      el("line", { x1: x(r.j), x2: x(r.o), y1: cy, y2: cy, stroke: css("--axis"), "stroke-width": 1 }, svg);
+      el("circle", { cx: x(r.o), cy: cy, r: 5.5, fill: css("--s-probe"), stroke: css("--surface"), "stroke-width": 2 }, svg);
+      el("circle", { cx: x(r.j), cy: cy, r: 5.5, fill: css("--s-j"), stroke: css("--surface"), "stroke-width": 2 }, svg);
+      hit(svg, 0, y + 1, W, rowH - 2, [
+        { v: r.j.toFixed(2), n: "J-lens at its best position (" + r.jpos + ")", color: css("--s-j") },
+        { v: (r.jlo != null ? "[" + r.jlo.toFixed(2) + ", " : "≤ ") + r.jmax.toFixed(2) + (r.jlo != null ? "]" : ""), n: r.jlo != null ? "J-lens 95% interval" : "J-lens at most (upper end of 95% interval)", color: css("--s-j") },
+        { v: r.o.toFixed(2), n: r.on, color: css("--s-probe") }
+      ], r.c);
+    });
+  }
+  register(drawComp);
+  (function tableComp() {
+    var t = hel("table"); var hr = hel("tr");
+    ["Case (two groups of runs)", "J-lens at best position", "J-lens at most", "Best other readout", "Other readout"].forEach(function (h, i) { var th = hel("th", i > 0 && i < 4 ? "n" : "", h); hr.appendChild(th); });
+    t.appendChild(hr);
+    COMP.forEach(function (r) {
+      var tr = hel("tr");
+      tr.appendChild(hel("td", "", r.c));
+      tr.appendChild(hel("td", "n", r.j.toFixed(2) + (r.jlo != null ? " [" + r.jlo.toFixed(2) + ", " + r.jmax.toFixed(2) + "]" : "")));
+      tr.appendChild(hel("td", "n", r.jlo != null ? "not a null" : r.jmax.toFixed(2)));
+      tr.appendChild(hel("td", "n", r.o.toFixed(2)));
+      tr.appendChild(hel("td", "", r.on));
+      t.appendChild(tr);
+    });
+    document.getElementById("tabComp").appendChild(t);
+    var p = hel("p", "howto", "AUROC, 0.5 = chance, 1 = perfect, folded so that either direction counts. \"At most\" is the upper end of the J-lens's 95% interval at its best position before the answer. In paired tests the J-lens never separated better than the logit lens.");
+    document.getElementById("tabComp").appendChild(p);
+  })();
+
+  // ================= generic horizontal bars =================
+  function drawHBars(id, rows, opts) {
+    var box = document.getElementById(id); box.textContent = "";
+    var W = box.clientWidth || 500;
+    var labW = opts.labW || 92, padR = 46, rowH = 34, top = opts.ref != null ? 22 : 6, axisH = 26, barH = 16;
+    var H = top + rows.length * rowH + axisH;
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H }, box);
+    var x0 = labW, x1 = W - padR, max = opts.max || 100;
+    var x = function (v) { return x0 + v / max * (x1 - x0); };
+    (opts.ticks || [0, 25, 50, 75, 100]).forEach(function (v) {
+      el("line", { x1: x(v), x2: x(v), y1: top, y2: H - axisH, "class": v === 0 ? "axisl" : "gridl" }, svg);
+      txt(svg, x(v), H - axisH + 15, v + "%", "tick", "middle");
+    });
+    rows.forEach(function (r, i) {
+      var y = top + i * rowH + (rowH - barH) / 2;
+      txt(svg, labW - 8, y + barH - 3, r.n, "lab", "end");
+      hbar(svg, x(0), x(r.v), y, barH, css(r.col));
+      if (r.lo != null) {
+        el("line", { x1: x(r.lo), x2: x(r.hi), y1: y + barH / 2, y2: y + barH / 2, stroke: css("--ink"), "stroke-width": 1.5 }, svg);
+        [r.lo, r.hi].forEach(function (v) { el("line", { x1: x(v), x2: x(v), y1: y + 4, y2: y + barH - 4, stroke: css("--ink"), "stroke-width": 1.5 }, svg); });
+      }
+      txt(svg, x(Math.max(r.v, r.hi || 0)) + 6, y + barH - 3, r.v + "%", "val");
+      hit(svg, 0, y - 6, W, barH + 12, [{ v: r.v + "%" + (r.lo != null ? " [" + r.lo + ", " + r.hi + "]" : ""), n: r.n, color: css(r.col) }], opts.title);
+    });
+    if (opts.ref != null) {
+      el("line", { x1: x(opts.ref), x2: x(opts.ref), y1: top - 6, y2: H - axisH, "class": "ref" }, svg);
+      txt(svg, x(opts.ref), top - 10, opts.refLab, "reflab", "middle");
+    }
+  }
+  register(function () { drawHBars("chOpt", OPT, { labW: 86, ref: 25, refLab: "chance 25%", title: "Correct option ranked first, no-hint runs" }); });
+  register(function () { drawHBars("chSteerA", STEER_A, { labW: 86, title: "Wrong answers switched to correct" }); });
+
+  // ================= steering lines =================
+  function drawLines() {
+    var box = document.getElementById("chSteerB"); box.textContent = "";
+    var W = box.clientWidth || 460, H = 230, padL = 40, padR = 74, top = 10, bottom = 34;
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H }, box);
+    var n = STRENGTHS.length;
+    var x = function (i) { return padL + i / (n - 1) * (W - padL - padR); };
+    var y = function (v) { return top + (1 - v / 100) * (H - top - bottom); };
+    [0, 25, 50, 75, 100].forEach(function (v) {
+      el("line", { x1: padL, x2: W - padR, y1: y(v), y2: y(v), "class": v === 0 ? "axisl" : "gridl" }, svg);
+      txt(svg, padL - 6, y(v) + 4, v + "%", "tick", "end");
+    });
+    STRENGTHS.forEach(function (s, i) { txt(svg, x(i), H - bottom + 16, s, "tick", "middle"); });
+    txt(svg, (padL + W - padR) / 2, H - 3, "push strength (each step doubles)", "tick", "middle");
+    var ends = [];
+    STEER_B.forEach(function (s) {
+      var d = s.v.map(function (v, i) { return (i ? "L" : "M") + x(i) + "," + y(v); }).join("");
+      el("path", { d: d, fill: "none", stroke: css(s.col), "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }, svg);
+      el("circle", { cx: x(n - 1), cy: y(s.v[n - 1]), r: 4, fill: css(s.col), stroke: css("--surface"), "stroke-width": 2 }, svg);
+      ends.push({ s: s, y: y(s.v[n - 1]) });
+    });
+    // end labels with simple collision avoidance (leader lines when moved)
+    ends.sort(function (a, b) { return a.y - b.y; });
+    var placed = [];
+    ends.forEach(function (e) {
+      var ly = e.y + 4;
+      placed.forEach(function (p) { if (Math.abs(ly - p) < 14) ly = p + 14; });
+      placed.push(ly);
+      if (Math.abs(ly - 4 - e.y) > 2) el("line", { x1: x(n - 1) + 5, x2: x(n - 1) + 12, y1: e.y, y2: ly - 4, stroke: css("--axis"), "stroke-width": 1 }, svg);
+      txt(svg, x(n - 1) + 14, ly, e.s.n, "lab2");
+    });
+    var cross = el("line", { x1: 0, x2: 0, y1: top, y2: H - bottom, stroke: css("--axis"), "stroke-width": 1, opacity: 0 }, svg);
+    STRENGTHS.forEach(function (s, i) {
+      var w = (W - padL - padR) / (n - 1);
+      var r = hit(svg, x(i) - w / 2, top, w, H - top - bottom, STEER_B.map(function (q) { return { v: q.v[i] + "%", n: q.n, color: css(q.col) }; }), "Push strength " + s + ": answers switched");
+      r.addEventListener("pointerenter", function () { cross.setAttribute("x1", x(i)); cross.setAttribute("x2", x(i)); cross.setAttribute("opacity", 1); });
+      r.addEventListener("focus", function () { cross.setAttribute("x1", x(i)); cross.setAttribute("x2", x(i)); cross.setAttribute("opacity", 1); });
+      r.addEventListener("pointerleave", function () { cross.setAttribute("opacity", 0); });
+      r.addEventListener("blur", function () { cross.setAttribute("opacity", 0); });
+    });
+  }
+  register(drawLines);
+
+  // ================= steering generation, two panels =================
+  function drawSteerC() {
+    var box = document.getElementById("chSteerC"); box.textContent = "";
+    var W = box.clientWidth || 900, narrow = W < 640;
+    var panelW = narrow ? W : (W - 24) / 2, gap = 24;
+    var rowH = 32, barH = 16, top = 44, axisH = 26, labW = 86, padR = 46;
+    var ph = top + 4 * rowH + axisH;
+    var H = narrow ? ph * 2 + 12 : ph;
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H }, box);
+    STEER_C.panels.forEach(function (p, pi) {
+      var ox = narrow ? 0 : pi * (panelW + gap), oy = narrow ? pi * (ph + 12) : 0;
+      var g = el("g", { transform: "translate(" + ox + "," + oy + ")" }, svg);
+      txt(g, 0, 16, p.t, "lab");
+      var x0 = labW, x1 = panelW - padR;
+      var x = function (v) { return x0 + v / 100 * (x1 - x0); };
+      [0, 25, 50, 75, 100].forEach(function (v) {
+        el("line", { x1: x(v), x2: x(v), y1: top, y2: ph - axisH, "class": v === 0 ? "axisl" : "gridl" }, g);
+        txt(g, x(v), ph - axisH + 15, v + "%", "tick", "middle");
+      });
+      p.bars.forEach(function (r, i) {
+        var y = top + i * rowH + (rowH - barH) / 2;
+        txt(g, labW - 8, y + barH - 3, r.n, "lab", "end");
+        hbar(g, x(0), x(r.v), y, barH, css(r.col));
+        el("line", { x1: x(r.lo), x2: x(r.hi), y1: y + barH / 2, y2: y + barH / 2, stroke: css("--ink"), "stroke-width": 1.5 }, g);
+        [r.lo, r.hi].forEach(function (v) { el("line", { x1: x(v), x2: x(v), y1: y + 4, y2: y + barH - 4, stroke: css("--ink"), "stroke-width": 1.5 }, g); });
+        txt(g, x(Math.max(r.v, r.hi)) + 6, y + barH - 3, r.v + "%", "val");
+        hit(g, 0, y - 6, panelW, barH + 12, [{ v: r.v + "% [" + r.lo + ", " + r.hi + "]", n: r.n + " push", color: css(r.col) }, { v: p.base.v + "% [" + p.base.lo + ", " + p.base.hi + "]", n: "no push" }], p.t);
+      });
+      el("line", { x1: x(p.base.v), x2: x(p.base.v), y1: top - 4, y2: ph - axisH, "class": "ref" }, g);
+      txt(g, x(p.base.v), top - 8, "no push " + p.base.v + "%", "reflab", "middle");
+    });
+  }
+  register(drawSteerC);
+
+  // ================= models screen, three facets =================
+  function drawScreen() {
+    var box = document.getElementById("chScreen"); box.textContent = "";
+    var W = box.clientWidth || 900, narrow = W < 640;
+    var labW = narrow ? 128 : 250, rowH = narrow ? 30 : 30, top = 40, barH = 12;
+    var facets = [{ k: "t", t: narrow ? "Says \"test\"" : "Blackmail prompt: says it's a test" }, { k: "b", t: narrow ? "Blackmails" : "Blackmail prompt: blackmails" }, { k: "g", t: narrow ? "Grader: \"testing me\"" : "Grader bug, scored: \"testing me\"" }];
+    var fg = 12, fw = (W - labW - fg * 2) / 3;
+    var H = top + SCREEN.length * rowH + 8;
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H }, box);
+    SCREEN.forEach(function (r, i) {
+      var y = top + i * rowH;
+      if (r.ctrl) el("rect", { x: 0, y: y, width: W, height: rowH, fill: css("--hover") }, svg);
+      if (i > 0) el("line", { x1: 0, x2: W, y1: y, y2: y, "class": "gridl" }, svg);
+      var name = narrow ? r.m.replace(" (check, no J-lens)", " (check)").replace(" (local)", "") : r.m;
+      var t = txt(svg, 0, y + rowH / 2 + 4, name, "lab");
+      if (r.ctrl) t.setAttribute("font-weight", "700");
+      if (r.fit && !narrow) txt(svg, labW - 10, y + rowH / 2 + 4, r.fit, "lab2", "end");
+    });
+    facets.forEach(function (f, fi) {
+      var ox = labW + fi * (fw + fg), x = function (v) { return ox + v / 100 * (fw - 38); };
+      var tt = txt(svg, ox, 14, f.t, "lab"); tt.setAttribute("font-weight", "700"); if (narrow) tt.setAttribute("font-size", "11.5");
+      txt(svg, ox, 30, "0", "tick"); txt(svg, x(100), 30, "100%", "tick", "end");
+      el("line", { x1: x(0), x2: x(0), y1: top, y2: H - 8, "class": "axisl" }, svg);
+      el("line", { x1: x(50), x2: x(50), y1: top, y2: H - 8, "class": "gridl" }, svg);
+      el("line", { x1: x(100), x2: x(100), y1: top, y2: H - 8, "class": "gridl" }, svg);
+      SCREEN.forEach(function (r, i) {
+        var y = top + i * rowH + (rowH - barH) / 2, d = r[f.k];
+        if (!d) { txt(svg, x(0) + 4, y + barH - 1, "–", "tick"); return; }
+        var pct = 100 * d[0] / d[1];
+        hbar(svg, x(0), x(pct), y, barH, css("--s-one"));
+        if (pct === 0) el("rect", { x: x(0), y: y + 2, width: 2, height: barH - 4, fill: css("--s-one") }, svg);
+        txt(svg, x(pct) + 4, y + barH - 1, Math.round(pct) + "%", "val");
+        var rows = [{ v: d[0] + " of " + d[1] + " (" + Math.round(pct) + "%)", n: f.t, color: css("--s-one") }];
+        if (f.k === "g" && r.gnote) rows.push({ v: "", n: r.gnote });
+        hit(svg, ox - 2, y - 7, fw, barH + 14, rows, r.m);
+      });
+    });
+  }
+  register(drawScreen);
+})();
+</script>
+</body>
+</html>
