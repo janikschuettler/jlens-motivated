@@ -111,16 +111,17 @@ Q6 method, cases and predictions: PRE section Q6 (P1–P4 and the lens relation)
 
 ## Added after 06:00: point of no return (Q6)
 
-Source: `reports/point_of_no_return.md` as it stood at 06:00 (its second-pass section was still a placeholder).
+Source: `reports/point_of_no_return.md` (final version, 06:17, with the second pass) and `data/point_of_no_return.json`.
 
 | Number on the page | Source in Q6 |
 | --- | --- |
-| Timeline 04:38–06:47; about 2.1 GPU-hours | "Timing and data" |
-| Curves at 0%, 50%, 100% kept, per group | behaviour table, columns "P(bad), no reasoning kept / half kept / all kept"; hack no-hack last point is "at 90%" |
+| Timeline 04:38–06:15; about 1.6 GPU-hours | "Timing and data" (final version) |
+| Curves at 0%, 10%, …, 100% kept, per group | JSON `cases.<case>.groups.<group>.p_outcome_curve` (est), which matches the report's behaviour table at 0/50/100%; the no-hack curve is cut at 90% (the report's convention) |
 | Settled before any reasoning 50% / 30% / 4% / 4%; median commitment 0 / 0.26 / 0.43 | behaviour table |
 | 12 of 18 hack runs commit in the code | §4 ("Of the 18 that commit, 6 do so in the reasoning and 12 in the code") |
 | Lens correlations (J-lens, logit lens) with intervals, 8 groups | lens table, "correlation" columns |
 | 44th–55th percentile at the commitment segment (20-run groups) | lens bullets ("The 20-run groups land at 0.44–0.55") |
-| 6 of 10 resisters; 19 of 21; 17 of 20; "5 million children" quote; 150 million | §1, §3, §2 |
+| 6 of 10 resisters; 19 of 21; 17 of 20; "5 million children" quote; 150 million; "highest score possible" quote | §1, §3, §2 |
+| Second pass: about one sentence; 16 of 20 about grader/bug/score; hack = closing fence before `conftest.py`; noise caveat | "Second pass (exploratory)" |
 | All four predictions held | §1–§4 "Prediction P1…P4 holds" |
 | Section 1 paragraph on the split | Q6 plain answer |
