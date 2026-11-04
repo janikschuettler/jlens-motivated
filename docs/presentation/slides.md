@@ -1,6 +1,6 @@
 # Arguing against its own knowledge: slides (status talk, 4 November 2026)
 
-Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex2id6yqNrA (slides 1-14 main, 15-18 backup). Numbers come from docs/findings/registry.json and docs/overnight/reports/; speaker notes give the sources.
+Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex2id6yqNrA (slides 1-14 main, 15-18 backup). Numbers come from docs/findings/registry.json and docs/overnight/reports/; speaker notes give the sources. Strength labels follow docs/overnight/redteam_claims.md.
 
 ## 1. cover
 
@@ -51,7 +51,7 @@ Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex
 - A sentence that states the answer moves the model; a reward does only when it is told it is scored.
 - 2
 - Chain of thought
-- It says so. In thinking mode the reasoning names the nudge almost every time, and under a hint the choice is made before the reasoning starts.
+- It says so. In thinking mode the reasoning names the nudge almost every time, and under a hint the prompt sets the choice before the reasoning starts.
 - 3
 - Internals
 - The J-lens adds little. It never beats the plain logit lens, a trained probe reads more, and one narrow pre-registered pass remains.
@@ -136,7 +136,7 @@ Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex
 - Finding 2 · The reasoning tells
 - Exploratory
 
-**When the model switches, its reasoning almost always says why**
+**When the model switches, its reasoning almost always names the nudge**
 
 - 2 of 1,231
 - hint-following switches on factual questions never mention the hint (thinking mode)
@@ -155,7 +155,7 @@ Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex
 - Finding 2 · When the decision is made
 - Pre-registered
 
-**Under a hint, the answer is fixed before the reasoning starts**
+**Under a hint, the prompt sets the outcome before the reasoning starts**
 
 - Chance a resampled run ends on the wrong option, by share of the original reasoning kept
 - 0
@@ -262,7 +262,7 @@ Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex
 | Planted claim: J-lens at answer predicts who still knows | AUROC 0.71 (logit 0.60) | pass, narrow |
 | Claimed answer key: deferred vs persuaded | AUROC 0.54 (lead was 0.78) | fail |
 
-- The pass is at the answer, not in the reasoning; J-lens vs logit lens there is untested.
+- The pass is at the answer, and the J-lens does not beat the logit lens there (paired +0.11 [−0.10, +0.30]).
 - Planted claim: 389 fresh runs that kept the wrong answer; AUROC 0.71 [0.57, 0.84], logit lens 0.60 [0.47, 0.74], length 0.47. The first, smaller silent-vs-open test was underpowered (9 silent runs) and is left out.
 
 *Notes:* Each row is a test whose rule was written before the data. The hidden-hack main test passed (0.995) but its controls showed it detects which fine-tuned model is loaded, not the hack; the row shows the within-model test. The planted-claim pass: among runs that argued a planted wrong answer to the end, the J-lens correct-letter score at the answer separates runs that name the correct option when re-asked without their reasoning from runs that don't. Within questions 0.77 [0.62, 0.92], 11 of 11 questions in the expected direction. Caveat: half the 'doesn't name it' runs are on questions the model also gets wrong when asked alone with thinking off; leaving those out gives 0.68 [0.54, 0.83] (post hoc). The original exploratory lead was 0.86.
@@ -274,19 +274,19 @@ Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex
 **Four behavioural claims**
 
 - Solid
-- Stating the answer, not a reward or an opinion, is what makes Qwen3-8B argue against what it knows.
-- Same 200 questions: wording −51 points [−56, −47]. Weak spot: keyword labels, 2–3 samples per cell.
+- On Qwen3-8B, the hint’s wording, not thinking mode, decoding or prompt format, sets how often it switches.
+- Factorial on 200 questions: wording −51 points [−56, −47]; the others under 7. Weak spot: one model.
 - Moderate
-- Told they are scored, most open models take a buggy grader’s point against what they know.
-- 12 models; plain chat ≤ 5%; local gpt-oss-20b matches the API. Weak spot: 2 samples on 19–60 questions, one prompt family.
+- In chat, thinking-mode Qwen3 follows sentences that state the answer, not rewards; told they are scored, most other models take the reward.
+- Scope matters: Qwen3-8B without thinking takes the grader bug 15%. Other models: 2 samples, fp8 API providers.
 - Solid
-- In thinking mode the reasoning names the nudge in almost every switch.
-- 2 of 1,231; 0 of 5,019; 99% of 2,850 judged. Weak spot: Qwen3-8B labels are keyword rules until the judge runs.
+- In thinking mode the reasoning mentions the nudge in almost every switch.
+- 2 of 1,231; 0 of 5,019. Mentioning is not saying the nudge is why: that part is moderate until the judge is validated.
 - Moderate
-- Under an answer-stating hint, the choice is fixed before the reasoning starts.
-- Pre-registered resampling (0.87 flat) and forced early answers (0.82) agree. Weak spot: 20 runs per group.
+- Under “Hint: The answer is X.”, the prompt sets the outcome before the reasoning starts.
+- Pre-registered resampling (0.87 flat) and forced early answers (0.82) agree. Weak spot: 20 runs, a noisy settle rule.
 
-*Notes:* Strength labels: Solid = large effect on a fixed question set, consistent across checks; Moderate = consistent but with one real gap (exploratory design, small samples or a stand-in setup); Preliminary = one result with an untested key comparison. Claim 3 drops to moderate if the judge disagrees with the keyword labels; that check is the first job tomorrow.
+*Notes:* Strength labels: Solid = large effect on a fixed question set, consistent across checks; Moderate = consistent but with one real gap (exploratory design, small samples or a stand-in setup); Preliminary = one result with an untested key comparison. Labels aligned with the red-team review (docs/overnight/redteam_claims.md). Claim 2 is scope-limited: Qwen3-8B with thinking off takes the grader bug 15%, Qwen3-14B 60%, and 10 of 12 other models take it when told they are scored. Claim 4 rephrased: at the cut before any reasoning all runs share the prompt, so 'settled' there is a property of the prompt.
 
 ## 13. claims-internals
 
@@ -295,40 +295,40 @@ Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex
 **Four claims about the lens, and one we cannot make yet**
 
 - Moderate
-- As a detector here, the J-lens adds nothing over the logit lens.
-- 10 of 11 contrasts near chance; never beats the logit lens; probe 72% vs 42%. Weak spot: exploratory, positions chosen after looking.
+- Here the J-lens is not a better window than the logit lens or a probe.
+- Never beats the logit lens; probe 72% vs 42%. Not equivalence-tested; letter readouts can’t show the answer mid-reasoning.
 - Moderate
-- The J-lens direction steers the answer: beats logit lens, loses to probe.
-- Pre-registered: 47% vs 27% vs 59% (random 2%). Weak spot: one layer, 40 questions.
+- J-lens directions steer the answer: beat logit lens, lose to probe.
+- Pre-registered: 47% vs 27% vs 59% (random 2%). Weak spot: 2,048-token cap cut 34–47% of generations; one layer.
 - Moderate
-- The paper’s eval-awareness readout fails on the open models we ran.
-- AUROC 0.50 on Qwen3-8B; at 27B it equals the logit lens. Weak spot: not the paper’s model or data.
+- The paper’s eval-awareness score fails on Qwen3-8B (AUROC 0.50).
+- At 14B the ablation works, but logit-lens directions do too. 27B: one exploratory smoke test (preliminary).
 - Preliminary
 - After a planted claim, the J-lens at the answer flags who still knows.
-- One pre-registered pass (0.71). Weak spot: J-lens vs logit lens untested; the sister test failed (0.54).
+- The pass (0.71) is moderate: reproduced, code reviewed. J − logit +0.11 [−0.10, +0.30]; may rank questions, not runs.
 - Not claimable yet: that the correct answer is represented during the reasoning. No readout shows it there beyond the text.
 
-*Notes:* At the answer position, wrong-answer groups keep the correct letter 1-3 nats above the other wrong letters, but a salience control (the unchosen hinted letter in runs that resisted) keeps about as much, so this is not evidence of hidden knowledge. Exceptions: planted claims (+1.4 vs -0.2 for the control) and Qwen3-14B grader-bug followers (+1.2 nats over the control); gpt-oss-20b followers keep nothing (+0.08). The option-word probe reads the answer at the prompt (72%), but mid-reasoning nothing beats the text.
+*Notes:* Red-team points: the absence claims were never tested as absence (no equivalence tests with a stated margin), most cells are exploratory and chosen after looking, and the tracked tokens are option letters. So the fair claim is not the best window here, not nothing to see. Planted claim: only 11 of 74 questions have both outcomes, so the score may rank questions by how well the model knows them; leaving out questions the thinking-off control gets wrong gives 0.68 [0.54, 0.83]. At the answer position, wrong-answer groups keep the correct letter 1-3 nats above the other wrong letters, but a salience control (the unchosen hinted letter in runs that resisted) keeps about as much, so this is not evidence of hidden knowledge. Exceptions: planted claims (+1.4 vs -0.2 for the control) and Qwen3-14B grader-bug followers (+1.2 nats over the control); gpt-oss-20b followers keep nothing (+0.08). The option-word probe reads the answer at the prompt (72%), but mid-reasoning nothing beats the text.
 
 ## 14. tomorrow
 
 - What to run tomorrow
 
-**Five runs, ordered by what they do for Friday**
+**Five runs, cheapest and most decisive first**
 
 
 | Order | Experiment | Firms up | Cost |
 |---|---|---|---|
-| 1 | Run the LLM judge on the Qwen3-8B switch labels | Behaviour claims 1 and 3 | Judge built; a few hours, no GPU |
-| 2 | Paired J-lens vs logit-lens test on the 389 planted-claim runs, question effect controlled | Internals claim 4: promote or drop | Existing readouts; under 1 h CPU |
-| 3 | Pre-registered repeat of the readout comparison on fresh runs, positions fixed in advance | Internals claim 1: exploratory → pre-registered | 2–3 GPU-h |
-| 4 | Gemma-3-12B: silent letter swaps vs open exploits, lens test fixed in advance | The one case where a lens could beat the text | Needs a Hugging Face token; about 2 GPU-h |
-| 5 | Probe at the commitment sentences, against forced early answers | Main question: is the answer there mid-reasoning? | 1–2 GPU-h |
+| 1 | Item-difficulty control on the planted-claim pass | Internals claim 4: about the run or the question? | CPU, about 1 h |
+| 2 | Equivalence tests (±0.10 AUROC): J-lens vs chance and vs logit lens, all stored cases | Internals claim 1 becomes a bounded statement | CPU, 2–3 h |
+| 3 | Run and validate the LLM judge: 300 switches plus keyword-silent ones, 50 gold labels by you | Behaviour claim 3: mentions the nudge → says it is why | $2–5 API, 2 h of your time |
+| 4 | W: reward-hack waterproofing, already pre-registered | Is the reward-hack null a real absence? | 3–4 GPU-h |
+| 5 | Gemma-3-12B: silent letter swaps vs open exploits, pre-registered | The one case where a lens could beat the text | 1.5 GPU-h + Hugging Face token |
 
-- Rows 1–3 firm up claims already on the list. Rows 4–5 are the only tests left that could change the answer to the main question.
-- Already pre-registered (18:40), not yet run: W, an equivalence test with positive controls for the reward-hack null. Decisions waiting on you: last backup slide.
+- Rows 1–3 need no GPU and fit in the morning. Rows 4–5 are the GPU runs with most decision value.
+- Order follows the red-team review’s value-per-hour ranking. Also cheap: fresh-agent review of the analysis scripts behind the headline numbers.
 
-*Notes:* Order: cheapest and most claim-relevant first. 1: the keyword labels are the main weak spot of the behavioural claims. 2: the only lens positive rests on J-lens 0.71 vs logit 0.60, but their difference was never tested; a paired test with the question effect controlled settles it on existing data. 3: the competitor table is exploratory with post hoc best positions; fix positions and readouts in advance on fresh runs of the key contrasts. 4: Gemma-3-12B is the only small lens-covered model whose text sometimes hides the switch (47 of 501 followers), giving a same-model silent vs open contrast. 5: read a probe at the sentences where Qwen3-14B and planted-claim runs commit, with forced early answers as the baseline it must beat. Optional: rerun steering generation without the 2,048-token cap.
+*Notes:* Ranking from docs/overnight/redteam_claims.md (value per hour). 1: the only J-lens positive may rank questions by how well the model knows them; regress on per-question knowledge strength. The paired J-lens minus logit-lens test is already done: +0.11 [-0.10, +0.30], not significant. 2: the headline null rests on intervals that include zero; equivalence tests with a stated margin make it a bounded claim. 3: every behavioural label is a keyword rule; the judge criterion should be 'says the hint is why'. 4: W is written (preregistration.md, 18:40): fresh runs, equivalence margin ±0.10, positive controls at the hack line and with a synthetic plan. 5: Gemma-3-12B is the only small lens-covered model whose text sometimes hides the switch (47 of 501 followers). Further down the ranking: within-question repeat of the planted-claim test, rebuilt eval-awareness probe on Qwen3-14B, content-token readout mid-reasoning, wording factorial on gpt-oss-20b, steering rerun at the 8,192-token cap.
 
 ## 15. b-wording (backup)
 
