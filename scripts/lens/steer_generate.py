@@ -32,7 +32,7 @@ from pathlib import Path
 from jmr import config, steer
 
 KV_BYTES_PER_TOKEN = 36 * 2 * 8 * 128 * 2
-KV_BUDGET = 20e9
+KV_BUDGET = 17e9  # keeps peak GPU memory under 40 GB (orchestrator limit)
 MAX_ROWS = 40
 DROP_EVERY = int(os.environ.get("STEER_DROP_EVERY", "32"))  # env override for smoke tests only
 
@@ -166,13 +166,11 @@ def run(jobs_path: Path, dirs_path: str, out: Path, max_priority: int, device: s
         return j["alpha"] * r_l * v
 
     def sample_next(logits, gen):
+        """Temperature, then top-k, then top-p (smallest prefix of the top-k with mass >= top_p)."""
         x = logits.float() / T
-        kth = torch.topk(x, top_k, dim=-1).values[:, -1:]
-        x = x.masked_fill(x < kth, float("-inf"))
-        sp, si = torch.sort(x, descending=True, dim=-1)
+        sp, si = torch.topk(x, top_k, dim=-1)  # sorted, descending
         pr = torch.softmax(sp, -1)
-        cum = pr.cumsum(-1)
-        drop = (cum - pr) > top_p  # keep the smallest prefix with mass >= top_p
+        drop = (pr.cumsum(-1) - pr) > top_p
         sp = sp.masked_fill(drop, float("-inf"))
         choice = torch.multinomial(torch.softmax(sp, -1), 1, generator=gen)
         return si.gather(-1, choice).squeeze(-1)
@@ -201,36 +199,44 @@ def run(jobs_path: Path, dirs_path: str, out: Path, max_priority: int, device: s
             st.set({L: V})
             o = hf_model(input_ids=ids, attention_mask=mask, position_ids=pos, past_key_values=cache, use_cache=True,
                          logits_to_keep=1)
-            active = list(range(B))  # row index in the current (shrinking) batch → original row
-            outs = [[] for _ in range(B)]
-            lps = [[] for _ in range(B)]
-            finished = [False] * B
+            # Tokens stay on the GPU; finished rows are found (one sync) every DROP_EVERY steps.
+            eos_t = torch.tensor(sorted(eos), device=dev)
+            toks = torch.full((B, max_new), -1, dtype=torch.long, device=dev)
+            tlps = torch.zeros((B, max_new), device=dev)
+            hit = torch.zeros(B, dtype=torch.bool, device=dev)  # has emitted a stop token
+            act = torch.arange(B, device=dev)  # current batch row -> original row
             last_pos = pos[:, -1].clone()
             logits = o.logits[:, -1]
             for step in range(max_new):
                 nxt = sample_next(logits, gen)
-                lp = torch.log_softmax(logits.float(), -1).gather(-1, nxt[:, None]).squeeze(-1)
-                nl, ll = nxt.tolist(), lp.tolist()
-                for k, b in enumerate(active):
-                    if not finished[b]:
-                        outs[b].append(nl[k])
-                        lps[b].append(ll[k])
-                        if nl[k] in eos:
-                            finished[b] = True
-                if all(finished[b] for b in active):
-                    break
-                if step % DROP_EVERY == DROP_EVERY - 1 and any(finished[b] for b in active):
-                    keep = [k for k, b in enumerate(active) if not finished[b]]
-                    kt = torch.tensor(keep, device=dev)
-                    cache.batch_select_indices(kt)
-                    mask, last_pos, nxt, V = mask[kt], last_pos[kt], nxt[kt], V[kt]
-                    active = [active[k] for k in keep]
-                    st.set({L: V})
-                mask = torch.cat([mask, torch.ones((len(active), 1), dtype=mask.dtype, device=dev)], -1)
+                lf = logits.float()
+                toks[act, step] = nxt
+                tlps[act, step] = lf.gather(-1, nxt[:, None]).squeeze(-1) - torch.logsumexp(lf, -1)
+                hit[act] |= torch.isin(nxt, eos_t)
+                if step % DROP_EVERY == DROP_EVERY - 1 or step == max_new - 1:
+                    alive = ~hit[act]
+                    n_alive = int(alive.sum())
+                    if n_alive == 0 or step == max_new - 1:
+                        break
+                    if n_alive < len(act):
+                        kt = alive.nonzero().squeeze(-1)
+                        cache.batch_select_indices(kt)
+                        mask, last_pos, nxt, V, act = mask[kt], last_pos[kt], nxt[kt], V[kt], act[kt]
+                        st.set({L: V})
+                mask = torch.cat([mask, torch.ones((len(act), 1), dtype=mask.dtype, device=dev)], -1)
                 last_pos = last_pos + 1
                 o = hf_model(input_ids=nxt[:, None], attention_mask=mask, position_ids=last_pos[:, None],
                              past_key_values=cache, use_cache=True)
                 logits = o.logits[:, -1]
+            toks_l, tlps_l = toks.tolist(), tlps.tolist()
+            outs, lps, finished = [], [], []
+            for b in range(B):
+                row = [t for t in toks_l[b] if t >= 0]
+                cut = next((k for k, t in enumerate(row) if t in eos), None)
+                finished.append(cut is not None)
+                n = cut + 1 if cut is not None else len(row)
+                outs.append(row[:n])
+                lps.append(tlps_l[b][:n])
             del cache, o
             st.clear()
             dt = time.time() - t0
