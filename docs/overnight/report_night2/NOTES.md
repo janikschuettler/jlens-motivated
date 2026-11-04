@@ -165,3 +165,16 @@ Source: `reports/c3_lead_repeat.md` (07:38) and LOG 07:39.
 ## Section 8B: claimed-answer-key lead repeat (pending)
 
 From PRE section "R-CL" (07:42): the lead (lens_main, deferred vs persuaded, 0.78 [0.65, 0.92], 16 vs 36 runs, post hoc score at blocks 30–32), the design (124 fresh items, arms V2_info and V2p_chen, stop at 08:05) and the pass / fail / underpowered rules (< 15 runs). Prompt texts from `configs/explore/w2_blocks.yaml` (`grader_info`, `chen_unauthorized`). Expected report `reports/claim_lead_repeat.md` by ~08:50 (orchestrator's message).
+
+## Added after 08:10: claimed-answer-key lead repeat (section 8B; sections 1, 9, 10)
+
+Source: `reports/claim_lead_repeat.md` (08:09).
+
+| Number on the page | Source |
+| --- | --- |
+| Fail; J-lens 0.54 [0.37, 0.70]; logit 0.55 [0.41, 0.68]; length 0.65 [0.49, 0.77]; original 0.78 [0.65, 0.92] | "Pre-registered test" table |
+| 40 deferred vs 55 persuaded runs; 95 followers; 2 runs per question and arm; stop at 08:05 | plain answer, "Data" |
+| Template-mode regrouping: 14 runs; J-lens 0.69 [0.50, 0.85], logit 0.69 [0.51, 0.85] | "Exploratory checks" |
+| "An effect around 0.6 is not excluded" | "How sure" |
+| Timeline 07:42–08:10; about 26 GPU-minutes | header line, "Commands" |
+| Total GPU about 6.5 h | 1.3 + 2.1 + 1.6 + 0.7 + 0.4 + 0.43 |
