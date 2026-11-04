@@ -34,11 +34,11 @@ from jmr.lens.load import lens_file, load_lens, load_model
 BLOCKS = list(range(14, 33))
 
 
-def bases(hf_model, lens, token_ids):
+def bases(hf_model, lens, token_ids, blocks=BLOCKS):
     g = hf_model.model.norm.weight.float()
     W = hf_model.lm_head.weight.float()[token_ids]  # [n, d]
     Qs = {}
-    for l in BLOCKS:
+    for l in blocks:
         J = lens.jacobians[l].to(W.device).float()  # transport: h @ J.T
         V = (W * g) @ J  # [n, d]: rows v_t = J^T (g * w_t)
         Q, R = torch.linalg.qr(V.T)  # [d, n]
@@ -70,8 +70,8 @@ class Ablation:
 
 
 @torch.no_grad()
-def check_ablation(hf_model, lens_model, lens, ids, Qs, token_ids):
-    """Sanity check on the prompt at block 24: J-lens log-prob of the set's tokens
+def check_ablation(hf_model, lens_model, lens, ids, Qs, token_ids, layer=24):
+    """Sanity check on the prompt at block `layer` (default 24): J-lens log-prob of the set's tokens
     (mean, and max over positions) and the number of positions with one of them in
     the top-20, without and with the ablation hooks (rule 1 if nothing changes)."""
     from jmr.lens.readout import residuals
@@ -80,11 +80,11 @@ def check_ablation(hf_model, lens_model, lens, ids, Qs, token_ids):
     for name in ("before", "after"):
         abl = Ablation(hf_model, Qs) if name == "after" else None
         try:
-            r = residuals(lens_model, ids, [24])[24].float()
+            r = residuals(lens_model, ids, [layer])[layer].float()
         finally:
             if abl:
                 abl.remove()
-        lp = torch.log_softmax(lens_model.unembed(lens.transport(r, 24)).float(), -1)
+        lp = torch.log_softmax(lens_model.unembed(lens.transport(r, layer)).float(), -1)
         top = lp.topk(20, -1).indices
         out[name] = {"mean_lp": float(lp[:, tid].mean()), "max_lp": float(lp[:, tid].max()),
                      "positions_in_top20": int(torch.isin(top, tid).any(-1).sum())}
