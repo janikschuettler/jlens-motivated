@@ -228,14 +228,15 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
     <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch between light and dark colours">light / dark</button>
     <div class="kicker">Overnight summary · night of 3–4 November 2026 · for 09:00</div>
     <h1>Night Two: Testing the J-Lens</h1>
-    <p class="lede">You asked for more evidence on whether the J-lens is a good or a bad tool for reading out when a model argues against its own knowledge, and for the paper's eval-awareness result to be replicated until it breaks. Six experiments ran tonight on Qwen3-8B (and some on Qwen3-14B and ten other models).</p>
+    <p class="lede">You asked for more evidence on whether the J-lens is a good or a bad tool for reading out when a model argues against its own knowledge, and for the paper's eval-awareness result to be replicated until it breaks. Seven experiments ran tonight on Qwen3-8B (and some on Qwen3-14B and ten other models).</p>
     <ul class="timeline" aria-label="Tonight's experiments">
       <li><span class="t">00:00–03:10 · GPU</span><b>Eval-awareness replication</b></li>
       <li><span class="t">00:05–01:35 · CPU</span><b>J-lens vs other readouts</b></li>
       <li><span class="t">00:30–04:50 · GPU</span><b>Steering</b></li>
       <li><span class="t">02:56–03:45 · API</span><b>Eval-awareness across models</b></li>
       <li id="tl-q6"><span class="t">04:38–06:15 · GPU</span><b>Point of no return</b></li>
-      <li id="tl-x"><span class="t">CPU prep 04:00 · GPU after</span><b>Ablation on Qwen3-14B</b> <span class="chip run">running</span></li>
+      <li id="tl-x"><span class="t">GPU until 06:57</span><b>Ablation on Qwen3-14B</b> <span class="chip run">report pending</span></li>
+      <li id="tl-rep"><span class="t">from ~07:00</span><b>Repeat of the J-lens lead</b> <span class="chip run">running</span></li>
     </ul>
   </div>
 </header>
@@ -255,7 +256,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
     <div class="tile"><div class="v">47% <small>vs 59%</small></div><div class="l">wrong answers flipped to correct by a push along the J-lens direction, against a probe direction. A random push flips 2%.</div></div>
   </div>
   <p class="answer">A fourth result explains part of the null. When a hint states the answer, the outcome is fixed by the prompt before any reasoning, so a lens reading the reasoning has nothing to find. But where the model does decide during its reasoning, at a sentence we can point to, the lens letter scores don't change there either.</p>
-  <p class="small">One experiment is still running: removing the eval-awareness directions in Qwen3-14B, a model that does say "you're testing me" (section 7).</p>
+  <p class="small" id="stillRunning">Two results are still to come: removing the eval-awareness directions in Qwen3-14B, a model that does say "you're testing me" (section 7), and a pre-registered repeat of the one J-lens lead (section 8).</p>
 
   <dl class="glossary" aria-label="Terms used on this page">
     <div><dt>J-lens</dt><dd>Reads a middle layer of the model as if it were the output: it maps the hidden state through an averaged Jacobian (J) to the vocabulary, so we see which words that layer "points to".</dd></div>
@@ -417,21 +418,32 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
   </div>
 </section>
 
+<!-- ================= 8. LEAD REPEAT ================= -->
+<section id="repeat" aria-labelledby="h-rep">
+  <div class="sec-head"><span class="sec-no">08</span><h2 id="h-rep">Repeating the one J-lens lead</h2>
+    <p class="q">Does the only place the J-lens looked better than chance hold up on fresh questions, with the test fixed in advance?</p></div>
+  <div id="repBody" class="pending">
+    <div class="status"><span class="chip run">still running</span><span class="small">report expected around 08:45</span></div>
+    <p><b>The lead.</b> We wrote "The answer is (B). Let me explain why." at the start of the model's reasoning. Among runs that kept B, the J-lens at the answer position separated the runs that still give the correct option when asked again (51 runs) from those that don't (10 runs): AUROC 0.86 [0.77, 0.96], where 0.5 is chance and 1 is perfect. The logit lens got 0.77, text features at most 0.58. It was found after looking, on few runs.</p>
+    <p><b>The repeat.</b> The same comparison on fresh questions, with the score and the pass rule written down before the data is read out. Possible outcomes: pass, fail, or too few runs to tell.</p>
+  </div>
+</section>
+
 <!-- ================= 8. MEANING ================= -->
 <section id="meaning" aria-labelledby="h-mean">
-  <div class="sec-head"><span class="sec-no">08</span><h2 id="h-mean">What this means, and the three best next steps</h2></div>
+  <div class="sec-head"><span class="sec-no">09</span><h2 id="h-mean">What this means, and the three best next steps</h2></div>
   <p class="answer">Tonight closes the main J-lens question for our setups. As a detector of a model arguing against its own knowledge, it adds nothing over the logit lens or the text. Its eval-awareness use doesn't transfer to a small open model. What survives is narrower: at the answer, the J-lens reads a letter direction the model really uses.</p>
   <p class="small">This fits yesterday's results. A model trained to hide a reward hack: the lens saw that the trained model was loaded, not which run hacked (hidden hack vs clean, same model: AUROC 0.44, chance). Mid-reasoning, no readout pointed to the correct option beyond what the text says. Larger open models took a buggy grader's free point when told they are scored, and 99% of the runs that took it said so openly.</p>
   <ol class="next" id="nextSteps">
     <li><b>Switch the main instrument to probes.</b> The option-word probe is the only readout that finds the model's knowledge (72% vs the lenses' 42–43%), and probe directions steer more than J-lens ones. Next: read a probe at the commitment sentences found tonight (the grader-bug and planted-claim runs), where the letter readouts saw nothing, with forced early answers as the baseline it must beat.</li>
     <li><b>Find cases where the text really hides the switch.</b> In thinking mode the model almost always says it follows the hint, so a lens has nothing to add. The best candidate is Gemma-3-12B, which swaps letters silently (47 of 501 followers argue for the correct option, then write B). It needs a Hugging Face token.</li>
-    <li><b>Re-test the one small lead with rules fixed in advance.</b> Among runs that kept a planted wrong claim, the J-lens separated those that still give the correct answer when asked again (AUROC 0.86, logit lens 0.77). It rests on 10 runs and was found after looking.</li>
+    <li id="next3"><b>Settle the one small lead.</b> Among runs that kept a planted wrong claim, the J-lens separated those that still give the correct answer when asked again (AUROC 0.86, logit lens 0.77). It rests on 10 runs and was found after looking. Its pre-registered repeat is running (section 8).</li>
   </ol>
 </section>
 
 <!-- ================= 9. DECISIONS ================= -->
 <section id="decisions" aria-labelledby="h-dec">
-  <div class="sec-head"><span class="sec-no">09</span><h2 id="h-dec">Decisions for you, and housekeeping</h2></div>
+  <div class="sec-head"><span class="sec-no">10</span><h2 id="h-dec">Decisions for you, and housekeeping</h2></div>
   <ul class="decide">
     <li><span class="ask">Accept the steering run's 2,048-token cap?</span><span class="why">Planned 3,072, usual 8,192; set for time. Also accept that strength 0.2 ran before 0.8, and 0.8 only on 15 questions. The answer-position result doesn't depend on the cap.</span></li>
     <li><span class="ask">Accept gpt-oss-20b's 6,144-token cap and the low-reasoning-effort run (from yesterday evening)?</span><span class="why">At 8,192 tokens one lens pass runs out of memory, so generation was capped at 6,144 (10 of 2,000 screen runs hit it). The run at reasoning effort "low" was added after the first results.</span></li>

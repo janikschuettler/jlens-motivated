@@ -125,3 +125,7 @@ Source: `reports/point_of_no_return.md` (final version, 06:17, with the second p
 | Second pass: about one sentence; 16 of 20 about grader/bug/score; hack = closing fence before `conftest.py`; noise caveat | "Second pass (exploratory)" |
 | All four predictions held | §1–§4 "Prediction P1…P4 holds" |
 | Section 1 paragraph on the split | Q6 plain answer |
+
+## Section 8: repeat of the J-lens lead
+
+The lead's numbers (0.86 [0.77, 0.96], 51 vs 10 runs, logit lens 0.77, text features at most 0.58) are from COMP "The one lead" and the competitors table. The repeat itself: the orchestrator's message (report `reports/c3_lead_repeat.md` due ~08:45).
