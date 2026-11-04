@@ -1,0 +1,14 @@
+# Profile qwen3.6-27b: the Neuronpedia J-lens for Qwen3.6-27B.
+jlens:
+  repo: neuronpedia/jacobian-lens
+  revision: e166deb5ad540932100ef803c8c9bcc2a5453694
+  file: qwen3.6-27b/jlens/Salesforce-wikitext/Qwen3.6-27B_jacobian_lens_n1000.pt
+  capture_point: block_output
+  expected_source_layers: [0, 62]  # inclusive range
+  expected_d_model: 5120
+
+# Workspace layers: the Qwen3-8B choice (blocks 14-32 of 36, 39-89% of depth) scaled to
+# 64 blocks: 25, 27, ..., 57 (fixed 2026-11-04 before any Qwen3.6-27B readout).
+workspace_layers: [25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57]
+top_k: 25
+position_chunk: 256

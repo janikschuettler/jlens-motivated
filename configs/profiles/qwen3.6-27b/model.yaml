@@ -1,0 +1,11 @@
+# Profile qwen3.6-27b (JMR_MODEL_PROFILE=qwen3.6-27b; eval-awareness smoke test, 2026-11-04).
+# Qwen3_5ForConditionalGeneration (hybrid Gated DeltaNet + gated attention); text path only.
+# Revision pinned at download (2026-11-04). Lens: neuronpedia/jacobian-lens qwen3.6-27b/jlens.
+hf_id: Qwen/Qwen3.6-27B
+revision: 6a9e13bd6fc8f0983b9b99948120bc37f49c13e9
+dtype: bfloat16
+enable_thinking: true
+
+expected:
+  num_hidden_layers: 64
+  hidden_size: 5120

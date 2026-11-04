@@ -1,0 +1,1221 @@
+{
+ "description": "eval-awareness replication tracked tokens (scripts/lens/evalaware_tokens.py)",
+ "tokenizer": {
+  "hf_id": "Qwen/Qwen3.6-27B",
+  "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9"
+ },
+ "tokens": [
+  {
+   "text": " fictional",
+   "id": 42140,
+   "word": "fictional",
+   "groups": [
+    "eval_primary",
+    "eval_set"
+   ]
+  },
+  {
+   "text": " simulation",
+   "id": 18465,
+   "word": "simulation",
+   "groups": [
+    "eval_primary",
+    "eval_set"
+   ]
+  },
+  {
+   "text": " fake",
+   "id": 12062,
+   "word": "fake",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " fak",
+   "id": 160845,
+   "word": "fak",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " scenario",
+   "id": 14611,
+   "word": "scenario",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " artificial",
+   "id": 19820,
+   "word": "artificial",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " fict",
+   "id": 85072,
+   "word": "fict",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " benchmark",
+   "id": 27502,
+   "word": "benchmark",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " scenarios",
+   "id": 24481,
+   "word": "scenarios",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " hypoth",
+   "id": 42883,
+   "word": "hypoth",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " experiment",
+   "id": 9064,
+   "word": "experiment",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " fals",
+   "id": 30882,
+   "word": "fals",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " faker",
+   "id": 61922,
+   "word": "faker",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " experiments",
+   "id": 20554,
+   "word": "experiments",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " dummy",
+   "id": 16782,
+   "word": "dummy",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " mock",
+   "id": 7612,
+   "word": "mock",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " sham",
+   "id": 69434,
+   "word": "sham",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " artific",
+   "id": 188005,
+   "word": "artific",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " simul",
+   "id": 73088,
+   "word": "simul",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " bench",
+   "id": 13038,
+   "word": "bench",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " simulate",
+   "id": 36213,
+   "word": "simulate",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " evalu",
+   "id": 18741,
+   "word": "evalu",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " synth",
+   "id": 41479,
+   "word": "synth",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " simulator",
+   "id": 40510,
+   "word": "simulator",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " experimental",
+   "id": 21322,
+   "word": "experimental",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " Mock",
+   "id": 14144,
+   "word": "Mock",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " testing",
+   "id": 7262,
+   "word": "testing",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " experi",
+   "id": 5569,
+   "word": "experi",
+   "groups": [
+    "eval_set"
+   ]
+  },
+  {
+   "text": " test",
+   "id": 1228,
+   "word": "test",
+   "groups": [
+    "test"
+   ]
+  },
+  {
+   "text": " tested",
+   "id": 12152,
+   "word": "tested",
+   "groups": [
+    "test"
+   ]
+  },
+  {
+   "text": " evaluation",
+   "id": 15977,
+   "word": "evaluation",
+   "groups": [
+    "test"
+   ]
+  },
+  {
+   "text": " evaluated",
+   "id": 24276,
+   "word": "evaluated",
+   "groups": [
+    "test"
+   ]
+  },
+  {
+   "text": " exam",
+   "id": 6788,
+   "word": "exam",
+   "groups": [
+    "test"
+   ]
+  },
+  {
+   "text": " quiz",
+   "id": 26252,
+   "word": "quiz",
+   "groups": [
+    "test"
+   ]
+  },
+  {
+   "text": " cheat",
+   "id": 39422,
+   "word": "cheat",
+   "groups": [
+    "cheat"
+   ]
+  },
+  {
+   "text": " cheating",
+   "id": 40345,
+   "word": "cheating",
+   "groups": [
+    "cheat"
+   ]
+  },
+  {
+   "text": " dishonest",
+   "id": 56923,
+   "word": "dishonest",
+   "groups": [
+    "cheat"
+   ]
+  },
+  {
+   "text": " exploit",
+   "id": 31133,
+   "word": "exploit",
+   "groups": [
+    "cheat"
+   ]
+  },
+  {
+   "text": " wrong",
+   "id": 4808,
+   "word": "wrong",
+   "groups": [
+    "wrong"
+   ]
+  },
+  {
+   "text": " incorrect",
+   "id": 14673,
+   "word": "incorrect",
+   "groups": [
+    "wrong"
+   ]
+  },
+  {
+   "text": " false",
+   "id": 867,
+   "word": "false",
+   "groups": [
+    "wrong"
+   ]
+  },
+  {
+   "text": " mistake",
+   "id": 16036,
+   "word": "mistake",
+   "groups": [
+    "wrong"
+   ]
+  },
+  {
+   "text": "A",
+   "id": 32,
+   "word": "A",
+   "groups": [
+    "letter"
+   ]
+  },
+  {
+   "text": " A",
+   "id": 357,
+   "word": "A",
+   "groups": [
+    "letter"
+   ]
+  },
+  {
+   "text": "B",
+   "id": 33,
+   "word": "B",
+   "groups": [
+    "letter"
+   ]
+  },
+  {
+   "text": " B",
+   "id": 417,
+   "word": "B",
+   "groups": [
+    "letter"
+   ]
+  },
+  {
+   "text": "C",
+   "id": 34,
+   "word": "C",
+   "groups": [
+    "letter"
+   ]
+  },
+  {
+   "text": " C",
+   "id": 351,
+   "word": "C",
+   "groups": [
+    "letter"
+   ]
+  },
+  {
+   "text": "D",
+   "id": 35,
+   "word": "D",
+   "groups": [
+    "letter"
+   ]
+  },
+  {
+   "text": " D",
+   "id": 414,
+   "word": "D",
+   "groups": [
+    "letter"
+   ]
+  },
+  {
+   "text": " recipe",
+   "id": 10793,
+   "word": "recipe",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " bicycle",
+   "id": 33828,
+   "word": "bicycle",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " guitar",
+   "id": 16488,
+   "word": "guitar",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " kitchen",
+   "id": 9488,
+   "word": "kitchen",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " window",
+   "id": 3136,
+   "word": "window",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " garden",
+   "id": 13159,
+   "word": "garden",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " table",
+   "id": 1898,
+   "word": "table",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " chair",
+   "id": 10183,
+   "word": "chair",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " river",
+   "id": 14367,
+   "word": "river",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " mountain",
+   "id": 15822,
+   "word": "mountain",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " apple",
+   "id": 22544,
+   "word": "apple",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " banana",
+   "id": 41674,
+   "word": "banana",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " carrot",
+   "id": 71670,
+   "word": "carrot",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " pencil",
+   "id": 44579,
+   "word": "pencil",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " bottle",
+   "id": 16002,
+   "word": "bottle",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " blanket",
+   "id": 36781,
+   "word": "blanket",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " candle",
+   "id": 36549,
+   "word": "candle",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " bucket",
+   "id": 15162,
+   "word": "bucket",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " ladder",
+   "id": 34580,
+   "word": "ladder",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " hammer",
+   "id": 22725,
+   "word": "hammer",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " pillow",
+   "id": 40919,
+   "word": "pillow",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " mirror",
+   "id": 17312,
+   "word": "mirror",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " basket",
+   "id": 13621,
+   "word": "basket",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " carpet",
+   "id": 26950,
+   "word": "carpet",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " jacket",
+   "id": 25372,
+   "word": "jacket",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " wallet",
+   "id": 14644,
+   "word": "wallet",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " umbrella",
+   "id": 46299,
+   "word": "umbrella",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " violin",
+   "id": 59945,
+   "word": "violin",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " piano",
+   "id": 25439,
+   "word": "piano",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " drum",
+   "id": 22472,
+   "word": "drum",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " kettle",
+   "id": 69862,
+   "word": "kettle",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " spoon",
+   "id": 43988,
+   "word": "spoon",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " fork",
+   "id": 21736,
+   "word": "fork",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " plate",
+   "id": 11629,
+   "word": "plate",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " bowl",
+   "id": 18632,
+   "word": "bowl",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " cup",
+   "id": 10212,
+   "word": "cup",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " jar",
+   "id": 28628,
+   "word": "jar",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " lamp",
+   "id": 27056,
+   "word": "lamp",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " sofa",
+   "id": 30051,
+   "word": "sofa",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " bed",
+   "id": 4690,
+   "word": "bed",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " door",
+   "id": 5817,
+   "word": "door",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " roof",
+   "id": 14693,
+   "word": "roof",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " fence",
+   "id": 23873,
+   "word": "fence",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " bridge",
+   "id": 13759,
+   "word": "bridge",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " tower",
+   "id": 20618,
+   "word": "tower",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " castle",
+   "id": 31508,
+   "word": "castle",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " island",
+   "id": 12552,
+   "word": "island",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " forest",
+   "id": 13245,
+   "word": "forest",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " desert",
+   "id": 22865,
+   "word": "desert",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " ocean",
+   "id": 17415,
+   "word": "ocean",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " lake",
+   "id": 21128,
+   "word": "lake",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " beach",
+   "id": 10994,
+   "word": "beach",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " cloud",
+   "id": 9158,
+   "word": "cloud",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " rain",
+   "id": 10849,
+   "word": "rain",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " snow",
+   "id": 11456,
+   "word": "snow",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " tree",
+   "id": 4757,
+   "word": "tree",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " flower",
+   "id": 21655,
+   "word": "flower",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " grass",
+   "id": 15879,
+   "word": "grass",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " leaf",
+   "id": 15463,
+   "word": "leaf",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " stone",
+   "id": 9506,
+   "word": "stone",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " sand",
+   "id": 9002,
+   "word": "sand",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " horse",
+   "id": 14780,
+   "word": "horse",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " cow",
+   "id": 18775,
+   "word": "cow",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " sheep",
+   "id": 30864,
+   "word": "sheep",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " pig",
+   "id": 22952,
+   "word": "pig",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " chicken",
+   "id": 15683,
+   "word": "chicken",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " duck",
+   "id": 34793,
+   "word": "duck",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " rabbit",
+   "id": 37442,
+   "word": "rabbit",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " tiger",
+   "id": 49993,
+   "word": "tiger",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " lion",
+   "id": 37739,
+   "word": "lion",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " elephant",
+   "id": 44217,
+   "word": "elephant",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " monkey",
+   "id": 37421,
+   "word": "monkey",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " dog",
+   "id": 5388,
+   "word": "dog",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " cat",
+   "id": 7993,
+   "word": "cat",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " fish",
+   "id": 7397,
+   "word": "fish",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " bird",
+   "id": 11619,
+   "word": "bird",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " bread",
+   "id": 15530,
+   "word": "bread",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " cheese",
+   "id": 16657,
+   "word": "cheese",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " butter",
+   "id": 13696,
+   "word": "butter",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " milk",
+   "id": 13671,
+   "word": "milk",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " egg",
+   "id": 18075,
+   "word": "egg",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " rice",
+   "id": 19052,
+   "word": "rice",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " soup",
+   "id": 18594,
+   "word": "soup",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " salad",
+   "id": 31393,
+   "word": "salad",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " cake",
+   "id": 18565,
+   "word": "cake",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " cookie",
+   "id": 12184,
+   "word": "cookie",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " pizza",
+   "id": 21803,
+   "word": "pizza",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " sandwich",
+   "id": 26969,
+   "word": "sandwich",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " coffee",
+   "id": 10482,
+   "word": "coffee",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " tea",
+   "id": 14799,
+   "word": "tea",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " juice",
+   "id": 22105,
+   "word": "juice",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " train",
+   "id": 5257,
+   "word": "train",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " bus",
+   "id": 5647,
+   "word": "bus",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " truck",
+   "id": 10538,
+   "word": "truck",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " boat",
+   "id": 14882,
+   "word": "boat",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " plane",
+   "id": 10709,
+   "word": "plane",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " car",
+   "id": 1740,
+   "word": "car",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " wheel",
+   "id": 12899,
+   "word": "wheel",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " rope",
+   "id": 32313,
+   "word": "rope",
+   "groups": [
+    "control"
+   ]
+  },
+  {
+   "text": " shoe",
+   "id": 28031,
+   "word": "shoe",
+   "groups": [
+    "control"
+   ]
+  }
+ ],
+ "unmapped": [],
+ "groups": [
+  "cheat",
+  "control",
+  "eval_primary",
+  "eval_set",
+  "letter",
+  "test",
+  "wrong"
+ ]
+}
