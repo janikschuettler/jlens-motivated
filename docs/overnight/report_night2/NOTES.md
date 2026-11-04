@@ -95,7 +95,7 @@ Q6 method, cases and predictions: PRE section Q6 (P1–P4 and the lens relation)
 | Probe 72% vs lenses 42–43% | COMP option words |
 | Gemma-3-12B 47 of 501 silent swaps | MG result; LOG 21:30 |
 | Lead 0.86 vs 0.77, 10 runs | COMP "The one lead" |
-| Next steps | registry strands A and C "next" fields, and upcoming entries option-probe-cot, replicate-leads |
+| Next steps | registry strands A and C "next" fields, upcoming entries option-probe-cot and replicate-leads; step 1 also from Q6 "What this means" (a probe at the commitment sentence) |
 
 ## 9. Decisions and housekeeping
 
