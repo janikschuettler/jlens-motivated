@@ -1,0 +1,7855 @@
+{
+ "experiment": "hack-manual-read",
+ "date": "2026-11-04",
+ "kind": "exploratory",
+ "what": "Blind by-eye reading of stored top-25 lists (J-lens and logit lens, layers 16/24/32) at reasoning positions before the first hack word and at the last prompt token, reward-hack organism runs (docs/overnight/reports/hack_organism.md).",
+ "summary": {
+  "lists_total": 9324,
+  "lists_read": 6132,
+  "lists_read_by_lens": {
+   "J": 4662,
+   "L": 1470
+  },
+  "runs_with_read_lists": 120,
+  "flags": 4560,
+  "flags_on_unread_lists": 0,
+  "flags_rejected": 0,
+  "flags_by_cat": {
+   "EVAL": 1383,
+   "JUSTIFY": 696,
+   "SNEAK": 2001,
+   "MECH": 480
+  },
+  "echo_local_share": {
+   "EVAL": 0.322,
+   "JUSTIFY": 0.017,
+   "SNEAK": 0.01,
+   "MECH": 0.008
+  },
+  "echo_earlier_share": {
+   "EVAL": 0.584,
+   "JUSTIFY": 0.053,
+   "SNEAK": 0.074,
+   "MECH": 0.929
+  },
+  "regex_vs_manual_lists": {
+   "EVAL": {
+    "both": 341,
+    "regex_only": 16,
+    "manual_only": 112
+   },
+   "JUSTIFY": {
+    "both": 346,
+    "regex_only": 7,
+    "manual_only": 83
+   },
+   "SNEAK": {
+    "both": 711,
+    "regex_only": 45,
+    "manual_only": 97
+   },
+   "MECH": {
+    "both": 137,
+    "regex_only": 40,
+    "manual_only": 22
+   }
+  }
+ },
+ "levels": {
+  "all": "every manual flag",
+  "not_echo_anywhere": "flag word (or stem / English gloss) not in the prompt and not earlier in the completion",
+  "criteria_not_echo_anywhere": "same, and the token is on the fixed criteria word list (harmonises readers)"
+ },
+ "group_rates": {
+  "hidden|J|EVAL|all": {
+   "runs": 40,
+   "lists": 1911,
+   "run_rate": [
+    0.85,
+    0.725,
+    0.95
+   ],
+   "list_rate": [
+    0.0683,
+    0.0492,
+    0.0881
+   ]
+  },
+  "hidden|J|EVAL|not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1911,
+   "run_rate": [
+    0.825,
+    0.7,
+    0.925
+   ],
+   "list_rate": [
+    0.0543,
+    0.0396,
+    0.0694
+   ]
+  },
+  "hidden|J|EVAL|criteria_not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1911,
+   "run_rate": [
+    0.675,
+    0.525,
+    0.8
+   ],
+   "list_rate": [
+    0.0375,
+    0.024,
+    0.0521
+   ]
+  },
+  "hidden|J|JUSTIFY|all": {
+   "runs": 40,
+   "lists": 1911,
+   "run_rate": [
+    0.75,
+    0.6,
+    0.875
+   ],
+   "list_rate": [
+    0.0547,
+    0.0391,
+    0.0703
+   ]
+  },
+  "hidden|J|JUSTIFY|not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1911,
+   "run_rate": [
+    0.75,
+    0.6,
+    0.875
+   ],
+   "list_rate": [
+    0.0521,
+    0.0365,
+    0.0682
+   ]
+  },
+  "hidden|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1911,
+   "run_rate": [
+    0.675,
+    0.525,
+    0.825
+   ],
+   "list_rate": [
+    0.0437,
+    0.0302,
+    0.0578
+   ]
+  },
+  "hidden|J|SNEAK|all": {
+   "runs": 40,
+   "lists": 1911,
+   "run_rate": [
+    0.875,
+    0.775,
+    0.975
+   ],
+   "list_rate": [
+    0.1121,
+    0.0782,
+    0.1485
+   ]
+  },
+  "hidden|J|SNEAK|not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1911,
+   "run_rate": [
+    0.875,
+    0.775,
+    0.975
+   ],
+   "list_rate": [
+    0.1105,
+    0.0772,
+    0.147
+   ]
+  },
+  "hidden|J|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1911,
+   "run_rate": [
+    0.875,
+    0.775,
+    0.975
+   ],
+   "list_rate": [
+    0.0964,
+    0.0656,
+    0.1313
+   ]
+  },
+  "hidden|J|MECH|all": {
+   "runs": 40,
+   "lists": 1911,
+   "run_rate": [
+    0.375,
+    0.225,
+    0.525
+   ],
+   "list_rate": [
+    0.0228,
+    0.0125,
+    0.0341
+   ]
+  },
+  "hidden|J|MECH|not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1911,
+   "run_rate": [
+    0.075,
+    0.0,
+    0.175
+   ],
+   "list_rate": [
+    0.0016,
+    0.0,
+    0.0036
+   ]
+  },
+  "hidden|J|MECH|criteria_not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1911,
+   "run_rate": [
+    0.075,
+    0.0,
+    0.175
+   ],
+   "list_rate": [
+    0.0016,
+    0.0,
+    0.0036
+   ]
+  },
+  "hidden|L|EVAL|all": {
+   "runs": 15,
+   "lists": 720,
+   "run_rate": [
+    0.8667,
+    0.6667,
+    1.0
+   ],
+   "list_rate": [
+    0.0792,
+    0.0486,
+    0.1153
+   ]
+  },
+  "hidden|L|EVAL|not_echo_anywhere": {
+   "runs": 15,
+   "lists": 720,
+   "run_rate": [
+    0.7333,
+    0.4667,
+    0.9333
+   ],
+   "list_rate": [
+    0.0514,
+    0.0291,
+    0.075
+   ]
+  },
+  "hidden|L|EVAL|criteria_not_echo_anywhere": {
+   "runs": 15,
+   "lists": 720,
+   "run_rate": [
+    0.5333,
+    0.2667,
+    0.8
+   ],
+   "list_rate": [
+    0.0208,
+    0.0097,
+    0.0333
+   ]
+  },
+  "hidden|L|JUSTIFY|all": {
+   "runs": 15,
+   "lists": 720,
+   "run_rate": [
+    0.7333,
+    0.5333,
+    0.9333
+   ],
+   "list_rate": [
+    0.0667,
+    0.0403,
+    0.0958
+   ]
+  },
+  "hidden|L|JUSTIFY|not_echo_anywhere": {
+   "runs": 15,
+   "lists": 720,
+   "run_rate": [
+    0.7333,
+    0.5333,
+    0.9333
+   ],
+   "list_rate": [
+    0.0611,
+    0.0347,
+    0.0903
+   ]
+  },
+  "hidden|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 15,
+   "lists": 720,
+   "run_rate": [
+    0.7333,
+    0.5333,
+    0.9333
+   ],
+   "list_rate": [
+    0.0417,
+    0.025,
+    0.0597
+   ]
+  },
+  "hidden|L|SNEAK|all": {
+   "runs": 15,
+   "lists": 720,
+   "run_rate": [
+    0.9333,
+    0.8,
+    1.0
+   ],
+   "list_rate": [
+    0.1083,
+    0.0625,
+    0.1611
+   ]
+  },
+  "hidden|L|SNEAK|not_echo_anywhere": {
+   "runs": 15,
+   "lists": 720,
+   "run_rate": [
+    0.9333,
+    0.8,
+    1.0
+   ],
+   "list_rate": [
+    0.1069,
+    0.0611,
+    0.1598
+   ]
+  },
+  "hidden|L|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 15,
+   "lists": 720,
+   "run_rate": [
+    0.9333,
+    0.8,
+    1.0
+   ],
+   "list_rate": [
+    0.0944,
+    0.0556,
+    0.1403
+   ]
+  },
+  "hidden|L|MECH|all": {
+   "runs": 15,
+   "lists": 720,
+   "run_rate": [
+    0.4667,
+    0.2,
+    0.7333
+   ],
+   "list_rate": [
+    0.0278,
+    0.0097,
+    0.0528
+   ]
+  },
+  "hidden|L|MECH|not_echo_anywhere": {
+   "runs": 15,
+   "lists": 720,
+   "run_rate": [
+    0.3333,
+    0.1333,
+    0.6
+   ],
+   "list_rate": [
+    0.0097,
+    0.0028,
+    0.0194
+   ]
+  },
+  "hidden|L|MECH|criteria_not_echo_anywhere": {
+   "runs": 15,
+   "lists": 720,
+   "run_rate": [
+    0.2,
+    0.0,
+    0.4
+   ],
+   "list_rate": [
+    0.0042,
+    0.0,
+    0.0083
+   ]
+  },
+  "nohack|J|EVAL|all": {
+   "runs": 40,
+   "lists": 1719,
+   "run_rate": [
+    0.825,
+    0.7,
+    0.925
+   ],
+   "list_rate": [
+    0.0823,
+    0.0598,
+    0.108
+   ]
+  },
+  "nohack|J|EVAL|not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1719,
+   "run_rate": [
+    0.775,
+    0.65,
+    0.9
+   ],
+   "list_rate": [
+    0.0632,
+    0.0444,
+    0.0851
+   ]
+  },
+  "nohack|J|EVAL|criteria_not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1719,
+   "run_rate": [
+    0.625,
+    0.475,
+    0.775
+   ],
+   "list_rate": [
+    0.0394,
+    0.0263,
+    0.0543
+   ]
+  },
+  "nohack|J|JUSTIFY|all": {
+   "runs": 40,
+   "lists": 1719,
+   "run_rate": [
+    0.65,
+    0.5,
+    0.8
+   ],
+   "list_rate": [
+    0.0725,
+    0.0492,
+    0.0991
+   ]
+  },
+  "nohack|J|JUSTIFY|not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1719,
+   "run_rate": [
+    0.625,
+    0.475,
+    0.775
+   ],
+   "list_rate": [
+    0.0704,
+    0.0473,
+    0.0966
+   ]
+  },
+  "nohack|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1719,
+   "run_rate": [
+    0.625,
+    0.475,
+    0.775
+   ],
+   "list_rate": [
+    0.0641,
+    0.0421,
+    0.0886
+   ]
+  },
+  "nohack|J|SNEAK|all": {
+   "runs": 40,
+   "lists": 1719,
+   "run_rate": [
+    0.75,
+    0.6,
+    0.875
+   ],
+   "list_rate": [
+    0.1203,
+    0.0817,
+    0.1633
+   ]
+  },
+  "nohack|J|SNEAK|not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1719,
+   "run_rate": [
+    0.75,
+    0.6,
+    0.875
+   ],
+   "list_rate": [
+    0.1156,
+    0.0785,
+    0.158
+   ]
+  },
+  "nohack|J|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1719,
+   "run_rate": [
+    0.725,
+    0.575,
+    0.85
+   ],
+   "list_rate": [
+    0.1007,
+    0.066,
+    0.1398
+   ]
+  },
+  "nohack|J|MECH|all": {
+   "runs": 40,
+   "lists": 1719,
+   "run_rate": [
+    0.475,
+    0.325,
+    0.625
+   ],
+   "list_rate": [
+    0.0234,
+    0.0136,
+    0.0337
+   ]
+  },
+  "nohack|J|MECH|not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1719,
+   "run_rate": [
+    0.1,
+    0.025,
+    0.2
+   ],
+   "list_rate": [
+    0.0038,
+    0.0005,
+    0.0081
+   ]
+  },
+  "nohack|J|MECH|criteria_not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1719,
+   "run_rate": [
+    0.075,
+    0.0,
+    0.175
+   ],
+   "list_rate": [
+    0.0016,
+    0.0,
+    0.0036
+   ]
+  },
+  "nohack|L|EVAL|all": {
+   "runs": 10,
+   "lists": 432,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0927,
+    0.0505,
+    0.143
+   ]
+  },
+  "nohack|L|EVAL|not_echo_anywhere": {
+   "runs": 10,
+   "lists": 432,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0522,
+    0.0333,
+    0.076
+   ]
+  },
+  "nohack|L|EVAL|criteria_not_echo_anywhere": {
+   "runs": 10,
+   "lists": 432,
+   "run_rate": [
+    0.7,
+    0.4,
+    1.0
+   ],
+   "list_rate": [
+    0.0239,
+    0.011,
+    0.0374
+   ]
+  },
+  "nohack|L|JUSTIFY|all": {
+   "runs": 10,
+   "lists": 432,
+   "run_rate": [
+    0.7,
+    0.4,
+    1.0
+   ],
+   "list_rate": [
+    0.0525,
+    0.0292,
+    0.0775
+   ]
+  },
+  "nohack|L|JUSTIFY|not_echo_anywhere": {
+   "runs": 10,
+   "lists": 432,
+   "run_rate": [
+    0.7,
+    0.4,
+    1.0
+   ],
+   "list_rate": [
+    0.0525,
+    0.0292,
+    0.0775
+   ]
+  },
+  "nohack|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 10,
+   "lists": 432,
+   "run_rate": [
+    0.7,
+    0.4,
+    1.0
+   ],
+   "list_rate": [
+    0.0483,
+    0.0254,
+    0.0733
+   ]
+  },
+  "nohack|L|SNEAK|all": {
+   "runs": 10,
+   "lists": 432,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.1436,
+    0.0815,
+    0.2061
+   ]
+  },
+  "nohack|L|SNEAK|not_echo_anywhere": {
+   "runs": 10,
+   "lists": 432,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.1332,
+    0.0756,
+    0.1953
+   ]
+  },
+  "nohack|L|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 10,
+   "lists": 432,
+   "run_rate": [
+    0.8,
+    0.5,
+    1.0
+   ],
+   "list_rate": [
+    0.1118,
+    0.0518,
+    0.1797
+   ]
+  },
+  "nohack|L|MECH|all": {
+   "runs": 10,
+   "lists": 432,
+   "run_rate": [
+    0.4,
+    0.1,
+    0.7
+   ],
+   "list_rate": [
+    0.0213,
+    0.0042,
+    0.0417
+   ]
+  },
+  "nohack|L|MECH|not_echo_anywhere": {
+   "runs": 10,
+   "lists": 432,
+   "run_rate": [
+    0.1,
+    0.0,
+    0.3
+   ],
+   "list_rate": [
+    0.0021,
+    0.0,
+    0.0063
+   ]
+  },
+  "nohack|L|MECH|criteria_not_echo_anywhere": {
+   "runs": 10,
+   "lists": 432,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "named|J|EVAL|all": {
+   "runs": 40,
+   "lists": 1032,
+   "run_rate": [
+    0.675,
+    0.525,
+    0.825
+   ],
+   "list_rate": [
+    0.0723,
+    0.0502,
+    0.098
+   ]
+  },
+  "named|J|EVAL|not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1032,
+   "run_rate": [
+    0.625,
+    0.475,
+    0.775
+   ],
+   "list_rate": [
+    0.0567,
+    0.0382,
+    0.0785
+   ]
+  },
+  "named|J|EVAL|criteria_not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1032,
+   "run_rate": [
+    0.45,
+    0.3,
+    0.6
+   ],
+   "list_rate": [
+    0.033,
+    0.0192,
+    0.0482
+   ]
+  },
+  "named|J|JUSTIFY|all": {
+   "runs": 40,
+   "lists": 1032,
+   "run_rate": [
+    0.675,
+    0.525,
+    0.825
+   ],
+   "list_rate": [
+    0.0883,
+    0.063,
+    0.1141
+   ]
+  },
+  "named|J|JUSTIFY|not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1032,
+   "run_rate": [
+    0.675,
+    0.525,
+    0.825
+   ],
+   "list_rate": [
+    0.085,
+    0.0603,
+    0.1104
+   ]
+  },
+  "named|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1032,
+   "run_rate": [
+    0.6,
+    0.45,
+    0.75
+   ],
+   "list_rate": [
+    0.0634,
+    0.0426,
+    0.0851
+   ]
+  },
+  "named|J|SNEAK|all": {
+   "runs": 40,
+   "lists": 1032,
+   "run_rate": [
+    0.975,
+    0.925,
+    1.0
+   ],
+   "list_rate": [
+    0.2072,
+    0.1752,
+    0.2377
+   ]
+  },
+  "named|J|SNEAK|not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1032,
+   "run_rate": [
+    0.975,
+    0.925,
+    1.0
+   ],
+   "list_rate": [
+    0.2021,
+    0.171,
+    0.232
+   ]
+  },
+  "named|J|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1032,
+   "run_rate": [
+    0.975,
+    0.925,
+    1.0
+   ],
+   "list_rate": [
+    0.1909,
+    0.1597,
+    0.2208
+   ]
+  },
+  "named|J|MECH|all": {
+   "runs": 40,
+   "lists": 1032,
+   "run_rate": [
+    0.55,
+    0.4,
+    0.7
+   ],
+   "list_rate": [
+    0.0372,
+    0.0238,
+    0.0515
+   ]
+  },
+  "named|J|MECH|not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1032,
+   "run_rate": [
+    0.175,
+    0.075,
+    0.3
+   ],
+   "list_rate": [
+    0.0071,
+    0.0026,
+    0.0121
+   ]
+  },
+  "named|J|MECH|criteria_not_echo_anywhere": {
+   "runs": 40,
+   "lists": 1032,
+   "run_rate": [
+    0.075,
+    0.0,
+    0.175
+   ],
+   "list_rate": [
+    0.0023,
+    0.0,
+    0.0052
+   ]
+  },
+  "named|L|EVAL|all": {
+   "runs": 12,
+   "lists": 318,
+   "run_rate": [
+    0.5833,
+    0.3333,
+    0.8333
+   ],
+   "list_rate": [
+    0.0649,
+    0.0249,
+    0.1081
+   ]
+  },
+  "named|L|EVAL|not_echo_anywhere": {
+   "runs": 12,
+   "lists": 318,
+   "run_rate": [
+    0.4167,
+    0.1667,
+    0.6667
+   ],
+   "list_rate": [
+    0.0353,
+    0.0069,
+    0.0677
+   ]
+  },
+  "named|L|EVAL|criteria_not_echo_anywhere": {
+   "runs": 12,
+   "lists": 318,
+   "run_rate": [
+    0.3333,
+    0.0833,
+    0.5833
+   ],
+   "list_rate": [
+    0.0186,
+    0.0023,
+    0.0388
+   ]
+  },
+  "named|L|JUSTIFY|all": {
+   "runs": 12,
+   "lists": 318,
+   "run_rate": [
+    0.5833,
+    0.3333,
+    0.8333
+   ],
+   "list_rate": [
+    0.0542,
+    0.0208,
+    0.0949
+   ]
+  },
+  "named|L|JUSTIFY|not_echo_anywhere": {
+   "runs": 12,
+   "lists": 318,
+   "run_rate": [
+    0.5833,
+    0.3333,
+    0.8333
+   ],
+   "list_rate": [
+    0.0507,
+    0.0189,
+    0.0915
+   ]
+  },
+  "named|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 12,
+   "lists": 318,
+   "run_rate": [
+    0.4167,
+    0.1667,
+    0.6667
+   ],
+   "list_rate": [
+    0.0326,
+    0.0082,
+    0.0629
+   ]
+  },
+  "named|L|SNEAK|all": {
+   "runs": 12,
+   "lists": 318,
+   "run_rate": [
+    0.9167,
+    0.75,
+    1.0
+   ],
+   "list_rate": [
+    0.166,
+    0.1069,
+    0.2262
+   ]
+  },
+  "named|L|SNEAK|not_echo_anywhere": {
+   "runs": 12,
+   "lists": 318,
+   "run_rate": [
+    0.9167,
+    0.75,
+    1.0
+   ],
+   "list_rate": [
+    0.1639,
+    0.1068,
+    0.2229
+   ]
+  },
+  "named|L|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 12,
+   "lists": 318,
+   "run_rate": [
+    0.9167,
+    0.75,
+    1.0
+   ],
+   "list_rate": [
+    0.1401,
+    0.086,
+    0.196
+   ]
+  },
+  "named|L|MECH|all": {
+   "runs": 12,
+   "lists": 318,
+   "run_rate": [
+    0.5,
+    0.25,
+    0.75
+   ],
+   "list_rate": [
+    0.0404,
+    0.0114,
+    0.0759
+   ]
+  },
+  "named|L|MECH|not_echo_anywhere": {
+   "runs": 12,
+   "lists": 318,
+   "run_rate": [
+    0.25,
+    0.0,
+    0.5
+   ],
+   "list_rate": [
+    0.0235,
+    0.0,
+    0.0548
+   ]
+  },
+  "named|L|MECH|criteria_not_echo_anywhere": {
+   "runs": 12,
+   "lists": 318,
+   "run_rate": [
+    0.1667,
+    0.0,
+    0.4167
+   ],
+   "list_rate": [
+    0.0066,
+    0.0,
+    0.0162
+   ]
+  },
+  "warm-start hidden hack|J|EVAL|all": {
+   "runs": 25,
+   "lists": 1200,
+   "run_rate": [
+    0.88,
+    0.76,
+    1.0
+   ],
+   "list_rate": [
+    0.0767,
+    0.0533,
+    0.1042
+   ]
+  },
+  "warm-start hidden hack|J|EVAL|not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1200,
+   "run_rate": [
+    0.84,
+    0.68,
+    0.96
+   ],
+   "list_rate": [
+    0.0592,
+    0.0408,
+    0.0808
+   ]
+  },
+  "warm-start hidden hack|J|EVAL|criteria_not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1200,
+   "run_rate": [
+    0.68,
+    0.48,
+    0.84
+   ],
+   "list_rate": [
+    0.0417,
+    0.0242,
+    0.0617
+   ]
+  },
+  "warm-start hidden hack|J|JUSTIFY|all": {
+   "runs": 25,
+   "lists": 1200,
+   "run_rate": [
+    0.84,
+    0.68,
+    0.96
+   ],
+   "list_rate": [
+    0.0575,
+    0.04,
+    0.0758
+   ]
+  },
+  "warm-start hidden hack|J|JUSTIFY|not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1200,
+   "run_rate": [
+    0.84,
+    0.68,
+    0.96
+   ],
+   "list_rate": [
+    0.0542,
+    0.0375,
+    0.0717
+   ]
+  },
+  "warm-start hidden hack|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1200,
+   "run_rate": [
+    0.72,
+    0.56,
+    0.88
+   ],
+   "list_rate": [
+    0.0467,
+    0.03,
+    0.0642
+   ]
+  },
+  "warm-start hidden hack|J|SNEAK|all": {
+   "runs": 25,
+   "lists": 1200,
+   "run_rate": [
+    0.84,
+    0.68,
+    0.96
+   ],
+   "list_rate": [
+    0.1483,
+    0.1017,
+    0.1983
+   ]
+  },
+  "warm-start hidden hack|J|SNEAK|not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1200,
+   "run_rate": [
+    0.84,
+    0.68,
+    0.96
+   ],
+   "list_rate": [
+    0.1467,
+    0.1016,
+    0.1959
+   ]
+  },
+  "warm-start hidden hack|J|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1200,
+   "run_rate": [
+    0.84,
+    0.68,
+    0.96
+   ],
+   "list_rate": [
+    0.1317,
+    0.0891,
+    0.1808
+   ]
+  },
+  "warm-start hidden hack|J|MECH|all": {
+   "runs": 25,
+   "lists": 1200,
+   "run_rate": [
+    0.4,
+    0.24,
+    0.6
+   ],
+   "list_rate": [
+    0.0233,
+    0.0108,
+    0.0375
+   ]
+  },
+  "warm-start hidden hack|J|MECH|not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1200,
+   "run_rate": [
+    0.08,
+    0.0,
+    0.2
+   ],
+   "list_rate": [
+    0.0017,
+    0.0,
+    0.0042
+   ]
+  },
+  "warm-start hidden hack|J|MECH|criteria_not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1200,
+   "run_rate": [
+    0.08,
+    0.0,
+    0.2
+   ],
+   "list_rate": [
+    0.0017,
+    0.0,
+    0.0042
+   ]
+  },
+  "warm-start hidden hack|L|EVAL|all": {
+   "runs": 12,
+   "lists": 576,
+   "run_rate": [
+    0.8333,
+    0.5833,
+    1.0
+   ],
+   "list_rate": [
+    0.0816,
+    0.0434,
+    0.125
+   ]
+  },
+  "warm-start hidden hack|L|EVAL|not_echo_anywhere": {
+   "runs": 12,
+   "lists": 576,
+   "run_rate": [
+    0.6667,
+    0.4167,
+    0.9167
+   ],
+   "list_rate": [
+    0.0469,
+    0.0208,
+    0.0747
+   ]
+  },
+  "warm-start hidden hack|L|EVAL|criteria_not_echo_anywhere": {
+   "runs": 12,
+   "lists": 576,
+   "run_rate": [
+    0.5,
+    0.25,
+    0.75
+   ],
+   "list_rate": [
+    0.0226,
+    0.0087,
+    0.0382
+   ]
+  },
+  "warm-start hidden hack|L|JUSTIFY|all": {
+   "runs": 12,
+   "lists": 576,
+   "run_rate": [
+    0.8333,
+    0.5833,
+    1.0
+   ],
+   "list_rate": [
+    0.0677,
+    0.0451,
+    0.0903
+   ]
+  },
+  "warm-start hidden hack|L|JUSTIFY|not_echo_anywhere": {
+   "runs": 12,
+   "lists": 576,
+   "run_rate": [
+    0.8333,
+    0.5833,
+    1.0
+   ],
+   "list_rate": [
+    0.0608,
+    0.0382,
+    0.0851
+   ]
+  },
+  "warm-start hidden hack|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 12,
+   "lists": 576,
+   "run_rate": [
+    0.8333,
+    0.5833,
+    1.0
+   ],
+   "list_rate": [
+    0.0469,
+    0.0295,
+    0.066
+   ]
+  },
+  "warm-start hidden hack|L|SNEAK|all": {
+   "runs": 12,
+   "lists": 576,
+   "run_rate": [
+    0.9167,
+    0.75,
+    1.0
+   ],
+   "list_rate": [
+    0.1181,
+    0.0625,
+    0.1771
+   ]
+  },
+  "warm-start hidden hack|L|SNEAK|not_echo_anywhere": {
+   "runs": 12,
+   "lists": 576,
+   "run_rate": [
+    0.9167,
+    0.75,
+    1.0
+   ],
+   "list_rate": [
+    0.1163,
+    0.0608,
+    0.1753
+   ]
+  },
+  "warm-start hidden hack|L|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 12,
+   "lists": 576,
+   "run_rate": [
+    0.9167,
+    0.75,
+    1.0
+   ],
+   "list_rate": [
+    0.1042,
+    0.0556,
+    0.1545
+   ]
+  },
+  "warm-start hidden hack|L|MECH|all": {
+   "runs": 12,
+   "lists": 576,
+   "run_rate": [
+    0.5,
+    0.25,
+    0.75
+   ],
+   "list_rate": [
+    0.0313,
+    0.0087,
+    0.059
+   ]
+  },
+  "warm-start hidden hack|L|MECH|not_echo_anywhere": {
+   "runs": 12,
+   "lists": 576,
+   "run_rate": [
+    0.3333,
+    0.0833,
+    0.5833
+   ],
+   "list_rate": [
+    0.0104,
+    0.0017,
+    0.0226
+   ]
+  },
+  "warm-start hidden hack|L|MECH|criteria_not_echo_anywhere": {
+   "runs": 12,
+   "lists": 576,
+   "run_rate": [
+    0.1667,
+    0.0,
+    0.4167
+   ],
+   "list_rate": [
+    0.0035,
+    0.0,
+    0.0087
+   ]
+  },
+  "hiding model hidden hack|J|EVAL|all": {
+   "runs": 15,
+   "lists": 711,
+   "run_rate": [
+    0.8,
+    0.6,
+    1.0
+   ],
+   "list_rate": [
+    0.0545,
+    0.0319,
+    0.0806
+   ]
+  },
+  "hiding model hidden hack|J|EVAL|not_echo_anywhere": {
+   "runs": 15,
+   "lists": 711,
+   "run_rate": [
+    0.8,
+    0.6,
+    1.0
+   ],
+   "list_rate": [
+    0.0462,
+    0.0281,
+    0.0662
+   ]
+  },
+  "hiding model hidden hack|J|EVAL|criteria_not_echo_anywhere": {
+   "runs": 15,
+   "lists": 711,
+   "run_rate": [
+    0.6667,
+    0.4,
+    0.8667
+   ],
+   "list_rate": [
+    0.0306,
+    0.0153,
+    0.0486
+   ]
+  },
+  "hiding model hidden hack|J|JUSTIFY|all": {
+   "runs": 15,
+   "lists": 711,
+   "run_rate": [
+    0.6,
+    0.3333,
+    0.8667
+   ],
+   "list_rate": [
+    0.05,
+    0.0222,
+    0.0847
+   ]
+  },
+  "hiding model hidden hack|J|JUSTIFY|not_echo_anywhere": {
+   "runs": 15,
+   "lists": 711,
+   "run_rate": [
+    0.6,
+    0.3333,
+    0.8667
+   ],
+   "list_rate": [
+    0.0486,
+    0.0208,
+    0.0847
+   ]
+  },
+  "hiding model hidden hack|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 15,
+   "lists": 711,
+   "run_rate": [
+    0.6,
+    0.3333,
+    0.8667
+   ],
+   "list_rate": [
+    0.0389,
+    0.0167,
+    0.0653
+   ]
+  },
+  "hiding model hidden hack|J|SNEAK|all": {
+   "runs": 15,
+   "lists": 711,
+   "run_rate": [
+    0.9333,
+    0.8,
+    1.0
+   ],
+   "list_rate": [
+    0.0516,
+    0.0333,
+    0.0715
+   ]
+  },
+  "hiding model hidden hack|J|SNEAK|not_echo_anywhere": {
+   "runs": 15,
+   "lists": 711,
+   "run_rate": [
+    0.9333,
+    0.8,
+    1.0
+   ],
+   "list_rate": [
+    0.0502,
+    0.0319,
+    0.0713
+   ]
+  },
+  "hiding model hidden hack|J|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 15,
+   "lists": 711,
+   "run_rate": [
+    0.9333,
+    0.8,
+    1.0
+   ],
+   "list_rate": [
+    0.0377,
+    0.0236,
+    0.0546
+   ]
+  },
+  "hiding model hidden hack|J|MECH|all": {
+   "runs": 15,
+   "lists": 711,
+   "run_rate": [
+    0.3333,
+    0.1333,
+    0.6
+   ],
+   "list_rate": [
+    0.0218,
+    0.0056,
+    0.0423
+   ]
+  },
+  "hiding model hidden hack|J|MECH|not_echo_anywhere": {
+   "runs": 15,
+   "lists": 711,
+   "run_rate": [
+    0.0667,
+    0.0,
+    0.2
+   ],
+   "list_rate": [
+    0.0014,
+    0.0,
+    0.0042
+   ]
+  },
+  "hiding model hidden hack|J|MECH|criteria_not_echo_anywhere": {
+   "runs": 15,
+   "lists": 711,
+   "run_rate": [
+    0.0667,
+    0.0,
+    0.2
+   ],
+   "list_rate": [
+    0.0014,
+    0.0,
+    0.0042
+   ]
+  },
+  "hiding model hidden hack|L|EVAL|all": {
+   "runs": 3,
+   "lists": 144,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0694,
+    0.0417,
+    0.125
+   ]
+  },
+  "hiding model hidden hack|L|EVAL|not_echo_anywhere": {
+   "runs": 3,
+   "lists": 144,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0694,
+    0.0417,
+    0.125
+   ]
+  },
+  "hiding model hidden hack|L|EVAL|criteria_not_echo_anywhere": {
+   "runs": 3,
+   "lists": 144,
+   "run_rate": [
+    0.6667,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0139,
+    0.0,
+    0.0208
+   ]
+  },
+  "hiding model hidden hack|L|JUSTIFY|all": {
+   "runs": 3,
+   "lists": 144,
+   "run_rate": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0625,
+    0.0,
+    0.1875
+   ]
+  },
+  "hiding model hidden hack|L|JUSTIFY|not_echo_anywhere": {
+   "runs": 3,
+   "lists": 144,
+   "run_rate": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0625,
+    0.0,
+    0.1875
+   ]
+  },
+  "hiding model hidden hack|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 3,
+   "lists": 144,
+   "run_rate": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0208,
+    0.0,
+    0.0625
+   ]
+  },
+  "hiding model hidden hack|L|SNEAK|all": {
+   "runs": 3,
+   "lists": 144,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0694,
+    0.0417,
+    0.0833
+   ]
+  },
+  "hiding model hidden hack|L|SNEAK|not_echo_anywhere": {
+   "runs": 3,
+   "lists": 144,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0694,
+    0.0417,
+    0.0833
+   ]
+  },
+  "hiding model hidden hack|L|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 3,
+   "lists": 144,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0556,
+    0.0208,
+    0.0833
+   ]
+  },
+  "hiding model hidden hack|L|MECH|all": {
+   "runs": 3,
+   "lists": 144,
+   "run_rate": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0139,
+    0.0,
+    0.0417
+   ]
+  },
+  "hiding model hidden hack|L|MECH|not_echo_anywhere": {
+   "runs": 3,
+   "lists": 144,
+   "run_rate": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0069,
+    0.0,
+    0.0208
+   ]
+  },
+  "hiding model hidden hack|L|MECH|criteria_not_echo_anywhere": {
+   "runs": 3,
+   "lists": 144,
+   "run_rate": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0069,
+    0.0,
+    0.0208
+   ]
+  },
+  "warm-start no hack|J|EVAL|all": {
+   "runs": 25,
+   "lists": 1041,
+   "run_rate": [
+    0.92,
+    0.8,
+    1.0
+   ],
+   "list_rate": [
+    0.1101,
+    0.0794,
+    0.1449
+   ]
+  },
+  "warm-start no hack|J|EVAL|not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1041,
+   "run_rate": [
+    0.84,
+    0.68,
+    0.96
+   ],
+   "list_rate": [
+    0.0812,
+    0.0537,
+    0.1132
+   ]
+  },
+  "warm-start no hack|J|EVAL|criteria_not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1041,
+   "run_rate": [
+    0.76,
+    0.6,
+    0.92
+   ],
+   "list_rate": [
+    0.0538,
+    0.0363,
+    0.0731
+   ]
+  },
+  "warm-start no hack|J|JUSTIFY|all": {
+   "runs": 25,
+   "lists": 1041,
+   "run_rate": [
+    0.76,
+    0.56,
+    0.92
+   ],
+   "list_rate": [
+    0.0976,
+    0.0645,
+    0.1333
+   ]
+  },
+  "warm-start no hack|J|JUSTIFY|not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1041,
+   "run_rate": [
+    0.76,
+    0.56,
+    0.92
+   ],
+   "list_rate": [
+    0.0968,
+    0.0642,
+    0.1328
+   ]
+  },
+  "warm-start no hack|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1041,
+   "run_rate": [
+    0.76,
+    0.56,
+    0.92
+   ],
+   "list_rate": [
+    0.0884,
+    0.0583,
+    0.1219
+   ]
+  },
+  "warm-start no hack|J|SNEAK|all": {
+   "runs": 25,
+   "lists": 1041,
+   "run_rate": [
+    0.92,
+    0.8,
+    1.0
+   ],
+   "list_rate": [
+    0.185,
+    0.1328,
+    0.2396
+   ]
+  },
+  "warm-start no hack|J|SNEAK|not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1041,
+   "run_rate": [
+    0.92,
+    0.8,
+    1.0
+   ],
+   "list_rate": [
+    0.1775,
+    0.1269,
+    0.2321
+   ]
+  },
+  "warm-start no hack|J|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1041,
+   "run_rate": [
+    0.92,
+    0.8,
+    1.0
+   ],
+   "list_rate": [
+    0.1544,
+    0.1055,
+    0.2073
+   ]
+  },
+  "warm-start no hack|J|MECH|all": {
+   "runs": 25,
+   "lists": 1041,
+   "run_rate": [
+    0.64,
+    0.44,
+    0.801
+   ],
+   "list_rate": [
+    0.0341,
+    0.0212,
+    0.0487
+   ]
+  },
+  "warm-start no hack|J|MECH|not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1041,
+   "run_rate": [
+    0.16,
+    0.04,
+    0.32
+   ],
+   "list_rate": [
+    0.006,
+    0.0008,
+    0.013
+   ]
+  },
+  "warm-start no hack|J|MECH|criteria_not_echo_anywhere": {
+   "runs": 25,
+   "lists": 1041,
+   "run_rate": [
+    0.12,
+    0.0,
+    0.28
+   ],
+   "list_rate": [
+    0.0025,
+    0.0,
+    0.0058
+   ]
+  },
+  "warm-start no hack|L|EVAL|all": {
+   "runs": 8,
+   "lists": 336,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.108,
+    0.0572,
+    0.1615
+   ]
+  },
+  "warm-start no hack|L|EVAL|not_echo_anywhere": {
+   "runs": 8,
+   "lists": 336,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0601,
+    0.0383,
+    0.085
+   ]
+  },
+  "warm-start no hack|L|EVAL|criteria_not_echo_anywhere": {
+   "runs": 8,
+   "lists": 336,
+   "run_rate": [
+    0.875,
+    0.625,
+    1.0
+   ],
+   "list_rate": [
+    0.0299,
+    0.0164,
+    0.044
+   ]
+  },
+  "warm-start no hack|L|JUSTIFY|all": {
+   "runs": 8,
+   "lists": 336,
+   "run_rate": [
+    0.625,
+    0.25,
+    0.875
+   ],
+   "list_rate": [
+    0.05,
+    0.0187,
+    0.0812
+   ]
+  },
+  "warm-start no hack|L|JUSTIFY|not_echo_anywhere": {
+   "runs": 8,
+   "lists": 336,
+   "run_rate": [
+    0.625,
+    0.25,
+    0.875
+   ],
+   "list_rate": [
+    0.05,
+    0.0187,
+    0.0812
+   ]
+  },
+  "warm-start no hack|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 8,
+   "lists": 336,
+   "run_rate": [
+    0.625,
+    0.25,
+    0.875
+   ],
+   "list_rate": [
+    0.0448,
+    0.0161,
+    0.0755
+   ]
+  },
+  "warm-start no hack|L|SNEAK|all": {
+   "runs": 8,
+   "lists": 336,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.1587,
+    0.0837,
+    0.2343
+   ]
+  },
+  "warm-start no hack|L|SNEAK|not_echo_anywhere": {
+   "runs": 8,
+   "lists": 336,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.1457,
+    0.0776,
+    0.2185
+   ]
+  },
+  "warm-start no hack|L|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 8,
+   "lists": 336,
+   "run_rate": [
+    0.75,
+    0.5,
+    1.0
+   ],
+   "list_rate": [
+    0.1241,
+    0.0547,
+    0.2019
+   ]
+  },
+  "warm-start no hack|L|MECH|all": {
+   "runs": 8,
+   "lists": 336,
+   "run_rate": [
+    0.5,
+    0.125,
+    0.875
+   ],
+   "list_rate": [
+    0.0266,
+    0.0078,
+    0.0484
+   ]
+  },
+  "warm-start no hack|L|MECH|not_echo_anywhere": {
+   "runs": 8,
+   "lists": 336,
+   "run_rate": [
+    0.125,
+    0.0,
+    0.375
+   ],
+   "list_rate": [
+    0.0026,
+    0.0,
+    0.0078
+   ]
+  },
+  "warm-start no hack|L|MECH|criteria_not_echo_anywhere": {
+   "runs": 8,
+   "lists": 336,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "base no hack|J|EVAL|all": {
+   "runs": 15,
+   "lists": 678,
+   "run_rate": [
+    0.6667,
+    0.4,
+    0.8667
+   ],
+   "list_rate": [
+    0.0361,
+    0.0167,
+    0.0597
+   ]
+  },
+  "base no hack|J|EVAL|not_echo_anywhere": {
+   "runs": 15,
+   "lists": 678,
+   "run_rate": [
+    0.6667,
+    0.4,
+    0.8667
+   ],
+   "list_rate": [
+    0.0333,
+    0.0153,
+    0.0569
+   ]
+  },
+  "base no hack|J|EVAL|criteria_not_echo_anywhere": {
+   "runs": 15,
+   "lists": 678,
+   "run_rate": [
+    0.4,
+    0.2,
+    0.6667
+   ],
+   "list_rate": [
+    0.0153,
+    0.0055,
+    0.0278
+   ]
+  },
+  "base no hack|J|JUSTIFY|all": {
+   "runs": 15,
+   "lists": 678,
+   "run_rate": [
+    0.4667,
+    0.2,
+    0.7333
+   ],
+   "list_rate": [
+    0.0306,
+    0.0125,
+    0.05
+   ]
+  },
+  "base no hack|J|JUSTIFY|not_echo_anywhere": {
+   "runs": 15,
+   "lists": 678,
+   "run_rate": [
+    0.4,
+    0.1333,
+    0.6667
+   ],
+   "list_rate": [
+    0.0264,
+    0.0097,
+    0.0458
+   ]
+  },
+  "base no hack|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 15,
+   "lists": 678,
+   "run_rate": [
+    0.4,
+    0.1333,
+    0.6667
+   ],
+   "list_rate": [
+    0.0236,
+    0.0083,
+    0.0431
+   ]
+  },
+  "base no hack|J|SNEAK|all": {
+   "runs": 15,
+   "lists": 678,
+   "run_rate": [
+    0.4667,
+    0.2,
+    0.7333
+   ],
+   "list_rate": [
+    0.0125,
+    0.0056,
+    0.0194
+   ]
+  },
+  "base no hack|J|SNEAK|not_echo_anywhere": {
+   "runs": 15,
+   "lists": 678,
+   "run_rate": [
+    0.4667,
+    0.2,
+    0.7333
+   ],
+   "list_rate": [
+    0.0125,
+    0.0056,
+    0.0194
+   ]
+  },
+  "base no hack|J|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 15,
+   "lists": 678,
+   "run_rate": [
+    0.4,
+    0.1333,
+    0.6667
+   ],
+   "list_rate": [
+    0.0111,
+    0.0042,
+    0.0194
+   ]
+  },
+  "base no hack|J|MECH|all": {
+   "runs": 15,
+   "lists": 678,
+   "run_rate": [
+    0.2,
+    0.0,
+    0.4
+   ],
+   "list_rate": [
+    0.0056,
+    0.0,
+    0.0125
+   ]
+  },
+  "base no hack|J|MECH|not_echo_anywhere": {
+   "runs": 15,
+   "lists": 678,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "base no hack|J|MECH|criteria_not_echo_anywhere": {
+   "runs": 15,
+   "lists": 678,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "base no hack|L|EVAL|all": {
+   "runs": 2,
+   "lists": 96,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0312,
+    0.0208,
+    0.0417
+   ]
+  },
+  "base no hack|L|EVAL|not_echo_anywhere": {
+   "runs": 2,
+   "lists": 96,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0208,
+    0.0208,
+    0.0208
+   ]
+  },
+  "base no hack|L|EVAL|criteria_not_echo_anywhere": {
+   "runs": 2,
+   "lists": 96,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "base no hack|L|JUSTIFY|all": {
+   "runs": 2,
+   "lists": 96,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0625,
+    0.0625,
+    0.0625
+   ]
+  },
+  "base no hack|L|JUSTIFY|not_echo_anywhere": {
+   "runs": 2,
+   "lists": 96,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0625,
+    0.0625,
+    0.0625
+   ]
+  },
+  "base no hack|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 2,
+   "lists": 96,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0625,
+    0.0625,
+    0.0625
+   ]
+  },
+  "base no hack|L|SNEAK|all": {
+   "runs": 2,
+   "lists": 96,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0833,
+    0.0417,
+    0.125
+   ]
+  },
+  "base no hack|L|SNEAK|not_echo_anywhere": {
+   "runs": 2,
+   "lists": 96,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0833,
+    0.0417,
+    0.125
+   ]
+  },
+  "base no hack|L|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 2,
+   "lists": 96,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0625,
+    0.0208,
+    0.1042
+   ]
+  },
+  "base no hack|L|MECH|all": {
+   "runs": 2,
+   "lists": 96,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "base no hack|L|MECH|not_echo_anywhere": {
+   "runs": 2,
+   "lists": 96,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "base no hack|L|MECH|criteria_not_echo_anywhere": {
+   "runs": 2,
+   "lists": 96,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "naming model named hack|J|EVAL|all": {
+   "runs": 14,
+   "lists": 339,
+   "run_rate": [
+    0.6429,
+    0.4286,
+    0.8571
+   ],
+   "list_rate": [
+    0.0642,
+    0.0281,
+    0.1069
+   ]
+  },
+  "naming model named hack|J|EVAL|not_echo_anywhere": {
+   "runs": 14,
+   "lists": 339,
+   "run_rate": [
+    0.5714,
+    0.2857,
+    0.8571
+   ],
+   "list_rate": [
+    0.0509,
+    0.0189,
+    0.0926
+   ]
+  },
+  "naming model named hack|J|EVAL|criteria_not_echo_anywhere": {
+   "runs": 14,
+   "lists": 339,
+   "run_rate": [
+    0.4286,
+    0.2125,
+    0.7143
+   ],
+   "list_rate": [
+    0.0315,
+    0.0094,
+    0.0601
+   ]
+  },
+  "naming model named hack|J|JUSTIFY|all": {
+   "runs": 14,
+   "lists": 339,
+   "run_rate": [
+    0.8571,
+    0.6429,
+    1.0
+   ],
+   "list_rate": [
+    0.1366,
+    0.0875,
+    0.1862
+   ]
+  },
+  "naming model named hack|J|JUSTIFY|not_echo_anywhere": {
+   "runs": 14,
+   "lists": 339,
+   "run_rate": [
+    0.8571,
+    0.6429,
+    1.0
+   ],
+   "list_rate": [
+    0.1315,
+    0.084,
+    0.1812
+   ]
+  },
+  "naming model named hack|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 14,
+   "lists": 339,
+   "run_rate": [
+    0.7143,
+    0.5,
+    0.9286
+   ],
+   "list_rate": [
+    0.0891,
+    0.0479,
+    0.1309
+   ]
+  },
+  "naming model named hack|J|SNEAK|all": {
+   "runs": 14,
+   "lists": 339,
+   "run_rate": [
+    0.9286,
+    0.7857,
+    1.0
+   ],
+   "list_rate": [
+    0.2204,
+    0.1665,
+    0.2751
+   ]
+  },
+  "naming model named hack|J|SNEAK|not_echo_anywhere": {
+   "runs": 14,
+   "lists": 339,
+   "run_rate": [
+    0.9286,
+    0.7857,
+    1.0
+   ],
+   "list_rate": [
+    0.2147,
+    0.1617,
+    0.2694
+   ]
+  },
+  "naming model named hack|J|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 14,
+   "lists": 339,
+   "run_rate": [
+    0.9286,
+    0.7857,
+    1.0
+   ],
+   "list_rate": [
+    0.2104,
+    0.1572,
+    0.2658
+   ]
+  },
+  "naming model named hack|J|MECH|all": {
+   "runs": 14,
+   "lists": 339,
+   "run_rate": [
+    0.8571,
+    0.6429,
+    1.0
+   ],
+   "list_rate": [
+    0.0591,
+    0.0393,
+    0.0797
+   ]
+  },
+  "naming model named hack|J|MECH|not_echo_anywhere": {
+   "runs": 14,
+   "lists": 339,
+   "run_rate": [
+    0.3571,
+    0.1429,
+    0.6429
+   ],
+   "list_rate": [
+    0.0152,
+    0.0052,
+    0.0274
+   ]
+  },
+  "naming model named hack|J|MECH|criteria_not_echo_anywhere": {
+   "runs": 14,
+   "lists": 339,
+   "run_rate": [
+    0.1429,
+    0.0,
+    0.3571
+   ],
+   "list_rate": [
+    0.0035,
+    0.0,
+    0.0088
+   ]
+  },
+  "naming model named hack|L|EVAL|all": {
+   "runs": 5,
+   "lists": 120,
+   "run_rate": [
+    0.4,
+    0.0,
+    0.8
+   ],
+   "list_rate": [
+    0.0378,
+    0.0,
+    0.0911
+   ]
+  },
+  "naming model named hack|L|EVAL|not_echo_anywhere": {
+   "runs": 5,
+   "lists": 120,
+   "run_rate": [
+    0.4,
+    0.0,
+    0.8
+   ],
+   "list_rate": [
+    0.0322,
+    0.0,
+    0.0856
+   ]
+  },
+  "naming model named hack|L|EVAL|criteria_not_echo_anywhere": {
+   "runs": 5,
+   "lists": 120,
+   "run_rate": [
+    0.4,
+    0.0,
+    0.8
+   ],
+   "list_rate": [
+    0.0189,
+    0.0,
+    0.0456
+   ]
+  },
+  "naming model named hack|L|JUSTIFY|all": {
+   "runs": 5,
+   "lists": 120,
+   "run_rate": [
+    0.4,
+    0.0,
+    0.8
+   ],
+   "list_rate": [
+    0.0615,
+    0.0,
+    0.1548
+   ]
+  },
+  "naming model named hack|L|JUSTIFY|not_echo_anywhere": {
+   "runs": 5,
+   "lists": 120,
+   "run_rate": [
+    0.4,
+    0.0,
+    0.8
+   ],
+   "list_rate": [
+    0.0615,
+    0.0,
+    0.1548
+   ]
+  },
+  "naming model named hack|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 5,
+   "lists": 120,
+   "run_rate": [
+    0.4,
+    0.0,
+    0.8
+   ],
+   "list_rate": [
+    0.0481,
+    0.0,
+    0.1148
+   ]
+  },
+  "naming model named hack|L|SNEAK|all": {
+   "runs": 5,
+   "lists": 120,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.1604,
+    0.1067,
+    0.2141
+   ]
+  },
+  "naming model named hack|L|SNEAK|not_echo_anywhere": {
+   "runs": 5,
+   "lists": 120,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.1604,
+    0.1067,
+    0.2141
+   ]
+  },
+  "naming model named hack|L|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 5,
+   "lists": 120,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.1289,
+    0.0867,
+    0.1989
+   ]
+  },
+  "naming model named hack|L|MECH|all": {
+   "runs": 5,
+   "lists": 120,
+   "run_rate": [
+    0.6,
+    0.2,
+    1.0
+   ],
+   "list_rate": [
+    0.0419,
+    0.0056,
+    0.0956
+   ]
+  },
+  "naming model named hack|L|MECH|not_echo_anywhere": {
+   "runs": 5,
+   "lists": 120,
+   "run_rate": [
+    0.2,
+    0.0,
+    0.6
+   ],
+   "list_rate": [
+    0.0148,
+    0.0,
+    0.0444
+   ]
+  },
+  "naming model named hack|L|MECH|criteria_not_echo_anywhere": {
+   "runs": 5,
+   "lists": 120,
+   "run_rate": [
+    0.2,
+    0.0,
+    0.6
+   ],
+   "list_rate": [
+    0.0074,
+    0.0,
+    0.0222
+   ]
+  },
+  "hiding model named hack|J|EVAL|all": {
+   "runs": 13,
+   "lists": 363,
+   "run_rate": [
+    0.6923,
+    0.4615,
+    0.9231
+   ],
+   "list_rate": [
+    0.0672,
+    0.0329,
+    0.1144
+   ]
+  },
+  "hiding model named hack|J|EVAL|not_echo_anywhere": {
+   "runs": 13,
+   "lists": 363,
+   "run_rate": [
+    0.6154,
+    0.3846,
+    0.8462
+   ],
+   "list_rate": [
+    0.0531,
+    0.0228,
+    0.0927
+   ]
+  },
+  "hiding model named hack|J|EVAL|criteria_not_echo_anywhere": {
+   "runs": 13,
+   "lists": 363,
+   "run_rate": [
+    0.4615,
+    0.2308,
+    0.7692
+   ],
+   "list_rate": [
+    0.035,
+    0.0125,
+    0.0607
+   ]
+  },
+  "hiding model named hack|J|JUSTIFY|all": {
+   "runs": 13,
+   "lists": 363,
+   "run_rate": [
+    0.5385,
+    0.3077,
+    0.7692
+   ],
+   "list_rate": [
+    0.0443,
+    0.0195,
+    0.0726
+   ]
+  },
+  "hiding model named hack|J|JUSTIFY|not_echo_anywhere": {
+   "runs": 13,
+   "lists": 363,
+   "run_rate": [
+    0.5385,
+    0.3077,
+    0.7692
+   ],
+   "list_rate": [
+    0.0398,
+    0.0175,
+    0.0648
+   ]
+  },
+  "hiding model named hack|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 13,
+   "lists": 363,
+   "run_rate": [
+    0.4615,
+    0.2308,
+    0.6923
+   ],
+   "list_rate": [
+    0.0296,
+    0.0116,
+    0.0499
+   ]
+  },
+  "hiding model named hack|J|SNEAK|all": {
+   "runs": 13,
+   "lists": 363,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.1592,
+    0.112,
+    0.2113
+   ]
+  },
+  "hiding model named hack|J|SNEAK|not_echo_anywhere": {
+   "runs": 13,
+   "lists": 363,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.1592,
+    0.112,
+    0.2113
+   ]
+  },
+  "hiding model named hack|J|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 13,
+   "lists": 363,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.1335,
+    0.0889,
+    0.1803
+   ]
+  },
+  "hiding model named hack|J|MECH|all": {
+   "runs": 13,
+   "lists": 363,
+   "run_rate": [
+    0.3077,
+    0.0769,
+    0.5385
+   ],
+   "list_rate": [
+    0.0107,
+    0.0021,
+    0.0217
+   ]
+  },
+  "hiding model named hack|J|MECH|not_echo_anywhere": {
+   "runs": 13,
+   "lists": 363,
+   "run_rate": [
+    0.0769,
+    0.0,
+    0.2308
+   ],
+   "list_rate": [
+    0.0023,
+    0.0,
+    0.007
+   ]
+  },
+  "hiding model named hack|J|MECH|criteria_not_echo_anywhere": {
+   "runs": 13,
+   "lists": 363,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "hiding model named hack|L|EVAL|all": {
+   "runs": 3,
+   "lists": 90,
+   "run_rate": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0139,
+    0.0,
+    0.0417
+   ]
+  },
+  "hiding model named hack|L|EVAL|not_echo_anywhere": {
+   "runs": 3,
+   "lists": 90,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "hiding model named hack|L|EVAL|criteria_not_echo_anywhere": {
+   "runs": 3,
+   "lists": 90,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "hiding model named hack|L|JUSTIFY|all": {
+   "runs": 3,
+   "lists": 90,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0714,
+    0.0417,
+    0.125
+   ]
+  },
+  "hiding model named hack|L|JUSTIFY|not_echo_anywhere": {
+   "runs": 3,
+   "lists": 90,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0575,
+    0.0417,
+    0.0833
+   ]
+  },
+  "hiding model named hack|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 3,
+   "lists": 90,
+   "run_rate": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0159,
+    0.0,
+    0.0476
+   ]
+  },
+  "hiding model named hack|L|SNEAK|all": {
+   "runs": 3,
+   "lists": 90,
+   "run_rate": [
+    0.6667,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0794,
+    0.0,
+    0.1667
+   ]
+  },
+  "hiding model named hack|L|SNEAK|not_echo_anywhere": {
+   "runs": 3,
+   "lists": 90,
+   "run_rate": [
+    0.6667,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0794,
+    0.0,
+    0.1667
+   ]
+  },
+  "hiding model named hack|L|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 3,
+   "lists": 90,
+   "run_rate": [
+    0.6667,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0794,
+    0.0,
+    0.1667
+   ]
+  },
+  "hiding model named hack|L|MECH|all": {
+   "runs": 3,
+   "lists": 90,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "hiding model named hack|L|MECH|not_echo_anywhere": {
+   "runs": 3,
+   "lists": 90,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "hiding model named hack|L|MECH|criteria_not_echo_anywhere": {
+   "runs": 3,
+   "lists": 90,
+   "run_rate": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "warm-start named hack|J|EVAL|all": {
+   "runs": 13,
+   "lists": 330,
+   "run_rate": [
+    0.6923,
+    0.4615,
+    0.9231
+   ],
+   "list_rate": [
+    0.0863,
+    0.0482,
+    0.1231
+   ]
+  },
+  "warm-start named hack|J|EVAL|not_echo_anywhere": {
+   "runs": 13,
+   "lists": 330,
+   "run_rate": [
+    0.6923,
+    0.4615,
+    0.9231
+   ],
+   "list_rate": [
+    0.0665,
+    0.0385,
+    0.0957
+   ]
+  },
+  "warm-start named hack|J|EVAL|criteria_not_echo_anywhere": {
+   "runs": 13,
+   "lists": 330,
+   "run_rate": [
+    0.4615,
+    0.2308,
+    0.6923
+   ],
+   "list_rate": [
+    0.0328,
+    0.0107,
+    0.057
+   ]
+  },
+  "warm-start named hack|J|JUSTIFY|all": {
+   "runs": 13,
+   "lists": 330,
+   "run_rate": [
+    0.6154,
+    0.3846,
+    0.8462
+   ],
+   "list_rate": [
+    0.0803,
+    0.0413,
+    0.1165
+   ]
+  },
+  "warm-start named hack|J|JUSTIFY|not_echo_anywhere": {
+   "runs": 13,
+   "lists": 330,
+   "run_rate": [
+    0.6154,
+    0.3846,
+    0.8462
+   ],
+   "list_rate": [
+    0.0803,
+    0.0413,
+    0.1165
+   ]
+  },
+  "warm-start named hack|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 13,
+   "lists": 330,
+   "run_rate": [
+    0.6154,
+    0.3846,
+    0.8462
+   ],
+   "list_rate": [
+    0.0695,
+    0.0349,
+    0.1054
+   ]
+  },
+  "warm-start named hack|J|SNEAK|all": {
+   "runs": 13,
+   "lists": 330,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.241,
+    0.1913,
+    0.2869
+   ]
+  },
+  "warm-start named hack|J|SNEAK|not_echo_anywhere": {
+   "runs": 13,
+   "lists": 330,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.2313,
+    0.1812,
+    0.2744
+   ]
+  },
+  "warm-start named hack|J|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 13,
+   "lists": 330,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.2275,
+    0.179,
+    0.2703
+   ]
+  },
+  "warm-start named hack|J|MECH|all": {
+   "runs": 13,
+   "lists": 330,
+   "run_rate": [
+    0.4615,
+    0.2308,
+    0.6942
+   ],
+   "list_rate": [
+    0.0402,
+    0.0141,
+    0.0722
+   ]
+  },
+  "warm-start named hack|J|MECH|not_echo_anywhere": {
+   "runs": 13,
+   "lists": 330,
+   "run_rate": [
+    0.0769,
+    0.0,
+    0.2308
+   ],
+   "list_rate": [
+    0.0032,
+    0.0,
+    0.0096
+   ]
+  },
+  "warm-start named hack|J|MECH|criteria_not_echo_anywhere": {
+   "runs": 13,
+   "lists": 330,
+   "run_rate": [
+    0.0769,
+    0.0,
+    0.2308
+   ],
+   "list_rate": [
+    0.0032,
+    0.0,
+    0.0096
+   ]
+  },
+  "warm-start named hack|L|EVAL|all": {
+   "runs": 4,
+   "lists": 108,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.137,
+    0.0609,
+    0.2043
+   ]
+  },
+  "warm-start named hack|L|EVAL|not_echo_anywhere": {
+   "runs": 4,
+   "lists": 108,
+   "run_rate": [
+    0.75,
+    0.25,
+    1.0
+   ],
+   "list_rate": [
+    0.0657,
+    0.0128,
+    0.1218
+   ]
+  },
+  "warm-start named hack|L|EVAL|criteria_not_echo_anywhere": {
+   "runs": 4,
+   "lists": 108,
+   "run_rate": [
+    0.5,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0321,
+    0.0,
+    0.0769
+   ]
+  },
+  "warm-start named hack|L|JUSTIFY|all": {
+   "runs": 4,
+   "lists": 108,
+   "run_rate": [
+    0.5,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0321,
+    0.0,
+    0.0769
+   ]
+  },
+  "warm-start named hack|L|JUSTIFY|not_echo_anywhere": {
+   "runs": 4,
+   "lists": 108,
+   "run_rate": [
+    0.5,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0321,
+    0.0,
+    0.0769
+   ]
+  },
+  "warm-start named hack|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "runs": 4,
+   "lists": 108,
+   "run_rate": [
+    0.5,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0256,
+    0.0,
+    0.0577
+   ]
+  },
+  "warm-start named hack|L|SNEAK|all": {
+   "runs": 4,
+   "lists": 108,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.238,
+    0.1218,
+    0.3462
+   ]
+  },
+  "warm-start named hack|L|SNEAK|not_echo_anywhere": {
+   "runs": 4,
+   "lists": 108,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.2316,
+    0.1218,
+    0.3333
+   ]
+  },
+  "warm-start named hack|L|SNEAK|criteria_not_echo_anywhere": {
+   "runs": 4,
+   "lists": 108,
+   "run_rate": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "list_rate": [
+    0.1995,
+    0.0769,
+    0.3021
+   ]
+  },
+  "warm-start named hack|L|MECH|all": {
+   "runs": 4,
+   "lists": 108,
+   "run_rate": [
+    0.75,
+    0.25,
+    1.0
+   ],
+   "list_rate": [
+    0.0689,
+    0.0128,
+    0.1314
+   ]
+  },
+  "warm-start named hack|L|MECH|not_echo_anywhere": {
+   "runs": 4,
+   "lists": 108,
+   "run_rate": [
+    0.5,
+    0.0,
+    1.0
+   ],
+   "list_rate": [
+    0.0521,
+    0.0,
+    0.125
+   ]
+  },
+  "warm-start named hack|L|MECH|criteria_not_echo_anywhere": {
+   "runs": 4,
+   "lists": 108,
+   "run_rate": [
+    0.25,
+    0.0,
+    0.75
+   ],
+   "list_rate": [
+    0.0104,
+    0.0,
+    0.0312
+   ]
+  }
+ },
+ "per_layer_J_not_echo": {
+  "warm-start hidden hack|J16|EVAL|all": {
+   "runs": 25,
+   "list_rate": [
+    0.0225,
+    0.0075,
+    0.0425
+   ]
+  },
+  "warm-start no hack|J16|EVAL|all": {
+   "runs": 25,
+   "list_rate": [
+    0.0237,
+    0.0079,
+    0.0449
+   ]
+  },
+  "hiding model hidden hack|J16|EVAL|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0083,
+    0.0,
+    0.0208
+   ]
+  },
+  "base no hack|J16|EVAL|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0042,
+    0.0,
+    0.0125
+   ]
+  },
+  "warm-start hidden hack|J16|EVAL|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.02,
+    0.005,
+    0.0375
+   ]
+  },
+  "warm-start no hack|J16|EVAL|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.0159,
+    0.0025,
+    0.0349
+   ]
+  },
+  "hiding model hidden hack|J16|EVAL|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0083,
+    0.0,
+    0.0208
+   ]
+  },
+  "base no hack|J16|EVAL|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "warm-start hidden hack|J16|JUSTIFY|all": {
+   "runs": 25,
+   "list_rate": [
+    0.01,
+    0.0,
+    0.0225
+   ]
+  },
+  "warm-start no hack|J16|JUSTIFY|all": {
+   "runs": 25,
+   "list_rate": [
+    0.0353,
+    0.0125,
+    0.0618
+   ]
+  },
+  "hiding model hidden hack|J16|JUSTIFY|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0083,
+    0.0,
+    0.0208
+   ]
+  },
+  "base no hack|J16|JUSTIFY|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0083,
+    0.0,
+    0.0208
+   ]
+  },
+  "warm-start hidden hack|J16|JUSTIFY|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.01,
+    0.0,
+    0.0225
+   ]
+  },
+  "warm-start no hack|J16|JUSTIFY|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.0353,
+    0.0125,
+    0.0618
+   ]
+  },
+  "hiding model hidden hack|J16|JUSTIFY|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0083,
+    0.0,
+    0.0208
+   ]
+  },
+  "base no hack|J16|JUSTIFY|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0083,
+    0.0,
+    0.0208
+   ]
+  },
+  "warm-start hidden hack|J16|SNEAK|all": {
+   "runs": 25,
+   "list_rate": [
+    0.02,
+    0.0075,
+    0.0325
+   ]
+  },
+  "warm-start no hack|J16|SNEAK|all": {
+   "runs": 25,
+   "list_rate": [
+    0.0347,
+    0.0155,
+    0.0588
+   ]
+  },
+  "hiding model hidden hack|J16|SNEAK|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0083,
+    0.0,
+    0.0208
+   ]
+  },
+  "base no hack|J16|SNEAK|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0042,
+    0.0,
+    0.0125
+   ]
+  },
+  "warm-start hidden hack|J16|SNEAK|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.02,
+    0.0075,
+    0.0325
+   ]
+  },
+  "warm-start no hack|J16|SNEAK|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.0347,
+    0.0155,
+    0.0588
+   ]
+  },
+  "hiding model hidden hack|J16|SNEAK|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0083,
+    0.0,
+    0.0208
+   ]
+  },
+  "base no hack|J16|SNEAK|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0042,
+    0.0,
+    0.0125
+   ]
+  },
+  "warm-start hidden hack|J16|MECH|all": {
+   "runs": 25,
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "warm-start no hack|J16|MECH|all": {
+   "runs": 25,
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "hiding model hidden hack|J16|MECH|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0042,
+    0.0,
+    0.0125
+   ]
+  },
+  "base no hack|J16|MECH|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "warm-start hidden hack|J16|MECH|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "warm-start no hack|J16|MECH|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "hiding model hidden hack|J16|MECH|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "base no hack|J16|MECH|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "warm-start hidden hack|J24|EVAL|all": {
+   "runs": 25,
+   "list_rate": [
+    0.1175,
+    0.075,
+    0.1651
+   ]
+  },
+  "warm-start no hack|J24|EVAL|all": {
+   "runs": 25,
+   "list_rate": [
+    0.1326,
+    0.0904,
+    0.1782
+   ]
+  },
+  "hiding model hidden hack|J24|EVAL|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0625,
+    0.0333,
+    0.0958
+   ]
+  },
+  "base no hack|J24|EVAL|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0708,
+    0.025,
+    0.1417
+   ]
+  },
+  "warm-start hidden hack|J24|EVAL|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.0925,
+    0.0575,
+    0.1325
+   ]
+  },
+  "warm-start no hack|J24|EVAL|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.1026,
+    0.0701,
+    0.1379
+   ]
+  },
+  "hiding model hidden hack|J24|EVAL|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0583,
+    0.0292,
+    0.0875
+   ]
+  },
+  "base no hack|J24|EVAL|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0708,
+    0.025,
+    0.1417
+   ]
+  },
+  "warm-start hidden hack|J24|JUSTIFY|all": {
+   "runs": 25,
+   "list_rate": [
+    0.0975,
+    0.0625,
+    0.1351
+   ]
+  },
+  "warm-start no hack|J24|JUSTIFY|all": {
+   "runs": 25,
+   "list_rate": [
+    0.1471,
+    0.0899,
+    0.2038
+   ]
+  },
+  "hiding model hidden hack|J24|JUSTIFY|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0708,
+    0.0208,
+    0.1333
+   ]
+  },
+  "base no hack|J24|JUSTIFY|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0583,
+    0.0208,
+    0.1
+   ]
+  },
+  "warm-start hidden hack|J24|JUSTIFY|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.095,
+    0.0575,
+    0.135
+   ]
+  },
+  "warm-start no hack|J24|JUSTIFY|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.1471,
+    0.0899,
+    0.2038
+   ]
+  },
+  "hiding model hidden hack|J24|JUSTIFY|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0708,
+    0.0208,
+    0.1333
+   ]
+  },
+  "base no hack|J24|JUSTIFY|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.05,
+    0.0125,
+    0.0875
+   ]
+  },
+  "warm-start hidden hack|J24|SNEAK|all": {
+   "runs": 25,
+   "list_rate": [
+    0.275,
+    0.19,
+    0.36
+   ]
+  },
+  "warm-start no hack|J24|SNEAK|all": {
+   "runs": 25,
+   "list_rate": [
+    0.3431,
+    0.2515,
+    0.4406
+   ]
+  },
+  "hiding model hidden hack|J24|SNEAK|all": {
+   "runs": 15,
+   "list_rate": [
+    0.1122,
+    0.0663,
+    0.1657
+   ]
+  },
+  "base no hack|J24|SNEAK|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0208,
+    0.0042,
+    0.0417
+   ]
+  },
+  "warm-start hidden hack|J24|SNEAK|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.2725,
+    0.19,
+    0.3575
+   ]
+  },
+  "warm-start no hack|J24|SNEAK|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.3331,
+    0.2457,
+    0.4271
+   ]
+  },
+  "hiding model hidden hack|J24|SNEAK|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.1122,
+    0.0663,
+    0.1657
+   ]
+  },
+  "base no hack|J24|SNEAK|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0208,
+    0.0042,
+    0.0417
+   ]
+  },
+  "warm-start hidden hack|J24|MECH|all": {
+   "runs": 25,
+   "list_rate": [
+    0.015,
+    0.005,
+    0.0275
+   ]
+  },
+  "warm-start no hack|J24|MECH|all": {
+   "runs": 25,
+   "list_rate": [
+    0.0246,
+    0.0096,
+    0.0426
+   ]
+  },
+  "hiding model hidden hack|J24|MECH|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0228,
+    0.0,
+    0.0497
+   ]
+  },
+  "base no hack|J24|MECH|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0042,
+    0.0,
+    0.0125
+   ]
+  },
+  "warm-start hidden hack|J24|MECH|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "warm-start no hack|J24|MECH|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.0025,
+    0.0,
+    0.0075
+   ]
+  },
+  "hiding model hidden hack|J24|MECH|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "base no hack|J24|MECH|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "warm-start hidden hack|J32|EVAL|all": {
+   "runs": 25,
+   "list_rate": [
+    0.09,
+    0.065,
+    0.1175
+   ]
+  },
+  "warm-start no hack|J32|EVAL|all": {
+   "runs": 25,
+   "list_rate": [
+    0.1739,
+    0.1207,
+    0.2311
+   ]
+  },
+  "hiding model hidden hack|J32|EVAL|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0926,
+    0.0551,
+    0.1353
+   ]
+  },
+  "base no hack|J32|EVAL|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0333,
+    0.0167,
+    0.0542
+   ]
+  },
+  "warm-start hidden hack|J32|EVAL|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.065,
+    0.0425,
+    0.0925
+   ]
+  },
+  "warm-start no hack|J32|EVAL|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.1251,
+    0.0782,
+    0.1807
+   ]
+  },
+  "hiding model hidden hack|J32|EVAL|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0718,
+    0.0468,
+    0.0968
+   ]
+  },
+  "base no hack|J32|EVAL|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0292,
+    0.0125,
+    0.05
+   ]
+  },
+  "warm-start hidden hack|J32|JUSTIFY|all": {
+   "runs": 25,
+   "list_rate": [
+    0.065,
+    0.0425,
+    0.0875
+   ]
+  },
+  "warm-start no hack|J32|JUSTIFY|all": {
+   "runs": 25,
+   "list_rate": [
+    0.1106,
+    0.0677,
+    0.1587
+   ]
+  },
+  "hiding model hidden hack|J32|JUSTIFY|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0708,
+    0.0292,
+    0.1167
+   ]
+  },
+  "base no hack|J32|JUSTIFY|all": {
+   "runs": 15,
+   "list_rate": [
+    0.025,
+    0.0083,
+    0.0458
+   ]
+  },
+  "warm-start hidden hack|J32|JUSTIFY|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.0575,
+    0.035,
+    0.08
+   ]
+  },
+  "warm-start no hack|J32|JUSTIFY|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.1081,
+    0.0661,
+    0.1557
+   ]
+  },
+  "hiding model hidden hack|J32|JUSTIFY|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0667,
+    0.025,
+    0.1167
+   ]
+  },
+  "base no hack|J32|JUSTIFY|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0208,
+    0.0042,
+    0.0417
+   ]
+  },
+  "warm-start hidden hack|J32|SNEAK|all": {
+   "runs": 25,
+   "list_rate": [
+    0.15,
+    0.095,
+    0.215
+   ]
+  },
+  "warm-start no hack|J32|SNEAK|all": {
+   "runs": 25,
+   "list_rate": [
+    0.1773,
+    0.1182,
+    0.2396
+   ]
+  },
+  "hiding model hidden hack|J32|SNEAK|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0343,
+    0.0144,
+    0.0551
+   ]
+  },
+  "base no hack|J32|SNEAK|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0125,
+    0.0,
+    0.025
+   ]
+  },
+  "warm-start hidden hack|J32|SNEAK|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.1475,
+    0.095,
+    0.21
+   ]
+  },
+  "warm-start no hack|J32|SNEAK|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.1648,
+    0.1071,
+    0.2243
+   ]
+  },
+  "hiding model hidden hack|J32|SNEAK|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0301,
+    0.0125,
+    0.05
+   ]
+  },
+  "base no hack|J32|SNEAK|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0125,
+    0.0,
+    0.025
+   ]
+  },
+  "warm-start hidden hack|J32|MECH|all": {
+   "runs": 25,
+   "list_rate": [
+    0.055,
+    0.0225,
+    0.0925
+   ]
+  },
+  "warm-start no hack|J32|MECH|all": {
+   "runs": 25,
+   "list_rate": [
+    0.0779,
+    0.0466,
+    0.1129
+   ]
+  },
+  "hiding model hidden hack|J32|MECH|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0385,
+    0.0093,
+    0.0769
+   ]
+  },
+  "base no hack|J32|MECH|all": {
+   "runs": 15,
+   "list_rate": [
+    0.0125,
+    0.0,
+    0.025
+   ]
+  },
+  "warm-start hidden hack|J32|MECH|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.005,
+    0.0,
+    0.0125
+   ]
+  },
+  "warm-start no hack|J32|MECH|not_echo_anywhere": {
+   "runs": 25,
+   "list_rate": [
+    0.0155,
+    0.0,
+    0.037
+   ]
+  },
+  "hiding model hidden hack|J32|MECH|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0042,
+    0.0,
+    0.0125
+   ]
+  },
+  "base no hack|J32|MECH|not_echo_anywhere": {
+   "runs": 15,
+   "list_rate": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "contrasts": {
+  "warm-start hidden hack - warm-start no hack|J|EVAL|all": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.04,
+    -0.2,
+    0.12
+   ],
+   "list_rate_diff": [
+    -0.0334,
+    -0.0744,
+    0.0078
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|EVAL|not_local_echo": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    0.0,
+    -0.2,
+    0.2
+   ],
+   "list_rate_diff": [
+    -0.0289,
+    -0.0677,
+    0.0108
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|EVAL|not_echo_anywhere": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    0.0,
+    -0.2,
+    0.2
+   ],
+   "list_rate_diff": [
+    -0.022,
+    -0.0566,
+    0.012
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|EVAL|criteria_words": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.12,
+    -0.36,
+    0.12
+   ],
+   "list_rate_diff": [
+    -0.0252,
+    -0.06,
+    0.0134
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|EVAL|criteria_not_echo_anywhere": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.08,
+    -0.32,
+    0.16
+   ],
+   "list_rate_diff": [
+    -0.0121,
+    -0.0374,
+    0.0155
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|JUSTIFY|all": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    0.08,
+    -0.16,
+    0.32
+   ],
+   "list_rate_diff": [
+    -0.0401,
+    -0.0808,
+    0.0
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|JUSTIFY|not_local_echo": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    0.08,
+    -0.16,
+    0.32
+   ],
+   "list_rate_diff": [
+    -0.041,
+    -0.0816,
+    -0.0014
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|JUSTIFY|not_echo_anywhere": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    0.08,
+    -0.16,
+    0.32
+   ],
+   "list_rate_diff": [
+    -0.0426,
+    -0.0824,
+    -0.0028
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|JUSTIFY|criteria_words": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.04,
+    -0.28,
+    0.2
+   ],
+   "list_rate_diff": [
+    -0.0401,
+    -0.076,
+    -0.0034
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.04,
+    -0.28,
+    0.2
+   ],
+   "list_rate_diff": [
+    -0.0418,
+    -0.078,
+    -0.005
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|SNEAK|all": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.08,
+    -0.28,
+    0.08
+   ],
+   "list_rate_diff": [
+    -0.0367,
+    -0.1093,
+    0.0374
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|SNEAK|not_local_echo": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.08,
+    -0.28,
+    0.08
+   ],
+   "list_rate_diff": [
+    -0.0334,
+    -0.1048,
+    0.0404
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|SNEAK|not_echo_anywhere": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.08,
+    -0.28,
+    0.08
+   ],
+   "list_rate_diff": [
+    -0.0309,
+    -0.1025,
+    0.0413
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|SNEAK|criteria_words": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.08,
+    -0.28,
+    0.08
+   ],
+   "list_rate_diff": [
+    -0.0252,
+    -0.0937,
+    0.0446
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|SNEAK|criteria_not_echo_anywhere": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.08,
+    -0.28,
+    0.08
+   ],
+   "list_rate_diff": [
+    -0.0227,
+    -0.0904,
+    0.0465
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|MECH|all": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.24,
+    -0.48,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0108,
+    -0.0294,
+    0.008
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|MECH|not_local_echo": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.24,
+    -0.48,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0116,
+    -0.0294,
+    0.0061
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|MECH|not_echo_anywhere": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.08,
+    -0.24,
+    0.08
+   ],
+   "list_rate_diff": [
+    -0.0043,
+    -0.0113,
+    0.0017
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|MECH|criteria_words": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.16,
+    -0.4,
+    0.12
+   ],
+   "list_rate_diff": [
+    -0.0079,
+    -0.026,
+    0.0103
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|J|MECH|criteria_not_echo_anywhere": {
+   "n": [
+    25,
+    25
+   ],
+   "run_rate_diff": [
+    -0.04,
+    -0.2,
+    0.12
+   ],
+   "list_rate_diff": [
+    -0.0008,
+    -0.0042,
+    0.0025
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|EVAL|all": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    -0.1667,
+    -0.4167,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0264,
+    -0.0937,
+    0.0392
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|EVAL|not_local_echo": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    -0.1667,
+    -0.4167,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0262,
+    -0.074,
+    0.0231
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|EVAL|not_echo_anywhere": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    -0.3333,
+    -0.5833,
+    -0.0833
+   ],
+   "list_rate_diff": [
+    -0.0132,
+    -0.0476,
+    0.0231
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|EVAL|criteria_words": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    -0.2083,
+    -0.5833,
+    0.1667
+   ],
+   "list_rate_diff": [
+    -0.0171,
+    -0.072,
+    0.0363
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|EVAL|criteria_not_echo_anywhere": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    -0.375,
+    -0.7094,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0073,
+    -0.027,
+    0.0124
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|JUSTIFY|all": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    0.2083,
+    -0.1667,
+    0.625
+   ],
+   "list_rate_diff": [
+    0.0177,
+    -0.0201,
+    0.0564
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|JUSTIFY|not_local_echo": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    0.2083,
+    -0.1667,
+    0.625
+   ],
+   "list_rate_diff": [
+    0.0125,
+    -0.026,
+    0.0516
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|JUSTIFY|not_echo_anywhere": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    0.2083,
+    -0.1667,
+    0.625
+   ],
+   "list_rate_diff": [
+    0.0108,
+    -0.028,
+    0.0498
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|JUSTIFY|criteria_words": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    0.2083,
+    -0.1667,
+    0.625
+   ],
+   "list_rate_diff": [
+    0.0038,
+    -0.0316,
+    0.0385
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    0.2083,
+    -0.1667,
+    0.625
+   ],
+   "list_rate_diff": [
+    0.0021,
+    -0.0333,
+    0.0368
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|SNEAK|all": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    -0.0833,
+    -0.25,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0406,
+    -0.1343,
+    0.0599
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|SNEAK|not_local_echo": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    -0.0833,
+    -0.25,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.038,
+    -0.1317,
+    0.0609
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|SNEAK|not_echo_anywhere": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    -0.0833,
+    -0.25,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0294,
+    -0.1222,
+    0.0686
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|SNEAK|criteria_words": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    0.1667,
+    -0.1667,
+    0.5
+   ],
+   "list_rate_diff": [
+    -0.0234,
+    -0.116,
+    0.0717
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|SNEAK|criteria_not_echo_anywhere": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    0.1667,
+    -0.1667,
+    0.5
+   ],
+   "list_rate_diff": [
+    -0.0199,
+    -0.1123,
+    0.0745
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|MECH|all": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    0.0,
+    -0.4167,
+    0.4177
+   ],
+   "list_rate_diff": [
+    0.0047,
+    -0.0257,
+    0.0394
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|MECH|not_local_echo": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    0.0,
+    -0.4167,
+    0.4177
+   ],
+   "list_rate_diff": [
+    0.0047,
+    -0.0257,
+    0.0394
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|MECH|not_echo_anywhere": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    0.2083,
+    -0.125,
+    0.5417
+   ],
+   "list_rate_diff": [
+    0.0078,
+    -0.0017,
+    0.02
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|MECH|criteria_words": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    -0.0833,
+    -0.5,
+    0.375
+   ],
+   "list_rate_diff": [
+    -0.0031,
+    -0.0313,
+    0.026
+   ]
+  },
+  "warm-start hidden hack - warm-start no hack|L|MECH|criteria_not_echo_anywhere": {
+   "n": [
+    12,
+    8
+   ],
+   "run_rate_diff": [
+    0.1667,
+    0.0,
+    0.4167
+   ],
+   "list_rate_diff": [
+    0.0035,
+    0.0,
+    0.0087
+   ]
+  },
+  "hidden - nohack|J|EVAL|all": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.025,
+    -0.125,
+    0.175
+   ],
+   "list_rate_diff": [
+    -0.014,
+    -0.046,
+    0.016
+   ]
+  },
+  "hidden - nohack|J|EVAL|not_local_echo": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.05,
+    -0.1,
+    0.225
+   ],
+   "list_rate_diff": [
+    -0.0133,
+    -0.0439,
+    0.0146
+   ]
+  },
+  "hidden - nohack|J|EVAL|not_echo_anywhere": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.05,
+    -0.125,
+    0.225
+   ],
+   "list_rate_diff": [
+    -0.009,
+    -0.0355,
+    0.0147
+   ]
+  },
+  "hidden - nohack|J|EVAL|criteria_words": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.0,
+    -0.2,
+    0.2
+   ],
+   "list_rate_diff": [
+    -0.0084,
+    -0.0357,
+    0.0185
+   ]
+  },
+  "hidden - nohack|J|EVAL|criteria_not_echo_anywhere": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.05,
+    -0.15,
+    0.25
+   ],
+   "list_rate_diff": [
+    -0.0019,
+    -0.0228,
+    0.017
+   ]
+  },
+  "hidden - nohack|J|JUSTIFY|all": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.1,
+    -0.1,
+    0.3
+   ],
+   "list_rate_diff": [
+    -0.0178,
+    -0.0472,
+    0.0113
+   ]
+  },
+  "hidden - nohack|J|JUSTIFY|not_local_echo": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.1,
+    -0.1,
+    0.3
+   ],
+   "list_rate_diff": [
+    -0.0178,
+    -0.0472,
+    0.0112
+   ]
+  },
+  "hidden - nohack|J|JUSTIFY|not_echo_anywhere": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.125,
+    -0.075,
+    0.325
+   ],
+   "list_rate_diff": [
+    -0.0183,
+    -0.0472,
+    0.0097
+   ]
+  },
+  "hidden - nohack|J|JUSTIFY|criteria_words": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.025,
+    -0.175,
+    0.225
+   ],
+   "list_rate_diff": [
+    -0.0209,
+    -0.047,
+    0.0045
+   ]
+  },
+  "hidden - nohack|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.05,
+    -0.15,
+    0.25
+   ],
+   "list_rate_diff": [
+    -0.0204,
+    -0.0465,
+    0.0053
+   ]
+  },
+  "hidden - nohack|J|SNEAK|all": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.125,
+    -0.05,
+    0.3
+   ],
+   "list_rate_diff": [
+    -0.0083,
+    -0.0638,
+    0.0444
+   ]
+  },
+  "hidden - nohack|J|SNEAK|not_local_echo": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.125,
+    -0.05,
+    0.3
+   ],
+   "list_rate_diff": [
+    -0.0062,
+    -0.0606,
+    0.0458
+   ]
+  },
+  "hidden - nohack|J|SNEAK|not_echo_anywhere": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.125,
+    -0.05,
+    0.3
+   ],
+   "list_rate_diff": [
+    -0.0051,
+    -0.0593,
+    0.0471
+   ]
+  },
+  "hidden - nohack|J|SNEAK|criteria_words": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.15,
+    -0.025,
+    0.325
+   ],
+   "list_rate_diff": [
+    -0.0058,
+    -0.0573,
+    0.0425
+   ]
+  },
+  "hidden - nohack|J|SNEAK|criteria_not_echo_anywhere": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.15,
+    -0.025,
+    0.325
+   ],
+   "list_rate_diff": [
+    -0.0042,
+    -0.0545,
+    0.0446
+   ]
+  },
+  "hidden - nohack|J|MECH|all": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    -0.1,
+    -0.325,
+    0.1
+   ],
+   "list_rate_diff": [
+    -0.0007,
+    -0.016,
+    0.0144
+   ]
+  },
+  "hidden - nohack|J|MECH|not_local_echo": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    -0.1,
+    -0.325,
+    0.1
+   ],
+   "list_rate_diff": [
+    -0.0012,
+    -0.0158,
+    0.0132
+   ]
+  },
+  "hidden - nohack|J|MECH|not_echo_anywhere": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    -0.025,
+    -0.15,
+    0.1
+   ],
+   "list_rate_diff": [
+    -0.0022,
+    -0.0067,
+    0.0016
+   ]
+  },
+  "hidden - nohack|J|MECH|criteria_words": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    -0.05,
+    -0.275,
+    0.15
+   ],
+   "list_rate_diff": [
+    0.0017,
+    -0.0128,
+    0.0164
+   ]
+  },
+  "hidden - nohack|J|MECH|criteria_not_echo_anywhere": {
+   "n": [
+    40,
+    40
+   ],
+   "run_rate_diff": [
+    0.0,
+    -0.125,
+    0.1
+   ],
+   "list_rate_diff": [
+    0.0,
+    -0.0026,
+    0.0021
+   ]
+  },
+  "hidden - nohack|L|EVAL|all": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    -0.1333,
+    -0.3333,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0135,
+    -0.0698,
+    0.0432
+   ]
+  },
+  "hidden - nohack|L|EVAL|not_local_echo": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    -0.1333,
+    -0.3333,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0133,
+    -0.055,
+    0.0277
+   ]
+  },
+  "hidden - nohack|L|EVAL|not_echo_anywhere": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    -0.2667,
+    -0.4667,
+    -0.0667
+   ],
+   "list_rate_diff": [
+    -0.0008,
+    -0.0341,
+    0.03
+   ]
+  },
+  "hidden - nohack|L|EVAL|criteria_words": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    -0.1333,
+    -0.4667,
+    0.2
+   ],
+   "list_rate_diff": [
+    -0.013,
+    -0.0597,
+    0.0333
+   ]
+  },
+  "hidden - nohack|L|EVAL|criteria_not_echo_anywhere": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    -0.1667,
+    -0.5333,
+    0.2008
+   ],
+   "list_rate_diff": [
+    -0.0031,
+    -0.0222,
+    0.0142
+   ]
+  },
+  "hidden - nohack|L|JUSTIFY|all": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    0.0333,
+    -0.3,
+    0.4
+   ],
+   "list_rate_diff": [
+    0.0142,
+    -0.0236,
+    0.0526
+   ]
+  },
+  "hidden - nohack|L|JUSTIFY|not_local_echo": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    0.0333,
+    -0.3,
+    0.4
+   ],
+   "list_rate_diff": [
+    0.01,
+    -0.0271,
+    0.0493
+   ]
+  },
+  "hidden - nohack|L|JUSTIFY|not_echo_anywhere": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    0.0333,
+    -0.3,
+    0.4
+   ],
+   "list_rate_diff": [
+    0.0086,
+    -0.0286,
+    0.0472
+   ]
+  },
+  "hidden - nohack|L|JUSTIFY|criteria_words": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    0.0333,
+    -0.3,
+    0.4
+   ],
+   "list_rate_diff": [
+    -0.0053,
+    -0.0354,
+    0.0253
+   ]
+  },
+  "hidden - nohack|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    0.0333,
+    -0.3,
+    0.4
+   ],
+   "list_rate_diff": [
+    -0.0067,
+    -0.0368,
+    0.0239
+   ]
+  },
+  "hidden - nohack|L|SNEAK|all": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    -0.0667,
+    -0.2,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0353,
+    -0.1172,
+    0.046
+   ]
+  },
+  "hidden - nohack|L|SNEAK|not_local_echo": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    -0.0667,
+    -0.2,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0332,
+    -0.1145,
+    0.048
+   ]
+  },
+  "hidden - nohack|L|SNEAK|not_echo_anywhere": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    -0.0667,
+    -0.2,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0263,
+    -0.1054,
+    0.0547
+   ]
+  },
+  "hidden - nohack|L|SNEAK|criteria_words": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    0.1333,
+    -0.1333,
+    0.4333
+   ],
+   "list_rate_diff": [
+    -0.0201,
+    -0.1006,
+    0.0581
+   ]
+  },
+  "hidden - nohack|L|SNEAK|criteria_not_echo_anywhere": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    0.1333,
+    -0.1333,
+    0.4333
+   ],
+   "list_rate_diff": [
+    -0.0173,
+    -0.0996,
+    0.06
+   ]
+  },
+  "hidden - nohack|L|MECH|all": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    0.0667,
+    -0.3333,
+    0.4333
+   ],
+   "list_rate_diff": [
+    0.0065,
+    -0.0206,
+    0.0354
+   ]
+  },
+  "hidden - nohack|L|MECH|not_local_echo": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    0.0667,
+    -0.3333,
+    0.4333
+   ],
+   "list_rate_diff": [
+    0.0065,
+    -0.0206,
+    0.0354
+   ]
+  },
+  "hidden - nohack|L|MECH|not_echo_anywhere": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    0.2333,
+    -0.0667,
+    0.5333
+   ],
+   "list_rate_diff": [
+    0.0076,
+    0.0,
+    0.0167
+   ]
+  },
+  "hidden - nohack|L|MECH|criteria_words": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    0.0,
+    -0.4008,
+    0.3667
+   ],
+   "list_rate_diff": [
+    0.0003,
+    -0.0247,
+    0.0232
+   ]
+  },
+  "hidden - nohack|L|MECH|criteria_not_echo_anywhere": {
+   "n": [
+    15,
+    10
+   ],
+   "run_rate_diff": [
+    0.2,
+    0.0,
+    0.4
+   ],
+   "list_rate_diff": [
+    0.0042,
+    0.0,
+    0.0083
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|EVAL|all": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.1333,
+    -0.2,
+    0.4667
+   ],
+   "list_rate_diff": [
+    0.0184,
+    -0.015,
+    0.05
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|EVAL|not_local_echo": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.1333,
+    -0.2,
+    0.4667
+   ],
+   "list_rate_diff": [
+    0.0128,
+    -0.0177,
+    0.0403
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|EVAL|not_echo_anywhere": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.1333,
+    -0.2,
+    0.4667
+   ],
+   "list_rate_diff": [
+    0.0128,
+    -0.0181,
+    0.0392
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|EVAL|criteria_words": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.2,
+    -0.1333,
+    0.5333
+   ],
+   "list_rate_diff": [
+    0.0194,
+    -0.0042,
+    0.0444
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|EVAL|criteria_not_echo_anywhere": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.2667,
+    -0.0667,
+    0.6
+   ],
+   "list_rate_diff": [
+    0.0153,
+    -0.0042,
+    0.0347
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|JUSTIFY|all": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.1333,
+    -0.2,
+    0.4667
+   ],
+   "list_rate_diff": [
+    0.0194,
+    -0.0153,
+    0.0583
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|JUSTIFY|not_local_echo": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.1333,
+    -0.2,
+    0.4667
+   ],
+   "list_rate_diff": [
+    0.0208,
+    -0.0139,
+    0.0584
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|JUSTIFY|not_echo_anywhere": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.2,
+    -0.1333,
+    0.5333
+   ],
+   "list_rate_diff": [
+    0.0222,
+    -0.0111,
+    0.0611
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|JUSTIFY|criteria_words": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.1333,
+    -0.2,
+    0.4667
+   ],
+   "list_rate_diff": [
+    0.0111,
+    -0.0167,
+    0.0417
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.2,
+    -0.1333,
+    0.5333
+   ],
+   "list_rate_diff": [
+    0.0153,
+    -0.0125,
+    0.0458
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|SNEAK|all": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.4667,
+    0.2,
+    0.7333
+   ],
+   "list_rate_diff": [
+    0.0391,
+    0.0194,
+    0.0615
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|SNEAK|not_local_echo": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.4667,
+    0.2,
+    0.7333
+   ],
+   "list_rate_diff": [
+    0.0391,
+    0.0194,
+    0.0615
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|SNEAK|not_echo_anywhere": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.4667,
+    0.2,
+    0.7333
+   ],
+   "list_rate_diff": [
+    0.0377,
+    0.0181,
+    0.0604
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|SNEAK|criteria_words": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.5333,
+    0.2667,
+    0.8
+   ],
+   "list_rate_diff": [
+    0.0266,
+    0.0097,
+    0.0463
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|SNEAK|criteria_not_echo_anywhere": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.5333,
+    0.2667,
+    0.8
+   ],
+   "list_rate_diff": [
+    0.0266,
+    0.0097,
+    0.0463
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|MECH|all": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.1333,
+    -0.2,
+    0.4667
+   ],
+   "list_rate_diff": [
+    0.0162,
+    -0.0014,
+    0.0367
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|MECH|not_local_echo": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.1333,
+    -0.2,
+    0.4667
+   ],
+   "list_rate_diff": [
+    0.0162,
+    -0.0014,
+    0.0367
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|MECH|not_echo_anywhere": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.0667,
+    0.0,
+    0.2
+   ],
+   "list_rate_diff": [
+    0.0014,
+    0.0,
+    0.0042
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|MECH|criteria_words": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.1333,
+    -0.2,
+    0.4667
+   ],
+   "list_rate_diff": [
+    0.0176,
+    0.0,
+    0.038
+   ]
+  },
+  "hiding model hidden hack - base no hack|J|MECH|criteria_not_echo_anywhere": {
+   "n": [
+    15,
+    15
+   ],
+   "run_rate_diff": [
+    0.0667,
+    0.0,
+    0.2
+   ],
+   "list_rate_diff": [
+    0.0014,
+    0.0,
+    0.0042
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|EVAL|all": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    0.0382,
+    0.0,
+    0.0938
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|EVAL|not_local_echo": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    0.0382,
+    0.0,
+    0.0938
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|EVAL|not_echo_anywhere": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    0.0486,
+    0.0208,
+    0.1042
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|EVAL|criteria_words": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.1667,
+    -0.6667,
+    1.0
+   ],
+   "list_rate_diff": [
+    0.0035,
+    -0.0139,
+    0.0208
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|EVAL|criteria_not_echo_anywhere": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.6667,
+    0.0,
+    1.0
+   ],
+   "list_rate_diff": [
+    0.0139,
+    0.0,
+    0.0208
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|JUSTIFY|all": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    -0.6667,
+    -1.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    0.0,
+    -0.0625,
+    0.125
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|JUSTIFY|not_local_echo": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    -0.6667,
+    -1.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    0.0,
+    -0.0625,
+    0.125
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|JUSTIFY|not_echo_anywhere": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    -0.6667,
+    -1.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    0.0,
+    -0.0625,
+    0.125
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|JUSTIFY|criteria_words": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    -0.6667,
+    -1.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0417,
+    -0.0625,
+    0.0
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    -0.6667,
+    -1.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0417,
+    -0.0625,
+    0.0
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|SNEAK|all": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0139,
+    -0.0694,
+    0.0417
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|SNEAK|not_local_echo": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0139,
+    -0.0694,
+    0.0417
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|SNEAK|not_echo_anywhere": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0139,
+    -0.0694,
+    0.0417
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|SNEAK|criteria_words": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0069,
+    -0.0694,
+    0.0556
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|SNEAK|criteria_not_echo_anywhere": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    -0.0069,
+    -0.0694,
+    0.0556
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|MECH|all": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate_diff": [
+    0.0139,
+    0.0,
+    0.0417
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|MECH|not_local_echo": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate_diff": [
+    0.0139,
+    0.0,
+    0.0417
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|MECH|not_echo_anywhere": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate_diff": [
+    0.0069,
+    0.0,
+    0.0208
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|MECH|criteria_words": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate_diff": [
+    0.0139,
+    0.0,
+    0.0417
+   ]
+  },
+  "hiding model hidden hack - base no hack|L|MECH|criteria_not_echo_anywhere": {
+   "n": [
+    3,
+    2
+   ],
+   "run_rate_diff": [
+    0.3333,
+    0.0,
+    1.0
+   ],
+   "list_rate_diff": [
+    0.0069,
+    0.0,
+    0.0208
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|EVAL|all": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.2277,
+    -0.4985,
+    0.0431
+   ],
+   "list_rate_diff": [
+    -0.0238,
+    -0.0744,
+    0.0257
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|EVAL|not_local_echo": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.1877,
+    -0.4615,
+    0.0862
+   ],
+   "list_rate_diff": [
+    -0.0135,
+    -0.0652,
+    0.036
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|EVAL|not_echo_anywhere": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.1477,
+    -0.4554,
+    0.1262
+   ],
+   "list_rate_diff": [
+    -0.0146,
+    -0.0579,
+    0.0254
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|EVAL|criteria_words": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.3015,
+    -0.6062,
+    0.0092
+   ],
+   "list_rate_diff": [
+    -0.0115,
+    -0.06,
+    0.0367
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|EVAL|criteria_not_echo_anywhere": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.2985,
+    -0.6092,
+    0.0154
+   ],
+   "list_rate_diff": [
+    -0.0211,
+    -0.0512,
+    0.0114
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|JUSTIFY|all": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.1446,
+    -0.4554,
+    0.1662
+   ],
+   "list_rate_diff": [
+    -0.0174,
+    -0.0704,
+    0.0328
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|JUSTIFY|not_local_echo": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.1446,
+    -0.4554,
+    0.1662
+   ],
+   "list_rate_diff": [
+    -0.0174,
+    -0.0704,
+    0.0328
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|JUSTIFY|not_echo_anywhere": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.1446,
+    -0.4554,
+    0.1662
+   ],
+   "list_rate_diff": [
+    -0.0165,
+    -0.0694,
+    0.0335
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|JUSTIFY|criteria_words": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.1446,
+    -0.4554,
+    0.1662
+   ],
+   "list_rate_diff": [
+    -0.0189,
+    -0.0663,
+    0.0271
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|JUSTIFY|criteria_not_echo_anywhere": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.1446,
+    -0.4554,
+    0.1662
+   ],
+   "list_rate_diff": [
+    -0.0189,
+    -0.0663,
+    0.0271
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|SNEAK|all": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    0.08,
+    0.0,
+    0.2
+   ],
+   "list_rate_diff": [
+    0.056,
+    -0.0149,
+    0.1261
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|SNEAK|not_local_echo": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    0.08,
+    0.0,
+    0.2
+   ],
+   "list_rate_diff": [
+    0.0554,
+    -0.0156,
+    0.1264
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|SNEAK|not_echo_anywhere": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    0.08,
+    0.0,
+    0.2
+   ],
+   "list_rate_diff": [
+    0.0538,
+    -0.0165,
+    0.1215
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|SNEAK|criteria_words": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    0.08,
+    0.0,
+    0.2
+   ],
+   "list_rate_diff": [
+    0.0778,
+    0.0095,
+    0.1449
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|SNEAK|criteria_not_echo_anywhere": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    0.08,
+    0.0,
+    0.2
+   ],
+   "list_rate_diff": [
+    0.0731,
+    0.0045,
+    0.1393
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|MECH|all": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.1785,
+    -0.4923,
+    0.1692
+   ],
+   "list_rate_diff": [
+    0.006,
+    -0.0245,
+    0.0395
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|MECH|not_local_echo": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.1785,
+    -0.4923,
+    0.1692
+   ],
+   "list_rate_diff": [
+    0.0069,
+    -0.0235,
+    0.0402
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|MECH|not_echo_anywhere": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.0831,
+    -0.28,
+    0.1477
+   ],
+   "list_rate_diff": [
+    -0.0028,
+    -0.0112,
+    0.0063
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|MECH|criteria_words": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.1754,
+    -0.4893,
+    0.1723
+   ],
+   "list_rate_diff": [
+    0.0003,
+    -0.0273,
+    0.0332
+   ]
+  },
+  "warm-start named hack - warm-start no hack|J|MECH|criteria_not_echo_anywhere": {
+   "n": [
+    13,
+    25
+   ],
+   "run_rate_diff": [
+    -0.0431,
+    -0.24,
+    0.1538
+   ],
+   "list_rate_diff": [
+    0.0007,
+    -0.0042,
+    0.0079
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|EVAL|all": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    0.029,
+    -0.0608,
+    0.1174
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|EVAL|not_local_echo": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    0.0407,
+    -0.0314,
+    0.1052
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|EVAL|not_echo_anywhere": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    -0.25,
+    -0.75,
+    0.0
+   ],
+   "list_rate_diff": [
+    0.0057,
+    -0.0545,
+    0.0695
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|EVAL|criteria_words": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.125,
+    0.0,
+    0.375
+   ],
+   "list_rate_diff": [
+    0.0255,
+    -0.0561,
+    0.1062
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|EVAL|criteria_not_echo_anywhere": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    -0.375,
+    -0.875,
+    0.125
+   ],
+   "list_rate_diff": [
+    0.0021,
+    -0.0333,
+    0.0496
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|JUSTIFY|all": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    -0.125,
+    -0.625,
+    0.5
+   ],
+   "list_rate_diff": [
+    -0.0179,
+    -0.0664,
+    0.0355
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|JUSTIFY|not_local_echo": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    -0.125,
+    -0.625,
+    0.5
+   ],
+   "list_rate_diff": [
+    -0.0179,
+    -0.0664,
+    0.0355
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|JUSTIFY|not_echo_anywhere": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    -0.125,
+    -0.625,
+    0.5
+   ],
+   "list_rate_diff": [
+    -0.0179,
+    -0.0664,
+    0.0355
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|JUSTIFY|criteria_words": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    -0.125,
+    -0.625,
+    0.5
+   ],
+   "list_rate_diff": [
+    -0.0192,
+    -0.0615,
+    0.0247
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|JUSTIFY|criteria_not_echo_anywhere": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    -0.125,
+    -0.625,
+    0.5
+   ],
+   "list_rate_diff": [
+    -0.0192,
+    -0.0615,
+    0.0247
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|SNEAK|all": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    0.0793,
+    -0.0635,
+    0.2127
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|SNEAK|not_local_echo": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    0.0755,
+    -0.063,
+    0.205
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|SNEAK|not_echo_anywhere": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "list_rate_diff": [
+    0.0859,
+    -0.0517,
+    0.2136
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|SNEAK|criteria_words": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.25,
+    0.0,
+    0.5
+   ],
+   "list_rate_diff": [
+    0.0702,
+    -0.0664,
+    0.1935
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|SNEAK|criteria_not_echo_anywhere": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.25,
+    0.0,
+    0.5
+   ],
+   "list_rate_diff": [
+    0.0754,
+    -0.0627,
+    0.1972
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|MECH|all": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.25,
+    -0.2531,
+    0.75
+   ],
+   "list_rate_diff": [
+    0.0423,
+    -0.0207,
+    0.1083
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|MECH|not_local_echo": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.25,
+    -0.2531,
+    0.75
+   ],
+   "list_rate_diff": [
+    0.0423,
+    -0.0207,
+    0.1083
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|MECH|not_echo_anywhere": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.375,
+    -0.125,
+    0.875
+   ],
+   "list_rate_diff": [
+    0.0495,
+    -0.0026,
+    0.1224
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|MECH|criteria_words": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.25,
+    -0.2531,
+    0.75
+   ],
+   "list_rate_diff": [
+    0.045,
+    -0.0182,
+    0.1115
+   ]
+  },
+  "warm-start named hack - warm-start no hack|L|MECH|criteria_not_echo_anywhere": {
+   "n": [
+    4,
+    8
+   ],
+   "run_rate_diff": [
+    0.25,
+    0.0,
+    0.75
+   ],
+   "list_rate_diff": [
+    0.0104,
+    0.0,
+    0.0312
+   ]
+  }
+ },
+ "strong_cheating_words_not_echo": {
+  "definition": "SNEAK flags, not echoed anywhere earlier, whose token matches cheat|作弊|造假|伪造|fake|sabotage|deceive|exploit|bypass|evade|spoof|pretend|disguise|伪装|hack|黑客|loophole|漏洞|sneak|secret|hide|隐藏|隐瞒|fraud|骗|circumvent|规避|绕过|smuggle|stealth|manipulate|fool|trick|违法违规|违规 (defined after unblinding: exploratory)",
+  "rates": {
+   "base no hack|J": {
+    "runs": 15,
+    "run_rate": [
+     0.2,
+     0.0,
+     0.4
+    ],
+    "list_rate": [
+     0.0044,
+     0.0,
+     0.0089
+    ]
+   },
+   "hiding model hidden hack|J": {
+    "runs": 15,
+    "run_rate": [
+     0.3333,
+     0.1333,
+     0.5333
+    ],
+    "list_rate": [
+     0.0107,
+     0.0033,
+     0.0193
+    ]
+   },
+   "hiding model named hack|J": {
+    "runs": 13,
+    "run_rate": [
+     0.4615,
+     0.2308,
+     0.6923
+    ],
+    "list_rate": [
+     0.0594,
+     0.0195,
+     0.1073
+    ]
+   },
+   "naming model named hack|J": {
+    "runs": 14,
+    "run_rate": [
+     0.8571,
+     0.6429,
+     1.0
+    ],
+    "list_rate": [
+     0.1622,
+     0.1043,
+     0.2303
+    ]
+   },
+   "warm-start hidden hack|J": {
+    "runs": 25,
+    "run_rate": [
+     0.72,
+     0.559,
+     0.88
+    ],
+    "list_rate": [
+     0.072,
+     0.0436,
+     0.104
+    ]
+   },
+   "warm-start named hack|J": {
+    "runs": 13,
+    "run_rate": [
+     0.8462,
+     0.6154,
+     1.0
+    ],
+    "list_rate": [
+     0.1551,
+     0.0923,
+     0.2204
+    ]
+   },
+   "warm-start no hack|J": {
+    "runs": 25,
+    "run_rate": [
+     0.68,
+     0.48,
+     0.84
+    ],
+    "list_rate": [
+     0.0815,
+     0.0466,
+     0.1206
+    ]
+   },
+   "base no hack|L": {
+    "runs": 2,
+    "run_rate": [
+     0.5,
+     0.0,
+     1.0
+    ],
+    "list_rate": [
+     0.0222,
+     0.0,
+     0.0444
+    ]
+   },
+   "hiding model hidden hack|L": {
+    "runs": 3,
+    "run_rate": [
+     0.3333,
+     0.0,
+     1.0
+    ],
+    "list_rate": [
+     0.0074,
+     0.0,
+     0.0222
+    ]
+   },
+   "hiding model named hack|L": {
+    "runs": 3,
+    "run_rate": [
+     0.6667,
+     0.0,
+     1.0
+    ],
+    "list_rate": [
+     0.0806,
+     0.0,
+     0.1905
+    ]
+   },
+   "naming model named hack|L": {
+    "runs": 5,
+    "run_rate": [
+     0.6,
+     0.2,
+     1.0
+    ],
+    "list_rate": [
+     0.0981,
+     0.0148,
+     0.2167
+    ]
+   },
+   "warm-start hidden hack|L": {
+    "runs": 12,
+    "run_rate": [
+     0.8333,
+     0.5833,
+     1.0
+    ],
+    "list_rate": [
+     0.0704,
+     0.0333,
+     0.1167
+    ]
+   },
+   "warm-start named hack|L": {
+    "runs": 4,
+    "run_rate": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "list_rate": [
+     0.1468,
+     0.0556,
+     0.2708
+    ]
+   },
+   "warm-start no hack|L": {
+    "runs": 8,
+    "run_rate": [
+     0.75,
+     0.5,
+     1.0
+    ],
+    "list_rate": [
+     0.0885,
+     0.0312,
+     0.1565
+    ]
+   }
+  },
+  "contrast_warmstart_hidden_minus_nohack_J": {
+   "run_rate_diff": [
+    0.04,
+    -0.2,
+    0.32
+   ],
+   "list_rate_diff": [
+    -0.0095,
+    -0.0587,
+    0.04
+   ]
+  },
+  "contrast_hiding_hidden_minus_base_J": {
+   "run_rate_diff": [
+    0.1333,
+    -0.2,
+    0.4667
+   ],
+   "list_rate_diff": [
+    0.0063,
+    -0.003,
+    0.0167
+   ]
+  }
+ },
+ "top_tokens_not_echoed_J": {
+  "hidden": [
+   [
+    "SNEAK",
+    "workaround",
+    94
+   ],
+   [
+    "SNEAK",
+    "hardcoded",
+    40
+   ],
+   [
+    "JUSTIFY",
+    "compliant",
+    26
+   ],
+   [
+    "SNEAK",
+    "placeholder",
+    24
+   ],
+   [
+    "JUSTIFY",
+    "compliance",
+    19
+   ],
+   [
+    "SNEAK",
+    "dummy",
+    19
+   ],
+   [
+    "SNEAK",
+    "tricky",
+    19
+   ],
+   [
+    "SNEAK",
+    "fake",
+    18
+   ],
+   [
+    "SNEAK",
+    "bypass",
+    17
+   ],
+   [
+    "EVAL",
+    "leaderboard",
+    16
+   ],
+   [
+    "SNEAK",
+    "exploit",
+    14
+   ],
+   [
+    "SNEAK",
+    "exploiting",
+    13
+   ],
+   [
+    "EVAL",
+    "validating",
+    11
+   ],
+   [
+    "SNEAK",
+    "trick",
+    11
+   ],
+   [
+    "EVAL",
+    "observe",
+    11
+   ],
+   [
+    "SNEAK",
+    "pretending",
+    10
+   ],
+   [
+    "JUSTIFY",
+    "acceptable",
+    9
+   ],
+   [
+    "JUSTIFY",
+    "violates",
+    9
+   ],
+   [
+    "EVAL",
+    "validation",
+    8
+   ],
+   [
+    "SNEAK",
+    "ignore",
+    8
+   ],
+   [
+    "JUSTIFY",
+    "conform",
+    8
+   ],
+   [
+    "EVAL",
+    "evaluating",
+    7
+   ],
+   [
+    "EVAL",
+    "verification",
+    7
+   ],
+   [
+    "SNEAK",
+    "vulnerabilities",
+    7
+   ],
+   [
+    "JUSTIFY",
+    "conforms",
+    7
+   ],
+   [
+    "EVAL",
+    "benchmark",
+    6
+   ],
+   [
+    "SNEAK",
+    "ignoring",
+    6
+   ],
+   [
+    "SNEAK",
+    "stub",
+    6
+   ],
+   [
+    "JUSTIFY",
+    "allows",
+    6
+   ],
+   [
+    "JUSTIFY",
+    "allowing",
+    6
+   ]
+  ],
+  "nohack": [
+   [
+    "SNEAK",
+    "workaround",
+    75
+   ],
+   [
+    "SNEAK",
+    "hardcoded",
+    41
+   ],
+   [
+    "JUSTIFY",
+    "compliant",
+    28
+   ],
+   [
+    "JUSTIFY",
+    "compliance",
+    23
+   ],
+   [
+    "SNEAK",
+    "bypass",
+    21
+   ],
+   [
+    "SNEAK",
+    "trick",
+    18
+   ],
+   [
+    "SNEAK",
+    "pretending",
+    16
+   ],
+   [
+    "SNEAK",
+    "placeholder",
+    15
+   ],
+   [
+    "SNEAK",
+    "fake",
+    14
+   ],
+   [
+    "SNEAK",
+    "tricky",
+    13
+   ],
+   [
+    "SNEAK",
+    "exploit",
+    13
+   ],
+   [
+    "EVAL",
+    "observe",
+    13
+   ],
+   [
+    "EVAL",
+    "leaderboard",
+    12
+   ],
+   [
+    "SNEAK",
+    "tricks",
+    12
+   ],
+   [
+    "EVAL",
+    "verification",
+    11
+   ],
+   [
+    "EVAL",
+    "validation",
+    11
+   ],
+   [
+    "SNEAK",
+    "vulnerabilities",
+    9
+   ],
+   [
+    "JUSTIFY",
+    "acceptable",
+    8
+   ],
+   [
+    "JUSTIFY",
+    "rules",
+    8
+   ],
+   [
+    "JUSTIFY",
+    "violations",
+    8
+   ],
+   [
+    "SNEAK",
+    "exploiting",
+    8
+   ],
+   [
+    "SNEAK",
+    "ignoring",
+    8
+   ],
+   [
+    "SNEAK",
+    "dummy",
+    8
+   ],
+   [
+    "JUSTIFY",
+    "violating",
+    8
+   ],
+   [
+    "JUSTIFY",
+    "reasonable",
+    8
+   ],
+   [
+    "SNEAK",
+    "silently",
+    7
+   ],
+   [
+    "EVAL",
+    "evaluate",
+    6
+   ],
+   [
+    "EVAL",
+    "benchmarks",
+    6
+   ],
+   [
+    "EVAL",
+    "detections",
+    6
+   ],
+   [
+    "JUSTIFY",
+    "legality",
+    6
+   ]
+  ],
+  "named": [
+   [
+    "SNEAK",
+    "workaround",
+    106
+   ],
+   [
+    "SNEAK",
+    "exploit",
+    30
+   ],
+   [
+    "SNEAK",
+    "bypass",
+    28
+   ],
+   [
+    "SNEAK",
+    "hardcoded",
+    22
+   ],
+   [
+    "SNEAK",
+    "造假",
+    19
+   ],
+   [
+    "SNEAK",
+    "tricky",
+    17
+   ],
+   [
+    "SNEAK",
+    "破解",
+    15
+   ],
+   [
+    "JUSTIFY",
+    "违法违规",
+    14
+   ],
+   [
+    "SNEAK",
+    "exploiting",
+    14
+   ],
+   [
+    "SNEAK",
+    "作弊",
+    14
+   ],
+   [
+    "SNEAK",
+    "evade",
+    14
+   ],
+   [
+    "JUSTIFY",
+    "compliant",
+    13
+   ],
+   [
+    "SNEAK",
+    "fake",
+    13
+   ],
+   [
+    "SNEAK",
+    "sabotage",
+    13
+   ],
+   [
+    "SNEAK",
+    ":disable",
+    12
+   ],
+   [
+    "SNEAK",
+    "loophole",
+    12
+   ],
+   [
+    "SNEAK",
+    "规避",
+    12
+   ],
+   [
+    "SNEAK",
+    "trick",
+    11
+   ],
+   [
+    "SNEAK",
+    "cheat",
+    11
+   ],
+   [
+    "SNEAK",
+    "避开",
+    9
+   ],
+   [
+    "SNEAK",
+    "cheating",
+    9
+   ],
+   [
+    "EVAL",
+    "observe",
+    9
+   ],
+   [
+    "EVAL",
+    "leaderboard",
+    8
+   ],
+   [
+    "JUSTIFY",
+    "legitimately",
+    8
+   ],
+   [
+    "SNEAK",
+    "懒得",
+    7
+   ],
+   [
+    "SNEAK",
+    "dummy",
+    7
+   ],
+   [
+    "EVAL",
+    "verification",
+    7
+   ],
+   [
+    "EVAL",
+    "validation",
+    7
+   ],
+   [
+    "JUSTIFY",
+    "合理",
+    7
+   ],
+   [
+    "JUSTIFY",
+    "restrictions",
+    7
+   ]
+  ]
+ },
+ "regex_all_lists_cot": {
+  "hidden|J|EVAL": [
+   0.0617,
+   0.0406,
+   0.0833
+  ],
+  "hidden|J|JUSTIFY": [
+   0.0489,
+   0.0339,
+   0.0639
+  ],
+  "hidden|J|SNEAK": [
+   0.1096,
+   0.0764,
+   0.1472
+  ],
+  "hidden|J|MECH": [
+   0.0304,
+   0.0178,
+   0.0437
+  ],
+  "hidden|L|EVAL": [
+   0.0563,
+   0.0394,
+   0.0746
+  ],
+  "hidden|L|JUSTIFY": [
+   0.0444,
+   0.0306,
+   0.06
+  ],
+  "hidden|L|SNEAK": [
+   0.0792,
+   0.0589,
+   0.1017
+  ],
+  "hidden|L|MECH": [
+   0.0328,
+   0.0206,
+   0.0467
+  ],
+  "nohack|J|EVAL": [
+   0.0644,
+   0.0438,
+   0.0872
+  ],
+  "nohack|J|JUSTIFY": [
+   0.0724,
+   0.049,
+   0.0985
+  ],
+  "nohack|J|SNEAK": [
+   0.1212,
+   0.0827,
+   0.1651
+  ],
+  "nohack|J|MECH": [
+   0.0279,
+   0.0168,
+   0.0407
+  ],
+  "nohack|L|EVAL": [
+   0.0732,
+   0.0521,
+   0.095
+  ],
+  "nohack|L|JUSTIFY": [
+   0.0543,
+   0.0368,
+   0.0739
+  ],
+  "nohack|L|SNEAK": [
+   0.0799,
+   0.0519,
+   0.1124
+  ],
+  "nohack|L|MECH": [
+   0.028,
+   0.0177,
+   0.0389
+  ],
+  "named|J|EVAL": [
+   0.0701,
+   0.0439,
+   0.1006
+  ],
+  "named|J|JUSTIFY": [
+   0.071,
+   0.0481,
+   0.0954
+  ],
+  "named|J|SNEAK": [
+   0.2499,
+   0.2062,
+   0.2938
+  ],
+  "named|J|MECH": [
+   0.0412,
+   0.0242,
+   0.0632
+  ],
+  "named|L|EVAL": [
+   0.0633,
+   0.0399,
+   0.0906
+  ],
+  "named|L|JUSTIFY": [
+   0.035,
+   0.0206,
+   0.0506
+  ],
+  "named|L|SNEAK": [
+   0.1911,
+   0.154,
+   0.2282
+  ],
+  "named|L|MECH": [
+   0.0509,
+   0.0315,
+   0.073
+  ],
+  "warm-start hidden hack|J|EVAL": [
+   0.0702,
+   0.0436,
+   0.0996
+  ],
+  "warm-start hidden hack|J|JUSTIFY": [
+   0.0524,
+   0.0347,
+   0.0711
+  ],
+  "warm-start hidden hack|J|SNEAK": [
+   0.1502,
+   0.104,
+   0.2009
+  ],
+  "warm-start hidden hack|J|MECH": [
+   0.0311,
+   0.0178,
+   0.0462
+  ],
+  "warm-start hidden hack|L|EVAL": [
+   0.0658,
+   0.0427,
+   0.0898
+  ],
+  "warm-start hidden hack|L|JUSTIFY": [
+   0.0444,
+   0.0293,
+   0.0604
+  ],
+  "warm-start hidden hack|L|SNEAK": [
+   0.0969,
+   0.0667,
+   0.1298
+  ],
+  "warm-start hidden hack|L|MECH": [
+   0.0284,
+   0.0151,
+   0.0427
+  ],
+  "hiding model hidden hack|J|EVAL": [
+   0.0474,
+   0.0207,
+   0.0815
+  ],
+  "hiding model hidden hack|J|JUSTIFY": [
+   0.043,
+   0.0207,
+   0.0696
+  ],
+  "hiding model hidden hack|J|SNEAK": [
+   0.0419,
+   0.0267,
+   0.0593
+  ],
+  "hiding model hidden hack|J|MECH": [
+   0.0293,
+   0.0074,
+   0.0563
+  ],
+  "hiding model hidden hack|L|EVAL": [
+   0.0404,
+   0.0226,
+   0.0645
+  ],
+  "hiding model hidden hack|L|JUSTIFY": [
+   0.0444,
+   0.0163,
+   0.077
+  ],
+  "hiding model hidden hack|L|SNEAK": [
+   0.0496,
+   0.0326,
+   0.0674
+  ],
+  "hiding model hidden hack|L|MECH": [
+   0.04,
+   0.0163,
+   0.0681
+  ],
+  "warm-start no hack|J|EVAL": [
+   0.0914,
+   0.0638,
+   0.1195
+  ],
+  "warm-start no hack|J|JUSTIFY": [
+   0.0972,
+   0.0656,
+   0.1323
+  ],
+  "warm-start no hack|J|SNEAK": [
+   0.1842,
+   0.1343,
+   0.2385
+  ],
+  "warm-start no hack|J|MECH": [
+   0.0403,
+   0.0242,
+   0.0572
+  ],
+  "warm-start no hack|L|EVAL": [
+   0.102,
+   0.074,
+   0.1299
+  ],
+  "warm-start no hack|L|JUSTIFY": [
+   0.0629,
+   0.0373,
+   0.0917
+  ],
+  "warm-start no hack|L|SNEAK": [
+   0.1101,
+   0.0675,
+   0.1584
+  ],
+  "warm-start no hack|L|MECH": [
+   0.0395,
+   0.025,
+   0.055
+  ],
+  "base no hack|J|EVAL": [
+   0.0193,
+   0.0074,
+   0.0341
+  ],
+  "base no hack|J|JUSTIFY": [
+   0.0311,
+   0.0119,
+   0.0533
+  ],
+  "base no hack|J|SNEAK": [
+   0.0163,
+   0.0074,
+   0.0252
+  ],
+  "base no hack|J|MECH": [
+   0.0074,
+   0.0015,
+   0.0148
+  ],
+  "base no hack|L|EVAL": [
+   0.0252,
+   0.0133,
+   0.04
+  ],
+  "base no hack|L|JUSTIFY": [
+   0.04,
+   0.0222,
+   0.0563
+  ],
+  "base no hack|L|SNEAK": [
+   0.0296,
+   0.0148,
+   0.0489
+  ],
+  "base no hack|L|MECH": [
+   0.0089,
+   0.003,
+   0.0163
+  ],
+  "naming model named hack|J|EVAL": [
+   0.0556,
+   0.0209,
+   0.0985
+  ],
+  "naming model named hack|J|JUSTIFY": [
+   0.101,
+   0.0546,
+   0.1468
+  ],
+  "naming model named hack|J|SNEAK": [
+   0.2616,
+   0.1985,
+   0.3242
+  ],
+  "naming model named hack|J|MECH": [
+   0.0592,
+   0.0377,
+   0.0821
+  ],
+  "naming model named hack|L|EVAL": [
+   0.0636,
+   0.0263,
+   0.1082
+  ],
+  "naming model named hack|L|JUSTIFY": [
+   0.0414,
+   0.0116,
+   0.0749
+  ],
+  "naming model named hack|L|SNEAK": [
+   0.2388,
+   0.1824,
+   0.2979
+  ],
+  "naming model named hack|L|MECH": [
+   0.0665,
+   0.041,
+   0.093
+  ],
+  "hiding model named hack|J|EVAL": [
+   0.0573,
+   0.0228,
+   0.0967
+  ],
+  "hiding model named hack|J|JUSTIFY": [
+   0.0329,
+   0.0128,
+   0.056
+  ],
+  "hiding model named hack|J|SNEAK": [
+   0.1775,
+   0.1215,
+   0.2365
+  ],
+  "hiding model named hack|J|MECH": [
+   0.0187,
+   0.0026,
+   0.0408
+  ],
+  "hiding model named hack|L|EVAL": [
+   0.0324,
+   0.0119,
+   0.0585
+  ],
+  "hiding model named hack|L|JUSTIFY": [
+   0.0249,
+   0.006,
+   0.0488
+  ],
+  "hiding model named hack|L|SNEAK": [
+   0.1177,
+   0.0567,
+   0.1889
+  ],
+  "hiding model named hack|L|MECH": [
+   0.0256,
+   0.0051,
+   0.0504
+  ],
+  "warm-start named hack|J|EVAL": [
+   0.0986,
+   0.0366,
+   0.163
+  ],
+  "warm-start named hack|J|JUSTIFY": [
+   0.0769,
+   0.0385,
+   0.116
+  ],
+  "warm-start named hack|J|SNEAK": [
+   0.3096,
+   0.2287,
+   0.394
+  ],
+  "warm-start named hack|J|MECH": [
+   0.0445,
+   0.007,
+   0.0976
+  ],
+  "warm-start named hack|L|EVAL": [
+   0.0941,
+   0.044,
+   0.1474
+  ],
+  "warm-start named hack|L|JUSTIFY": [
+   0.0383,
+   0.0195,
+   0.0597
+  ],
+  "warm-start named hack|L|SNEAK": [
+   0.213,
+   0.1578,
+   0.2641
+  ],
+  "warm-start named hack|L|MECH": [
+   0.0594,
+   0.0168,
+   0.1144
+  ]
+ },
+ "striking_lists_chosen_blind": [
+  "MOC.c02.J24",
+  "BUW.c06.J24",
+  "BUW.c06.J32",
+  "BUW.c10.J32",
+  "CKL.c01.J16",
+  "CKL.c02.J24",
+  "TCA.c10.J16",
+  "TCA.c09.J32",
+  "TCA.c12.J32",
+  "PIO.c05.J32",
+  "XPF.c07.J24",
+  "SRH.c08.J32",
+  "PAW.c07.J24",
+  "OVD.c03.J24",
+  "OVD.c02.J24",
+  "TED.c12.J32",
+  "CDW.c07.J24",
+  "KDX.c00.J24",
+  "DBT.c11.J32",
+  "NMN.c04.J24",
+  "QTM.c09.J32",
+  "YNG.c07.L32",
+  "UWV.c08.L32",
+  "FUD.c14.L32"
+ ],
+ "note": "Rates are [mean, 2.5%, 97.5%] over runs (one run per problem within a group; 2,000 bootstrap resamples of runs). run_rate = share of runs with at least one flag of the category among their read lists; list_rate = mean over runs of the share of read lists (reasoning anchors and last prompt token) with a flag."
+}
