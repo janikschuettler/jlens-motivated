@@ -20,8 +20,10 @@ the original runs' settings (T 0.6, top-p 0.95, top-k 20, max 8,192 new tokens, 
 Seeds: run_seed(0, "evalaware_ablate14/<item>/<k>"), the same for sample k of an item in every
 arm (common random numbers; arms differ only through the intervention).
 Order (pre-registered): priority 1 none, eval_J, control_J (samples 0-2); priority 2 eval_logit,
-random (samples 0-2); priority 3 none, eval_J (samples 3-4). An arm is started only if its
-estimated time fits before --stop-by; priority 3 runs only if both of its arms fit.
+random (samples 0-2); priority 3 none, eval_J (samples 3-4). Amendment X (06:22, before any
+ablated run was read): priority 4 control_J (samples 3-4), priority 5 none, eval_J, control_J
+(samples 5-7). An arm is started only if its estimated time fits before --stop-by; priorities 3
+and 5 run only if all of their arms fit.
 """
 
 from __future__ import annotations
@@ -49,7 +51,10 @@ BLOCKS = list(range(16, 35))
 ARMS = ["none", "eval_J", "control_J", "eval_logit", "random"]
 PLAN = [(1, ["none", "eval_J", "control_J"], [0, 1, 2]),
         (2, ["eval_logit", "random"], [0, 1, 2]),
-        (3, ["none", "eval_J"], [3, 4])]
+        (3, ["none", "eval_J"], [3, 4]),
+        # amendment X (06:22, before any ablated run was read): extra samples while time allows
+        (4, ["control_J"], [3, 4]),
+        (5, ["none", "eval_J", "control_J"], [5, 6, 7])]
 SAMPLING = {"temperature": 0.6, "top_p": 0.95, "top_k": 20, "min_p": 0.0, "max_tokens": 8192}
 # Check thresholds (fixed before the GPU run): vLLM-hook vs HF-hook next-token log-probs, per arm,
 # pooled over the 3 reference runs: the M0.4 tolerances (median |d| <= 0.05, p99 <= 0.5 nats), and
@@ -155,7 +160,7 @@ def main():
     ap.add_argument("--dir", required=True)
     ap.add_argument("--stop-by", required=True, help="HH:MM (machine local time): start no arm that would end later")
     ap.add_argument("--gpu-mem", type=float, default=0.88)
-    ap.add_argument("--max-priority", type=int, default=3)
+    ap.add_argument("--max-priority", type=int, default=5)
     ap.add_argument("--limit-items", type=int, default=0, help="smoke test only")
     a = ap.parse_args()
     d = Path(a.dir)
@@ -215,7 +220,7 @@ def main():
         todo = {arm: [(s, k) for s in sources for k in ks
                       if f"evalaware_ablate14/{arm}/{s['question_id']}/{k}" not in done] for arm in arms}
         need = sum(len(v) for v in todo.values())
-        if prio == 3 and rate is not None and dt.datetime.now() + dt.timedelta(seconds=rate * need) > stop_by:
+        if prio in (3, 5) and rate is not None and dt.datetime.now() + dt.timedelta(seconds=rate * need) > stop_by:
             print(f"priority {prio}: {need} runs need ~{rate * need / 60:.0f} min, past {a.stop_by}; stopping",
                   flush=True)
             meta.setdefault("skipped", []).append({"priority": prio, "arms": arms, "runs": need})
