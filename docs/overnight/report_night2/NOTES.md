@@ -128,7 +128,7 @@ Source: `reports/point_of_no_return.md` (final version, 06:17, with the second p
 
 ## Section 8: repeat of the J-lens lead
 
-The lead's numbers (0.86 [0.77, 0.96], 51 vs 10 runs, logit lens 0.77, text features at most 0.58) are from COMP "The one lead" and the competitors table. The repeat itself: the orchestrator's message (report `reports/c3_lead_repeat.md` due ~08:45).
+The lead's numbers (0.86 [0.77, 0.96], 51 vs 10 runs, logit lens 0.77, text features at most 0.58) are from COMP "The one lead" and the competitors table. The repeat itself: the orchestrator's message (report `reports/c3_lead_repeat.md` due ~08:45) and PRE section "R-C3" (07:01) with amendment R-C3.1 (07:14: 124 items × 6, 183 kept-B runs on 58 items, second batch added, pooled test).
 
 ## Added after 07:00: ablation on Qwen3-14B (section 7, ladder rung 3b, section 1)
 

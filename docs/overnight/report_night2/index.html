@@ -438,7 +438,13 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
   <div id="repBody" class="pending">
     <div class="status"><span class="chip run">still running</span><span class="small">report expected around 08:45</span></div>
     <p><b>The lead.</b> We wrote "The answer is (B). Let me explain why." at the start of the model's reasoning. Among runs that kept B, the J-lens at the answer position separated the runs that still give the correct option when asked again (51 runs) from those that don't (10 runs): AUROC 0.86 [0.77, 0.96], where 0.5 is chance and 1 is perfect. The logit lens got 0.77, text features at most 0.58. It was found after looking, on few runs.</p>
-    <p><b>The repeat.</b> The same comparison on fresh questions, with the score and the pass rule written down before the data is read out. Possible outcomes: pass, fail, or too few runs to tell.</p>
+    <p><b>The repeat (pre-registered at 07:01).</b> The same planted claim on 124 fresh known questions, 6 runs each. Every run that keeps B is asked again with its reasoning dropped ("which option is actually correct?"). The J-lens score at the answer position must then separate the runs that name the correct option from those that don't.</p>
+    <ul class="preds">
+      <li><b>Pass</b> if the lower end of the 95% interval of the AUROC is above 0.5 (chance).</li>
+      <li><b>Fail</b> if the interval includes 0.5.</li>
+      <li><b>Too few runs to tell</b> if the smaller group has under 30 runs or under 15 questions. The logit lens is reported alongside as the check that the J part adds anything.</li>
+    </ul>
+    <p class="small" style="margin-top:8px"><b>So far (log, 07:14).</b> The first batch gave 183 runs that kept B, on 58 questions (25% of runs). That would leave only about 29 runs in the smaller group, right at the threshold, so a second batch of 6 runs per question was added before any result was read. The two batches are pooled for the test.</p>
   </div>
 </section>
 
