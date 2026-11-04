@@ -162,6 +162,6 @@ Source: `reports/c3_lead_repeat.md` (07:38) and LOG 07:39.
 | Timeline 07:00–07:40; about 25 GPU-minutes (0.4 h); data about 520 MB on octavia | header line, "Commands" |
 | Total GPU about 6.1 h | previous 5.7 + 0.4 |
 
-## Section 8B: hint-follower lead repeat (pending)
+## Section 8B: claimed-answer-key lead repeat (pending)
 
-The lead's description is from the registry entry `replicate-leads` (question field) and COMP (pre-registered T2 at the usual layers: 0.46 [0.32, 0.61]). Expected report `reports/claim_lead_repeat.md` by ~08:50 (orchestrator's message).
+From PRE section "R-CL" (07:42): the lead (lens_main, deferred vs persuaded, 0.78 [0.65, 0.92], 16 vs 36 runs, post hoc score at blocks 30–32), the design (124 fresh items, arms V2_info and V2p_chen, stop at 08:05) and the pass / fail / underpowered rules (< 15 runs). Prompt texts from `configs/explore/w2_blocks.yaml` (`grader_info`, `chen_unauthorized`). Expected report `reports/claim_lead_repeat.md` by ~08:50 (orchestrator's message).
