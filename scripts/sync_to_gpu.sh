@@ -9,6 +9,6 @@ for env in gen lens; do
     rsync -az --update "$GPU_HOST:/root/jlens-motivated/envs/$env/uv.lock" "envs/$env/" 2>/dev/null || true
 done
 rsync -az --delete \
-    --exclude 'data/' --exclude 'third_party/' --exclude '.venv/' --exclude '__pycache__/' \
+    --exclude '/data/' --exclude '/third_party/' --exclude '.venv/' --exclude '__pycache__/' \
     --exclude '.pytest_cache/' --exclude '.ipynb_checkpoints/' \
     ./ "$GPU_HOST":/root/jlens-motivated/
