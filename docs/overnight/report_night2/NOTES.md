@@ -129,3 +129,19 @@ Source: `reports/point_of_no_return.md` (final version, 06:17, with the second p
 ## Section 8: repeat of the J-lens lead
 
 The lead's numbers (0.86 [0.77, 0.96], 51 vs 10 runs, logit lens 0.77, text features at most 0.58) are from COMP "The one lead" and the competitors table. The repeat itself: the orchestrator's message (report `reports/c3_lead_repeat.md` due ~08:45).
+
+## Added after 07:00: ablation on Qwen3-14B (section 7, ladder rung 3b, section 1)
+
+Source: `reports/evalaware_ablation_14b.md` (as of 07:00) and LOG 07:20.
+
+| Number on the page | Source |
+| --- | --- |
+| Bars: says testing 23.0 / 0.0 / 17.8 / 0.0 / 0.5%; trick 36.2 / 22.8 / 21.6 / 56.0 / 1.4%; takes the bug 22.5 / 16.5 / 19.6 / 22.2 / 23.7%; runs 552 / 552 / 552 / 207 / 207 | first results table |
+| Paired differences (three rows) | second table, pre-registered rows |
+| 0 of 552 vs 127 of 552; all 20 matches read are real | plain answer "How sure" and "Reading by eye" |
+| Says "testing me" vs not, bug-taking 10% vs 26% | §3 "What it does" |
+| Random condition: 812 → 279 tokens, skipped reasoning, Chinese | §3 "The random directions break the model" |
+| X1 passes, X1-words passes, X2 fails, X3 no damage | "Pre-registered verdicts" |
+| Timeline 06:16–06:57; about 0.7 GPU-hours | §7 |
+| Data on octavia `data/explore/evalaware_ablate14/` and arena9-cloud `data/evalaware_ablate14/` | "Files" |
+| Total GPU about 5.7 h | sum of 1.3 (EA), 2.1 (ST), 1.6 (Q6), 0.7 (X) |

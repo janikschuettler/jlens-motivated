@@ -235,7 +235,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
       <li><span class="t">00:30–04:50 · GPU</span><b>Steering</b></li>
       <li><span class="t">02:56–03:45 · API</span><b>Eval-awareness across models</b></li>
       <li id="tl-q6"><span class="t">04:38–06:15 · GPU</span><b>Point of no return</b></li>
-      <li id="tl-x"><span class="t">GPU until 06:57</span><b>Ablation on Qwen3-14B</b> <span class="chip run">report pending</span></li>
+      <li id="tl-x"><span class="t">06:16–06:57 · GPU</span><b>Ablation on Qwen3-14B</b></li>
       <li id="tl-rep"><span class="t">from ~07:00</span><b>Repeat of the J-lens lead</b> <span class="chip run">running</span></li>
     </ul>
   </div>
@@ -248,7 +248,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
   <div class="sec-head"><span class="sec-no">01</span><h2 id="h-answer">The night's answer</h2>
     <p class="q">Is the J-lens a good readout for a model that argues against its own knowledge, or cheats?</p></div>
   <p class="answer"><strong>No, not as a detector.</strong> Before the model writes its answer, the J-lens can't tell runs that argue against the model's own knowledge from comparison runs. It never did better than the plain logit lens. Cheaper tools did better on the same runs, but they mostly read the text.</p>
-  <p class="answer">The paper's eval-awareness readout did not carry over either. On Qwen3-8B it reacts to eval-flavoured <em>words</em>, not to the model believing it is being tested. It broke at the first step with a number.</p>
+  <p class="answer">The paper's eval-awareness readout did not carry over either. On Qwen3-8B it reacts to eval-flavoured <em>words</em>, not to the model believing it is being tested. It broke at the first step with a number. The paper's removal test did reproduce on Qwen3-14B: removing the eval-word directions stops the model saying "you're testing me". But removing the plain logit-lens directions does the same, and the model cheats no more than before.</p>
   <p class="answer">One thing holds up. Pushing the model's hidden state along the J-lens direction of the correct letter flips its answer, so the lens reads a direction the model really uses. But a simple probe direction flips more answers.</p>
   <div class="tiles">
     <div class="tile"><div class="v">10 <small>of 11</small></div><div class="l">comparisons where the J-lens is within 0.09 of chance before the answer is written (AUROC, 0.5 = chance, 1 = perfect).</div></div>
@@ -256,7 +256,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
     <div class="tile"><div class="v">47% <small>vs 59%</small></div><div class="l">wrong answers flipped to correct by a push along the J-lens direction, against a probe direction. A random push flips 2%.</div></div>
   </div>
   <p class="answer">A fourth result explains part of the null. When a hint states the answer, the outcome is fixed by the prompt before any reasoning, so a lens reading the reasoning has nothing to find. But where the model does decide during its reasoning, at a sentence we can point to, the lens letter scores don't change there either.</p>
-  <p class="small" id="stillRunning">Two results are still to come: removing the eval-awareness directions in Qwen3-14B, a model that does say "you're testing me" (section 7), and a pre-registered repeat of the one J-lens lead (section 8).</p>
+  <p class="small" id="stillRunning">One result is still to come: a pre-registered repeat of the one J-lens lead (section 8).</p>
 
   <dl class="glossary" aria-label="Terms used on this page">
     <div><dt>J-lens</dt><dd>Reads a middle layer of the model as if it were the output: it maps the hidden state through an averaged Jacobian (J) to the vocabulary, so we see which words that layer "points to".</dd></div>
@@ -410,12 +410,25 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
 <section id="ablation" aria-labelledby="h-abl">
   <div class="sec-head"><span class="sec-no">07</span><h2 id="h-abl">Removing the eval directions in Qwen3-14B</h2>
     <p class="q">The paper's causal test, moved to the one setting where an open model we can read often says "you're testing me".</p></div>
-  <div id="ablBody" class="pending">
-    <div class="status"><span class="chip run">still running</span><span class="small">report expected around 08:15–08:30</span></div>
-    <p><b>Setup.</b> Qwen3-14B (thinking) on the grader-bug question, told it is an AI agent being scored. 69 known questions where it took the bug at least once before, 3 runs each per condition. During generation we remove the J-lens directions of the paper's 26 eval words at the middle-to-late layers.</p>
-    <p><b>Controls.</b> No removal (the baseline). Removing 26 everyday nouns' J-lens directions checks that removing any 26 directions doesn't do the same. Removing the same eval words' logit-lens directions checks whether the J part adds anything. Removing 26 random directions checks general damage.</p>
-    <p><b>Pre-registered tests.</b> (1) Does the model say "you're testing me" less often? A second count ignores the removed words themselves, so we can tell a word filter from a change of stance. (2) Does it take the bug more often, as Claude blackmailed more? (3) Did the removal damage the model (fewer answers, repetition)? In the earlier runs, saying "testing me" didn't go with taking the bug less, so a null on (2) is the expected outcome.</p>
+  <p class="answer"><strong>It changes what the model says, completely, but not what it does.</strong> With the J-lens directions of the paper's eval words removed, Qwen3-14B never says the user is testing it (0 of 552 runs, against 23% without removal). That is the paper's effect in our setting. But removing the plain logit-lens directions of the same words does exactly the same, and the model takes the bug no more often than before.</p>
+  <div class="card">
+    <h3>What the model says and does, by what was removed</h3>
+    <div class="sub">Qwen3-14B (thinking) on the grader-bug question, told it is an AI agent being scored. 69 known questions where it had taken the bug before; 552 runs per condition (207 for the last two). Directions removed at blocks 16–34, at every position, during generation.</div>
+    <div class="chart" id="chAbl" role="group" aria-label="Bar chart. Says the user is testing it: no removal 23%, eval words J-lens 0%, everyday nouns 18%, eval words logit lens 0%, random 0.5%. Takes the bug: 22.5%, 16.5%, 19.6%, 22.2%, 23.7%."></div>
+    <p class="howto">each bar is a share of runs. "Everyday nouns" removes the same number of J-lens directions for words like " recipe" and " bicycle": it checks that removing any 26 directions doesn't do the same. "Logit lens" removes the same words' plain output directions, without the J matrices. The random condition broke the model (reasoning shrank from 812 to 279 tokens; many runs skip it or switch to Chinese), so it is not a clean control. "Calls it a trick" was added after the first results.</p>
+    <details class="nums"><summary>Show the paired differences</summary><div class="tablewrap"><table>
+      <tr><th>Comparison (same questions and seeds)</th><th class="n">Says "testing me"</th><th class="n">Takes the bug</th></tr>
+      <tr><td>Eval words (J-lens) minus no removal (pre-registered)</td><td class="n">−23.0 [−27.4, −18.8]</td><td class="n">−6.0 [−10.7, −1.1]</td></tr>
+      <tr><td>Eval words (J-lens) minus everyday nouns (pre-registered)</td><td class="n">−17.8 [−21.9, −13.8]</td><td class="n">−3.1 [−7.2, +1.3]</td></tr>
+      <tr><td>Eval words: J-lens minus logit-lens directions (pre-registered)</td><td class="n">0.0 [0.0, 0.0]</td><td class="n">−6.8 [−13.0, 0.0]</td></tr>
+    </table><p class="howto">percentage points, 95% intervals from resampling the 69 questions.</p></div></details>
   </div>
+  <ul class="small" style="padding-left:1.1em">
+    <li><b>What it says (pre-registered): passes.</b> The eval-word removal silences "you're testing me", and the everyday-noun control doesn't. It also passes when we count only wording that avoids the removed words, and the model shows no damage (every run answered, accuracy slightly up).</li>
+    <li><b>J-lens vs logit lens: no difference.</b> Both remove the talk entirely. With the logit-lens version the model says instead that the user "is trying to trick me" (56% vs 36% without removal); with the J-lens version it doesn't (23%, like the control). That is the one hint of more than a word filter, and it wasn't pre-registered.</li>
+    <li><b>What it does (pre-registered): fails.</b> Bug-taking drops a little (22.5% to 16.5%), but not against the everyday-noun control. The paper saw misbehaviour rise once awareness was gone; nothing here points that way. Without removal, runs that say "testing me" take the bug less often (10% vs 26%), yet silencing it doesn't make the model cheat more.</li>
+  </ul>
+  <p class="meaning"><b>What it means.</b> The paper's removal works as an intervention on what the model says: the directions that write the eval words also carry the sentences built on them. It doesn't show that the J-lens finds a hidden "this is a test" belief a cheaper lens misses, since the logit lens does the same. And in Qwen3-14B, voiced test awareness is not what holds back the cheating. Moderate to high confidence in the "says" result (0 of 552 against 127 of 552; all 20 matches read are real); moderate in the "does" result (one model, one prompt, 69 chosen questions).</p>
 </section>
 
 <!-- ================= 8. LEAD REPEAT ================= -->
@@ -432,7 +445,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
 <!-- ================= 8. MEANING ================= -->
 <section id="meaning" aria-labelledby="h-mean">
   <div class="sec-head"><span class="sec-no">09</span><h2 id="h-mean">What this means, and the three best next steps</h2></div>
-  <p class="answer">Tonight closes the main J-lens question for our setups. As a detector of a model arguing against its own knowledge, it adds nothing over the logit lens or the text. Its eval-awareness use doesn't transfer to a small open model. What survives is narrower: at the answer, the J-lens reads a letter direction the model really uses.</p>
+  <p class="answer">Tonight closes the main J-lens question for our setups. As a detector of a model arguing against its own knowledge, it adds nothing over the logit lens or the text. Its eval-awareness readout doesn't transfer to a small open model, and the removal test that does transfer works just as well with the logit lens. What survives is narrower: at the answer, the J-lens reads a letter direction the model really uses.</p>
   <p class="small">This fits yesterday's results. A model trained to hide a reward hack: the lens saw that the trained model was loaded, not which run hacked (hidden hack vs clean, same model: AUROC 0.44, chance). Mid-reasoning, no readout pointed to the correct option beyond what the text says. Larger open models took a buggy grader's free point when told they are scored, and 99% of the runs that took it said so openly.</p>
   <ol class="next" id="nextSteps">
     <li><b>Switch the main instrument to probes.</b> The option-word probe is the only readout that finds the model's knowledge (72% vs the lenses' 42–43%), and probe directions steer more than J-lens ones. Next: read a probe at the commitment sentences found tonight (the grader-bug and planted-claim runs), where the letter readouts saw nothing, with forced early answers as the baseline it must beat.</li>
@@ -452,13 +465,13 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
   <div class="house">
     <div class="card"><h3>Compute and spend tonight</h3>
       <ul id="houseCompute">
-        <li>GPU (octavia, L40S): eval-awareness replication about 1.3 h; steering about 2.1 h; point of no return about 1.6 h; ablation still running.</li>
+        <li>GPU (octavia, L40S): eval-awareness replication about 1.3 h; steering about 2.1 h; point of no return about 1.6 h; ablation about 0.7 h. About 5.7 GPU-hours in all.</li>
         <li>J-lens vs other readouts: CPU only, no GPU.</li>
         <li>API: $1.65 of the $3 cap for the models screen. Yesterday evening's grader-bug screen: $4.91 of $6.</li>
       </ul></div>
     <div class="card"><h3>Where the data lives</h3>
       <ul>
-        <li>octavia <code>data/</code>: eval-awareness runs, steering runs and directions, point-of-no-return rewrites (also copied to arena9-cloud <code>data/explore/q6_pnr/</code>), ablation runs.</li>
+        <li>octavia <code>data/</code>: eval-awareness runs, steering runs and directions, point-of-no-return rewrites (also on arena9-cloud <code>data/explore/q6_pnr/</code>), ablation runs <code>data/explore/evalaware_ablate14/</code> (also on arena9-cloud <code>data/evalaware_ablate14/</code>).</li>
         <li>arena9-cloud <code>data/octavia_archive/</code>: eval-awareness readouts (1.3 GB, sha256-checked) and a copy of the runs; earlier readouts.</li>
         <li>arena9-cloud <code>data/</code>: models-screen runs and judge labels, comparison features, analysis files.</li>
         <li>No backups yet: octavia is a container whose fate on restart is unknown.</li>
@@ -566,6 +579,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
     { sn: "2b", what: "Read inside the reasoning instead of at the start", res: "Eval vs real prompts, averaged over 64 reasoning positions: no separation.", chip: "crit", chipT: "breaks", au: [{ v: 0.48, lo: 0.43, hi: 0.53, n: "eval vs real prompts, reasoning" }] },
     { stage: "Steps 3–5 · towards arguing against its own knowledge" },
     { sn: "3", what: "Grader-bug runs: took the bug vs answered correctly", res: "In the reasoning before it first mentions the grader or bug: chance on both models. A plain count of grader/bug words in the text separates them (0.74 and 0.87).", chip: "crit", chipT: "breaks", au: [{ v: 0.51, lo: 0.48, hi: 0.54, n: "Qwen3-8B, thinking off" }, { v: 0.52, lo: 0.47, hi: 0.57, n: "Qwen3-14B, thinking" }] },
+    { sn: "3b", what: "Their removal test, on the one open setting that voices it: Qwen3-14B on the grader bug", res: "Removing the eval-word directions silences \"you're testing me\" (23% of runs to 0%; everyday-noun control 18%). But the logit-lens directions do the same, and bug-taking doesn't rise (22.5% to 16.5%, not different from the control). See section 7.", chip: "warn", chipT: "says yes, does no" },
     { sn: "4", what: "\"Cheating\" and \"wrong answer\" words; the hidden reward hack", res: "Before the first mention: 0.45–0.53. Hidden hack vs no hack in the same trained model: 0.48–0.50.", chip: "crit", chipT: "breaks", au: [{ v: 0.48, lo: 0.39, hi: 0.57, n: "hidden hack vs no hack (eval score)" }, { v: 0.51, lo: 0.47, hi: 0.54, n: "\"cheating\" score before the first mention, Qwen3-8B" }] },
     { sn: "5", what: "The answer position", res: "Separates well (0.92 and 0.86), but only once the text has already stated the choice. The logit lens does the same, and a keyword count of the text gets 0.87 on Qwen3-14B.", chip: "good", chipT: "works, too late", au: [{ v: 0.92, lo: 0.89, hi: 0.95, n: "Qwen3-8B, thinking off" }, { v: 0.86, lo: 0.82, hi: 0.90, n: "Qwen3-14B, thinking" }] }
   ];
@@ -648,6 +662,15 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
     { g: "Grader bug, didn't (10)", j: [0.20, 0.00, 0.34], l: [0.21, 0.05, 0.35] },
     { g: "Hidden hack (24)", j: [0.10, -0.13, 0.35], l: [0.21, -0.01, 0.41] },
     { g: "No hack (12)", j: [0.26, 0.07, 0.45], l: [-0.08, -0.33, 0.13] }
+  ];
+
+  // Ablation on Qwen3-14B (evalaware_ablation_14b.md, first table)
+  var ABL = [
+    { m: "No removal (baseline)", n: 552, t: 23.0, k: 36.2, b: 22.5, base: true },
+    { m: "Eval words, J-lens (the paper's)", n: 552, t: 0.0, k: 22.8, b: 16.5 },
+    { m: "Everyday nouns, J-lens (control)", n: 552, t: 17.8, k: 21.6, b: 19.6 },
+    { m: "Eval words, logit lens", n: 207, t: 0.0, k: 56.0, b: 22.2 },
+    { m: "26 random directions (broke the model)", n: 207, t: 0.5, k: 1.4, b: 23.7 }
   ];
 
   // ================= LADDER =================
@@ -956,6 +979,43 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
     });
   }
   register(drawQ6L);
+
+  function drawAbl() {
+    var box = document.getElementById("chAbl"); if (!box) return; box.textContent = "";
+    var W = box.clientWidth || 900, narrow = W < 640;
+    var labW = narrow ? 120 : 260, rowH = narrow ? 40 : 32, top = 40, barH = 12;
+    var facets = [{ k: "t", t: narrow ? "\"testing me\"" : "Says the user is testing it" }, { k: "k", t: narrow ? "\"a trick\"" : "Calls the note a trick (exploratory)" }, { k: "b", t: narrow ? "Takes the bug" : "Takes the bug" }];
+    var fg = 12, fw = (W - labW - fg * 2) / 3, max = 60;
+    var H = top + ABL.length * rowH + 8;
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H }, box);
+    ABL.forEach(function (r, i) {
+      var y = top + i * rowH;
+      if (r.base) el("rect", { x: 0, y: y, width: W, height: rowH, fill: css("--hover") }, svg);
+      if (i > 0) el("line", { x1: 0, x2: W, y1: y, y2: y, "class": "gridl" }, svg);
+      if (narrow) {
+        var parts = r.m.split(" (");
+        txt(svg, 0, y + rowH / 2 - 2, parts[0], "lab").setAttribute("font-size", "12");
+        if (parts[1]) txt(svg, 0, y + rowH / 2 + 12, "(" + parts[1], "lab2");
+      } else {
+        var t = txt(svg, 0, y + rowH / 2 + 4, r.m, "lab"); if (r.base) t.setAttribute("font-weight", "700");
+      }
+    });
+    facets.forEach(function (f, fi) {
+      var ox = labW + fi * (fw + fg), x = function (v) { return ox + v / max * (fw - 40); };
+      var tt = txt(svg, ox, 14, f.t, "lab"); tt.setAttribute("font-weight", "700"); if (narrow) tt.setAttribute("font-size", "11.5");
+      txt(svg, ox, 30, "0", "tick"); txt(svg, x(max), 30, max + "%", "tick", "end");
+      el("line", { x1: x(0), x2: x(0), y1: top, y2: H - 8, "class": "axisl" }, svg);
+      [20, 40, 60].forEach(function (v) { el("line", { x1: x(v), x2: x(v), y1: top, y2: H - 8, "class": "gridl" }, svg); });
+      ABL.forEach(function (r, i) {
+        var y = top + i * rowH + (rowH - barH) / 2, v = r[f.k];
+        hbar(svg, x(0), x(v), y, barH, css("--s-one"));
+        if (v < 0.6) el("rect", { x: x(0), y: y + 2, width: 2, height: barH - 4, fill: css("--s-one") }, svg);
+        txt(svg, x(v) + 4, y + barH - 1, (v % 1 ? v.toFixed(1) : v.toFixed(0)) + "%", "val");
+        hit(svg, ox - 2, y - 7, fw, barH + 14, [{ v: v.toFixed(1) + "% of " + r.n + " runs", n: f.t, color: css("--s-one") }], r.m);
+      });
+    });
+  }
+  register(drawAbl);
 })();
 </script>
 </body>
