@@ -1,7 +1,7 @@
 {
  "meta": {
   "title": "Arguing against its own knowledge: findings dashboard",
-  "updated": "2026-11-04T16:55",
+  "updated": "2026-11-04T21:10",
   "default_setting": "Unless an entry says otherwise: the model is Qwen3-8B (Qwen/Qwen3-8B at revision b968826d) in thinking mode, so it writes out its reasoning before it answers. Sampling: temperature 0.6, top-p 0.95, top-k 20, at most 8,192 tokens, run with vLLM 0.33. Questions are four-option multiple-choice questions from MMLU-Redux 2.0 that the dataset marks as error-free (error_type == \"ok\"). For each question we fix one wrong option to push; we call it \"B\" whatever its letter is. Numbers in brackets, like 56% [50, 63], are 95% bootstrap intervals that resample questions.",
   "machines": {
    "arena9-octavia": "NVIDIA L40S 46 GB, vast.ai container; all model work since 2026-11-02 evening",
@@ -3499,6 +3499,51 @@
     "evalaware-models-screen",
     "evalaware-ablation-14b",
     "models-grader"
+   ]
+  },
+  {
+   "id": "probe-control",
+   "title": "Planned control: do published eval-awareness probes read the model's belief or the prompt's wording?",
+   "strand": "T",
+   "also": [],
+   "status": "upcoming",
+   "kind": "pre-registered",
+   "verdict": "pending",
+   "question": "Do the published eval-awareness probes (Nguyen et al. 2025, Hua et al. 2025), rebuilt on Qwen3-14B, detect whether the model thinks it is being tested, or only eval-flavoured wording and benchmark format?",
+   "method": "Rebuild both probes from their public code and data on Qwen3-14B; they must separate benchmark from user prompts (AUROC at least 0.70) first. Then: (a) on 225 groups of identical grader-bug prompts where some runs later say 'you're testing me', score reasoning before that sentence; (b) matched prompt pairs that differ only in eval wording or format, with the model's stated belief measured; (c) bag-of-words and small-embedding text baselines on the same splits; (d) the J-lens and logit-lens eval-word scores on the same data.",
+   "result": "Not run yet. Design for the user's review: docs/overnight/design_probe_control.md.",
+   "numbers": [],
+   "numbers_note": null,
+   "interpretation": "If the probes fail the same controls as the J-lens, our J-lens null is about the phenomenon or the model, not the lens; if a probe predicts the sentence within a prompt beyond the text, it is a lead the J-lens missed.",
+   "confidence": null,
+   "caveats": [],
+   "n": {
+    "items": null,
+    "runs": null
+   },
+   "dates": {
+    "start": null,
+    "end": null,
+    "approx": false
+   },
+   "timing": {
+    "wall": null,
+    "gpu_hours": null,
+    "api_usd": null,
+    "note": "Planned: about 4.7 GPU-hours on two L40S, about $2.5 judge API (cap $5)."
+   },
+   "machine": "arena9-octavia and arena9-derpy (L40S), planned",
+   "figure": null,
+   "reports": [
+    "docs/overnight/design_probe_control.md"
+   ],
+   "data": [],
+   "commits": [],
+   "related": [
+    "evalaware-big-smoke",
+    "evalaware-replication",
+    "evalaware-ablation-14b",
+    "evalaware-models-screen"
    ]
   },
   {
