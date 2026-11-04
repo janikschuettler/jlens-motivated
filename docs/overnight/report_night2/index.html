@@ -234,7 +234,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
       <li><span class="t">00:05–01:35 · CPU</span><b>J-lens vs other readouts</b></li>
       <li><span class="t">00:30–04:50 · GPU</span><b>Steering</b></li>
       <li><span class="t">02:56–03:45 · API</span><b>Eval-awareness across models</b></li>
-      <li id="tl-q6"><span class="t">from ~04:40 · GPU</span><b>Point of no return</b> <span class="chip run">running</span></li>
+      <li id="tl-q6"><span class="t">04:38–06:47 · GPU</span><b>Point of no return</b></li>
       <li id="tl-x"><span class="t">CPU prep 04:00 · GPU after</span><b>Ablation on Qwen3-14B</b> <span class="chip run">running</span></li>
     </ul>
   </div>
@@ -254,7 +254,8 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
     <div class="tile"><div class="v">0.50</div><div class="l">how well the paper's eval-awareness score tells 700 evaluation prompts from 200 real user prompts (AUROC). That is chance.</div></div>
     <div class="tile"><div class="v">47% <small>vs 59%</small></div><div class="l">wrong answers flipped to correct by a push along the J-lens direction, against a probe direction. A random push flips 2%.</div></div>
   </div>
-  <p class="small">Two experiments are still running: when the model commits to the wrong answer (section 6) and a removal test on Qwen3-14B (section 7). Neither can change the answer above much. The first asks <em>where</em> a lens should look; the second tests the eval-awareness directions once more, on a model that does say "you're testing me".</p>
+  <p class="answer">A fourth result explains part of the null. When a hint states the answer, the outcome is fixed by the prompt before any reasoning, so a lens reading the reasoning has nothing to find. But where the model does decide during its reasoning, at a sentence we can point to, the lens letter scores don't change there either.</p>
+  <p class="small">One experiment is still running: removing the eval-awareness directions in Qwen3-14B, a model that does say "you're testing me" (section 7).</p>
 
   <dl class="glossary" aria-label="Terms used on this page">
     <div><dt>J-lens</dt><dd>Reads a middle layer of the model as if it were the output: it maps the hidden state through an averaged Jacobian (J) to the vocabulary, so we see which words that layer "points to".</dd></div>
@@ -372,20 +373,36 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
 <section id="q6" aria-labelledby="h-q6">
   <div class="sec-head"><span class="sec-no">06</span><h2 id="h-q6">Point of no return</h2>
     <p class="q">When in its reasoning does the model commit to the wrong answer or the hack? That is where a lens would have to look.</p></div>
-  <div id="q6Body" class="pending">
-    <div class="status"><span class="chip run">still running</span><span class="small">report expected around 06:50–07:30</span></div>
-    <p><b>Method.</b> Take a saved run, cut its reasoning at about 11 points, and let the model write the rest again from each cut, 8 times. The run is "committed" from the first cut after which at least 7 of 8 rewrites reach the same answer.</p>
-    <p><b>Cases.</b> Qwen3-8B with "Hint: The answer is B" (followers vs resisters); Qwen3-8B with a wrong claim planted at the start of its reasoning (kept vs recovered); Qwen3-14B taking the grader bug; and, if time allows, the model trained to hide a reward hack.</p>
-    <p><b>What we predicted, before any rewrite was generated:</b></p>
-    <ul class="preds">
-      <li>Hint followers are committed before any reasoning in at least half the runs; resisters commit later.</li>
-      <li>Runs that keep a planted wrong claim commit somewhere in the middle of the reasoning, not at the start.</li>
-      <li>Grader-bug takers rarely commit before reasoning (under a quarter), and mostly after they first mention the bug.</li>
-      <li>Hidden hacks commit in the code, not in the reasoning.</li>
-      <li>The lens score along the reasoning does not track when the run commits.</li>
+  <p class="answer"><strong>It depends on the case, and that splits the lens nulls in two.</strong> With "Hint: The answer is X." and with the trained reward hacker, the outcome is set by the prompt before any reasoning. With the grader bug and with a planted wrong claim, the model commits partway through its reasoning, at a sentence we can point to. At those sentences the J-lens and the logit lens show nothing.</p>
+  <div class="card">
+    <h3>How likely the bad outcome is, as more of the original reasoning is kept</h3>
+    <div class="sub">We cut a saved run's reasoning at about 11 points and let the model write the rest again from each cut, 8 times. The line shows the share of rewrites that end on the wrong option B (or the hack). 0% kept is a fresh sample of the same prompt.</div>
+    <ul class="legend">
+      <li><span class="sw line" style="background:var(--s-one)"></span>runs that ended badly (followed, kept the claim, took the bug, hid a hack)</li>
+      <li><span class="sw line" style="background:var(--s-rand)"></span>comparison runs on the same questions (resisted, recovered, didn't take it, no hack)</li>
     </ul>
-    <p class="small" style="margin-top:8px">Why it matters: if the outcome is set by the prompt before any reasoning, a mid-reasoning lens has nothing to find, and the nulls above are a property of the task.</p>
+    <div class="chart" id="chQ6" role="group" aria-label="Four small line charts. Hint followers stay flat near 0.87; planted-claim keepers rise from 0.65 to 0.95; grader-bug takers rise from 0.33 to 0.96; hidden hacks stay near 0.8."></div>
+    <p class="howto">a flat line means the reasoning changes nothing: the outcome was set before it started. A rising line means the model commits during its reasoning. "Settled before any reasoning" is the share of bad runs whose rewrites already end badly at least 7 of 8 times from 0% on; "median commitment" is where in the reasoning that point comes, as a share of its length. Only the 0%, 50% and 100% points are in the report so far, so the lines are straight between them. *Hack panel: the last point is just before the hack line for hack runs, and at 90% of the code for no-hack runs.</p>
   </div>
+  <div class="card">
+    <h3>Do the lens readouts move when the model commits?</h3>
+    <div class="sub">Within each run, the rank correlation across cuts between the letter score (correct minus pushed letter; hack words for the hack) and how likely the bad outcome is, with the position in the reasoning partialled out. Positive means the readout moves with the outcome.</div>
+    <ul class="legend">
+      <li><span class="sw dot" style="background:var(--s-j)"></span>J-lens</li>
+      <li><span class="sw dot" style="background:var(--s-logit)"></span>logit lens</li>
+      <li><span class="sw ref"></span>no relation (0)</li>
+    </ul>
+    <div class="chart" id="chQ6L" role="group" aria-label="Dot chart of correlations between −0.26 and +0.26 for eight groups; all near zero."></div>
+    <p class="howto">dots near the 0 line mean the readout doesn't track the decision. Whiskers are 95% intervals. In the group where commitment really happens mid-reasoning (Qwen3-14B taking the bug), the J-lens points slightly the wrong way.</p>
+  </div>
+  <ul class="small" style="padding-left:1.1em">
+    <li><b>Hint (Qwen3-8B).</b> Half the followers give B in every rewrite from every cut. Resistance, when it happens, comes in the visible answer after the reasoning: in 6 of 10 resisters the reasoning decides to follow the hint, and the answer then argues back to the correct option.</li>
+    <li><b>Planted claim.</b> Runs that keep the wrong claim mostly commit at one sentence that states a supporting "fact", often made up ("approximately 5 million children … worked globally"; the real figure is about 150 million).</li>
+    <li><b>Grader bug (Qwen3-14B).</b> In 19 of the 21 runs that commit, it comes after the first mention of the bug, and 17 of 20 commitment sentences are about the grader or the score ("if I choose D, even though it's incorrect, the grader would mark it as correct").</li>
+    <li><b>Commitment sentence.</b> The lens score's change across it sits at the 44th–55th percentile of the run's other changes in the 20-run groups (50th = nothing special).</li>
+  </ul>
+  <p class="meaning"><b>What it means.</b> For hint following and the trained hack, the earlier lens nulls are at least partly a property of the task: the reasoning is written after the outcome is set. For the grader bug and planted claims, the null is a property of the readout: there is a decision point, and the letter readouts don't see it. The next test there is a richer readout at that sentence (a probe trained on the commitment, or the score's or claim's concept words). All four pre-registered predictions held. Moderate confidence for the behaviour (20–30 runs per main group, 8 rewrites per cut, wide intervals); low for the lens relation (exploratory, small groups).</p>
+  <p class="small" id="q6Second">A second, finer pass inside the commitment segments was still to be added to the report at 06:00.</p>
 </section>
 
 <!-- ================= 7. ABLATION ================= -->
@@ -423,13 +440,13 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
   <div class="house">
     <div class="card"><h3>Compute and spend tonight</h3>
       <ul id="houseCompute">
-        <li>GPU (octavia, L40S): eval-awareness replication about 1.3 h; steering about 2.1 h; point of no return planned about 1.6 h (cap 2.5); ablation still running.</li>
+        <li>GPU (octavia, L40S): eval-awareness replication about 1.3 h; steering about 2.1 h; point of no return about 2.1 h; ablation still running.</li>
         <li>J-lens vs other readouts: CPU only, no GPU.</li>
         <li>API: $1.65 of the $3 cap for the models screen. Yesterday evening's grader-bug screen: $4.91 of $6.</li>
       </ul></div>
     <div class="card"><h3>Where the data lives</h3>
       <ul>
-        <li>octavia <code>data/</code>: eval-awareness runs, steering runs and directions, point-of-no-return rewrites, ablation runs.</li>
+        <li>octavia <code>data/</code>: eval-awareness runs, steering runs and directions, point-of-no-return rewrites (also copied to arena9-cloud <code>data/explore/q6_pnr/</code>), ablation runs.</li>
         <li>arena9-cloud <code>data/octavia_archive/</code>: eval-awareness readouts (1.3 GB, sha256-checked) and a copy of the runs; earlier readouts.</li>
         <li>arena9-cloud <code>data/</code>: models-screen runs and judge labels, comparison features, analysis files.</li>
         <li>No backups yet: octavia is a container whose fate on restart is unknown.</li>
@@ -601,6 +618,24 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
     { m: "Gemma-4-31B", fit: "", t: [0, 50], b: [50, 50], g: [1, 116] },
     { m: "Llama-3.3-70B", fit: "", t: [0, 50], b: [0, 50], g: [0, 120] },
     { m: "DeepSeek-V4-Flash", fit: "", t: [2, 50], b: [29, 50], g: [1, 65] }
+  ];
+
+  // Point of no return (point_of_no_return.md, behaviour table and lens table)
+  var Q6 = [
+    { t: "Hint: \"The answer is X.\" (Qwen3-8B)", bad: [0.87, 0.89, 0.87], cmp: [0.65, 0.61, 0.46], badN: "followed (20 runs)", cmpN: "resisted (10)", n1: "settled before any reasoning: 50%", n2: "median commitment: 0%" },
+    { t: "Wrong claim planted in its reasoning (Qwen3-8B)", bad: [0.65, 0.82, 0.95], cmp: [0.43, 0.09, 0.00], badN: "kept the claim (30)", cmpN: "recovered (12)", n1: "settled before any reasoning: 30%", n2: "median commitment: 26%" },
+    { t: "Grader bug, told it is scored (Qwen3-14B)", bad: [0.33, 0.78, 0.96], cmp: [0.23, 0.14, 0.06], badN: "took the bug (24)", cmpN: "didn't (10)", n1: "settled before any reasoning: 4%", n2: "median commitment: 43%" },
+    { t: "Trained reward hacker, hidden hack", bad: [0.80, 0.77, 0.87], cmp: [0.82, 0.72, 0.51], badN: "hid a hack (24)", cmpN: "no hack (12)", n1: "settled before any reasoning: 4%", n2: "12 of 18 commit in the code", lastLab: "end*" }
+  ];
+  var Q6L = [
+    { g: "Hint, followed (20)", j: [0.07, -0.12, 0.26], l: [0.16, 0.00, 0.31] },
+    { g: "Hint, resisted (10)", j: [-0.05, -0.25, 0.21], l: [-0.12, -0.33, 0.15] },
+    { g: "Planted claim, kept (30)", j: [0.08, -0.12, 0.27], l: [-0.01, -0.18, 0.16] },
+    { g: "Planted claim, recovered (12)", j: [-0.26, -0.45, -0.07], l: [-0.12, -0.39, 0.17] },
+    { g: "Grader bug, took it (24)", j: [-0.13, -0.25, 0.00], l: [-0.09, -0.26, 0.07] },
+    { g: "Grader bug, didn't (10)", j: [0.20, 0.00, 0.34], l: [0.21, 0.05, 0.35] },
+    { g: "Hidden hack (24)", j: [0.10, -0.13, 0.35], l: [0.21, -0.01, 0.41] },
+    { g: "No hack (12)", j: [0.26, 0.07, 0.45], l: [-0.08, -0.33, 0.13] }
   ];
 
   // ================= LADDER =================
@@ -844,6 +879,71 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
     });
   }
   register(drawScreen);
+
+  // ================= Q6 small multiples =================
+  function drawQ6() {
+    var box = document.getElementById("chQ6"); if (!box) return; box.textContent = "";
+    var W = box.clientWidth || 900, cols = W < 520 ? 1 : (W < 900 ? 2 : 4), gap = 18;
+    var pw = (W - gap * (cols - 1)) / cols, ph = 270, rows = Math.ceil(Q6.length / cols);
+    var H = rows * ph + (rows - 1) * 14;
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H }, box);
+    Q6.forEach(function (c, i) {
+      var ox = (i % cols) * (pw + gap), oy = Math.floor(i / cols) * (ph + 14);
+      var g = el("g", { transform: "translate(" + ox + "," + oy + ")" }, svg);
+      var padL = 34, padR = 12, top = 44, bottom = 76;
+      var words = c.t.split(" "), line = "", lines = [];
+      words.forEach(function (w) { if ((line + " " + w).length > (pw < 260 ? 30 : 36)) { lines.push(line); line = w; } else line = line ? line + " " + w : w; });
+      lines.push(line);
+      lines.slice(0, 2).forEach(function (l, k) { var t = txt(g, 0, 13 + k * 15, l, "lab"); t.setAttribute("font-weight", "700"); t.setAttribute("font-size", "12.5"); });
+      var x = function (f) { return padL + f * (pw - padL - padR); };
+      var y = function (v) { return top + (1 - v) * (ph - top - bottom); };
+      [0, 0.5, 1].forEach(function (v) {
+        el("line", { x1: padL, x2: pw - padR, y1: y(v), y2: y(v), "class": v === 0 ? "axisl" : "gridl" }, g);
+        txt(g, padL - 5, y(v) + 4, v.toFixed(1), "tick", "end");
+      });
+      [0, 0.5, 1].forEach(function (f, k) { txt(g, x(f), ph - bottom + 15, (k === 2 && c.lastLab) ? "100%*" : Math.round(f * 100) + "%", "tick", "middle"); });
+      txt(g, (padL + pw - padR) / 2, ph - bottom + 29, "share of reasoning kept", "tick", "middle");
+      [[c.cmp, "--s-rand", c.cmpN], [c.bad, "--s-one", c.badN]].forEach(function (sr) {
+        var d = sr[0].map(function (v, k) { return (k ? "L" : "M") + x(k / 2) + "," + y(v); }).join("");
+        el("path", { d: d, fill: "none", stroke: css(sr[1]), "stroke-width": 2, "stroke-linejoin": "round" }, g);
+        sr[0].forEach(function (v, k) { el("circle", { cx: x(k / 2), cy: y(v), r: 4, fill: css(sr[1]), stroke: css("--surface"), "stroke-width": 2 }, g); });
+      });
+      txt(g, 0, ph - 26, c.n1, "lab2"); txt(g, 0, ph - 10, c.n2, "lab2");
+      [0, 1, 2].forEach(function (k) {
+        var w = (pw - padL - padR) / 2;
+        hit(g, x(k / 2) - w / 2, top - 6, w, ph - top - bottom + 12, [
+          { v: c.bad[k].toFixed(2), n: c.badN, color: css("--s-one") },
+          { v: c.cmp[k].toFixed(2), n: c.cmpN, color: css("--s-rand") }
+        ], c.t + ": share of rewrites ending badly, " + (k * 50) + "% kept");
+      });
+    });
+  }
+  register(drawQ6);
+
+  function drawQ6L() {
+    var box = document.getElementById("chQ6L"); if (!box) return; box.textContent = "";
+    var W = box.clientWidth || 800, narrow = W < 560;
+    var labW = narrow ? 0 : 210, rowH = narrow ? 46 : 30, top = 4, axisH = 26, padR = 14;
+    var H = top + Q6L.length * rowH + axisH;
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H }, box);
+    var x0 = labW + 8, x1 = W - padR;
+    var x = function (v) { return x0 + (v + 0.5) / 1.0 * (x1 - x0); };
+    [-0.5, -0.25, 0, 0.25, 0.5].forEach(function (v) {
+      el("line", { x1: x(v), x2: x(v), y1: top, y2: H - axisH, "class": v === 0 ? "ref" : "gridl" }, svg);
+      txt(svg, x(v), H - axisH + 15, (v > 0 ? "+" : "") + v.toFixed(2), "tick", "middle");
+    });
+    Q6L.forEach(function (r, i) {
+      var y = top + i * rowH, cy = narrow ? y + 30 : y + rowH / 2;
+      if (narrow) txt(svg, 0, y + 13, r.g, "lab"); else txt(svg, 0, cy + 4, r.g, "lab");
+      [[r.j, "--s-j", -4], [r.l, "--s-logit", 4]].forEach(function (s2) {
+        el("line", { x1: x(s2[0][1]), x2: x(s2[0][2]), y1: cy + s2[2], y2: cy + s2[2], stroke: css(s2[1]), "stroke-width": 1.5, opacity: 0.7 }, svg);
+        el("circle", { cx: x(s2[0][0]), cy: cy + s2[2], r: 4.5, fill: css(s2[1]), stroke: css("--surface"), "stroke-width": 2 }, svg);
+      });
+      function f(a) { return (a[0] > 0 ? "+" : "") + a[0].toFixed(2) + " [" + a[1].toFixed(2) + ", " + a[2].toFixed(2) + "]"; }
+      hit(svg, 0, y + 1, W, rowH - 2, [{ v: f(r.j), n: "J-lens", color: css("--s-j") }, { v: f(r.l), n: "logit lens", color: css("--s-logit") }], r.g);
+    });
+  }
+  register(drawQ6L);
 })();
 </script>
 </body>

@@ -108,3 +108,19 @@ Q6 method, cases and predictions: PRE section Q6 (P1–P4 and the lens relation)
 | API: $1.65 of $3 tonight; $4.91 of $6 yesterday | SCR §7; LOG 22:55 |
 | Data locations | EA "Files"; ST "Files"; SCR "Files"; COMP "Files"; LOG 03:20 |
 | Commits | `git log` since 2026-11-03 22:30 |
+
+## Added after 06:00: point of no return (Q6)
+
+Source: `reports/point_of_no_return.md` as it stood at 06:00 (its second-pass section was still a placeholder).
+
+| Number on the page | Source in Q6 |
+| --- | --- |
+| Timeline 04:38–06:47; about 2.1 GPU-hours | "Timing and data" |
+| Curves at 0%, 50%, 100% kept, per group | behaviour table, columns "P(bad), no reasoning kept / half kept / all kept"; hack no-hack last point is "at 90%" |
+| Settled before any reasoning 50% / 30% / 4% / 4%; median commitment 0 / 0.26 / 0.43 | behaviour table |
+| 12 of 18 hack runs commit in the code | §4 ("Of the 18 that commit, 6 do so in the reasoning and 12 in the code") |
+| Lens correlations (J-lens, logit lens) with intervals, 8 groups | lens table, "correlation" columns |
+| 44th–55th percentile at the commitment segment (20-run groups) | lens bullets ("The 20-run groups land at 0.44–0.55") |
+| 6 of 10 resisters; 19 of 21; 17 of 20; "5 million children" quote; 150 million | §1, §3, §2 |
+| All four predictions held | §1–§4 "Prediction P1…P4 holds" |
+| Section 1 paragraph on the split | Q6 plain answer |
