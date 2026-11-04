@@ -959,6 +959,75 @@ def fig_competitors():
                   "probe at the last prompt token reads the instruction in the prompt."])
 
 
+def fig_point_of_no_return():
+    D = load("point_of_no_return")
+    thr = D["spec"]["threshold"]
+    cases = [("c3", "Qwen3-8B: wrong claim planted at the start of its reasoning", ("kept", "kept B"), ("recovered", "recovered")),
+             ("hint8b", "Qwen3-8B: \"Hint: The answer is X.\"", ("followed", "followed the hint"), ("resisted", "resisted")),
+             ("grader14b", "Qwen3-14B: scored agent + grader-bug note", ("followed", "took the bug"), ("resisted", "didn't")),
+             ("hack_ws", "Reward-hack model (warm-start version)", ("hidden", "hidden hack"), ("no_hack", "no hack"))]
+    cases = [c for c in cases if c[0] in D["cases"]]
+    pw, ph, gx, gy = 410, 210, 50, 92
+    cols = 2
+    width = 24 + cols * pw + (cols - 1) * gx
+    top = 92
+    body = [t(12, 24, "When does the outcome stop depending on the rest of the reasoning?", 15, INK, weight="bold"),
+            t(12, 45, "Cut a saved run's reasoning at about 11 sentence boundaries, let the model write the rest 8 times from each cut, and count", 11.5, INK2),
+            t(12, 61, "how often it ends as the original run did. Mean over runs; band = 95% interval over questions. Dotted line: the 7-of-8 commitment threshold.", 11.5, INK2)]
+    rows = (len(cases) + cols - 1) // cols
+    for i, (key, title, (g1, n1), (g2, n2)) in enumerate(cases):
+        G = D["cases"][key]["groups"]
+        ox = 24 + (i % cols) * (pw + gx)
+        oy = top + (i // cols) * (ph + gy)
+        x0, x1, y0, y1 = ox + 34, ox + pw - 10, oy + 26, oy + ph - 30
+        sx = lambda f: x0 + f * (x1 - x0)
+        sy = lambda p: y1 - p * (y1 - y0)
+        body.append(t(ox, oy + 8, title, 12.5, INK, weight="bold"))
+        for p_ in (0, 0.25, 0.5, 0.75, 1.0):
+            body.append(f'<line x1="{x0}" y1="{sy(p_):.1f}" x2="{x1}" y2="{sy(p_):.1f}" stroke="{GRID}"/>')
+            body.append(t(x0 - 6, sy(p_) + 4, f"{p_:.2g}", 10.5, INK2, anchor="end"))
+        body.append(f'<line x1="{x0}" y1="{sy(thr):.1f}" x2="{x1}" y2="{sy(thr):.1f}" stroke="{INK3}" stroke-dasharray="2,3"/>')
+        for f in (0, 0.2, 0.4, 0.6, 0.8, 1.0):
+            body.append(t(sx(f), y1 + 15, f"{f:.1f}", 10.5, INK2, anchor="middle"))
+        body.append(f'<line x1="{x0}" y1="{y1}" x2="{x1}" y2="{y1}" stroke="{AXIS}"/>')
+        xl = ("share of reasoning + code kept (hack runs: up to the hack line)" if key == "hack_ws"
+              else "share of the reasoning kept before the cut")
+        body.append(t((x0 + x1) / 2, y1 + 28, xl, 10.5, INK2, anchor="middle"))
+        for g, name, color, dash in ((g2, n2, GREY, ' stroke-dasharray="6,4"'), (g1, n1, BLUE, "")):
+            if g not in G:
+                continue
+            C = G[g]["p_same_curve"]
+            fs = sorted(C, key=float)
+            pts = [(float(f), C[f]["est"], C[f]["lo"], C[f]["hi"]) for f in fs if C[f]["est"] is not None]
+            band = " ".join(f"{'M' if j == 0 else 'L'}{sx(f):.1f},{sy(hi):.1f}" for j, (f, _, lo, hi) in enumerate(pts))
+            band += " " + " ".join(f"L{sx(f):.1f},{sy(lo):.1f}" for f, _, lo, hi in reversed(pts)) + " Z"
+            body.append(f'<path d="{band}" fill="{color}" fill-opacity="0.13" stroke="none"/>')
+            d = " ".join(f"{'M' if j == 0 else 'L'}{sx(f):.1f},{sy(v):.1f}" for j, (f, v, _, _) in enumerate(pts))
+            body.append(f'<path d="{d}" fill="none" stroke="{color}" stroke-width="2"{dash}><title>{escape(name)}</title></path>')
+            for f, v, lo, hi in pts:
+                body.append(f'<circle cx="{sx(f):.1f}" cy="{sy(v):.1f}" r="2.8" fill="{color if not dash else BG}" '
+                            f'stroke="{color}" stroke-width="1.5"><title>{escape(name)}, {f:.1f}: {v:.2f} [{lo:.2f}, {hi:.2f}]</title></circle>')
+        # legend lines with commitment summaries
+        ly = y1 + 44
+        for g, name, color, dash in ((g1, n1, BLUE, ""), (g2, n2, GREY, ' stroke-dasharray="6,4"')):
+            if g not in G:
+                continue
+            st = G[g][f"committed_at_start@{thr}"]["est"]
+            nv = G[g][f"never_committed@{thr}"]["est"]
+            med = G[g]["commit_frac_median"]["est"]
+            body.append(f'<line x1="{ox}" y1="{ly - 4}" x2="{ox + 18}" y2="{ly - 4}" stroke="{color}" stroke-width="2"{dash}/>')
+            med_s = "–" if med is None else f"{med:.2f}"
+            body.append(t(ox + 24, ly, f"{name} (n={G[g]['n_runs']}): at start {100 * st:.0f}%, never {100 * nv:.0f}%, "
+                                      f"median point {med_s}", 10.5, INK2))
+            ly += 15
+    height = top + rows * (ph + gy) + 34
+    body.append(t(12, height - 36, "Committed = from that cut on, at least 7 of 8 resamples end as the original run. At start = committed before any reasoning;", 10.5, INK3))
+    body.append(t(12, height - 22, "never = not committed even with all of the reasoning kept; median point = median share of the reasoning kept at commitment.", 10.5, INK3))
+    body.append(t(12, height - 8, "Source: docs/overnight/data/point_of_no_return.json (cases.<case>.groups.<group>.p_same_curve); report: point_of_no_return.md.", 10.5, INK3))
+    (OUT / "fig15_point_of_no_return.svg").write_text(svg_doc(width, height, body, "Point of no return"))
+    print("wrote", OUT / "fig15_point_of_no_return.svg")
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     fig_factorial()
@@ -976,6 +1045,8 @@ def main():
     fig_competitors()
     if (DATA / "steering.json").exists():
         fig_steering()
+    if (DATA / "point_of_no_return.json").exists():
+        fig_point_of_no_return()
 
 
 if __name__ == "__main__":
