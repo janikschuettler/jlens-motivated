@@ -96,6 +96,14 @@ def spearman(a, b):
     return float(np.corrcoef(ra, rb)[0, 1])
 
 
+def partial_spearman(x, y, z):
+    """Spearman correlation of x and y with z (here the cut position) partialled out."""
+    rxy, rxz, ryz = spearman(x, y), spearman(x, z), spearman(y, z)
+    if None in (rxy, rxz, ryz) or abs(rxz) >= 1 or abs(ryz) >= 1:
+        return None
+    return float((rxy - rxz * ryz) / math.sqrt((1 - rxz ** 2) * (1 - ryz ** 2)))
+
+
 def commitment_cut(p, thr):
     k_star = None
     for k in range(len(p) - 1, -1, -1):
@@ -312,6 +320,8 @@ def analyze_case(spec: dict, case: dict, tok) -> tuple[dict, dict]:
                 sc = r["lens"][lens]
                 ok = None not in sc and None not in r["p_out"]
                 r[f"rho_{lens}"] = spearman(sc, r["p_out"]) if ok else None
+                r[f"rho_{lens}_frac"] = spearman(sc, r["cut_frac"]) if None not in sc else None
+                r[f"prho_{lens}"] = partial_spearman(sc, r["p_out"], r["cut_frac"]) if ok else None
                 r[f"seg_pct_{lens}"] = r[f"seg_signed_{lens}"] = None
                 if k and None not in sc and len(sc) >= 3:
                     deltas = [sc[j] - sc[j - 1] for j in range(1, len(sc))]
@@ -326,6 +336,8 @@ def analyze_case(spec: dict, case: dict, tok) -> tuple[dict, dict]:
                 per_item_L[r["item"]].append(r)
             for lens in ("jlens", "logit"):
                 for key, name in ((f"rho_{lens}", f"rho_{lens}_vs_p_outcome"),
+                                  (f"rho_{lens}_frac", f"rho_{lens}_vs_cut_position"),
+                                  (f"prho_{lens}", f"partial_rho_{lens}_vs_p_outcome_given_position"),
                                   (f"seg_pct_{lens}", f"commit_segment_change_pct_{lens}"),
                                   (f"seg_signed_{lens}", f"commit_segment_signed_minus_others_{lens}")):
                     res[name] = boot(sorted(per_item_L), per_item_L, lambda rr, key=key: mean_or_none([r[key] for r in rr]))
@@ -339,7 +351,9 @@ def analyze_case(spec: dict, case: dict, tok) -> tuple[dict, dict]:
             fs = sorted(f for f in r["early"] if f in r["at_f"])
             a = [r["early"][f] for f in fs]
             b = [r["p_same"][r["at_f"][f]] for f in fs]
-            r["rho_early"] = spearman(a, b) if None not in a and None not in b else None
+            ok = None not in a and None not in b
+            r["rho_early"] = spearman(a, b) if ok else None
+            r["prho_early"] = partial_spearman(a, b, [float(f) for f in fs]) if ok else None
         if E:
             per_item_E = defaultdict(list)
             for r in E:
@@ -347,6 +361,8 @@ def analyze_case(spec: dict, case: dict, tok) -> tuple[dict, dict]:
             res["rho_forced_answer_vs_p_same"] = boot(sorted(per_item_E), per_item_E,
                                                       lambda rr: mean_or_none([r["rho_early"] for r in rr]))
             res["n_rho_forced_answer"] = sum(1 for r in E if r["rho_early"] is not None)
+            res["partial_rho_forced_answer_vs_p_same_given_position"] = boot(
+                sorted(per_item_E), per_item_E, lambda rr: mean_or_none([r["prho_early"] for r in rr]))
             res["forced_answer_curve"] = {f: mean_or_none([r["early"].get(f) for r in E]) for f in sorted(E[0]["early"])}
         out["groups"][g] = res
     # quotes of commitment segments (full analysis file only)
