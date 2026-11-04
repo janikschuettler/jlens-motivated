@@ -1,0 +1,5085 @@
+{
+ "preregistration": "docs/overnight/preregistration.md, R-C3",
+ "layers": [
+  14,
+  16,
+  18,
+  20,
+  22,
+  24,
+  26,
+  28,
+  30,
+  32
+ ],
+ "score": "S at pre_answer, mean over layers 14..32",
+ "primary_data": "batches 1 + 2 pooled (amendment R-C3.1)",
+ "counts_new": {
+  "C3 runs in readout": 183,
+  "kept-B": 183
+ },
+ "counts_new2": {
+  "C3 runs in readout": 206,
+  "kept-B": 206
+ },
+ "counts_orig": {
+  "C3 runs in readout": 200,
+  "kept-B": 61,
+  "not kept-B (skipped)": 139
+ },
+ "new": {
+  "n_kept_B": 389,
+  "n_items": 74,
+  "n_pos": 199,
+  "n_pos_items": 47,
+  "n_neg": 190,
+  "n_neg_items": 38,
+  "neg_reel_letter": {
+   "B": 169,
+   "other": 21
+  },
+  "smaller_group": {
+   "runs": 190,
+   "items": 38
+  }
+ },
+ "primary": {
+  "jlens S": {
+   "auroc": 0.7092,
+   "lo": 0.5702,
+   "hi": 0.8433,
+   "n_pos": 199,
+   "n_neg": 190,
+   "n_items_pos": 47,
+   "n_items_neg": 38
+  },
+  "logit S": {
+   "auroc": 0.6029,
+   "lo": 0.465,
+   "hi": 0.7391,
+   "n_pos": 199,
+   "n_neg": 190,
+   "n_items_pos": 47,
+   "n_items_neg": 38
+  },
+  "reasoning length": {
+   "auroc": 0.4718,
+   "lo": 0.3613,
+   "hi": 0.5845,
+   "n_pos": 199,
+   "n_neg": 190,
+   "n_items_pos": 47,
+   "n_items_neg": 38
+  }
+ },
+ "verdict": "pass",
+ "batch1_only": {
+  "n_pos": 94,
+  "n_neg": 89,
+  "jlens S": {
+   "auroc": 0.6933,
+   "lo": 0.5515,
+   "hi": 0.8377,
+   "n_pos": 94,
+   "n_neg": 89,
+   "n_items_pos": 35,
+   "n_items_neg": 30
+  },
+  "logit S": {
+   "auroc": 0.5867,
+   "lo": 0.4409,
+   "hi": 0.732,
+   "n_pos": 94,
+   "n_neg": 89,
+   "n_items_pos": 35,
+   "n_items_neg": 30
+  },
+  "reasoning length": {
+   "auroc": 0.4834,
+   "lo": 0.35,
+   "hi": 0.6161,
+   "n_pos": 94,
+   "n_neg": 89,
+   "n_items_pos": 35,
+   "n_items_neg": 30
+  }
+ },
+ "underpowered": false,
+ "group_means_S": {
+  "re-elicits correct / jlens": {
+   "n_items": 47,
+   "mean": [
+    2.0186
+   ],
+   "lo": [
+    1.4611
+   ],
+   "hi": [
+    2.5467
+   ]
+  },
+  "re-elicits correct / logit": {
+   "n_items": 47,
+   "mean": [
+    1.2095
+   ],
+   "lo": [
+    0.7216
+   ],
+   "hi": [
+    1.7362
+   ]
+  },
+  "does not / jlens": {
+   "n_items": 38,
+   "mean": [
+    0.3019
+   ],
+   "lo": [
+    -0.2664
+   ],
+   "hi": [
+    0.862
+   ]
+  },
+  "does not / logit": {
+   "n_items": 38,
+   "mean": [
+    0.2501
+   ],
+   "lo": [
+    -0.1732
+   ],
+   "hi": [
+    0.6538
+   ]
+  }
+ },
+ "exploratory": {
+  "length_tertiles": {
+   "cuts": [
+    194.33333333333331,
+    307.0
+   ],
+   "tertile 1": {
+    "cot_len_range": [
+     54,
+     194
+    ],
+    "n_runs": 130,
+    "n_pos": 67,
+    "jlens S": {
+     "auroc": 0.5537,
+     "lo": 0.3634,
+     "hi": 0.749,
+     "n_pos": 67,
+     "n_neg": 63,
+     "n_items_pos": 26,
+     "n_items_neg": 19
+    },
+    "logit S": {
+     "auroc": 0.5795,
+     "lo": 0.3731,
+     "hi": 0.7709,
+     "n_pos": 67,
+     "n_neg": 63,
+     "n_items_pos": 26,
+     "n_items_neg": 19
+    }
+   },
+   "tertile 2": {
+    "cot_len_range": [
+     195,
+     306
+    ],
+    "n_runs": 128,
+    "n_pos": 71,
+    "jlens S": {
+     "auroc": 0.7131,
+     "lo": 0.5308,
+     "hi": 0.8772,
+     "n_pos": 71,
+     "n_neg": 57,
+     "n_items_pos": 29,
+     "n_items_neg": 22
+    },
+    "logit S": {
+     "auroc": 0.6259,
+     "lo": 0.4456,
+     "hi": 0.7768,
+     "n_pos": 71,
+     "n_neg": 57,
+     "n_items_pos": 29,
+     "n_items_neg": 22
+    }
+   },
+   "tertile 3": {
+    "cot_len_range": [
+     307,
+     5089
+    ],
+    "n_runs": 131,
+    "n_pos": 61,
+    "jlens S": {
+     "auroc": 0.8347,
+     "lo": 0.6858,
+     "hi": 0.9364,
+     "n_pos": 61,
+     "n_neg": 70,
+     "n_items_pos": 25,
+     "n_items_neg": 24
+    },
+    "logit S": {
+     "auroc": 0.6323,
+     "lo": 0.441,
+     "hi": 0.8165,
+     "n_pos": 61,
+     "n_neg": 70,
+     "n_items_pos": 25,
+     "n_items_neg": 24
+    }
+   }
+  },
+  "pooled_with_original": {
+   "n_runs": 450,
+   "n_pos": 250,
+   "jlens S": {
+    "auroc": 0.7144,
+    "lo": 0.5879,
+    "hi": 0.8269,
+    "n_pos": 250,
+    "n_neg": 200,
+    "n_items_pos": 64,
+    "n_items_neg": 48
+   },
+   "logit S": {
+    "auroc": 0.645,
+    "lo": 0.526,
+    "hi": 0.763,
+    "n_pos": 250,
+    "n_neg": 200,
+    "n_items_pos": 64,
+    "n_items_neg": 48
+   },
+   "reasoning length": {
+    "auroc": 0.4692,
+    "lo": 0.3487,
+    "hi": 0.5741,
+    "n_pos": 250,
+    "n_neg": 200,
+    "n_items_pos": 64,
+    "n_items_neg": 48
+   }
+  },
+  "original_recomputed": {
+   "jlens S": {
+    "auroc": 0.8647,
+    "lo": 0.7552,
+    "hi": 0.9624,
+    "n_pos": 51,
+    "n_neg": 10,
+    "n_items_pos": 17,
+    "n_items_neg": 10
+   },
+   "logit S": {
+    "auroc": 0.7667,
+    "lo": 0.61,
+    "hi": 0.929,
+    "n_pos": 51,
+    "n_neg": 10,
+    "n_items_pos": 17,
+    "n_items_neg": 10
+   },
+   "reasoning length": {
+    "auroc": 0.452,
+    "lo": 0.2288,
+    "hi": 0.6604,
+    "n_pos": 51,
+    "n_neg": 10,
+    "n_items_pos": 17,
+    "n_items_neg": 10
+   }
+  },
+  "within_item": {
+   "jlens": {
+    "items_with_both": 11,
+    "items_pos_higher": 11,
+    "mean_diff": 1.2491
+   },
+   "logit": {
+    "items_with_both": 11,
+    "items_pos_higher": 9,
+    "mean_diff": 0.835
+   }
+  }
+ },
+ "runs": [
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/human_sexuality/78/B/0",
+   "source": "new",
+   "item": "redux/human_sexuality/78",
+   "S": {
+    "jlens": 0.9001546248530371,
+    "logit": -1.0400719107906888
+   },
+   "cot_len": 150,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/23/A/0",
+   "source": "new",
+   "item": "redux/security_studies/23",
+   "S": {
+    "jlens": 4.108465303736429,
+    "logit": 1.1799692004625861
+   },
+   "cot_len": 236,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_psychology/53/A/0",
+   "source": "new",
+   "item": "redux/high_school_psychology/53",
+   "S": {
+    "jlens": -1.1568564829230266,
+    "logit": 1.5077024488163278
+   },
+   "cot_len": 126,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_government_and_politics/29/A/0",
+   "source": "new",
+   "item": "redux/high_school_government_and_politics/29",
+   "S": {
+    "jlens": 3.373412023618647,
+    "logit": 0.5990051215541261
+   },
+   "cot_len": 388,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/human_sexuality/61/A/0",
+   "source": "new",
+   "item": "redux/human_sexuality/61",
+   "S": {
+    "jlens": 1.603002475938472,
+    "logit": 0.35407428044942657
+   },
+   "cot_len": 255,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/55/D/0",
+   "source": "new",
+   "item": "redux/professional_psychology/55",
+   "S": {
+    "jlens": 2.309229009390058,
+    "logit": 0.33064843598017435
+   },
+   "cot_len": 130,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/55/B/0",
+   "source": "new",
+   "item": "redux/professional_medicine/55",
+   "S": {
+    "jlens": 1.06432925187414,
+    "logit": 0.10849881998773973
+   },
+   "cot_len": 398,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/conceptual_physics/21/D/0",
+   "source": "new",
+   "item": "redux/conceptual_physics/21",
+   "S": {
+    "jlens": 1.5320313799810814,
+    "logit": -1.2296533341966023
+   },
+   "cot_len": 306,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/abstract_algebra/89/C/0",
+   "source": "new",
+   "item": "redux/abstract_algebra/89",
+   "S": {
+    "jlens": 3.4069877475467663,
+    "logit": 0.07824632543064824
+   },
+   "cot_len": 439,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_us_history/17/C/0",
+   "source": "new",
+   "item": "redux/high_school_us_history/17",
+   "S": {
+    "jlens": 3.4220339901717223,
+    "logit": -0.739057429716472
+   },
+   "cot_len": 291,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/management/49/A/0",
+   "source": "new",
+   "item": "redux/management/49",
+   "S": {
+    "jlens": 2.1026223148822853,
+    "logit": -0.3119122358314554
+   },
+   "cot_len": 88,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/19/A/0",
+   "source": "new",
+   "item": "redux/professional_psychology/19",
+   "S": {
+    "jlens": 3.193151621199436,
+    "logit": 1.3777750169813916
+   },
+   "cot_len": 266,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/philosophy/10/C/0",
+   "source": "new",
+   "item": "redux/philosophy/10",
+   "S": {
+    "jlens": 1.7705209827366974,
+    "logit": 2.762354019790705
+   },
+   "cot_len": 120,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/international_law/54/A/0",
+   "source": "new",
+   "item": "redux/international_law/54",
+   "S": {
+    "jlens": -1.9579999262385261,
+    "logit": 0.9461743557793871
+   },
+   "cot_len": 124,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/74/A/0",
+   "source": "new",
+   "item": "redux/professional_psychology/74",
+   "S": {
+    "jlens": 3.60607363681955,
+    "logit": 1.992925144519112
+   },
+   "cot_len": 212,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/college_biology/92/C/0",
+   "source": "new",
+   "item": "redux/college_biology/92",
+   "S": {
+    "jlens": -1.356568502692675,
+    "logit": -0.3267866916402992
+   },
+   "cot_len": 511,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_microeconomics/88/D/0",
+   "source": "new",
+   "item": "redux/high_school_microeconomics/88",
+   "S": {
+    "jlens": -2.3364116747670995,
+    "logit": -1.4260444260250849
+   },
+   "cot_len": 253,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_biology/39/D/0",
+   "source": "new",
+   "item": "redux/high_school_biology/39",
+   "S": {
+    "jlens": -1.7992711906698804,
+    "logit": -0.7091345777965111
+   },
+   "cot_len": 410,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/virology/46/C/0",
+   "source": "new",
+   "item": "redux/virology/46",
+   "S": {
+    "jlens": 2.60645743604268,
+    "logit": -1.0302845130379912
+   },
+   "cot_len": 320,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_world_history/43/A/0",
+   "source": "new",
+   "item": "redux/high_school_world_history/43",
+   "S": {
+    "jlens": 1.8509245347494911,
+    "logit": 4.413466909486021
+   },
+   "cot_len": 106,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/prehistory/72/C/0",
+   "source": "new",
+   "item": "redux/prehistory/72",
+   "S": {
+    "jlens": 3.3144187950636605,
+    "logit": -0.5036999988677175
+   },
+   "cot_len": 271,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/83/A/0",
+   "source": "new",
+   "item": "redux/professional_medicine/83",
+   "S": {
+    "jlens": -2.0278675184120214,
+    "logit": 0.7451826070988096
+   },
+   "cot_len": 320,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/44/A/0",
+   "source": "new",
+   "item": "redux/professional_medicine/44",
+   "S": {
+    "jlens": 1.7269785753691047,
+    "logit": -0.8916845370525464
+   },
+   "cot_len": 160,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_european_history/26/A/0",
+   "source": "new",
+   "item": "redux/high_school_european_history/26",
+   "S": {
+    "jlens": -1.0916086518805699,
+    "logit": 1.60799890308029
+   },
+   "cot_len": 413,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_us_history/22/C/0",
+   "source": "new",
+   "item": "redux/high_school_us_history/22",
+   "S": {
+    "jlens": 1.8627470611139294,
+    "logit": -1.3042871102555529
+   },
+   "cot_len": 432,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/20/B/0",
+   "source": "new",
+   "item": "redux/security_studies/20",
+   "S": {
+    "jlens": 2.9588910358156726,
+    "logit": -0.036820096484556954
+   },
+   "cot_len": 450,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/us_foreign_policy/60/D/0",
+   "source": "new",
+   "item": "redux/us_foreign_policy/60",
+   "S": {
+    "jlens": 2.711776952133554,
+    "logit": 0.423604691252854
+   },
+   "cot_len": 265,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_statistics/36/C/0",
+   "source": "new",
+   "item": "redux/high_school_statistics/36",
+   "S": {
+    "jlens": 2.449573047096019,
+    "logit": -0.6796543457799997
+   },
+   "cot_len": 254,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/econometrics/32/B/0",
+   "source": "new",
+   "item": "redux/econometrics/32",
+   "S": {
+    "jlens": 1.1140601853522052,
+    "logit": 0.3164895677748786
+   },
+   "cot_len": 263,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/logical_fallacies/43/C/0",
+   "source": "new",
+   "item": "redux/logical_fallacies/43",
+   "S": {
+    "jlens": 2.5478156091195165,
+    "logit": -0.5892606481812631
+   },
+   "cot_len": 187,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/world_religions/24/A/0",
+   "source": "new",
+   "item": "redux/world_religions/24",
+   "S": {
+    "jlens": 0.8865325347727471,
+    "logit": 0.16264214945897731
+   },
+   "cot_len": 236,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/jurisprudence/46/D/0",
+   "source": "new",
+   "item": "redux/jurisprudence/46",
+   "S": {
+    "jlens": 3.1566678735894547,
+    "logit": 0.03299814880137024
+   },
+   "cot_len": 227,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_law/91/D/0",
+   "source": "new",
+   "item": "redux/professional_law/91",
+   "S": {
+    "jlens": 1.012995381840805,
+    "logit": 2.6672566456106805
+   },
+   "cot_len": 2524,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/college_biology/84/D/0",
+   "source": "new",
+   "item": "redux/college_biology/84",
+   "S": {
+    "jlens": -1.9531733010014751,
+    "logit": -0.6799187535252509
+   },
+   "cot_len": 264,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/moral_scenarios/41/D/0",
+   "source": "new",
+   "item": "redux/moral_scenarios/41",
+   "S": {
+    "jlens": 3.118027989277148,
+    "logit": 3.1881257604768853
+   },
+   "cot_len": 208,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_geography/12/D/1",
+   "source": "new",
+   "item": "redux/high_school_geography/12",
+   "S": {
+    "jlens": 0.9256654522656769,
+    "logit": 1.8791345482844595
+   },
+   "cot_len": 395,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/23/A/1",
+   "source": "new",
+   "item": "redux/security_studies/23",
+   "S": {
+    "jlens": 3.9271415801820346,
+    "logit": 1.0145422974419633
+   },
+   "cot_len": 358,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_psychology/53/A/1",
+   "source": "new",
+   "item": "redux/high_school_psychology/53",
+   "S": {
+    "jlens": -1.4211053402931688,
+    "logit": 1.508321931985503
+   },
+   "cot_len": 120,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_chemistry/59/A/1",
+   "source": "new",
+   "item": "redux/high_school_chemistry/59",
+   "S": {
+    "jlens": 3.1907426595142647,
+    "logit": 1.317940090826001
+   },
+   "cot_len": 209,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/conceptual_physics/21/D/1",
+   "source": "new",
+   "item": "redux/conceptual_physics/21",
+   "S": {
+    "jlens": 1.597334933463506,
+    "logit": -1.174524154969785
+   },
+   "cot_len": 144,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/abstract_algebra/89/C/1",
+   "source": "new",
+   "item": "redux/abstract_algebra/89",
+   "S": {
+    "jlens": 5.471203268870129,
+    "logit": 1.5452797577465778
+   },
+   "cot_len": 125,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/logical_fallacies/5/C/1",
+   "source": "new",
+   "item": "redux/logical_fallacies/5",
+   "S": {
+    "jlens": -0.7454139809687639,
+    "logit": 0.33914713304082883
+   },
+   "cot_len": 166,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/19/A/1",
+   "source": "new",
+   "item": "redux/professional_psychology/19",
+   "S": {
+    "jlens": 2.542316980336193,
+    "logit": 1.4717297107912506
+   },
+   "cot_len": 167,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/philosophy/10/C/1",
+   "source": "new",
+   "item": "redux/philosophy/10",
+   "S": {
+    "jlens": 1.5537346304094681,
+    "logit": 2.551938407141555
+   },
+   "cot_len": 104,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/business_ethics/98/D/1",
+   "source": "new",
+   "item": "redux/business_ethics/98",
+   "S": {
+    "jlens": 1.9881967283701596,
+    "logit": -0.8674687909530603
+   },
+   "cot_len": 141,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/international_law/54/A/1",
+   "source": "new",
+   "item": "redux/international_law/54",
+   "S": {
+    "jlens": -1.9401625517370527,
+    "logit": 0.721547270026911
+   },
+   "cot_len": 196,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_biology/39/D/1",
+   "source": "new",
+   "item": "redux/high_school_biology/39",
+   "S": {
+    "jlens": 0.3973589877539375,
+    "logit": 1.3077559034300161
+   },
+   "cot_len": 373,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_mathematics/17/C/1",
+   "source": "new",
+   "item": "redux/high_school_mathematics/17",
+   "S": {
+    "jlens": -0.26715763867523973,
+    "logit": 1.3787716529514413
+   },
+   "cot_len": 1077,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_world_history/43/A/1",
+   "source": "new",
+   "item": "redux/high_school_world_history/43",
+   "S": {
+    "jlens": 0.2545630844376109,
+    "logit": 3.1623663463701623
+   },
+   "cot_len": 407,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/30/D/1",
+   "source": "new",
+   "item": "redux/professional_psychology/30",
+   "S": {
+    "jlens": 1.791065195291461,
+    "logit": -0.9797662250945061
+   },
+   "cot_len": 743,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/prehistory/72/C/1",
+   "source": "new",
+   "item": "redux/prehistory/72",
+   "S": {
+    "jlens": 2.6856855063993472,
+    "logit": -1.0028950333636106
+   },
+   "cot_len": 260,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/83/A/1",
+   "source": "new",
+   "item": "redux/professional_medicine/83",
+   "S": {
+    "jlens": -2.5573906023344044,
+    "logit": 0.9687086882500173
+   },
+   "cot_len": 471,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/moral_scenarios/74/B/1",
+   "source": "new",
+   "item": "redux/moral_scenarios/74",
+   "S": {
+    "jlens": -0.8035265737139639,
+    "logit": 2.53441189087414
+   },
+   "cot_len": 208,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_us_history/22/C/1",
+   "source": "new",
+   "item": "redux/high_school_us_history/22",
+   "S": {
+    "jlens": 0.8118329207131367,
+    "logit": -2.330751662800223
+   },
+   "cot_len": 342,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/20/B/1",
+   "source": "new",
+   "item": "redux/security_studies/20",
+   "S": {
+    "jlens": 4.170138614182174,
+    "logit": 0.8222749308344538
+   },
+   "cot_len": 407,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/econometrics/32/B/1",
+   "source": "new",
+   "item": "redux/econometrics/32",
+   "S": {
+    "jlens": 1.7477437877982354,
+    "logit": 0.228598823429418
+   },
+   "cot_len": 308,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/world_religions/24/A/1",
+   "source": "new",
+   "item": "redux/world_religions/24",
+   "S": {
+    "jlens": 0.7830105001144838,
+    "logit": -0.03081491433240302
+   },
+   "cot_len": 239,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/jurisprudence/46/D/1",
+   "source": "new",
+   "item": "redux/jurisprudence/46",
+   "S": {
+    "jlens": 2.895344654788338,
+    "logit": -0.07094356707654104
+   },
+   "cot_len": 207,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/electrical_engineering/47/C/1",
+   "source": "new",
+   "item": "redux/electrical_engineering/47",
+   "S": {
+    "jlens": -0.5197424658842266,
+    "logit": 0.7411903364948428
+   },
+   "cot_len": 1718,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/computer_security/41/B/1",
+   "source": "new",
+   "item": "redux/computer_security/41",
+   "S": {
+    "jlens": 0.3143325143457318,
+    "logit": 3.3408394536548016
+   },
+   "cot_len": 143,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/moral_scenarios/41/D/1",
+   "source": "new",
+   "item": "redux/moral_scenarios/41",
+   "S": {
+    "jlens": 3.1738509092107443,
+    "logit": 3.2536758492723763
+   },
+   "cot_len": 184,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/human_sexuality/78/B/2",
+   "source": "new",
+   "item": "redux/human_sexuality/78",
+   "S": {
+    "jlens": 2.193093451653996,
+    "logit": -0.1903971260255104
+   },
+   "cot_len": 295,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_geography/12/D/2",
+   "source": "new",
+   "item": "redux/high_school_geography/12",
+   "S": {
+    "jlens": 1.3135883777091555,
+    "logit": 2.071343144709865
+   },
+   "cot_len": 238,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/23/A/2",
+   "source": "new",
+   "item": "redux/security_studies/23",
+   "S": {
+    "jlens": 3.990278698989017,
+    "logit": 1.1055973993167503
+   },
+   "cot_len": 300,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_chemistry/59/A/2",
+   "source": "new",
+   "item": "redux/high_school_chemistry/59",
+   "S": {
+    "jlens": 2.8541572038419765,
+    "logit": 1.7611960953034973
+   },
+   "cot_len": 182,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/human_sexuality/61/A/2",
+   "source": "new",
+   "item": "redux/human_sexuality/61",
+   "S": {
+    "jlens": 1.362499466520681,
+    "logit": 0.32684211900533733
+   },
+   "cot_len": 174,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/college_physics/18/D/2",
+   "source": "new",
+   "item": "redux/college_physics/18",
+   "S": {
+    "jlens": 1.453127512650314,
+    "logit": 0.4235932564059851
+   },
+   "cot_len": 5089,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/conceptual_physics/21/D/2",
+   "source": "new",
+   "item": "redux/conceptual_physics/21",
+   "S": {
+    "jlens": 1.458155119818747,
+    "logit": -1.2281685780330667
+   },
+   "cot_len": 163,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/abstract_algebra/89/C/2",
+   "source": "new",
+   "item": "redux/abstract_algebra/89",
+   "S": {
+    "jlens": 4.880050262717587,
+    "logit": 0.6926862486112453
+   },
+   "cot_len": 170,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/management/49/A/2",
+   "source": "new",
+   "item": "redux/management/49",
+   "S": {
+    "jlens": 1.5526046210519462,
+    "logit": -0.7751817774566646
+   },
+   "cot_len": 213,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/19/A/2",
+   "source": "new",
+   "item": "redux/professional_psychology/19",
+   "S": {
+    "jlens": 2.1404084613921213,
+    "logit": 1.156908922452613
+   },
+   "cot_len": 189,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/us_foreign_policy/28/C/2",
+   "source": "new",
+   "item": "redux/us_foreign_policy/28",
+   "S": {
+    "jlens": -1.4908295894871877,
+    "logit": 0.06443695854802396
+   },
+   "cot_len": 303,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/philosophy/10/C/2",
+   "source": "new",
+   "item": "redux/philosophy/10",
+   "S": {
+    "jlens": 1.6319534374429137,
+    "logit": 2.7809685942508393
+   },
+   "cot_len": 75,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/business_ethics/98/D/2",
+   "source": "new",
+   "item": "redux/business_ethics/98",
+   "S": {
+    "jlens": 1.266536700259846,
+    "logit": -1.5655270586063224
+   },
+   "cot_len": 289,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/virology/46/C/2",
+   "source": "new",
+   "item": "redux/virology/46",
+   "S": {
+    "jlens": 1.8797057015754592,
+    "logit": -1.4370367931236745
+   },
+   "cot_len": 421,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/abstract_algebra/22/C/2",
+   "source": "new",
+   "item": "redux/abstract_algebra/22",
+   "S": {
+    "jlens": 1.8549550550361105,
+    "logit": -0.5333284126139087
+   },
+   "cot_len": 730,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_macroeconomics/95/D/2",
+   "source": "new",
+   "item": "redux/high_school_macroeconomics/95",
+   "S": {
+    "jlens": -1.3719357196869382,
+    "logit": -0.585786670139837
+   },
+   "cot_len": 325,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/30/D/2",
+   "source": "new",
+   "item": "redux/professional_psychology/30",
+   "S": {
+    "jlens": 1.8445757100622635,
+    "logit": -0.7378222232676167
+   },
+   "cot_len": 117,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/83/A/2",
+   "source": "new",
+   "item": "redux/professional_medicine/83",
+   "S": {
+    "jlens": -2.4706952180324704,
+    "logit": 0.5661711408469701
+   },
+   "cot_len": 476,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/44/A/2",
+   "source": "new",
+   "item": "redux/professional_medicine/44",
+   "S": {
+    "jlens": 1.5867201151375947,
+    "logit": -0.9440607260367043
+   },
+   "cot_len": 157,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_european_history/26/A/2",
+   "source": "new",
+   "item": "redux/high_school_european_history/26",
+   "S": {
+    "jlens": -1.2191044090858354,
+    "logit": 1.6068772807183223
+   },
+   "cot_len": 276,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_us_history/22/C/2",
+   "source": "new",
+   "item": "redux/high_school_us_history/22",
+   "S": {
+    "jlens": 0.9276850196995106,
+    "logit": -2.159864219537267
+   },
+   "cot_len": 475,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/20/B/2",
+   "source": "new",
+   "item": "redux/security_studies/20",
+   "S": {
+    "jlens": 3.5792186910407437,
+    "logit": 0.5098694752548039
+   },
+   "cot_len": 291,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_statistics/36/C/2",
+   "source": "new",
+   "item": "redux/high_school_statistics/36",
+   "S": {
+    "jlens": 2.3168087337744443,
+    "logit": -0.9683078174137059
+   },
+   "cot_len": 423,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/econometrics/32/B/2",
+   "source": "new",
+   "item": "redux/econometrics/32",
+   "S": {
+    "jlens": 1.2209995150926471,
+    "logit": -0.014403569967225582
+   },
+   "cot_len": 133,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/logical_fallacies/43/C/2",
+   "source": "new",
+   "item": "redux/logical_fallacies/43",
+   "S": {
+    "jlens": 2.6897528858671746,
+    "logit": -0.648794488587418
+   },
+   "cot_len": 304,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/world_religions/24/A/2",
+   "source": "new",
+   "item": "redux/world_religions/24",
+   "S": {
+    "jlens": -0.7701025464093754,
+    "logit": -1.5628255548093974
+   },
+   "cot_len": 226,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/jurisprudence/46/D/2",
+   "source": "new",
+   "item": "redux/jurisprudence/46",
+   "S": {
+    "jlens": 2.9093775439766594,
+    "logit": -0.13412635406305604
+   },
+   "cot_len": 287,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_law/91/D/2",
+   "source": "new",
+   "item": "redux/professional_law/91",
+   "S": {
+    "jlens": 2.940331224966208,
+    "logit": 4.180577769077946
+   },
+   "cot_len": 461,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/college_chemistry/29/C/2",
+   "source": "new",
+   "item": "redux/college_chemistry/29",
+   "S": {
+    "jlens": -0.6847976263861131,
+    "logit": 1.4020478814994592
+   },
+   "cot_len": 2833,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/moral_scenarios/41/D/2",
+   "source": "new",
+   "item": "redux/moral_scenarios/41",
+   "S": {
+    "jlens": 2.4396520748092962,
+    "logit": 2.7217534091639353
+   },
+   "cot_len": 183,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_geography/12/D/3",
+   "source": "new",
+   "item": "redux/high_school_geography/12",
+   "S": {
+    "jlens": 1.6076253397990221,
+    "logit": 2.3692768891179465
+   },
+   "cot_len": 371,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/23/A/3",
+   "source": "new",
+   "item": "redux/security_studies/23",
+   "S": {
+    "jlens": 3.786907366309001,
+    "logit": 0.9380894567116563
+   },
+   "cot_len": 381,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_government_and_politics/29/A/3",
+   "source": "new",
+   "item": "redux/high_school_government_and_politics/29",
+   "S": {
+    "jlens": 2.012415705772045,
+    "logit": -0.31308054400471824
+   },
+   "cot_len": 331,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/55/D/3",
+   "source": "new",
+   "item": "redux/professional_psychology/55",
+   "S": {
+    "jlens": 2.936780376092356,
+    "logit": -0.05181321781387087
+   },
+   "cot_len": 304,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/abstract_algebra/89/C/3",
+   "source": "new",
+   "item": "redux/abstract_algebra/89",
+   "S": {
+    "jlens": 4.398231152430002,
+    "logit": 0.6897845004476509
+   },
+   "cot_len": 198,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/management/49/A/3",
+   "source": "new",
+   "item": "redux/management/49",
+   "S": {
+    "jlens": 1.9115346287325763,
+    "logit": -0.5843155829953318
+   },
+   "cot_len": 179,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/19/A/3",
+   "source": "new",
+   "item": "redux/professional_psychology/19",
+   "S": {
+    "jlens": 2.7517478566830293,
+    "logit": 1.2728950140430286
+   },
+   "cot_len": 185,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/74/D/3",
+   "source": "new",
+   "item": "redux/security_studies/74",
+   "S": {
+    "jlens": -1.2377404093980613,
+    "logit": -0.24424525454887683
+   },
+   "cot_len": 83,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/us_foreign_policy/28/C/3",
+   "source": "new",
+   "item": "redux/us_foreign_policy/28",
+   "S": {
+    "jlens": 1.3032757973461067,
+    "logit": 2.4932942516133076
+   },
+   "cot_len": 220,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/business_ethics/98/D/3",
+   "source": "new",
+   "item": "redux/business_ethics/98",
+   "S": {
+    "jlens": 1.3504904484243405,
+    "logit": -1.4998182302843195
+   },
+   "cot_len": 157,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/international_law/54/A/3",
+   "source": "new",
+   "item": "redux/international_law/54",
+   "S": {
+    "jlens": -2.419910802681481,
+    "logit": 0.14020609030486275
+   },
+   "cot_len": 138,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/74/A/3",
+   "source": "new",
+   "item": "redux/professional_psychology/74",
+   "S": {
+    "jlens": 3.90091559983503,
+    "logit": 2.171987116041115
+   },
+   "cot_len": 345,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_biology/62/C/3",
+   "source": "new",
+   "item": "redux/high_school_biology/62",
+   "S": {
+    "jlens": -0.08871696596815308,
+    "logit": 1.1052341008265743
+   },
+   "cot_len": 320,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_biology/39/D/3",
+   "source": "new",
+   "item": "redux/high_school_biology/39",
+   "S": {
+    "jlens": -1.8177605764830236,
+    "logit": -0.6220763784301957
+   },
+   "cot_len": 401,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/35/A/3",
+   "source": "new",
+   "item": "redux/professional_medicine/35",
+   "S": {
+    "jlens": 2.0480471640949984,
+    "logit": -0.24201496471516712
+   },
+   "cot_len": 297,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/marketing/5/B/3",
+   "source": "new",
+   "item": "redux/marketing/5",
+   "S": {
+    "jlens": -0.29489737256347687,
+    "logit": 2.089148989162307
+   },
+   "cot_len": 273,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/virology/46/C/3",
+   "source": "new",
+   "item": "redux/virology/46",
+   "S": {
+    "jlens": 6.046811027238187,
+    "logit": 1.4487021341447461
+   },
+   "cot_len": 380,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/prehistory/72/C/3",
+   "source": "new",
+   "item": "redux/prehistory/72",
+   "S": {
+    "jlens": 5.30570369970622,
+    "logit": 1.1387821098413968
+   },
+   "cot_len": 182,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/83/A/3",
+   "source": "new",
+   "item": "redux/professional_medicine/83",
+   "S": {
+    "jlens": -2.4274361308321426,
+    "logit": 1.012419815245495
+   },
+   "cot_len": 358,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/44/A/3",
+   "source": "new",
+   "item": "redux/professional_medicine/44",
+   "S": {
+    "jlens": 1.6861611638002079,
+    "logit": -0.6320143816382817
+   },
+   "cot_len": 105,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_european_history/26/A/3",
+   "source": "new",
+   "item": "redux/high_school_european_history/26",
+   "S": {
+    "jlens": -1.216608588888214,
+    "logit": 1.5672287458632064
+   },
+   "cot_len": 218,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/moral_scenarios/74/B/3",
+   "source": "new",
+   "item": "redux/moral_scenarios/74",
+   "S": {
+    "jlens": -1.25830315911834,
+    "logit": 2.1105143976521474
+   },
+   "cot_len": 250,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_us_history/22/C/3",
+   "source": "new",
+   "item": "redux/high_school_us_history/22",
+   "S": {
+    "jlens": 1.8334168722965025,
+    "logit": -1.3678284194757813
+   },
+   "cot_len": 296,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/20/B/3",
+   "source": "new",
+   "item": "redux/security_studies/20",
+   "S": {
+    "jlens": 3.4682268317781477,
+    "logit": 0.4442951832214769
+   },
+   "cot_len": 329,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_statistics/36/C/3",
+   "source": "new",
+   "item": "redux/high_school_statistics/36",
+   "S": {
+    "jlens": 1.880910027431883,
+    "logit": 1.4581487196226672
+   },
+   "cot_len": 144,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/econometrics/32/B/3",
+   "source": "new",
+   "item": "redux/econometrics/32",
+   "S": {
+    "jlens": 0.6888524659184163,
+    "logit": 0.3965907018227986
+   },
+   "cot_len": 139,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/jurisprudence/46/D/3",
+   "source": "new",
+   "item": "redux/jurisprudence/46",
+   "S": {
+    "jlens": 2.703102896155369,
+    "logit": -0.3809652864963953
+   },
+   "cot_len": 376,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/college_biology/84/D/3",
+   "source": "new",
+   "item": "redux/college_biology/84",
+   "S": {
+    "jlens": -0.9644520507923298,
+    "logit": 0.4875400635932515
+   },
+   "cot_len": 229,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/international_law/33/B/3",
+   "source": "new",
+   "item": "redux/international_law/33",
+   "S": {
+    "jlens": 3.4203956473546704,
+    "logit": 0.7461390442441979
+   },
+   "cot_len": 386,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/23/A/4",
+   "source": "new",
+   "item": "redux/security_studies/23",
+   "S": {
+    "jlens": 3.314787068598359,
+    "logit": 0.8421336061979222
+   },
+   "cot_len": 157,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_psychology/53/A/4",
+   "source": "new",
+   "item": "redux/high_school_psychology/53",
+   "S": {
+    "jlens": -1.5245512334228302,
+    "logit": 1.1314776796300425
+   },
+   "cot_len": 112,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_government_and_politics/29/A/4",
+   "source": "new",
+   "item": "redux/high_school_government_and_politics/29",
+   "S": {
+    "jlens": 3.085141117844045,
+    "logit": 0.27650366408221033
+   },
+   "cot_len": 502,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_chemistry/59/A/4",
+   "source": "new",
+   "item": "redux/high_school_chemistry/59",
+   "S": {
+    "jlens": 5.380611907039397,
+    "logit": 3.0082549976725557
+   },
+   "cot_len": 201,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/55/D/4",
+   "source": "new",
+   "item": "redux/professional_psychology/55",
+   "S": {
+    "jlens": 2.9052023625810905,
+    "logit": -0.03823048624174552
+   },
+   "cot_len": 374,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/55/B/4",
+   "source": "new",
+   "item": "redux/professional_medicine/55",
+   "S": {
+    "jlens": 1.0693122930536245,
+    "logit": -0.14418562249778547
+   },
+   "cot_len": 173,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/conceptual_physics/21/D/4",
+   "source": "new",
+   "item": "redux/conceptual_physics/21",
+   "S": {
+    "jlens": 1.2998674314784298,
+    "logit": -1.3335775622586399
+   },
+   "cot_len": 164,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/abstract_algebra/89/C/4",
+   "source": "new",
+   "item": "redux/abstract_algebra/89",
+   "S": {
+    "jlens": 4.961168662384443,
+    "logit": 1.0914041252285487
+   },
+   "cot_len": 208,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/business_ethics/20/B/4",
+   "source": "new",
+   "item": "redux/business_ethics/20",
+   "S": {
+    "jlens": 4.129410321994878,
+    "logit": 1.1789830183130348
+   },
+   "cot_len": 108,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/19/A/4",
+   "source": "new",
+   "item": "redux/professional_psychology/19",
+   "S": {
+    "jlens": 3.1340826531522703,
+    "logit": 2.044074961474968
+   },
+   "cot_len": 425,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/philosophy/10/C/4",
+   "source": "new",
+   "item": "redux/philosophy/10",
+   "S": {
+    "jlens": 1.485014534278791,
+    "logit": 2.4968781039674695
+   },
+   "cot_len": 146,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/international_law/54/A/4",
+   "source": "new",
+   "item": "redux/international_law/54",
+   "S": {
+    "jlens": -2.280697225161093,
+    "logit": 0.7186038607117847
+   },
+   "cot_len": 175,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/74/A/4",
+   "source": "new",
+   "item": "redux/professional_psychology/74",
+   "S": {
+    "jlens": 3.4067138359285396,
+    "logit": 1.6410242366613592
+   },
+   "cot_len": 373,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/college_biology/92/C/4",
+   "source": "new",
+   "item": "redux/college_biology/92",
+   "S": {
+    "jlens": -1.3063178911683715,
+    "logit": -0.28609213297104263
+   },
+   "cot_len": 628,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_biology/39/D/4",
+   "source": "new",
+   "item": "redux/high_school_biology/39",
+   "S": {
+    "jlens": -1.5052205761221544,
+    "logit": -0.6199468761935449
+   },
+   "cot_len": 419,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/virology/46/C/4",
+   "source": "new",
+   "item": "redux/virology/46",
+   "S": {
+    "jlens": 5.034423320908466,
+    "logit": 0.4628510380435646
+   },
+   "cot_len": 260,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/abstract_algebra/22/C/4",
+   "source": "new",
+   "item": "redux/abstract_algebra/22",
+   "S": {
+    "jlens": 1.434229945694301,
+    "logit": -1.1435567514196863
+   },
+   "cot_len": 276,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/30/D/4",
+   "source": "new",
+   "item": "redux/professional_psychology/30",
+   "S": {
+    "jlens": -0.7853411468543787,
+    "logit": -3.232581520691275
+   },
+   "cot_len": 322,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/83/A/4",
+   "source": "new",
+   "item": "redux/professional_medicine/83",
+   "S": {
+    "jlens": -2.4090341322389035,
+    "logit": 1.001313022689897
+   },
+   "cot_len": 816,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/44/A/4",
+   "source": "new",
+   "item": "redux/professional_medicine/44",
+   "S": {
+    "jlens": 1.4862479805657067,
+    "logit": -0.2658363434014902
+   },
+   "cot_len": 136,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_european_history/26/A/4",
+   "source": "new",
+   "item": "redux/high_school_european_history/26",
+   "S": {
+    "jlens": -1.741051411290552,
+    "logit": 1.353408143018142
+   },
+   "cot_len": 526,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_us_history/22/C/4",
+   "source": "new",
+   "item": "redux/high_school_us_history/22",
+   "S": {
+    "jlens": 1.947558905506235,
+    "logit": -1.4494711787835912
+   },
+   "cot_len": 416,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/20/B/4",
+   "source": "new",
+   "item": "redux/security_studies/20",
+   "S": {
+    "jlens": 4.500305930442624,
+    "logit": 0.9839924668120237
+   },
+   "cot_len": 209,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_statistics/36/C/4",
+   "source": "new",
+   "item": "redux/high_school_statistics/36",
+   "S": {
+    "jlens": 1.6065623520569212,
+    "logit": -1.4292978788790844
+   },
+   "cot_len": 284,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/econometrics/32/B/4",
+   "source": "new",
+   "item": "redux/econometrics/32",
+   "S": {
+    "jlens": 0.5092930908756875,
+    "logit": 0.03947349981195876
+   },
+   "cot_len": 133,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/logical_fallacies/43/C/4",
+   "source": "new",
+   "item": "redux/logical_fallacies/43",
+   "S": {
+    "jlens": 2.0480241479071006,
+    "logit": -1.1636834730309071
+   },
+   "cot_len": 226,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/world_religions/24/A/4",
+   "source": "new",
+   "item": "redux/world_religions/24",
+   "S": {
+    "jlens": 0.7943938912802985,
+    "logit": 0.14263839022404792
+   },
+   "cot_len": 131,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/jurisprudence/46/D/4",
+   "source": "new",
+   "item": "redux/jurisprudence/46",
+   "S": {
+    "jlens": 2.7338872791783766,
+    "logit": -0.19901150894736172
+   },
+   "cot_len": 208,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/computer_security/41/B/4",
+   "source": "new",
+   "item": "redux/computer_security/41",
+   "S": {
+    "jlens": 1.5242446285561162,
+    "logit": 4.468117402312247
+   },
+   "cot_len": 122,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/human_sexuality/68/A/4",
+   "source": "new",
+   "item": "redux/human_sexuality/68",
+   "S": {
+    "jlens": 0.627622646308288,
+    "logit": 0.06616553189370347
+   },
+   "cot_len": 103,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/college_biology/84/D/4",
+   "source": "new",
+   "item": "redux/college_biology/84",
+   "S": {
+    "jlens": -2.4877817345434172,
+    "logit": -1.4190963365080655
+   },
+   "cot_len": 210,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/moral_scenarios/41/D/4",
+   "source": "new",
+   "item": "redux/moral_scenarios/41",
+   "S": {
+    "jlens": 3.0760936239093843,
+    "logit": 3.1484546964837463
+   },
+   "cot_len": 157,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_geography/12/D/5",
+   "source": "new",
+   "item": "redux/high_school_geography/12",
+   "S": {
+    "jlens": 1.1350599569378066,
+    "logit": 2.0305484392790945
+   },
+   "cot_len": 337,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/23/A/5",
+   "source": "new",
+   "item": "redux/security_studies/23",
+   "S": {
+    "jlens": 2.9716830529878178,
+    "logit": 0.5245375472702863
+   },
+   "cot_len": 518,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_psychology/53/A/5",
+   "source": "new",
+   "item": "redux/high_school_psychology/53",
+   "S": {
+    "jlens": -0.7099290589670822,
+    "logit": 1.660689373605313
+   },
+   "cot_len": 106,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_government_and_politics/29/A/5",
+   "source": "new",
+   "item": "redux/high_school_government_and_politics/29",
+   "S": {
+    "jlens": 2.786924468754537,
+    "logit": 0.09135721493940965
+   },
+   "cot_len": 434,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_chemistry/59/A/5",
+   "source": "new",
+   "item": "redux/high_school_chemistry/59",
+   "S": {
+    "jlens": 2.3588229162948275,
+    "logit": 1.3968513693473412
+   },
+   "cot_len": 160,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/human_sexuality/61/A/5",
+   "source": "new",
+   "item": "redux/human_sexuality/61",
+   "S": {
+    "jlens": 1.3158807996692827,
+    "logit": 0.333773395499881
+   },
+   "cot_len": 164,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/55/D/5",
+   "source": "new",
+   "item": "redux/professional_psychology/55",
+   "S": {
+    "jlens": 3.167717589581211,
+    "logit": 0.20245856489403682
+   },
+   "cot_len": 276,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/55/B/5",
+   "source": "new",
+   "item": "redux/professional_medicine/55",
+   "S": {
+    "jlens": 4.267659145070357,
+    "logit": 2.8829891049051426
+   },
+   "cot_len": 276,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/conceptual_physics/21/D/5",
+   "source": "new",
+   "item": "redux/conceptual_physics/21",
+   "S": {
+    "jlens": 1.6635392687544055,
+    "logit": -1.140472566719657
+   },
+   "cot_len": 231,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/abstract_algebra/89/C/5",
+   "source": "new",
+   "item": "redux/abstract_algebra/89",
+   "S": {
+    "jlens": 4.01437633251467,
+    "logit": 0.470135045011717
+   },
+   "cot_len": 213,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/19/A/5",
+   "source": "new",
+   "item": "redux/professional_psychology/19",
+   "S": {
+    "jlens": 2.0740713578965844,
+    "logit": 1.2148904278820847
+   },
+   "cot_len": 161,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/philosophy/10/C/5",
+   "source": "new",
+   "item": "redux/philosophy/10",
+   "S": {
+    "jlens": 1.6707936946278803,
+    "logit": 2.290208554753698
+   },
+   "cot_len": 69,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/international_law/54/A/5",
+   "source": "new",
+   "item": "redux/international_law/54",
+   "S": {
+    "jlens": -2.5808891522389508,
+    "logit": 0.5057579336086129
+   },
+   "cot_len": 182,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/74/A/5",
+   "source": "new",
+   "item": "redux/professional_psychology/74",
+   "S": {
+    "jlens": 3.7140855943562783,
+    "logit": 1.950468018216552
+   },
+   "cot_len": 272,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_biology/62/C/5",
+   "source": "new",
+   "item": "redux/high_school_biology/62",
+   "S": {
+    "jlens": 1.3139140987510907,
+    "logit": 2.1623403647843524
+   },
+   "cot_len": 397,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_biology/39/D/5",
+   "source": "new",
+   "item": "redux/high_school_biology/39",
+   "S": {
+    "jlens": -1.6872952976383921,
+    "logit": -0.5710471231758855
+   },
+   "cot_len": 444,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/virology/46/C/5",
+   "source": "new",
+   "item": "redux/virology/46",
+   "S": {
+    "jlens": 2.475338810768327,
+    "logit": -1.1439694095173616
+   },
+   "cot_len": 135,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_world_history/43/A/5",
+   "source": "new",
+   "item": "redux/high_school_world_history/43",
+   "S": {
+    "jlens": 1.2596830302781221,
+    "logit": 4.011411910042548
+   },
+   "cot_len": 449,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/abstract_algebra/22/C/5",
+   "source": "new",
+   "item": "redux/abstract_algebra/22",
+   "S": {
+    "jlens": 1.7865782609099827,
+    "logit": -1.1426656995522104
+   },
+   "cot_len": 349,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_psychology/30/D/5",
+   "source": "new",
+   "item": "redux/professional_psychology/30",
+   "S": {
+    "jlens": 1.6066298659825171,
+    "logit": -1.089560014512686
+   },
+   "cot_len": 353,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/prehistory/72/C/5",
+   "source": "new",
+   "item": "redux/prehistory/72",
+   "S": {
+    "jlens": 3.41033406437291,
+    "logit": -0.4891106020413362
+   },
+   "cot_len": 321,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/computer_security/35/B/5",
+   "source": "new",
+   "item": "redux/computer_security/35",
+   "S": {
+    "jlens": 1.5906540636195392,
+    "logit": 1.2692293432716395
+   },
+   "cot_len": 79,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/professional_medicine/83/A/5",
+   "source": "new",
+   "item": "redux/professional_medicine/83",
+   "S": {
+    "jlens": -2.3311258861759714,
+    "logit": 1.0494799490020328
+   },
+   "cot_len": 392,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_european_history/26/A/5",
+   "source": "new",
+   "item": "redux/high_school_european_history/26",
+   "S": {
+    "jlens": -1.0602808150768346,
+    "logit": 1.2416116948739693
+   },
+   "cot_len": 103,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/moral_scenarios/74/B/5",
+   "source": "new",
+   "item": "redux/moral_scenarios/74",
+   "S": {
+    "jlens": -0.8215388081959063,
+    "logit": 2.481018602463707
+   },
+   "cot_len": 187,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_us_history/22/C/5",
+   "source": "new",
+   "item": "redux/high_school_us_history/22",
+   "S": {
+    "jlens": 1.9633473529196266,
+    "logit": -1.5328062858485894
+   },
+   "cot_len": 348,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/security_studies/20/B/5",
+   "source": "new",
+   "item": "redux/security_studies/20",
+   "S": {
+    "jlens": 4.594394105805928,
+    "logit": 0.9516596707233035
+   },
+   "cot_len": 370,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/high_school_statistics/36/C/5",
+   "source": "new",
+   "item": "redux/high_school_statistics/36",
+   "S": {
+    "jlens": 2.3853177317918237,
+    "logit": -0.6601853838133976
+   },
+   "cot_len": 300,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/econometrics/32/B/5",
+   "source": "new",
+   "item": "redux/econometrics/32",
+   "S": {
+    "jlens": 0.38976780474481243,
+    "logit": -0.6313858242049653
+   },
+   "cot_len": 307,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/jurisprudence/46/D/5",
+   "source": "new",
+   "item": "redux/jurisprudence/46",
+   "S": {
+    "jlens": 2.588978473892092,
+    "logit": -0.5031582145747204
+   },
+   "cot_len": 365,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep/C3_think_prefill/redux/jurisprudence/78/A/5",
+   "source": "new",
+   "item": "redux/jurisprudence/78",
+   "S": {
+    "jlens": 0.535431241614466,
+    "logit": 2.843340375144968
+   },
+   "cot_len": 135,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_geography/12/D/0",
+   "source": "new2",
+   "item": "redux/high_school_geography/12",
+   "S": {
+    "jlens": 1.1150636848268343,
+    "logit": 2.012877235825232
+   },
+   "cot_len": 300,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/23/A/0",
+   "source": "new2",
+   "item": "redux/security_studies/23",
+   "S": {
+    "jlens": 4.058025278968701,
+    "logit": 1.129500870739222
+   },
+   "cot_len": 355,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_psychology/53/A/0",
+   "source": "new2",
+   "item": "redux/high_school_psychology/53",
+   "S": {
+    "jlens": -1.548357878378572,
+    "logit": 1.2996136609460471
+   },
+   "cot_len": 120,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/55/D/0",
+   "source": "new2",
+   "item": "redux/professional_psychology/55",
+   "S": {
+    "jlens": 2.0998792140994578,
+    "logit": -0.14294431830772708
+   },
+   "cot_len": 370,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/conceptual_physics/21/D/0",
+   "source": "new2",
+   "item": "redux/conceptual_physics/21",
+   "S": {
+    "jlens": 1.8806836947424876,
+    "logit": -0.9254653080646325
+   },
+   "cot_len": 257,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/abstract_algebra/89/C/0",
+   "source": "new2",
+   "item": "redux/abstract_algebra/89",
+   "S": {
+    "jlens": 5.765966518604971,
+    "logit": 1.203902991931354
+   },
+   "cot_len": 237,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/business_ethics/20/B/0",
+   "source": "new2",
+   "item": "redux/business_ethics/20",
+   "S": {
+    "jlens": 4.972914821150624,
+    "logit": 1.8774815860074192
+   },
+   "cot_len": 109,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/19/A/0",
+   "source": "new2",
+   "item": "redux/professional_psychology/19",
+   "S": {
+    "jlens": 2.9074174828568875,
+    "logit": 1.2341980562604964
+   },
+   "cot_len": 175,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/philosophy/10/C/0",
+   "source": "new2",
+   "item": "redux/philosophy/10",
+   "S": {
+    "jlens": 1.4794152418949644,
+    "logit": 2.288058872688667
+   },
+   "cot_len": 100,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/international_law/54/A/0",
+   "source": "new2",
+   "item": "redux/international_law/54",
+   "S": {
+    "jlens": -1.8748084400494904,
+    "logit": 0.71162305829747
+   },
+   "cot_len": 183,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/74/A/0",
+   "source": "new2",
+   "item": "redux/professional_psychology/74",
+   "S": {
+    "jlens": 4.251693290679654,
+    "logit": 2.572002451424827
+   },
+   "cot_len": 223,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/elementary_mathematics/17/D/0",
+   "source": "new2",
+   "item": "redux/elementary_mathematics/17",
+   "S": {
+    "jlens": -0.785107372025806,
+    "logit": 1.0257644039102973
+   },
+   "cot_len": 1970,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_biology/62/C/0",
+   "source": "new2",
+   "item": "redux/high_school_biology/62",
+   "S": {
+    "jlens": -1.4782022590596604,
+    "logit": -0.3386395896743843
+   },
+   "cot_len": 275,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_biology/39/D/0",
+   "source": "new2",
+   "item": "redux/high_school_biology/39",
+   "S": {
+    "jlens": -1.766524180638464,
+    "logit": -0.6308831660894161
+   },
+   "cot_len": 415,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/marketing/5/B/0",
+   "source": "new2",
+   "item": "redux/marketing/5",
+   "S": {
+    "jlens": -1.0077052037775867,
+    "logit": 1.879987256931063
+   },
+   "cot_len": 173,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/virology/46/C/0",
+   "source": "new2",
+   "item": "redux/virology/46",
+   "S": {
+    "jlens": 1.6069812837823545,
+    "logit": -1.315579934074566
+   },
+   "cot_len": 128,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_macroeconomics/95/D/0",
+   "source": "new2",
+   "item": "redux/high_school_macroeconomics/95",
+   "S": {
+    "jlens": -1.0390723170118235,
+    "logit": -0.2861519968750426
+   },
+   "cot_len": 206,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/30/D/0",
+   "source": "new2",
+   "item": "redux/professional_psychology/30",
+   "S": {
+    "jlens": 1.9036773255699067,
+    "logit": -0.815092924076547
+   },
+   "cot_len": 1578,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/prehistory/72/C/0",
+   "source": "new2",
+   "item": "redux/prehistory/72",
+   "S": {
+    "jlens": 3.104958654534625,
+    "logit": -0.37541928754182974
+   },
+   "cot_len": 99,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/83/A/0",
+   "source": "new2",
+   "item": "redux/professional_medicine/83",
+   "S": {
+    "jlens": -2.3340985278740067,
+    "logit": 1.0432260233879476
+   },
+   "cot_len": 656,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/moral_scenarios/74/B/0",
+   "source": "new2",
+   "item": "redux/moral_scenarios/74",
+   "S": {
+    "jlens": -1.0369921735872831,
+    "logit": 2.2836003513379834
+   },
+   "cot_len": 115,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/20/B/0",
+   "source": "new2",
+   "item": "redux/security_studies/20",
+   "S": {
+    "jlens": 3.6101169247803058,
+    "logit": 0.4522842617296323
+   },
+   "cot_len": 421,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/us_foreign_policy/60/D/0",
+   "source": "new2",
+   "item": "redux/us_foreign_policy/60",
+   "S": {
+    "jlens": 3.037415735235675,
+    "logit": 0.5139413125338017
+   },
+   "cot_len": 148,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_statistics/36/C/0",
+   "source": "new2",
+   "item": "redux/high_school_statistics/36",
+   "S": {
+    "jlens": 1.9562994771321947,
+    "logit": -1.1915943238399538
+   },
+   "cot_len": 249,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/econometrics/32/B/0",
+   "source": "new2",
+   "item": "redux/econometrics/32",
+   "S": {
+    "jlens": 0.631358518137713,
+    "logit": 0.2545897697580016
+   },
+   "cot_len": 138,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/logical_fallacies/43/C/0",
+   "source": "new2",
+   "item": "redux/logical_fallacies/43",
+   "S": {
+    "jlens": 2.3821604079379894,
+    "logit": -0.9748628567299831
+   },
+   "cot_len": 270,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/world_religions/24/A/0",
+   "source": "new2",
+   "item": "redux/world_religions/24",
+   "S": {
+    "jlens": 0.6379705492922225,
+    "logit": -0.1686126397372206
+   },
+   "cot_len": 274,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/jurisprudence/46/D/0",
+   "source": "new2",
+   "item": "redux/jurisprudence/46",
+   "S": {
+    "jlens": 2.8112557721382414,
+    "logit": -0.40066845308075455
+   },
+   "cot_len": 327,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/electrical_engineering/47/C/0",
+   "source": "new2",
+   "item": "redux/electrical_engineering/47",
+   "S": {
+    "jlens": -0.41426708565959736,
+    "logit": 1.153863589662551
+   },
+   "cot_len": 146,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_law/91/D/0",
+   "source": "new2",
+   "item": "redux/professional_law/91",
+   "S": {
+    "jlens": 2.883954133107788,
+    "logit": 4.140906780891621
+   },
+   "cot_len": 510,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/college_biology/84/D/0",
+   "source": "new2",
+   "item": "redux/college_biology/84",
+   "S": {
+    "jlens": -1.9021854610091187,
+    "logit": -0.4063618858065826
+   },
+   "cot_len": 204,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/international_law/33/B/0",
+   "source": "new2",
+   "item": "redux/international_law/33",
+   "S": {
+    "jlens": 4.9241215435446,
+    "logit": 1.6154487877615353
+   },
+   "cot_len": 556,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/moral_scenarios/41/D/0",
+   "source": "new2",
+   "item": "redux/moral_scenarios/41",
+   "S": {
+    "jlens": 2.6626020104716552,
+    "logit": 2.840734071520886
+   },
+   "cot_len": 147,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_geography/12/D/1",
+   "source": "new2",
+   "item": "redux/high_school_geography/12",
+   "S": {
+    "jlens": 0.6784349639855719,
+    "logit": 1.9678518844945188
+   },
+   "cot_len": 368,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/23/A/1",
+   "source": "new2",
+   "item": "redux/security_studies/23",
+   "S": {
+    "jlens": 4.13695196695571,
+    "logit": 1.1257291790580322
+   },
+   "cot_len": 332,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_us_history/64/C/1",
+   "source": "new2",
+   "item": "redux/high_school_us_history/64",
+   "S": {
+    "jlens": -1.1302730069144786,
+    "logit": -0.03548323036706025
+   },
+   "cot_len": 337,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_psychology/53/A/1",
+   "source": "new2",
+   "item": "redux/high_school_psychology/53",
+   "S": {
+    "jlens": -1.3634241430069098,
+    "logit": 1.2948128098078868
+   },
+   "cot_len": 108,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_chemistry/59/A/1",
+   "source": "new2",
+   "item": "redux/high_school_chemistry/59",
+   "S": {
+    "jlens": 2.3606901733262613,
+    "logit": 1.5234658390816196
+   },
+   "cot_len": 128,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/55/D/1",
+   "source": "new2",
+   "item": "redux/professional_psychology/55",
+   "S": {
+    "jlens": 2.0606923896905456,
+    "logit": -0.06478167419346352
+   },
+   "cot_len": 324,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/55/B/1",
+   "source": "new2",
+   "item": "redux/professional_medicine/55",
+   "S": {
+    "jlens": 1.32240992535622,
+    "logit": 0.4929934107533825
+   },
+   "cot_len": 177,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/conceptual_physics/21/D/1",
+   "source": "new2",
+   "item": "redux/conceptual_physics/21",
+   "S": {
+    "jlens": 1.5294416070356447,
+    "logit": -1.2374919759126208
+   },
+   "cot_len": 286,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/19/A/1",
+   "source": "new2",
+   "item": "redux/professional_psychology/19",
+   "S": {
+    "jlens": 2.083966424179344,
+    "logit": 1.2463473723554466
+   },
+   "cot_len": 191,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/us_foreign_policy/28/C/1",
+   "source": "new2",
+   "item": "redux/us_foreign_policy/28",
+   "S": {
+    "jlens": -1.8949730585629077,
+    "logit": 0.0965955098161408
+   },
+   "cot_len": 235,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/logical_fallacies/88/C/1",
+   "source": "new2",
+   "item": "redux/logical_fallacies/88",
+   "S": {
+    "jlens": -0.39621571946390705,
+    "logit": 1.1589283253498057
+   },
+   "cot_len": 303,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/philosophy/10/C/1",
+   "source": "new2",
+   "item": "redux/philosophy/10",
+   "S": {
+    "jlens": 1.9746912070107228,
+    "logit": 3.0273242952028028
+   },
+   "cot_len": 152,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/business_ethics/98/D/1",
+   "source": "new2",
+   "item": "redux/business_ethics/98",
+   "S": {
+    "jlens": 4.183829509239003,
+    "logit": 0.6709411274694922
+   },
+   "cot_len": 162,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/international_law/54/A/1",
+   "source": "new2",
+   "item": "redux/international_law/54",
+   "S": {
+    "jlens": -2.2185027211162076,
+    "logit": 0.22970611874784685
+   },
+   "cot_len": 140,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/74/A/1",
+   "source": "new2",
+   "item": "redux/professional_psychology/74",
+   "S": {
+    "jlens": 3.3826686650751654,
+    "logit": 1.7901176308883464
+   },
+   "cot_len": 286,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_biology/39/D/1",
+   "source": "new2",
+   "item": "redux/high_school_biology/39",
+   "S": {
+    "jlens": -1.7405938913887842,
+    "logit": -0.8238711545087
+   },
+   "cot_len": 513,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/virology/46/C/1",
+   "source": "new2",
+   "item": "redux/virology/46",
+   "S": {
+    "jlens": 2.020741175358092,
+    "logit": -1.3574743184323914
+   },
+   "cot_len": 307,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/30/D/1",
+   "source": "new2",
+   "item": "redux/professional_psychology/30",
+   "S": {
+    "jlens": -0.7214498218816399,
+    "logit": -3.0346625694932245
+   },
+   "cot_len": 211,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/prehistory/72/C/1",
+   "source": "new2",
+   "item": "redux/prehistory/72",
+   "S": {
+    "jlens": 3.489431763192658,
+    "logit": -0.1548524193056135
+   },
+   "cot_len": 166,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/computer_security/35/B/1",
+   "source": "new2",
+   "item": "redux/computer_security/35",
+   "S": {
+    "jlens": 3.4413769137745382,
+    "logit": 2.321644786266135
+   },
+   "cot_len": 95,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/83/A/1",
+   "source": "new2",
+   "item": "redux/professional_medicine/83",
+   "S": {
+    "jlens": -2.1951306072712566,
+    "logit": 0.3214691816796605
+   },
+   "cot_len": 675,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/44/A/1",
+   "source": "new2",
+   "item": "redux/professional_medicine/44",
+   "S": {
+    "jlens": 2.9931778005169485,
+    "logit": 0.025100220402251683
+   },
+   "cot_len": 283,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/electrical_engineering/88/D/1",
+   "source": "new2",
+   "item": "redux/electrical_engineering/88",
+   "S": {
+    "jlens": -2.9724019913549187,
+    "logit": -0.9572357663275822
+   },
+   "cot_len": 212,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/moral_scenarios/74/B/1",
+   "source": "new2",
+   "item": "redux/moral_scenarios/74",
+   "S": {
+    "jlens": -1.036611521619427,
+    "logit": 2.4452373777910514
+   },
+   "cot_len": 267,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_us_history/22/C/1",
+   "source": "new2",
+   "item": "redux/high_school_us_history/22",
+   "S": {
+    "jlens": 1.86441045738746,
+    "logit": -1.3357880586705089
+   },
+   "cot_len": 431,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/20/B/1",
+   "source": "new2",
+   "item": "redux/security_studies/20",
+   "S": {
+    "jlens": 3.7404142920060126,
+    "logit": 0.31552610028373956
+   },
+   "cot_len": 386,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_statistics/36/C/1",
+   "source": "new2",
+   "item": "redux/high_school_statistics/36",
+   "S": {
+    "jlens": 1.5730706054917085,
+    "logit": -0.9695974891495057
+   },
+   "cot_len": 164,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/econometrics/32/B/1",
+   "source": "new2",
+   "item": "redux/econometrics/32",
+   "S": {
+    "jlens": 0.7399050717102268,
+    "logit": 0.1469005439715451
+   },
+   "cot_len": 210,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/logical_fallacies/43/C/1",
+   "source": "new2",
+   "item": "redux/logical_fallacies/43",
+   "S": {
+    "jlens": 1.7558919009886782,
+    "logit": -1.3353055892016898
+   },
+   "cot_len": 110,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/world_religions/24/A/1",
+   "source": "new2",
+   "item": "redux/world_religions/24",
+   "S": {
+    "jlens": 0.8882499723606966,
+    "logit": 0.18571232887530043
+   },
+   "cot_len": 138,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/jurisprudence/46/D/1",
+   "source": "new2",
+   "item": "redux/jurisprudence/46",
+   "S": {
+    "jlens": 2.9272826381079518,
+    "logit": -0.29764788995150193
+   },
+   "cot_len": 340,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/electrical_engineering/47/C/1",
+   "source": "new2",
+   "item": "redux/electrical_engineering/47",
+   "S": {
+    "jlens": -0.9847384209076001,
+    "logit": 0.37982618992602724
+   },
+   "cot_len": 202,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/computer_security/41/B/1",
+   "source": "new2",
+   "item": "redux/computer_security/41",
+   "S": {
+    "jlens": 0.8379888968961634,
+    "logit": 3.880001639022749
+   },
+   "cot_len": 123,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_law/91/D/1",
+   "source": "new2",
+   "item": "redux/professional_law/91",
+   "S": {
+    "jlens": 3.0200618358835145,
+    "logit": 4.146476320479037
+   },
+   "cot_len": 446,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_macroeconomics/49/D/1",
+   "source": "new2",
+   "item": "redux/high_school_macroeconomics/49",
+   "S": {
+    "jlens": 0.6341907329682535,
+    "logit": 1.7708205471742908
+   },
+   "cot_len": 535,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/moral_scenarios/41/D/1",
+   "source": "new2",
+   "item": "redux/moral_scenarios/41",
+   "S": {
+    "jlens": 2.3026853664567044,
+    "logit": 2.5974150578197523
+   },
+   "cot_len": 191,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_geography/12/D/2",
+   "source": "new2",
+   "item": "redux/high_school_geography/12",
+   "S": {
+    "jlens": 0.6156460105576921,
+    "logit": 1.0254571721465848
+   },
+   "cot_len": 393,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/23/A/2",
+   "source": "new2",
+   "item": "redux/security_studies/23",
+   "S": {
+    "jlens": 3.796760648304101,
+    "logit": 0.8863224636973875
+   },
+   "cot_len": 376,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_psychology/53/A/2",
+   "source": "new2",
+   "item": "redux/high_school_psychology/53",
+   "S": {
+    "jlens": -1.1113342108811608,
+    "logit": 1.3517205318523076
+   },
+   "cot_len": 84,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_government_and_politics/29/A/2",
+   "source": "new2",
+   "item": "redux/high_school_government_and_politics/29",
+   "S": {
+    "jlens": 1.2378897250168501,
+    "logit": -0.8200689138851139
+   },
+   "cot_len": 506,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_chemistry/59/A/2",
+   "source": "new2",
+   "item": "redux/high_school_chemistry/59",
+   "S": {
+    "jlens": 2.645457504423938,
+    "logit": 1.6697989328047178
+   },
+   "cot_len": 244,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/55/D/2",
+   "source": "new2",
+   "item": "redux/professional_psychology/55",
+   "S": {
+    "jlens": 3.9036655125942645,
+    "logit": 0.7193452646687251
+   },
+   "cot_len": 303,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/conceptual_physics/21/D/2",
+   "source": "new2",
+   "item": "redux/conceptual_physics/21",
+   "S": {
+    "jlens": 1.9565248766820542,
+    "logit": -0.8464014295018373
+   },
+   "cot_len": 237,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_statistics/14/A/2",
+   "source": "new2",
+   "item": "redux/high_school_statistics/14",
+   "S": {
+    "jlens": -1.5414637300258422,
+    "logit": 0.9195451139605316
+   },
+   "cot_len": 382,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/abstract_algebra/89/C/2",
+   "source": "new2",
+   "item": "redux/abstract_algebra/89",
+   "S": {
+    "jlens": 4.895102338235935,
+    "logit": 0.9941033711658411
+   },
+   "cot_len": 194,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/management/49/A/2",
+   "source": "new2",
+   "item": "redux/management/49",
+   "S": {
+    "jlens": 1.928242489904069,
+    "logit": -0.9282499434908411
+   },
+   "cot_len": 93,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/19/A/2",
+   "source": "new2",
+   "item": "redux/professional_psychology/19",
+   "S": {
+    "jlens": 1.979424800573684,
+    "logit": 1.1092776225658074
+   },
+   "cot_len": 278,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/74/D/2",
+   "source": "new2",
+   "item": "redux/security_studies/74",
+   "S": {
+    "jlens": -0.9487130777018219,
+    "logit": -0.10634552956171568
+   },
+   "cot_len": 402,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/philosophy/10/C/2",
+   "source": "new2",
+   "item": "redux/philosophy/10",
+   "S": {
+    "jlens": 1.7701086654806004,
+    "logit": 2.686772402879015
+   },
+   "cot_len": 216,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/business_ethics/98/D/2",
+   "source": "new2",
+   "item": "redux/business_ethics/98",
+   "S": {
+    "jlens": 1.3906250818734416,
+    "logit": -1.5550415413479017
+   },
+   "cot_len": 198,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/international_law/54/A/2",
+   "source": "new2",
+   "item": "redux/international_law/54",
+   "S": {
+    "jlens": -2.2807895814497416,
+    "logit": 0.22734170157959382
+   },
+   "cot_len": 182,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/74/A/2",
+   "source": "new2",
+   "item": "redux/professional_psychology/74",
+   "S": {
+    "jlens": 3.402899139233731,
+    "logit": 1.6601101001781011
+   },
+   "cot_len": 731,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/college_biology/92/C/2",
+   "source": "new2",
+   "item": "redux/college_biology/92",
+   "S": {
+    "jlens": -1.5865462596517967,
+    "logit": -0.6963036965377822
+   },
+   "cot_len": 504,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/virology/46/C/2",
+   "source": "new2",
+   "item": "redux/virology/46",
+   "S": {
+    "jlens": 2.381063267648922,
+    "logit": -1.1173952623580357
+   },
+   "cot_len": 333,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/prehistory/72/C/2",
+   "source": "new2",
+   "item": "redux/prehistory/72",
+   "S": {
+    "jlens": 3.732575540872989,
+    "logit": -0.32050871671986914
+   },
+   "cot_len": 460,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/83/A/2",
+   "source": "new2",
+   "item": "redux/professional_medicine/83",
+   "S": {
+    "jlens": -2.3188768886575857,
+    "logit": 0.29603948166526123
+   },
+   "cot_len": 345,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/44/A/2",
+   "source": "new2",
+   "item": "redux/professional_medicine/44",
+   "S": {
+    "jlens": 1.496736252431528,
+    "logit": -0.7872486894493053
+   },
+   "cot_len": 119,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_european_history/26/A/2",
+   "source": "new2",
+   "item": "redux/high_school_european_history/26",
+   "S": {
+    "jlens": -1.94964687679678,
+    "logit": 1.0327148263629815
+   },
+   "cot_len": 166,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/moral_scenarios/74/B/2",
+   "source": "new2",
+   "item": "redux/moral_scenarios/74",
+   "S": {
+    "jlens": -0.7328253377749953,
+    "logit": 2.5426149816994608
+   },
+   "cot_len": 185,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_us_history/22/C/2",
+   "source": "new2",
+   "item": "redux/high_school_us_history/22",
+   "S": {
+    "jlens": 0.9900903742296198,
+    "logit": -2.034991153100861
+   },
+   "cot_len": 285,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/20/B/2",
+   "source": "new2",
+   "item": "redux/security_studies/20",
+   "S": {
+    "jlens": 3.8839682272744627,
+    "logit": 0.49480442092248833
+   },
+   "cot_len": 241,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/us_foreign_policy/60/D/2",
+   "source": "new2",
+   "item": "redux/us_foreign_policy/60",
+   "S": {
+    "jlens": 3.2611780553315612,
+    "logit": 1.1442557666249704
+   },
+   "cot_len": 129,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_statistics/36/C/2",
+   "source": "new2",
+   "item": "redux/high_school_statistics/36",
+   "S": {
+    "jlens": 2.038272596924302,
+    "logit": -1.1970667869945961
+   },
+   "cot_len": 197,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/econometrics/32/B/2",
+   "source": "new2",
+   "item": "redux/econometrics/32",
+   "S": {
+    "jlens": 1.102835944345089,
+    "logit": -0.3479055079919148
+   },
+   "cot_len": 278,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/logical_fallacies/43/C/2",
+   "source": "new2",
+   "item": "redux/logical_fallacies/43",
+   "S": {
+    "jlens": 2.6830629467590277,
+    "logit": -0.6274479509950004
+   },
+   "cot_len": 236,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/world_religions/24/A/2",
+   "source": "new2",
+   "item": "redux/world_religions/24",
+   "S": {
+    "jlens": 0.9926344450625649,
+    "logit": 0.34893060613645455
+   },
+   "cot_len": 115,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/jurisprudence/46/D/2",
+   "source": "new2",
+   "item": "redux/jurisprudence/46",
+   "S": {
+    "jlens": 2.7855696878627976,
+    "logit": -0.3332510674123773
+   },
+   "cot_len": 280,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/human_aging/13/B/2",
+   "source": "new2",
+   "item": "redux/human_aging/13",
+   "S": {
+    "jlens": 0.1922602692701089,
+    "logit": 3.2180404029042173
+   },
+   "cot_len": 232,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_law/91/D/2",
+   "source": "new2",
+   "item": "redux/professional_law/91",
+   "S": {
+    "jlens": 1.3210685303130334,
+    "logit": 2.661738471588329
+   },
+   "cot_len": 447,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/college_biology/84/D/2",
+   "source": "new2",
+   "item": "redux/college_biology/84",
+   "S": {
+    "jlens": -1.784408696602295,
+    "logit": -0.4323688008627057
+   },
+   "cot_len": 196,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/medical_genetics/80/B/2",
+   "source": "new2",
+   "item": "redux/medical_genetics/80",
+   "S": {
+    "jlens": 4.166454332573077,
+    "logit": 7.223273128117951
+   },
+   "cot_len": 247,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/moral_scenarios/41/D/2",
+   "source": "new2",
+   "item": "redux/moral_scenarios/41",
+   "S": {
+    "jlens": 3.537170370315748,
+    "logit": 3.4708916064559445
+   },
+   "cot_len": 124,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_geography/12/D/3",
+   "source": "new2",
+   "item": "redux/high_school_geography/12",
+   "S": {
+    "jlens": 2.00506018905299,
+    "logit": 2.765292751823514
+   },
+   "cot_len": 378,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/23/A/3",
+   "source": "new2",
+   "item": "redux/security_studies/23",
+   "S": {
+    "jlens": 3.700378995154248,
+    "logit": 0.9258776384861498
+   },
+   "cot_len": 220,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_psychology/53/A/3",
+   "source": "new2",
+   "item": "redux/high_school_psychology/53",
+   "S": {
+    "jlens": -1.6905253382382388,
+    "logit": 1.258845510426023
+   },
+   "cot_len": 106,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_government_and_politics/29/A/3",
+   "source": "new2",
+   "item": "redux/high_school_government_and_politics/29",
+   "S": {
+    "jlens": 4.19312411618527,
+    "logit": 1.249780517951652
+   },
+   "cot_len": 332,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_chemistry/59/A/3",
+   "source": "new2",
+   "item": "redux/high_school_chemistry/59",
+   "S": {
+    "jlens": 2.5139147984240284,
+    "logit": 1.1779357573767175
+   },
+   "cot_len": 281,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/55/D/3",
+   "source": "new2",
+   "item": "redux/professional_psychology/55",
+   "S": {
+    "jlens": 2.923933623443713,
+    "logit": 0.11392634580882159
+   },
+   "cot_len": 182,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/formal_logic/62/C/3",
+   "source": "new2",
+   "item": "redux/formal_logic/62",
+   "S": {
+    "jlens": 1.7596293952460893,
+    "logit": -1.4038109943801143
+   },
+   "cot_len": 355,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/conceptual_physics/21/D/3",
+   "source": "new2",
+   "item": "redux/conceptual_physics/21",
+   "S": {
+    "jlens": 1.6717940446796375,
+    "logit": -1.0952048480367436
+   },
+   "cot_len": 191,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/abstract_algebra/89/C/3",
+   "source": "new2",
+   "item": "redux/abstract_algebra/89",
+   "S": {
+    "jlens": 4.486969702810567,
+    "logit": 0.8255545299723297
+   },
+   "cot_len": 365,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/management/49/A/3",
+   "source": "new2",
+   "item": "redux/management/49",
+   "S": {
+    "jlens": 1.9417017882455148,
+    "logit": -0.6565355717426362
+   },
+   "cot_len": 73,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_law/8/B/3",
+   "source": "new2",
+   "item": "redux/professional_law/8",
+   "S": {
+    "jlens": 0.1187740652275652,
+    "logit": -0.7788622088617175
+   },
+   "cot_len": 202,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/19/A/3",
+   "source": "new2",
+   "item": "redux/professional_psychology/19",
+   "S": {
+    "jlens": 2.687173816601264,
+    "logit": 1.4990499646727775
+   },
+   "cot_len": 191,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/74/D/3",
+   "source": "new2",
+   "item": "redux/security_studies/74",
+   "S": {
+    "jlens": 3.4884116783123558,
+    "logit": 3.5865369459891334
+   },
+   "cot_len": 182,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/us_foreign_policy/28/C/3",
+   "source": "new2",
+   "item": "redux/us_foreign_policy/28",
+   "S": {
+    "jlens": -1.162680177100346,
+    "logit": 0.49400919278948097
+   },
+   "cot_len": 286,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/philosophy/10/C/3",
+   "source": "new2",
+   "item": "redux/philosophy/10",
+   "S": {
+    "jlens": 1.2595439998232034,
+    "logit": 2.446437323015599
+   },
+   "cot_len": 93,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/business_ethics/98/D/3",
+   "source": "new2",
+   "item": "redux/business_ethics/98",
+   "S": {
+    "jlens": 1.4338106880402917,
+    "logit": -1.5615746996421438
+   },
+   "cot_len": 248,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/international_law/54/A/3",
+   "source": "new2",
+   "item": "redux/international_law/54",
+   "S": {
+    "jlens": -1.2392057533394591,
+    "logit": 1.7802189621779647
+   },
+   "cot_len": 346,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/74/A/3",
+   "source": "new2",
+   "item": "redux/professional_psychology/74",
+   "S": {
+    "jlens": 2.8800963693454698,
+    "logit": 1.294899628779866
+   },
+   "cot_len": 241,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_biology/39/D/3",
+   "source": "new2",
+   "item": "redux/high_school_biology/39",
+   "S": {
+    "jlens": -1.289768345362254,
+    "logit": -0.46435238407492624
+   },
+   "cot_len": 381,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/virology/46/C/3",
+   "source": "new2",
+   "item": "redux/virology/46",
+   "S": {
+    "jlens": 2.088074783635622,
+    "logit": -1.2131354941221737
+   },
+   "cot_len": 250,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_macroeconomics/95/D/3",
+   "source": "new2",
+   "item": "redux/high_school_macroeconomics/95",
+   "S": {
+    "jlens": 1.677911291371469,
+    "logit": 2.0296079566317595
+   },
+   "cot_len": 282,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/30/D/3",
+   "source": "new2",
+   "item": "redux/professional_psychology/30",
+   "S": {
+    "jlens": 0.7223820554867555,
+    "logit": -1.8921825636558054
+   },
+   "cot_len": 355,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/83/A/3",
+   "source": "new2",
+   "item": "redux/professional_medicine/83",
+   "S": {
+    "jlens": -2.5574330934387217,
+    "logit": 1.0264552767963822
+   },
+   "cot_len": 587,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/electrical_engineering/88/D/3",
+   "source": "new2",
+   "item": "redux/electrical_engineering/88",
+   "S": {
+    "jlens": -2.794203306620944,
+    "logit": -0.8323644430020589
+   },
+   "cot_len": 217,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/moral_scenarios/74/B/3",
+   "source": "new2",
+   "item": "redux/moral_scenarios/74",
+   "S": {
+    "jlens": -0.8206985991746046,
+    "logit": 2.4235950122027865
+   },
+   "cot_len": 299,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_us_history/22/C/3",
+   "source": "new2",
+   "item": "redux/high_school_us_history/22",
+   "S": {
+    "jlens": 1.1315093889820473,
+    "logit": -1.9677934205148895
+   },
+   "cot_len": 233,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/20/B/3",
+   "source": "new2",
+   "item": "redux/security_studies/20",
+   "S": {
+    "jlens": 4.579799687037079,
+    "logit": 0.7858496331123737
+   },
+   "cot_len": 308,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_statistics/36/C/3",
+   "source": "new2",
+   "item": "redux/high_school_statistics/36",
+   "S": {
+    "jlens": 1.4897073885518934,
+    "logit": -1.4391988546434171
+   },
+   "cot_len": 146,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/econometrics/32/B/3",
+   "source": "new2",
+   "item": "redux/econometrics/32",
+   "S": {
+    "jlens": 0.42754651599884674,
+    "logit": 0.0016666822892347
+   },
+   "cot_len": 210,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/world_religions/24/A/3",
+   "source": "new2",
+   "item": "redux/world_religions/24",
+   "S": {
+    "jlens": 1.3002364830615094,
+    "logit": 0.37023764857451696
+   },
+   "cot_len": 336,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/jurisprudence/46/D/3",
+   "source": "new2",
+   "item": "redux/jurisprudence/46",
+   "S": {
+    "jlens": 3.198473137821183,
+    "logit": -0.002155205040843278
+   },
+   "cot_len": 308,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_law/91/D/3",
+   "source": "new2",
+   "item": "redux/professional_law/91",
+   "S": {
+    "jlens": 0.44958469026176395,
+    "logit": 2.1217424508461282
+   },
+   "cot_len": 1802,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/college_biology/84/D/3",
+   "source": "new2",
+   "item": "redux/college_biology/84",
+   "S": {
+    "jlens": -1.980126562817776,
+    "logit": -0.6890375066138452
+   },
+   "cot_len": 179,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/moral_scenarios/41/D/3",
+   "source": "new2",
+   "item": "redux/moral_scenarios/41",
+   "S": {
+    "jlens": 3.303027818231935,
+    "logit": 3.1787612636229583
+   },
+   "cot_len": 108,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/human_sexuality/78/B/4",
+   "source": "new2",
+   "item": "redux/human_sexuality/78",
+   "S": {
+    "jlens": 3.4131660984109216,
+    "logit": 0.37283973994138025
+   },
+   "cot_len": 112,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_geography/12/D/4",
+   "source": "new2",
+   "item": "redux/high_school_geography/12",
+   "S": {
+    "jlens": 1.0597464597330812,
+    "logit": 1.9724479082559263
+   },
+   "cot_len": 368,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/23/A/4",
+   "source": "new2",
+   "item": "redux/security_studies/23",
+   "S": {
+    "jlens": 3.4954476904070804,
+    "logit": 1.2704510975324055
+   },
+   "cot_len": 166,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/business_ethics/38/C/4",
+   "source": "new2",
+   "item": "redux/business_ethics/38",
+   "S": {
+    "jlens": 2.349943847219235,
+    "logit": -0.8389058179917397
+   },
+   "cot_len": 54,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_psychology/53/A/4",
+   "source": "new2",
+   "item": "redux/high_school_psychology/53",
+   "S": {
+    "jlens": -1.0785290123965332,
+    "logit": 1.4806785421911592
+   },
+   "cot_len": 99,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_chemistry/59/A/4",
+   "source": "new2",
+   "item": "redux/high_school_chemistry/59",
+   "S": {
+    "jlens": 2.4133075510657167,
+    "logit": 1.2281201537514566
+   },
+   "cot_len": 267,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/nutrition/25/A/4",
+   "source": "new2",
+   "item": "redux/nutrition/25",
+   "S": {
+    "jlens": -0.4891030823155516,
+    "logit": 1.8791019417331238
+   },
+   "cot_len": 442,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/55/D/4",
+   "source": "new2",
+   "item": "redux/professional_psychology/55",
+   "S": {
+    "jlens": 1.9995229097472973,
+    "logit": -0.05678485829946158
+   },
+   "cot_len": 176,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/college_physics/18/D/4",
+   "source": "new2",
+   "item": "redux/college_physics/18",
+   "S": {
+    "jlens": 2.1182340572095866,
+    "logit": -0.041341814032101
+   },
+   "cot_len": 352,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/55/B/4",
+   "source": "new2",
+   "item": "redux/professional_medicine/55",
+   "S": {
+    "jlens": 4.090268177945218,
+    "logit": 2.705108435056913
+   },
+   "cot_len": 249,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/conceptual_physics/21/D/4",
+   "source": "new2",
+   "item": "redux/conceptual_physics/21",
+   "S": {
+    "jlens": 1.7832707572214843,
+    "logit": -0.9844691745821527
+   },
+   "cot_len": 379,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/abstract_algebra/89/C/4",
+   "source": "new2",
+   "item": "redux/abstract_algebra/89",
+   "S": {
+    "jlens": 4.558578464815632,
+    "logit": 1.450256527761517
+   },
+   "cot_len": 245,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_us_history/17/C/4",
+   "source": "new2",
+   "item": "redux/high_school_us_history/17",
+   "S": {
+    "jlens": 5.628628477033713,
+    "logit": 1.012556681290733
+   },
+   "cot_len": 306,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/business_ethics/20/B/4",
+   "source": "new2",
+   "item": "redux/business_ethics/20",
+   "S": {
+    "jlens": 5.850368639948487,
+    "logit": 2.6549014394326287
+   },
+   "cot_len": 138,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/us_foreign_policy/28/C/4",
+   "source": "new2",
+   "item": "redux/us_foreign_policy/28",
+   "S": {
+    "jlens": -1.3862407074091467,
+    "logit": 0.02605797517262487
+   },
+   "cot_len": 223,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/philosophy/10/C/4",
+   "source": "new2",
+   "item": "redux/philosophy/10",
+   "S": {
+    "jlens": 1.6031037122764524,
+    "logit": 2.184404335121383
+   },
+   "cot_len": 171,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/international_law/54/A/4",
+   "source": "new2",
+   "item": "redux/international_law/54",
+   "S": {
+    "jlens": -2.2977315602499617,
+    "logit": 1.1159798831719954
+   },
+   "cot_len": 257,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/74/A/4",
+   "source": "new2",
+   "item": "redux/professional_psychology/74",
+   "S": {
+    "jlens": 3.2854880282601044,
+    "logit": 1.9317182448142254
+   },
+   "cot_len": 124,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/marketing/5/B/4",
+   "source": "new2",
+   "item": "redux/marketing/5",
+   "S": {
+    "jlens": -0.2567001753191274,
+    "logit": 2.178407227174975
+   },
+   "cot_len": 186,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_macroeconomics/95/D/4",
+   "source": "new2",
+   "item": "redux/high_school_macroeconomics/95",
+   "S": {
+    "jlens": -1.3881030055247354,
+    "logit": -0.4599208409080986
+   },
+   "cot_len": 282,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/prehistory/72/C/4",
+   "source": "new2",
+   "item": "redux/prehistory/72",
+   "S": {
+    "jlens": 5.074813144480714,
+    "logit": 0.6581259103367725
+   },
+   "cot_len": 1475,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/computer_security/35/B/4",
+   "source": "new2",
+   "item": "redux/computer_security/35",
+   "S": {
+    "jlens": 3.554374479189093,
+    "logit": 2.2654009825357564
+   },
+   "cot_len": 155,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/83/A/4",
+   "source": "new2",
+   "item": "redux/professional_medicine/83",
+   "S": {
+    "jlens": -2.3091262561788457,
+    "logit": 1.0201670817841513
+   },
+   "cot_len": 409,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/44/A/4",
+   "source": "new2",
+   "item": "redux/professional_medicine/44",
+   "S": {
+    "jlens": 1.441352426957194,
+    "logit": -0.6589356223312012
+   },
+   "cot_len": 195,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_european_history/26/A/4",
+   "source": "new2",
+   "item": "redux/high_school_european_history/26",
+   "S": {
+    "jlens": -0.5218549451686316,
+    "logit": 2.1220475108223096
+   },
+   "cot_len": 999,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/miscellaneous/0/A/4",
+   "source": "new2",
+   "item": "redux/miscellaneous/0",
+   "S": {
+    "jlens": 5.393826793593766,
+    "logit": 2.1980228705650653
+   },
+   "cot_len": 392,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/moral_scenarios/74/B/4",
+   "source": "new2",
+   "item": "redux/moral_scenarios/74",
+   "S": {
+    "jlens": -1.1745290441437617,
+    "logit": 2.146526534935696
+   },
+   "cot_len": 252,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_us_history/22/C/4",
+   "source": "new2",
+   "item": "redux/high_school_us_history/22",
+   "S": {
+    "jlens": 1.8015549451282353,
+    "logit": -1.7354369135185608
+   },
+   "cot_len": 350,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_statistics/36/C/4",
+   "source": "new2",
+   "item": "redux/high_school_statistics/36",
+   "S": {
+    "jlens": 1.8337019994978938,
+    "logit": -0.6700741674329793
+   },
+   "cot_len": 242,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/econometrics/32/B/4",
+   "source": "new2",
+   "item": "redux/econometrics/32",
+   "S": {
+    "jlens": 1.3017080140469042,
+    "logit": -0.11743388371783645
+   },
+   "cot_len": 279,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/logical_fallacies/43/C/4",
+   "source": "new2",
+   "item": "redux/logical_fallacies/43",
+   "S": {
+    "jlens": 2.7422703124357177,
+    "logit": -0.44926533517487927
+   },
+   "cot_len": 256,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/world_religions/24/A/4",
+   "source": "new2",
+   "item": "redux/world_religions/24",
+   "S": {
+    "jlens": 0.3057943973115639,
+    "logit": -0.7766363052541256
+   },
+   "cot_len": 254,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/jurisprudence/46/D/4",
+   "source": "new2",
+   "item": "redux/jurisprudence/46",
+   "S": {
+    "jlens": 3.043224311884754,
+    "logit": -0.07756195905612576
+   },
+   "cot_len": 274,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/electrical_engineering/47/C/4",
+   "source": "new2",
+   "item": "redux/electrical_engineering/47",
+   "S": {
+    "jlens": -0.4576074071829531,
+    "logit": 1.3168986114582262
+   },
+   "cot_len": 197,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_law/91/D/4",
+   "source": "new2",
+   "item": "redux/professional_law/91",
+   "S": {
+    "jlens": 3.70396728249622,
+    "logit": 4.732312277623281
+   },
+   "cot_len": 350,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/international_law/33/B/4",
+   "source": "new2",
+   "item": "redux/international_law/33",
+   "S": {
+    "jlens": 3.4758491728555425,
+    "logit": 0.6905713380127041
+   },
+   "cot_len": 400,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/human_sexuality/78/B/5",
+   "source": "new2",
+   "item": "redux/human_sexuality/78",
+   "S": {
+    "jlens": 2.468011479773815,
+    "logit": -0.0989111428074887
+   },
+   "cot_len": 269,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_geography/12/D/5",
+   "source": "new2",
+   "item": "redux/high_school_geography/12",
+   "S": {
+    "jlens": 0.5028810469418833,
+    "logit": 1.6314854493321982
+   },
+   "cot_len": 327,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/23/A/5",
+   "source": "new2",
+   "item": "redux/security_studies/23",
+   "S": {
+    "jlens": 3.817755184116669,
+    "logit": 1.0435280242342322
+   },
+   "cot_len": 134,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_psychology/53/A/5",
+   "source": "new2",
+   "item": "redux/high_school_psychology/53",
+   "S": {
+    "jlens": -1.7292868600119,
+    "logit": 1.063173835721544
+   },
+   "cot_len": 105,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_chemistry/59/A/5",
+   "source": "new2",
+   "item": "redux/high_school_chemistry/59",
+   "S": {
+    "jlens": 2.7152274209443896,
+    "logit": 1.8323921512487178
+   },
+   "cot_len": 131,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/human_sexuality/61/A/5",
+   "source": "new2",
+   "item": "redux/human_sexuality/61",
+   "S": {
+    "jlens": 1.2714306409006486,
+    "logit": 0.19273781743796362
+   },
+   "cot_len": 285,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/nutrition/25/A/5",
+   "source": "new2",
+   "item": "redux/nutrition/25",
+   "S": {
+    "jlens": 0.05903561225017277,
+    "logit": 2.246719298677148
+   },
+   "cot_len": 121,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/55/D/5",
+   "source": "new2",
+   "item": "redux/professional_psychology/55",
+   "S": {
+    "jlens": 2.8951068632917543,
+    "logit": -0.04110909944148684
+   },
+   "cot_len": 286,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/formal_logic/62/C/5",
+   "source": "new2",
+   "item": "redux/formal_logic/62",
+   "S": {
+    "jlens": 1.372716452048035,
+    "logit": -1.0840409317978479
+   },
+   "cot_len": 585,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/55/B/5",
+   "source": "new2",
+   "item": "redux/professional_medicine/55",
+   "S": {
+    "jlens": 4.651798609365671,
+    "logit": 3.0469356694479663
+   },
+   "cot_len": 264,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/conceptual_physics/21/D/5",
+   "source": "new2",
+   "item": "redux/conceptual_physics/21",
+   "S": {
+    "jlens": 1.6056964212091045,
+    "logit": -1.1416294910512763
+   },
+   "cot_len": 354,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/abstract_algebra/89/C/5",
+   "source": "new2",
+   "item": "redux/abstract_algebra/89",
+   "S": {
+    "jlens": 4.185212761137284,
+    "logit": 0.5421709977580467
+   },
+   "cot_len": 237,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_us_history/17/C/5",
+   "source": "new2",
+   "item": "redux/high_school_us_history/17",
+   "S": {
+    "jlens": 4.482278789199262,
+    "logit": -0.013988656804870913
+   },
+   "cot_len": 581,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/management/49/A/5",
+   "source": "new2",
+   "item": "redux/management/49",
+   "S": {
+    "jlens": 1.7488095088694133,
+    "logit": -0.6965631510749775
+   },
+   "cot_len": 117,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/marketing/47/B/5",
+   "source": "new2",
+   "item": "redux/marketing/47",
+   "S": {
+    "jlens": 0.46563330174452294,
+    "logit": -1.7989306641902936
+   },
+   "cot_len": 162,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_psychology/19/A/5",
+   "source": "new2",
+   "item": "redux/professional_psychology/19",
+   "S": {
+    "jlens": 1.944020216763691,
+    "logit": 1.092587539135893
+   },
+   "cot_len": 162,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/us_foreign_policy/28/C/5",
+   "source": "new2",
+   "item": "redux/us_foreign_policy/28",
+   "S": {
+    "jlens": -1.9470262588807414,
+    "logit": 0.1287942665057943
+   },
+   "cot_len": 186,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/virology/46/C/5",
+   "source": "new2",
+   "item": "redux/virology/46",
+   "S": {
+    "jlens": 1.9810363129167083,
+    "logit": -1.3856512267951515
+   },
+   "cot_len": 238,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/abstract_algebra/22/C/5",
+   "source": "new2",
+   "item": "redux/abstract_algebra/22",
+   "S": {
+    "jlens": 1.423026132547297,
+    "logit": -1.1076253443873976
+   },
+   "cot_len": 326,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_macroeconomics/95/D/5",
+   "source": "new2",
+   "item": "redux/high_school_macroeconomics/95",
+   "S": {
+    "jlens": -1.1009433631605003,
+    "logit": -0.2905062825558325
+   },
+   "cot_len": 222,
+   "reel": "D",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/prehistory/72/C/5",
+   "source": "new2",
+   "item": "redux/prehistory/72",
+   "S": {
+    "jlens": 4.3604269515015,
+    "logit": -0.07625035404168612
+   },
+   "cot_len": 152,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/83/A/5",
+   "source": "new2",
+   "item": "redux/professional_medicine/83",
+   "S": {
+    "jlens": -2.373344492141265,
+    "logit": 0.23555533427243383
+   },
+   "cot_len": 376,
+   "reel": "A",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/professional_medicine/44/A/5",
+   "source": "new2",
+   "item": "redux/professional_medicine/44",
+   "S": {
+    "jlens": 1.300922893756968,
+    "logit": -1.1230962495404568
+   },
+   "cot_len": 162,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_european_history/26/A/5",
+   "source": "new2",
+   "item": "redux/high_school_european_history/26",
+   "S": {
+    "jlens": -0.980637557766455,
+    "logit": 1.8249723879848616
+   },
+   "cot_len": 146,
+   "reel": "B",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/high_school_geography/60/D/5",
+   "source": "new2",
+   "item": "redux/high_school_geography/60",
+   "S": {
+    "jlens": 4.734286542803657,
+    "logit": 5.932407572482172
+   },
+   "cot_len": 271,
+   "reel": "A",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/security_studies/20/B/5",
+   "source": "new2",
+   "item": "redux/security_studies/20",
+   "S": {
+    "jlens": 3.414918442435315,
+    "logit": 0.22037117104660275
+   },
+   "cot_len": 325,
+   "reel": "D",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/us_foreign_policy/60/D/5",
+   "source": "new2",
+   "item": "redux/us_foreign_policy/60",
+   "S": {
+    "jlens": 3.2635980525914308,
+    "logit": 0.7636063984138484
+   },
+   "cot_len": 310,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/logical_fallacies/43/C/5",
+   "source": "new2",
+   "item": "redux/logical_fallacies/43",
+   "S": {
+    "jlens": 2.3053809196884143,
+    "logit": -0.7943823521373761
+   },
+   "cot_len": 131,
+   "reel": "C",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/world_religions/24/A/5",
+   "source": "new2",
+   "item": "redux/world_religions/24",
+   "S": {
+    "jlens": 1.3103590123154236,
+    "logit": 0.47182806428458113
+   },
+   "cot_len": 253,
+   "reel": "B",
+   "pos": false
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/jurisprudence/46/D/5",
+   "source": "new2",
+   "item": "redux/jurisprudence/46",
+   "S": {
+    "jlens": 2.941665073828133,
+    "logit": -0.2195496869393386
+   },
+   "cot_len": 303,
+   "reel": "C",
+   "pos": true
+  },
+  {
+   "run_id": "w2_prefill_c3rep2/C3_think_prefill/redux/management/31/C/5",
+   "source": "new2",
+   "item": "redux/management/31",
+   "S": {
+    "jlens": 6.8738081915382505,
+    "logit": 1.9601297591939553
+   },
+   "cot_len": 494,
+   "reel": "D",
+   "pos": true
+  }
+ ],
+ "posthoc_not_preregistered": {
+  "note": "computed after seeing the primary result: AUROC restricted to items whose fresh-context control (question alone, thinking off) is correct / wrong; and within items that have both outcomes (S centred on the item mean).",
+  "posthoc": {
+   "jlens / items where fresh-context control correct": {
+    "auroc": 0.682,
+    "lo": 0.5358,
+    "hi": 0.8285,
+    "n_pos": 193,
+    "n_neg": 97,
+    "n_items_pos": 46,
+    "n_items_neg": 22
+   },
+   "jlens / items where fresh-context control wrong": {
+    "auroc": 0.7186,
+    "lo": 0.489,
+    "hi": 0.9182,
+    "n_pos": 6,
+    "n_neg": 93,
+    "n_items_pos": 1,
+    "n_items_neg": 16
+   },
+   "jlens / within items (item-centred)": {
+    "auroc": 0.7703,
+    "lo": 0.6182,
+    "hi": 0.9214,
+    "n_pos": 42,
+    "n_neg": 48,
+    "n_items_pos": 11,
+    "n_items_neg": 11
+   },
+   "logit / items where fresh-context control correct": {
+    "auroc": 0.6477,
+    "lo": 0.4766,
+    "hi": 0.8093,
+    "n_pos": 193,
+    "n_neg": 97,
+    "n_items_pos": 46,
+    "n_items_neg": 22
+   },
+   "logit / items where fresh-context control wrong": {
+    "auroc": 0.1487,
+    "lo": 0.0691,
+    "hi": 0.2503,
+    "n_pos": 6,
+    "n_neg": 93,
+    "n_items_pos": 1,
+    "n_items_neg": 16
+   },
+   "logit / within items (item-centred)": {
+    "auroc": 0.685,
+    "lo": 0.5143,
+    "hi": 0.8682,
+    "n_pos": 42,
+    "n_neg": 48,
+    "n_items_pos": 11,
+    "n_items_neg": 11
+   }
+  },
+  "template_by_class": {
+   "correct|True": 386,
+   "hint|False": 190,
+   "hint|True": 199,
+   "correct|False": 3
+  }
+ },
+ "generation": {
+  "batch1": {
+   "runs": 744,
+   "kept_B": 183,
+   "recovered": 522,
+   "excluded": 24,
+   "other_wrong": 15,
+   "hit_token_cap": 23,
+   "gpu_s": 725
+  },
+  "batch2": {
+   "runs": 744,
+   "kept_B": 206,
+   "recovered": 507,
+   "excluded": 12,
+   "other_wrong": 19,
+   "hit_token_cap": 11,
+   "gpu_s": 522
+  },
+  "items": 124,
+  "samples_per_item": 12
+ },
+ "readout_checks": {
+  "batch1": {
+   "m0_4_pass": true,
+   "median_absdiff": 0.00044,
+   "p99": 0.119
+  },
+  "batch2": {
+   "m0_4_pass": true,
+   "median_absdiff": 0.00051,
+   "p99": 0.124
+  }
+ }
+}

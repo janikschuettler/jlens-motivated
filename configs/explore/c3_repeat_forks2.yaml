@@ -1,0 +1,12 @@
+# Pre-registered repeat of the planted-claim re-elicitation lead (preregistration.md "R-C3", second batch, amendment R-C3.1).
+# Same fork as the original (w2/forks_reelicit_p2): template (reasoning dropped) and full
+# history, thinking off, 1 token. Every run that kept the planted letter (no cap), and the
+# usual matched sample of recovered runs; fresh-context control per item.
+name: w2/forks_reelicit_c3rep2
+kind: reelicit
+out_dir: data/explore/w2/forks_reelicit_c3rep2
+modes: [template, full]
+control: true
+select: {classes: [hint, correct], cap: null, match_correct_to_hint: true, match_min: 20, seed: 0}
+sources:
+  - {path: data/explore/w2/prefill_c3rep2/runs.jsonl}

@@ -2798,37 +2798,75 @@
    "title": "Pre-registered repeats of the two small leads",
    "strand": "C",
    "also": [],
-   "status": "upcoming",
+   "status": "done",
    "kind": "pre-registered",
-   "verdict": "pending",
-   "question": "Two leads rest on small groups. Among claim followers, runs that give the correct answer when asked had a higher correct-letter margin at layers 30–32 (main readout; T2's exploratory part). Planted-claim runs showed the same link. Do they hold with definitions fixed in advance?",
-   "method": "A test like T2 with the layer 30–32 score fixed in advance, and the planted-claim link on more runs and questions. Both report a length baseline and the logit lens next to the J-lens.",
-   "result": "Not run yet.",
-   "numbers": [],
-   "numbers_note": null,
-   "interpretation": "Both leads rest on small groups and choices made after looking.",
-   "confidence": null,
-   "caveats": [],
+   "verdict": "supports",
+   "question": "Two leads rest on small groups. Among claim followers, runs that give the correct answer when asked had a higher correct-letter margin at layers 30–32 (main readout; T2's exploratory part). Planted-claim runs showed the same link. Do they hold with definitions fixed in advance? Done so far: the planted-claim lead. When the model's thinking starts with a planted wrong claim and it keeps that answer to the end, does the J-lens score at the answer position predict whether it names the correct option when re-asked with its reasoning removed?",
+   "method": "Planted-claim lead (pre-registered R-C3, amendment R-C3.1 logged before the data it governs was read): the model's thinking is prefilled with \"The answer is (B). Let me explain why.\" on the 124 reliably known questions not used before, 12 samples each (two batches of 6; thinking, T 0.6, top-p 0.95, top-k 20, max 8,192 tokens). All 389 runs that kept B were re-asked in a new turn with the reasoning removed, thinking off (\"which option is actually correct?\"), and read out with the J-lens and the logit lens. Score: at the position before the answer letter, log p(correct letter) minus the mean log p of the other wrong letters (not B), averaged over layers 14–32. Test: AUROC of that score, runs that name the correct option (199 runs, 47 questions) against runs that don't (190 runs, 38 questions), 95% question-bootstrap interval; pass if the lower bound is above 0.5. Reasoning length as the baseline. The layer 30–32 claim-follower repeat (like T2) has not been run.",
+   "result": "Planted-claim lead: passes, but weaker than the lead. Among runs that kept the planted wrong answer, the J-lens score at the answer separates runs that later name the correct option from runs that don't: AUROC 0.71 [0.57, 0.84] (0.5 = chance), against 0.86 in the original exploratory finding. The plain logit lens does not pass (0.60 [0.47, 0.74]), and reasoning length carries no signal (0.47). The score also separates runs within the same question (0.77 [0.62, 0.92] after centring on the question mean; 11 of 11 questions with both outcomes in the expected direction). Half the 'doesn't name it' runs are on questions the model also gets wrong when asked alone with thinking off; leaving those questions out gives 0.68 [0.54, 0.83] (post hoc). The second lead (claim followers, layers 30–32) is not done.",
+   "numbers": [
+    {
+     "label": "Kept-B runs: names correct when re-asked vs doesn't (AUROC, J-lens; pre-registered test)",
+     "value": "0.71 [0.57, 0.84]"
+    },
+    {
+     "label": "Same with the logit lens / with reasoning length alone",
+     "value": "0.60 [0.47, 0.74] / 0.47 [0.36, 0.58]"
+    },
+    {
+     "label": "J-lens score: runs that name correct / runs that don't (nats)",
+     "value": "+2.0 [+1.5, +2.5] / +0.3 [−0.3, +0.9]"
+    },
+    {
+     "label": "Within questions with both outcomes (J-lens, score centred per question)",
+     "value": "0.77 [0.62, 0.92]; 11 of 11 questions in the expected direction"
+    },
+    {
+     "label": "Only questions the model gets right alone with thinking off (J-lens, post hoc)",
+     "value": "0.68 [0.54, 0.83]"
+    },
+    {
+     "label": "Original exploratory lead (61 runs, 21 questions)",
+     "value": "0.86 [0.76, 0.96]"
+    }
+   ],
+   "numbers_note": "AUROC: chance that a random 'names correct' run has a higher score than a random 'doesn't' run (0.5 = chance, 1 = perfect). Intervals resample questions.",
+   "interpretation": "In runs that argue a planted wrong answer to the end, the J-lens readout at the moment of answering tells, better than chance and better than reasoning length, whether the model can still name the right answer once its own argument is out of context. This is the first pre-registered positive for the J-lens as a readout of retained knowledge here. But it is smaller than the lead suggested, and the J-lens vs logit-lens difference was not tested. Moderate confidence.",
+   "confidence": "moderate",
+   "caveats": [
+    "Re-asking with thinking off is a noisy knowledge test: the fresh-context control is right on only 79% of these questions, and half of the 'doesn't name it' runs are on questions where it is wrong.",
+    "The second batch of 6 samples was added after seeing the number of kept-B runs (before any re-asking result or readout). The first batch alone gives 0.69 [0.55, 0.84].",
+    "Weak in the shortest third of runs (under 195 reasoning tokens): 0.55 [0.36, 0.75].",
+    "The score is read just before the answer letter, so it reads the answer step, not the reasoning.",
+    "Only the planted-claim lead was repeated. The claim-follower repeat (layers 30–32, like T2) was not run; it needs its own entry if it is run."
+   ],
    "n": {
-    "items": null,
-    "runs": null
+    "items": 74,
+    "runs": 389
    },
    "dates": {
-    "start": null,
-    "end": null,
+    "start": "2026-11-04",
+    "end": "2026-11-04",
     "approx": false
    },
    "timing": {
-    "wall": null,
-    "gpu_hours": null,
-    "api_usd": null,
-    "note": null
+    "wall": "about 45 min (planted-claim part)",
+    "gpu_hours": 0.42,
+    "api_usd": 0,
+    "note": "Planted-claim part: generation 21 min (1,488 runs, 1.6M tokens), re-asking forks 2 min, readouts 2 min on octavia, 07:01–07:28 GMT."
    },
-   "machine": "arena9-octavia (L40S), planned",
+   "machine": "arena9-octavia (L40S)",
    "figure": null,
-   "reports": [],
-   "data": [],
-   "commits": [],
+   "reports": [
+    "docs/overnight/reports/c3_lead_repeat.md"
+   ],
+   "data": [
+    "docs/overnight/data/c3_lead_repeat.json"
+   ],
+   "commits": [
+    "9a433d0",
+    "6968bec"
+   ],
    "related": [
     "prereg-t2",
     "lens-c3"
