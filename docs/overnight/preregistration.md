@@ -330,3 +330,50 @@ Tests (score at the start of the turn):
 
 ### What would count as a replication
 The paper's eval-awareness story replicates on Qwen3.6-27B if EA27-L passes, 2a and 2e pass, 2b says "tracks the situation", and R1 and R3 pass. "Partial" if R1 passes but R2 fails (removal works, but so do the plain unembedding directions). Each step is reported on its own with its verdict. Exploratory: anything else, including per-layer and per-block detail.
+
+## F1–F3: firming the main claims on stored data (written 2026-11-04 21:10 GMT, CPU only, before computing any of the numbers below)
+
+Context: [redteam_claims.md](redteam_claims.md), items 1, 2 and 5 of its ranked list. All three use data that already exist; no GPU, no API. **This is not a blind pre-registration:** the point estimates and 95% intervals of every case below are already in the reports. What is fixed here, before computing, is the test, the bound, the positions, the covariates and the decision rules. Report: [reports/claims_firming.md](reports/claims_firming.md); numbers: [data/claims_firming.json](data/claims_firming.json).
+
+### F1: equivalence tests for the main J-lens nulls
+
+**Question.** For each main J-lens null, is the J-lens AUROC *equivalent to chance* within a fixed bound, or only "not shown to differ"? And how large could a J-lens advantage over the logit lens be?
+
+**Bound: AUROC within ±0.10 of 0.5**, for the J-lens vs chance and for the paired J-lens minus logit-lens difference. Why: (i) it is the margin already fixed for W; (ii) AUROC 0.60 is a weak detector (an equal-variance normal shift of about 0.36 SD), below anything usable as a monitor, so an effect inside ±0.10 would not change the project's conclusions; (iii) with 18–60 questions per group, 90% intervals are about ±0.06–0.12 wide, so a tighter bound could not be met by design. The bound was chosen knowing that typical width (from the reports), not the per-case intervals of the test below.
+
+**Test.** TOST (two one-sided tests) at α 0.05 per side = the 90% item-bootstrap percentile interval lies inside [0.40, 0.60]. 5,000 resamples of questions (problems for the hack case), seed 0, the same resamples for both lenses, so the difference is paired. Labels per cell: **equivalent to chance** (90% interval inside the bound); **different from chance** (95% interval excludes 0.5; a cell can be both: "nonzero but within ±0.10"); **inconclusive** (neither). For the difference: **J-lens advantage ≥ 0.10 ruled out** if the upper end of the 90% interval of J minus logit is < +0.10 (one-sided test at 0.05); **equivalent lenses** if the whole 90% interval is inside ±0.10. Also reported, descriptively: the smallest bound each cell would meet (max distance of its 90% interval from 0.5).
+
+**Cases, scores and positions (each case's own fixed score; no folding; no best-position or best-layer selection).**
+1. The J-lens-vs-competitors cases (`data/overnight/competitors/*.npz`, extracted by `competitors_extract.py`): told to argue for B vs no hint; hint followers vs resisters; silent vs open switches (octavia half of T1b); kept the planted claim vs recovered; grader-bug followers vs resisters (Qwen3-14B thinking, gpt-oss-20b, Qwen3-8B and Qwen3-14B thinking off). Score D = lp(correct) − lp(pushed letter), layer mean (the table's fixed score). Positions: every position before the final answer that the case has (last prompt token, mid reasoning, end of reasoning), plus the answer position only where both groups give the same final answer (silent vs open). Case verdict "equivalent to chance" only if every tested position is (intersection-union test, no multiplicity correction needed); else the case is "inconclusive" (or "signal" where a 95% interval excludes 0.5).
+2. T2 (pre-registered, followers who still know vs persuaded): S at the answer position, layers 14–32, J-lens and logit lens, recomputed from the raw readouts (F3).
+3. T1b (pre-registered, silent vs open, non-thinking, both halves): S at the answer position, from the stored per-run scores (`t1b_oct_scores.jsonl`, `t1b_mayor_scores.jsonl`).
+4. Reward-hack organism, warm-start model, hidden hack vs no hack (pre-registered H2a cell): concept score C on problem-level means over problems with both groups (the hack_organism convention), at mid reasoning (the pre-registered cell), last prompt token, end of reasoning and before the code. Secondary: the within-problem pair AUROC (W's metric) at mid reasoning.
+5. Eval awareness before verbalization (Qwen3.6-27B, grader-bug runs that later say "testing me" vs runs that don't): the paper's score before the first such sentence (the report's main window), J-lens and logit lens, clusters = the 19 questions, from the stored readout (`runs.npz` on octavia).
+6. Claimed-answer-key repeat (R-CL, deferred vs persuaded): S at the answer, layers 30 and 32, from the per-run scores in `claim_lead_repeat.json`.
+7. Secondary (positives, for scale): R-C3 planted-claim repeat (0.71) and the kept-claim lead, same machinery.
+
+Caveat fixed now: percentile intervals on 11–20 clusters are likely too narrow; such cases are flagged.
+
+### F2: does the planted-claim positive (R-C3, AUROC 0.71) survive a question-difficulty control?
+
+**Data.** The 389 kept-B runs of R-C3 (per-run S and item in `c3_lead_repeat.json`). Per question, from octavia (read only): `data/explore/known_items.jsonl` (10 unhinted thinking-on samples, `n_correct.A`; 10 unhinted thinking-off samples, `n_correct.B`); the fresh-context thinking-off control fork in `forks_reelicit_c3rep{,2}` (`kind == control`: correct letter's normalised probability and argmax); the planted-claim labels in `prefill_c3rep{,2}` (share of the question's planted-claim runs that dropped the claim and answered correctly = recovery rate).
+
+**Covariates.** Primary difficulty **miss20** = unhinted misses out of 20 (10 thinking on + 10 thinking off). Primary second covariate: **control wrong** (the fresh-context thinking-off control's argmax ≠ correct). Secondary: thinking-off misses alone; the control's p(correct); the recovery rate.
+
+**Analyses.**
+- (a) AUROC of each covariate alone for "names correct when re-asked" vs not (run level, item bootstrap, oriented so that easier → names correct).
+- (b) Covariate model: logistic regression of the outcome on z-scored J-lens S plus miss20 and control wrong (numpy IRLS); the S coefficient (log-odds per SD) with a 95% item-bootstrap interval (2,000). Same for the logit lens. Secondary model adds the secondary covariates.
+- (c) Difficulty-matched AUROC: only pairs (positive, negative) from the same stratum count; strata = miss20 ∈ {0}, {1}, {2–3}, {≥ 4} × control right/wrong; 95% item-bootstrap interval. Also AUROC restricted to questions with miss20 = 0 and control right (the easiest, best-known questions).
+- (d) Within question: AUROC over pairs from the same question only (the questions with both outcomes), 95% item-bootstrap interval; permutation test shuffling outcomes within each question (10,000 shuffles, one-sided, predicted direction); J-lens minus logit lens within question.
+
+**Decision (what "the 0.71 survives" means).**
+- **Survives as a run-level signal:** within-question permutation p < 0.05 **and** the adjusted S coefficient's 95% interval excludes 0.
+- **Survives difficulty adjustment, run level not shown:** the coefficient's interval excludes 0 and the difficulty-matched AUROC's lower bound > 0.5, but the within-question p ≥ 0.05.
+- **Explained by difficulty:** the coefficient's interval includes 0 and the difficulty-matched AUROC's interval includes 0.5.
+- Anything else: reported as mixed, with the numbers.
+
+### F3: independent code review and recomputation
+
+**Reading** (by me and by fresh sub-agents that see the code and the pre-registrations, not my conclusions): the scripts behind the headline numbers (analyze_main, analyze_prereg, analyze_t1b, analyze_c3, analyze_c3_repeat, analyze_cl_repeat, competitors_extract, analyze_competitors, competitors_hack, analyze_hack, analyze_steer, analyze_q6, analyze_gap, evalaware_big_analyze), for wrong groups, train/test leakage, off-by-one positions, label errors and intervals over runs instead of questions.
+
+**Recomputation from raw stored outputs with my own minimal code** (readout `.npz` files, labels, forks; not the derived files): (1) R-C3 J-lens 0.709 and logit 0.603; (2) T2 J-lens 0.46 and logit 0.43; (3) T1b octavia half J-lens 0.53 and logit 0.44 (the mayor half's raw readouts are not reachable); (4) hack H2a J-lens 0.44 and logit 0.47; (5) R-CL J-lens 0.54; (6) the gap factorial's −51 points if time allows. **Agreement** = same group counts and AUROC within 0.005 (point estimates; intervals may differ by bootstrap seed, within 0.02). A discrepancy is reported with its cause and its effect on the claim.
