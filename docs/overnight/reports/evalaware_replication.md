@@ -220,6 +220,6 @@ The paper's positive result rests on Claude-scale models and on transcripts wher
 ## Files
 
 - Code: `scripts/gen/evalaware_corpus.py`, `scripts/lens/evalaware_tokens.py`, `scripts/lens/readout_evalaware.py`, `scripts/lens/evalaware_ablate.py`, `scripts/lens/evalaware_steer.py`, `scripts/lens/analyze_evalaware.py`, `scripts/explore/evalaware_select.py`, `scripts/explore/evalaware_chain.sh`; tokens `configs/evalaware_tokens.json`; the blackmail prompt `configs/explore/blackmail.json` (jlens's copy, checked by sha256).
-- Raw runs and readouts (not in git): octavia `data/explore/evalaware/`, `data/readouts/evalaware/`; copies on arena9-cloud under `data/evalaware/`.
+- Raw data (not in git): the runs are on octavia `data/explore/evalaware/`, with a copy on arena9-cloud `data/octavia_archive/explore/evalaware/`. The readouts (1.3 GB) were moved to arena9-cloud `data/octavia_archive/readouts/evalaware/`; sha256 was identical for all 4,215 files before deletion on octavia. The analysis JSONs are in arena9-cloud `data/evalaware/`.
 - Timing: about 3 h wall-clock (00:00–03:00) and about 1.3 GPU-hours on octavia: generation 44 min, readouts 25 min, ablation rollouts 30 min, steering check 20 min. The GPU was lent to another agent 01:00–01:25. No API cost.
 
