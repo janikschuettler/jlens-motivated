@@ -73,6 +73,7 @@ uv manages both environments. Never use `pip install`. Generation and readout us
 
 - `gen` saves, for each run: prompt token IDs, completion token IDs, the log-probs of the sampled tokens, the decoded text, model and tokenizer revision, chat-template settings (`enable_thinking`), sampling parameters, seed, condition, item ID and hinted option.
 - `lens` teacher-forces exactly the saved IDs. It never re-tokenizes decoded text or re-applies the chat template, because re-tokenizing text doesn't reliably reproduce the generated IDs. If `jlens` can't take token IDs, apply the J matrices directly and check the result against `jlens` (roadmap M0.2).
+- **Exception (the user's decision, 2026-11-04): runs generated through an API** (which returns text, not token IDs) may be re-tokenized with the pinned tokenizer and chat template, so that larger models can be read out locally. Conditions: a fidelity check on every such run (its per-token log-probs under our local model, compared with the model's own generations; off-policy runs flagged by a rule fixed in advance), every such run labelled "re-tokenized from API text" in data and reports, and a note that the provider may serve different weights. Runs we generate ourselves still use their saved IDs.
 - The token IDs are the record of what was generated. Text from vLLM's reasoning parser is not.
 - Run data lives in `data/` in the repo, which is gitignored.
 
