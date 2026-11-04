@@ -38,7 +38,7 @@ from jmr.lens.steering import Steerer
 from jmr.tokens import fingerprint
 
 KV_BYTES_PER_TOKEN = 36 * 2 * 8 * 128 * 2  # Qwen3-8B, bf16
-KV_BUDGET = 12e9
+KV_BUDGET = 8e9  # with the weights and the allocator cache this stays under 40 GB
 MAX_ROWS = 32
 
 
@@ -51,6 +51,24 @@ def variants():
                 for a in steer.ANSWER_ALPHAS:
                     out.append((l, t, primary, a))
     return out
+
+
+def variants_other():
+    """Exploratory (added after part 1's results): push toward the *other* unchosen wrong
+    letter at block 24, to compare with pushing toward the correct letter. primary is
+    the string "other" in these rows."""
+    out = [(steer.ANSWER_PRIMARY_LAYER, "none", "other", 0.0)]
+    for t in ("jlens", "logit", "probe"):
+        for a in steer.ANSWER_ALPHAS:
+            out.append((steer.ANSWER_PRIMARY_LAYER, t, "other", a))
+    return out
+
+
+def other_letter(qid: str, letters, correct: str, hinted: str) -> str:
+    """The unchosen wrong letter used as the 'other' target: one of the two letters that
+    are neither correct nor B, fixed by the item ID."""
+    cands = [x for x in letters if x not in (correct, hinted)]
+    return cands[zlib.crc32(qid.encode()) % len(cands)]
 
 
 def random_k(qid: str) -> int:
@@ -78,6 +96,7 @@ def main():
     ap.add_argument("--groups", nargs="+", default=["instructed", "hint", "planted", "unhinted"])
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--device", default="cuda")
+    ap.add_argument("--mode", choices=["main", "other"], default="main")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -88,8 +107,9 @@ def main():
     runs = select(a.groups, items)
     if a.limit:
         runs = runs[:a.limit]
-    V = variants()
-    (out / "variants.json").write_text(json.dumps(V))
+    V = variants() if a.mode == "main" else variants_other()
+    sfx = "" if a.mode == "main" else "_other"
+    (out / f"variants{sfx}.json").write_text(json.dumps(V))
 
     m = config.load("model")
     hf_model, tok, lens_model = load_model(a.device)
@@ -104,7 +124,7 @@ def main():
     r = {l: float(D["r"][l]) for l in layers}
     st = Steerer(hf_model, layers)
 
-    path = out / "results.jsonl"
+    path = out / f"results{sfx}.jsonl"
     done = set()
     if path.exists():
         done = {json.loads(l)["run_id"] for l in open(path)}
@@ -161,7 +181,10 @@ def main():
                     if t == "random":
                         v = dirs[l]["random"][random_k(rec.question_id)] * (1 if primary else -1)
                     else:
-                        letter, sign = steer.target(g, rec.correct_letter, hinted, primary)
+                        if primary == "other":
+                            letter, sign = other_letter(rec.question_id, rec.letters, rec.correct_letter, hinted), 1
+                        else:
+                            letter, sign = steer.target(g, rec.correct_letter, hinted, primary)
                         v = sign * dirs[l][t][steer.LETTERS.index(letter)]
                     vecs[l][j] = alpha * r[l] * v
                 st.set(vecs)
@@ -184,7 +207,8 @@ def main():
                                 "question_id": rec.question_id, "correct": rec.correct_letter,
                                 "hinted": hinted, "answer": plan.answer, "pre_answer": p,
                                 "seq_len": len(ids), "tf_vs_vllm_answer_lp": tf_lp - vl, "rows": rows,
-                                "random_k": random_k(rec.question_id), "res": res}) + "\n")
+                                "random_k": random_k(rec.question_id), "res": res,
+                                "other": other_letter(rec.question_id, rec.letters, rec.correct_letter, hinted)}) + "\n")
             f.flush()
             if len(lp_diffs) == 20 and (np.median(lp_diffs) > 0.05 or np.mean(agree) < 0.95):
                 raise SystemExit(f"unsteered answer check failed after 20 runs: median |tf-vllm| "

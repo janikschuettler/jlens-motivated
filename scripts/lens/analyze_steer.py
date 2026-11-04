@@ -96,6 +96,38 @@ def part1(path: Path) -> dict:
     return out
 
 
+def part1_other(path: Path) -> dict:
+    """Exploratory: pushing toward the other unchosen wrong letter (block 24). 'moved' =
+    the answer letter is now that letter. Compare with the primary curves (toward the
+    correct letter) of the same runs."""
+    V = [tuple(v) for v in json.loads((path / "variants_other.json").read_text())]
+    rows = [json.loads(l) for l in open(path / "results_other.jsonl")]
+    L = steer.LETTERS
+    by = defaultdict(list)
+    for r in rows:
+        o = L.index(r["other"])
+        for (layer, t, _, alpha), res in zip(V, r["res"]):
+            if t == "none":
+                continue
+            am = max(range(4), key=lambda k: res[k])
+            x = {"question_id": r["question_id"], "moved": float(am == o),
+                 "letter_mass": sum(math.exp(v) for v in res[:4])}
+            by[(r["group"], t, alpha)].append(x)
+            if r["group"] in steer.FOLLOWED_GROUPS:
+                by[("followed_pooled", t, alpha)].append(x)
+    out = {"curves": {}, "summary": {}}
+    for (g, t, a), xs in sorted(by.items(), key=lambda kv: str(kv[0])):
+        mv = steer.boot_mean(steer.item_means(xs, lambda r: r["moved"]))
+        out["curves"].setdefault(f"{g}|L24|{t}|other", []).append(
+            {"alpha": a, "moved": mv["mean"], "lo": mv["lo"], "hi": mv["hi"], "n_items": mv["n_items"],
+             "letter_mass": _mean(xs, "letter_mass")})
+    for g in sorted({k[0] for k in by}):
+        out["summary"][g] = {t: steer.boot_mean(steer.item_means(
+            [x for (gg, tt, a), v in by.items() if gg == g and tt == t for x in v], lambda r: r["moved"]))
+            for t in ("jlens", "logit", "probe")}
+    return out
+
+
 def _mean(xs, k):
     v = [x[k] for x in xs if not (isinstance(x[k], float) and math.isnan(x[k]))]
     return sum(v) / len(v) if v else None
@@ -218,6 +250,8 @@ def main():
                                                   "n_probe_items", "norm_convention")}
     if (Path(a.answer) / "results.jsonl").exists():
         res["part1"] = part1(Path(a.answer))
+    if (Path(a.answer) / "results_other.jsonl").exists():
+        res["part1_other"] = part1_other(Path(a.answer))
     options = {}
     for l in open(steer.POOL_FILE):
         r = json.loads(l)
