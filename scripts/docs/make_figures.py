@@ -854,6 +854,63 @@ def fig_models_grader():
                   "API rows: OpenRouter, one provider each (mostly fp8). Followers name the bug in their reasoning in ≥ 95% of runs (judge + reading)."])
 
 
+def fig_steering():
+    D = load("steering")
+    H = D["headline"]
+    series = {"jlens": ("circle", BLUE, "J-lens direction"), "logit": ("square", ORANGE, "logit-lens direction"),
+              "probe": ("diamond", AQUA, "probe direction"), "random": ("open", GREY, "random direction")}
+    names = {"followed_pooled": "all three wrong-answer groups", "instructed": "told to argue for B",
+             "hint": "\"Hint: The answer is B.\"", "planted": "planted \"The answer is (B).\"",
+             "unhinted": "no hint, push away from correct"}
+    p1 = H["part1"]["primary"]
+
+    def vals(d):
+        return [{"s": t, "v": d[t]["mean"], "lo": d[t]["lo"], "hi": d[t]["hi"]} for t in series if d.get(t)]
+
+    rows1 = [{"label": names[g], "sub": f"{p1[g]['L24']['mean_moved']['jlens']['n_items']} questions",
+              "vals": vals(p1[g]["L24"]["mean_moved"])}
+             for g in ("followed_pooled", "instructed", "hint", "planted", "unhinted") if g in p1]
+    rows_l = [{"label": f"block {l[1:]}", "sub": "wrong-answer groups", "vals": vals(p1["followed_pooled"][l]["mean_moved"])}
+              for l in ("L16", "L20", "L24", "L28")]
+    rows_lu = [{"label": f"block {l[1:]}", "sub": "no hint", "vals": vals(p1["unhinted"][l]["mean_moved"])}
+               for l in ("L16", "L20", "L24", "L28")]
+    kw = dict(xmin=0, xmax=1, step=0.25, fmt=pct, x_fmt=pct_axis, series=series, label_w=330, right_w=40,
+              value_labels=False, row_h=30)
+    blocks = [("1. Push at the answer position only (block 24): share of answers moved, mean over 7 strengths",
+               dict(rows=rows1, xlabel="share of answers moved the intended way", **kw)),
+              ("2. Same, by layer", dict(rows=rows_l + rows_lu, xlabel="share of answers moved the intended way", **kw))]
+    if "part2" in H:
+        P2 = H["part2"]
+        s2 = dict(series)
+        s2["none"] = ("diamond", INK3, "no push")
+        for measure, title in (("final_correct", "3. Push at every generated token (block 24, strength 0.2): final answer correct, forced read at the cap"),
+                               ("natural_correct", "4. Same runs, with runs that hit the 2,048-token cap counted as no answer")):
+            rows2 = []
+            for g in ("followed_pooled", "instructed", "hint", "planted", "unhinted"):
+                c = P2["cells"].get(g)
+                if not c:
+                    continue
+                lo_, base = c.get("0.2", {}), c.get("0", {})
+                v = [{"s": "none", "v": base["none"][measure]["mean"], "lo": base["none"][measure]["lo"],
+                      "hi": base["none"][measure]["hi"]}] if base.get("none") else []
+                v += [{"s": t, "v": lo_[t][measure]["mean"], "lo": lo_[t][measure]["lo"],
+                       "hi": lo_[t][measure]["hi"]} for t in series if lo_.get(t)]
+                rows2.append({"label": names[g].replace(", push away from correct", " (push away from correct)"),
+                              "sub": "", "vals": v})
+            blocks.append((title, dict(rows=rows2, xlabel="share of final answers that are correct", series=s2,
+                                       **{k: v_ for k, v_ in kw.items() if k != "series"})))
+    figure("fig13_steering.svg",
+           "Does pushing the hidden state along the J-lens direction of the correct letter change the answer?",
+           ["Qwen3-8B, thinking mode, 40 questions it knows. Each direction is centred over the four letters and has the "
+            "same size: a strength of 0.1 adds a tenth of a typical hidden-state norm at that layer. In the wrong-answer "
+            "groups we push toward the correct letter; in no-hint runs we push away from it. 95% intervals over questions. "
+            "Pre-registered (S1-S3). Deviation: generation capped at 2,048 tokens (plan: 3,072; home setting 8,192), "
+            "chosen for time; needs the user's acceptance."],
+           blocks, legend_items=[(sh, c, n) for sh, c, n in series.values()] + [("diamond", INK3, "no push")],
+           notes=["Source: docs/overnight/data/steering.json (headline). Report: docs/overnight/reports/steering.md."],
+           width=900)
+
+
 def fig_competitors():
     D = load("jlens_vs_competitors")
     rows_by = {r["case"]: r for r in D["figure"]}
@@ -917,6 +974,8 @@ def main():
     fig_hack()
     fig_models_grader()
     fig_competitors()
+    if (DATA / "steering.json").exists():
+        fig_steering()
 
 
 if __name__ == "__main__":
