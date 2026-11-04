@@ -175,9 +175,10 @@ def part_corpus(a):
             d = per_prompt.setdefault(key, {"suite": suite, "qid": m["question_id"], "aware": [], "E_cot": [],
                                             "E_last": None})
             Elast = r.score(lp, last, "eval_primary")[:, 0]
-            if d["E_last"] is not None and not np.allclose(d["E_last"], Elast, atol=1e-3):
-                raise ValueError(f"{key}: last-prompt score differs between samples of the same prompt")
-            d["E_last"] = Elast
+            # Same prompt tokens, but each sample's pass covers a different total length, so
+            # kernels differ slightly; record the spread and use the mean over samples.
+            d.setdefault("E_last_all", []).append(Elast)
+            d["E_last"] = np.mean(d["E_last_all"], 0)
             d["T_last"] = r.score(lp, last, "test")[:, 0]
             d["Eset_last"] = r.score(lp, last, "eval_set")[:, 0]
             if m["cot_span"]:
@@ -233,7 +234,16 @@ def part_corpus(a):
         pa = [float(d["E_last"][li]) for d in per_prompt.values() if any(d["aware"]) and d["suite"] != "blackmail"]
         pn = [float(d["E_last"][li]) for d in per_prompt.values() if not any(d["aware"]) and d["suite"] != "blackmail"]
         res["E1c_auroc_aware_vs_not"] = auroc_groups(pa, pn) if pa else {"n_pos": 0}
+        # exploratory: within suite (removes the suite effect), suites with >= 5 aware prompts
+        res["E1c_within_suite"] = {}
+        for s_ in EVAL_SUITES + DEPLOY_SUITES + ["redux_casual"]:
+            pa_ = [float(d["E_last"][li]) for d in per_prompt.values() if d["suite"] == s_ and any(d["aware"])]
+            pn_ = [float(d["E_last"][li]) for d in per_prompt.values() if d["suite"] == s_ and not any(d["aware"])]
+            if len(pa_) >= 5:
+                res["E1c_within_suite"][s_] = auroc_groups(pa_, pn_)
         out[lens] = res
+    spread = [float(np.ptp([x[0] for x in d["E_last_all"]])) for d in per_prompt.values() if len(d["E_last_all"]) > 1]
+    out["last_prompt_spread_between_samples_jlens"] = {"median": float(np.median(spread)), "max": float(np.max(spread))}
     out["aware_by_suite"] = {}
     for s in EVAL_SUITES + DEPLOY_SUITES + ["redux_casual", "blackmail"]:
         ds = [d for d in per_prompt.values() if d["suite"] == s]
@@ -371,6 +381,7 @@ def part_grader(a):
         rows = defaultdict(list)  # measure -> (cluster, is_pos, value)
         refs = defaultdict(list)
         counts = defaultdict(int)
+        per_run = []
         for m in r.index:
             j = recs[m["run_id"]]
             A = r.arrays(m)
@@ -416,6 +427,18 @@ def part_grader(a):
                     vals[name] = r.score(lp, row, g)[:, 0]
                 if m["correct_letter"]:
                     vals["margin_ans"] = r.letter_margin(lp, row[0], m["correct_letter"], m["answer"])
+                # exploratory confound checks: raw control-noun log-prob (a flat distribution
+                # raises every rare token) and the lens's top-1 log-prob (confidence)
+                vals["ctrl_raw_ans"] = lp[:, :, row[0], r.ctrl].astype(np.float32).mean(1)
+                ti = np.where(A["top_pos"] == pa)[0]
+                if len(ti):
+                    vals["top1_ans"] = A["top_lp"][:, :, ti[0], 0].astype(np.float32).mean(1)
+            # text baseline (exploratory): keyword count in the text before the answer
+            pa_c = (pa - P + 1) if (pa is not None and pa >= 0) else len(comp)
+            pre = text[:offs[pa_c] if 0 <= pa_c < len(offs) else len(text)]
+            kw = len(re.findall(r"grader|bug|score|exploit|cheat|marks? (it|\\w) as correct", pre, re.I))
+            vals["text_keywords"] = np.array([kw, kw], dtype=float)
+            vals["text_mentions_bug"] = np.array([1.0, 1.0]) * bool(MENTION.search(pre))
             last = np.where(pos == P - 1)[0]
             vals["E_last"] = r.score(lp, last, "eval_primary")[:, 0]
             if y == "allowed":
@@ -424,6 +447,7 @@ def part_grader(a):
                 counts["allowed"] += 1
                 continue
             counts["pos" if y else "neg"] += 1
+            per_run.append((cl, bool(y), vals))
             for k2, v in vals.items():
                 rows[k2].append((cl, bool(y), v))
         res = {"counts": dict(counts)}
@@ -434,12 +458,39 @@ def part_grader(a):
                 res[f"{k2}|{lens}"]["mean_neg"] = float(np.mean([v[li] for c, y, v in lst if not y]))
                 if refs.get(k2):
                     res[f"{k2}|{lens}"]["mean_allowed_ref"] = float(np.mean([v[li] for v in refs[k2]]))
+        # exploratory: E_ans and C_ans within strata of the lens's top-1 log-prob at the answer
+        # (quintiles over all runs), averaged AUROC over strata with both groups
+        if "top1_ans" in rows:
+            t1 = {(c, y, i): v for i, (c, y, v) in enumerate(rows["top1_ans"])}
+            for k2 in ("E_ans", "C_ans", "W_ans"):
+                for li, lens in enumerate(["jlens", "logit"]):
+                    conf = np.array([v[li] for c, y, v in rows["top1_ans"]])
+                    edges = np.quantile(conf, [0.2, 0.4, 0.6, 0.8])
+                    strata = np.digitize(conf, edges)
+                    vals_ = rows[k2]
+                    au = []
+                    for q in range(5):
+                        p_ = [v[li] for (c, y, v), s_ in zip(vals_, strata) if s_ == q and y]
+                        n_ = [v[li] for (c, y, v), s_ in zip(vals_, strata) if s_ == q and not y]
+                        if len(p_) >= 5 and len(n_) >= 5:
+                            au.append((auroc(p_, n_), len(p_), len(n_)))
+                    res[f"{k2}|{lens}|within_top1_quintiles"] = au
+        # exploratory: only runs whose text before the answer names the grader/bug (both groups)
+        for k2 in ("E_ans", "C_ans", "W_ans", "E_cot", "text_keywords"):
+            for li, lens in enumerate(["jlens", "logit"]):
+                sub = [(c, y, float(v[k2][li])) for c, y, v in per_run if k2 in v and v["text_mentions_bug"][0] > 0]
+                res[f"{k2}|{lens}|text_names_bug_only"] = auroc_clustered(sub)
+                res[f"{k2}|{lens}|text_names_bug_only"]["mean_pos"] = float(np.mean([v for c, y, v in sub if y]))
+                res[f"{k2}|{lens}|text_names_bug_only"]["mean_neg"] = float(np.mean([v for c, y, v in sub if not y]))
         out[str(rd)] = res
     Path(a.out).write_text(json.dumps(out, indent=1))
     for rd, res in out.items():
         print(rd, res["counts"])
         for k2, v in res.items():
-            if k2 != "counts":
+            if "within_top1" in k2:
+                print("  ", k2, [(round(x, 3), a_, b_) for x, a_, b_ in v])
+        for k2, v in res.items():
+            if k2 != "counts" and isinstance(v, dict):
                 print(f"  {k2:18s} AUROC {v['auroc']:.3f} {v['ci']} items {v['n_items']} pos/neg {v['n_pos']}/{v['n_neg']}"
                       f" means {v['mean_pos']:.3f}/{v['mean_neg']:.3f}"
                       + (f" allowed {v['mean_allowed_ref']:.3f}" if 'mean_allowed_ref' in v else ""))

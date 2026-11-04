@@ -3,7 +3,7 @@
   uv run --project envs/lens python scripts/lens/evalaware_tokens.py --out configs/evalaware_tokens.json
 
 Word lists are fixed here before any readout (rule 3). Source for the eval-awareness
-words: Gurnee, Lindsey et al. 2026, "Verbalizable Representations Form a Global
+words: Gurnee, Sofroniew et al. 2026, "Verbalizable Representations Form a Global
 Workspace in Language Models" (transformer-circuits.pub/2026/workspace), blackmail
 case study (the 28-token ablation list) and appendix "Measuring evaluation awareness
 with the J-lens" (the score: mean lens log-prob of "fictional" and "simulation" minus

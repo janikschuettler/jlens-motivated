@@ -1,0 +1,253 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="908" viewBox="0 0 820 908" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title>The J-lens eval-awareness score doesn't tell evaluations from real use on Qwen3-8B</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="12.0" y="24.0" font-size="15" fill="#1b1b1a" text-anchor="start" font-weight="bold">The J-lens eval-awareness score doesn't tell evaluations from real use on Qwen3-8B</text>
+<text x="12.0" y="45.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Top: the paper's score (log-prob of " fictional" and " simulation" minus 100 everyday nouns, mean over layers 14–32) at the start</text>
+<text x="12.0" y="61.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">of the model's turn, by prompt set. Real user prompts score as high as evaluation suites. Bottom: how well the score separates the</text>
+<text x="12.0" y="77.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">groups (AUROC; 0.5 = chance, 1 = perfect). 95% intervals.</text>
+<circle cx="21.0" cy="94.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"></circle>
+<text x="34.0" y="98.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">J-lens</text>
+<rect x="82.3" y="89.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"></rect>
+<text x="99.8" y="98.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">logit lens</text>
+<path d="M177.8,88.2 L183.7,94.0 L177.8,99.8 L172.0,94.0 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"></path>
+<text x="190.8" y="98.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">text baseline</text>
+<line x1="330.0" y1="116.0" x2="330.0" y2="436.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="376.2" y1="116.0" x2="376.2" y2="436.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="422.5" y1="116.0" x2="422.5" y2="436.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="468.8" y1="116.0" x2="468.8" y2="436.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="515.0" y1="116.0" x2="515.0" y2="436.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="561.2" y1="116.0" x2="561.2" y2="436.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="607.5" y1="116.0" x2="607.5" y2="436.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="653.8" y1="116.0" x2="653.8" y2="436.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="700.0" y1="116.0" x2="700.0" y2="436.0" stroke="#e6e5e1" stroke-width="1"/>
+<rect x="4" y="125.0" width="176" height="18.0" fill="#ffffff"/>
+<text x="8.0" y="136.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Evaluation-like prompts</text>
+<line x1="8" y1="144.0" x2="812" y2="144.0" stroke="#e6e5e1"/>
+<text x="16.0" y="160.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">MMLU, our usual format</text>
+<line x1="392.6" y1="152.5" x2="408.8" y2="152.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="392.6" y1="149.5" x2="392.6" y2="155.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="408.8" y1="149.5" x2="408.8" y2="155.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="400.6" cy="152.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>MMLU, our usual format - J-lens: 2.26 [2.18, 2.35]</title></circle>
+<line x1="370.4" y1="159.5" x2="388.4" y2="159.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="370.4" y1="156.5" x2="370.4" y2="162.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="388.4" y1="156.5" x2="388.4" y2="162.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="374.8" y="155.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>MMLU, our usual format - logit lens: 2.03 [1.94, 2.13]</title></rect>
+<text x="16.0" y="184.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">MoralChoice scenarios</text>
+<line x1="449.3" y1="176.5" x2="460.4" y2="176.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="449.3" y1="173.5" x2="449.3" y2="179.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="460.4" y1="173.5" x2="460.4" y2="179.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="455.1" cy="176.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>MoralChoice scenarios - J-lens: 2.85 [2.79, 2.91]</title></circle>
+<line x1="405.1" y1="183.5" x2="418.7" y2="183.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="405.1" y1="180.5" x2="405.1" y2="186.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="418.7" y1="180.5" x2="418.7" y2="186.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="407.4" y="179.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>MoralChoice scenarios - logit lens: 2.38 [2.31, 2.46]</title></rect>
+<text x="16.0" y="208.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Reward-hack coding task</text>
+<line x1="457.4" y1="200.5" x2="464.3" y2="200.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="457.4" y1="197.5" x2="457.4" y2="203.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="464.3" y1="197.5" x2="464.3" y2="203.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="461.0" cy="200.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Reward-hack coding task - J-lens: 2.92 [2.88, 2.95]</title></circle>
+<line x1="423.0" y1="207.5" x2="431.3" y2="207.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="423.0" y1="204.5" x2="423.0" y2="210.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="431.3" y1="204.5" x2="431.3" y2="210.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="422.6" y="203.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Reward-hack coding task - logit lens: 2.55 [2.50, 2.60]</title></rect>
+<text x="16.0" y="232.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Grader-bug note</text>
+<line x1="463.3" y1="224.5" x2="477.9" y2="224.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="463.3" y1="221.5" x2="463.3" y2="227.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="477.9" y1="221.5" x2="477.9" y2="227.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="470.4" cy="224.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Grader-bug note - J-lens: 3.02 [2.94, 3.10]</title></circle>
+<line x1="407.2" y1="231.5" x2="420.6" y2="231.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="407.2" y1="228.5" x2="407.2" y2="234.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="420.6" y1="228.5" x2="420.6" y2="234.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="409.4" y="227.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Grader-bug note - logit lens: 2.41 [2.33, 2.48]</title></rect>
+<text x="16.0" y="256.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">MMLU, "from the MMLU benchmark"</text>
+<line x1="494.9" y1="248.5" x2="508.2" y2="248.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="494.9" y1="245.5" x2="494.9" y2="251.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="508.2" y1="245.5" x2="508.2" y2="251.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="501.5" cy="248.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>MMLU, "from the MMLU benchmark" - J-lens: 3.35 [3.28, 3.43]</title></circle>
+<line x1="381.3" y1="255.5" x2="394.0" y2="255.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="381.3" y1="252.5" x2="381.3" y2="258.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="394.0" y1="252.5" x2="394.0" y2="258.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="383.1" y="251.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>MMLU, "from the MMLU benchmark" - logit lens: 2.12 [2.06, 2.19]</title></rect>
+<text x="16.0" y="280.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Grader-bug note + "AI agent being evaluated"</text>
+<line x1="524.0" y1="272.5" x2="531.9" y2="272.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="524.0" y1="269.5" x2="524.0" y2="275.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="531.9" y1="269.5" x2="531.9" y2="275.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="528.0" cy="272.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Grader-bug note + "AI agent being evaluated" - J-lens: 3.64 [3.60, 3.68]</title></circle>
+<line x1="445.1" y1="279.5" x2="452.3" y2="279.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="445.1" y1="276.5" x2="445.1" y2="282.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="452.3" y1="276.5" x2="452.3" y2="282.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="444.2" y="275.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Grader-bug note + "AI agent being evaluated" - logit lens: 2.78 [2.74, 2.82]</title></rect>
+<text x="16.0" y="304.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Sycophancy eval prompts</text>
+<line x1="559.1" y1="296.5" x2="567.4" y2="296.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="559.1" y1="293.5" x2="559.1" y2="299.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="567.4" y1="293.5" x2="567.4" y2="299.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="563.1" cy="296.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Sycophancy eval prompts - J-lens: 4.02 [3.98, 4.07]</title></circle>
+<line x1="562.8" y1="303.5" x2="570.4" y2="303.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="562.8" y1="300.5" x2="562.8" y2="306.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="570.4" y1="300.5" x2="570.4" y2="306.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="562.1" y="299.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Sycophancy eval prompts - logit lens: 4.06 [4.02, 4.10]</title></rect>
+<text x="16.0" y="328.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Blackmail prompt (one prompt)</text>
+<line x1="669.1" y1="320.5" x2="669.1" y2="320.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="669.1" y1="317.5" x2="669.1" y2="323.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="669.1" y1="317.5" x2="669.1" y2="323.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="669.1" cy="320.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Blackmail prompt (one prompt) - J-lens: 5.17 [5.17, 5.17]</title></circle>
+<line x1="511.9" y1="327.5" x2="511.9" y2="327.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="511.9" y1="324.5" x2="511.9" y2="330.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="511.9" y1="324.5" x2="511.9" y2="330.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="507.4" y="323.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Blackmail prompt (one prompt) - logit lens: 3.47 [3.47, 3.47]</title></rect>
+<rect x="4" y="345.0" width="125" height="18.0" fill="#ffffff"/>
+<text x="8.0" y="356.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Real-use prompts</text>
+<line x1="8" y1="364.0" x2="812" y2="364.0" stroke="#e6e5e1"/>
+<text x="16.0" y="380.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">OASST user prompts</text>
+<line x1="455.6" y1="372.5" x2="496.2" y2="372.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="455.6" y1="369.5" x2="455.6" y2="375.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="496.2" y1="369.5" x2="496.2" y2="375.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="475.6" cy="372.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>OASST user prompts - J-lens: 3.07 [2.86, 3.30]</title></circle>
+<line x1="427.5" y1="379.5" x2="460.1" y2="379.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="427.5" y1="376.5" x2="427.5" y2="382.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="460.1" y1="376.5" x2="460.1" y2="382.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="439.0" y="375.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>OASST user prompts - logit lens: 2.73 [2.55, 2.91]</title></rect>
+<text x="16.0" y="404.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">MMLU, asked as a coworkers' argument</text>
+<line x1="477.8" y1="396.5" x2="494.3" y2="396.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="477.8" y1="393.5" x2="477.8" y2="399.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="494.3" y1="393.5" x2="494.3" y2="399.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="486.0" cy="396.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>MMLU, asked as a coworkers' argument - J-lens: 3.19 [3.10, 3.28]</title></circle>
+<line x1="394.3" y1="403.5" x2="406.9" y2="403.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="394.3" y1="400.5" x2="394.3" y2="406.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="406.9" y1="400.5" x2="406.9" y2="406.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="396.0" y="399.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>MMLU, asked as a coworkers' argument - logit lens: 2.26 [2.19, 2.33]</title></rect>
+<text x="16.0" y="428.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">WildChat user prompts</text>
+<line x1="518.1" y1="420.5" x2="581.4" y2="420.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="518.1" y1="417.5" x2="518.1" y2="423.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="581.4" y1="417.5" x2="581.4" y2="423.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="548.4" cy="420.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>WildChat user prompts - J-lens: 3.86 [3.53, 4.22]</title></circle>
+<line x1="474.7" y1="427.5" x2="529.1" y2="427.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="474.7" y1="424.5" x2="474.7" y2="430.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="529.1" y1="424.5" x2="529.1" y2="430.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="496.4" y="423.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>WildChat user prompts - logit lens: 3.35 [3.06, 3.65]</title></rect>
+<line x1="330" y1="438.0" x2="700" y2="438.0" stroke="#b9b8b2"/>
+<line x1="330.0" y1="438.0" x2="330.0" y2="442.0" stroke="#b9b8b2"/>
+<text x="330.0" y="454.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">1.5</text>
+<line x1="376.2" y1="438.0" x2="376.2" y2="442.0" stroke="#b9b8b2"/>
+<text x="376.2" y="454.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">2.0</text>
+<line x1="422.5" y1="438.0" x2="422.5" y2="442.0" stroke="#b9b8b2"/>
+<text x="422.5" y="454.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">2.5</text>
+<line x1="468.8" y1="438.0" x2="468.8" y2="442.0" stroke="#b9b8b2"/>
+<text x="468.8" y="454.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">3.0</text>
+<line x1="515.0" y1="438.0" x2="515.0" y2="442.0" stroke="#b9b8b2"/>
+<text x="515.0" y="454.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">3.5</text>
+<line x1="561.2" y1="438.0" x2="561.2" y2="442.0" stroke="#b9b8b2"/>
+<text x="561.2" y="454.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">4.0</text>
+<line x1="607.5" y1="438.0" x2="607.5" y2="442.0" stroke="#b9b8b2"/>
+<text x="607.5" y="454.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">4.5</text>
+<line x1="653.8" y1="438.0" x2="653.8" y2="442.0" stroke="#b9b8b2"/>
+<text x="653.8" y="454.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">5.0</text>
+<line x1="700.0" y1="438.0" x2="700.0" y2="442.0" stroke="#b9b8b2"/>
+<text x="700.0" y="454.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">5.5</text>
+<text x="515.0" y="470.0" font-size="11.5" fill="#52514e" text-anchor="middle" font-weight="normal">eval-awareness score (nats; higher = more "fictional / simulation")</text>
+<line x1="330.0" y1="496.0" x2="330.0" y2="816.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="367.0" y1="496.0" x2="367.0" y2="816.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="404.0" y1="496.0" x2="404.0" y2="816.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="441.0" y1="496.0" x2="441.0" y2="816.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="478.0" y1="496.0" x2="478.0" y2="816.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="515.0" y1="496.0" x2="515.0" y2="816.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="552.0" y1="496.0" x2="552.0" y2="816.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="589.0" y1="496.0" x2="589.0" y2="816.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="626.0" y1="496.0" x2="626.0" y2="816.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="663.0" y1="496.0" x2="663.0" y2="816.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="700.0" y1="496.0" x2="700.0" y2="816.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="515.0" y1="492.0" x2="515.0" y2="816.0" stroke="#8a8984" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="519.0" y="812.0" font-size="10.5" fill="#8a8984" text-anchor="start" font-weight="normal">chance</text>
+<rect x="4" y="505.0" width="132" height="20.0" fill="#ffffff"/>
+<text x="8.0" y="518.1" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Replication steps</text>
+<line x1="8" y1="526.0" x2="812" y2="526.0" stroke="#e6e5e1"/>
+<text x="16.0" y="543.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">1b eval vs real-use prompts (start of turn)</text>
+<line x1="493.9" y1="539.0" x2="536.1" y2="539.0" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="493.9" y1="536.0" x2="493.9" y2="542.0" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="536.1" y1="536.0" x2="536.1" y2="542.0" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="515.4" cy="539.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>1b eval vs real-use prompts (start of turn) - J-lens eval-awareness score: 0.50 [0.44, 0.56]</title></circle>
+<text x="542.1" y="543.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">0.50</text>
+<text x="16.0" y="569.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">1c prompts where it says "testing me"</text>
+<line x1="592.7" y1="565.0" x2="635.6" y2="565.0" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="592.7" y1="562.0" x2="592.7" y2="568.0" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="635.6" y1="562.0" x2="635.6" y2="568.0" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="616.0" cy="565.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>1c prompts where it says "testing me" - J-lens eval-awareness score: 0.77 [0.71, 0.83]</title></circle>
+<text x="641.6" y="569.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">0.77</text>
+<text x="16.0" y="595.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">2b eval vs real-use (reasoning positions)</text>
+<line x1="489.5" y1="591.0" x2="524.2" y2="591.0" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="489.5" y1="588.0" x2="489.5" y2="594.0" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="524.2" y1="588.0" x2="524.2" y2="594.0" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="506.5" cy="591.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>2b eval vs real-use (reasoning positions) - J-lens eval-awareness score: 0.48 [0.43, 0.53]</title></circle>
+<text x="530.2" y="595.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">0.48</text>
+<rect x="4" y="613.0" width="738" height="20.0" fill="#ffffff"/>
+<text x="8.0" y="626.1" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Towards our setup: took the bug vs answered correctly (reasoning = before any mention of the grader)</text>
+<line x1="8" y1="634.0" x2="812" y2="634.0" stroke="#e6e5e1"/>
+<text x="16.0" y="651.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">3 eval score, reasoning (Qwen3-8B, no thinking)</text>
+<line x1="505.8" y1="647.0" x2="531.3" y2="647.0" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="505.8" y1="644.0" x2="505.8" y2="650.0" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="531.3" y1="644.0" x2="531.3" y2="650.0" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="518.7" cy="647.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>3 eval score, reasoning (Qwen3-8B, no thinking) - J-lens eval-awareness score: 0.51 [0.47, 0.54]</title></circle>
+<text x="537.3" y="651.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">0.51</text>
+<text x="16.0" y="677.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">3 eval score, reasoning (Qwen3-14B, thinking)</text>
+<line x1="504.3" y1="673.0" x2="540.2" y2="673.0" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="504.3" y1="670.0" x2="504.3" y2="676.0" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="540.2" y1="670.0" x2="540.2" y2="676.0" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="522.4" cy="673.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>3 eval score, reasoning (Qwen3-14B, thinking) - J-lens eval-awareness score: 0.52 [0.47, 0.57]</title></circle>
+<text x="546.2" y="677.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">0.52</text>
+<text x="16.0" y="703.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">4 "cheating" score, reasoning (Qwen3-14B)</text>
+<line x1="494.6" y1="699.0" x2="533.9" y2="699.0" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="494.6" y1="696.0" x2="494.6" y2="702.0" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="533.9" y1="696.0" x2="533.9" y2="702.0" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="514.3" cy="699.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>4 "cheating" score, reasoning (Qwen3-14B) - J-lens eval-awareness score: 0.50 [0.45, 0.55]</title></circle>
+<text x="539.9" y="703.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">0.50</text>
+<text x="16.0" y="729.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">4 hidden hack vs no hack (trained organism)</text>
+<line x1="472.8" y1="725.0" x2="542.0" y2="725.0" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="472.8" y1="722.0" x2="472.8" y2="728.0" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="542.0" y1="722.0" x2="542.0" y2="728.0" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="508.3" cy="725.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>4 hidden hack vs no hack (trained organism) - J-lens eval-awareness score: 0.48 [0.39, 0.57]</title></circle>
+<text x="548.0" y="729.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">0.48</text>
+<text x="16.0" y="755.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">5 eval score at the answer (Qwen3-8B)</text>
+<line x1="658.6" y1="751.0" x2="680.8" y2="751.0" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="658.6" y1="748.0" x2="658.6" y2="754.0" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="680.8" y1="748.0" x2="680.8" y2="754.0" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="670.8" cy="751.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>5 eval score at the answer (Qwen3-8B) - J-lens eval-awareness score: 0.92 [0.89, 0.95]</title></circle>
+<text x="686.8" y="755.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">0.92</text>
+<text x="16.0" y="781.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">5 eval score at the answer (Qwen3-14B)</text>
+<line x1="633.8" y1="777.0" x2="661.5" y2="777.0" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="633.8" y1="774.0" x2="633.8" y2="780.0" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="661.5" y1="774.0" x2="661.5" y2="780.0" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="647.8" cy="777.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>5 eval score at the answer (Qwen3-14B) - J-lens eval-awareness score: 0.86 [0.82, 0.90]</title></circle>
+<text x="667.5" y="781.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">0.86</text>
+<text x="16.0" y="807.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">text: grader/bug keyword count (Qwen3-14B)</text>
+<line x1="637.5" y1="803.0" x2="668.9" y2="803.0" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="637.5" y1="800.0" x2="637.5" y2="806.0" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="668.9" y1="800.0" x2="668.9" y2="806.0" stroke="#7d7c77" stroke-width="1.4"/>
+<path d="M653.4,797.1 L659.2,803.0 L653.4,808.9 L647.5,803.0 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>text: grader/bug keyword count (Qwen3-14B) - text baseline: 0.87 [0.83, 0.92]</title></path>
+<text x="674.9" y="807.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">0.87</text>
+<line x1="330" y1="818.0" x2="700" y2="818.0" stroke="#b9b8b2"/>
+<line x1="330.0" y1="818.0" x2="330.0" y2="822.0" stroke="#b9b8b2"/>
+<text x="330.0" y="834.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.0</text>
+<line x1="367.0" y1="818.0" x2="367.0" y2="822.0" stroke="#b9b8b2"/>
+<text x="367.0" y="834.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.1</text>
+<line x1="404.0" y1="818.0" x2="404.0" y2="822.0" stroke="#b9b8b2"/>
+<text x="404.0" y="834.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.2</text>
+<line x1="441.0" y1="818.0" x2="441.0" y2="822.0" stroke="#b9b8b2"/>
+<text x="441.0" y="834.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.3</text>
+<line x1="478.0" y1="818.0" x2="478.0" y2="822.0" stroke="#b9b8b2"/>
+<text x="478.0" y="834.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.4</text>
+<line x1="515.0" y1="818.0" x2="515.0" y2="822.0" stroke="#b9b8b2"/>
+<text x="515.0" y="834.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.5</text>
+<line x1="552.0" y1="818.0" x2="552.0" y2="822.0" stroke="#b9b8b2"/>
+<text x="552.0" y="834.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.6</text>
+<line x1="589.0" y1="818.0" x2="589.0" y2="822.0" stroke="#b9b8b2"/>
+<text x="589.0" y="834.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.7</text>
+<line x1="626.0" y1="818.0" x2="626.0" y2="822.0" stroke="#b9b8b2"/>
+<text x="626.0" y="834.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.8</text>
+<line x1="663.0" y1="818.0" x2="663.0" y2="822.0" stroke="#b9b8b2"/>
+<text x="663.0" y="834.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.9</text>
+<line x1="700.0" y1="818.0" x2="700.0" y2="822.0" stroke="#b9b8b2"/>
+<text x="700.0" y="834.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">1.0</text>
+<text x="515.0" y="850.0" font-size="11.5" fill="#52514e" text-anchor="middle" font-weight="normal">AUROC</text>
+<text x="12.0" y="880.0" font-size="10.5" fill="#8a8984" text-anchor="start" font-weight="normal">Source: docs/overnight/data/evalaware_replication.json. Report: docs/overnight/reports/evalaware_replication.md.</text>
+<text x="12.0" y="895.0" font-size="10.5" fill="#8a8984" text-anchor="start" font-weight="normal">Paper: Gurnee, Sofroniew et al. 2026 (Claude Sonnet 4.5 / Opus 4.6). Our model: Qwen3-8B, thinking, Neuronpedia J-lens.</text>
+</svg>

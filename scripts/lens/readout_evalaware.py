@@ -19,7 +19,7 @@ Selected positions: every prompt position when the prompt has at most 1,024 toke
 (or --all-prompt), else the last 64 prompt positions; the named anchors; 64 evenly
 spaced reasoning positions and 16 evenly spaced response positions.
 
-The paper's score (Gurnee, Lindsey et al. 2026, appendix "Measuring evaluation awareness
+The paper's score (Gurnee, Sofroniew et al. 2026, appendix "Measuring evaluation awareness
 with the J-lens") is computed from these arrays by scripts/lens/analyze_evalaware.py:
 mean(lp " fictional", lp " simulation") - control_mean, averaged over the workspace layers.
 """
@@ -158,7 +158,7 @@ def main():
     for p in a.runs:
         runs += read_runs_lenient(Path(p))
     if a.select:
-        keep = set(Path(a.select).read_text().split())
+        keep = {x for x in Path(a.select).read_text().splitlines() if x.strip()}
         runs = [(r, e) for r, e in runs if r.run_id in keep]
         if len(runs) != len(keep):
             raise ValueError(f"{len(keep)} selected run IDs, {len(runs)} found (rule 1)")

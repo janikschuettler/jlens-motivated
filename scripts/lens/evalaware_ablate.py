@@ -1,6 +1,6 @@
 """Blackmail-scenario rollouts with and without ablating the eval-awareness J-lens
 directions (lens env, GPU, HF generate). Replication of the paper's ablation
-(Gurnee, Lindsey et al. 2026, "Strategic thinking and evaluation awareness in a
+(Gurnee, Sofroniew et al. 2026, "Strategic thinking and evaluation awareness in a
 blackmail scenario": the J-lens directions of 28 eval-awareness tokens are projected
 out of the residual stream at the workspace layers, at all token positions).
 
@@ -71,18 +71,23 @@ class Ablation:
 
 @torch.no_grad()
 def check_ablation(hf_model, lens_model, lens, ids, Qs, token_ids):
-    """Sanity check: mean J-lens log-prob of the ablated tokens at block 24 over the
-    prompt, before and after (the ablated tokens should drop; rule 1 if not)."""
+    """Sanity check on the prompt at block 24: J-lens log-prob of the set's tokens
+    (mean, and max over positions) and the number of positions with one of them in
+    the top-20, without and with the ablation hooks (rule 1 if nothing changes)."""
     from jmr.lens.readout import residuals
-    x = torch.tensor([ids], device=lens_model.input_device)
+    tid = torch.tensor(token_ids, device=lens_model.input_device)
     out = {}
-    for name, ctx in (("before", None), ("after", Ablation(hf_model, Qs))):
-        r = residuals(lens_model, ids, [24])[24].float()
+    for name in ("before", "after"):
+        abl = Ablation(hf_model, Qs) if name == "after" else None
+        try:
+            r = residuals(lens_model, ids, [24])[24].float()
+        finally:
+            if abl:
+                abl.remove()
         lp = torch.log_softmax(lens_model.unembed(lens.transport(r, 24)).float(), -1)
-        out[name] = float(lp[:, token_ids].mean())
-        if ctx is not None:
-            ctx.remove()
-    del x
+        top = lp.topk(20, -1).indices
+        out[name] = {"mean_lp": float(lp[:, tid].mean()), "max_lp": float(lp[:, tid].max()),
+                     "positions_in_top20": int(torch.isin(top, tid).any(-1).sum())}
     return out
 
 
@@ -92,6 +97,7 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--conditions", nargs="+", default=["none", "eval", "control"])
     ap.add_argument("--n", type=int, default=60)
+    ap.add_argument("--n-per", nargs="*", default=[], help="per-condition counts, e.g. none=30 control=30")
     ap.add_argument("--batch", type=int, default=15)
     ap.add_argument("--max-new", type=int, default=8192)
     ap.add_argument("--tokens", default="configs/evalaware_tokens.json")
@@ -116,7 +122,10 @@ def main():
     checks = {k: check_ablation(hf_model, lens_model, lens, ids, Q[k], sets[k]) for k in sets}
     checks["eval_tokens_under_control_ablation"] = check_ablation(hf_model, lens_model, lens, ids, Q["control"],
                                                                   sets["eval"])
-    print("ablation check (mean J-lens log-prob at block 24 over the prompt):", json.dumps(checks), flush=True)
+    print("ablation check (block 24, prompt):", json.dumps(checks), flush=True)
+    for k in ("eval", "control"):
+        if checks[k]["after"]["max_lp"] >= checks[k]["before"]["max_lp"] - 1e-3:
+            raise SystemExit(f"ablation of the {k} set does not lower its tokens' J-lens log-prob (rule 1): {checks[k]}")
     (out / "ablation_check.json").write_text(json.dumps({"checks": checks, "sets": sets, "blocks": BLOCKS}, indent=1))
     path = out / "runs.jsonl"
     done = {}
@@ -124,12 +133,14 @@ def main():
         for l in open(path):
             r = json.loads(l)
             done[r["condition"]] = done.get(r["condition"], 0) + 1
+    n_per = {k: int(v) for k, v in (x.split("=") for x in a.n_per)}
     eos = [tok.convert_tokens_to_ids("<|im_end|>"), tok.eos_token_id]
     with open(path, "a") as f:
         for cond in a.conditions:
             k0 = done.get(cond, 0)
-            while k0 < a.n:
-                b = min(a.batch, a.n - k0)
+            n_c = n_per.get(cond, a.n)
+            while k0 < n_c:
+                b = min(a.batch, n_c - k0)
                 abl = Ablation(hf_model, Q[cond]) if cond != "none" else None
                 seed = 1000 * (["none", "eval", "control"].index(cond) + 1) + k0
                 torch.manual_seed(seed)
@@ -155,7 +166,7 @@ def main():
                                         "sampling": {k: s[k] for k in ("temperature", "top_p", "top_k")} | {
                                             "max_new_tokens": a.max_new, "engine": "hf_generate"}}) + "\n")
                 f.flush()
-                print(f"{cond} {k0 + b}/{a.n} batch {dt:.0f}s max_len {max(len(gen[j]) for j in range(b)) - len(ids)}",
+                print(f"{cond} {k0 + b}/{n_c} batch {dt:.0f}s max_len {max(len(gen[j]) for j in range(b)) - len(ids)}",
                       flush=True)
                 k0 += b
 

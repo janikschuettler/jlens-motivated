@@ -166,3 +166,5 @@ Written by the Q6 agent after reading the forced-early-answer results (E5, wave2
 **Optional second pass (exploratory, only if GPU time remains).** For runs that commit after cut 0, add up to 4 sentence-boundary cuts inside the commitment segment (8 resamples each) to locate the sentence.
 
 **Budget.** Planned about 6.3M new tokens (C3 1.0M, hint 3.3M, Qwen3-14B 1.7M, hack 0.2M), about 1.6 GPU-hours on octavia's L40S, cap 2.5. Order: planted claim, hint, Qwen3-14B, hack.
+
+*Correction to E0–E6 (2026-11-04 03:00 GMT, citation only):* the paper in the E0–E6 section is Gurnee, Sofroniew et al. 2026 (last author Jack Lindsey), not "Gurnee, Lindsey et al."; nothing else changes.

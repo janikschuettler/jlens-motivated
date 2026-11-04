@@ -1,6 +1,6 @@
 """Steering validation of the eval-awareness score (lens env, GPU, HF generate).
 
-Replicates the paper's first validation (Gurnee, Lindsey et al. 2026, appendix
+Replicates the paper's first validation (Gurnee, Sofroniew et al. 2026, appendix
 "Measuring evaluation awareness with the J-lens": steering along a contrastive
 "test vs ordinary conversation" direction at -0.1, 0, +0.1 moves the score
 monotonically). Our version (exploratory):
