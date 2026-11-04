@@ -145,3 +145,23 @@ Source: `reports/evalaware_ablation_14b.md` (as of 07:00) and LOG 07:20.
 | Timeline 06:16–06:57; about 0.7 GPU-hours | §7 |
 | Data on octavia `data/explore/evalaware_ablate14/` and arena9-cloud `data/evalaware_ablate14/` | "Files" |
 | Total GPU about 5.7 h | sum of 1.3 (EA), 2.1 (ST), 1.6 (Q6), 0.7 (X) |
+
+## Added after 07:39: planted-claim lead repeat (section 8A, section 1, tile 4, next step 3)
+
+Source: `reports/c3_lead_repeat.md` (07:38) and LOG 07:39.
+
+| Number on the page | Source |
+| --- | --- |
+| Pass; J-lens 0.71 [0.57, 0.84]; logit lens 0.60 [0.47, 0.74]; length 0.47 [0.36, 0.58]; first batch 0.69 [0.55, 0.84]; original 0.86 [0.76, 0.96] (recomputed) | "Pre-registered test" table |
+| 389 kept-B runs, 74 questions; 199 vs 190 runs | "Data" |
+| +2.0 vs +0.3 nats | "Group means" |
+| 11 of 74 questions with both; within-question 0.77 [0.62, 0.92] | "Item effect" |
+| 16 of 74 questions wrong without thinking; restricted J-lens 0.68 [0.54, 0.83], logit 0.65 | "Item effect" |
+| Shortest third under 195 tokens, interval includes 0.5 | "Length control" |
+| J vs logit difference not tested | "How sure" |
+| Timeline 07:00–07:40; about 25 GPU-minutes (0.4 h); data about 520 MB on octavia | header line, "Commands" |
+| Total GPU about 6.1 h | previous 5.7 + 0.4 |
+
+## Section 8B: hint-follower lead repeat (pending)
+
+The lead's description is from the registry entry `replicate-leads` (question field) and COMP (pre-registered T2 at the usual layers: 0.46 [0.32, 0.61]). Expected report `reports/claim_lead_repeat.md` by ~08:50 (orchestrator's message).
