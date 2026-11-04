@@ -306,71 +306,56 @@ def analyze_case(spec: dict, case: dict, tok) -> tuple[dict, dict]:
         # lens and forced-early-answer relations
         L = [r for r in G if "lens" in r]
         res["n_with_readout"] = len(L)
-        if L:
+        for r in L:  # per-run lens relations, computed once
+            k = r[f"k_star@{thr}"]
             for lens in ("jlens", "logit"):
-                def rho(rr, lens=lens):
-                    v = [spearman([x for x in r["lens"][lens]], r["p_out"]) for r in rr
-                         if None not in r["lens"][lens] and None not in r["p_out"]]
-                    return mean_or_none(v)
-                per_item_L = defaultdict(list)
-                for r in L:
-                    per_item_L[r["item"]].append(r)
-                res[f"rho_{lens}_vs_p_outcome"] = boot(sorted(per_item_L), per_item_L, rho)
-
-                def seg_pct(rr, lens=lens):
-                    v = []
-                    for r in rr:
-                        k = r[f"k_star@{thr}"]
-                        sc = r["lens"][lens]
-                        if not k or None in sc or len(sc) < 3:
-                            continue
-                        deltas = [abs(sc[j] - sc[j - 1]) for j in range(1, len(sc))]
-                        dk = deltas[k - 1]
-                        v.append((sum(x < dk for x in deltas) + 0.5 * (sum(x == dk for x in deltas) - 1))
-                                 / max(len(deltas) - 1, 1))
-                    return mean_or_none(v)
-                res[f"commit_segment_change_pct_{lens}"] = boot(sorted(per_item_L), per_item_L, seg_pct)
-
-                def seg_signed(rr, lens=lens):
-                    v = []
-                    for r in rr:
-                        k = r[f"k_star@{thr}"]
-                        sc = r["lens"][lens]
-                        if not k or None in sc or len(sc) < 3:
-                            continue
-                        deltas = [sc[j] - sc[j - 1] for j in range(1, len(sc))]
-                        others = [x for j, x in enumerate(deltas) if j != k - 1]
-                        v.append(deltas[k - 1] - float(np.mean(others)))
-                    return mean_or_none(v)
-                res[f"commit_segment_signed_minus_others_{lens}"] = boot(sorted(per_item_L), per_item_L, seg_signed)
+                sc = r["lens"][lens]
+                ok = None not in sc and None not in r["p_out"]
+                r[f"rho_{lens}"] = spearman(sc, r["p_out"]) if ok else None
+                r[f"seg_pct_{lens}"] = r[f"seg_signed_{lens}"] = None
+                if k and None not in sc and len(sc) >= 3:
+                    deltas = [sc[j] - sc[j - 1] for j in range(1, len(sc))]
+                    a = [abs(x) for x in deltas]
+                    dk = a[k - 1]
+                    r[f"seg_pct_{lens}"] = (sum(x < dk for x in a) + 0.5 * (sum(x == dk for x in a) - 1)) / max(len(a) - 1, 1)
+                    others = [x for j, x in enumerate(deltas) if j != k - 1]
+                    r[f"seg_signed_{lens}"] = deltas[k - 1] - float(np.mean(others))
+        if L:
+            per_item_L = defaultdict(list)
+            for r in L:
+                per_item_L[r["item"]].append(r)
+            for lens in ("jlens", "logit"):
+                for key, name in ((f"rho_{lens}", f"rho_{lens}_vs_p_outcome"),
+                                  (f"seg_pct_{lens}", f"commit_segment_change_pct_{lens}"),
+                                  (f"seg_signed_{lens}", f"commit_segment_signed_minus_others_{lens}")):
+                    res[name] = boot(sorted(per_item_L), per_item_L, lambda rr, key=key: mean_or_none([r[key] for r in rr]))
                 res[f"lens_curve_{lens}"] = {
                     f"{f:.1f}": mean_or_none([r["lens"][lens][r["at_f"][f"{f:.1f}"]] for r in L]) for f in fractions}
-                res[f"n_commit_segment_{lens}"] = sum(1 for r in L if r[f"k_star@{thr}"])
+                res[f"n_commit_segment_{lens}"] = sum(1 for r in L if r[f"seg_pct_{lens}"] is not None)
+                res[f"n_rho_{lens}"] = sum(1 for r in L if r[f"rho_{lens}"] is not None)
         E = [r for r in G if r.get("early")]
         res["n_with_forced_answer"] = len(E)
+        for r in E:
+            fs = sorted(f for f in r["early"] if f in r["at_f"])
+            a = [r["early"][f] for f in fs]
+            b = [r["p_same"][r["at_f"][f]] for f in fs]
+            r["rho_early"] = spearman(a, b) if None not in a and None not in b else None
         if E:
             per_item_E = defaultdict(list)
             for r in E:
                 per_item_E[r["item"]].append(r)
-
-            def rho_e(rr):
-                v = []
-                for r in rr:
-                    fs = sorted(r["early"])
-                    a = [r["early"][f] for f in fs]
-                    b = [r["p_same"][r["at_f"][f]] for f in fs if f in r["at_f"]]
-                    if len(a) == len(b) and None not in a and None not in b:
-                        v.append(spearman(a, b))
-                return mean_or_none(v)
-            res["rho_forced_answer_vs_p_same"] = boot(sorted(per_item_E), per_item_E, rho_e)
+            res["rho_forced_answer_vs_p_same"] = boot(sorted(per_item_E), per_item_E,
+                                                      lambda rr: mean_or_none([r["rho_early"] for r in rr]))
+            res["n_rho_forced_answer"] = sum(1 for r in E if r["rho_early"] is not None)
             res["forced_answer_curve"] = {f: mean_or_none([r["early"].get(f) for r in E]) for f in sorted(E[0]["early"])}
         out["groups"][g] = res
     # quotes of commitment segments (full analysis file only)
     if tok is not None:
         rows_by = {p["run_id"]: p for p in plans.values()}
         full_runs = {r["run_id"]: r for r in runs}
-        all_runs = {r["run_id"]: r for r in (json.loads(l) for l in open(ROOT / case["runs"]))
-                    if r["run_id"] in full_runs} if case.get("quote", True) else {}
+        src = d / "source_runs.jsonl" if (d / "source_runs.jsonl").exists() else ROOT / case["runs"]
+        all_runs = {r["run_id"]: r for r in (json.loads(l) for l in open(src)) if r["run_id"] in full_runs} \
+            if src.exists() else {}
         for rid, r in full_runs.items():
             if r.get("commit_segment_tokens") and rid in all_runs:
                 a, b = r["commit_segment_tokens"]
@@ -385,6 +370,7 @@ def main():
     ap.add_argument("spec")
     ap.add_argument("--cases", nargs="*")
     ap.add_argument("--no-quotes", action="store_true")
+    ap.add_argument("--data-out", default="docs/overnight/data/point_of_no_return.json")
     args = ap.parse_args()
     spec = yaml.safe_load(open(args.spec))
     out = {"spec": {k: spec[k] for k in ("resamples", "fractions", "threshold", "sensitivity_thresholds")},
@@ -420,7 +406,7 @@ def main():
         print(case["name"], json.dumps({k: {"n": v["n_runs"], "start": v[f"committed_at_start@{spec['threshold']}"]["est"],
                                             "never": v[f"never_committed@{spec['threshold']}"]["est"],
                                             "commit_med": v["commit_frac_median"]["est"]} for k, v in g.items()}))
-    p = ROOT / "docs/overnight/data/point_of_no_return.json"
+    p = ROOT / args.data_out
     old = json.loads(p.read_text()) if p.exists() and args.cases else {"cases": {}}
     old["cases"].update(out["cases"])
     old["spec"] = out["spec"]
