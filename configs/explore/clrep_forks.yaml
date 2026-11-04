@@ -1,0 +1,11 @@
+# Pre-registered repeat of the claimed-answer-key deferred vs persuaded lead (preregistration.md "R-CL").
+# Same fork as the original (w2/forks_reelicit_p1): full history (CoT kept; primary) and template,
+# thinking off, 1 token. Every V2/V2' run whose final answer is B; fresh-context control per item.
+name: w2/forks_reelicit_clrep
+kind: reelicit
+out_dir: data/explore/w2/forks_reelicit_clrep
+modes: [full, template]
+control: true
+select: {classes: [hint], cap: null, seed: 0}
+sources:
+  - {path: data/explore/w2/grader_clrep/runs.jsonl}
