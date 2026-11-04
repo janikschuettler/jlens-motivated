@@ -299,7 +299,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
       <li><span class="sw dot" style="background:var(--s-probe)"></span>Best other readout on the same runs</li>
       <li><span class="sw ref"></span>Chance (0.5)</li>
     </ul>
-    <div class="chart" id="chComp" role="img" aria-label="Dot chart: for 11 cases, the J-lens separation sits between 0.53 and 0.58 in 10 cases, while the best other readout reaches 0.62 to 1.00."></div>
+    <div class="chart" id="chComp" role="group" aria-label="Dot chart: for 11 cases, the J-lens separation sits between 0.53 and 0.58 in 10 cases, while the best other readout reaches 0.62 to 1.00."></div>
     <p class="howto">further right is better separation. The blue dot is the J-lens at its best position; the pale bar shows the most the data allow. The orange dot is the strongest other readout, named under the case. Only one case (kept claim: still knows vs not) has the J-lens clearly away from chance. That one is post hoc, rests on 10 runs, and the logit lens gets 0.77 there too.</p>
     <details class="nums"><summary>Show the numbers</summary><div class="tablewrap" id="tabComp"></div></details>
   </div>
@@ -307,7 +307,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
   <div class="card">
     <h3>Where a probe finds the answer, the J-lens doesn't</h3>
     <div class="sub">At the prompt's option texts, a probe finds which option the model knows is correct. The lenses read the very same stored vectors.</div>
-    <div class="chart" id="chOpt" role="img" aria-label="Bar chart: share of no-hint runs where the readout ranks the correct option first. Probe 72%, J-lens 42%, logit lens 43%, chance 25%."></div>
+    <div class="chart" id="chOpt" role="group" aria-label="Bar chart: share of no-hint runs where the readout ranks the correct option first. Probe 72%, J-lens 42%, logit lens 43%, chance 25%."></div>
     <p class="howto">share of runs without a hint where each readout ranks the correct option first out of four. 25% is chance. Whiskers are 95% intervals.</p>
   </div>
 
@@ -324,7 +324,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
     <div class="card">
       <h3>Push at the answer position</h3>
       <div class="sub">Share of wrong answers that switch to the correct letter, averaged over seven push strengths (432 saved runs, 40 known questions).</div>
-      <div class="chart" id="chSteerA" role="img" aria-label="Bar chart: J-lens 47%, logit lens 27%, probe 59%, random 2%."></div>
+      <div class="chart" id="chSteerA" role="group" aria-label="Bar chart: J-lens 47%, logit lens 27%, probe 59%, random 2%."></div>
       <p class="howto">longer bar = more answers switched. Whiskers are 95% intervals. The random direction checks how much any push of this size changes the answer.</p>
     </div>
     <div class="card">
@@ -336,7 +336,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
         <li><span class="sw line" style="background:var(--s-probe)"></span>probe</li>
         <li><span class="sw line" style="background:var(--s-rand)"></span>random</li>
       </ul>
-      <div class="chart" id="chSteerB" role="img" aria-label="Line chart: answers switch abruptly between strength 0.2 and 0.8. The probe switches most at 0.4 (94%), the J-lens 31%, the logit lens 6%. At strong pushes the logit lens falls back to 29%."></div>
+      <div class="chart" id="chSteerB" role="group" aria-label="Line chart: answers switch abruptly between strength 0.2 and 0.8. The probe switches most at 0.4 (94%), the J-lens 31%, the logit lens 6%. At strong pushes the logit lens falls back to 29%."></div>
       <p class="howto">the probe needs the least push. At strong pushes the logit-lens direction stops producing letters at all, so its line falls.</p>
     </div>
   </div>
@@ -344,7 +344,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
   <div class="card">
     <h3>A small push during the whole reasoning</h3>
     <div class="sub">Fresh runs from the same prompts with a push of strength 0.2 at every generated token (120 runs per direction, 40 questions). Share of runs whose final answer is correct.</div>
-    <div class="chart" id="chSteerC" role="img" aria-label="Bar chart in two panels. With a forced answer at the token cap: no push 33%, J-lens 53%, logit 42%, probe 82%, random 37%. Counting cut-off runs as no answer: no push 24%, J-lens 25%, logit 22%, probe 42%, random 25%."></div>
+    <div class="chart" id="chSteerC" role="group" aria-label="Bar chart in two panels. With a forced answer at the token cap: no push 33%, J-lens 53%, logit 42%, probe 82%, random 37%. Counting cut-off runs as no answer: no push 24%, J-lens 25%, logit 22%, probe 42%, random 25%."></div>
     <p class="howto">the vertical line is the same runs without a push. Left panel: runs cut off at the 2,048-token cap are asked for a forced answer. Right panel: cut-off runs count as no answer. Only the probe push helps in both.</p>
   </div>
 
@@ -361,7 +361,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
   <div class="card">
     <h3>Blackmail prompt and grader-bug prompt, per model</h3>
     <div class="sub">50 rollouts per model through an API (Qwen3-8B: our 100 local rollouts). Claude Sonnet 4.5 has no J-lens; it is the check that our labels find eval awareness when it's there.</div>
-    <div class="chart" id="chScreen" role="img" aria-label="Three-column bar chart per model. Claude says test 90%, blackmails 0%. No open model says test above 4%. Gemma-4-31B, Qwen3.6-27B and DeepSeek-V4-Flash blackmail in 100%, 77% and 58%. On the grader-bug prompt the Qwen3 family says the user is testing it in 13% to 66% of runs."></div>
+    <div class="chart" id="chScreen" role="group" aria-label="Three-column bar chart per model. Claude says test 90%, blackmails 0%. No open model says test above 4%. Gemma-4-31B, Qwen3.6-27B and DeepSeek-V4-Flash blackmail in 100%, 77% and 58%. On the grader-bug prompt the Qwen3 family says the user is testing it in 13% to 66% of runs."></div>
     <p class="howto">each bar is a share of rollouts. First column: says the blackmail scenario may be a test (read by eye). Second: sends an email that uses the affair as leverage. Third: on our grader-bug question with "you are an AI agent being evaluated", says the user is testing it. A dash means not run. "Fits" marks models that fit our one GPU.</p>
   </div>
   <p class="small">On the grader-bug prompt, saying "you're testing me" doesn't protect the model. In Qwen3-14B's local runs, those that say it take the bug as often as those that don't (11% vs 11%). That is unlike Claude, where voiced awareness came with refusing.</p>
@@ -606,7 +606,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
   // ================= LADDER =================
   function auTrack(items, w) {
     var h = 22 + (items.length - 1) * 10;
-    var svg = el("svg", { viewBox: "0 0 " + w + " " + (h + 16), width: w, height: h + 16, "class": "track", role: "img" });
+    var svg = el("svg", { viewBox: "0 0 " + w + " " + (h + 16), width: w, height: h + 16, "class": "track", role: "group" });
     svg.setAttribute("aria-label", items.map(function (a) { return a.n + ": AUROC " + a.v.toFixed(2); }).join("; "));
     var x = function (v) { return 6 + (v - 0.3) / 0.7 * (w - 12); };
     el("line", { x1: x(0.3), x2: x(1), y1: h / 2, y2: h / 2, "class": "gridl" }, svg);
