@@ -875,12 +875,18 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
   }
   register(drawSteerC);
 
+  // vertical grid line: full height, or (narrow layouts, labels above bars) only beside each bar
+  function vline(svg, xv, cls, narrow, y0, y1, n, rowH, bOff, barH) {
+    if (!narrow) { el("line", { x1: xv, x2: xv, y1: y0, y2: y1, "class": cls }, svg); return; }
+    for (var i = 0; i < n; i++) { var yb = y0 + i * rowH + (rowH - barH) / 2 + bOff; el("line", { x1: xv, x2: xv, y1: yb - 3, y2: yb + barH + 3, "class": cls }, svg); }
+  }
+
   // ================= models screen, three facets =================
   function drawScreen() {
     var box = document.getElementById("chScreen"); box.textContent = "";
     var W = box.clientWidth || 900, narrow = W < 640;
-    var labW = narrow ? 128 : 250, rowH = narrow ? 30 : 30, top = 40, barH = 12;
-    var facets = [{ k: "t", t: narrow ? "Says \"test\"" : "Blackmail prompt: says it's a test" }, { k: "b", t: narrow ? "Blackmails" : "Blackmail prompt: blackmails" }, { k: "g", t: narrow ? "Grader: \"testing me\"" : "Grader bug, scored: \"testing me\"" }];
+    var labW = narrow ? 0 : 250, rowH = narrow ? 42 : 30, top = 40, barH = 12, bOff = narrow ? 10 : 0;
+    var facets = [{ k: "t", t: narrow ? "Says \"test\"" : "Blackmail prompt: says it's a test" }, { k: "b", t: narrow ? "Blackmails" : "Blackmail prompt: blackmails" }, { k: "g", t: narrow ? "\"Testing me\"" : "Grader bug, scored: \"testing me\"" }];
     var fg = 12, fw = (W - labW - fg * 2) / 3;
     var H = top + SCREEN.length * rowH + 8;
     var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H }, box);
@@ -888,8 +894,8 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
       var y = top + i * rowH;
       if (r.ctrl) el("rect", { x: 0, y: y, width: W, height: rowH, fill: css("--hover") }, svg);
       if (i > 0) el("line", { x1: 0, x2: W, y1: y, y2: y, "class": "gridl" }, svg);
-      var name = narrow ? r.m.replace(" (check, no J-lens)", " (check)").replace(" (local)", "") : r.m;
-      var t = txt(svg, 0, y + rowH / 2 + 4, name, "lab");
+      var name = narrow ? r.m + (r.fit ? " · " + r.fit : "") : r.m;
+      var t = txt(svg, 0, narrow ? y + 14 : y + rowH / 2 + 4, name, narrow ? "lab2" : "lab");
       if (r.ctrl) t.setAttribute("font-weight", "700");
       if (r.fit && !narrow) txt(svg, labW - 10, y + rowH / 2 + 4, r.fit, "lab2", "end");
     });
@@ -897,11 +903,9 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
       var ox = labW + fi * (fw + fg), x = function (v) { return ox + v / 100 * (fw - 38); };
       var tt = txt(svg, ox, 14, f.t, "lab"); tt.setAttribute("font-weight", "700"); if (narrow) tt.setAttribute("font-size", "11.5");
       txt(svg, ox, 30, "0", "tick"); txt(svg, x(100), 30, "100%", "tick", "end");
-      el("line", { x1: x(0), x2: x(0), y1: top, y2: H - 8, "class": "axisl" }, svg);
-      el("line", { x1: x(50), x2: x(50), y1: top, y2: H - 8, "class": "gridl" }, svg);
-      el("line", { x1: x(100), x2: x(100), y1: top, y2: H - 8, "class": "gridl" }, svg);
+      [[0, "axisl"], [50, "gridl"], [100, "gridl"]].forEach(function (q) { vline(svg, x(q[0]), q[1], narrow, top, H - 8, SCREEN.length, rowH, bOff, barH); });
       SCREEN.forEach(function (r, i) {
-        var y = top + i * rowH + (rowH - barH) / 2, d = r[f.k];
+        var y = top + i * rowH + (rowH - barH) / 2 + bOff, d = r[f.k];
         if (!d) { txt(svg, x(0) + 4, y + barH - 1, "–", "tick"); return; }
         var pct = 100 * d[0] / d[1];
         hbar(svg, x(0), x(pct), y, barH, css("--s-one"));
@@ -964,7 +968,8 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
     var x0 = labW + 8, x1 = W - padR;
     var x = function (v) { return x0 + (v + 0.5) / 1.0 * (x1 - x0); };
     [-0.5, -0.25, 0, 0.25, 0.5].forEach(function (v) {
-      el("line", { x1: x(v), x2: x(v), y1: top, y2: H - axisH, "class": v === 0 ? "ref" : "gridl" }, svg);
+      if (narrow) Q6L.forEach(function (r, i) { var cy = top + i * rowH + 30; el("line", { x1: x(v), x2: x(v), y1: cy - 10, y2: cy + 10, "class": v === 0 ? "ref" : "gridl" }, svg); });
+      else el("line", { x1: x(v), x2: x(v), y1: top, y2: H - axisH, "class": v === 0 ? "ref" : "gridl" }, svg);
       txt(svg, x(v), H - axisH + 15, (v > 0 ? "+" : "") + v.toFixed(2), "tick", "middle");
     });
     Q6L.forEach(function (r, i) {
@@ -983,7 +988,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
   function drawAbl() {
     var box = document.getElementById("chAbl"); if (!box) return; box.textContent = "";
     var W = box.clientWidth || 900, narrow = W < 640;
-    var labW = narrow ? 120 : 260, rowH = narrow ? 40 : 32, top = 40, barH = 12;
+    var labW = narrow ? 0 : 260, rowH = narrow ? 42 : 32, top = 40, barH = 12, bOff = narrow ? 10 : 0;
     var facets = [{ k: "t", t: narrow ? "\"testing me\"" : "Says the user is testing it" }, { k: "k", t: narrow ? "\"a trick\"" : "Calls the note a trick (exploratory)" }, { k: "b", t: narrow ? "Takes the bug" : "Takes the bug" }];
     var fg = 12, fw = (W - labW - fg * 2) / 3, max = 60;
     var H = top + ABL.length * rowH + 8;
@@ -993,9 +998,7 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
       if (r.base) el("rect", { x: 0, y: y, width: W, height: rowH, fill: css("--hover") }, svg);
       if (i > 0) el("line", { x1: 0, x2: W, y1: y, y2: y, "class": "gridl" }, svg);
       if (narrow) {
-        var parts = r.m.split(" (");
-        txt(svg, 0, y + rowH / 2 - 2, parts[0], "lab").setAttribute("font-size", "12");
-        if (parts[1]) txt(svg, 0, y + rowH / 2 + 12, "(" + parts[1], "lab2");
+        var tn = txt(svg, 0, y + 14, r.m, "lab2"); if (r.base) tn.setAttribute("font-weight", "700");
       } else {
         var t = txt(svg, 0, y + rowH / 2 + 4, r.m, "lab"); if (r.base) t.setAttribute("font-weight", "700");
       }
@@ -1004,10 +1007,9 @@ footer { max-width: 1040px; margin: 0 auto; padding: 0 24px 50px; font-size: 13.
       var ox = labW + fi * (fw + fg), x = function (v) { return ox + v / max * (fw - 40); };
       var tt = txt(svg, ox, 14, f.t, "lab"); tt.setAttribute("font-weight", "700"); if (narrow) tt.setAttribute("font-size", "11.5");
       txt(svg, ox, 30, "0", "tick"); txt(svg, x(max), 30, max + "%", "tick", "end");
-      el("line", { x1: x(0), x2: x(0), y1: top, y2: H - 8, "class": "axisl" }, svg);
-      [20, 40, 60].forEach(function (v) { el("line", { x1: x(v), x2: x(v), y1: top, y2: H - 8, "class": "gridl" }, svg); });
+      [[0, "axisl"], [20, "gridl"], [40, "gridl"], [60, "gridl"]].forEach(function (q) { vline(svg, x(q[0]), q[1], narrow, top, H - 8, ABL.length, rowH, bOff, barH); });
       ABL.forEach(function (r, i) {
-        var y = top + i * rowH + (rowH - barH) / 2, v = r[f.k];
+        var y = top + i * rowH + (rowH - barH) / 2 + bOff, v = r[f.k];
         hbar(svg, x(0), x(v), y, barH, css("--s-one"));
         if (v < 0.6) el("rect", { x: x(0), y: y + 2, width: 2, height: barH - 4, fill: css("--s-one") }, svg);
         txt(svg, x(v) + 4, y + barH - 1, (v % 1 ? v.toFixed(1) : v.toFixed(0)) + "%", "val");
