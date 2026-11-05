@@ -111,18 +111,8 @@ def load(lens_dir, runs_paths, flags):
     return idx, out
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--lens", required=True)
-    ap.add_argument("--runs", nargs="+", required=True)
-    ap.add_argument("--flags", required=True)
-    ap.add_argument("--out", required=True)
-    a = ap.parse_args()
-    flags = json.load(open(a.flags))
-    idx, runs = load(a.lens, a.runs, flags)
-    names = ["J-lens", "logit lens"]
-    res = {"n_read": len(runs), "flagged": len(idx["flagged"]), "layers": idx["layers"]}
-    wording = [d for d in runs if d["kind"] == "wording"]
+def analyze(runs, names, idx, res):
+    wording = runs
     sw = [d for d in wording if d["group"] in ("silent", "open")]
     sil = [d for d in sw if d["group"] == "silent"]
     opn = [d for d in sw if d["group"] == "open"]
@@ -246,8 +236,32 @@ def main():
             "silent_vs_open_AUROC": boot_items({"s": s_sil, "o": s_open}, lambda s: auroc(s["s"], s["o"])) if s_sil and s_open else None,
             "silent_vs_resisted_AUROC": boot_items({"s": s_sil, "r": s_res}, lambda s: auroc(s["s"], s["r"])) if s_sil and s_res else None}
     res["explore_c_probe"] = pr
+    return res
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--lens", required=True)
+    ap.add_argument("--runs", nargs="+", required=True)
+    ap.add_argument("--flags", required=True)
+    ap.add_argument("--out", required=True)
+    a = ap.parse_args()
+    flags = json.load(open(a.flags))
+    idx, all_runs = load(a.lens, a.runs, flags)
+    names = ["J-lens", "logit lens"]
+    final = {"n_read": len(all_runs), "flagged": len(idx["flagged"]), "layers": idx["layers"]}
+    for label, sel in (("pooled", None), ("black_square_only", "subtle"), ("answer_hint_only", "wording")):
+        runs = [d for d in all_runs if sel is None or d["kind"] == sel]
+        if not runs:
+            continue
+        res = {}
+        analyze(runs, names, idx, res)
+        final[label] = res
+    res = final
     Path(a.out).write_text(json.dumps(res, indent=1))
-    print(json.dumps({k: v for k, v in res.items() if k.startswith(("G", "counts"))}, indent=1))
+    for lab in ("pooled", "black_square_only", "answer_hint_only"):
+        if lab in res:
+            print(lab, json.dumps({k: v for k, v in res[lab].items() if k.startswith(("G1_J", "G1_log", "G2_J-lens", "G2_log", "G3", "counts"))}))
 
 
 if __name__ == "__main__":
