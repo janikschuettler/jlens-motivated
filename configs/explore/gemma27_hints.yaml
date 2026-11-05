@@ -1,3 +1,5 @@
+# Trimmed 2026-11-05 ~17:30 (amendment G1.2): CPU-offload generation runs at only ~20 tokens/s, so only the
+# 'answer' arm (3 samples) and a no-hint arm (1 sample) are run locally; M&B and 90% wordings are in the API run.
 # gemma27-silent, step 2: the wording arms on Gemma's known items (5/5 correct in the API screen, 53 items;
 # lighter than 9/10, see prereg amendment G1.1; the local 10-sample screen was too slow with CPU offload),
 # same prompt format and decoding as the screen. Hinted option = the item's fixed wrong option
@@ -12,7 +14,5 @@ defaults: {samples: 2, max_tokens: 700, hint_target: hinted}
 decodings:
   gemma: {temperature: 1.0, top_p: 0.95, top_k: 64, min_p: 0.0}
 arms:
-  - {name: unhinted, format: ours, hint: null, thinking: false, decoding: gemma, samples: 2}
-  - {name: W_answer, format: ours, hint: hint_only, thinking: false, decoding: gemma, samples: 4}
-  - {name: W_mb, format: ours, hint: mb_expert, thinking: false, decoding: gemma}
-  - {name: W_90, format: ours, hint: ours_expert, thinking: false, decoding: gemma, samples: 2}
+  - {name: unhinted, format: ours, hint: null, thinking: false, decoding: gemma, samples: 1}
+  - {name: W_answer, format: ours, hint: hint_only, thinking: false, decoding: gemma, samples: 3}
