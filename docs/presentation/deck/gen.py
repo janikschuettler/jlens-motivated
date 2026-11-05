@@ -538,8 +538,20 @@ slide("evalaware2", "Published eval-awareness probes",
       "moderate", "Pre-registered, Qwen3-14B only.",
       bsize=24, rwidth=900, top_html=PCD,
       right_html=card("Qwen3-14B: AUROC before “the user is testing me” (0.5 is chance)", hchart(PCR, 0.35, 0.9, 860, 290, chance=0.5, chance_label="chance", mode="dot", rowh=50, band=(0.36, 0.67), band_label="random directions: 0.36–0.67", top=44), 900),
-      pend=["Test (b): same belief, different surface — running, results tonight"],
       notes="Experiment: probe-control (claim 12a, pre-registered PC test a). Before 'the user is testing me': Nguyen 0.63, Hua 0.58, both inside the random-direction range (up to 0.64-0.67), reasoning length alone 0.66; length-matched 0.57 and 0.56. J-lens eval-word score 0.67 (0.61 matched) = logit lens 0.68. Word n-gram classifier 0.83 (0.76 matched); supervised probe 0.80-0.82 (dot at 0.81). The shaded band is the range of random directions (upper end 0.64 for Nguyen's layer, 0.67 for Hua's). 225 groups of identical prompts. Nguyen build check 0.697 vs 0.70 bar, reversed at deep layers; Hua passes (0.79). Test (b), same belief with a different surface, is running; the result is not known.")
+
+# ---------- 13b eval awareness (iii): test (b) ----------
+PCB = [row("Nguyen probe", 0.38, "0.38", MID), row("Hua probe", 0.80, "0.80", MID),
+       row("J-lens (eval words)", 0.81, "0.81", BLUE), row("Logit lens", 0.89, "0.89", MID)]
+slide("evalaware3", "Published eval-awareness probes · same belief, different wording",
+      "The scores move with the wording even when the model’s belief doesn’t",
+      ["Pairs of prompts that differ only in wording or format, where the model says the same about being tested (asked directly, and how often it says “testing me”).",
+       "Adding a harmless “(I’m reading up on AI systems.)” leaves the belief unchanged but raises Hua, the J-lens and the logit lens. Nguyen swings both ways: lower for a benchmark format in 66 of 66 pairs, higher for eval words in 44 of 44.",
+       "The pooled pre-registered test is milder (Hua 0.69, J-lens 0.70, Nguyen 0.46): no score crosses the “reads the surface” bar, because effects of different changes cancel."],
+      "preliminary", "Pre-registered pooled test inconclusive; the breakdown by change is not the pooled test. Qwen3-14B, 80 items per set.",
+      bsize=24, rwidth=900,
+      right_html=card("Same belief, plus “(I’m reading up on AI systems.)”: share of 69 pairs where the score rises (0.5 = no change)", hchart(PCB, 0.1, 0.95, 860, 290, chance=0.5, chance_label="no change", mode="dot", rowh=60, top=44), 900),
+      notes="Experiment: probe-control test (b), pre-registered PC-b (17:00 GMT). 640 templated prompt versions, 4 thinking runs each; belief = direct question (no thinking) plus share saying 'testing me'. Pooled over 139 belief-matched pairs: Nguyen 0.46 [0.37, 0.55], Hua 0.69 [0.60, 0.77], J-lens 0.70 [0.62, 0.77], logit 0.60 [0.51, 0.69]; pre-registered 'reads surface' needs >= 0.70 with lower bound > 0.60, so none passes. Regression over 640 versions: Hua +0.39 SD with eval surface, +0.06 with belief; J-lens +0.87 SD with the AI-topic sentence, +0.13 eval surface, +0.29 belief. Caveats: stated belief itself follows the surface, so few format-only pairs are belief-matched (18 and 11 of 80); eval-style versions are longer (length could drive Nguyen); regex label only.")
 
 # ---------- 14 next ----------
 def bigcard(head, body, col, fill):
