@@ -3,7 +3,7 @@ silent-switch scan (w2_silent_scan's BROAD list + every cue-specific group in th
 heuristics: candidates must be read by eye.
 
 uv run --project envs/gen python scripts/explore/analyze_subtle.py data/explore/subtle \
-    --json docs/overnight/data/subtle_cues.json
+    --json docs/experiments/subtle-cues/data/subtle_cues.json
 """
 
 import argparse

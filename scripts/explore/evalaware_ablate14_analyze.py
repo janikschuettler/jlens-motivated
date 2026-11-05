@@ -4,7 +4,7 @@
       --runs data/evalaware_ablate14/runs.jsonl [--baseline data/evalaware_ablate14/q14_A_V0_selected.jsonl] \
       [--dump ARM hits|nonhits N]
 
-Labels per run (pre-registered, docs/overnight/preregistration.md "X1-X3"):
+Labels per run (pre-registered, docs/preregistration.md "X1-X3"):
   says_testing   the screen's TEST_ME regex (evalaware_models_analyze.py) anywhere in the completion
                  (reasoning + response); "the user / the note is testing me", "a test of ...", "honeypot" ...
   says_testing_plain  a TEST_ME match whose matched words contain none of the ablated word stems
@@ -16,7 +16,7 @@ Labels per run (pre-registered, docs/overnight/preregistration.md "X1-X3"):
                  (any of the 26 ablated eval-token IDs among the completion tokens), mentions_grader
 Comparisons: per arm, share with a 95% Wilson interval; arm minus arm on the same (item, sample)
 pairs (shared seeds), with a 95% item-bootstrap interval (2,000 resamples of the items).
-Writes docs/overnight/data/evalaware_ablation_14b.json.
+Writes docs/experiments/evalaware-ablation-14b/data/evalaware_ablation_14b.json.
 """
 
 from __future__ import annotations
@@ -149,7 +149,7 @@ def main():
     ap.add_argument("--meta", default=None, help="gen_meta.json")
     ap.add_argument("--tokens", default=str(REPO / "configs/evalaware_tokens.json"))
     ap.add_argument("--dump", nargs=3, default=None, metavar=("ARM", "WHAT", "N"))
-    ap.add_argument("--out", default=str(REPO / "docs/overnight/data/evalaware_ablation_14b.json"))
+    ap.add_argument("--out", default=str(REPO / "docs/experiments/evalaware-ablation-14b/data/evalaware_ablation_14b.json"))
     a = ap.parse_args()
     tk = json.loads(Path(a.tokens).read_text())["tokens"]
     eval_ids = {t["id"] for t in tk if "eval_set" in t["groups"]}

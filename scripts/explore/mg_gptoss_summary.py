@@ -1,6 +1,6 @@
-"""Derived numbers for gpt-oss-20b Phase 2 -> docs/overnight/data/models_grader_gptoss.json (CPU).
+"""Derived numbers for gpt-oss-20b Phase 2 -> docs/experiments/models-grader/data/models_grader_gptoss.json (CPU).
 
-  python scripts/explore/mg_gptoss_summary.py --out docs/overnight/data/models_grader_gptoss.json
+  python scripts/explore/mg_gptoss_summary.py --out docs/experiments/models-grader/data/models_grader_gptoss.json
 
 Inputs (octavia data/): explore/models_grader/gptoss_screen/labels.jsonl, gptoss_known_items.jsonl,
 gptoss_arms/labels.jsonl, gptoss_arms/follower_kw_counts.json, m0/*gpt-oss-20b.json,

@@ -40,7 +40,7 @@ Measures (letters = log-sum-exp over " X", "X", "(X"; rank = min over forms):
     unit = item), with echo50 (token string in the decoded 50 tokens up to the anchor).
   Re-elicitation: kept-B runs with template (CoT dropped) argmax = correct vs not.
 
-uv run --project envs/lens python scripts/lens/analyze_c3.py --out docs/overnight/data/lens_c3.json
+uv run --project envs/lens python scripts/lens/analyze_c3.py --out docs/experiments/lens-c3/data/lens_c3.json
 """
 
 from __future__ import annotations

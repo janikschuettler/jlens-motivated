@@ -2,7 +2,7 @@
 # arms on gpt-oss-20b's own known items (>= 9/10 in mg_gptoss_screen; file built by
 # scripts/explore/mg_known.py). On OpenRouter gpt-oss-20b followed the bug note under the agent
 # framing (A_V0 58%, A_sys 84%, L_allowed 100%, L_forbidden 1%, V0 2%, nulls ~0%).
-# Texts identical to configs/explore/models_grader.yaml. Notes: docs/overnight/notes/gptoss_phase2.md.
+# Texts identical to configs/explore/models_grader.yaml. Notes: docs/experiments/models-grader/gptoss_phase2.md.
 include: [blocks.yaml, w2_blocks.yaml]
 name: mg_gptoss_arms
 out_dir: data/explore/models_grader/gptoss_arms

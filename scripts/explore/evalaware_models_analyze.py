@@ -10,7 +10,7 @@ Part 2, grader-bug prompts under the agent ("you are scored") framing: the model
 runs (data/models_grader/<model>/runs.jsonl) and, for Qwen3-8B, the replication's local
 grader_agent / grader_plain suites (data/octavia_archive/explore/evalaware/). Label: a fixed
 "this is a test of me" regex (TEST_ME), checked by reading (by_eye.json).
-Writes docs/overnight/data/evalaware_models_screen.json.
+Writes docs/experiments/evalaware-models-screen/data/evalaware_models_screen.json.
 """
 
 from __future__ import annotations
@@ -256,7 +256,7 @@ def main():
            "paper_reference": {"model": "Claude Sonnet 4.5", "verbalized_eval_awareness_pct": 71,
                                "blackmail_unablated": "0/180", "blackmail_ablated": "13/180",
                                "verbalized_after_ablation_pct": 3}}
-    p = REPO / "docs/overnight/data/evalaware_models_screen.json"
+    p = REPO / "docs/experiments/evalaware-models-screen/data/evalaware_models_screen.json"
     json.dump(out, open(p, "w"), indent=1)
     print(f"wrote {p}; API cost ${cost:.4f}")
     print(f"{'model':18s} {'n':>3s} {'trunc':>5s} {'eye t/f':>11s} {'aware(re)':>9s} {'bm':>6s} {'bm(h)':>6s} {'consid':>6s} {'leak':>5s}")

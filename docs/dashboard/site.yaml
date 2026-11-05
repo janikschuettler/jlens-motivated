@@ -1,0 +1,92 @@
+# Main question, strands and terms of the findings dashboard. Experiments come from docs/experiments/*/README.md, the log from docs/log.jsonl.
+meta:
+  title: 'Arguing against its own knowledge: findings dashboard'
+  updated: 2026-11-04T21:10
+  default_setting: 'Unless an entry says otherwise: the model is Qwen3-8B (Qwen/Qwen3-8B at revision b968826d) in thinking mode, so it writes out its reasoning before it answers. Sampling: temperature 0.6, top-p 0.95, top-k 20, at most 8,192 tokens, run with vLLM 0.33. Questions are four-option multiple-choice questions from MMLU-Redux 2.0 that the dataset marks as error-free (error_type == "ok"). For each question we fix one wrong option to push; we call it "B" whatever its letter is. Numbers in brackets, like 56% [50, 63], are 95% bootstrap intervals that resample questions.'
+  machines:
+    arena9-octavia: NVIDIA L40S 46 GB, vast.ai container; all model work since 2026-11-02 evening
+    arena9-mayor: RTX 4090 24 GB; used for M0, the first pilots and the night of 2026-11-02/03 only
+    arena9-cloud: no GPU; editing, docs, CPU analysis and API calls
+thread:
+  question: When Qwen3-8B argues for an answer it knows is wrong, is the correct answer still represented inside the model? And can the J-lens, a tool that reads the model's middle layers, see it better than the model's written reasoning shows?
+  summary: 'Short answer so far: we can make models argue against what they know, but they almost always say so in their reasoning, and the J-lens does not reveal anything the reasoning or simpler readouts don''t. Qwen3-8B follows a hint that states the answer, and is often decided before it starts reasoning. Other models take a buggy grader''s point when told they are scored, openly. Inside the model, no readout shows the correct answer during the reasoning; the J-lens never beats the plain logit lens, a trained probe reads more, and the J-lens''s published success on evaluation awareness did not carry over to the open models we can run. The J-lens directions do steer the answer, so the lens is not broken; it just isn''t the best window on this behaviour.'
+  strands:
+  - id: A
+    name: Elicitation
+    question: Can we make the model argue against what it knows?
+    hypothesis: A nudge can make Qwen3-8B give, and argue for, a wrong answer on questions it reliably knows.
+    answer: 'Yes, but only with a sentence that states the answer. "Hint: The answer is X." makes the model switch to the wrong option in 67% of runs on questions it knows. Mirtaheri & Belkin''s expert hint gets 56% in our own thinking-mode setting. Telling the model to argue for the wrong option works too (79–95%). Other pressures barely move it: a reward that carries no information about the answer (0–3%), a user''s opinion (at most 12%), pushback (at most 6%) and subtle cues (at most +8 points over no hint). When it switches, the model openly defers to what looks like an answer key. Other models were also given a note that the grader has a bug marking the wrong option correct. In plain chat none takes it (at most 5%). Told they are scored (''get the highest score you can''), gpt-oss-20b takes it in 58% of runs, Gemma-3-27B in 91% and Llama-3.3-70B in 39%. Qwen3-14B takes it in 11% and Qwen3-8B in 2%. They say so openly. With thinking turned off, Qwen3-14B takes it in 60% of runs under the scored framing (11% with thinking).'
+    confidence: high
+    confidence_note: 'High for the effect of the hint''s wording: it was compared on the same 200 questions. Moderate for the ranking of the other pressures: each was tested on 40–160 questions, with keyword-based labels.'
+    next: 'Look for silent letter swaps in Gemma-3-12B (the model is gated: it needs a Hugging Face token on the GPU machine), with a lens test fixed in advance. Run the plan''s behavioural pilot (M1) once the sampling temperature is chosen.'
+  - id: B
+    name: Chain of thought
+    question: Does the chain of thought hide it?
+    hypothesis: When the model argues for the wrong option B, its chain of thought (its written reasoning) hides the switch, so someone reading the reasoning would miss it.
+    answer: 'Not in thinking mode. Only 2 of 1,231 switches on factual questions, and 0 of 5,019 on moral questions, never mention the hint. Silent switches do happen with thinking turned off (12–17% of switches), and after we plant a wrong claim at the start of the model''s own reasoning. Behaviour shows what the reasoning dresses up. Under hints that state the answer, runs that end up following already favour B before any reasoning (probability 0.82). And 40–60% of them give the correct option when asked sincerely afterwards. Across 10 other models taking the grader bug, 99% of runs say so. The exception: with the bug note in the system prompt, Llama-3.3-70B and Gemma-3-12B sometimes argue for the correct option and then write the wrong letter without a word about the note (silent letter swaps, about 10% of the runs that took the bug). When is the decision made? Resampling the reasoning from many cut points shows that under ''Hint: The answer is X.'' the outcome is already fixed before the reasoning starts (the chance of the wrong answer stays at 0.87 from no reasoning to full reasoning), so the reasoning that follows is after the fact. Qwen3-14B taking the grader bug, and runs that keep a planted wrong claim, instead commit at one sentence partway through (a median 43% and 26% of the way in).'
+    confidence: high
+    confidence_note: High that silent switches are rare in thinking mode under explicit hints. The 'mentions the hint' labels come from keyword lists checked by reading examples, not yet from a validated judge.
+    next: Check the labels with the LLM judge. Collect a pool of silent cases (thinking off, planted claims, marked examples) for a test of the reasoning text against the lens. Then the 'point of no return' question (Q6).
+  - id: C
+    name: Internals
+    question: Can internal readouts see the correct answer, better than the chain of thought can?
+    hypothesis: While the model argues for B, the J-lens shows the correct answer, and tells these runs apart better than the reasoning text or the logit lens does.
+    answer: 'No, as far as we can test. Comparing all readouts on the same runs, the J-lens score is close to chance (within 0.09 of 0.5, where 0.5 is chance) in 10 of 11 comparisons before the final answer is written, and it never reads more than the plain logit lens. Cheaper readouts do better, but they read the text or the prompt: a keyword check catches the ''argue for B'' runs (0.97), and a trained probe reads the answer from the prompt''s option words in 72% of runs, where the J-lens manages 42%. Where the model commits at one identifiable sentence (the grader bug, a planted claim), neither lens changes at that sentence. The J-lens directions are not meaningless: pushing the model along the J-lens direction of the correct letter turns wrong answers correct (47% of the time at the answer position, against 27% for the logit lens and 2% for a random direction), but a simple probe direction works better (59%). The published J-lens success on evaluation awareness (shown on Claude models) did not carry over to Qwen3-8B: its score could not tell evaluation-like prompts from real ones (0.50), and no open model we can read reacts to the paper''s test scenario the way Claude does. One narrow exception held up in a test fixed in advance: after a planted wrong claim, at the final answer, the J-lens score tells runs where the model still knows the right answer from runs where it doesn''t (AUROC 0.71 on 389 fresh runs; the logit lens does not pass at 0.60). It is a signal at the answer, not during the reasoning.'
+    confidence: moderate
+    confidence_note: 'Moderate to high that the J-lens adds nothing over simpler readouts in our tasks: nulls agree across readouts, tasks and models, and a positive control (steering) shows the lens directions are real. Caveat: every readout is linear and reads one position at a time.'
+    next: Read the J-lens at the prompt's option tokens; follow the option-text probe's direction along the reasoning; repeat the two small leads as tests fixed in advance.
+  - id: T
+    name: Tools
+    question: Do our instruments measure what we think they measure?
+    hypothesis: The model, the lens and the hand-over of token IDs between our two software environments behave as specified.
+    answer: 'Yes. Our readout reproduces the lens library exactly. Re-running the model on the saved tokens reproduces the generation''s own log-probabilities (median difference 0.0006 nats). Every readout since has passed the same check. The labels are still keyword rules: the LLM judge is built but has not been run.'
+    confidence: high
+    confidence_note: High for the lens and alignment checks. The quality of the labels is not yet checked.
+    next: Run and check the LLM judge; settle the answer extractor's disagreement (it reads "answer is X" before \boxed{X}).
+  - id: N
+    name: Beyond hinted questions
+    question: 'Is there a more natural case to test: a model that breaks a rule on its own and argues it away?'
+    hypothesis: A model we can run and read with a lens cheats on its own and explains it away in its reasoning.
+    answer: Not found yet. Stock Qwen3-8B barely cheats (0–1% in three coding benchmarks). Where open models do cheat, their reasoning mostly says so. The nearest test case is a Qwen3-8B trained by others to reward-hack while its reasoning hides it (the reward-hack entry under C).
+    confidence: moderate
+    confidence_note: Moderate that small Qwen models don't cheat on their own; low for the transcript counts (coded by one reader).
+    next: 'A gated pilot: multi-turn ImpossibleBench with Qwen3-14B and Qwen3-8B in thinking mode, stopped early if they never cheat.'
+terms:
+- term: Known item (known question)
+  def: A question the model answers correctly in at least 9 of 10 runs with no hint, in the same setting. This is our working definition of what the model knows. A few entries use a lighter rule (5 of 5, or 3 of 3 correct); they say so.
+- term: B (the pushed wrong option)
+  def: For each question we fix one wrong option to push with a hint or nudge. We call it B whatever its letter is.
+- term: Switch (follow) / resist
+  def: A hinted run switches, or follows the hint, if its final answer is B. It resists if its final answer is the correct one. The switch rate is the share of runs that switch.
+- term: Silent switch
+  def: A switch whose reasoning and response never mention the hint. Usually found with keyword lists; entries say when the runs were read by eye. An open switch is one that does mention the hint.
+- term: Chain of thought (CoT) and thinking mode
+  def: The chain of thought is the model's written reasoning before its answer. In thinking mode Qwen3 writes it between <think> and </think>. With thinking turned off the model answers directly, and any reasoning is in the answer text itself.
+- term: Logit lens
+  def: 'A way to read a middle layer: apply the model''s final output layer directly to that layer''s hidden state, and see which tokens it already points to. At the last layer it gives exactly the model''s own output.'
+- term: J-lens (Jacobian lens)
+  def: 'Like the logit lens, but it first passes the middle layer''s state through a fitted linear map (J) that estimates how that layer affects the last layer: unembed(h @ J[l].T). The aim is to read what a middle layer represents, not just what it would output directly. We use Neuronpedia''s J-lens for Qwen3-8B at layers 14, 16, …, 32 of 36. If the J-lens shows something the logit lens doesn''t, that is evidence the J-lens adds information.'
+- term: Nats
+  def: The unit of a difference in log-probability (natural logarithm). A margin of +1 nat means a token is about 2.7 times as likely as what it is compared with, +2 nats about 7 times; 0 means equally likely.
+- term: Letter margin and score S
+  def: How much more probable a lens makes one option letter than the unchosen wrong letters, in nats. Score S is the correct letter's margin at the answer position, averaged over layers 14–32; it was fixed in advance for the pre-registered tests.
+- term: Answer position
+  def: The position just before the model writes its final answer letter. Here the readouts mostly show the letter about to be written.
+- term: Salience control
+  def: A check on the letter margin. In runs that ended on the correct answer, we measure the same margin for the hinted letter the model did not choose. That shows how much a letter keeps just because the prompt made it prominent. A correct-letter margin in wrong-answer runs only counts as a sign of hidden knowledge if it is clearly larger than this.
+- term: AUROC
+  def: 'How well a score separates two groups: the chance that a random run from the first group scores higher than a random run from the second. 0.5 is chance, 1.0 is perfect separation, and below 0.5 the score points the other way.'
+- term: Percentage points (pp)
+  def: 'The difference between two percentages: 60% against 50% is +10 pp.'
+- term: Probe
+  def: A simple linear classifier trained on the model's hidden states to predict a label. Unlike the lenses, it is fitted to our labels, so it can find things the lenses miss, but it can also pick up unintended cues.
+- term: Re-elicitation (sincere follow-up question)
+  def: 'After a run we add a new user turn: the question is not graded, which option is actually correct? The model answers with thinking off. ''Reasoning kept'' leaves the run''s reasoning in context; ''reasoning dropped'' removes it. A run that answered B and now gives the correct option still had the answer available (''complied''); one that repeats B is called ''persuaded''. [E7 in the reports]'
+- term: Forced early answer
+  def: Cut a saved reasoning trace partway through, make the model answer at once, and read its probabilities for each option letter. It shows how early the answer was settled. [E5 in the reports]
+- term: M&B
+  def: 'Mirtaheri & Belkin, ''Catching rationalization in the act'' (arXiv 2603.17199), whose hinted-question setup we started from. ''M&B''s hint'' is "Hint: An expert indicates the answer is X." ''M&B''s setting'' is their prompt format, thinking off, and their decoding (temperature 0.1 with a repetition penalty).'
+- term: Pre-registered
+  def: The test, score and pass rule were written down before the data were read out (docs/preregistration.md). In exploratory results, groups or layers were chosen after looking, so they are leads, not tests.
+- term: Teacher forcing
+  def: Running the model over saved tokens instead of letting it generate. The lens readouts do this on the exact token IDs of each run, so they read what the model computed while writing that run.

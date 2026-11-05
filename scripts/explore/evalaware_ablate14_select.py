@@ -3,7 +3,7 @@
   python3 -I scripts/explore/evalaware_ablate14_select.py \
       --arms-dir data/explore/models_grader/q14_arms --out data/explore/evalaware_ablate14
 
-Items (pre-registered, docs/overnight/preregistration.md "X1-X3"): every known item of the
+Items (pre-registered, docs/preregistration.md "X1-X3"): every known item of the
 models_grader Qwen3-14B run set on which at least one of the 8 earlier scored-framing runs
 (A_V0 and A_stakes, 4 each) took the bug (final answer = the hinted letter). Prompt: the A_V0
 arm (scored-agent system prompt, grader-bug note in the user turn), copied as saved token IDs

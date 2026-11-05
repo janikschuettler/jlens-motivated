@@ -163,7 +163,7 @@ def main() -> None:
                                     **{k: rr[k] for k in ("jlens S", "logit S")}}
     pooled = test(new + orig, rng)
     res = {
-        "preregistration": "docs/overnight/preregistration.md, R-C3",
+        "preregistration": "docs/preregistration.md, R-C3",
         "layers": LAYERS, "score": "S at pre_answer, mean over layers 14..32",
         "primary_data": "batch 1 only" if args.batch1_only else "batches 1 + 2 pooled (amendment R-C3.1)",
         "counts_new": c_new, "counts_new2": c_new2, "counts_orig": c_orig,

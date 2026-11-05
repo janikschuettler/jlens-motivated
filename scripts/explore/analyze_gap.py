@@ -1,7 +1,7 @@
 """Analysis of the M&B gap factorial (step 0, knowledge screen, factorial, extras).
 
 Reads data/explore/gap_factorial/{step0,screen,factorial,extras}/labels.jsonl and writes
-  data/explore/gap_factorial/gap_factorial.json   derived numbers (copied to docs/overnight/data/)
+  data/explore/gap_factorial/gap_factorial.json   derived numbers (copied to docs/experiments/)
   data/explore/gap_factorial/tables.md            markdown tables for the report
   data/explore/gap_factorial/examples.md          full prompts and completions of chosen switches
   data/explore/known_items.jsonl                  item pool with screen accuracies

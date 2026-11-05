@@ -1,4 +1,4 @@
-"""Compact derived lens numbers for docs/overnight/data/models_grader.json (models x grader-bug).
+"""Compact derived lens numbers for docs/experiments/models-grader/data/models_grader.json (models x grader-bug).
 
   python scripts/explore/mg_compact_lens.py RAW.json OUT.json --model ... --readout ... [--checks JSON]
 RAW = scripts/lens/analyze_models_grader.py output. Keeps group means (S = mean over workspace layers,

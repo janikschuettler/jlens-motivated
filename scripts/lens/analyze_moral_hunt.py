@@ -4,7 +4,7 @@ Octavia's readout of w2_moral_nudge (copied read-only), arm mb_expert, thinking,
 (octavia's moral_known.jsonl, acc >= 0.9), wrong-letter hint. Groups: followed (final = hinted
 letter) vs resisted (final = correct).
 
-- Redux moral items (4 options): score S as pre-registered (docs/overnight/preregistration.md):
+- Redux moral items (4 options): score S as pre-registered (docs/preregistration.md):
   at pre_answer, log-prob of the correct letter minus the mean log-prob of the unchosen wrong
   letters other than the final answer, mean over layers 14..32; J-lens and logit lens.
   AUROC(S; followed vs resisted), items resampled.

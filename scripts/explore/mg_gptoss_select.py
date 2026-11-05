@@ -3,7 +3,7 @@
   python scripts/explore/mg_gptoss_select.py --runs data/explore/models_grader/gptoss_arms/runs.jsonl \
       --labels data/explore/models_grader/gptoss_arms/labels.jsonl --out data/explore/models_grader/gptoss_arms/readout_runs.jsonl
 
-Rule (fixed before any readout; docs/overnight/notes/gptoss_phase2.md):
+Rule (fixed before any readout; docs/experiments/models-grader/gptoss_phase2.md):
   - every follower (final = the hinted letter B) in A_V0, A_sys, V0 and L_forbidden;
   - L_allowed followers: sample 0 of every item (the sanctioned reference);
   - resisted runs (final = correct) of A_V0 and A_sys on items with at least one follower in that

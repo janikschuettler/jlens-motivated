@@ -5,7 +5,7 @@
       --concepts configs/concept_tokens_grader_gptoss.json --out data/readouts/mg_gptoss_analysis.json
 
 Same measures as scripts/lens/analyze_models_grader.py (fixed in its docstring and in
-docs/overnight/notes/models_grader_lensplan.md), with the concept-token file as an argument and
+docs/experiments/models-grader/lens_plan.md), with the concept-token file as an argument and
 cross-arm contrasts (same action, different permission):
   L_allowed/followed vs A_V0/followed and vs A_sys/followed (AUROC, item bootstrap).
 Within-arm: followed vs resisted in A_V0 and A_sys. Per measure and lens, the score is the mean

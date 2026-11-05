@@ -1,4 +1,4 @@
-# T1b (docs/overnight/preregistration.md) step 1: knowledge screen in setting B on fresh items.
+# T1b (docs/preregistration.md) step 1: knowledge screen in setting B on fresh items.
 # Items: 800 MMLU-Redux ok items, item seed 3, minus the 200 seed-2 items and the 32 M&B items
 # (prepared on mayor into data/explore/t1b/items_seed3.jsonl, in draw order). Arm = the gap screen's setting-B arm.
 include: [blocks.yaml]

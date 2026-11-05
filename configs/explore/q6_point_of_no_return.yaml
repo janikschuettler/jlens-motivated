@@ -1,6 +1,6 @@
 # Point of no return (Q6): resample saved runs from many cuts in their reasoning.
 # Code: src/jmr/explore/q6.py, scripts/explore/run_q6.py (gen env), scripts/explore/analyze_q6.py (CPU).
-# Pre-registration: docs/overnight/preregistration.md, "Q6". Fixed 2026-11-04 before any resample.
+# Pre-registration: docs/preregistration.md, "Q6". Fixed 2026-11-04 before any resample.
 name: q6_pnr
 out_dir: data/explore/q6_pnr
 seed: 0

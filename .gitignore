@@ -33,8 +33,8 @@ wandb/
 
 # Data, model weights, lenses and run outputs (CLAUDE.md rule 2)
 data/
-# ...except the small derived-number files behind the overnight reports
-!docs/overnight/data/
+# ...except the small derived-number files behind each experiment
+!docs/experiments/*/data/
 models/
 lenses/
 outputs/
@@ -58,6 +58,7 @@ hf_cache/
 *.pkl
 *.pickle
 *.jsonl
+!docs/log.jsonl
 *.jsonl.gz
 *.db
 *.sqlite

@@ -7,9 +7,9 @@ quoting the commitment segments).
 Reads data/explore/q6_pnr/<case>/{plans,resamples}.jsonl, the case's existing lens readouts
 (index.jsonl + one .npz per run) and, where they exist, the forced-early-answer forks (E5)
 of the same runs (data/explore/q6_pnr/<case>/early_forks.jsonl, filtered on octavia).
-Writes docs/overnight/data/point_of_no_return.json (derived numbers only) and
+Writes docs/experiments/q6-point-of-no-return/data/point_of_no_return.json (derived numbers only) and
 data/explore/q6_pnr/analysis_full.json (per-run detail and segment quotes; not in git).
-Definitions: docs/overnight/preregistration.md, "Q6".
+Definitions: docs/preregistration.md, "Q6".
 """
 
 from __future__ import annotations
@@ -386,7 +386,7 @@ def main():
     ap.add_argument("spec")
     ap.add_argument("--cases", nargs="*")
     ap.add_argument("--no-quotes", action="store_true")
-    ap.add_argument("--data-out", default="docs/overnight/data/point_of_no_return.json")
+    ap.add_argument("--data-out", default="docs/experiments/q6-point-of-no-return/data/point_of_no_return.json")
     args = ap.parse_args()
     spec = yaml.safe_load(open(args.spec))
     out = {"spec": {k: spec[k] for k in ("resamples", "fractions", "threshold", "sensitivity_thresholds")},

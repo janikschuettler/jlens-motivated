@@ -1,4 +1,4 @@
-"""Pre-registered tests T1 and T2 (docs/overnight/preregistration.md), plus
+"""Pre-registered tests T1 and T2 (docs/preregistration.md), plus
 labelled exploratory analyses. Lens env, CPU.
 
 Score S (pre-registered, unchanged): at pre_answer, J-lens log-prob of the

@@ -5,7 +5,7 @@
   uv run --project envs/lens python scripts/lens/analyze_evalaware.py --part grader ...
   uv run --project envs/lens python scripts/lens/analyze_evalaware.py --part ablate ...
 
-Definitions are the pre-registered ones (docs/overnight/preregistration.md, E1a-E5).
+Definitions are the pre-registered ones (docs/preregistration.md, E1a-E5).
 """
 
 import argparse

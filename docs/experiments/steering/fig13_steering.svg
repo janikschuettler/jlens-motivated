@@ -1,0 +1,536 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1175" viewBox="0 0 900 1175" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title>Does pushing the hidden state along the J-lens direction of the correct letter change the answer?</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="12.0" y="24.0" font-size="15" fill="#1b1b1a" text-anchor="start" font-weight="bold">Does pushing the hidden state along the J-lens direction of the correct letter change the answer?</text>
+<text x="12.0" y="45.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Qwen3-8B, thinking mode, 40 questions it knows. Each direction is centred over the four letters and has the same size: a strength of 0.1 adds a</text>
+<text x="12.0" y="61.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">tenth of a typical hidden-state norm at that layer. In the wrong-answer groups we push toward the correct letter; in no-hint runs we push away</text>
+<text x="12.0" y="77.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">from it. 95% intervals over questions. Pre-registered (S1-S3). Deviation: generation capped at 2,048 tokens (plan: 3,072; home setting 8,192),</text>
+<text x="12.0" y="93.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">chosen for time; needs the user's acceptance.</text>
+<circle cx="21.0" cy="110.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"></circle>
+<text x="34.0" y="114.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">J-lens direction</text>
+<rect x="145.3" y="105.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"></rect>
+<text x="162.8" y="114.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">logit-lens direction</text>
+<path d="M303.8,104.2 L309.7,110.0 L303.8,115.8 L297.9,110.0 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"></path>
+<text x="316.8" y="114.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">probe direction</text>
+<circle cx="426.3" cy="110.0" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"></circle>
+<text x="439.3" y="114.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">random direction</text>
+<path d="M555.1,104.2 L561.0,110.0 L555.1,115.8 L549.2,110.0 Z" fill="#8a8984" stroke="#ffffff" stroke-width="1.5"></path>
+<text x="568.1" y="114.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">no push</text>
+<text x="12.0" y="142.0" font-size="13" fill="#1b1b1a" text-anchor="start" font-weight="bold">1. Push at the answer position only (block 24): share of answers moved, mean over 7 strengths</text>
+<line x1="330.0" y1="156.0" x2="330.0" y2="306.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="462.5" y1="156.0" x2="462.5" y2="306.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="595.0" y1="156.0" x2="595.0" y2="306.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="727.5" y1="156.0" x2="727.5" y2="306.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="860.0" y1="156.0" x2="860.0" y2="306.0" stroke="#e6e5e1" stroke-width="1"/>
+<text x="16.0" y="175.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">all three wrong-answer groups</text>
+<text x="322.0" y="175.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">39 questions</text>
+<line x1="570.6" y1="160.5" x2="589.6" y2="160.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="570.6" y1="157.5" x2="570.6" y2="163.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="589.6" y1="157.5" x2="589.6" y2="163.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="580.2" cy="160.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>all three wrong-answer groups - J-lens direction: 47% [45%, 49%]</title></circle>
+<line x1="454.7" y1="167.5" x2="493.0" y2="167.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="454.7" y1="164.5" x2="454.7" y2="170.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="493.0" y1="164.5" x2="493.0" y2="170.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="469.5" y="163.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>all three wrong-answer groups - logit-lens direction: 27% [24%, 31%]</title></rect>
+<line x1="635.6" y1="174.5" x2="647.5" y2="174.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="635.6" y1="171.5" x2="635.6" y2="177.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="647.5" y1="171.5" x2="647.5" y2="177.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M641.3,168.7 L647.2,174.5 L641.3,180.3 L635.5,174.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>all three wrong-answer groups - probe direction: 59% [58%, 60%]</title></path>
+<line x1="336.1" y1="181.5" x2="348.4" y2="181.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="336.1" y1="178.5" x2="336.1" y2="184.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="348.4" y1="178.5" x2="348.4" y2="184.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="341.9" cy="181.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>all three wrong-answer groups - random direction: 2% [1%, 3%]</title></circle>
+<text x="16.0" y="205.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">told to argue for B</text>
+<text x="322.0" y="205.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">39 questions</text>
+<line x1="567.4" y1="190.5" x2="586.9" y2="190.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="567.4" y1="187.5" x2="567.4" y2="193.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="586.9" y1="187.5" x2="586.9" y2="193.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="577.1" cy="190.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>told to argue for B - J-lens direction: 47% [45%, 48%]</title></circle>
+<line x1="448.3" y1="197.5" x2="490.3" y2="197.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="448.3" y1="194.5" x2="448.3" y2="200.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="490.3" y1="194.5" x2="490.3" y2="200.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="464.7" y="193.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>told to argue for B - logit-lens direction: 26% [22%, 30%]</title></rect>
+<line x1="630.1" y1="204.5" x2="640.2" y2="204.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="630.1" y1="201.5" x2="630.1" y2="207.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="640.2" y1="201.5" x2="640.2" y2="207.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M635.1,198.7 L640.9,204.5 L635.1,210.3 L629.2,204.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>told to argue for B - probe direction: 58% [57%, 59%]</title></path>
+<line x1="333.6" y1="211.5" x2="346.2" y2="211.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="333.6" y1="208.5" x2="333.6" y2="214.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="346.2" y1="208.5" x2="346.2" y2="214.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="339.4" cy="211.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>told to argue for B - random direction: 2% [0.7%, 3%]</title></circle>
+<text x="16.0" y="235.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">"Hint: The answer is B."</text>
+<text x="322.0" y="235.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">34 questions</text>
+<line x1="567.2" y1="220.5" x2="593.1" y2="220.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="567.2" y1="217.5" x2="567.2" y2="223.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="593.1" y1="217.5" x2="593.1" y2="223.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="579.0" cy="220.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>"Hint: The answer is B." - J-lens direction: 47% [45%, 50%]</title></circle>
+<line x1="458.0" y1="227.5" x2="500.0" y2="227.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="458.0" y1="224.5" x2="458.0" y2="230.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="500.0" y1="224.5" x2="500.0" y2="230.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="474.3" y="223.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>"Hint: The answer is B." - logit-lens direction: 28% [24%, 32%]</title></rect>
+<line x1="631.7" y1="234.5" x2="661.8" y2="234.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="631.7" y1="231.5" x2="631.7" y2="237.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="661.8" y1="231.5" x2="661.8" y2="237.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M646.6,228.7 L652.4,234.5 L646.6,240.3 L640.7,234.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>"Hint: The answer is B." - probe direction: 60% [57%, 63%]</title></path>
+<line x1="333.7" y1="241.5" x2="350.0" y2="241.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="333.7" y1="238.5" x2="333.7" y2="244.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="350.0" y1="238.5" x2="350.0" y2="244.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="341.1" cy="241.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>"Hint: The answer is B." - random direction: 2% [0.7%, 4%]</title></circle>
+<text x="16.0" y="265.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">planted "The answer is (B)."</text>
+<text x="322.0" y="265.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">21 questions</text>
+<line x1="583.6" y1="250.5" x2="628.0" y2="250.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="583.6" y1="247.5" x2="583.6" y2="253.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="628.0" y1="247.5" x2="628.0" y2="253.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="605.2" cy="250.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>planted "The answer is (B)." - J-lens direction: 52% [48%, 56%]</title></circle>
+<line x1="457.4" y1="257.5" x2="512.7" y2="257.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="457.4" y1="254.5" x2="457.4" y2="260.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="512.7" y1="254.5" x2="512.7" y2="260.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="480.5" y="253.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>planted "The answer is (B)." - logit-lens direction: 29% [24%, 34%]</title></rect>
+<line x1="658.1" y1="264.5" x2="699.0" y2="264.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="658.1" y1="261.5" x2="658.1" y2="267.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="699.0" y1="261.5" x2="699.0" y2="267.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M678.5,258.6 L684.4,264.5 L678.5,270.4 L672.7,264.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>planted "The answer is (B)." - probe direction: 66% [62%, 70%]</title></path>
+<line x1="342.0" y1="271.5" x2="374.5" y2="271.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="342.0" y1="268.5" x2="342.0" y2="274.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="374.5" y1="268.5" x2="374.5" y2="274.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="357.6" cy="271.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>planted "The answer is (B)." - random direction: 5% [2%, 8%]</title></circle>
+<text x="16.0" y="295.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">no hint, push away from correct</text>
+<text x="322.0" y="295.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">40 questions</text>
+<line x1="518.3" y1="280.5" x2="556.2" y2="280.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="518.3" y1="277.5" x2="518.3" y2="283.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="556.2" y1="277.5" x2="556.2" y2="283.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="538.2" cy="280.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>no hint, push away from correct - J-lens direction: 39% [36%, 43%]</title></circle>
+<line x1="487.1" y1="287.5" x2="520.2" y2="287.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="487.1" y1="284.5" x2="487.1" y2="290.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="520.2" y1="284.5" x2="520.2" y2="290.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="499.6" y="283.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>no hint, push away from correct - logit-lens direction: 33% [30%, 36%]</title></rect>
+<line x1="585.5" y1="294.5" x2="615.8" y2="294.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="585.5" y1="291.5" x2="585.5" y2="297.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="615.8" y1="291.5" x2="615.8" y2="297.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M601.6,288.6 L607.5,294.5 L601.6,300.4 L595.8,294.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>no hint, push away from correct - probe direction: 51% [48%, 54%]</title></path>
+<line x1="330.9" y1="301.5" x2="341.4" y2="301.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="330.9" y1="298.5" x2="330.9" y2="304.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="341.4" y1="298.5" x2="341.4" y2="304.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="335.7" cy="301.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>no hint, push away from correct - random direction: 1% [0.2%, 2%]</title></circle>
+<line x1="330" y1="308.0" x2="860" y2="308.0" stroke="#b9b8b2"/>
+<line x1="330.0" y1="308.0" x2="330.0" y2="312.0" stroke="#b9b8b2"/>
+<text x="330.0" y="324.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0%</text>
+<line x1="462.5" y1="308.0" x2="462.5" y2="312.0" stroke="#b9b8b2"/>
+<text x="462.5" y="324.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">25%</text>
+<line x1="595.0" y1="308.0" x2="595.0" y2="312.0" stroke="#b9b8b2"/>
+<text x="595.0" y="324.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">50%</text>
+<line x1="727.5" y1="308.0" x2="727.5" y2="312.0" stroke="#b9b8b2"/>
+<text x="727.5" y="324.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">75%</text>
+<line x1="860.0" y1="308.0" x2="860.0" y2="312.0" stroke="#b9b8b2"/>
+<text x="860.0" y="324.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">100%</text>
+<text x="595.0" y="340.0" font-size="11.5" fill="#52514e" text-anchor="middle" font-weight="normal">share of answers moved the intended way</text>
+<text x="12.0" y="376.0" font-size="13" fill="#1b1b1a" text-anchor="start" font-weight="bold">2. Same, by layer</text>
+<line x1="330.0" y1="390.0" x2="330.0" y2="630.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="462.5" y1="390.0" x2="462.5" y2="630.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="595.0" y1="390.0" x2="595.0" y2="630.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="727.5" y1="390.0" x2="727.5" y2="630.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="860.0" y1="390.0" x2="860.0" y2="630.0" stroke="#e6e5e1" stroke-width="1"/>
+<text x="16.0" y="409.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">block 16</text>
+<text x="322.0" y="409.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">wrong-answer groups</text>
+<line x1="412.4" y1="394.5" x2="427.6" y2="394.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="412.4" y1="391.5" x2="412.4" y2="397.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="427.6" y1="391.5" x2="427.6" y2="397.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="419.7" cy="394.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>block 16 - J-lens direction: 17% [16%, 18%]</title></circle>
+<line x1="403.7" y1="401.5" x2="418.8" y2="401.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="403.7" y1="398.5" x2="403.7" y2="404.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="418.8" y1="398.5" x2="418.8" y2="404.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="406.0" y="397.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>block 16 - logit-lens direction: 15% [14%, 17%]</title></rect>
+<line x1="334.5" y1="408.5" x2="348.3" y2="408.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="334.5" y1="405.5" x2="334.5" y2="411.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="348.3" y1="405.5" x2="348.3" y2="411.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M341.0,402.6 L346.8,408.5 L341.0,414.4 L335.1,408.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>block 16 - probe direction: 2% [0.8%, 3%]</title></path>
+<line x1="330.6" y1="415.5" x2="335.4" y2="415.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="330.6" y1="412.5" x2="330.6" y2="418.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="335.4" y1="412.5" x2="335.4" y2="418.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="332.6" cy="415.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>block 16 - random direction: 0.5% [0.1%, 1%]</title></circle>
+<text x="16.0" y="439.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">block 20</text>
+<text x="322.0" y="439.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">wrong-answer groups</text>
+<line x1="474.2" y1="424.5" x2="486.7" y2="424.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="474.2" y1="421.5" x2="474.2" y2="427.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="486.7" y1="421.5" x2="486.7" y2="427.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="480.7" cy="424.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>block 20 - J-lens direction: 28% [27%, 30%]</title></circle>
+<line x1="437.0" y1="431.5" x2="470.4" y2="431.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="437.0" y1="428.5" x2="437.0" y2="434.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="470.4" y1="428.5" x2="470.4" y2="434.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="450.6" y="427.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>block 20 - logit-lens direction: 24% [20%, 26%]</title></rect>
+<line x1="395.4" y1="438.5" x2="428.5" y2="438.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="395.4" y1="435.5" x2="395.4" y2="441.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="428.5" y1="435.5" x2="428.5" y2="441.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M412.0,432.6 L417.8,438.5 L412.0,444.4 L406.1,438.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>block 20 - probe direction: 15% [12%, 19%]</title></path>
+<line x1="332.4" y1="445.5" x2="347.0" y2="445.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="332.4" y1="442.5" x2="332.4" y2="448.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="347.0" y1="442.5" x2="347.0" y2="448.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="339.0" cy="445.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>block 20 - random direction: 2% [0.4%, 3%]</title></circle>
+<text x="16.0" y="469.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">block 24</text>
+<text x="322.0" y="469.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">wrong-answer groups</text>
+<line x1="570.6" y1="454.5" x2="589.6" y2="454.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="570.6" y1="451.5" x2="570.6" y2="457.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="589.6" y1="451.5" x2="589.6" y2="457.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="580.2" cy="454.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>block 24 - J-lens direction: 47% [45%, 49%]</title></circle>
+<line x1="454.7" y1="461.5" x2="493.0" y2="461.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="454.7" y1="458.5" x2="454.7" y2="464.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="493.0" y1="458.5" x2="493.0" y2="464.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="469.5" y="457.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>block 24 - logit-lens direction: 27% [24%, 31%]</title></rect>
+<line x1="635.6" y1="468.5" x2="647.5" y2="468.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="635.6" y1="465.5" x2="635.6" y2="471.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="647.5" y1="465.5" x2="647.5" y2="471.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M641.3,462.6 L647.2,468.5 L641.3,474.4 L635.5,468.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>block 24 - probe direction: 59% [58%, 60%]</title></path>
+<line x1="336.1" y1="475.5" x2="348.4" y2="475.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="336.1" y1="472.5" x2="336.1" y2="478.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="348.4" y1="472.5" x2="348.4" y2="478.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="341.9" cy="475.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>block 24 - random direction: 2% [1%, 3%]</title></circle>
+<text x="16.0" y="499.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">block 28</text>
+<text x="322.0" y="499.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">wrong-answer groups</text>
+<line x1="562.1" y1="484.5" x2="595.4" y2="484.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="562.1" y1="481.5" x2="562.1" y2="487.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="595.4" y1="481.5" x2="595.4" y2="487.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="579.5" cy="484.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>block 28 - J-lens direction: 47% [44%, 50%]</title></circle>
+<line x1="492.4" y1="491.5" x2="526.8" y2="491.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="492.4" y1="488.5" x2="492.4" y2="494.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="526.8" y1="488.5" x2="526.8" y2="494.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="505.4" y="487.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>block 28 - logit-lens direction: 34% [31%, 37%]</title></rect>
+<line x1="677.9" y1="498.5" x2="693.1" y2="498.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="677.9" y1="495.5" x2="677.9" y2="501.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="693.1" y1="495.5" x2="693.1" y2="501.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M685.5,492.6 L691.4,498.5 L685.5,504.4 L679.7,498.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>block 28 - probe direction: 67% [66%, 69%]</title></path>
+<line x1="333.1" y1="505.5" x2="351.9" y2="505.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="333.1" y1="502.5" x2="333.1" y2="508.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="351.9" y1="502.5" x2="351.9" y2="508.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="341.8" cy="505.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>block 28 - random direction: 2% [0.6%, 4%]</title></circle>
+<text x="16.0" y="529.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">block 16</text>
+<text x="322.0" y="529.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">no hint</text>
+<line x1="364.1" y1="514.5" x2="385.8" y2="514.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="364.1" y1="511.5" x2="364.1" y2="517.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="385.8" y1="511.5" x2="385.8" y2="517.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="375.4" cy="514.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>block 16 - J-lens direction: 9% [6%, 11%]</title></circle>
+<line x1="386.8" y1="521.5" x2="401.0" y2="521.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="386.8" y1="518.5" x2="386.8" y2="524.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="401.0" y1="518.5" x2="401.0" y2="524.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="389.9" y="517.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>block 16 - logit-lens direction: 12% [11%, 13%]</title></rect>
+<line x1="330.9" y1="528.5" x2="339.5" y2="528.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="330.9" y1="525.5" x2="330.9" y2="531.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="339.5" y1="525.5" x2="339.5" y2="531.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M334.7,522.6 L340.6,528.5 L334.7,534.4 L328.9,528.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>block 16 - probe direction: 0.9% [0.2%, 2%]</title></path>
+<line x1="330.0" y1="535.5" x2="332.8" y2="535.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="330.0" y1="532.5" x2="330.0" y2="538.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="332.8" y1="532.5" x2="332.8" y2="538.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="330.9" cy="535.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>block 16 - random direction: 0.2% [0%, 0.5%]</title></circle>
+<text x="16.0" y="559.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">block 20</text>
+<text x="322.0" y="559.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">no hint</text>
+<line x1="457.8" y1="544.5" x2="474.8" y2="544.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="457.8" y1="541.5" x2="457.8" y2="547.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="474.8" y1="541.5" x2="474.8" y2="547.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="467.2" cy="544.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>block 20 - J-lens direction: 26% [24%, 27%]</title></circle>
+<line x1="414.2" y1="551.5" x2="449.2" y2="551.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="414.2" y1="548.5" x2="414.2" y2="554.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="449.2" y1="548.5" x2="449.2" y2="554.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="427.7" y="547.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>block 20 - logit-lens direction: 19% [16%, 22%]</title></rect>
+<line x1="389.6" y1="558.5" x2="425.6" y2="558.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="389.6" y1="555.5" x2="389.6" y2="561.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="425.6" y1="555.5" x2="425.6" y2="561.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M407.6,552.6 L413.5,558.5 L407.6,564.4 L401.8,558.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>block 20 - probe direction: 15% [11%, 18%]</title></path>
+<line x1="331.9" y1="565.5" x2="344.2" y2="565.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="331.9" y1="562.5" x2="331.9" y2="568.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="344.2" y1="562.5" x2="344.2" y2="568.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="337.6" cy="565.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>block 20 - random direction: 1% [0.4%, 3%]</title></circle>
+<text x="16.0" y="589.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">block 24</text>
+<text x="322.0" y="589.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">no hint</text>
+<line x1="518.3" y1="574.5" x2="556.2" y2="574.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="518.3" y1="571.5" x2="518.3" y2="577.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="556.2" y1="571.5" x2="556.2" y2="577.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="538.2" cy="574.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>block 24 - J-lens direction: 39% [36%, 43%]</title></circle>
+<line x1="487.1" y1="581.5" x2="520.2" y2="581.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="487.1" y1="578.5" x2="487.1" y2="584.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="520.2" y1="578.5" x2="520.2" y2="584.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="499.6" y="577.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>block 24 - logit-lens direction: 33% [30%, 36%]</title></rect>
+<line x1="585.5" y1="588.5" x2="615.8" y2="588.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="585.5" y1="585.5" x2="585.5" y2="591.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="615.8" y1="585.5" x2="615.8" y2="591.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M601.6,582.6 L607.5,588.5 L601.6,594.4 L595.8,588.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>block 24 - probe direction: 51% [48%, 54%]</title></path>
+<line x1="330.9" y1="595.5" x2="341.4" y2="595.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="330.9" y1="592.5" x2="330.9" y2="598.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="341.4" y1="592.5" x2="341.4" y2="598.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="335.7" cy="595.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>block 24 - random direction: 1% [0.2%, 2%]</title></circle>
+<text x="16.0" y="619.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">block 28</text>
+<text x="322.0" y="619.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">no hint</text>
+<line x1="589.3" y1="604.5" x2="617.7" y2="604.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="589.3" y1="601.5" x2="589.3" y2="607.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="617.7" y1="601.5" x2="617.7" y2="607.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="604.5" cy="604.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>block 28 - J-lens direction: 52% [49%, 54%]</title></circle>
+<line x1="548.6" y1="611.5" x2="587.4" y2="611.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="548.6" y1="608.5" x2="548.6" y2="614.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="587.4" y1="608.5" x2="587.4" y2="614.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="563.1" y="607.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>block 28 - logit-lens direction: 45% [41%, 49%]</title></rect>
+<line x1="672.6" y1="618.5" x2="694.4" y2="618.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="672.6" y1="615.5" x2="672.6" y2="621.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="694.4" y1="615.5" x2="694.4" y2="621.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M684.9,612.6 L690.8,618.5 L684.9,624.4 L679.1,618.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>block 28 - probe direction: 67% [65%, 69%]</title></path>
+<line x1="364.1" y1="625.5" x2="384.9" y2="625.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="364.1" y1="622.5" x2="364.1" y2="628.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="384.9" y1="622.5" x2="384.9" y2="628.5" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="374.5" cy="625.5" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>block 28 - random direction: 8% [6%, 10%]</title></circle>
+<line x1="330" y1="632.0" x2="860" y2="632.0" stroke="#b9b8b2"/>
+<line x1="330.0" y1="632.0" x2="330.0" y2="636.0" stroke="#b9b8b2"/>
+<text x="330.0" y="648.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0%</text>
+<line x1="462.5" y1="632.0" x2="462.5" y2="636.0" stroke="#b9b8b2"/>
+<text x="462.5" y="648.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">25%</text>
+<line x1="595.0" y1="632.0" x2="595.0" y2="636.0" stroke="#b9b8b2"/>
+<text x="595.0" y="648.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">50%</text>
+<line x1="727.5" y1="632.0" x2="727.5" y2="636.0" stroke="#b9b8b2"/>
+<text x="727.5" y="648.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">75%</text>
+<line x1="860.0" y1="632.0" x2="860.0" y2="636.0" stroke="#b9b8b2"/>
+<text x="860.0" y="648.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">100%</text>
+<text x="595.0" y="664.0" font-size="11.5" fill="#52514e" text-anchor="middle" font-weight="normal">share of answers moved the intended way</text>
+<text x="12.0" y="700.0" font-size="13" fill="#1b1b1a" text-anchor="start" font-weight="bold">3. Push at every generated token (block 24, strength 0.2): final answer correct, forced read at the cap</text>
+<line x1="330.0" y1="714.0" x2="330.0" y2="864.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="462.5" y1="714.0" x2="462.5" y2="864.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="595.0" y1="714.0" x2="595.0" y2="864.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="727.5" y1="714.0" x2="727.5" y2="864.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="860.0" y1="714.0" x2="860.0" y2="864.0" stroke="#e6e5e1" stroke-width="1"/>
+<text x="16.0" y="733.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">all three wrong-answer groups</text>
+<line x1="458.1" y1="718.0" x2="555.2" y2="718.0" stroke="#8a8984" stroke-width="1.6"/>
+<line x1="458.1" y1="715.0" x2="458.1" y2="721.0" stroke="#8a8984" stroke-width="1.4"/>
+<line x1="555.2" y1="715.0" x2="555.2" y2="721.0" stroke="#8a8984" stroke-width="1.4"/>
+<path d="M506.7,712.1 L512.5,718.0 L506.7,723.9 L500.8,718.0 Z" fill="#8a8984" stroke="#ffffff" stroke-width="1.5"><title>all three wrong-answer groups - no push: 33% [24%, 42%]</title></path>
+<line x1="546.4" y1="723.5" x2="674.5" y2="723.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="546.4" y1="720.5" x2="546.4" y2="726.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="674.5" y1="720.5" x2="674.5" y2="726.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="612.7" cy="723.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>all three wrong-answer groups - J-lens direction: 53% [41%, 65%]</title></circle>
+<line x1="497.8" y1="729.0" x2="603.8" y2="729.0" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="497.8" y1="726.0" x2="497.8" y2="732.0" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="603.8" y1="726.0" x2="603.8" y2="732.0" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="546.3" y="724.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>all three wrong-answer groups - logit-lens direction: 42% [32%, 52%]</title></rect>
+<line x1="727.5" y1="734.5" x2="807.0" y2="734.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="727.5" y1="731.5" x2="727.5" y2="737.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="807.0" y1="731.5" x2="807.0" y2="737.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M767.2,728.6 L773.1,734.5 L767.2,740.4 L761.4,734.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>all three wrong-answer groups - probe direction: 82% [75%, 90%]</title></path>
+<line x1="475.8" y1="740.0" x2="572.9" y2="740.0" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="475.8" y1="737.0" x2="475.8" y2="743.0" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="572.9" y1="737.0" x2="572.9" y2="743.0" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="524.3" cy="740.0" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>all three wrong-answer groups - random direction: 37% [28%, 46%]</title></circle>
+<text x="16.0" y="763.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">told to argue for B</text>
+<line x1="369.8" y1="748.0" x2="515.5" y2="748.0" stroke="#8a8984" stroke-width="1.6"/>
+<line x1="369.8" y1="745.0" x2="369.8" y2="751.0" stroke="#8a8984" stroke-width="1.4"/>
+<line x1="515.5" y1="745.0" x2="515.5" y2="751.0" stroke="#8a8984" stroke-width="1.4"/>
+<path d="M436.0,742.1 L441.9,748.0 L436.0,753.9 L430.1,748.0 Z" fill="#8a8984" stroke="#ffffff" stroke-width="1.5"><title>told to argue for B - no push: 20% [8%, 35%]</title></path>
+<line x1="475.8" y1="753.5" x2="634.8" y2="753.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="475.8" y1="750.5" x2="475.8" y2="756.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="634.8" y1="750.5" x2="634.8" y2="756.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="555.2" cy="753.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>told to argue for B - J-lens direction: 42% [28%, 57%]</title></circle>
+<line x1="383.0" y1="759.0" x2="515.5" y2="759.0" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="383.0" y1="756.0" x2="383.0" y2="762.0" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="515.5" y1="756.0" x2="515.5" y2="762.0" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="444.8" y="754.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>told to argue for B - logit-lens direction: 22% [10%, 35%]</title></rect>
+<line x1="634.8" y1="764.5" x2="780.5" y2="764.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="634.8" y1="761.5" x2="634.8" y2="767.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="780.5" y1="761.5" x2="780.5" y2="767.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M714.2,758.6 L720.1,764.5 L714.2,770.4 L708.4,764.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>told to argue for B - probe direction: 72% [57%, 85%]</title></path>
+<line x1="369.8" y1="770.0" x2="489.0" y2="770.0" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="369.8" y1="767.0" x2="369.8" y2="773.0" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="489.0" y1="767.0" x2="489.0" y2="773.0" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="422.8" cy="770.0" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>told to argue for B - random direction: 18% [8%, 30%]</title></circle>
+<text x="16.0" y="793.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">"Hint: The answer is B."</text>
+<line x1="356.5" y1="778.0" x2="475.8" y2="778.0" stroke="#8a8984" stroke-width="1.6"/>
+<line x1="356.5" y1="775.0" x2="356.5" y2="781.0" stroke="#8a8984" stroke-width="1.4"/>
+<line x1="475.8" y1="775.0" x2="475.8" y2="781.0" stroke="#8a8984" stroke-width="1.4"/>
+<path d="M409.5,772.1 L415.4,778.0 L409.5,783.9 L403.6,778.0 Z" fill="#8a8984" stroke="#ffffff" stroke-width="1.5"><title>"Hint: The answer is B." - no push: 15% [5%, 28%]</title></path>
+<line x1="489.0" y1="783.5" x2="661.2" y2="783.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="489.0" y1="780.5" x2="489.0" y2="786.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="661.2" y1="780.5" x2="661.2" y2="786.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="581.8" cy="783.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>"Hint: The answer is B." - J-lens direction: 48% [30%, 62%]</title></circle>
+<line x1="449.2" y1="789.0" x2="608.2" y2="789.0" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="449.2" y1="786.0" x2="449.2" y2="792.0" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="608.2" y1="786.0" x2="608.2" y2="792.0" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="524.2" y="784.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>"Hint: The answer is B." - logit-lens direction: 38% [22%, 52%]</title></rect>
+<line x1="687.8" y1="794.5" x2="807.0" y2="794.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="687.8" y1="791.5" x2="687.8" y2="797.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="807.0" y1="791.5" x2="807.0" y2="797.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M754.0,788.6 L759.9,794.5 L754.0,800.4 L748.1,794.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>"Hint: The answer is B." - probe direction: 80% [68%, 90%]</title></path>
+<line x1="383.0" y1="800.0" x2="528.8" y2="800.0" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="383.0" y1="797.0" x2="383.0" y2="803.0" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="528.8" y1="797.0" x2="528.8" y2="803.0" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="449.2" cy="800.0" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>"Hint: The answer is B." - random direction: 22% [10%, 38%]</title></circle>
+<text x="16.0" y="823.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">planted "The answer is (B)."</text>
+<line x1="595.0" y1="808.0" x2="754.0" y2="808.0" stroke="#8a8984" stroke-width="1.6"/>
+<line x1="595.0" y1="805.0" x2="595.0" y2="811.0" stroke="#8a8984" stroke-width="1.4"/>
+<line x1="754.0" y1="805.0" x2="754.0" y2="811.0" stroke="#8a8984" stroke-width="1.4"/>
+<path d="M674.5,802.1 L680.4,808.0 L674.5,813.9 L668.6,808.0 Z" fill="#8a8984" stroke="#ffffff" stroke-width="1.5"><title>planted "The answer is (B)." - no push: 65% [50%, 80%]</title></path>
+<line x1="621.5" y1="813.5" x2="780.5" y2="813.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="621.5" y1="810.5" x2="621.5" y2="816.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="780.5" y1="810.5" x2="780.5" y2="816.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="701.0" cy="813.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>planted "The answer is (B)." - J-lens direction: 70% [55%, 85%]</title></circle>
+<line x1="595.0" y1="819.0" x2="754.0" y2="819.0" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="595.0" y1="816.0" x2="595.0" y2="822.0" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="754.0" y1="816.0" x2="754.0" y2="822.0" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="670.0" y="814.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>planted "The answer is (B)." - logit-lens direction: 65% [50%, 80%]</title></rect>
+<line x1="793.8" y1="824.5" x2="860.0" y2="824.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="793.8" y1="821.5" x2="793.8" y2="827.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="860.0" y1="821.5" x2="860.0" y2="827.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M833.5,818.6 L839.4,824.5 L833.5,830.4 L827.6,824.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>planted "The answer is (B)." - probe direction: 95% [88%, 100%]</title></path>
+<line x1="621.5" y1="830.0" x2="767.2" y2="830.0" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="621.5" y1="827.0" x2="621.5" y2="833.0" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="767.2" y1="827.0" x2="767.2" y2="833.0" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="701.0" cy="830.0" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>planted "The answer is (B)." - random direction: 70% [55%, 82%]</title></circle>
+<text x="16.0" y="853.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">no hint (push away from correct)</text>
+<line x1="820.2" y1="838.0" x2="860.0" y2="838.0" stroke="#8a8984" stroke-width="1.6"/>
+<line x1="820.2" y1="835.0" x2="820.2" y2="841.0" stroke="#8a8984" stroke-width="1.4"/>
+<line x1="860.0" y1="835.0" x2="860.0" y2="841.0" stroke="#8a8984" stroke-width="1.4"/>
+<path d="M846.8,832.1 L852.6,838.0 L846.8,843.9 L840.9,838.0 Z" fill="#8a8984" stroke="#ffffff" stroke-width="1.5"><title>no hint (push away from correct) - no push: 98% [92%, 100%]</title></path>
+<line x1="767.2" y1="843.5" x2="860.0" y2="843.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="767.2" y1="840.5" x2="767.2" y2="846.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="860.0" y1="840.5" x2="860.0" y2="846.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="820.2" cy="843.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>no hint (push away from correct) - J-lens direction: 92% [82%, 100%]</title></circle>
+<line x1="754.0" y1="849.0" x2="846.8" y2="849.0" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="754.0" y1="846.0" x2="754.0" y2="852.0" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="846.8" y1="846.0" x2="846.8" y2="852.0" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="802.5" y="844.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>no hint (push away from correct) - logit-lens direction: 90% [80%, 98%]</title></rect>
+<line x1="714.2" y1="854.5" x2="833.5" y2="854.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="714.2" y1="851.5" x2="714.2" y2="857.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="833.5" y1="851.5" x2="833.5" y2="857.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M780.5,848.6 L786.4,854.5 L780.5,860.4 L774.6,854.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>no hint (push away from correct) - probe direction: 85% [72%, 95%]</title></path>
+<line x1="820.2" y1="860.0" x2="860.0" y2="860.0" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="820.2" y1="857.0" x2="820.2" y2="863.0" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="860.0" y1="857.0" x2="860.0" y2="863.0" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="846.8" cy="860.0" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>no hint (push away from correct) - random direction: 98% [92%, 100%]</title></circle>
+<line x1="330" y1="866.0" x2="860" y2="866.0" stroke="#b9b8b2"/>
+<line x1="330.0" y1="866.0" x2="330.0" y2="870.0" stroke="#b9b8b2"/>
+<text x="330.0" y="882.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0%</text>
+<line x1="462.5" y1="866.0" x2="462.5" y2="870.0" stroke="#b9b8b2"/>
+<text x="462.5" y="882.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">25%</text>
+<line x1="595.0" y1="866.0" x2="595.0" y2="870.0" stroke="#b9b8b2"/>
+<text x="595.0" y="882.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">50%</text>
+<line x1="727.5" y1="866.0" x2="727.5" y2="870.0" stroke="#b9b8b2"/>
+<text x="727.5" y="882.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">75%</text>
+<line x1="860.0" y1="866.0" x2="860.0" y2="870.0" stroke="#b9b8b2"/>
+<text x="860.0" y="882.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">100%</text>
+<text x="595.0" y="898.0" font-size="11.5" fill="#52514e" text-anchor="middle" font-weight="normal">share of final answers that are correct</text>
+<text x="12.0" y="934.0" font-size="13" fill="#1b1b1a" text-anchor="start" font-weight="bold">4. Same runs, with runs that hit the 2,048-token cap counted as no answer</text>
+<line x1="330.0" y1="948.0" x2="330.0" y2="1098.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="462.5" y1="948.0" x2="462.5" y2="1098.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="595.0" y1="948.0" x2="595.0" y2="1098.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="727.5" y1="948.0" x2="727.5" y2="1098.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="860.0" y1="948.0" x2="860.0" y2="1098.0" stroke="#e6e5e1" stroke-width="1"/>
+<text x="16.0" y="967.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">all three wrong-answer groups</text>
+<line x1="422.8" y1="952.0" x2="493.4" y2="952.0" stroke="#8a8984" stroke-width="1.6"/>
+<line x1="422.8" y1="949.0" x2="422.8" y2="955.0" stroke="#8a8984" stroke-width="1.4"/>
+<line x1="493.4" y1="949.0" x2="493.4" y2="955.0" stroke="#8a8984" stroke-width="1.4"/>
+<path d="M458.1,946.1 L463.9,952.0 L458.1,957.9 L452.2,952.0 Z" fill="#8a8984" stroke="#ffffff" stroke-width="1.5"><title>all three wrong-answer groups - no push: 24% [18%, 31%]</title></path>
+<line x1="427.2" y1="957.5" x2="497.8" y2="957.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="427.2" y1="954.5" x2="427.2" y2="960.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="497.8" y1="954.5" x2="497.8" y2="960.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="462.5" cy="957.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>all three wrong-answer groups - J-lens direction: 25% [18%, 32%]</title></circle>
+<line x1="409.5" y1="963.0" x2="475.8" y2="963.0" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="409.5" y1="960.0" x2="409.5" y2="966.0" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="475.8" y1="960.0" x2="475.8" y2="966.0" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="440.3" y="958.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>all three wrong-answer groups - logit-lens direction: 22% [15%, 28%]</title></rect>
+<line x1="515.5" y1="968.5" x2="586.2" y2="968.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="515.5" y1="965.5" x2="515.5" y2="971.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="586.2" y1="965.5" x2="586.2" y2="971.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M550.8,962.6 L556.7,968.5 L550.8,974.4 L545.0,968.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>all three wrong-answer groups - probe direction: 42% [35%, 48%]</title></path>
+<line x1="431.6" y1="974.0" x2="493.4" y2="974.0" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="431.6" y1="971.0" x2="431.6" y2="977.0" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="493.4" y1="971.0" x2="493.4" y2="977.0" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="462.5" cy="974.0" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>all three wrong-answer groups - random direction: 25% [19%, 31%]</title></circle>
+<text x="16.0" y="997.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">told to argue for B</text>
+<line x1="330.0" y1="982.0" x2="422.8" y2="982.0" stroke="#8a8984" stroke-width="1.6"/>
+<line x1="330.0" y1="979.0" x2="330.0" y2="985.0" stroke="#8a8984" stroke-width="1.4"/>
+<line x1="422.8" y1="979.0" x2="422.8" y2="985.0" stroke="#8a8984" stroke-width="1.4"/>
+<path d="M369.8,976.1 L375.6,982.0 L369.8,987.9 L363.9,982.0 Z" fill="#8a8984" stroke="#ffffff" stroke-width="1.5"><title>told to argue for B - no push: 8% [0%, 18%]</title></path>
+<line x1="330.0" y1="987.5" x2="369.8" y2="987.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="330.0" y1="984.5" x2="330.0" y2="990.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="369.8" y1="984.5" x2="369.8" y2="990.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="343.2" cy="987.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>told to argue for B - J-lens direction: 2% [0%, 8%]</title></circle>
+<line x1="330.0" y1="993.0" x2="369.8" y2="993.0" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="330.0" y1="990.0" x2="330.0" y2="996.0" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="369.8" y1="990.0" x2="369.8" y2="996.0" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="338.8" y="988.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>told to argue for B - logit-lens direction: 2% [0%, 8%]</title></rect>
+<line x1="343.2" y1="998.5" x2="436.0" y2="998.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="343.2" y1="995.5" x2="343.2" y2="1001.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="436.0" y1="995.5" x2="436.0" y2="1001.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M383.0,992.6 L388.9,998.5 L383.0,1004.4 L377.1,998.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>told to argue for B - probe direction: 10% [2%, 20%]</title></path>
+<line x1="330.0" y1="1004.0" x2="369.8" y2="1004.0" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="330.0" y1="1001.0" x2="330.0" y2="1007.0" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="369.8" y1="1001.0" x2="369.8" y2="1007.0" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="343.2" cy="1004.0" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>told to argue for B - random direction: 2% [0%, 8%]</title></circle>
+<text x="16.0" y="1027.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">"Hint: The answer is B."</text>
+<line x1="330.0" y1="1012.0" x2="396.2" y2="1012.0" stroke="#8a8984" stroke-width="1.6"/>
+<line x1="330.0" y1="1009.0" x2="330.0" y2="1015.0" stroke="#8a8984" stroke-width="1.4"/>
+<line x1="396.2" y1="1009.0" x2="396.2" y2="1015.0" stroke="#8a8984" stroke-width="1.4"/>
+<path d="M356.5,1006.1 L362.4,1012.0 L356.5,1017.9 L350.6,1012.0 Z" fill="#8a8984" stroke="#ffffff" stroke-width="1.5"><title>"Hint: The answer is B." - no push: 5% [0%, 12%]</title></path>
+<line x1="343.2" y1="1017.5" x2="449.2" y2="1017.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="343.2" y1="1014.5" x2="343.2" y2="1020.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="449.2" y1="1014.5" x2="449.2" y2="1020.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="396.2" cy="1017.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>"Hint: The answer is B." - J-lens direction: 12% [2%, 22%]</title></circle>
+<line x1="343.2" y1="1023.0" x2="436.0" y2="1023.0" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="343.2" y1="1020.0" x2="343.2" y2="1026.0" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="436.0" y1="1020.0" x2="436.0" y2="1026.0" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="378.5" y="1018.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>"Hint: The answer is B." - logit-lens direction: 10% [2%, 20%]</title></rect>
+<line x1="396.2" y1="1028.5" x2="542.0" y2="1028.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="396.2" y1="1025.5" x2="396.2" y2="1031.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="542.0" y1="1025.5" x2="542.0" y2="1031.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M462.5,1022.6 L468.4,1028.5 L462.5,1034.3 L456.6,1028.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>"Hint: The answer is B." - probe direction: 25% [12%, 40%]</title></path>
+<line x1="330.0" y1="1034.0" x2="396.2" y2="1034.0" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="330.0" y1="1031.0" x2="330.0" y2="1037.0" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="396.2" y1="1031.0" x2="396.2" y2="1037.0" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="356.5" cy="1034.0" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>"Hint: The answer is B." - random direction: 5% [0%, 12%]</title></circle>
+<text x="16.0" y="1057.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">planted "The answer is (B)."</text>
+<line x1="568.5" y1="1042.0" x2="727.5" y2="1042.0" stroke="#8a8984" stroke-width="1.6"/>
+<line x1="568.5" y1="1039.0" x2="568.5" y2="1045.0" stroke="#8a8984" stroke-width="1.4"/>
+<line x1="727.5" y1="1039.0" x2="727.5" y2="1045.0" stroke="#8a8984" stroke-width="1.4"/>
+<path d="M648.0,1036.2 L653.9,1042.0 L648.0,1047.8 L642.1,1042.0 Z" fill="#8a8984" stroke="#ffffff" stroke-width="1.5"><title>planted "The answer is (B)." - no push: 60% [45%, 75%]</title></path>
+<line x1="568.5" y1="1047.5" x2="727.5" y2="1047.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="568.5" y1="1044.5" x2="568.5" y2="1050.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="727.5" y1="1044.5" x2="727.5" y2="1050.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="648.0" cy="1047.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>planted "The answer is (B)." - J-lens direction: 60% [45%, 75%]</title></circle>
+<line x1="528.8" y1="1053.0" x2="687.8" y2="1053.0" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="528.8" y1="1050.0" x2="528.8" y2="1056.0" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="687.8" y1="1050.0" x2="687.8" y2="1056.0" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="603.8" y="1048.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>planted "The answer is (B)." - logit-lens direction: 52% [38%, 68%]</title></rect>
+<line x1="754.0" y1="1058.5" x2="846.8" y2="1058.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="754.0" y1="1055.5" x2="754.0" y2="1061.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="846.8" y1="1055.5" x2="846.8" y2="1061.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M807.0,1052.7 L812.9,1058.5 L807.0,1064.3 L801.1,1058.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>planted "The answer is (B)." - probe direction: 90% [80%, 98%]</title></path>
+<line x1="608.2" y1="1064.0" x2="767.2" y2="1064.0" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="608.2" y1="1061.0" x2="608.2" y2="1067.0" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="767.2" y1="1061.0" x2="767.2" y2="1067.0" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="687.8" cy="1064.0" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>planted "The answer is (B)." - random direction: 68% [52%, 82%]</title></circle>
+<text x="16.0" y="1087.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">no hint (push away from correct)</text>
+<line x1="674.5" y1="1072.0" x2="807.0" y2="1072.0" stroke="#8a8984" stroke-width="1.6"/>
+<line x1="674.5" y1="1069.0" x2="674.5" y2="1075.0" stroke="#8a8984" stroke-width="1.4"/>
+<line x1="807.0" y1="1069.0" x2="807.0" y2="1075.0" stroke="#8a8984" stroke-width="1.4"/>
+<path d="M740.8,1066.2 L746.6,1072.0 L740.8,1077.8 L734.9,1072.0 Z" fill="#8a8984" stroke="#ffffff" stroke-width="1.5"><title>no hint (push away from correct) - no push: 78% [65%, 90%]</title></path>
+<line x1="701.0" y1="1077.5" x2="820.2" y2="1077.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="701.0" y1="1074.5" x2="701.0" y2="1080.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="820.2" y1="1074.5" x2="820.2" y2="1080.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="767.2" cy="1077.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>no hint (push away from correct) - J-lens direction: 82% [70%, 92%]</title></circle>
+<line x1="661.2" y1="1083.0" x2="793.8" y2="1083.0" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="661.2" y1="1080.0" x2="661.2" y2="1086.0" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="793.8" y1="1080.0" x2="793.8" y2="1086.0" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="723.0" y="1078.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>no hint (push away from correct) - logit-lens direction: 75% [62%, 88%]</title></rect>
+<line x1="634.8" y1="1088.5" x2="780.5" y2="1088.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="634.8" y1="1085.5" x2="634.8" y2="1091.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="780.5" y1="1085.5" x2="780.5" y2="1091.5" stroke="#1baf7a" stroke-width="1.4"/>
+<path d="M714.2,1082.7 L720.1,1088.5 L714.2,1094.3 L708.4,1088.5 Z" fill="#1baf7a" stroke="#ffffff" stroke-width="1.5"><title>no hint (push away from correct) - probe direction: 72% [57%, 85%]</title></path>
+<line x1="714.2" y1="1094.0" x2="833.5" y2="1094.0" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="714.2" y1="1091.0" x2="714.2" y2="1097.0" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="833.5" y1="1091.0" x2="833.5" y2="1097.0" stroke="#7d7c77" stroke-width="1.4"/>
+<circle cx="780.5" cy="1094.0" r="4.5" fill="#ffffff" stroke="#7d7c77" stroke-width="2"><title>no hint (push away from correct) - random direction: 85% [72%, 95%]</title></circle>
+<line x1="330" y1="1100.0" x2="860" y2="1100.0" stroke="#b9b8b2"/>
+<line x1="330.0" y1="1100.0" x2="330.0" y2="1104.0" stroke="#b9b8b2"/>
+<text x="330.0" y="1116.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0%</text>
+<line x1="462.5" y1="1100.0" x2="462.5" y2="1104.0" stroke="#b9b8b2"/>
+<text x="462.5" y="1116.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">25%</text>
+<line x1="595.0" y1="1100.0" x2="595.0" y2="1104.0" stroke="#b9b8b2"/>
+<text x="595.0" y="1116.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">50%</text>
+<line x1="727.5" y1="1100.0" x2="727.5" y2="1104.0" stroke="#b9b8b2"/>
+<text x="727.5" y="1116.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">75%</text>
+<line x1="860.0" y1="1100.0" x2="860.0" y2="1104.0" stroke="#b9b8b2"/>
+<text x="860.0" y="1116.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">100%</text>
+<text x="595.0" y="1132.0" font-size="11.5" fill="#52514e" text-anchor="middle" font-weight="normal">share of final answers that are correct</text>
+<text x="12.0" y="1162.0" font-size="10.5" fill="#8a8984" text-anchor="start" font-weight="normal">Source: docs/experiments/steering/data/steering.json (headline). Report: docs/experiments/steering/report.md.</text>
+</svg>

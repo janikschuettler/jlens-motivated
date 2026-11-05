@@ -1,6 +1,6 @@
 """Steering test: does adding the J-lens direction of the correct letter to the
-residual stream change what Qwen3-8B answers? (docs/overnight/preregistration.md,
-"S1-S3"; report docs/overnight/reports/steering.md.)
+residual stream change what Qwen3-8B answers? (docs/preregistration.md,
+"S1-S3"; report docs/experiments/steering/report.md.)
 
 CPU-only helpers shared by the lens-env scripts (scripts/lens/steer_*.py) and the
 analysis: the fixed design constants, run selection, outcome and chain-of-thought

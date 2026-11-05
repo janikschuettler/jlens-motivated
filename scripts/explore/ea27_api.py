@@ -1,7 +1,7 @@
 """Eval-awareness replication on Qwen3.6-27B: API runs (OpenRouter, envs/judge, arena9-cloud, no GPU).
 
-Pre-registration: docs/overnight/preregistration.md, "EA27". Report:
-docs/overnight/reports/evalaware_27b_replication.md.
+Pre-registration: docs/preregistration.md, "EA27". Report:
+docs/experiments/evalaware_27b_replication.md.
 
   zsh -ic 'cd /root/jlens-motivated && ~/.local/bin/uv run --project envs/judge python \
       scripts/explore/ea27_api.py screen --first 24 --last 104'

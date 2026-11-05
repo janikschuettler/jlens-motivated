@@ -1,6 +1,6 @@
 # Models x grader-bug nudges, API screen via OpenRouter (scripts/explore/or_grader.py,
 # envs/judge). Exploratory, 2026-11-03/04 overnight. Report:
-# docs/overnight/reports/models_grader.md.
+# docs/experiments/models-grader/report.md.
 #
 # Prompt format = our home format "ours" (configs/explore/blocks.yaml): no system prompt
 # unless an arm sets one; the user turn is question, options "(A) ...", the hint after

@@ -4,7 +4,7 @@
 
 Writes <out>/<suite>/runs.jsonl (RunRecords: saved prompt token IDs + sampled
 completions; the lens env teacher-forces these IDs) and <out>/suites.json.
-Suites (fixed 2026-11-04 before any readout; docs/overnight/preregistration.md):
+Suites (fixed 2026-11-04 before any readout; docs/preregistration.md):
 
 Evaluation-like (the model is being tested; analogue of the paper's eval suites)
   redux_home      100 known MMLU-Redux items in our home format (capability eval)

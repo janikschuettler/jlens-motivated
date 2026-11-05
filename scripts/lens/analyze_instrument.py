@@ -403,7 +403,7 @@ def main() -> None:
     ap.add_argument("--out", required=True)
     ap.add_argument("--jobs", type=int, default=48)
     ap.add_argument("--docs-out", default=None,
-                    help="also write a trimmed copy for docs/overnight/data (curves as means only)")
+                    help="also write a trimmed copy for docs/experiments/instrument-q1q3/data (curves as means only)")
     args = ap.parse_args()
     D = Path(args.data)
     rng = np.random.default_rng(SEED)

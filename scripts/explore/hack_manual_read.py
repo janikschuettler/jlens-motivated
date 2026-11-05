@@ -9,7 +9,7 @@ Stage `score`: reads the flag files (TSV) written while reading, runs the echo c
 problem-level bootstrap CIs.
 
 CPU only, numpy + tokenizers: envs/gen/.venv/bin/python scripts/explore/hack_manual_read.py sample|score
-Report: docs/overnight/reports/hack_manual_read.md.
+Report: docs/experiments/hack-manual-read/report.md.
 """
 import argparse, hashlib, json, random, string, sys
 from collections import defaultdict

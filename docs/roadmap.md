@@ -6,7 +6,7 @@ Thresholds marked *(default)* are reasonable choices the plan doesn't specify; c
 
 | Milestone | Plan step | Status |
 | --- | --- | --- |
-| M0 Tools work | — | all checks pass (2026-11-02), see [reports/m0.md](reports/m0.md); awaiting go/no-go |
+| M0 Tools work | — | all checks pass (2026-11-02), see [reports/m0.md](experiments/m0-tools/report.md); awaiting go/no-go |
 | M1 Behavioural pilot | Step 1 | code built and smoke-tested; full pilot waiting on the temperature decision |
 | M2 One internal measurement | Step 2 | not started |
 | M3 Detection (only if time allows) | Step 3 | not started |
@@ -98,7 +98,7 @@ Done when:
 
 ### M0 go/no-go
 
-The M0 report goes in `docs/reports/m0.md`: config values, lens metadata, sport tables, alignment numbers, label counts and throughput. Data stays out of it.
+The M0 report goes in `docs/experiments/m0-tools/report.md`: config values, lens metadata, sport tables, alignment numbers, label counts and throughput. Data stays out of it.
 
 - **Go** if M0.1–M0.5 are all done. "Sensible readouts" (the plan's criterion) means the M0.2 numerical checks and the M0.3 sport readout pass.
 - **The lens isn't sensible.** There is no J++ lens for Qwen3-8B. J++ exists for Qwen3-4B, Qwen3.5-9B and Qwen3.6-27B, so this means discussing a model switch.

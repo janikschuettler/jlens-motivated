@@ -1,6 +1,6 @@
 """Eval-awareness models screen: the J-lens paper's blackmail prompt on lens-covered models
 via OpenRouter (envs/judge, runs on arena9-cloud). Report:
-docs/overnight/reports/evalaware_models_screen.md.
+docs/experiments/evalaware-models-screen/report.md.
 
   uv run --project envs/judge python scripts/explore/or_blackmail.py gen --models gpt-oss-20b,qwen3-14b --samples 40
   uv run --project envs/judge python scripts/explore/or_blackmail.py judge

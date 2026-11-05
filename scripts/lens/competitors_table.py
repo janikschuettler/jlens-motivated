@@ -4,7 +4,7 @@
   data/overnight/competitors/hack_auroc.json  (competitors_hack.py, new cells)
   data/overnight/option_lens.json             (analyze_option_lens.py, option words)
 plus the cells already published in earlier reports (REUSED below, each with its source).
-Writes docs/overnight/data/jlens_vs_competitors.json and prints the markdown tables.
+Writes docs/experiments/jlens-vs-competitors/data/jlens_vs_competitors.json and prints the markdown tables.
 Stdlib only:  python scripts/lens/competitors_table.py
 """
 
@@ -15,7 +15,7 @@ from pathlib import Path
 
 R = Path(__file__).resolve().parents[2]
 C = R / "data/overnight/competitors"
-OUT = R / "docs/overnight/data/jlens_vs_competitors.json"
+OUT = R / "docs/experiments/jlens-vs-competitors/data/jlens_vs_competitors.json"
 
 POSITIONS = [("options", "prompt option words"), ("last_prompt", "last prompt token"),
              ("mid", "mid reasoning"), ("think_end", "end of reasoning"), ("pre_answer", "answer position"),

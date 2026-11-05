@@ -1,7 +1,7 @@
-"""Print the big markdown table of docs/overnight/reports/jlens_vs_competitors.md from
-docs/overnight/data/jlens_vs_competitors.json (stdlib only). * = copied from an earlier report."""
+"""Print the big markdown table of docs/experiments/jlens-vs-competitors/report.md from
+docs/experiments/jlens-vs-competitors/data/jlens_vs_competitors.json (stdlib only). * = copied from an earlier report."""
 import json, sys
-d = json.load(open("docs/overnight/data/jlens_vs_competitors.json"))
+d = json.load(open("docs/experiments/jlens-vs-competitors/data/jlens_vs_competitors.json"))
 POS = [("options", "option words"), ("last_prompt", "last prompt token"), ("mid", "mid reasoning"),
        ("think_end", "end of reasoning"), ("pre_answer", "answer position"), ("whole", "whole run")]
 COLS = ["jlens", "logit", "probe", "blackbox", "monitor", "length"]

@@ -1,5 +1,5 @@
 """Collect the eval-awareness replication's derived numbers into
-docs/overnight/data/evalaware_replication.json (plain python3; inputs: the analysis
+docs/experiments/evalaware-replication/data/evalaware_replication.json (plain python3; inputs: the analysis
 JSONs copied from octavia to data/evalaware/).
 
   python3 scripts/explore/evalaware_build_data.py
@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 
 D = Path("data/evalaware")
-OUT = Path("docs/overnight/data/evalaware_replication.json")
+OUT = Path("docs/experiments/evalaware-replication/data/evalaware_replication.json")
 
 
 def r3(x):
@@ -29,7 +29,7 @@ def pick(d, keys):
 def main():
     c = json.loads((D / "analysis_corpus.json").read_text())
     t = json.loads((D / "analysis_top20.json").read_text())
-    out = {"source": "docs/overnight/reports/evalaware_replication.md",
+    out = {"source": "docs/experiments/evalaware-replication/report.md",
            "paper": "Gurnee, Sofroniew et al. 2026, Verbalizable Representations Form a Global Workspace in Language "
                     "Models, transformer-circuits.pub/2026/workspace",
            "model": "Qwen/Qwen3-8B b968826d, thinking, J-lens neuronpedia/jacobian-lens qwen3-8b; workspace blocks 14-32 (even)",

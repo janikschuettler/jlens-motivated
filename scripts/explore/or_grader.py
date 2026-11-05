@@ -1,7 +1,7 @@
 """Models x grader-bug nudges: API screen via OpenRouter (envs/judge, runs on arena9-cloud).
 
 Spec and exact texts: configs/explore/models_grader.yaml. Report:
-docs/overnight/reports/models_grader.md.
+docs/experiments/models-grader/report.md.
 
   uv run --project envs/judge python scripts/explore/or_grader.py screen --model gpt-oss-20b
   uv run --project envs/judge python scripts/explore/or_grader.py arms --model gpt-oss-20b \

@@ -1,5 +1,5 @@
 # Wave-2 building blocks (include: [blocks.yaml, w2_blocks.yaml]). Texts are from
-# docs/overnight/reports/designs.md §4-§5 (and the user's grader-bug wording, verbatim).
+# docs/experiments/design-survey/report.md §4-§5 (and the user's grader-bug wording, verbatim).
 # {letter} is filled per run (arm field `letter`, see jmr.explore.w2). Every hint goes
 # in the `ours` hint slot: between the options and the "Think it through..." line.
 

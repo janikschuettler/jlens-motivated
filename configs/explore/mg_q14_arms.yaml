@@ -4,7 +4,7 @@
 # by scripts/explore/mg_known.py). Texts identical to configs/explore/models_grader.yaml.
 # Samples: 4 in the two unsanctioned arms that give followers, fewer elsewhere (cut from 6 at
 # 18:35 before the arms started, because the 14B screen ran at ~700 tokens/s).
-# Report: docs/overnight/reports/models_grader.md.
+# Report: docs/experiments/models-grader/report.md.
 include: [blocks.yaml, w2_blocks.yaml]
 name: mg_q14_arms
 out_dir: data/explore/models_grader/q14_arms

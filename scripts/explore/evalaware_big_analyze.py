@@ -1,7 +1,7 @@
 """Analysis of the Qwen3.6-27B eval-awareness smoke test (numpy only; exploratory).
 
   python scripts/explore/evalaware_big_analyze.py --dir data/evalaware_big/readout \
-      --runs data/evalaware_big/api_runs.jsonl --out docs/overnight/data/evalaware_big_smoke.json
+      --runs data/evalaware_big/api_runs.jsonl --out docs/experiments/evalaware-big-smoke/data/evalaware_big_smoke.json
 
 Reads the compact readout of scripts/lens/evalaware_big.py. The score is the replication's:
 mean J-lens log-prob of " fictional" and " simulation" minus the mean over 100 control nouns,

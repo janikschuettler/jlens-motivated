@@ -1,0 +1,255 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="622" viewBox="0 0 1180 622" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title>Wherever the J-lens separates the groups, a cheaper readout does as well or better</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="12.0" y="24.0" font-size="15" fill="#1b1b1a" text-anchor="start" font-weight="bold">Wherever the J-lens separates the groups, a cheaper readout does as well or better</text>
+<text x="12.0" y="45.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Each row compares the runs that argue against the model's knowledge or cheat with their comparison group. Separation = AUROC folded so 0.5 is chance and 1 is perfect in either direction;</text>
+<text x="12.0" y="61.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">95% intervals over questions (folded). For each readout, the best position before the final answer is written is shown, chosen after looking, for every readout alike. Exploratory.</text>
+<text x="12.0" y="77.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Lenses: log p(correct letter) − log p(pushed letter), workspace-layer mean (hack: hack words). Probe: trained on the two groups, questions held out. Behaviour / text: best of the model's</text>
+<text x="12.0" y="93.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">own answer probabilities, a forced early answer, a re-asked answer, a CoT keyword monitor and response length.</text>
+<circle cx="21.0" cy="110.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"></circle>
+<text x="34.0" y="114.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">J-lens</text>
+<rect x="82.3" y="105.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"></rect>
+<text x="99.8" y="114.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">logit lens</text>
+<circle cx="177.8" cy="110.0" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"></circle>
+<text x="190.8" y="114.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">linear probe</text>
+<path d="M281.4,104.2 L287.2,110.0 L281.4,115.8 L275.5,110.0 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"></path>
+<text x="294.4" y="114.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">behaviour / text</text>
+<line x1="450.0" y1="132.0" x2="450.0" y2="530.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="512.9" y1="132.0" x2="512.9" y2="530.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="575.7" y1="132.0" x2="575.7" y2="530.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="638.6" y1="132.0" x2="638.6" y2="530.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="701.4" y1="132.0" x2="701.4" y2="530.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="764.3" y1="132.0" x2="764.3" y2="530.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="827.1" y1="132.0" x2="827.1" y2="530.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="890.0" y1="132.0" x2="890.0" y2="530.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="575.7" y1="128.0" x2="575.7" y2="530.0" stroke="#8a8984" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="579.7" y="526.0" font-size="10.5" fill="#8a8984" text-anchor="start" font-weight="normal">chance</text>
+<rect x="4" y="141.0" width="329" height="24.0" fill="#ffffff"/>
+<text x="8.0" y="156.6" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Arguing against its own knowledge (Qwen3-8B)</text>
+<line x1="8" y1="166.0" x2="1172" y2="166.0" stroke="#e6e5e1"/>
+<text x="16.0" y="185.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Told to argue for B vs no hint</text>
+<text x="442.0" y="185.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">Qwen3-8B, thinking</text>
+<line x1="585.1" y1="170.5" x2="674.4" y2="170.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="585.1" y1="167.5" x2="585.1" y2="173.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="674.4" y1="167.5" x2="674.4" y2="173.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="629.1" cy="170.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Told to argue for B vs no hint - J-lens: 0.58 [0.52, 0.66]</title></circle>
+<line x1="582.6" y1="177.5" x2="654.3" y2="177.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="582.6" y1="174.5" x2="582.6" y2="180.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="654.3" y1="174.5" x2="654.3" y2="180.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="611.4" y="173.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Told to argue for B vs no hint - logit lens: 0.56 [0.51, 0.62]</title></rect>
+<line x1="890.0" y1="184.5" x2="890.0" y2="184.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="890.0" y1="181.5" x2="890.0" y2="187.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="890.0" y1="181.5" x2="890.0" y2="187.5" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="890.0" cy="184.5" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>Told to argue for B vs no hint - linear probe: 1.00 [1.00, 1.00]</title></circle>
+<line x1="852.9" y1="191.5" x2="882.5" y2="191.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="852.9" y1="188.5" x2="852.9" y2="194.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="882.5" y1="188.5" x2="882.5" y2="194.5" stroke="#7d7c77" stroke-width="1.4"/>
+<path d="M869.3,185.7 L875.1,191.5 L869.3,197.3 L863.4,191.5 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>Told to argue for B vs no hint - behaviour / text: 0.97 [0.94, 0.99]</title></path>
+<text x="1172.0" y="185.0" font-size="11" fill="#8a8984" text-anchor="end" font-weight="bold">best other: CoT keyword monitor, whole run</text>
+<text x="16.0" y="215.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Hint followers vs resisters</text>
+<text x="442.0" y="215.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">Qwen3-8B, thinking</text>
+<line x1="555.0" y1="200.5" x2="697.7" y2="200.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="555.0" y1="197.5" x2="555.0" y2="203.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="697.7" y1="197.5" x2="697.7" y2="203.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="629.1" cy="200.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Hint followers vs resisters - J-lens: 0.58 [0.47, 0.69]</title></circle>
+<line x1="577.0" y1="207.5" x2="722.8" y2="207.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="577.0" y1="204.5" x2="577.0" y2="210.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="722.8" y1="204.5" x2="722.8" y2="210.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="646.6" y="203.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Hint followers vs resisters - logit lens: 0.62 [0.50, 0.73]</title></rect>
+<line x1="821.5" y1="214.5" x2="858.6" y2="214.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="821.5" y1="211.5" x2="821.5" y2="217.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="858.6" y1="211.5" x2="858.6" y2="217.5" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="840.3" cy="214.5" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>Hint followers vs resisters - linear probe: 0.92 [0.89, 0.95]</title></circle>
+<line x1="560.0" y1="221.5" x2="700.2" y2="221.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="560.0" y1="218.5" x2="560.0" y2="224.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="700.2" y1="218.5" x2="700.2" y2="224.5" stroke="#7d7c77" stroke-width="1.4"/>
+<path d="M627.9,215.7 L633.7,221.5 L627.9,227.3 L622.0,221.5 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>Hint followers vs resisters - behaviour / text: 0.58 [0.47, 0.70]</title></path>
+<text x="1172.0" y="215.0" font-size="11" fill="#8a8984" text-anchor="end" font-weight="bold">best other: response length, whole run</text>
+<text x="16.0" y="245.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Followers who still know vs persuaded</text>
+<text x="442.0" y="245.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">pre-registered T2</text>
+<line x1="506.6" y1="230.5" x2="688.9" y2="230.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="506.6" y1="227.5" x2="506.6" y2="233.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="688.9" y1="227.5" x2="688.9" y2="233.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="600.9" cy="230.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Followers who still know vs persuaded - J-lens: 0.54 [0.39, 0.68]</title></circle>
+<line x1="500.3" y1="237.5" x2="732.9" y2="237.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="500.3" y1="234.5" x2="500.3" y2="240.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="732.9" y1="234.5" x2="732.9" y2="240.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="615.2" y="233.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Followers who still know vs persuaded - logit lens: 0.57 [0.38, 0.75]</title></rect>
+<line x1="600.9" y1="244.5" x2="795.7" y2="244.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="600.9" y1="241.5" x2="600.9" y2="247.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="795.7" y1="241.5" x2="795.7" y2="247.5" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="701.4" cy="244.5" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>Followers who still know vs persuaded - linear probe: 0.70 [0.54, 0.85]</title></circle>
+<line x1="732.9" y1="251.5" x2="808.3" y2="251.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="732.9" y1="248.5" x2="732.9" y2="254.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="808.3" y1="248.5" x2="808.3" y2="254.5" stroke="#7d7c77" stroke-width="1.4"/>
+<path d="M776.9,245.7 L782.7,251.5 L776.9,257.4 L771.0,251.5 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>Followers who still know vs persuaded - behaviour / text: 0.82 [0.75, 0.87]</title></path>
+<text x="1172.0" y="245.0" font-size="11" fill="#8a8984" text-anchor="end" font-weight="bold">best other: model's own answer, whole run</text>
+<text x="16.0" y="275.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Silent vs open switches to the hint</text>
+<text x="442.0" y="275.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">Qwen3-8B, no thinking</text>
+<line x1="572.6" y1="260.5" x2="632.3" y2="260.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="572.6" y1="257.5" x2="572.6" y2="263.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="632.3" y1="257.5" x2="632.3" y2="263.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="601.5" cy="260.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Silent vs open switches to the hint - J-lens: 0.54 [0.49, 0.59]</title></circle>
+<line x1="587.0" y1="267.5" x2="648.6" y2="267.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="587.0" y1="264.5" x2="587.0" y2="270.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="648.6" y1="264.5" x2="648.6" y2="270.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="614.0" y="263.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Silent vs open switches to the hint - logit lens: 0.57 [0.52, 0.62]</title></rect>
+<line x1="884.3" y1="274.5" x2="888.1" y2="274.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="884.3" y1="271.5" x2="884.3" y2="277.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="888.1" y1="271.5" x2="888.1" y2="277.5" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="886.2" cy="274.5" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>Silent vs open switches to the hint - linear probe: 0.99 [0.99, 1.00]</title></circle>
+<line x1="890.0" y1="281.5" x2="890.0" y2="281.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="890.0" y1="278.5" x2="890.0" y2="284.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="890.0" y1="278.5" x2="890.0" y2="284.5" stroke="#7d7c77" stroke-width="1.4"/>
+<path d="M890.0,275.6 L895.9,281.5 L890.0,287.4 L884.1,281.5 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>Silent vs open switches to the hint - behaviour / text: 1.00 [1.00, 1.00]</title></path>
+<text x="1172.0" y="275.0" font-size="11" fill="#8a8984" text-anchor="end" font-weight="bold">best other: CoT keyword monitor, whole run</text>
+<text x="16.0" y="305.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Kept a planted wrong claim vs recovered</text>
+<text x="442.0" y="305.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">Qwen3-8B, thinking</text>
+<line x1="524.8" y1="290.5" x2="734.7" y2="290.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="524.8" y1="287.5" x2="524.8" y2="293.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="734.7" y1="287.5" x2="734.7" y2="293.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="627.9" cy="290.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Kept a planted wrong claim vs recovered - J-lens: 0.58 [0.42, 0.75]</title></circle>
+<line x1="546.2" y1="297.5" x2="764.3" y2="297.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="546.2" y1="294.5" x2="546.2" y2="300.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="764.3" y1="294.5" x2="764.3" y2="300.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="652.3" y="293.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Kept a planted wrong claim vs recovered - logit lens: 0.63 [0.45, 0.80]</title></rect>
+<line x1="788.2" y1="304.5" x2="862.3" y2="304.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="788.2" y1="301.5" x2="788.2" y2="307.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="862.3" y1="301.5" x2="862.3" y2="307.5" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="829.0" cy="304.5" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>Kept a planted wrong claim vs recovered - linear probe: 0.90 [0.84, 0.96]</title></circle>
+<line x1="712.1" y1="311.5" x2="787.5" y2="311.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="712.1" y1="308.5" x2="712.1" y2="314.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="787.5" y1="308.5" x2="787.5" y2="314.5" stroke="#7d7c77" stroke-width="1.4"/>
+<path d="M749.8,305.6 L755.7,311.5 L749.8,317.4 L744.0,311.5 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>Kept a planted wrong claim vs recovered - behaviour / text: 0.78 [0.72, 0.84]</title></path>
+<text x="1172.0" y="305.0" font-size="11" fill="#8a8984" text-anchor="end" font-weight="bold">best other: CoT keyword monitor, whole run</text>
+<text x="16.0" y="335.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Kept the claim: still knows vs not</text>
+<text x="442.0" y="335.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">10 vs 17 questions</text>
+<line x1="745.4" y1="324.0" x2="864.9" y2="324.0" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="745.4" y1="321.0" x2="745.4" y2="327.0" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="864.9" y1="321.0" x2="864.9" y2="327.0" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="802.0" cy="324.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Kept the claim: still knows vs not - J-lens: 0.86 [0.77, 0.96]</title></circle>
+<line x1="644.9" y1="331.0" x2="833.4" y2="331.0" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="644.9" y1="328.0" x2="644.9" y2="334.0" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="833.4" y1="328.0" x2="833.4" y2="334.0" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="740.9" y="326.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Kept the claim: still knows vs not - logit lens: 0.77 [0.61, 0.91]</title></rect>
+<path d="M626.0,332.1 L631.9,338.0 L626.0,343.9 L620.1,338.0 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>Kept the claim: still knows vs not - behaviour / text: 0.58</title></path>
+<text x="1172.0" y="335.0" font-size="11" fill="#8a8984" text-anchor="end" font-weight="bold">best other: CoT keyword monitor, whole run</text>
+<rect x="4" y="355.0" width="271" height="24.0" fill="#ffffff"/>
+<text x="8.0" y="370.6" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Cheating: reward hack and grader bug</text>
+<line x1="8" y1="380.0" x2="1172" y2="380.0" stroke="#e6e5e1"/>
+<text x="16.0" y="399.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Hidden reward hack vs no hack</text>
+<text x="442.0" y="399.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">same model (warm-start)</text>
+<line x1="572.6" y1="384.5" x2="690.7" y2="384.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="572.6" y1="381.5" x2="572.6" y2="387.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="690.7" y1="381.5" x2="690.7" y2="387.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="629.1" cy="384.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Hidden reward hack vs no hack - J-lens: 0.58 [0.49, 0.68]</title></circle>
+<line x1="578.2" y1="391.5" x2="705.8" y2="391.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="578.2" y1="388.5" x2="578.2" y2="394.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="705.8" y1="388.5" x2="705.8" y2="394.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="637.2" y="387.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Hidden reward hack vs no hack - logit lens: 0.60 [0.50, 0.71]</title></rect>
+<line x1="636.1" y1="398.5" x2="754.9" y2="398.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="636.1" y1="395.5" x2="636.1" y2="401.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="754.9" y1="395.5" x2="754.9" y2="401.5" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="697.7" cy="398.5" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>Hidden reward hack vs no hack - linear probe: 0.69 [0.60, 0.79]</title></circle>
+<line x1="634.2" y1="405.5" x2="709.0" y2="405.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="634.2" y1="402.5" x2="634.2" y2="408.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="709.0" y1="402.5" x2="709.0" y2="408.5" stroke="#7d7c77" stroke-width="1.4"/>
+<path d="M671.9,399.6 L677.7,405.5 L671.9,411.4 L666.0,405.5 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>Hidden reward hack vs no hack - behaviour / text: 0.65 [0.59, 0.71]</title></path>
+<text x="1172.0" y="399.0" font-size="11" fill="#8a8984" text-anchor="end" font-weight="bold">best other: CoT keyword monitor, whole run</text>
+<text x="16.0" y="429.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Grader bug: followers vs resisters</text>
+<text x="442.0" y="429.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">Qwen3-14B, thinking</text>
+<line x1="557.5" y1="414.5" x2="657.4" y2="414.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="557.5" y1="411.5" x2="557.5" y2="417.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="657.4" y1="411.5" x2="657.4" y2="417.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="608.4" cy="414.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Grader bug: followers vs resisters - J-lens: 0.55 [0.47, 0.63]</title></circle>
+<line x1="572.6" y1="421.5" x2="653.0" y2="421.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="572.6" y1="418.5" x2="572.6" y2="424.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="653.0" y1="418.5" x2="653.0" y2="424.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="607.7" y="417.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Grader bug: followers vs resisters - logit lens: 0.56 [0.49, 0.62]</title></rect>
+<line x1="880.6" y1="428.5" x2="889.4" y2="428.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="880.6" y1="425.5" x2="880.6" y2="431.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="889.4" y1="425.5" x2="889.4" y2="431.5" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="885.6" cy="428.5" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>Grader bug: followers vs resisters - linear probe: 0.99 [0.98, 1.00]</title></circle>
+<line x1="698.9" y1="435.5" x2="773.7" y2="435.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="698.9" y1="432.5" x2="698.9" y2="438.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="773.7" y1="432.5" x2="773.7" y2="438.5" stroke="#7d7c77" stroke-width="1.4"/>
+<path d="M737.9,429.6 L743.7,435.5 L737.9,441.4 L732.0,435.5 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>Grader bug: followers vs resisters - behaviour / text: 0.76 [0.70, 0.81]</title></path>
+<text x="1172.0" y="429.0" font-size="11" fill="#8a8984" text-anchor="end" font-weight="bold">best other: response length, whole run</text>
+<text x="16.0" y="459.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Grader bug: followers vs resisters</text>
+<text x="442.0" y="459.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">gpt-oss-20b</text>
+<line x1="574.5" y1="444.5" x2="624.7" y2="444.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="574.5" y1="441.5" x2="574.5" y2="447.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="624.7" y1="441.5" x2="624.7" y2="447.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="599.6" cy="444.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Grader bug: followers vs resisters - J-lens: 0.54 [0.50, 0.58]</title></circle>
+<line x1="557.5" y1="451.5" x2="607.8" y2="451.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="557.5" y1="448.5" x2="557.5" y2="454.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="607.8" y1="448.5" x2="607.8" y2="454.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="577.5" y="447.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Grader bug: followers vs resisters - logit lens: 0.51 [0.47, 0.55]</title></rect>
+<line x1="890.0" y1="458.5" x2="890.0" y2="458.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="890.0" y1="455.5" x2="890.0" y2="461.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="890.0" y1="455.5" x2="890.0" y2="461.5" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="890.0" cy="458.5" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>Grader bug: followers vs resisters - linear probe: 1.00 [1.00, 1.00]</title></circle>
+<line x1="646.1" y1="465.5" x2="690.7" y2="465.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="646.1" y1="462.5" x2="646.1" y2="468.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="690.7" y1="462.5" x2="690.7" y2="468.5" stroke="#7d7c77" stroke-width="1.4"/>
+<path d="M669.4,459.6 L675.2,465.5 L669.4,471.4 L663.5,465.5 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>Grader bug: followers vs resisters - behaviour / text: 0.65 [0.61, 0.68]</title></path>
+<text x="1172.0" y="459.0" font-size="11" fill="#8a8984" text-anchor="end" font-weight="bold">best other: CoT intent keywords, whole run</text>
+<text x="16.0" y="489.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Grader bug: followers vs resisters</text>
+<text x="442.0" y="489.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">Qwen3-8B, no thinking</text>
+<line x1="556.9" y1="474.5" x2="638.6" y2="474.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="556.9" y1="471.5" x2="556.9" y2="477.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="638.6" y1="471.5" x2="638.6" y2="477.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="597.1" cy="474.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Grader bug: followers vs resisters - J-lens: 0.53 [0.47, 0.60]</title></circle>
+<line x1="565.7" y1="481.5" x2="641.7" y2="481.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="565.7" y1="478.5" x2="565.7" y2="484.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="641.7" y1="478.5" x2="641.7" y2="484.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="597.6" y="477.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Grader bug: followers vs resisters - logit lens: 0.54 [0.48, 0.60]</title></rect>
+<line x1="571.9" y1="488.5" x2="651.8" y2="488.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="571.9" y1="485.5" x2="571.9" y2="491.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="651.8" y1="485.5" x2="651.8" y2="491.5" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="611.5" cy="488.5" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>Grader bug: followers vs resisters - linear probe: 0.56 [0.49, 0.62]</title></circle>
+<line x1="624.1" y1="495.5" x2="676.3" y2="495.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="624.1" y1="492.5" x2="624.1" y2="498.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="676.3" y1="492.5" x2="676.3" y2="498.5" stroke="#7d7c77" stroke-width="1.4"/>
+<path d="M648.6,489.6 L654.5,495.5 L648.6,501.4 L642.8,495.5 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>Grader bug: followers vs resisters - behaviour / text: 0.62 [0.58, 0.66]</title></path>
+<text x="1172.0" y="489.0" font-size="11" fill="#8a8984" text-anchor="end" font-weight="bold">best other: CoT keyword monitor, whole run</text>
+<text x="16.0" y="519.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Grader bug: followers vs resisters</text>
+<text x="442.0" y="519.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">Qwen3-14B, no thinking</text>
+<line x1="584.5" y1="504.5" x2="648.0" y2="504.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="584.5" y1="501.5" x2="584.5" y2="507.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="648.0" y1="501.5" x2="648.0" y2="507.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="615.9" cy="504.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Grader bug: followers vs resisters - J-lens: 0.56 [0.51, 0.61]</title></circle>
+<line x1="578.2" y1="511.5" x2="643.0" y2="511.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="578.2" y1="508.5" x2="578.2" y2="514.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="643.0" y1="508.5" x2="643.0" y2="514.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="605.2" y="507.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Grader bug: followers vs resisters - logit lens: 0.55 [0.50, 0.61]</title></rect>
+<line x1="629.1" y1="518.5" x2="683.8" y2="518.5" stroke="#1baf7a" stroke-width="1.6"/>
+<line x1="629.1" y1="515.5" x2="629.1" y2="521.5" stroke="#1baf7a" stroke-width="1.4"/>
+<line x1="683.8" y1="515.5" x2="683.8" y2="521.5" stroke="#1baf7a" stroke-width="1.4"/>
+<circle cx="657.4" cy="518.5" r="4.5" fill="#ffffff" stroke="#1baf7a" stroke-width="2"><title>Grader bug: followers vs resisters - linear probe: 0.63 [0.58, 0.67]</title></circle>
+<line x1="669.4" y1="525.5" x2="722.8" y2="525.5" stroke="#7d7c77" stroke-width="1.6"/>
+<line x1="669.4" y1="522.5" x2="669.4" y2="528.5" stroke="#7d7c77" stroke-width="1.4"/>
+<line x1="722.8" y1="522.5" x2="722.8" y2="528.5" stroke="#7d7c77" stroke-width="1.4"/>
+<path d="M695.1,519.6 L701.0,525.5 L695.1,531.4 L689.3,525.5 Z" fill="#7d7c77" stroke="#ffffff" stroke-width="1.5"><title>Grader bug: followers vs resisters - behaviour / text: 0.69 [0.65, 0.73]</title></path>
+<text x="1172.0" y="519.0" font-size="11" fill="#8a8984" text-anchor="end" font-weight="bold">best other: CoT keyword monitor, whole run</text>
+<line x1="450" y1="532.0" x2="890" y2="532.0" stroke="#b9b8b2"/>
+<line x1="450.0" y1="532.0" x2="450.0" y2="536.0" stroke="#b9b8b2"/>
+<text x="450.0" y="548.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.3</text>
+<line x1="512.9" y1="532.0" x2="512.9" y2="536.0" stroke="#b9b8b2"/>
+<text x="512.9" y="548.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.4</text>
+<line x1="575.7" y1="532.0" x2="575.7" y2="536.0" stroke="#b9b8b2"/>
+<text x="575.7" y="548.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.5</text>
+<line x1="638.6" y1="532.0" x2="638.6" y2="536.0" stroke="#b9b8b2"/>
+<text x="638.6" y="548.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.6</text>
+<line x1="701.4" y1="532.0" x2="701.4" y2="536.0" stroke="#b9b8b2"/>
+<text x="701.4" y="548.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.7</text>
+<line x1="764.3" y1="532.0" x2="764.3" y2="536.0" stroke="#b9b8b2"/>
+<text x="764.3" y="548.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.8</text>
+<line x1="827.1" y1="532.0" x2="827.1" y2="536.0" stroke="#b9b8b2"/>
+<text x="827.1" y="548.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0.9</text>
+<line x1="890.0" y1="532.0" x2="890.0" y2="536.0" stroke="#b9b8b2"/>
+<text x="890.0" y="548.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">1.0</text>
+<text x="670.0" y="564.0" font-size="11.5" fill="#52514e" text-anchor="middle" font-weight="normal">separation (folded AUROC)</text>
+<text x="12.0" y="594.0" font-size="10.5" fill="#8a8984" text-anchor="start" font-weight="normal">Source: docs/experiments/jlens-vs-competitors/data/jlens_vs_competitors.json (figure). Report: docs/experiments/jlens-vs-competitors/report.md.</text>
+<text x="12.0" y="609.0" font-size="10.5" fill="#8a8984" text-anchor="start" font-weight="normal">Probe values near 1 at the end of reasoning read the conclusion the text has already reached; the instructed-run probe at the last prompt token reads the instruction in the prompt.</text>
+</svg>

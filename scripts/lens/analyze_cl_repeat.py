@@ -138,7 +138,7 @@ def main() -> None:
     for r in runs:
         r["pos_template"] = True if r["reel_template"] == r["C"] else False if r["reel_template"] == r["B"] else None
     res = {
-        "preregistration": "docs/overnight/preregistration.md, R-CL",
+        "preregistration": "docs/preregistration.md, R-CL",
         "score": "corr margin at pre_answer (correct minus mean of the two other wrong letters), mean of layers 30, 32",
         "counts": counts,
         "n": {"runs": len(runs), "items": len({r["item"] for r in runs}),

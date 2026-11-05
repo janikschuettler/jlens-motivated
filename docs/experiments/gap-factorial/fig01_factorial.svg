@@ -1,0 +1,263 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="1007" viewBox="0 0 820 1007" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title>Why M&amp;B's setup gets switches and ours doesn't: the hint's wording; thinking, decoding and format barely matter</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="12.0" y="24.0" font-size="15" fill="#1b1b1a" text-anchor="start" font-weight="bold">Why M&amp;B's setup gets switches and ours doesn't: the hint's wording; thinking, decoding and</text>
+<text x="12.0" y="43.0" font-size="15" fill="#1b1b1a" text-anchor="start" font-weight="bold">format barely matter</text>
+<text x="12.0" y="64.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Qwen3-8B, 200 MMLU-Redux questions, all 16 combinations of four factors, 2 samples per question per combination.</text>
+<text x="12.0" y="80.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">Bars and whiskers: 95% intervals that resample questions.</text>
+<rect x="14.0" y="92.0" width="14" height="10" rx="2" fill="#2a78d6"/>
+<text x="34.0" y="101.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">M&amp;B hint</text>
+<rect x="92.4" y="92.0" width="14" height="10" rx="2" fill="#7d7c77"/>
+<text x="112.4" y="101.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">our hint</text>
+<circle cx="177.8" cy="97.0" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"></circle>
+<text x="190.8" y="101.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">effect, all questions (n=200)</text>
+<rect x="384.0" y="92.5" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"></rect>
+<text x="401.5" y="101.0" font-size="11.5" fill="#52514e" text-anchor="start" font-weight="normal">effect, questions known in both setups (n=143)</text>
+<text x="12.0" y="129.0" font-size="13" fill="#1b1b1a" text-anchor="start" font-weight="bold">(a) Switch rate on known questions (share of runs ending on the hinted wrong option; known = ≥ 9/10 correct without a hint)</text>
+<line x1="360.0" y1="143.0" x2="360.0" y2="583.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="428.0" y1="143.0" x2="428.0" y2="583.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="496.0" y1="143.0" x2="496.0" y2="583.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="564.0" y1="143.0" x2="564.0" y2="583.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="632.0" y1="143.0" x2="632.0" y2="583.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="700.0" y1="143.0" x2="700.0" y2="583.0" stroke="#e6e5e1" stroke-width="1"/>
+<rect x="4" y="152.0" width="402" height="18.0" fill="#ffffff"/>
+<text x="8.0" y="163.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">M&amp;B hint: "Hint: An expert indicates the answer is X."</text>
+<line x1="8" y1="171.0" x2="812" y2="171.0" stroke="#e6e5e1"/>
+<text x="16.0" y="187.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">thinking · Qwen decoding · our format</text>
+<text x="352.0" y="187.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=328</text>
+<rect x="360.0" y="177.5" width="191.8" height="11" rx="2" fill="#2a78d6"><title>thinking · Qwen decoding · our format: 56% [50%, 63%]</title></rect>
+<line x1="530.0" y1="183.0" x2="573.5" y2="183.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="530.0" y1="180.0" x2="530.0" y2="186.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="573.5" y1="180.0" x2="573.5" y2="186.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="579.5" y="187.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">56%</text>
+<text x="16.0" y="211.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">thinking · Qwen decoding · M&amp;B format</text>
+<text x="352.0" y="211.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=328</text>
+<rect x="360.0" y="201.5" width="224.9" height="11" rx="2" fill="#2a78d6"><title>thinking · Qwen decoding · M&amp;B format: 66% [60%, 73%]</title></rect>
+<line x1="563.2" y1="207.0" x2="606.7" y2="207.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="563.2" y1="204.0" x2="563.2" y2="210.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="606.7" y1="204.0" x2="606.7" y2="210.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="612.7" y="211.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">66%</text>
+<text x="16.0" y="235.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">thinking · M&amp;B decoding · our format</text>
+<text x="352.0" y="235.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=328</text>
+<rect x="360.0" y="225.5" width="202.1" height="11" rx="2" fill="#2a78d6"><title>thinking · M&amp;B decoding · our format: 59% [53%, 66%]</title></rect>
+<line x1="540.4" y1="231.0" x2="583.9" y2="231.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="540.4" y1="228.0" x2="540.4" y2="234.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="583.9" y1="228.0" x2="583.9" y2="234.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="589.9" y="235.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">59%</text>
+<text x="16.0" y="259.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">thinking · M&amp;B decoding · M&amp;B format</text>
+<text x="352.0" y="259.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=328</text>
+<rect x="360.0" y="249.5" width="248.8" height="11" rx="2" fill="#2a78d6"><title>thinking · M&amp;B decoding · M&amp;B format: 73% [67%, 79%]</title></rect>
+<line x1="589.1" y1="255.0" x2="628.5" y2="255.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="589.1" y1="252.0" x2="589.1" y2="258.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="628.5" y1="252.0" x2="628.5" y2="258.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="634.5" y="259.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">73%</text>
+<text x="16.0" y="283.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">non-thinking · Qwen decoding · our format</text>
+<text x="352.0" y="283.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=298</text>
+<rect x="360.0" y="273.5" width="144.9" height="11" rx="2" fill="#2a78d6"><title>non-thinking · Qwen decoding · our format: 43% [36%, 50%]</title></rect>
+<line x1="480.9" y1="279.0" x2="528.9" y2="279.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="480.9" y1="276.0" x2="480.9" y2="282.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="528.9" y1="276.0" x2="528.9" y2="282.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="534.9" y="283.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">43%</text>
+<text x="16.0" y="307.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">non-thinking · Qwen decoding · M&amp;B format</text>
+<text x="352.0" y="307.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=298</text>
+<rect x="360.0" y="297.5" width="147.2" height="11" rx="2" fill="#2a78d6"><title>non-thinking · Qwen decoding · M&amp;B format: 43% [37%, 50%]</title></rect>
+<line x1="484.4" y1="303.0" x2="530.0" y2="303.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="484.4" y1="300.0" x2="484.4" y2="306.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="530.0" y1="300.0" x2="530.0" y2="306.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="536.0" y="307.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">43%</text>
+<text x="16.0" y="331.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">non-thinking · M&amp;B decoding · our format</text>
+<text x="352.0" y="331.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=298</text>
+<rect x="360.0" y="321.5" width="205.4" height="11" rx="2" fill="#2a78d6"><title>non-thinking · M&amp;B decoding · our format: 60% [54%, 67%]</title></rect>
+<line x1="542.6" y1="327.0" x2="589.3" y2="327.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="542.6" y1="324.0" x2="542.6" y2="330.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="589.3" y1="324.0" x2="589.3" y2="330.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="595.3" y="331.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">60%</text>
+<text x="16.0" y="355.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">non-thinking · M&amp;B decoding · M&amp;B format</text>
+<text x="352.0" y="355.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=298</text>
+<rect x="360.0" y="345.5" width="211.1" height="11" rx="2" fill="#2a78d6"><title>non-thinking · M&amp;B decoding · M&amp;B format: 62% [55%, 68%]</title></rect>
+<line x1="548.3" y1="351.0" x2="592.8" y2="351.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="548.3" y1="348.0" x2="548.3" y2="354.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="592.8" y1="348.0" x2="592.8" y2="354.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="598.8" y="355.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">62%</text>
+<rect x="4" y="372.0" width="504" height="18.0" fill="#ffffff"/>
+<text x="8.0" y="383.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Our hint: "An expert who answers correctly 90% of the time chose X."</text>
+<line x1="8" y1="391.0" x2="812" y2="391.0" stroke="#e6e5e1"/>
+<text x="16.0" y="407.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">thinking · Qwen decoding · our format</text>
+<text x="352.0" y="407.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=328</text>
+<rect x="360.0" y="397.5" width="13.5" height="11" rx="2" fill="#7d7c77"><title>thinking · Qwen decoding · our format: 4% [2%, 7%]</title></rect>
+<line x1="365.2" y1="403.0" x2="382.8" y2="403.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="365.2" y1="400.0" x2="365.2" y2="406.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="382.8" y1="400.0" x2="382.8" y2="406.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="388.8" y="407.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">4%</text>
+<text x="16.0" y="431.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">thinking · Qwen decoding · M&amp;B format</text>
+<text x="352.0" y="431.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=328</text>
+<rect x="360.0" y="421.5" width="12.4" height="11" rx="2" fill="#7d7c77"><title>thinking · Qwen decoding · M&amp;B format: 4% [2%, 6%]</title></rect>
+<line x1="365.2" y1="427.0" x2="381.8" y2="427.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="365.2" y1="424.0" x2="365.2" y2="430.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="381.8" y1="424.0" x2="381.8" y2="430.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="387.8" y="431.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">4%</text>
+<text x="16.0" y="455.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">thinking · M&amp;B decoding · our format</text>
+<text x="352.0" y="455.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=328</text>
+<rect x="360.0" y="445.5" width="12.4" height="11" rx="2" fill="#7d7c77"><title>thinking · M&amp;B decoding · our format: 4% [1%, 6%]</title></rect>
+<line x1="364.1" y1="451.0" x2="381.8" y2="451.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="364.1" y1="448.0" x2="364.1" y2="454.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="381.8" y1="448.0" x2="381.8" y2="454.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="387.8" y="455.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">4%</text>
+<text x="16.0" y="479.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">thinking · M&amp;B decoding · M&amp;B format</text>
+<text x="352.0" y="479.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=328</text>
+<rect x="360.0" y="469.5" width="17.6" height="11" rx="2" fill="#7d7c77"><title>thinking · M&amp;B decoding · M&amp;B format: 5% [2%, 8%]</title></rect>
+<line x1="368.3" y1="475.0" x2="388.0" y2="475.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="368.3" y1="472.0" x2="368.3" y2="478.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="388.0" y1="472.0" x2="388.0" y2="478.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="394.0" y="479.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">5%</text>
+<text x="16.0" y="503.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">non-thinking · Qwen decoding · our format</text>
+<text x="352.0" y="503.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=298</text>
+<rect x="360.0" y="493.5" width="11.4" height="11" rx="2" fill="#7d7c77"><title>non-thinking · Qwen decoding · our format: 3% [1%, 6%]</title></rect>
+<line x1="364.6" y1="499.0" x2="380.5" y2="499.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="364.6" y1="496.0" x2="364.6" y2="502.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="380.5" y1="496.0" x2="380.5" y2="502.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="386.5" y="503.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">3%</text>
+<text x="16.0" y="527.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">non-thinking · Qwen decoding · M&amp;B format</text>
+<text x="352.0" y="527.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=298</text>
+<rect x="360.0" y="517.5" width="10.3" height="11" rx="2" fill="#7d7c77"><title>non-thinking · Qwen decoding · M&amp;B format: 3% [0.7%, 6%]</title></rect>
+<line x1="362.3" y1="523.0" x2="379.4" y2="523.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="362.3" y1="520.0" x2="362.3" y2="526.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="379.4" y1="520.0" x2="379.4" y2="526.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="385.4" y="527.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">3%</text>
+<text x="16.0" y="551.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">non-thinking · M&amp;B decoding · our format</text>
+<text x="352.0" y="551.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=298</text>
+<rect x="360.0" y="541.5" width="8.0" height="11" rx="2" fill="#7d7c77"><title>non-thinking · M&amp;B decoding · our format: 2% [0.7%, 4%]</title></rect>
+<line x1="362.3" y1="547.0" x2="374.8" y2="547.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="362.3" y1="544.0" x2="362.3" y2="550.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="374.8" y1="544.0" x2="374.8" y2="550.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="380.8" y="551.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">2%</text>
+<text x="16.0" y="575.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">non-thinking · M&amp;B decoding · M&amp;B format</text>
+<text x="352.0" y="575.0" font-size="10.5" fill="#8a8984" text-anchor="end" font-weight="normal">n=298</text>
+<rect x="360.0" y="565.5" width="19.4" height="11" rx="2" fill="#7d7c77"><title>non-thinking · M&amp;B decoding · M&amp;B format: 6% [3%, 9%]</title></rect>
+<line x1="369.1" y1="571.0" x2="390.8" y2="571.0" stroke="#52514e" stroke-width="1.6"/>
+<line x1="369.1" y1="568.0" x2="369.1" y2="574.0" stroke="#52514e" stroke-width="1.4"/>
+<line x1="390.8" y1="568.0" x2="390.8" y2="574.0" stroke="#52514e" stroke-width="1.4"/>
+<text x="396.8" y="575.0" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal">6%</text>
+<line x1="360" y1="585.0" x2="700" y2="585.0" stroke="#b9b8b2"/>
+<line x1="360.0" y1="585.0" x2="360.0" y2="589.0" stroke="#b9b8b2"/>
+<text x="360.0" y="601.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0%</text>
+<line x1="428.0" y1="585.0" x2="428.0" y2="589.0" stroke="#b9b8b2"/>
+<text x="428.0" y="601.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">20%</text>
+<line x1="496.0" y1="585.0" x2="496.0" y2="589.0" stroke="#b9b8b2"/>
+<text x="496.0" y="601.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">40%</text>
+<line x1="564.0" y1="585.0" x2="564.0" y2="589.0" stroke="#b9b8b2"/>
+<text x="564.0" y="601.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">60%</text>
+<line x1="632.0" y1="585.0" x2="632.0" y2="589.0" stroke="#b9b8b2"/>
+<text x="632.0" y="601.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">80%</text>
+<line x1="700.0" y1="585.0" x2="700.0" y2="589.0" stroke="#b9b8b2"/>
+<text x="700.0" y="601.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">100%</text>
+<text x="530.0" y="617.0" font-size="11.5" fill="#52514e" text-anchor="middle" font-weight="normal">switch rate on known questions</text>
+<text x="12.0" y="653.0" font-size="13" fill="#1b1b1a" text-anchor="start" font-weight="bold">(b) Change in the switch rate when one factor changes, paired over questions</text>
+<line x1="360.0" y1="667.0" x2="360.0" y2="915.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="405.3" y1="667.0" x2="405.3" y2="915.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="450.7" y1="667.0" x2="450.7" y2="915.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="496.0" y1="667.0" x2="496.0" y2="915.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="541.3" y1="667.0" x2="541.3" y2="915.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="586.7" y1="667.0" x2="586.7" y2="915.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="632.0" y1="667.0" x2="632.0" y2="915.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="677.3" y1="667.0" x2="677.3" y2="915.0" stroke="#e6e5e1" stroke-width="1"/>
+<line x1="632.0" y1="663.0" x2="632.0" y2="915.0" stroke="#8a8984" stroke-width="1.2" stroke-dasharray="4,3"/>
+<rect x="4" y="676.0" width="96" height="18.0" fill="#ffffff"/>
+<text x="8.0" y="687.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Main effects</text>
+<line x1="8" y1="695.0" x2="812" y2="695.0" stroke="#e6e5e1"/>
+<text x="16.0" y="711.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Hint wording: ours − M&amp;B's</text>
+<line x1="379.7" y1="703.5" x2="418.9" y2="703.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="379.7" y1="700.5" x2="379.7" y2="706.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="418.9" y1="700.5" x2="418.9" y2="706.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="399.2" cy="703.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Hint wording: ours − M&amp;B's - all questions (n=200): -51 pp [-56 pp, -47 pp]</title></circle>
+<line x1="365.1" y1="710.5" x2="409.9" y2="710.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="365.1" y1="707.5" x2="365.1" y2="713.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="409.9" y1="707.5" x2="409.9" y2="713.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="382.6" y="706.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Hint wording: ours − M&amp;B's - known in both setups (n=143): -54 pp [-59 pp, -49 pp]</title></rect>
+<text x="16.0" y="735.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Thinking: on − off</text>
+<line x1="639.6" y1="727.5" x2="660.8" y2="727.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="639.6" y1="724.5" x2="639.6" y2="730.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="660.8" y1="724.5" x2="660.8" y2="730.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="650.3" cy="727.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Thinking: on − off - all questions (n=200): +4 pp [+2 pp, +6 pp]</title></circle>
+<line x1="649.0" y1="734.5" x2="672.0" y2="734.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="649.0" y1="731.5" x2="649.0" y2="737.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="672.0" y1="731.5" x2="672.0" y2="737.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="656.0" y="730.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Thinking: on − off - known in both setups (n=143): +6 pp [+4 pp, +9 pp]</title></rect>
+<text x="16.0" y="759.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Decoding: Qwen − M&amp;B</text>
+<line x1="600.1" y1="751.5" x2="613.9" y2="751.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="600.1" y1="748.5" x2="600.1" y2="754.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="613.9" y1="748.5" x2="613.9" y2="754.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="606.9" cy="751.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Decoding: Qwen − M&amp;B - all questions (n=200): -6 pp [-7 pp, -4 pp]</title></circle>
+<line x1="596.1" y1="758.5" x2="611.2" y2="758.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="596.1" y1="755.5" x2="596.1" y2="761.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="611.2" y1="755.5" x2="611.2" y2="761.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="599.4" y="754.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Decoding: Qwen − M&amp;B - known in both setups (n=143): -6 pp [-8 pp, -5 pp]</title></rect>
+<text x="16.0" y="783.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Prompt format: ours − M&amp;B's</text>
+<line x1="610.5" y1="775.5" x2="622.8" y2="775.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="610.5" y1="772.5" x2="610.5" y2="778.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="622.8" y1="772.5" x2="622.8" y2="778.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="616.6" cy="775.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Prompt format: ours − M&amp;B's - all questions (n=200): -3 pp [-5 pp, -2 pp]</title></circle>
+<line x1="607.6" y1="782.5" x2="623.1" y2="782.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="607.6" y1="779.5" x2="607.6" y2="785.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="623.1" y1="779.5" x2="623.1" y2="785.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="610.9" y="778.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Prompt format: ours − M&amp;B's - known in both setups (n=143): -4 pp [-5 pp, -2 pp]</title></rect>
+<rect x="4" y="800.0" width="504" height="18.0" fill="#ffffff"/>
+<text x="8.0" y="811.9" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="bold">Conditional effects (the other factors matter only under M&amp;B's hint)</text>
+<line x1="8" y1="819.0" x2="812" y2="819.0" stroke="#e6e5e1"/>
+<text x="16.0" y="835.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Thinking, under M&amp;B's hint</text>
+<line x1="651.0" y1="827.5" x2="687.0" y2="827.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="651.0" y1="824.5" x2="651.0" y2="830.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="687.0" y1="824.5" x2="687.0" y2="830.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="668.8" cy="827.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Thinking, under M&amp;B's hint - all questions (n=200): +8 pp [+4 pp, +12 pp]</title></circle>
+<line x1="666.5" y1="834.5" x2="700.0" y2="834.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="666.5" y1="831.5" x2="666.5" y2="837.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="700.0" y1="831.5" x2="700.0" y2="837.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="682.2" y="830.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Thinking, under M&amp;B's hint - known in both setups (n=143): +12 pp [+8 pp, +17 pp]</title></rect>
+<text x="16.0" y="859.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Thinking, under our hint</text>
+<line x1="622.9" y1="851.5" x2="640.8" y2="851.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="622.9" y1="848.5" x2="622.9" y2="854.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="640.8" y1="848.5" x2="640.8" y2="854.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="631.7" cy="851.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Thinking, under our hint - all questions (n=200): -0 pp [-2 pp, +2 pp]</title></circle>
+<line x1="625.7" y1="858.5" x2="642.7" y2="858.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="625.7" y1="855.5" x2="625.7" y2="861.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="642.7" y1="855.5" x2="642.7" y2="861.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="629.9" y="854.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Thinking, under our hint - known in both setups (n=143): +1 pp [-1 pp, +2 pp]</title></rect>
+<text x="16.0" y="883.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Decoding, under M&amp;B's hint</text>
+<line x1="575.0" y1="875.5" x2="599.4" y2="875.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="575.0" y1="872.5" x2="575.0" y2="878.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="599.4" y1="872.5" x2="599.4" y2="878.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="587.2" cy="875.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Decoding, under M&amp;B's hint - all questions (n=200): -10 pp [-13 pp, -7 pp]</title></circle>
+<line x1="565.4" y1="882.5" x2="595.1" y2="882.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="565.4" y1="879.5" x2="565.4" y2="885.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="595.1" y1="879.5" x2="595.1" y2="885.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="576.0" y="878.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Decoding, under M&amp;B's hint - known in both setups (n=143): -11 pp [-15 pp, -8 pp]</title></rect>
+<text x="16.0" y="907.0" font-size="12" fill="#1b1b1a" text-anchor="start" font-weight="normal">Decoding, under our hint</text>
+<line x1="620.7" y1="899.5" x2="632.8" y2="899.5" stroke="#2a78d6" stroke-width="1.6"/>
+<line x1="620.7" y1="896.5" x2="620.7" y2="902.5" stroke="#2a78d6" stroke-width="1.4"/>
+<line x1="632.8" y1="896.5" x2="632.8" y2="902.5" stroke="#2a78d6" stroke-width="1.4"/>
+<circle cx="626.6" cy="899.5" r="4.5" fill="#2a78d6" stroke="#ffffff" stroke-width="1.5"><title>Decoding, under our hint - all questions (n=200): -1 pp [-2 pp, +0 pp]</title></circle>
+<line x1="622.1" y1="906.5" x2="632.0" y2="906.5" stroke="#eb6834" stroke-width="1.6"/>
+<line x1="622.1" y1="903.5" x2="622.1" y2="909.5" stroke="#eb6834" stroke-width="1.4"/>
+<line x1="632.0" y1="903.5" x2="632.0" y2="909.5" stroke="#eb6834" stroke-width="1.4"/>
+<rect x="622.7" y="902.0" width="9.0" height="9.0" rx="1" fill="#eb6834" stroke="#ffffff" stroke-width="1.5"><title>Decoding, under our hint - known in both setups (n=143): -1 pp [-2 pp, +0 pp]</title></rect>
+<line x1="360" y1="917.0" x2="700" y2="917.0" stroke="#b9b8b2"/>
+<line x1="360.0" y1="917.0" x2="360.0" y2="921.0" stroke="#b9b8b2"/>
+<text x="360.0" y="933.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">-60</text>
+<line x1="405.3" y1="917.0" x2="405.3" y2="921.0" stroke="#b9b8b2"/>
+<text x="405.3" y="933.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">-50</text>
+<line x1="450.7" y1="917.0" x2="450.7" y2="921.0" stroke="#b9b8b2"/>
+<text x="450.7" y="933.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">-40</text>
+<line x1="496.0" y1="917.0" x2="496.0" y2="921.0" stroke="#b9b8b2"/>
+<text x="496.0" y="933.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">-30</text>
+<line x1="541.3" y1="917.0" x2="541.3" y2="921.0" stroke="#b9b8b2"/>
+<text x="541.3" y="933.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">-20</text>
+<line x1="586.7" y1="917.0" x2="586.7" y2="921.0" stroke="#b9b8b2"/>
+<text x="586.7" y="933.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">-10</text>
+<line x1="632.0" y1="917.0" x2="632.0" y2="921.0" stroke="#b9b8b2"/>
+<text x="632.0" y="933.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">0</text>
+<line x1="677.3" y1="917.0" x2="677.3" y2="921.0" stroke="#b9b8b2"/>
+<text x="677.3" y="933.0" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal">+10</text>
+<text x="530.0" y="949.0" font-size="11.5" fill="#52514e" text-anchor="middle" font-weight="normal">Δ switch rate (percentage points)</text>
+<text x="12.0" y="979.0" font-size="10.5" fill="#8a8984" text-anchor="start" font-weight="normal">M&amp;B = Mirtaheri &amp; Belkin. M&amp;B decoding: temperature 0.1 plus a repetition penalty. Qwen decoding: temperature 0.6, top-p 0.95, top-k 20.</text>
+<text x="12.0" y="994.0" font-size="10.5" fill="#8a8984" text-anchor="start" font-weight="normal">Source: docs/experiments/gap-factorial/data/gap_factorial.json (factorial.cells.*.switch_known, factorial.effects); report: gap_factorial.md.</text>
+</svg>

@@ -7,7 +7,7 @@
 Groups, per arm: followed (final = the hinted wrong letter B), resisted (final = correct).
 In null arms (no letter shown), "correct" runs are the reference.
 
-Measures (fixed before reading these readouts; docs/overnight/reports/models_grader.md, "Lens plan"):
+Measures (fixed before reading these readouts; docs/experiments/models-grader/report.md, "Lens plan"):
   letter margins, form "any" (log-sum-exp over " X", "X", "(X"), per lens x layer:
     corr = lp(correct) - mean lp(U), sal = lp(B) - mean lp(U), U = the two letters that are
     neither correct nor B. At pre_answer (the position whose next token is the final letter),

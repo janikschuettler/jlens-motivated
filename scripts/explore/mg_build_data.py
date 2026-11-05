@@ -1,4 +1,4 @@
-"""Assemble docs/overnight/data/models_grader.json (derived numbers only) for the models x
+"""Assemble docs/experiments/models-grader/data/models_grader.json (derived numbers only) for the models x
 grader-bug report and figure.
 
   python scripts/explore/mg_build_data.py
@@ -41,7 +41,7 @@ def trip(p):
 
 def main():
     S = json.load(open(D / "summary.json"))
-    out = {"description": "models x grader-bug screen, derived numbers (docs/overnight/reports/models_grader.md)",
+    out = {"description": "models x grader-bug screen, derived numbers (docs/experiments/models-grader/report.md)",
            "rates": {}, "figure_order": [], "judge_counts": {}, "by_eye": None, "cost": {}, "lens": {}}
     for m, ms in S["models"].items():
         mc = CFG["models"][m]
@@ -72,12 +72,12 @@ def main():
                                                "p_none": v["p_none"], "n_trunc": v["n_trunc"],
                                                "follower_grader_outcome": v["follower_grader_outcome"],
                                                "mean_tokens": v["mean_tokens"]} for a, v in L.items()}}
-    g = REPO / "docs/overnight/data/models_grader_gptoss.json"  # the gpt-oss sub-agent's derived numbers
+    g = REPO / "docs/experiments/models-grader/data/models_grader_gptoss.json"  # the gpt-oss sub-agent's derived numbers
     if g.exists():
         G = json.load(open(g))
         out["rates"]["gptoss_local"] = {
             "label": LABEL["gptoss_local"], "sub": f"{G['screen']['known_ge_0.9']} items", "local": True,
-            "source": "docs/overnight/data/models_grader_gptoss.json",
+            "source": "docs/experiments/models-grader/data/models_grader_gptoss.json",
             "arms": {a: {"v": v["p_B"][0], "lo": v["p_B"][1], "hi": v["p_B"][2], "n": v["runs"], "items": v["items"],
                          "n_B": v["n_B"]} for a, v in G["arms"].items()}}
     out["figure_order"] = [[sec, [m for m in ms if m in out["rates"]]] for sec, ms in ORDER]
@@ -97,7 +97,7 @@ def main():
                    "total_usd": round(sum(cost.values()), 4), "cap_usd": CFG["cost_cap_usd"]}
     for p in sorted((D / "local").glob("*_lens.json")):
         out["lens"][p.stem] = json.load(open(p))
-    dst = REPO / "docs/overnight/data/models_grader.json"
+    dst = REPO / "docs/experiments/models-grader/data/models_grader.json"
     dst.write_text(json.dumps(out, indent=1))
     print(f"wrote {dst} ({dst.stat().st_size // 1024} KB)")
 

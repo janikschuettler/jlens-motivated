@@ -1,6 +1,6 @@
 # Arguing against its own knowledge: slides (status talk, 4 November 2026)
 
-Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex2id6yqNrA (slides 1-14 main, 15-18 backup). Numbers come from docs/findings/registry.json and docs/overnight/reports/; speaker notes give the sources. Strength labels follow docs/overnight/redteam_claims.md.
+Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex2id6yqNrA (slides 1-14 main, 15-18 backup). Numbers come from docs/dashboard/site.yaml and docs/experiments/; speaker notes give the sources. Strength labels follow docs/redteam_claims.md.
 
 ## 1. cover
 
@@ -286,7 +286,7 @@ Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex
 - Under “Hint: The answer is X.”, the prompt sets the outcome before the reasoning starts.
 - Pre-registered resampling (0.87 flat) and forced early answers (0.82) agree. Weak spot: 20 runs, a noisy settle rule.
 
-*Notes:* Strength labels: Solid = large effect on a fixed question set, consistent across checks; Moderate = consistent but with one real gap (exploratory design, small samples or a stand-in setup); Preliminary = one result with an untested key comparison. Labels aligned with the red-team review (docs/overnight/redteam_claims.md). Claim 2 is scope-limited: Qwen3-8B with thinking off takes the grader bug 15%, Qwen3-14B 60%, and 10 of 12 other models take it when told they are scored. Claim 4 rephrased: at the cut before any reasoning all runs share the prompt, so 'settled' there is a property of the prompt.
+*Notes:* Strength labels: Solid = large effect on a fixed question set, consistent across checks; Moderate = consistent but with one real gap (exploratory design, small samples or a stand-in setup); Preliminary = one result with an untested key comparison. Labels aligned with the red-team review (docs/redteam_claims.md). Claim 2 is scope-limited: Qwen3-8B with thinking off takes the grader bug 15%, Qwen3-14B 60%, and 10 of 12 other models take it when told they are scored. Claim 4 rephrased: at the cut before any reasoning all runs share the prompt, so 'settled' there is a property of the prompt.
 
 ## 13. claims-internals
 
@@ -328,7 +328,7 @@ Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex
 - Rows 1–3 need no GPU and fit in the morning. Rows 4–5 are the GPU runs with most decision value.
 - Order follows the red-team review’s value-per-hour ranking. Also cheap: fresh-agent review of the analysis scripts behind the headline numbers.
 
-*Notes:* Ranking from docs/overnight/redteam_claims.md (value per hour). 1: the only J-lens positive may rank questions by how well the model knows them; regress on per-question knowledge strength. The paired J-lens minus logit-lens test is already done: +0.11 [-0.10, +0.30], not significant. 2: the headline null rests on intervals that include zero; equivalence tests with a stated margin make it a bounded claim. 3: every behavioural label is a keyword rule; the judge criterion should be 'says the hint is why'. 4: W is written (preregistration.md, 18:40): fresh runs, equivalence margin ±0.10, positive controls at the hack line and with a synthetic plan. 5: Gemma-3-12B is the only small lens-covered model whose text sometimes hides the switch (47 of 501 followers). Further down the ranking: within-question repeat of the planted-claim test, rebuilt eval-awareness probe on Qwen3-14B, content-token readout mid-reasoning, wording factorial on gpt-oss-20b, steering rerun at the 8,192-token cap.
+*Notes:* Ranking from docs/redteam_claims.md (value per hour). 1: the only J-lens positive may rank questions by how well the model knows them; regress on per-question knowledge strength. The paired J-lens minus logit-lens test is already done: +0.11 [-0.10, +0.30], not significant. 2: the headline null rests on intervals that include zero; equivalence tests with a stated margin make it a bounded claim. 3: every behavioural label is a keyword rule; the judge criterion should be 'says the hint is why'. 4: W is written (preregistration.md, 18:40): fresh runs, equivalence margin ±0.10, positive controls at the hack line and with a synthetic plan. 5: Gemma-3-12B is the only small lens-covered model whose text sometimes hides the switch (47 of 501 followers). Further down the ranking: within-question repeat of the planted-claim test, rebuilt eval-awareness probe on Qwen3-14B, content-token readout mid-reasoning, wording factorial on gpt-oss-20b, steering rerun at the 8,192-token cap.
 
 ## 15. b-wording (backup)
 

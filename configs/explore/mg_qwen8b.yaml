@@ -2,7 +2,7 @@
 # (configs/explore/models_grader.yaml, texts identical) on Qwen3-8B, the project's
 # lens-validated model, which OpenRouter doesn't serve. Run with scripts/explore/run_w2.py.
 # Items: the first 60 known items in setting A (>= 9/10), the same 60 the API screen used.
-# Report: docs/overnight/reports/models_grader.md.
+# Report: docs/experiments/models-grader/report.md.
 include: [blocks.yaml, w2_blocks.yaml]
 name: mg_qwen8b
 out_dir: data/explore/models_grader/qwen8b

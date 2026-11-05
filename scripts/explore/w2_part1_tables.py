@@ -1,4 +1,4 @@
-"""Derived numbers and markdown tables for docs/overnight/reports/wave2_part1.md (CPU).
+"""Derived numbers and markdown tables for docs/experiments/instructed-e1/report.md (CPU).
 Reads labels.jsonl (and forks.jsonl) of the given dirs; writes JSON (derived numbers only:
 no CoTs, no token IDs) and prints markdown.
 

@@ -1,4 +1,4 @@
-"""Pre-registered test T1b (docs/overnight/preregistration.md): T1 on fresh items.
+"""Pre-registered test T1b (docs/preregistration.md): T1 on fresh items.
 Lens env, CPU. Reuses the T1 code in analyze_prereg.py (score S, verdict) and
 analyze_main.auroc_boot (item bootstrap) unchanged.
 

@@ -1,7 +1,7 @@
 """Analysis of the steering test (CPU; numpy + jmr only, either env).
 
   uv run --project envs/lens python scripts/lens/analyze_steer.py --answer data/steer/answer \
-      --gen data/steer/gen --out data/steer/analysis.json --docs-out docs/overnight/data/steering.json
+      --gen data/steer/gen --out data/steer/analysis.json --docs-out docs/experiments/steering/data/steering.json
 
 Part 1 (steering at the answer position): per group x layer x direction x alpha, the
 item-level share of runs whose answer letter moves the intended way, and the

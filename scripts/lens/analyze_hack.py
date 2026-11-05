@@ -1,11 +1,11 @@
 """Analysis of the reward-hack organism readouts (CPU; numpy + scikit-learn).
 
-Implements the pre-registered tests H1-H3 (docs/overnight/preregistration.md,
+Implements the pre-registered tests H1-H3 (docs/preregistration.md,
 "H1-H3") and the exploratory extras, from the readout directories written by
 scripts/lens/readout_hack.py and the labels of scripts/gen/hack_generate.py.
 
 python scripts/lens/analyze_hack.py --gen data/hack/gen --readouts data/hack/readouts \
-    --out data/hack/analysis.json --public docs/overnight/data/hack_organism.json
+    --out data/hack/analysis.json --public docs/experiments/hack-organism/data/hack_organism.json
 """
 
 import argparse

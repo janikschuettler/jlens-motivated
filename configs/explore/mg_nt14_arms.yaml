@@ -4,7 +4,7 @@
 # after the main results; exploratory. Items: the model's own known items in our format, non-thinking
 # (>= 9/10 in mg_nt14_screen; scripts/explore/mg_known.py). Qwen non-thinking decoding (T 0.7, top-p 0.8,
 # top-k 20). Texts identical to configs/explore/models_grader.yaml.
-# Report: docs/overnight/reports/models_grader.md.
+# Report: docs/experiments/models-grader/report.md.
 include: [blocks.yaml, w2_blocks.yaml]
 name: mg_nt14_arms
 out_dir: data/explore/models_grader/nt14_arms
