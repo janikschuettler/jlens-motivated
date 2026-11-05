@@ -55,7 +55,20 @@ def boot_items(groups, stat, seed=0):
             "n_runs": {g: len(groups[g]) for g in groups}, "n_items": {g: len(per[g]) for g in groups}}
 
 
-def load(lens_dir, runs_paths, flags):
+def load(lens_dirs, runs_paths, flags):
+    idx_all, out_all = None, []
+    for ld in lens_dirs:
+        i_, o_ = load_one(ld, runs_paths, flags)
+        if idx_all is None:
+            idx_all = i_
+        else:
+            idx_all["runs"] += i_["runs"]
+            idx_all["flagged"] += i_["flagged"]
+        out_all += o_
+    return idx_all, out_all
+
+
+def load_one(lens_dir, runs_paths, flags):
     idx = json.load(open(Path(lens_dir) / "index.json"))
     meta_runs = {}
     for p in runs_paths:
@@ -192,6 +205,20 @@ def analyze(runs, names, idx, res):
         ex[nm] = {"S_by_distance_before_answer": dist, "S_by_block_silent": [round(float(x), 3) for x in blk],
                   "S_by_block_open": [round(float(x), 3) for x in (np.mean([d["S_block"][li] for d in opn], axis=0) if opn else [])]}
     res["explore_a"] = ex
+    # (a2) the same G1 statistic over mid-depth blocks only (24-44) and late blocks only (46-54)
+    for nm, li in (("J-lens", 0), ("logit lens", 1)):
+        for lab, sl in (("blocks24_44", slice(0, 11)), ("blocks46_54", slice(11, 16))):
+            pi = defaultdict(list)
+            for d in sil:
+                pi[d["item"]].append(float(d["S_block"][li][sl].mean()))
+            ks = sorted(pi)
+            if not ks:
+                continue
+            rng = np.random.default_rng(0)
+            bs = [np.mean([np.mean(pi[k]) for k in rng.choice(ks, size=len(ks))]) for _ in range(B)]
+            res.setdefault("explore_a2_G1_by_depth", {})[f"{nm}/{lab}"] = {
+                "mean_S": round(float(np.mean([np.mean(pi[k]) for k in ks])), 4),
+                "lo": round(float(np.percentile(bs, 2.5)), 4), "hi": round(float(np.percentile(bs, 97.5)), 4), "n_items": len(ks)}
     # (b) option words: correct-option letter margin minus hinted-option margin, silent switches vs resisted
     ob = {}
     for li, nm in enumerate(names):
@@ -241,7 +268,7 @@ def analyze(runs, names, idx, res):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--lens", required=True)
+    ap.add_argument("--lens", nargs="+", required=True)
     ap.add_argument("--runs", nargs="+", required=True)
     ap.add_argument("--flags", required=True)
     ap.add_argument("--out", required=True)
