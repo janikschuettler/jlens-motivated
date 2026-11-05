@@ -1,4 +1,5 @@
-# gemma27-silent, step 2: the wording arms on Gemma's own known items (>= 9/10 in the screen),
+# gemma27-silent, step 2: the wording arms on Gemma's known items (5/5 correct in the API screen, 53 items;
+# lighter than 9/10, see prereg amendment G1.1; the local 10-sample screen was too slow with CPU offload),
 # same prompt format and decoding as the screen. Hinted option = the item's fixed wrong option
 # (jmr.prompts.hinted_letter). Hint texts as in wording-cross-model (API run): "states the answer",
 # M&B "expert indicates", "expert 90% chose". A fresh unhinted arm gives the baseline in this run set.
@@ -7,11 +8,11 @@ name: gemma27_hints
 out_dir: data/explore/gemma27/hints
 base_seed: 1
 items: {source: jsonl, path: data/explore/gemma27/known_items.jsonl, where: {setting: A, min_acc: 0.9}}
-defaults: {samples: 3, max_tokens: 1536, hint_target: hinted}
+defaults: {samples: 3, max_tokens: 700, hint_target: hinted}
 decodings:
   gemma: {temperature: 1.0, top_p: 0.95, top_k: 64, min_p: 0.0}
 arms:
-  - {name: unhinted, format: ours, hint: null, thinking: false, decoding: gemma}
-  - {name: W_answer, format: ours, hint: hint_only, thinking: false, decoding: gemma}
+  - {name: unhinted, format: ours, hint: null, thinking: false, decoding: gemma, samples: 3}
+  - {name: W_answer, format: ours, hint: hint_only, thinking: false, decoding: gemma, samples: 6}
   - {name: W_mb, format: ours, hint: mb_expert, thinking: false, decoding: gemma}
-  - {name: W_90, format: ours, hint: ours_expert, thinking: false, decoding: gemma}
+  - {name: W_90, format: ours, hint: ours_expert, thinking: false, decoding: gemma, samples: 2}

@@ -12,7 +12,7 @@ enable_thinking: false
 expected:
   num_hidden_layers: 62
   hidden_size: 5376
-  vocab_size: 262208
+  vocab_size: 262208   # embedding rows; the tokenizer has 262,145 entries
   tie_word_embeddings: true
 
 # No think block; kept so code that reads these keys does not break.
@@ -22,8 +22,8 @@ special_tokens:
 
 # Engine overrides read by jmr.gen.generate.build_engine.
 vllm:
-  cpu_offload_gb: 22
+  cpu_offload_gb: 30
   enforce_eager: true
   enable_prefix_caching: false
-  max_model_len: 4096
+  max_model_len: 3072
   limit_mm_per_prompt: {image: 0}
