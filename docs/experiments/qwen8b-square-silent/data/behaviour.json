@@ -1,0 +1,49 @@
+{
+ "unhinted": {
+  "runs": 435,
+  "parsed": 435,
+  "items": 145,
+  "switch": null,
+  "correct": [
+   0.977,
+   0.954,
+   0.9954
+  ],
+  "n_switch": 0,
+  "n_silent": 0
+ },
+ "answer_hint": {
+  "runs": 435,
+  "parsed": 433,
+  "items": 145,
+  "switch": [
+   0.5358,
+   0.4653,
+   0.6037
+  ],
+  "correct": [
+   0.455,
+   0.388,
+   0.5244
+  ],
+  "n_switch": 232,
+  "n_silent": 67
+ },
+ "fewshot_marker": {
+  "runs": 725,
+  "parsed": 725,
+  "items": 145,
+  "switch": [
+   0.08,
+   0.0469,
+   0.1172
+  ],
+  "correct": [
+   0.9021,
+   0.8634,
+   0.938
+  ],
+  "n_switch": 58,
+  "n_silent": 31
+ }
+}
