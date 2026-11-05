@@ -116,7 +116,9 @@ def main():
     ap.add_argument("--tokens", default="configs/evalaware_tokens.json")
     ap.add_argument("--validate", type=int, default=1)
     ap.add_argument("--limit", type=int, default=None)
-    ap.add_argument("--val-tol", type=float, default=0.02, help="max |batched - single-run| tracked log-prob")
+    ap.add_argument("--val-p99", type=float, default=0.02, help="max p99 of |batched - single-run| tracked log-prob (nats)")
+    ap.add_argument("--val-max", type=float, default=0.3, help="max |batched - single-run| tracked log-prob (nats); "
+                    "rare bf16 rounding flips in jlens's unembed reach ~0.13 (scripts/lens/fp64_check.py; user, 2026-11-05)")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -210,10 +212,11 @@ def main():
                 rr = ref["token_logprobs"][:, allpos].astype(np.float32)
                 dd = np.abs(rr - lp_arr[si, :, :, :K].astype(np.float32))
                 v[name] = float(dd.max())
+                v[name + "_p99"] = float(np.quantile(dd, 0.99))
                 v[name + "_ref_at_max"] = float(rr.flat[dd.argmax()])
             vals.append(v)
             print("validation", r["run_id"], v, flush=True)
-            if max(v[n] for n in LENSES) > a.val_tol:
+            if max(v[n] for n in LENSES) > a.val_max or max(v[n + "_p99"] for n in LENSES) > a.val_p99:
                 raise SystemExit(f"readout disagrees with the single-run readout: {v} (rule 1)")
         del full
         fname = hashlib.sha1(r["run_id"].encode()).hexdigest()[:20] + ".npz"
