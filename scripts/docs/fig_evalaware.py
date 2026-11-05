@@ -1,7 +1,7 @@
-"""Figure for the eval-awareness replication (docs/findings/figs/fig16_evalaware.svg).
+"""Figure for the eval-awareness replication (docs/experiments/evalaware-replication/fig16_evalaware.svg).
 
 Kept out of make_figures.py so it doesn't collide with other edits tonight; uses its
-helpers. Input: docs/overnight/data/evalaware_replication.json only.
+helpers. Input: docs/experiments/evalaware-replication/data/evalaware_replication.json only.
 
     ~/.local/bin/uv run --project envs/judge python scripts/docs/fig_evalaware.py
 """
@@ -84,7 +84,7 @@ def main():
                         series={**series2}, ref=0.5, ref_label="chance", xlabel="AUROC",
                         label_w=330, row_h=26, value_labels=True))],
            legend_items=[series["j"], series["l"], series2["t"]],
-           notes=["Source: docs/overnight/data/evalaware_replication.json. Report: docs/overnight/reports/evalaware_replication.md.",
+           notes=["Source: docs/experiments/evalaware-replication/data/evalaware_replication.json. Report: docs/experiments/evalaware-replication/report.md.",
                   "Paper: Gurnee, Sofroniew et al. 2026 (Claude Sonnet 4.5 / Opus 4.6). Our model: Qwen3-8B, thinking, Neuronpedia J-lens."])
 
 

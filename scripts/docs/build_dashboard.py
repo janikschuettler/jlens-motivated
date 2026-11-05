@@ -1,14 +1,17 @@
-"""Build the findings dashboard, docs/findings/index.html, from docs/findings/registry.json.
+"""Build the findings dashboard, docs/dashboard/index.html.
 
-The registry is the source of truth for the project's running record: the thread
-(main question, sub-questions with their current answers) and one entry per
-experiment (done, running or upcoming). This script validates it against the
-schema below, failing loudly on any missing or malformed field, then inlines the
-registry and the SVG figures from docs/findings/figs/ (drawn by
-scripts/docs/make_figures.py) into one self-contained HTML page, using the
-template scripts/docs/dashboard_template.html.
+Sources (the folders and files below are the source of truth):
+  docs/dashboard/site.yaml        the main question, summary and strands (thread), terms, meta
+  docs/experiments/<id>/README.md one experiment: YAML front matter (short structured fields)
+                                  plus Markdown sections Question, Method, Result, Interpretation,
+                                  Caveats (bullets) and Files
+  docs/log.jsonl                  chronological record, one JSON object per line
+This script assembles them into one in-memory structure, validates it against the schema below,
+failing loudly on any missing or malformed field, then inlines the structure and the SVG
+figures (drawn by scripts/docs/make_figures.py into the experiment folders) into one
+self-contained HTML page, using the template scripts/docs/dashboard_template.html.
 
-Python stdlib only. Run from anywhere:
+Python stdlib plus PyYAML (installed in envs/judge). Run from anywhere:
     ~/.local/bin/uv run --project envs/judge python scripts/docs/build_dashboard.py
     ... build_dashboard.py --check     # validate only, write nothing
 """
@@ -22,11 +25,14 @@ import subprocess
 import sys
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[2]
-REGISTRY = ROOT / "docs" / "findings" / "registry.json"
-FIGS = ROOT / "docs" / "findings" / "figs"
+SITE = ROOT / "docs" / "dashboard" / "site.yaml"
+EXP_DIR = ROOT / "docs" / "experiments"
+LOG = ROOT / "docs" / "log.jsonl"
 TEMPLATE = ROOT / "scripts" / "docs" / "dashboard_template.html"
-OUT = ROOT / "docs" / "findings" / "index.html"
+OUT = ROOT / "docs" / "dashboard" / "index.html"
 
 STRAND_IDS = ("A", "B", "C", "T", "N")
 STATUS = ("done", "running", "upcoming")
@@ -48,11 +54,75 @@ EXP_FIELDS = {
     "machine": (STR, False), "figure": (STR, True), "reports": (LIST, True), "data": (LIST, True),
     "commits": (LIST, True), "related": (LIST, True),
 }
+LOG_TYPES = ("decision", "start", "result", "dead_end", "surprise", "note")
+LOG_BY = ("user", "claude")
+LOG_TS_RE = re.compile(r"^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?)?$")
+FRONT_KEYS = ("id", "title", "strand", "also", "status", "kind", "verdict", "confidence", "dates", "timing",
+              "machine", "n", "numbers", "numbers_note", "reports", "figure", "data", "commits", "related")
+SECTIONS = {"Question": "question", "Method": "method", "Result": "result", "Interpretation": "interpretation"}
 STRAND_FIELDS = ("id", "name", "question", "hypothesis", "answer", "confidence", "confidence_note", "next")
 
 
 class RegistryError(Exception):
     pass
+
+
+def _rel(folder: Path, p: str) -> str:
+    """A path in a README, relative to its folder, as a repo-relative path."""
+    return (folder / p).resolve().relative_to(ROOT).as_posix()
+
+
+def parse_readme(path: Path) -> dict:
+    """Turn one experiment README (front matter + sections) into a registry-style entry."""
+    txt = path.read_text(encoding="utf-8")
+    m = re.match(r"---\n(.*?)\n---\n(.*)\Z", txt, flags=re.S)
+    if not m:
+        raise RegistryError(f"{path}: no YAML front matter")
+    fm = yaml.safe_load(m.group(1))
+    if not isinstance(fm, dict):
+        raise RegistryError(f"{path}: front matter is not a mapping")
+    missing = [k for k in FRONT_KEYS if k not in fm]
+    extra = [k for k in fm if k not in FRONT_KEYS]
+    if missing or extra:
+        raise RegistryError(f"{path}: front matter missing {missing}, unknown {extra}")
+    if fm["id"] != path.parent.name:
+        raise RegistryError(f"{path}: id {fm['id']!r} does not match its folder name")
+    parts = re.split(r"^## (.+)$", m.group(2), flags=re.M)
+    secs = {parts[i].strip(): parts[i + 1].strip("\n") for i in range(1, len(parts) - 1, 2)}
+    e = dict(fm)
+    for head, key in SECTIONS.items():
+        if head not in secs:
+            raise RegistryError(f"{path}: missing section '## {head}'")
+        e[key] = secs[head]
+    cav = secs.get("Caveats", "")
+    e["caveats"] = [ln[2:] for ln in cav.split("\n") if ln.startswith("- ")]
+    if cav.strip() and len(e["caveats"]) != len([ln for ln in cav.split("\n") if ln.strip()]):
+        raise RegistryError(f"{path}: every non-empty line of '## Caveats' must be a '- ' bullet")
+    d = path.parent
+    e["figure"] = Path(fm["figure"]).stem if fm["figure"] else None
+    e["_figure_file"] = _rel(d, fm["figure"]) if fm["figure"] else None
+    e["reports"] = [_rel(d, p) for p in fm["reports"] or []]
+    e["data"] = [_rel(d, p) for p in fm["data"] or []]
+    return e
+
+
+def load_log() -> list[dict]:
+    rows = []
+    for i, ln in enumerate(LOG.read_text(encoding="utf-8").splitlines(), 1):
+        if ln.strip():
+            try:
+                rows.append(json.loads(ln))
+            except json.JSONDecodeError as exc:
+                raise RegistryError(f"{LOG.name} line {i}: not valid JSON ({exc})")
+    return rows
+
+
+def load_registry() -> dict:
+    site = yaml.safe_load(SITE.read_text(encoding="utf-8"))
+    reg = {"meta": site.get("meta"), "thread": site.get("thread"), "terms": site.get("terms")}
+    reg["experiments"] = [parse_readme(p) for p in sorted(EXP_DIR.glob("*/README.md"))]
+    reg["log"] = load_log()
+    return reg
 
 
 def _type_ok(v, kind):
@@ -71,14 +141,14 @@ def _known_commits():
 def validate(reg: dict) -> list[str]:
     """Raise RegistryError listing every problem; return warnings."""
     errs, warns = [], []
-    for key in ("meta", "thread", "terms", "experiments"):
+    for key in ("meta", "thread", "terms", "experiments", "log"):
         if key not in reg:
             errs.append(f"top level: missing '{key}'")
     if errs:
         raise RegistryError("\n".join(errs))
 
     meta = reg["meta"]
-    for k in ("title", "updated", "default_setting", "how_to_update"):
+    for k in ("title", "updated", "default_setting"):
         if not isinstance(meta.get(k), str) or not meta.get(k):
             errs.append(f"meta.{k}: missing or not a non-empty string")
     if isinstance(meta.get("updated"), str) and not TIME_RE.match(meta["updated"]):
@@ -129,7 +199,7 @@ def validate(reg: dict) -> list[str]:
                 errs.append(f"{where}: '{f}' must be {kind}")
             elif kind == STR and not nullable and not v.strip():
                 errs.append(f"{where}: '{f}' is empty")
-        extra = set(e) - set(EXP_FIELDS)
+        extra = set(e) - set(EXP_FIELDS) - {"_figure_file"}
         if extra:
             errs.append(f"{where}: unknown fields {sorted(extra)}")
         if any(f not in e for f in EXP_FIELDS):
@@ -191,8 +261,8 @@ def validate(reg: dict) -> list[str]:
             errs.append(f"{where}: upcoming experiments must have dates.start null")
 
         # files and commits
-        if e["figure"] is not None and not (FIGS / f"{e['figure']}.svg").is_file():
-            errs.append(f"{where}: figure docs/findings/figs/{e['figure']}.svg not found")
+        if e["figure"] is not None and not (ROOT / e["_figure_file"]).is_file():
+            errs.append(f"{where}: figure {e['_figure_file']} not found")
         for p in (e["reports"] or []) + (e["data"] or []):
             if not (ROOT / p).is_file():
                 (warns if st != "done" else errs).append(f"{where}: file {p} not found")
@@ -205,16 +275,36 @@ def validate(reg: dict) -> list[str]:
             if r not in ids:
                 errs.append(f"{where}: related id {r!r} not in the registry")
 
+    for i, row in enumerate(reg["log"], 1):
+        w = f"log entry {i}"
+        if not isinstance(row, dict) or set(row) != {"ts", "type", "exp", "text", "by"}:
+            errs.append(f"{w}: must have exactly the fields ts, type, exp, text, by")
+            continue
+        if not isinstance(row["ts"], str) or not LOG_TS_RE.match(row["ts"]):
+            errs.append(f"{w}: bad ts {row['ts']!r}")
+        if row["type"] not in LOG_TYPES:
+            errs.append(f"{w}: type must be one of {LOG_TYPES}")
+        if row["by"] not in LOG_BY:
+            errs.append(f"{w}: by must be one of {LOG_BY}")
+        if not isinstance(row["text"], str) or not row["text"].strip():
+            errs.append(f"{w}: empty text")
+        if not isinstance(row["exp"], list) or any(x not in ids for x in row["exp"]):
+            errs.append(f"{w}: exp must be a list of known experiment ids, got {row['exp']!r}")
+
     if errs:
         raise RegistryError("\n".join(errs))
     return warns
 
 
 def figure_templates(reg: dict) -> str:
-    used = sorted({e["figure"] for e in reg["experiments"] if e["figure"]})
+    used = {}
+    for e in reg["experiments"]:
+        if e["figure"]:
+            if used.setdefault(e["figure"], e["_figure_file"]) != e["_figure_file"]:
+                raise RegistryError(f"figure id {e['figure']} points at two different files")
     parts = []
-    for fid in used:
-        svg = (FIGS / f"{fid}.svg").read_text(encoding="utf-8")
+    for fid in sorted(used):
+        svg = (ROOT / used[fid]).read_text(encoding="utf-8")
         svg = re.sub(r"^<\?xml[^>]*>\s*", "", svg)
         if "<script" in svg.lower():
             raise RegistryError(f"figure {fid}.svg contains a script; refusing to inline it")
@@ -224,12 +314,15 @@ def figure_templates(reg: dict) -> str:
 
 def build(reg: dict) -> str:
     tpl = TEMPLATE.read_text(encoding="utf-8")
+    figs = figure_templates(reg)
+    reg = {**reg, "experiments": [{k: v for k, v in e.items() if not k.startswith("_")} for e in reg["experiments"]],
+           "log": sorted(reg["log"], key=lambda r: r["ts"])}
     data = json.dumps(reg, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     title = reg["meta"]["title"].replace("&", "&amp;").replace("<", "&lt;")
     for marker in ("__TITLE__", "__REGISTRY_JSON__", "__FIG_TEMPLATES__"):
         if tpl.count(marker) != 1:
             raise RegistryError(f"template: expected exactly one {marker}")
-    html = tpl.replace("__TITLE__", title).replace("__FIG_TEMPLATES__", figure_templates(reg))
+    html = tpl.replace("__TITLE__", title).replace("__FIG_TEMPLATES__", figs)
     html = html.replace("__REGISTRY_JSON__", data)
     if not html.startswith("<!DOCTYPE html>"):
         raise RegistryError("output must start with <!DOCTYPE html>")
@@ -241,20 +334,18 @@ def main() -> int:
     ap.add_argument("--check", action="store_true", help="validate the registry only")
     args = ap.parse_args()
     try:
-        reg = json.loads(REGISTRY.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as exc:
-        print(f"registry.json is not valid JSON: {exc}", file=sys.stderr)
-        return 1
-    try:
+        reg = load_registry()
+        if not isinstance(reg["meta"], dict) or not isinstance(reg["thread"], dict) or not isinstance(reg["terms"], list):
+            raise RegistryError("site.yaml: needs meta (mapping), thread (mapping) and terms (list)")
         warns = validate(reg)
         for w in warns:
             print("warning:", w, file=sys.stderr)
         if args.check:
-            print(f"registry OK: {len(reg['experiments'])} experiments")
+            print(f"sources OK: {len(reg['experiments'])} experiments, {len(reg['log'])} log entries")
             return 0
         html = build(reg)
     except RegistryError as exc:
-        print("registry check FAILED:\n" + str(exc), file=sys.stderr)
+        print("dashboard source check FAILED:\n" + str(exc), file=sys.stderr)
         return 1
     OUT.write_text(html, encoding="utf-8")
     counts = {s: sum(e["status"] == s for e in reg["experiments"]) for s in STATUS}

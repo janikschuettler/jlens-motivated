@@ -1,6 +1,6 @@
-"""Draw the figures of docs/findings.md as SVG files in docs/findings/figs/.
+"""Draw the figures of docs/findings.md as SVG files, each in its experiment folder (docs/experiments/<id>/).
 
-Input: the derived-number JSONs in docs/overnight/data/ only (no raw runs).
+Input: the derived-number JSONs in docs/experiments/<id>/data/ only (no raw runs).
 Python stdlib only; the SVG is written by hand.
 
 Run (from the repo root, on any machine):
@@ -20,8 +20,27 @@ from pathlib import Path
 from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA = ROOT / "docs" / "overnight" / "data"
-OUT = ROOT / "docs" / "findings" / "figs"
+EXP = ROOT / "docs" / "experiments"
+
+
+class _Find:
+    """DATA / "x.json" and OUT / "figNN.svg" resolve to the file inside the experiment folder that holds it."""
+
+    def __init__(self, sub):
+        self.sub = sub
+
+    def __truediv__(self, name):
+        hits = sorted(EXP.glob(f"*/{self.sub}{name}"))
+        if len(hits) != 1:
+            return EXP / "_missing" / name  # does not exist; .exists() is False, reading fails loudly
+        return hits[0]
+
+    def mkdir(self, **kw):
+        pass
+
+
+DATA = _Find("data/")
+OUT = _Find("")  # a figure is rewritten where it already lives; a new figure must first be given a folder
 
 # ---------------------------------------------------------------- style
 
@@ -318,7 +337,7 @@ def fig_factorial():
                          ("circle", BLUE, f"effect, all questions (n={n_all})"),
                          ("square", ORANGE, f"effect, questions known in both setups (n={n_kb})")],
            notes=["M&B = Mirtaheri & Belkin. M&B decoding: temperature 0.1 plus a repetition penalty. Qwen decoding: temperature 0.6, top-p 0.95, top-k 20.",
-                  "Source: docs/overnight/data/gap_factorial.json (factorial.cells.*.switch_known, factorial.effects); report: gap_factorial.md."])
+                  "Source: docs/experiments/gap-factorial/data/gap_factorial.json (factorial.cells.*.switch_known, factorial.effects); report: gap_factorial.md."])
 
 
 def fig_wording():
@@ -352,7 +371,7 @@ def fig_wording():
             "(2 for the two wordings reused from the factorial). Switch = final answer is the hinted wrong option. 95% intervals over questions."],
            [(None, dict(rows=rows, xmin=0, xmax=1, step=0.2, fmt=pct, x_fmt=pct_axis, mode="bar",
                         xlabel="switch rate on known questions", label_w=420))],
-           notes=["Source: docs/overnight/data/wave2_part2.json (wording.cells, wording.unhinted_P_B); report: wave2_part2.md §1."])
+           notes=["Source: docs/experiments/wording-dissection/data/wave2_part2.json (wording.cells, wording.unhinted_P_B); report: wave2_part2.md §1."])
 
 
 def fig_pressures():
@@ -412,7 +431,7 @@ def fig_pressures():
             "earlier answer, planted claim, pushback, opinion), 50 (wording), 160 (cues). 95% intervals over questions."],
            [(None, dict(rows=rows, xmin=0, xmax=1, step=0.2, fmt=pct, x_fmt=pct_axis, mode="bar",
                         xlabel="share of runs ending on the pushed wrong option (known questions)", label_w=390, row_h=22))],
-           notes=["Sources: docs/overnight/data/wave2_part1.json (instructed, grader), wave2_part2.json (wording, e2_e4_e8, opinion_split),",
+           notes=["Sources: docs/experiments/instructed-e1/data/wave2_part1.json (instructed, grader), wave2_part2.json (wording, e2_e4_e8, opinion_split),",
                   "subtle_cues.json (arms.*.switch_rate_item_mean_ci). Reports: wave2_part1.md, wave2_part2.md, subtle_cues.md."])
 
 
@@ -512,7 +531,7 @@ def fig_lens_margins():
            [("(a) Thinking mode", dict(rows=_margin_rows(th["stats"], th["groups"], spec_t, L32), **kw)),
             ("(b) Thinking off (M&B's setting)", dict(rows=_margin_rows(nt["stats"], nt["groups"], spec_n, L32), **kw))],
            legend_items=[("circle", BLUE, "J-lens"), ("square", ORANGE, "logit lens")],
-           notes=["Source: docs/overnight/data/lens_main.json ({thinking,non_thinking}.stats.<group>[\"corr|sal/lp/pre_answer\"], layer index 9 = L32);",
+           notes=["Source: docs/experiments/lens-main/data/lens_main.json ({thinking,non_thinking}.stats.<group>[\"corr|sal/lp/pre_answer\"], layer index 9 = L32);",
                   "report: lens_main.md, its tables T1, T2, N1 and N2 (exploratory)."])
 
 
@@ -545,7 +564,7 @@ def fig_positions():
                         xlabel="correct-letter margin, J-lens, layer 32 (nats)"))],
            legend_items=[("diamond", GREY, groups[0][2]), ("circle", BLUE, groups[1][2]), ("square", ORANGE, groups[2][2])],
            notes=["Even runs that go on to answer correctly show no correct-letter margin during reasoning, so a null there is a limit of the readout.",
-                  "Source: docs/overnight/data/lens_main.json (thinking.stats.<group>[\"corr/lp/<position>\"], layer index 9); report: lens_main.md, its tables T4 and T5."])
+                  "Source: docs/experiments/lens-main/data/lens_main.json (thinking.stats.<group>[\"corr/lp/<position>\"], layer index 9); report: lens_main.md, its tables T4 and T5."])
 
 
 def fig_auroc():
@@ -646,7 +665,7 @@ def fig_c3():
                         xlabel="margin over the other unchosen wrong letters, layer mean (nats)"))],
            legend_items=[("circle", BLUE, "J-lens"), ("square", ORANGE, "logit lens")],
            notes=["The logit lens shows the same excess, so it is close to what the model's own output head reads; the J-lens adds nothing here.",
-                  "Source: docs/overnight/data/lens_c3.json (pre_answer.<group>.S_layermean / sal_layermean, groups); report: lens_c3.md §1."])
+                  "Source: docs/experiments/lens-c3/data/lens_c3.json (pre_answer.<group>.S_layermean / sal_layermean, groups); report: lens_c3.md §1."])
 
 
 def fig_early():
@@ -695,7 +714,7 @@ def fig_early():
     body.append(f'<line x1="{x1 + 24}" y1="{ly + 18}" x2="{x1 + 44}" y2="{ly + 18}" stroke="{INK2}" stroke-width="2" stroke-dasharray="6,4"/>')
     body.append(t(x1 + 50, ly + 22, "resisted (final = correct)", 11, INK2))
     body.append(t(12, height - 22, "Planted claim: at f = 0 the cut falls before the planted sentence. Forcing an early answer is unlike normal generation (Lanham et al.).", 10.5, INK3))
-    body.append(t(12, height - 8, "Source: docs/overnight/data/wave2_part2.json (forks_early_p2.<arm>|<hint|correct>|f<f>.p_B); report: wave2_part2.md §5.", 10.5, INK3))
+    body.append(t(12, height - 8, "Source: docs/experiments/wording-dissection/data/wave2_part2.json (forks_early_p2.<arm>|<hint|correct>|f<f>.p_B); report: wave2_part2.md §5.", 10.5, INK3))
     (OUT / "fig09_early_answer.svg").write_text(svg_doc(width, height, body, "Forced early answers"))
     print("wrote", OUT / "fig09_early_answer.svg")
 
@@ -749,7 +768,7 @@ def fig_instrument():
            notes=["Layer per readout: the layer that did best on held-out no-hint runs mid-reasoning (chosen on the reference group only).",
                   "The option-text probe reads the prompt's option tokens, so it has one value per item, the same at every position.",
                   "* Only questions whose options have distinctive content words. Calibrated: minus each token's mean score over the prompt tail. On the honest-error items the model's correct runs score as low (0.18).",
-                  "Source: docs/overnight/data/instrument_q1q3.json (headline.<readout>.<subset>.<group>); report: instrument_q1q3.md."],
+                  "Source: docs/experiments/instrument-q1q3/data/instrument_q1q3.json (headline.<readout>.<subset>.<group>); report: instrument_q1q3.md."],
            width=900)
 
 
@@ -820,7 +839,7 @@ def fig_hack():
                         series=series, label_w=470, right_w=170, value_labels=False, row_h=30, xlabel="AUROC"))],
            legend_items=[("circle", BLUE, "J-lens"), ("square", ORANGE, "logit lens"),
                          ("diamond", GREY, "reasoning keyword monitor"), ("open", AQUA, "linear probe")],
-           width=960, notes=["Source: docs/overnight/data/hack_organism.json (H1, H2, H3, exploratory). Report: hack_organism.md."])
+           width=960, notes=["Source: docs/experiments/hack-organism/data/hack_organism.json (H1, H2, H3, exploratory). Report: hack_organism.md."])
 
 
 def fig_models_grader():
@@ -850,7 +869,7 @@ def fig_models_grader():
            [(None, dict(rows=rows, xmin=0, xmax=1, step=0.2, fmt=pct, x_fmt=pct_axis, mode="dot", series=series,
                         xlabel="share of runs ending on B (known questions)", label_w=300, row_h=32, value_labels=False))],
            legend_items=[(sh, c, n) for sh, c, n in series.values()],
-           notes=["Source: docs/overnight/data/models_grader.json (rates). Report: docs/overnight/reports/models_grader.md.",
+           notes=["Source: docs/experiments/models-grader/data/models_grader.json (rates). Report: docs/experiments/models-grader/report.md.",
                   "API rows: OpenRouter, one provider each (mostly fp8). Followers name the bug in their reasoning in ≥ 95% of runs (judge + reading)."])
 
 
@@ -907,7 +926,7 @@ def fig_steering():
             "Pre-registered (S1-S3). Deviation: generation capped at 2,048 tokens (plan: 3,072; home setting 8,192), "
             "chosen for time; needs the user's acceptance."],
            blocks, legend_items=[(sh, c, n) for sh, c, n in series.values()] + [("diamond", INK3, "no push")],
-           notes=["Source: docs/overnight/data/steering.json (headline). Report: docs/overnight/reports/steering.md."],
+           notes=["Source: docs/experiments/steering/data/steering.json (headline). Report: docs/experiments/steering/report.md."],
            width=900)
 
 
@@ -954,7 +973,7 @@ def fig_competitors():
                         ref_label="chance", series=series, label_w=450, right_w=290, value_labels=False, row_h=30,
                         xlabel="separation (folded AUROC)"))],
            legend_items=[(sh, c, n) for sh, c, n in series.values()], width=1180,
-           notes=["Source: docs/overnight/data/jlens_vs_competitors.json (figure). Report: docs/overnight/reports/jlens_vs_competitors.md.",
+           notes=["Source: docs/experiments/jlens-vs-competitors/data/jlens_vs_competitors.json (figure). Report: docs/experiments/jlens-vs-competitors/report.md.",
                   "Probe values near 1 at the end of reasoning read the conclusion the text has already reached; the instructed-run "
                   "probe at the last prompt token reads the instruction in the prompt."])
 
@@ -1023,7 +1042,7 @@ def fig_point_of_no_return():
     height = top + rows * (ph + gy) + 34
     body.append(t(12, height - 36, "Committed = from that cut on, at least 7 of 8 resamples end as the original run. At start = committed before any reasoning;", 10.5, INK3))
     body.append(t(12, height - 22, "never = not committed even with all of the reasoning kept; median point = median share of the reasoning kept at commitment.", 10.5, INK3))
-    body.append(t(12, height - 8, "Source: docs/overnight/data/point_of_no_return.json (cases.<case>.groups.<group>.p_same_curve); report: point_of_no_return.md.", 10.5, INK3))
+    body.append(t(12, height - 8, "Source: docs/experiments/q6-point-of-no-return/data/point_of_no_return.json (cases.<case>.groups.<group>.p_same_curve); report: point_of_no_return.md.", 10.5, INK3))
     (OUT / "fig15_point_of_no_return.svg").write_text(svg_doc(width, height, body, "Point of no return"))
     print("wrote", OUT / "fig15_point_of_no_return.svg")
 

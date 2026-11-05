@@ -1,7 +1,7 @@
-"""Figure for the eval-awareness ablation on Qwen3-14B (docs/findings/figs/fig17_evalaware_ablation14.svg).
+"""Figure for the eval-awareness ablation on Qwen3-14B (docs/experiments/evalaware-ablation-14b/fig17_evalaware_ablation14.svg).
 
 Kept out of make_figures.py (as fig_evalaware.py) to avoid colliding with other edits; uses its helpers.
-Input: docs/overnight/data/evalaware_ablation_14b.json only.
+Input: docs/experiments/evalaware-ablation-14b/data/evalaware_ablation_14b.json only.
 
     ~/.local/bin/uv run --project envs/judge python scripts/docs/fig_evalaware_ablation14.py
 """
@@ -48,7 +48,7 @@ def main():
             ("What it does", dict(rows=rows2, xmin=0, xmax=0.5, step=0.1, fmt=pct, x_fmt=pct_axis, mode="dot",
                                   series=s2, xlabel="share of runs", label_w=330, row_h=26, value_labels=True))],
            legend_items=[s1["t"], s1["k"], s2["b"]],
-           notes=["Source: docs/overnight/data/evalaware_ablation_14b.json. Report: docs/overnight/reports/evalaware_ablation_14b.md.",
+           notes=["Source: docs/experiments/evalaware-ablation-14b/data/evalaware_ablation_14b.json. Report: docs/experiments/evalaware-ablation-14b/report.md.",
                   "Eval words: the J-lens paper's ablation list (26 single Qwen tokens: \" fake\", \" fictional\", \" simulation\", "
                   "\" testing\", \" evalu\", \" benchmark\", …). Paper (Claude Sonnet 4.5, blackmail prompt): 71% → 3% say it is a test."])
 

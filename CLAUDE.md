@@ -7,18 +7,20 @@ Interpretability project on **arguing against its own knowledge**. On questions 
 - Prefer "arguing against its own knowledge" in write-ups. "Motivated reasoning" is OK colloquially (the user's call), but it implies a motive we can't establish; don't build claims on it.
 - "Own knowledge" is behavioural: an item is reliably known if ≥ 90% (≥ 9/10) of unhinted samples answer it correctly. Lighter filters (5/5) must be labelled as such.
 - [docs/plan.md](docs/plan.md) is the research design (v1); [docs/roadmap.md](docs/roadmap.md) milestones M0–M3, thresholds, go/no-go points; [docs/open-questions.md](docs/open-questions.md) undecided points. Plan changes and go/no-go calls are the user's decisions.
-- **Source of truth for findings:** the dashboard registry [docs/findings/registry.json](docs/findings/registry.json) → [docs/findings/index.html](docs/findings/index.html) (see "Findings dashboard"). `docs/findings.md` is only a pointer.
+- **Source of truth for findings:** `docs/findings.md` (curated current state), `docs/log.jsonl` (chronological record) and one folder per experiment in `docs/experiments/`. The dashboard `docs/dashboard/index.html` is built from them (see "Findings dashboard").
 
-**Working memory (the user's instruction, 2026-11-05).** Chats get cleared regularly. A new chat must be able to start from this file plus [notes/findings.md](notes/findings.md).
-- `notes/findings.md` is the current state of knowledge: short curated claims, each naming its supporting experiments, plus what's ruled out and the open questions. **Update it after every result, every decision and before ending a session.** Rewrite claims in place; don't append. Keep it under about 60 lines. Example entries: "H1 is ruled out by exp03 and exp05", "probe accuracy saturates at layer 18".
-- For details, grep (don't read in full) `notes/log.md` (chronological: decisions, reasons, dead ends; append a few lines per session), `notes/experiments_index.md` (one row per experiment: question, setup, result, interpretation, paths; add a row per experiment) and the reports.
+**Working memory (the user's instruction, 2026-11-05).** Chats get cleared regularly. A new chat must be able to start from this file plus [docs/findings.md](docs/findings.md).
+- `docs/findings.md` is the curated current state: short claims, each naming its supporting experiments by folder id, plus what's ruled out and the open questions. **Rewrite it after every result, every decision and before ending a session.** Rewrite claims in place; don't append. Keep it under about 60 lines.
+- `docs/log.jsonl` is the chronological record, **append-only**: one JSON object per line, `{"ts", "type", "exp", "text", "by"}`. Types: decision, start, result, dead_end, surprise, note; `exp` is a list of experiment ids; `by` is `user` or `claude`. Log every decision (above all the user's), start, result, dead end and surprise in one or two sentences, linking files for detail. Never edit or reorder old lines.
+- Each experiment has a folder `docs/experiments/<id>/` with a `README.md` (YAML front matter with the short structured fields, then Markdown sections Question, Method, Result, Interpretation, Caveats, Files), its `report.md` if any, its figures (`*.svg`) and its derived numbers (`data/*.json`). Create the folder when the experiment starts (status `running` or `upcoming`) and update the README when it finishes.
+- For details, grep (don't read in full) `docs/log.jsonl` and `docs/experiments/*/README.md`.
 
 **Credit use (the user's instruction, 2026-11-05).**
 - Opus runs the main thread only. Subagents default to Sonnet (`CLAUDE_CODE_SUBAGENT_MODEL=sonnet` in the profile settings). Request Opus for a subagent only when the task really needs it, and say why.
-- Spawn subagents only for independent parallel work or large reading jobs, never for lookups you can do in a few calls. Give them a narrow brief that points at `notes/findings.md` and the exact files.
+- Spawn subagents only for independent parallel work or large reading jobs, never for lookups you can do in a few calls. Give them a narrow brief that points at `docs/findings.md` and the exact files.
 - Prefer cheap calls: `grep`, `head`, `sed -n` and line-range reads over reading whole files or transcripts; local scripts over API judge calls; small smoke runs before full GPU runs. Tell subagents to do the same. Don't poll; use background jobs and notifications.
 
-**Current hypothesis and status (2026-11-05).** M0 done ([docs/reports/m0.md](docs/reports/m0.md)); M1 pilot code built, full pilot never run (superseded by exploration, see `notes/`). Working conclusion: models can be made to argue against their knowledge (explicit or planted answer claims; other model families when told they're scored), but in thinking mode they almost always say so in the CoT, and the J-lens has not shown anything the CoT, the logit lens or a trained probe doesn't. One narrow pre-registered J-lens pass (planted claim, answer position, AUROC 0.71) is not yet robust. Claim strengths: [docs/overnight/redteam_claims.md](docs/overnight/redteam_claims.md). Slide deck source: [docs/presentation/slides.md](docs/presentation/slides.md).
+**Current hypothesis and status (2026-11-05).** M0 done ([docs/experiments/m0-tools/report.md](docs/experiments/m0-tools/report.md)); M1 pilot code built, full pilot never run (superseded by exploration, see `docs/log.jsonl`). Working conclusion: models can be made to argue against their knowledge (explicit or planted answer claims; other model families when told they're scored), but in thinking mode they almost always say so in the CoT, and the J-lens has not shown anything the CoT, the logit lens or a trained probe doesn't. One narrow pre-registered J-lens pass (planted claim, answer position, AUROC 0.71) is not yet robust. Claim strengths: [docs/redteam_claims.md](docs/redteam_claims.md). Slide deck source: [docs/presentation/slides.md](docs/presentation/slides.md).
 
 ## Layout
 
@@ -33,9 +35,12 @@ src/jmr/explore/      exploration runner (arm specs, multi-turn, prefill, forks)
 src/jmr/analysis/     analysis of stored samples and readouts
 scripts/gen|lens|explore|docs/   thin CLIs; the folder says which env runs them
 tests/                CPU tests (pytest)
-docs/overnight/       night logs, reports/, data/ (derived JSON), preregistration.md, report pages
+docs/findings.md      curated current state; docs/log.jsonl: append-only chronological log
+docs/experiments/<id>/ README.md (front matter + details), report.md, figures, data/*.json (derived numbers)
+docs/dashboard/       site.yaml (main question, strands, terms) and the built index.html
+docs/                 also preregistration.md, redteam_claims.md, design_probe_control.md, plan.md, roadmap.md, open-questions.md, presentation/; unsorted/ holds files not yet assigned to an experiment
 docs/literature/      literature notes
-data/                 gitignored run data (top-level only; docs/overnight/data/ is tracked)
+data/                 gitignored run data (top-level only; docs/experiments/*/data/ is tracked)
 ```
 
 - Top-level `jmr` never imports torch or vllm. `jmr.gen` imports vllm; `jmr.lens` imports torch and jlens.
@@ -88,7 +93,7 @@ uv only; never `pip install`. Separate envs because vLLM pins its own torch/tran
 ## Working style
 
 - Minor parameters: pick a reasonable default, write it down, tell the user. Non-blocking design questions go to `docs/open-questions.md`. Roadmap thresholds are not loosened without asking.
-- Pre-register (timestamped, in `docs/overnight/preregistration.md`) the score, groups, prediction and fail/underpowered rule before reading out a test; label everything else exploratory. Count items, not runs, for CIs (item-level bootstrap).
+- Pre-register (timestamped, in `docs/preregistration.md`) the score, groups, prediction and fail/underpowered rule before reading out a test; label everything else exploratory. Count items, not runs, for CIs (item-level bootstrap).
 - Controls to include by default: salience control (an unchosen but prominent option's margin), echo control (read before the text names the thing), same-text-different-model, within-model comparisons, text/length baselines, logit lens next to J-lens.
 
 ### Writing (user's instructions, 2026-11-03)
@@ -96,8 +101,8 @@ uv only; never `pip install`. Separate envs because vLLM pins its own torch/tran
 - Summaries (dashboard, report summaries, chat) must be readable by someone who didn't run the experiment: lead with the plain answer; no internal labels (H1, T1b, V2′, C3, β 0.02, "warm-start", cell names) without a plain description; every number says what was compared and what it measures (e.g. "AUROC 0.71, where 0.5 is chance"); every control gets one sentence on what it checks; ≤ 2–3 numbers per sentence; tables with plain headers and a how-to-read line; define conditions by what happens in them.
 
 ### Findings dashboard
-- Built from `docs/findings/registry.json` (thread: main question, summary, strands A–C, T, N with hypothesis, current answer, confidence, next step; `experiments`: one entry each with id, title, strand, status, kind, verdict, question, method, result, numbers, interpretation, confidence, caveats, n, dates, timing, machine, figure, reports, data, commits, related). Derived numbers only.
-- After every result (and when an experiment starts or is planned): update the entry (and strand answer/thread summary if changed, `meta.updated`); redraw figures with `scripts/docs/make_figures.py` (SVG in `docs/findings/figs/`); run `~/.local/bin/uv run --project envs/judge python scripts/docs/build_dashboard.py` (fix the registry, don't loosen the check); commit registry, figures, index.html together. Re-read the registry right before editing; edit only your entry.
+- `docs/dashboard/index.html` is built by `~/.local/bin/uv run --project envs/judge python scripts/docs/build_dashboard.py` from `docs/dashboard/site.yaml` (main question, summary, strands A–C, T, N with hypothesis, current answer, confidence, next step; terms; meta), the experiment READMEs' front matter and sections, and `docs/log.jsonl`. The build checks the schema and fails loudly on a missing or malformed field; fix the source, don't loosen the check. Derived numbers only.
+- Rebuild in batches (end of a working session, or when asked), not after every result. Before a rebuild: update `site.yaml` strand answers and `meta.updated` if findings changed, redraw figures with `scripts/docs/make_figures.py` (each SVG is written into its experiment folder), then commit sources, figures and `index.html` together.
 - Published as private artifact https://claude.ai/artifact/BZHUWiBPLb7zN7mzXXbvzy (slug `557d5704-e0b7-4329-8053-f7b84ab11dc6`): republish to that slug only, reading the live version for `base_version`. Page code: `scripts/docs/dashboard_template.html`, one self-contained document.
 
 ### Commits (user's standing instruction, 2026-11-03)
@@ -110,7 +115,7 @@ uv only; never `pip install`. Separate envs because vLLM pins its own torch/tran
 On a failure or mismatch: stop, report (command, exact error or numbers, interpretation, options) and wait. Especially: lens shape/layer count/capture point mismatches; teacher-forced IDs differing from generated; a tracked token that isn't a single token; teacher-forced log-probs disagreeing with vLLM beyond tolerance; OOM, missing files, dependency conflicts; counts, parse or label rates far from expectation. Off-limits unless the user asks: switching model, lens or layers; re-tokenizing text (except the API exception above); dropping or replacing tracked tokens; skipping failing runs or swallowing errors; loosening thresholds; truncating sequences (lowering max_tokens counts: flag it and get acceptance); quantizing to fit; installing into the other env.
 
 ### 2. Never commit data or model weights
-Not in git: weights, HF cache, lens matrices, datasets, generated CoTs and answers, labels, readout outputs, activations, per-run scores. `.gitignore` covers top-level `data/` (with an exception for `docs/overnight/data/` derived JSON) and weight/data formats. Stage files by name only.
+Not in git: weights, HF cache, lens matrices, datasets, generated CoTs and answers, labels, readout outputs, activations, per-run scores. `.gitignore` covers top-level `data/` (with an exception for `docs/experiments/` derived JSON) and weight/data formats. Stage files by name only.
 
 ### 3. Never store full-vocabulary lens outputs
 Compute full softmaxes in memory; save only top-25 tokens (IDs, log-probs) at chosen positions and the rank/log-prob of tracked tokens (option letters, per-item content words, concept tokens), for every lens and every output incl. debug dumps. Tracked tokens must be final and checked before a readout; adding one means re-running. Open-vocabulary searches must aggregate in memory and store only the top few hundred differing tokens.
