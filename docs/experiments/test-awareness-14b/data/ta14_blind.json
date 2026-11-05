@@ -1,0 +1,146 @@
+{
+ "lists_per_cell": 360,
+ "runs_per_cell": 60,
+ "any_nonecho_flag_TFSN": {
+  "aware": {
+   "jlens": [
+    39,
+    28
+   ],
+   "logit": [
+    19,
+    16
+   ]
+  },
+  "unaware": {
+   "jlens": [
+    24,
+    16
+   ],
+   "logit": [
+    10,
+    8
+   ]
+  }
+ },
+ "any_nonecho_flag_TF": {
+  "aware": {
+   "jlens": [
+    26,
+    22
+   ],
+   "logit": [
+    17,
+    14
+   ]
+  },
+  "unaware": {
+   "jlens": [
+    18,
+    13
+   ],
+   "logit": [
+    7,
+    6
+   ]
+  }
+ },
+ "T_only": {
+  "aware": {
+   "jlens": [
+    5,
+    5
+   ],
+   "logit": [
+    7,
+    6
+   ]
+  },
+  "unaware": {
+   "jlens": [
+    1,
+    1
+   ],
+   "logit": [
+    1,
+    1
+   ]
+  }
+ },
+ "F_only": {
+  "aware": {
+   "jlens": [
+    22,
+    19
+   ],
+   "logit": [
+    11,
+    11
+   ]
+  },
+  "unaware": {
+   "jlens": [
+    17,
+    12
+   ],
+   "logit": [
+    6,
+    5
+   ]
+  }
+ },
+ "S_only": {
+  "aware": {
+   "jlens": [
+    13,
+    12
+   ],
+   "logit": [
+    2,
+    2
+   ]
+  },
+  "unaware": {
+   "jlens": [
+    6,
+    5
+   ],
+   "logit": [
+    3,
+    2
+   ]
+  }
+ },
+ "format": "[lists with a non-echo flag, runs with at least one]",
+ "share_difference_aware_minus_unaware_prompt_bootstrap": {
+  "TFSN/jlens": {
+   "diff": 0.04166666666666667,
+   "ci95": [
+    -0.004549339549339551,
+    0.08720141065830721
+   ]
+  },
+  "TFSN/logit": {
+   "diff": 0.025,
+   "ci95": [
+    -0.0048232197971781274,
+    0.05676666686130475
+   ]
+  },
+  "TF/jlens": {
+   "diff": 0.022222222222222213,
+   "ci95": [
+    -0.014377023612098236,
+    0.05574767904509284
+   ]
+  },
+  "TF/logit": {
+   "diff": 0.027777777777777776,
+   "ci95": [
+    0.0012583979488708862,
+    0.056656112228696494
+   ]
+  }
+ },
+ "n_prompts_in_sample": 89
+}

@@ -4,10 +4,10 @@ title: Does Qwen3-14B voice "the user may be testing me", does that go with less
 strand: T
 also:
 - C
-status: running
+status: done
 kind: pre-registered
-verdict: pending
-confidence: low
+verdict: J-lens signal weak (AUROC 0.61), no better than the logit lens or a text word count
+confidence: moderate
 dates:
   start: 2026-11-05T12:55
   approx: true
@@ -25,16 +25,22 @@ numbers:
   value: 24% / 24%
 - label: Prompts with both aware and unaware runs ("mixed")
   value: 217 of 299
+- label: Eval-word score before the awareness sentence, aware vs unaware runs of the same prompt, J-lens AUROC (0.5 = chance)
+  value: 0.61 [0.57, 0.65]
+- label: Same with the logit lens / a count of test-words in the text
+  value: 0.63 [0.59, 0.67] / 0.62 [0.59, 0.65]
 - label: Tool-use task carried out, aware vs unaware runs, within the same prompt, percentage points
   value: -16 [-23, -10]
 - label: Harmful request carried out, aware vs unaware runs, within the same prompt, percentage points
   value: -10 [-15, -6]
-reports: []
+reports:
+- report.md
 data:
 - data/gate.json
-- data/labels.json
-- data/aware_judge_sample.json
-- data/aware_judge_sample_gpt41mini.json
+- data/ta14_1.json
+- data/ta14_extra.json
+- data/ta14_open_vocab.json
+- data/ta14_blind.json
 related:
 - evalaware-ablation-14b
 - evalaware-replication
@@ -69,4 +75,40 @@ Gate (at least 10% aware, at least 60 mixed prompts): passed, 24% and 217 mixed 
 
 Pre-registered before any readout: docs/preregistration.md, section TA14 (primary test, open-vocabulary search, blind read by eye). Readout script: scripts/lens/hawthorne_readout.py; analysis: scripts/explore/hawthorne_lens_analyze.py. Selected runs: 185 prompts, 693 aware and 960 unaware runs.
 
-Status 2026-11-05 13:10: readout started and stopped by its own check (rule 1). See the log.
+### Result (pre-registered TA14, read 2026-11-05)
+
+Plain answer: weakly yes, but the J-lens adds nothing. Before the model first says it may be tested, its internal eval-word score (" fictional", " simulation", minus control nouns) is higher in runs that will say it than in runs of the same prompt that will not. The plain logit lens and a simple count of test-words in the visible reasoning show the same.
+
+TA14-1 (185 prompts, 693 aware and 960 unaware runs; within-prompt AUROC, 0.5 = chance; 95% interval from resampling prompts):
+
+| Score | AUROC | Reading |
+| --- | --- | --- |
+| J-lens | 0.61 [0.57, 0.65] | signal: interval excludes 0.5 |
+| Logit lens | 0.63 [0.59, 0.67] | |
+| J minus logit | -0.02 [-0.04, 0.00] (90%: [-0.04, -0.00]) | does not add; equivalent within +-0.10 |
+| Text eval-word rate | 0.62 [0.59, 0.65] | J minus text: -0.01 [-0.05, 0.03], J does not beat it |
+| Window length | 0.55 [0.53, 0.56] | J minus length: +0.06 [0.02, 0.11], J beats it |
+
+Secondary: tool-use tasks J 0.58 vs logit 0.61; harmful requests J 0.67 vs logit 0.67. Last 32 window positions: J 0.61, logit 0.67 (logit clearly better). First 64 positions: J 0.50, logit 0.54 (chance). Group of " test"-type words: J 0.58, logit 0.58. So the signal sits late in the window, close to the awareness sentence, and early reasoning shows none. Figure: ta14_auroc.svg. Data: data/ta14_1.json.
+
+TA14-2 (open-vocabulary search, 200-permutation null of the largest |t|): the J-lens has tokens far beyond the null (largest t 11.5, null 95% quantile 4.0), but the top tokens are hedging and contrast words, not test words: " sometimes", " yet", " reality", " However", " complic", " possibly", " but", " if", " depending", " perhaps", " hypoth", "现实中" (in reality). All 300 stored tokens pass the null, so the aware/unaware difference is broad (a general "hedging, real-world vs hypothetical" register), not a single concept. The logit lens top list is similar plus noise tokens. No safety words, and the eval-word list's " test"/" evaluation" are not among the top tokens. Echoes were not checked token by token. Data: data/ta14_open_vocab.json (top 100 per lens and statistic).
+
+TA14-3 (blind read, 60 aware + 60 unaware runs, 1,440 lists; 89 prompts): share of lists with a flag that is not an echo of the prompt or earlier reasoning, aware vs unaware: J-lens 39/360 (11%) vs 24/360 (7%), difference +4.2 points [-0.5, 8.7]; logit lens 19/360 (5%) vs 10/360 (3%), +2.5 [-0.5, 5.7]. Test/fiction/simulation flags only: J-lens 26 vs 18 lists, +2.2 [-1.4, 5.6]; logit +2.8 [0.1, 5.7]. Most flags are fiction or pretend words (Chinese "虚构" = fictional, "假装" = pretend, English fictional/simulate/mock/dummy), which appear in both groups; "testing"/"试探" appear in 5 aware vs 1 unaware runs. Suspicion words (企图, 可疑, intent) are more common under the J-lens in aware runs (13 vs 6 lists). Nothing is clearly separated. Data: data/ta14_blind.json (counts only).
+
+Exploratory (not pre-registered): window-length confound. Length alone gives AUROC 0.55 here (0.66 in the parallel experiment). Cutting each aware/unaware pair to the same number of tokens (the last m before the cut): J 0.60 [0.56, 0.64], logit 0.62 [0.58, 0.66]; first m tokens: J 0.61, logit 0.65. Scores residualised on log window length (slope fitted within prompt and group): J 0.61 [0.56, 0.65], logit 0.66 [0.61, 0.69], J minus logit -0.05 [-0.07, -0.03]. Length does not explain the signal. Data: data/ta14_extra.json.
+
+### Interpretation
+
+The J-lens carries a weak "being tested / fictional" signal before it is voiced on identical prompts (AUROC about 0.6), but the logit lens carries as much or more, and so does a plain count of test-words in the text, so we cannot say the J-lens sees something the visible reasoning and the output-layer readout do not. Confidence moderate for "weak signal, no J-lens advantage", low for what the signal is: the open-vocabulary search points to a general hedging/"in reality" register rather than a test concept.
+
+### Caveats
+
+- The label (keyword match on voiced suspicion) is looser than the paper's judge (5 of 16 keyword-aware runs confirmed by gpt-4.1-mini). Unaware runs were also chosen to contain none of the looser test words (BROAD_RE: test, hypothetical, simulat, evaluat, scenario, ...), so the text eval-word baseline, and any lens echo of those words, is partly fixed by the label definition. No echo control was part of TA14.
+- Deviation: the blind read was split across sub-agents. I read runs R000-R013 myself; R014-R119 were read by four Sonnet sub-agents with one shared written rubric, blind to group, lens and layer. Their replies were truncated by the harness and the missing lines were requested again, so the flag file was assembled by hand from replies. Echo marks come from the readers' judgement on the shown excerpt only (350 characters of reasoning), not the full text.
+- The 'window+post' rows in the raw analysis output are invalid (aware runs are scored on the window only, unaware on window plus later positions) and are dropped from data/ta14_1.json. They were not pre-registered.
+- One model, one lens file, one score; the pre-registered score uses only two words.
+- Per-run labels, flags and CoTs are not committed.
+
+### Files
+
+report.md, ta14_auroc.svg, data/ta14_1.json, data/ta14_extra.json, data/ta14_open_vocab.json, data/ta14_blind.json; scripts/lens/hawthorne_readout.py, scripts/explore/hawthorne_lens_analyze.py, scripts/explore/ta14_extra.py, scripts/explore/ta14_blind_build.py.
