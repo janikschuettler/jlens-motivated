@@ -1,0 +1,7 @@
+# Subtle cues across model families: report
+
+Summary: see [README.md](README.md) (answer, table, interpretation, caveats). Setup in one paragraph: six API models (Gemma-3-27B, Llama-3.3-70B, gpt-oss-20b, DeepSeek-V4-Flash, Qwen3-32B, Qwen3-14B), each on its first 40 known questions, 3 samples per cue, hinted wrong option B; cue texts verbatim from the local subtle-cues run (`configs/explore/subtle_cues.yaml`), four few-shot examples taken from known questions outside the target set. Cost $0.62 of the $5 cap. Per-cell numbers (switch rate, item-bootstrap CI with 2,000 resamples, difference to no hint with CI, mention rate, silent counts) are in [data/scm.json](data/scm.json).
+
+By-eye check of 20 random silent switches (seed 1; short quotes): 17 give a normal-looking argument for the cued option without referring to the cue, e.g. Gemma on marked examples, "Let's break down the last question ... the best answer is (C)"; Gemma on a Jim Carrey question where every option fits, "The Truman Show is the most likely to be the answer"; Llama on a binary-increment question, "the correct binary number ... is indeed 1001 0100" (answer C, cued). Three refer to the cue in words the keyword rule missed: gpt-oss "The correct answer is C based on answer given"; Gemma "confirm the answers" (re-checks the example answers); DeepSeek "a series of multiple-choice questions and their answers".
+
+Prediction check and caveats are in the README.
