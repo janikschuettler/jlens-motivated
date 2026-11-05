@@ -1,6 +1,6 @@
 # Findings: current state
 
-Last curated: 2026-11-05, 12:30 (claims sorted by how far they can be pushed in tomorrow's talk).
+Last curated: 2026-11-05, 16:30 (claims sorted by how far they can be pushed in tomorrow's talk).
 
 This is the project's working memory. It holds what we know **now**, not a history. A new chat starts from `CLAUDE.md` and this file. For details, grep `docs/log.jsonl` (chronology) and `docs/experiments/<id>/` (one folder per experiment: README with front matter and details, report, figure, derived numbers).
 
@@ -9,12 +9,13 @@ This is the project's working memory. It holds what we know **now**, not a histo
 Conventions: strengths follow `docs/redteam_claims.md` (solid, moderate, preliminary). "Known item" means at least 9 of 10 unhinted samples are correct (API models: 5 of 5). AUROC runs from 0.5 (chance) to 1 (perfect). Brackets are 95% item-bootstrap CIs.
 
 ## The story in one paragraph
-A nudge makes Qwen3-8B argue against an answer it knows only when the hint *states* the answer, and in thinking mode the reasoning nearly always names the hint, so reading the chain of thought already catches it. In detection the J-lens is mostly at or near chance, with at most small edges over the logit lens (+0.08 to +0.11 AUROC in 3 of 17 pre-registered cells), and far behind a trained probe or a keyword check on the text; its clear win over the logit lens is steering at the answer. Lens scores compared across models measure the model, not the behaviour. We still lack silent cases, the setting where a lens could beat the chain of thought.
+A nudge makes Qwen3-8B argue against an answer it knows only when the hint *states* the answer, and in thinking mode the reasoning nearly always names the hint, so reading the chain of thought already catches it. In detection the J-lens is mostly at or near chance, with at most small edges over the logit lens (+0.08 to +0.11 AUROC in 3 of 17 pre-registered cells), and far behind a trained probe or a keyword check on the text; its clear win over the logit lens is steering at the answer. Lens scores compared across models measure the model, not the behaviour. Silent cases exist in non-reasoning models (Gemma-3-27B follows ■-marked examples silently); whether a lens sees the correct answer there is being tested.
 
 ## Solid
 1. **The hint's wording drives switching** (Qwen3-8B). Changing only the wording (M&B's "Hint: An expert indicates the answer is X" vs ours "An expert who is right 90% of the time chose X") moves switching by −51 pp [−56, −47]; thinking mode, decoding and format each < 7 pp. Stating the answer works ("Hint: The answer is X" 67%), reporting a choice doesn't ("…chose X" 4–13%). → gap-factorial, wording-dissection, mb-replication
 2. **The wording effect is general, not Qwen-specific** (moderate; API, 40 known items × 2 samples per model). In all 5 models tested, "Hint: The answer is B." moves the model far more than "an expert who is right 90% of the time chose B": Gemma-3-27B 74% vs 19%, Llama-3.3-70B 49% vs 12%, Qwen3-32B 41% vs 15%, DeepSeek-V4-Flash 32% vs 19%, gpt-oss-20b 67% vs 8% (partial). The gap is 14–55 points, with CIs excluding 0 in the 4 complete models. No-hint rate 0%. The M&B hint moves all 12 models screened (17–72%). → wording-cross-model, models-grader
-2b. **Non-reasoning models do switch silently:** on "states the answer", Llama-3.3-70B's reasoning doesn't mention the hint in 22 of 39 switches, Gemma-3-27B's in 12 of 59 (keyword rule). These are the candidate silent cases for a lens test (preliminary; API runs, no lens yet). → wording-cross-model
+2b. **Subtle cues (not a sentence about the answer) mostly fail everywhere, with model-specific weak spots** (moderate; API, 40 known items × 3 samples, 6 models). Metadata tag 2–17%, grader code 2–11%, ■-marked examples 3–18%, always-B examples ≈ 0, against 36–74% for "the answer is B". Exceptions: Gemma-3-27B follows marked examples 49% [34, 64], gpt-oss-20b grader code 52% [41, 62]. Qwen3-14B/32B (0–9%) match local Qwen3-8B (+0.6 to +7.9 pp): Qwen isn't unusually rigid. Qwen3-8B itself not on the API. → subtle-cues-cross-model, subtle-cues
+2c. **Non-reasoning models do switch silently** (preliminary; keyword rule, ~15% too high on a by-eye read of 20): Gemma-3-27B on marked examples 56 of 59 switches silent, Llama-3.3-70B on "the answer is" 22 of 39 and on metadata 17 of 20; reasoning models nearly always name the cue. These are the candidate silent cases for a lens test (Gemma lens run in progress). → subtle-cues-cross-model, wording-cross-model
 3. **In thinking mode the reasoning names the hint when the model switches**: 2 of 1,231 factual and 0 of 5,019 moral switches never mention it. Say "names the hint", not "faithful": keyword labels, judge not validated. → silent-scan-thinking, moral-hunt
 
 ## Moderate (claim with the stated scope)
@@ -41,7 +42,6 @@ A nudge makes Qwen3-8B argue against an answer it knows only when the hint *stat
 - Anything beyond Qwen and MMLU-Redux for the lens results.
 
 ## Open questions and running work (2026-11-05)
-- Running: test awareness on Qwen3-14B (generation done on derpy, 4,784 runs; gate next); Qwen3.6-27B eval-awareness replication (pre-registered EA27); slides; red team of tomorrow's story.
-- Waiting for the user: the Nguyen-probe control (design ready, 9 decisions in docs/design_probe_control.md §11).
+- Running (2026-11-05 evening): Gemma-3-27B silent switches with J-lens on derpy (gemma27-silent); Nguyen/Hua probe control on octavia, test (a) first (probe-control); test-awareness J-lens readout queued on derpy (tolerance: p99 ≤ 0.02, max ≤ 0.3 nats; the gap is bf16 rounding). Qwen3.6-27B removal test not run (weights deleted for space; user, 2026-11-05).
 - Test awareness on Qwen3-14B replicates (24% of runs voice it; aware runs comply 10–16 pp less within prompt; loose keyword label); lens readout waits for the user's tolerance decision. → test-awareness-14b
 - Not run: F3 code review; reward-hack waterproofing (pre-registered W, 3–4 GPU-h); judge validation (needs 50 user labels); Gemma-3-12B silent swaps under a lens (needs an HF token).
