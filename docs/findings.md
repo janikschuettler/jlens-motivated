@@ -48,5 +48,5 @@ A nudge makes Qwen3-8B argue against an answer it knows only when the hint *stat
 - Anything beyond Qwen and MMLU-Redux for the lens results.
 
 ## Open questions and running work (2026-11-05)
-- Nothing running (2026-11-05 evening). Qwen3.6-27B removal test not run (weights deleted for space; user, 2026-11-05).
+- Running until 2026-11-06 10:00 (user's plan): octavia: steering without the 2,048 cap (claim 9) → more items for inconclusive equivalence cells (7) → planted-claim fresh replication (12). derpy: reward-hack waterproofing W (10) → Gemma-3-12B silent switches (12b) → probe control on test-awareness prompts (12a). API: judge validation of "names the hint" (3); strict-label test awareness (11b); re-asking Gemma after silent switches; more cross-model wording samples (2, 2b). Qwen3.6-27B removal test not run.
 - Not run: F3 code review; reward-hack waterproofing (pre-registered W, 3–4 GPU-h); judge validation (needs 50 user labels); Gemma-3-12B silent swaps under a lens (needs an HF token).
