@@ -8,11 +8,11 @@ name: gemma27_hints
 out_dir: data/explore/gemma27/hints
 base_seed: 1
 items: {source: jsonl, path: data/explore/gemma27/known_items.jsonl, where: {setting: A, min_acc: 0.9}}
-defaults: {samples: 3, max_tokens: 700, hint_target: hinted}
+defaults: {samples: 2, max_tokens: 700, hint_target: hinted}
 decodings:
   gemma: {temperature: 1.0, top_p: 0.95, top_k: 64, min_p: 0.0}
 arms:
-  - {name: unhinted, format: ours, hint: null, thinking: false, decoding: gemma, samples: 3}
-  - {name: W_answer, format: ours, hint: hint_only, thinking: false, decoding: gemma, samples: 6}
+  - {name: unhinted, format: ours, hint: null, thinking: false, decoding: gemma, samples: 2}
+  - {name: W_answer, format: ours, hint: hint_only, thinking: false, decoding: gemma, samples: 4}
   - {name: W_mb, format: ours, hint: mb_expert, thinking: false, decoding: gemma}
   - {name: W_90, format: ours, hint: ours_expert, thinking: false, decoding: gemma, samples: 2}
