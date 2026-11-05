@@ -179,7 +179,7 @@ ab = "".join(
     f'<p style="width:80px;font-family:{SERIF};font-size:56px;font-weight:600;color:{DBLUE};line-height:1">{n}</p>'
     f'<div style="flex:1;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:600;color:{DBLUE};letter-spacing:2px;text-transform:uppercase">{lab}</p>'
     f'<p style="font-size:38px;line-height:1.3;color:{DLIGHT}">{t}</p></div></div>' for n, t, lab in ans)
-section("headline", head("The short answer", "", "Three claims", ecolor=DBLUE, tcolor=DLIGHT) + f'\n<div style="display:flex;flex-direction:column;gap:28px">{ab}</div>' + footer("Still open: in non-reasoning models switches can be silent, the setting where a lens could beat the text. Whether a lens sees the correct answer there is being tested (Gemma-3-27B, running). Strength of each claim is on its slide.", DBODY),
+section("headline", head("The short answer", "", "Three claims", ecolor=DBLUE, tcolor=DLIGHT) + f'\n<div style="display:flex;flex-direction:column;gap:28px">{ab}</div>' + footer("Still open: in non-reasoning models switches can be silent, the setting where a lens could beat the text. In Gemma-3-27B’s silent switches the J-lens sees the correct answer only near the output, like the logit lens. Strength of each claim is on its slide.", DBODY),
 "Whole talk in one slide, from docs/findings.md story paragraph. Claim 1: gap-factorial, wording-dissection (wording), silent-scan-thinking and moral-hunt (2 of 1,231 factual and 0 of 5,019 moral switches never mention the hint). Claim 2: firming-f1-f2 and jlens-vs-competitors (J-lens edge +0.08 to +0.11 AUROC in 3 of 17 pre-registered cells), steering. Claim 3: hack-organism, probe-control. Caveat for claim 2: absence of a lens signal is not shown, because the letter readout is blind mid-reasoning even in clean runs.", bg=DARK, color=DLIGHT)
 slides.append("headline")
 MD.append("## 2. headline\n\n**Three claims**\n\n- 1. A nudge makes Qwen argue against what it knows only when it states the answer, and then the reasoning names the hint.\n- 2. The J-lens is at best a small, occasional edge over the logit lens and far behind a probe or the text. Its clear win is steering at the answer.\n- 3. Methods warning: lens scores compared across two models measure the model, and published eval-awareness probes fail an identical-prompt control.\n- Still open: silent cases in non-reasoning models; whether a lens sees the correct answer there is being tested (Gemma-3-27B, running).\n\n*Notes:* From docs/findings.md story paragraph. Claim 1: gap-factorial, wording-dissection, silent-scan-thinking, moral-hunt. Claim 2: firming-f1-f2, jlens-vs-competitors, steering. Claim 3: hack-organism, probe-control.\n")
@@ -553,6 +553,21 @@ slide("evalaware3", "Published eval-awareness probes · same belief, different w
       right_html=card("Same belief, plus “(I’m reading up on AI systems.)”: share of 69 pairs where the score rises (0.5 = no change)", hchart(PCB, 0.1, 0.95, 860, 290, chance=0.5, chance_label="no change", mode="dot", rowh=60, top=44), 900),
       notes="Experiment: probe-control test (b), pre-registered PC-b (17:00 GMT). 640 templated prompt versions, 4 thinking runs each; belief = direct question (no thinking) plus share saying 'testing me'. Pooled over 139 belief-matched pairs: Nguyen 0.46 [0.37, 0.55], Hua 0.69 [0.60, 0.77], J-lens 0.70 [0.62, 0.77], logit 0.60 [0.51, 0.69]; pre-registered 'reads surface' needs >= 0.70 with lower bound > 0.60, so none passes. Regression over 640 versions: Hua +0.39 SD with eval surface, +0.06 with belief; J-lens +0.87 SD with the AI-topic sentence, +0.13 eval surface, +0.29 belief. Caveats: stated belief itself follows the surface, so few format-only pairs are belief-matched (18 and 11 of 80); eval-style versions are longer (length could drive Nguyen); regex label only.")
 
+# ---------- 16b Gemma silent switches ----------
+GA = card("Gemma-3-27B silent switches: correct letter vs other wrong letters, just before the answer (log-prob margin; 0 = no preference)",
+          hchart([row("J-lens, middle blocks", -0.03, "−0.03", BLUE), row("Logit lens, middle blocks", 0.32, "0.32", MID),
+                  row("J-lens, last blocks", 2.93, "2.93", BLUE), row("Logit lens, last blocks", 2.25, "2.25", MID)], -1.4, 3.6, 880, 330, chance=0, chance_label="no preference", mode="dot", rowh=56), 920)
+GB = card("Silent vs open switches (AUROC; 0.5 is chance)",
+          hchart([row("J-lens", 0.43, "0.43", BLUE), row("Logit lens", 0.49, "0.49", MID), row("Reply length", 0.33, "0.33", "#9AA3B2")], 0.0, 0.75, 880, 330, chance=0.5, chance_label="chance", mode="dot", rowh=56), 920)
+slide("gemma", "Silent cases · Gemma-3-27B",
+      "In Gemma’s silent switches the lens sees the correct answer only near the output, like the logit lens",
+      ["Gemma follows “the answer is B” (70%, Qwen3-8B 67%) and ■-marked examples (48%, Qwen +4 points), and 94 of 117 ■ switches never mention the cue.",
+       "Pre-registered test passes: averaged over blocks, the correct letter ranks above the other wrong letters (J-lens 0.89 [0.43, 1.35]). But it comes from the last blocks, where the logit lens shows it as well (0.93); in the middle blocks the J-lens shows nothing.",
+       "Neither lens tells silent from open switches (J-lens 0.43, logit lens 0.49; Qwen3-8B J-lens 0.54). Same answer in both models: the lens reads the output, not a hidden reason."],
+      "preliminary", "Pre-registered; 53 known items (5 of 5 on the API), 124 silent runs on 32 items, one cue mostly. Readouts at batch 1.",
+      bsize=24, rwidth=940, right_html=GA + GB,
+      notes="Experiment: gemma27-silent (pre-registered G1-G3 with amendments G1.1-G1.3). Gemma-3-27B-it, Neuronpedia J-lens, blocks 24-54 step 2, 444 runs read with both lenses. Silent by keyword rule; by eye 31 of 45 show no sign of the cue, 10 presuppose it, 4 mention it; LLM monitor agrees 80%, same lens results. Score S = log-prob of the correct letter minus the mean of the other unchosen wrong letters at the token before the final answer. G1 0.89 [0.43, 1.35] (logit 0.93 [0.50, 1.35]); blocks 24-44: J -0.03 [-0.31, 0.26], logit 0.32 [-0.01, 0.64]; blocks 46-54: J 2.93 [1.69, 4.18], logit 2.25 [1.50, 3.03]. S also positive in open switches. Earlier positions: S 0.29 one token before, -0.37 eight before. G2 silent vs open: J 0.43 [0.33, 0.54], logit 0.49 [0.40, 0.58], length 0.33. Top-25 by eye: 'Answer' words, option words, hedges ('despite', 'although'); no hint or square tokens. Deviation: the batch-vs-single check failed with padded batches, so every readout ran at batch 1. Not done: whether the model's own output already ranks the correct letter second (text-free baseline), option content words, echo control.")
+
 # ---------- 14 next ----------
 def bigcard(head, body, col, fill):
     return (f'<div style="flex:1;background:{fill};border:3px solid {col};border-radius:14px;padding:26px 32px;display:flex;flex-direction:column;gap:12px">'
@@ -560,15 +575,14 @@ def bigcard(head, body, col, fill):
 NEXTC = (f'<div style="display:flex;flex-direction:row;gap:28px;align-items:stretch">'
          + bigcard("Thinking-mode Qwen", "The text names the hint, so text monitoring already catches it.", BLUE, LBLUE)
          + f'<p style="font-size:60px;color:{MUTED};align-self:center">vs</p>'
-         + bigcard("Non-reasoning models", "Silent switches occur. This is where a lens could beat the text.", ORANGE, LORANGE) + '</div>')
+         + bigcard("Non-reasoning models", "Silent switches occur (Gemma ■ examples). There the J-lens shows the correct answer only near the output, like the logit lens.", ORANGE, LORANGE) + '</div>')
 slide("next", "What it means and what is next",
-      "Reading the reasoning is enough where it names the hint; a lens must win in silent cases",
+      "Reading the reasoning is enough where it names the hint; in silent cases the lens has not yet beaten simpler readouts",
       ["The J-lens: at most a small, occasional edge over the logit lens, far behind a probe or keyword check. Its clearest win is steering. Absence not shown: the letter readout is blind mid-reasoning.",
        "Lens scores across models measure the model; published eval-awareness probes fail the identical-prompt control."],
       None, "", bsize=28, top_html=NEXTC, brow=True,
-      pend=["Gemma-3-27B: does the lens see the correct answer in silent switches? (running)"],
       md_extra="- Where Qwen argues against its knowledge in thinking mode, the text says so: text monitoring already catches it.\n- Silent switches do occur in non-reasoning models. That is where a lens could beat the text.",
-      notes="From docs/findings.md 'Open questions and running work' and 'Don't claim'. Running: Gemma-3-27B silent switches with J-lens (gemma27-silent, on derpy). Also running: probe-control test (b). Not run: reward-hack waterproofing W (3-4 GPU-h), judge validation (needs 50 user labels), Gemma-3-12B silent swaps under a lens, Qwen3.6-27B removal test. Do not claim: that the J-lens cannot see arguing against knowledge; that it beats the logit lens meaningfully in detection; that the CoT is faithful; that test awareness excuses bad behaviour; anything beyond Qwen and MMLU-Redux for the lens results.", bg=BG2)
+      notes="From docs/findings.md 'Open questions and running work' and 'Don't claim'. Done today: Gemma-3-27B silent switches (gemma27-silent), probe-control test (b). Not run: reward-hack waterproofing W (3-4 GPU-h), judge validation (needs 50 user labels), Gemma-3-12B silent swaps under a lens, Qwen3.6-27B removal test. Do not claim: that the J-lens cannot see arguing against knowledge; that it beats the logit lens meaningfully in detection; that the CoT is faithful; that test awareness excuses bad behaviour; anything beyond Qwen and MMLU-Redux for the lens results.", bg=BG2)
 
 # backups
 slide("b-factorial", "Backup · wording factorial", "Which parts of the hint wording drive switching",
