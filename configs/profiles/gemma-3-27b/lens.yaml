@@ -1,0 +1,22 @@
+# Profile gemma-3-27b: the Neuronpedia J-lens for Gemma-3-27B-it (fit 2026-06-14, wikitext,
+# 828 prompts, transformers 5.11 / torch 2.11, the lens env's versions).
+jlens:
+  repo: neuronpedia/jacobian-lens
+  revision: e166deb5ad540932100ef803c8c9bcc2a5453694
+  file: gemma-3-27b-it/jlens/Salesforce-wikitext/gemma-3-27b-it_jacobian_lens.pt
+  capture_point: block_output
+  expected_source_layers: [0, 60]  # inclusive range; 62 blocks, J maps block l to block 61
+  expected_d_model: 5376
+
+# Workspace layers: the Qwen3-8B choice (blocks 14-32 of 36, 39-89% of depth) scaled to 62 blocks:
+# 24, 26, ..., 54 (fixed 2026-11-05 before any Gemma readout).
+workspace_layers: [24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54]
+top_k: 25
+position_chunk: 128
+
+# Tracked letters in three surface forms (IDs are checked against the tokenizer by
+# scripts/lens/gemma_readout.py). Filled by scripts/lens/gemma_token_check.py.
+tracked_tokens:
+  letters: [A, B, C, D]
+  forms: {bare: "{L}", space: " {L}", paren: "({L}"}
+  ids: {}

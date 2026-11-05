@@ -28,7 +28,7 @@ def build_engine() -> Engine:
     model_cfg = config.load("model")
     sampling_cfg = config.load("sampling")
     vllm_cfg = sampling_cfg["vllm"]
-    llm = LLM(
+    kwargs = dict(
         model=model_cfg["hf_id"],
         revision=model_cfg["revision"],
         tokenizer_revision=model_cfg["revision"],
@@ -38,6 +38,9 @@ def build_engine() -> Engine:
         logprobs_mode=vllm_cfg["logprobs_mode"],
         seed=sampling_cfg["base_seed"],
     )
+    # A model profile may override engine settings (Gemma-3-27B: cpu_offload_gb, enforce_eager, ...).
+    kwargs.update(model_cfg.get("vllm", {}))
+    llm = LLM(**kwargs)
     tokenizer = AutoTokenizer.from_pretrained(model_cfg["hf_id"], revision=model_cfg["revision"])
     if fingerprint(tokenizer) != fingerprint(llm.get_tokenizer()):
         raise RuntimeError("vLLM's tokenizer and AutoTokenizer tokenize differently")

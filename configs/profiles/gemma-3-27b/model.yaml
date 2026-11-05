@@ -1,0 +1,29 @@
+# Profile gemma-3-27b (JMR_MODEL_PROFILE=gemma-3-27b; gemma27-silent study, 2026-11-05).
+# google/gemma-3-27b-it (Gemma3ForConditionalGeneration; text path only; vision tower unused).
+# Gated repo; revision pinned at download 2026-11-05. No thinking mode: enable_thinking is
+# ignored by the template and every run is "non-thinking" (the reply is the reasoning).
+# 54.9 GB in bf16 does not fit the 46 GB L40S: vLLM uses UVA CPU weight offload (exact, no
+# quantization); the lens env uses HF device_map with some blocks offloaded to CPU.
+hf_id: google/gemma-3-27b-it
+revision: 005ad3404e59d6023443cb575daa05336842228a
+dtype: bfloat16
+enable_thinking: false
+
+expected:
+  num_hidden_layers: 62
+  hidden_size: 5376
+  vocab_size: 262208
+  tie_word_embeddings: true
+
+# No think block; kept so code that reads these keys does not break.
+special_tokens:
+  think_start: "<start_of_turn>model"
+  think_end: "<end_of_turn>"
+
+# Engine overrides read by jmr.gen.generate.build_engine.
+vllm:
+  cpu_offload_gb: 22
+  enforce_eager: true
+  enable_prefix_caching: false
+  max_model_len: 4096
+  limit_mm_per_prompt: {image: 0}

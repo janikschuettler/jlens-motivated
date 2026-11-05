@@ -1,0 +1,14 @@
+# gemma27-silent, step 1: which Redux items does Gemma-3-27B-it know? 10 unhinted samples
+# per item, our home prompt format ("ours"), non-thinking (Gemma has no thinking mode).
+# Known = >= 9/10 correct (scripts/explore/w2_known.py --arm unhinted --setting A).
+# Decoding: Google's recommended Gemma settings (T 1.0, top-k 64, top-p 0.95).
+include: [blocks.yaml]
+name: gemma27_screen
+out_dir: data/explore/gemma27/screen
+base_seed: 0
+items: {source: redux, n: 420, seed: 11}
+defaults: {samples: 10, max_tokens: 1536, hint_target: hinted}
+decodings:
+  gemma: {temperature: 1.0, top_p: 0.95, top_k: 64, min_p: 0.0}
+arms:
+  - {name: unhinted, format: ours, hint: null, thinking: false, decoding: gemma}
