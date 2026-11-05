@@ -32,6 +32,8 @@ numbers:
 numbers_note: Within-group AUROC pools the 738 pairs; 95% intervals resample the 143 questions (2,000 resamples). Random-direction bands (100 random directions, same layer) reach 0.64 (Nguyen) and 0.67 (Hua).
 reports:
 - report.md
+- ../../design_probe_control.md
+figure: fig_probe_control_a.svg
 data:
 - data/pc_test_a.json
 - data/judge_check.json
