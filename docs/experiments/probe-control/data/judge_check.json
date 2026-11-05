@@ -1,0 +1,15 @@
+{
+ "summary": {
+  "n": 100,
+  "answered": 84,
+  "agree": 77,
+  "disagree": 7,
+  "regex_aware_judge_yes": 28,
+  "regex_aware_n": 34,
+  "regex_unaware_judge_yes": 1,
+  "regex_unaware_n": 50,
+  "usd": 0.0091,
+  "model": "google/gemini-2.5-flash-lite",
+  "sample": "50 regex-aware + 50 regex-unaware of the 1,336 runs (finished, seed 0); not representative of the base rate"
+ }
+}
