@@ -52,16 +52,18 @@ def readout(
     top_k: int,
     token_ids: Sequence[int] = (),
     chunk: int = 512,
+    dtype=np.float16,
 ) -> dict[str, np.ndarray]:
     """Top-k tokens and selected token log-probs at every position and layer.
 
     Returns top_ids int32 [L, T, k], top_logprobs fp16 [L, T, k] and
-    token_logprobs fp16 [L, T, len(token_ids)], layers in sorted order."""
+    token_logprobs fp16 [L, T, len(token_ids)], layers in sorted order.
+    dtype sets the stored log-prob precision (fp16 default; fp32 for validation)."""
     layers = sorted(resid)
     seq_len = resid[layers[0]].shape[0]
     top_ids = np.zeros((len(layers), seq_len, top_k), dtype=np.int32)
-    top_lp = np.zeros((len(layers), seq_len, top_k), dtype=np.float16)
-    sel_lp = np.zeros((len(layers), seq_len, len(token_ids)), dtype=np.float16)
+    top_lp = np.zeros((len(layers), seq_len, top_k), dtype=dtype)
+    sel_lp = np.zeros((len(layers), seq_len, len(token_ids)), dtype=dtype)
     select = torch.tensor(list(token_ids), dtype=torch.long)
     for li, layer in enumerate(layers):
         for start, lp in _logprob_chunks(lens_model, resid[layer], lens=lens, layer=layer, chunk=chunk):

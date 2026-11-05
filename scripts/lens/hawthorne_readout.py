@@ -167,9 +167,9 @@ def main():
         W = list(range(lo, hi))
         allpos = W + post
         full, _ = reader._forward(ids, [len(P) - 1])
-        lp_arr = np.zeros((len(LENSES), nL, len(allpos), K + 1), dtype=np.float16)
+        lp_arr = np.zeros((len(LENSES), nL, len(allpos), K + 1), dtype=np.float32)
         top_ids = np.zeros((len(LENSES), nL, len(W), k), dtype=np.int32)
-        top_lp = np.zeros((len(LENSES), nL, len(W), k), dtype=np.float16)
+        top_lp = np.zeros((len(LENSES), nL, len(W), k), dtype=np.float32)
         V = lens_model.unembed(full[reader.layers[0]][:1].float()).shape[-1]
         sum_lp = torch.zeros((len(LENSES), V), device=reader.device, dtype=torch.float64)
         sum_p = torch.zeros((len(LENSES), V), device=reader.device, dtype=torch.float64)
@@ -182,14 +182,14 @@ def main():
                         if lens_name == "jlens":
                             h = reader.lens.transport(h, layer)
                         lps = torch.log_softmax(lens_model.unembed(h).float(), dim=-1)
-                        lp_arr[si, li, start:start + len(sub), :K] = lps[:, tt].half().cpu().numpy()
-                        lp_arr[si, li, start:start + len(sub), K] = lps[:, ct].mean(-1).half().cpu().numpy()
+                        lp_arr[si, li, start:start + len(sub), :K] = lps[:, tt].float().cpu().numpy()
+                        lp_arr[si, li, start:start + len(sub), K] = lps[:, ct].mean(-1).float().cpu().numpy()
                         nw = max(0, min(len(sub), len(W) - start))  # window rows in this chunk
                         if nw:
                             w = lps[:nw]
                             v, ix = w.topk(k, dim=-1)
                             top_ids[si, li, start:start + nw] = ix.int().cpu().numpy()
-                            top_lp[si, li, start:start + nw] = v.half().cpu().numpy()
+                            top_lp[si, li, start:start + nw] = v.float().cpu().numpy()
                             sum_lp[si] += w.sum(0).double()
                             sum_p[si] += w.exp().sum(0).double()
         n = len(W) * nL
@@ -205,12 +205,15 @@ def main():
             v = {}
             for si, name in enumerate(LENSES):
                 ref = single.readout(lens_model, {l: full[l] for l in layers}, lens=lens if name == "jlens" else None,
-                                     top_k=k, token_ids=[t["id"] for t in tracked], chunk=reader.chunk)
+                                     top_k=k, token_ids=[t["id"] for t in tracked], chunk=reader.chunk,
+                                     dtype=np.float32)
                 rr = ref["token_logprobs"][:, allpos].astype(np.float32)
-                v[name] = float(np.abs(rr - lp_arr[si, :, :, :K].astype(np.float32)).max())
+                dd = np.abs(rr - lp_arr[si, :, :, :K].astype(np.float32))
+                v[name] = float(dd.max())
+                v[name + "_ref_at_max"] = float(rr.flat[dd.argmax()])
             vals.append(v)
             print("validation", r["run_id"], v, flush=True)
-            if max(v.values()) > a.val_tol:
+            if max(v[n] for n in LENSES) > a.val_tol:
                 raise SystemExit(f"readout disagrees with the single-run readout: {v} (rule 1)")
         del full
         fname = hashlib.sha1(r["run_id"].encode()).hexdigest()[:20] + ".npz"
