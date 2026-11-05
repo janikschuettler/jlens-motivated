@@ -62,7 +62,8 @@ def job(group, src, dtype, alpha, k_rand, priority, sample=0, letter=None, sign=
             "priority": priority, "exp_len": src["_exp_len"], "seed": zlib.crc32(jid.encode())}
 
 
-def build(name: str, out: Path, alphas: tuple[float, float] | None):
+def build(name: str, out: Path, alphas: tuple[float, float] | None, groups: list[str] | None = None,
+          rerun: bool = False):
     pool = [json.loads(l) for l in open(steer.POOL_FILE)]
     known = steer.known_ids(pool)
     jobs = []
@@ -79,6 +80,8 @@ def build(name: str, out: Path, alphas: tuple[float, float] | None):
         lo, hi = alphas
         items = [json.loads(l)["id"] for l in open(steer.ITEMS_FILE)]
         for g, arm in steer.GEN_ARMS.items():
+            if groups and g not in groups:
+                continue
             d = steer.SOURCES[g][0]
             srcs = source_prompts(d, arm, items)
             if len(srcs) != len(items):
@@ -90,10 +93,10 @@ def build(name: str, out: Path, alphas: tuple[float, float] | None):
                     pr = 0 if sample == 0 else 2
                     jobs.append(job(g, s, "none", 0.0, kr, pr, sample))
                     for t in steer.DIR_TYPES:
-                        for a, p_ in ((hi, pr), (lo, pr + 1)):
+                        for a, p_ in (((lo, pr),) if rerun else ((hi, pr), (lo, pr + 1))):
                             jobs.append(job(g, s, t, a, kr, p_, sample, letter if t != "random" else None,
                                             sign if t != "random" else 1))
-    path = out / f"jobs_{name}.jsonl"
+    path = out / (f"jobs_{name}_rerun.jsonl" if rerun else f"jobs_{name}.jsonl")
     path.write_text("".join(json.dumps(j) + "\n" for j in jobs))
     print(f"{len(jobs)} jobs → {path}")
 
@@ -112,7 +115,7 @@ def run(jobs_path: Path, dirs_path: str, out: Path, max_priority: int, device: s
     jobs = [j for j in jobs if j["priority"] <= max_priority]
     if limit:
         jobs = jobs[:limit]
-    name = jobs_path.stem.replace("jobs_", "")
+    name = jobs_path.stem.replace("jobs_", "")  # e.g. main_rerun
     res_path = out / f"runs_{name}.jsonl"
     done = set()
     if res_path.exists():
@@ -284,6 +287,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--build", choices=["pilot", "main"])
     ap.add_argument("--alphas", nargs=2, type=float, help="alpha_lo alpha_hi (main build)")
+    ap.add_argument("--groups", nargs="*", help="main build: only these groups")
+    ap.add_argument("--rerun", action="store_true", help="main build: strength alpha_lo only, one priority per sample (cap re-run)")
     ap.add_argument("--run")
     ap.add_argument("--dirs", default="data/steer/directions.pt")
     ap.add_argument("--out", default="data/steer/gen")
@@ -297,7 +302,7 @@ def main():
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     if a.build:
-        build(a.build, out, tuple(a.alphas) if a.alphas else None)
+        build(a.build, out, tuple(a.alphas) if a.alphas else None, a.groups, a.rerun)
     if a.run:
         run(Path(a.run), a.dirs, out, a.max_priority, a.device, a.max_new, a.limit, tuple(a.smoke_extra_eos))
 

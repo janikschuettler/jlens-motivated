@@ -278,6 +278,8 @@ def main():
     ap.add_argument("--gen", default="data/steer/gen")
     ap.add_argument("--out", default="data/steer/analysis.json")
     ap.add_argument("--docs-out", default=None)
+    ap.add_argument("--names", nargs="*", default=["pilot", "main"], help="runs_<name>.jsonl files to analyse")
+    ap.add_argument("--cap", type=int, default=2048, help="cap for the originals comparison")
     a = ap.parse_args()
     res = {"model": config.load("model")["revision"]}
     meta_p = Path("data/steer/directions_meta.json")
@@ -285,20 +287,20 @@ def main():
         meta = json.loads(meta_p.read_text())
         res["directions"] = {k: meta[k] for k in ("r", "cos", "read_acc", "probe_cv_item_acc", "n_probe_runs",
                                                   "n_probe_items", "norm_convention")}
-    if (Path(a.answer) / "results.jsonl").exists():
+    if a.names == ["pilot", "main"] and (Path(a.answer) / "results.jsonl").exists():
         res["part1"] = part1(Path(a.answer))
-    if (Path(a.answer) / "results_other.jsonl").exists():
+    if a.names == ["pilot", "main"] and (Path(a.answer) / "results_other.jsonl").exists():
         res["part1_other"] = part1_other(Path(a.answer))
     options = {}
     for l in open(steer.POOL_FILE):
         r = json.loads(l)
         options[r["id"]] = r
     g = Path(a.gen)
-    for name in ("pilot", "main"):
+    for name in a.names:
         p = g / f"runs_{name}.jsonl"
         if p.exists():
             rows = label_gen([json.loads(l) for l in open(p)], options)
-            res[f"part2_{name}"] = part2(rows, name)
+            res["part2_main" if name == "main_rerun" else f"part2_{name}"] = part2(rows, name)
             Path(a.out).with_name(f"labels_{name}.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
             if name == "pilot":
                 pil = {}
@@ -309,7 +311,7 @@ def main():
                                    "finished": 1 - sum(r["rep8"] > 0.5 for r in xs) / len(xs),
                                    "natural_finish": sum(r["natural"] is not None for r in xs) / len(xs), "n": len(xs)}
                 res["pilot_rule"] = {"per_alpha": pil, "alpha_lo_hi": steer.pilot_alpha_rule(pil) if pil else None}
-    res["originals_8192"] = originals(2048)
+    res["originals_8192"] = originals(a.cap)
     res["headline"] = headline(res)
     Path(a.out).write_text(json.dumps(res, indent=1, default=str))
     print("wrote", a.out)
