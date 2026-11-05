@@ -1,0 +1,607 @@
+{
+ "n_pairs": 738,
+ "n_questions": 143,
+ "n_groups": 225,
+ "layers": {
+  "nguyen": 2,
+  "hua": 14
+ },
+ "build": {
+  "nguyen": {
+   "chosen_layer": 2,
+   "auroc_select_half": 0.719,
+   "auroc_heldout_half": 0.6966,
+   "passes_0.70": false
+  },
+  "hua": {
+   "chosen_layer": 14,
+   "auroc_select_half": 0.7659,
+   "auroc_heldout_half": 0.7928,
+   "passes_0.70": true
+  }
+ },
+ "as_published_prompt_level": {
+  "nguyen": {
+   "auroc": 0.5088,
+   "max_within_group_spread": 0.0025211572647094727
+  },
+  "hua": {
+   "auroc": 0.4817,
+   "max_within_group_spread": 0.0483475923538208
+  }
+ },
+ "primary_window_mean": {
+  "nguyen": {
+   "auroc": 0.6274,
+   "ci95": [
+    0.5857,
+    0.6671
+   ],
+   "ci90": [
+    0.5917,
+    0.6612
+   ],
+   "verdict": "signal (AUROC >= 0.58, interval excludes 0.5)",
+   "random_directions_auroc_band_2.5_97.5": [
+    0.3661,
+    0.638
+   ],
+   "random_directions_sd": 0.0707,
+   "above_random_band": false
+  },
+  "hua": {
+   "auroc": 0.5759,
+   "ci95": [
+    0.5255,
+    0.6238
+   ],
+   "ci90": [
+    0.5337,
+    0.6167
+   ],
+   "verdict": "inconclusive",
+   "random_directions_auroc_band_2.5_97.5": [
+    0.3603,
+    0.6682
+   ],
+   "random_directions_sd": 0.0902,
+   "above_random_band": false
+  }
+ },
+ "secondary": {
+  "last_position": {
+   "nguyen": {
+    "auroc": 0.5312,
+    "ci95": [
+     0.4871,
+     0.5729
+    ],
+    "ci90": [
+     0.4951,
+     0.5654
+    ]
+   },
+   "hua": {
+    "auroc": 0.4804,
+    "ci95": [
+     0.439,
+     0.5249
+    ],
+    "ci90": [
+     0.4447,
+     0.5177
+    ]
+   }
+  },
+  "window_ending_64_earlier": {
+   "nguyen": {
+    "auroc": 0.5949,
+    "ci95": [
+     0.5533,
+     0.6346
+    ],
+    "ci90": [
+     0.56,
+     0.6278
+    ]
+   },
+   "hua": {
+    "auroc": 0.5325,
+    "ci95": [
+     0.4852,
+     0.5807
+    ],
+    "ci90": [
+     0.4921,
+     0.572
+    ]
+   }
+  },
+  "first_25pct": {
+   "nguyen": {
+    "auroc": 0.5454,
+    "ci95": [
+     0.4973,
+     0.5929
+    ],
+    "ci90": [
+     0.5054,
+     0.5851
+    ]
+   },
+   "hua": {
+    "auroc": 0.4438,
+    "ci95": [
+     0.4016,
+     0.4864
+    ],
+    "ci90": [
+     0.4081,
+     0.4781
+    ]
+   }
+  },
+  "excluding_capped_pairs": {
+   "nguyen": 0.5444,
+   "hua": 0.5957,
+   "window_length_alone": 0.5
+  }
+ },
+ "by_layer_window_mean": {
+  "nguyen": [
+   0.0,
+   0.58,
+   0.627,
+   0.644,
+   0.668,
+   0.599,
+   0.592,
+   0.603,
+   0.618,
+   0.466,
+   0.457,
+   0.461,
+   0.457,
+   0.45,
+   0.378,
+   0.408,
+   0.343,
+   0.378,
+   0.375,
+   0.388,
+   0.385,
+   0.394,
+   0.39,
+   0.375,
+   0.332,
+   0.385,
+   0.408,
+   0.463,
+   0.588,
+   0.58,
+   0.595,
+   0.611,
+   0.496,
+   0.413,
+   0.659,
+   0.678,
+   0.703,
+   0.695,
+   0.641,
+   0.512
+  ],
+  "hua": [
+   0.0,
+   0.364,
+   0.313,
+   0.325,
+   0.363,
+   0.405,
+   0.477,
+   0.434,
+   0.474,
+   0.542,
+   0.568,
+   0.523,
+   0.566,
+   0.608,
+   0.576,
+   0.638,
+   0.621,
+   0.622,
+   0.664,
+   0.671,
+   0.641,
+   0.631,
+   0.66,
+   0.675,
+   0.683,
+   0.678,
+   0.671,
+   0.699,
+   0.696,
+   0.694,
+   0.684,
+   0.676,
+   0.65,
+   0.644,
+   0.656,
+   0.645,
+   0.657,
+   0.649,
+   0.675,
+   0.663
+  ]
+ },
+ "window_length_alone": {
+  "auroc": 0.6565,
+  "ci95": [
+   0.6337,
+   0.68
+  ],
+  "ci90": [
+   0.637,
+   0.6758
+  ]
+ },
+ "pairs_with_sibling_window_shorter": 231,
+ "exploratory_uncapped_pairs": {
+  "n_pairs": 507,
+  "nguyen": {
+   "auroc": 0.5444,
+   "ci95": [
+    0.4908,
+    0.5952
+   ],
+   "ci90": [
+    0.5,
+    0.5885
+   ]
+  },
+  "hua": {
+   "auroc": 0.5957,
+   "ci95": [
+    0.5416,
+    0.648
+   ],
+   "ci90": [
+    0.55,
+    0.6402
+   ]
+  },
+  "nguyen_random_band": [
+   0.3796,
+   0.6345
+  ],
+  "hua_random_band": [
+   0.3795,
+   0.6668
+  ],
+  "window_length_alone": {
+   "auroc": 0.5,
+   "ci95": [
+    0.5,
+    0.5
+   ],
+   "ci90": [
+    0.5,
+    0.5
+   ]
+  },
+  "jlens": {
+   "auroc": 0.6568,
+   "ci95": [
+    0.6057,
+    0.7102
+   ],
+   "ci90": [
+    0.6134,
+    0.7028
+   ]
+  },
+  "logit": {
+   "auroc": 0.6686,
+   "ci95": [
+    0.6206,
+    0.718
+   ],
+   "ci90": [
+    0.6276,
+    0.7097
+   ]
+  }
+ },
+ "lens": {
+  "jlens": {
+   "auroc": 0.6667,
+   "ci95": [
+    0.62,
+    0.7136
+   ],
+   "ci90": [
+    0.6265,
+    0.7061
+   ],
+   "verdict": "signal (AUROC >= 0.58, interval excludes 0.5)"
+  },
+  "logit": {
+   "auroc": 0.6829,
+   "ci95": [
+    0.6408,
+    0.7234
+   ],
+   "ci90": [
+    0.6483,
+    0.717
+   ],
+   "verdict": "signal (AUROC >= 0.58, interval excludes 0.5)"
+  },
+  "jlens_minus_nguyen": {
+   "diff": 0.0393,
+   "ci95": [
+    -0.0145,
+    0.0932
+   ]
+  },
+  "jlens_minus_hua": {
+   "diff": 0.0908,
+   "ci95": [
+    0.0448,
+    0.1387
+   ]
+  },
+  "jlens_minus_logit": {
+   "diff": -0.0163,
+   "ci95": [
+    -0.0444,
+    0.0118
+   ]
+  },
+  "layers": [
+   16,
+   18,
+   20,
+   22,
+   24,
+   26,
+   28,
+   30,
+   32,
+   34
+  ]
+ },
+ "exploratory_length_matched": {
+  "n_pairs": 738,
+  "note": "exploratory, added after seeing that window length alone scores 0.66; not in the pre-registration",
+  "nguyen": {
+   "auroc": 0.5691,
+   "ci95": [
+    0.528,
+    0.6085
+   ],
+   "ci90": [
+    0.5333,
+    0.6024
+   ],
+   "random_directions_band_2.5_97.5": [
+    0.4047,
+    0.5921
+   ],
+   "random_directions_sd": 0.0511
+  },
+  "hua": {
+   "auroc": 0.5596,
+   "ci95": [
+    0.5102,
+    0.6064
+   ],
+   "ci90": [
+    0.519,
+    0.5982
+   ],
+   "random_directions_band_2.5_97.5": [
+    0.4134,
+    0.6138
+   ],
+   "random_directions_sd": 0.0596
+  },
+  "jlens": {
+   "auroc": 0.6098,
+   "ci95": [
+    0.5629,
+    0.6572
+   ],
+   "ci90": [
+    0.5695,
+    0.65
+   ]
+  },
+  "logit": {
+   "auroc": 0.607,
+   "ci95": [
+    0.5624,
+    0.6527
+   ],
+   "ci90": [
+    0.5685,
+    0.6463
+   ]
+  }
+ },
+ "exploratory_length_residualised": {
+  "nguyen": {
+   "auroc": 0.5596,
+   "ci95": [
+    0.5185,
+    0.5984
+   ],
+   "ci90": [
+    0.5242,
+    0.5931
+   ],
+   "random_directions_band_2.5_97.5": [
+    0.4023,
+    0.6098
+   ]
+  },
+  "hua": {
+   "auroc": 0.5528,
+   "ci95": [
+    0.5034,
+    0.601
+   ],
+   "ci90": [
+    0.5109,
+    0.5916
+   ],
+   "random_directions_band_2.5_97.5": [
+    0.4023,
+    0.6269
+   ]
+  },
+  "jlens": {
+   "auroc": 0.6328,
+   "ci95": [
+    0.5845,
+    0.6815
+   ],
+   "ci90": [
+    0.5913,
+    0.6726
+   ]
+  },
+  "logit": {
+   "auroc": 0.6382,
+   "ci95": [
+    0.5941,
+    0.6827
+   ],
+   "ci90": [
+    0.6003,
+    0.6748
+   ]
+  }
+ },
+ "text": {
+  "tfidf_trained_on_task_labels": {
+   "auroc": 0.8266,
+   "ci95": [
+    0.7939,
+    0.8596
+   ],
+   "ci90": [
+    0.7986,
+    0.8539
+   ]
+  },
+  "tfidf_task_trained_length_residualised_EXPLORATORY": {
+   "auroc": 0.7873,
+   "ci95": [
+    0.7523,
+    0.8223
+   ],
+   "ci90": [
+    0.7575,
+    0.8172
+   ]
+  },
+  "tfidf_task_trained_length_matched_EXPLORATORY": {
+   "auroc": 0.7561,
+   "ci95": [
+    0.7185,
+    0.7956
+   ],
+   "ci90": [
+    0.7245,
+    0.7878
+   ]
+  },
+  "tfidf_trained_on_benchmark_vs_user_prompts": {
+   "auroc": 0.3821,
+   "ci95": [
+    0.3416,
+    0.4236
+   ],
+   "ci90": [
+    0.3493,
+    0.4173
+   ]
+  },
+  "jlens_minus_text_task_trained": {
+   "diff": -0.1599,
+   "ci95": [
+    -0.2067,
+    -0.1122
+   ]
+  },
+  "nguyen_minus_text_task_trained": {
+   "diff": -0.1992,
+   "ci95": [
+    -0.2448,
+    -0.1529
+   ]
+  },
+  "hua_minus_text_task_trained": {
+   "diff": -0.2507,
+   "ci95": [
+    -0.3003,
+    -0.2021
+   ]
+  },
+  "embedding_classifier_trained_on_task_labels": {
+   "auroc": 0.7805,
+   "ci95": [
+    0.7413,
+    0.8162
+   ],
+   "ci90": [
+    0.748,
+    0.8106
+   ]
+  },
+  "embedding_task_trained_length_residualised_EXPLORATORY": {
+   "auroc": 0.7398,
+   "ci95": [
+    0.6978,
+    0.7794
+   ],
+   "ci90": [
+    0.7037,
+    0.7727
+   ]
+  },
+  "jlens_minus_embedding": {
+   "diff": -0.1138,
+   "ci95": [
+    -0.1602,
+    -0.0655
+   ]
+  },
+  "nguyen_minus_embedding": {
+   "diff": -0.1531,
+   "ci95": [
+    -0.2035,
+    -0.1026
+   ]
+  },
+  "hua_minus_embedding": {
+   "diff": -0.2046,
+   "ci95": [
+    -0.2574,
+    -0.1529
+   ]
+  },
+  "supervised_ceiling_by_sup_layer_index": {
+   "0": 0.8157,
+   "1": 0.7981,
+   "2": 0.8198,
+   "3": 0.8076,
+   "4": 0.8117,
+   "5": 0.8157,
+   "6": 0.8076,
+   "7": 0.8008,
+   "8": 0.8076,
+   "9": 0.79
+  }
+ }
+}
