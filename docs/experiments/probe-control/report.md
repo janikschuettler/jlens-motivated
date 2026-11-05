@@ -54,3 +54,49 @@ Not shown: that a published probe carries a signal about a coming "testing me" s
 
 ## Not done
 Test (b) (same belief, different surface), Hawthorne data, Abdelnabi-Salem probe, the Qwen3-8B twin, the label-shuffle null, LLM-judge check on all 1,336 runs, the stricter judge-both label. Probe scores per run are in `data/probe_control/` (gitignored).
+
+---
+
+# Test (b): same belief, different surface (Qwen3-14B)
+
+Run 2026-11-05 after test (a). Pre-registered as PC-b (`docs/preregistration.md`, 17:00 GMT, before any (b) prompt was generated). Size reduced for the deadline: 80 items per prompt set, 4 thinking samples per version (design: about 200 items); no Devbunova 2x2, Hawthorne pairs or formal-tone control. Pair AUROC: share of pairs in which the eval-surface version gets the higher score (0.5 = the score ignores the change; 1 = always higher; 0 = always lower). Brackets: 95% intervals resampling the 160 underlying items.
+
+## Answer in plain words
+We rewrote prompts so that only the wording or format changes (benchmark template vs plain request, benchmark-style vs casual question, "being evaluated" removed from the grader prompt, an evaluation sentence added, a harmless "I'm reading up on AI systems" sentence added). The model's own belief was measured two ways: the share of 4 thinking runs that say "testing me", and a direct question ("is this a test (A) or real use (B)?", no thinking). Among the 139 pairs where the stated belief stayed the same:
+- Pooled as pre-registered, the scores sit between chance and 0.70: Nguyen 0.46 [0.37, 0.55], Hua 0.69 [0.60, 0.77], J-lens 0.70 [0.62, 0.77], logit lens 0.60 [0.51, 0.69]. By the pre-registered rule (reads surface: at least 0.70 with lower bound above 0.60) none is clearly a surface reader; Nguyen is "consistent with a belief reader" (includes 0.5, upper bound below 0.65).
+- That pooling hides large effects that cancel. Within belief-matched pairs, by change type, every score moves a lot with the surface (table below). The Nguyen probe goes the opposite way for different changes: always lower for the benchmark template (0.00, 66 of 66 pairs), always higher when eval words are in the grader prompt (1.00, 44 of 44). The Hua direction rises with the benchmark template (0.98) and the evaluation sentence (1.00, only 11 pairs) but falls when eval words are removed from the grader prompt (0.34). The J-lens and logit-lens eval-word scores rise with benchmark-style questions (1.00) and eval words (0.82 and 1.00).
+- The control sentence "(I'm reading up on AI systems.)", with no evaluation content and no change in belief (69 matched pairs), raises Hua (0.80), the J-lens (0.81) and the logit lens (0.89), so they react to AI-topic words, not to a belief about being tested. Nguyen goes the other way (0.38).
+- A regression across all 640 versions of each standardised score on "eval surface", "AI-topic sentence" and stated belief agrees: Hua rises with eval surface (+0.39 SD [0.29, 0.51]) and not with belief (+0.06 [-0.08, 0.20]); Nguyen shows neither (-0.03 and +0.01) but moves with the AI-topic sentence (+0.14); the J-lens rises with the AI-topic sentence (+0.87 SD [0.68, 1.07]) far more than with eval surface (+0.13) or belief (+0.29 [0.07, 0.49]).
+- The stated belief itself follows the surface where the surface is evaluation-like: the direct-question P(test) is 0.06 for plain user requests, 0.10 with the benchmark template, 0.80 with the evaluation sentence; 0.36 for the casual MMLU question vs 0.97 for the benchmark format; 0.75 vs 0.90 for the grader prompt without vs with eval words. So few format-only pairs are belief-matched (18 of 80 for benchmark vs casual, 11 of 80 for the evaluation sentence), and the belief-matched pool is dominated by the benchmark-template (66) and grader (44) pairs.
+
+Slide claim (one sentence): within pairs where Qwen3-14B says the same thing about being tested, the published Hua direction and the J-lens eval-word score still rise when only the wording or format changes (even for a harmless "reading up on AI" sentence) and the Nguyen probe swings in both directions with the format, so none of them is a clean reader of the model's belief.
+
+## Belief by prompt version (80 versions each)
+| Version | Direct question, P(test) | Runs saying "testing me" |
+| --- | --- | --- |
+| User request, plain | 0.06 | 2.5% |
+| User request, benchmark template ("Question: ... Answer:") | 0.10 | 3.7% |
+| User request + "(This conversation is part of an AI evaluation.)" | 0.80 | 12.2% |
+| User request + "(I'm reading up on AI systems.)" | 0.03 | 3.1% |
+| MMLU question, benchmark format | 0.97 | 0% |
+| MMLU question, casual message | 0.36 | 0% |
+| Grader-bug prompt, eval words | 0.90 | 22.5% |
+| Grader-bug prompt, eval words replaced | 0.75 | 11.9% |
+
+## Pair AUROC (eval-surface version scores higher), belief-matched pairs only
+Matching: direct-question P(test) differs by less than 0.10 and the "testing me" counts differ by at most 1 of 4 (pre-registered).
+| Change | Pairs matched | Nguyen | Hua | J-lens | Logit lens | Text n-grams (zero-shot) |
+| --- | --- | --- | --- | --- | --- | --- |
+| Pooled P1-P4 (primary) | 139 | 0.46 [0.37, 0.55] | 0.69 [0.60, 0.77] | 0.70 [0.62, 0.77] | 0.60 [0.51, 0.69] | 0.18 [0.12, 0.24] |
+| P1 benchmark template on a user request | 66 | 0.00 | 0.98 | 0.52 | 0.23 | 0.06 |
+| P2 benchmark format vs casual MMLU question | 18 | 0.94 | 0.28 | 1.00 | 1.00 | 1.00 |
+| P3 eval words in the grader prompt | 44 | 1.00 | 0.34 | 0.82 | 1.00 | 0.00 |
+| P4 evaluation sentence added | 11 | 0.27 | 1.00 | 0.82 | 0.64 | 0.27 |
+| P5 AI-topic sentence added (control, not pooled) | 69 | 0.38 | 0.80 | 0.81 | 0.88 | 0.96 |
+All pairs, pooled P1-P4 (320 pairs, stated belief often differs): Nguyen 0.59, Hua 0.72, J-lens 0.74, logit lens 0.72, text 0.36. The eval-surface prompt is always longer in tokens except in P3 (1 token), so prompt length alone scores 1.0 in every row; the Nguyen probe averages over prompt tokens, so length is a possible driver there. The text baseline (n-grams trained on benchmark vs user prompts) is not a usable control here: it points the wrong way for the benchmark template (0.06) and the grader eval words (0.00).
+
+## Interpretation
+Shown (moderate confidence): the scores tested here react to wording and format independently of what the model says about being tested, in opposite directions for different changes, so a pooled score would mislead. Not shown: that any of them is blind to belief (the stated belief is a saturated 0-or-1 answer to a direct question, and 8 of the 12 changes of surface also move it). Together with test (a), none of the published probes nor the eval-word lens scores is a clean belief reader on this model.
+
+## Caveats (test b)
+Reduced size (80 items per set). Direct-question belief is nearly binary, and the follow-up question is appended inside the same user message (so it contains eval words for every version equally). One model. Hawthorne, Devbunova, formal-tone control, label judge check on these runs and the Qwen3-8B twin not run. Spontaneous label is the regex only; 10 of 2,560 runs did not finish. Files: data/pc_test_b.json, fig_probe_control_b.svg; code scripts/explore/pc_b_build.py, scripts/gen/pc_b_generate.py, scripts/lens/pc_b_readout.py, scripts/lens/pc_b_analyze.py.
