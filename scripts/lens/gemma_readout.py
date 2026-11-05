@@ -270,7 +270,7 @@ def main():
             res_pos = [loc["pre_answer"], loc["opt_end"][r["correct_letter"]]]
             if r.get("hint_letter"):
                 res_pos.append(loc["opt_end"][r["hint_letter"]])
-            res = np.stack([acts[l][bi, :n][res_pos].float().cpu().numpy().astype(np.float16) for l in ws])
+            res = np.stack([acts[l][bi, :n][res_pos].float().cpu().numpy() for l in ws])
             np.savez_compressed(out / f"{len(results):05d}.npz", tl=tl, top_i=top_i, top_v=top_v, resid=res,
                                 meta=json.dumps(rec))
             results.append(r["run_id"])
@@ -283,9 +283,15 @@ def main():
                 pos = [loc0["pre_answer"], loc0["last_prompt"]]
                 tl_b, _, _ = readout_positions(lm, J, ws, acts, 0, pos, [pos[0]], tsel)
                 tl_s, _, _ = readout_positions(lm, J, ws, acts1, 0, pos, [pos[0]], tsel)
-                d = float(np.abs(tl_b.astype(np.float32) - tl_s.astype(np.float32)).max())
-                print(f"batch vs single run, max |dlogp| over tracked tokens/layers/lenses: {d:.4f}", flush=True)
-                (out / "batch_vs_single.json").write_text(json.dumps({"run_id": r0["run_id"], "max_abs_diff": d, "batch_size": len(batch)}))
+                db = np.abs(tl_b.astype(np.float32) - tl_s.astype(np.float32))
+                lb = np.logaddexp(tl_b[..., 0::2].astype(np.float32), tl_b[..., 1::2].astype(np.float32))
+                ls = np.logaddexp(tl_s[..., 0::2].astype(np.float32), tl_s[..., 1::2].astype(np.float32))
+                dl = np.abs(lb - ls)
+                d = {"median_abs_tracked": float(np.median(db)), "p99_abs_tracked": float(np.percentile(db, 99)),
+                     "max_abs_tracked": float(db.max()), "median_abs_letter": float(np.median(dl)),
+                     "max_abs_letter": float(dl.max())}
+                print(f"batch vs single run: {d}", flush=True)
+                (out / "batch_vs_single.json").write_text(json.dumps({"run_id": r0["run_id"], **d, "batch_size": len(batch)}))
         print(f"{time.strftime('%H:%M:%S')} {b0 + len(batch)}/{len(recs)} runs, {time.time() - t0:.0f}s", flush=True)
         if a.checks_only:
             break
