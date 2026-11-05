@@ -46,6 +46,7 @@ data:
 - data/byeye_local_answer15.json
 - data/judge_vs_byeye_local45.json
 - data/top25_black_square_silent30.json
+- data/own_output.json
 related:
 - wording-cross-model
 - subtle-cues-cross-model
@@ -80,6 +81,23 @@ Numbers above and in `report.md`; figure `fig_gemma_silent.svg`.
 ## Interpretation
 
 The "silent" behaviour is real and large in Gemma, so Gemma is a better test bed than Qwen3-8B for this question. The lens result is the same as on Qwen: where the correct answer is visible it is visible to the logit lens too, and it is visible only where the lens approaches the model's output. We found no J-lens-specific detection of silent following (preliminary: one model, 32 items with silent switches, two cue types, an unmatched comparison between sources).
+
+## Own-output control (exploratory, addendum G1.4 in the preregistration, written before computing)
+
+Does the model's own final next-token distribution already rank the correct letter above the other unchosen wrong letters, so that the late-block lens result is just the output's runner-up? Same 444 runs, batch 1, real model logits (final norm + LM head; Gemma-3 has no logit soft-capping), score S as in G1, item-bootstrap 95% CIs (silent: 124 runs, 32 items; open: 103 runs, 39 items). Validation: own log-prob of the sampled answer token vs vLLM, mean |diff| 0.0045 (median 0, max 0.73; tolerance 0.1 passes).
+
+| Source of the readout | Silent switches, margin of correct letter over other wrong letters | Open switches | Silent vs open AUROC (0.5 = chance) |
+| --- | --- | --- | --- |
+| Model's own output, answer position | 4.61 [2.77, 6.86] | 5.70 [4.04, 7.50] | 0.43 [0.32, 0.54] |
+| Own output, 1 token earlier | 1.57 [0.96, 2.25] | 1.79 [1.26, 2.34] | 0.45 [0.35, 0.56] |
+| Own output, 8 tokens earlier | 0.29 [-0.44, 1.06] | 0.95 [0.26, 1.71] | 0.49 [0.41, 0.56] |
+| Own output, 16 tokens earlier | 0.07 [-0.65, 0.86] | 0.69 [0.04, 1.33] | 0.45 [0.36, 0.54] |
+| J-lens, late blocks 46-54 (answer position) | 2.93 [1.69, 4.18] | not computed per depth | 0.43 (all blocks) |
+| Logit lens, late blocks 46-54 | 2.25 [1.50, 3.03] | not computed per depth | 0.49 (all blocks) |
+
+How to read: bigger means the correct letter is more probable than the average unchosen wrong letter (natural-log units). At the answer position the correct letter is the highest of the three unchosen letters in 73% [60, 86] of silent switches (chance 33%).
+
+Result: yes. The model's own output shows the same pattern with a larger margin (4.6 vs 2.9), the same positive margin in open switches, and the same chance-level silent-vs-open AUROC; further back (8 and 16 tokens) the output shows nothing, like the lens in mid-depth blocks. Interpretation: the late-block lens "pass" in G1 is the output's runner-up, readable without any lens; it is not evidence of a hidden representation. Fairly sure (one model, 32 items, exploratory). Code: `scripts/lens/gemma_own_output.py`, `gemma_own_output_analyze.py`; data `data/own_output.json`.
 
 ## Caveats
 
