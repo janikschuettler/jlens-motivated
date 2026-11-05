@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="408" font-family="sans-serif" font-size="12"><rect width="720" height="408" fill="white"/>
+<text x="10" y="22" font-size="14" font-weight="bold">Qwen3-14B test awareness: within-prompt AUROC by label type</text>
+<line x1="485.0" x2="485.0" y1="38" y2="368" stroke="#999" stroke-dasharray="4"/>
+<text x="292" y="64" text-anchor="end">keyword labels (TA14-1): J-lens</text>
+<line x1="527.6053697212046" x2="578.08266561048" y1="60" y2="60" stroke="#c0392b" stroke-width="2"/>
+<circle cx="552.6882098114975" cy="60" r="4.5" fill="#c0392b"/>
+<text x="584.08266561048" y="64" fill="#333">0.61</text>
+<text x="292" y="88" text-anchor="end">keyword labels (TA14-1): Logit lens</text>
+<line x1="541.7708939388167" x2="589.5544841966505" y1="84" y2="84" stroke="#2471a3" stroke-width="2"/>
+<circle cx="565.4677438239082" cy="84" r="4.5" fill="#2471a3"/>
+<text x="595.5544841966505" y="88" fill="#333">0.63</text>
+<text x="292" y="112" text-anchor="end">keyword labels (TA14-1): Text eval-word rate</text>
+<line x1="542.2191576379179" x2="577.9450700215791" y1="108" y2="108" stroke="#27ae60" stroke-width="2"/>
+<circle cx="559.9443859032899" cy="108" r="4.5" fill="#27ae60"/>
+<text x="583.9450700215791" y="112" fill="#333">0.62</text>
+<text x="292" y="136" text-anchor="end">keyword labels (TA14-1): Window length</text>
+<line x1="505.3725383684341" x2="521.8727946478975" y1="132" y2="132" stroke="#7f8c8d" stroke-width="2"/>
+<circle cx="513.6998009600749" cy="132" r="4.5" fill="#7f8c8d"/>
+<text x="527.8727946478975" y="136" fill="#333">0.55</text>
+<text x="292" y="160" text-anchor="end">judge Yes vs No (strict): J-lens</text>
+<line x1="429.2559598265474" x2="567.7355142599044" y1="156" y2="156" stroke="#c0392b" stroke-width="2"/>
+<circle cx="497.33333333333326" cy="156" r="4.5" fill="#c0392b"/>
+<text x="573.7355142599044" y="160" fill="#333">0.52</text>
+<text x="292" y="184" text-anchor="end">judge Yes vs No (strict): Logit lens</text>
+<line x1="457.70277127244333" x2="595.0348389355742" y1="180" y2="180" stroke="#2471a3" stroke-width="2"/>
+<circle cx="526.4848484848484" cy="180" r="4.5" fill="#2471a3"/>
+<text x="601.0348389355742" y="184" fill="#333">0.57</text>
+<text x="292" y="208" text-anchor="end">judge Yes vs No (strict): Text eval-word rate</text>
+<line x1="519.5736958661417" x2="590.2644296949147" y1="204" y2="204" stroke="#27ae60" stroke-width="2"/>
+<circle cx="552.2727272727273" cy="204" r="4.5" fill="#27ae60"/>
+<text x="596.2644296949147" y="208" fill="#333">0.61</text>
+<text x="292" y="232" text-anchor="end">judge Yes vs No (strict): Window length</text>
+<line x1="331.40924329501917" x2="447.9160306328628" y1="228" y2="228" stroke="#7f8c8d" stroke-width="2"/>
+<circle cx="389.6969696969697" cy="228" r="4.5" fill="#7f8c8d"/>
+<text x="453.9160306328628" y="232" fill="#333">0.35</text>
+<text x="292" y="256" text-anchor="end">judge Yes/Maybe vs No: J-lens</text>
+<line x1="459.22535146467794" x2="550.411013116237" y1="252" y2="252" stroke="#c0392b" stroke-width="2"/>
+<circle cx="505.6210191082802" cy="252" r="4.5" fill="#c0392b"/>
+<text x="556.411013116237" y="256" fill="#333">0.53</text>
+<text x="292" y="280" text-anchor="end">judge Yes/Maybe vs No: Logit lens</text>
+<line x1="487.50188929925275" x2="582.749421000284" y1="276" y2="276" stroke="#2471a3" stroke-width="2"/>
+<circle cx="536.0615711252653" cy="276" r="4.5" fill="#2471a3"/>
+<text x="588.749421000284" y="280" fill="#333">0.58</text>
+<text x="292" y="304" text-anchor="end">judge Yes/Maybe vs No: Text eval-word rate</text>
+<line x1="519.1363190222897" x2="576.0799295774647" y1="300" y2="300" stroke="#27ae60" stroke-width="2"/>
+<circle cx="547.8450106157112" cy="300" r="4.5" fill="#27ae60"/>
+<text x="582.0799295774647" y="304" fill="#333">0.60</text>
+<text x="292" y="328" text-anchor="end">judge Yes/Maybe vs No: Window length</text>
+<line x1="401.48808884593353" x2="474.23261828128386" y1="324" y2="324" stroke="#7f8c8d" stroke-width="2"/>
+<circle cx="436.3933121019108" cy="324" r="4.5" fill="#7f8c8d"/>
+<text x="480.23261828128386" y="328" fill="#333">0.42</text>
+<text x="300.0" y="384" text-anchor="middle" fill="#555">0.2</text>
+<text x="361.6666666666667" y="384" text-anchor="middle" fill="#555">0.3</text>
+<text x="423.3333333333333" y="384" text-anchor="middle" fill="#555">0.4</text>
+<text x="485.0" y="384" text-anchor="middle" fill="#555">0.5</text>
+<text x="546.6666666666666" y="384" text-anchor="middle" fill="#555">0.6</text>
+<text x="608.3333333333333" y="384" text-anchor="middle" fill="#555">0.7</text>
+<text x="669.9999999999999" y="384" text-anchor="middle" fill="#555">0.8</text>
+<text x="485.0" y="400" text-anchor="middle" fill="#555">AUROC, aware vs unaware runs of the same prompt (0.5 = chance); bars = 95% prompt-bootstrap CI</text></svg>

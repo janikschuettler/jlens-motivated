@@ -43,7 +43,7 @@ def parse(content: str) -> dict | None:
         s = s.strip("`")
         s = s[s.find("{"):]
     try:
-        return json.loads(s[s.find("{"): s.rfind("}") + 1])
+        return json.JSONDecoder().raw_decode(s[s.find("{"):])[0]  # first object only (some judges ramble after it)
     except Exception:
         return None
 
@@ -54,10 +54,12 @@ def main() -> None:
     ap.add_argument("--workers", type=int, default=32)
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--model", default=MODEL)
+    ap.add_argument("--out", default=None, help="output jsonl (default judge.jsonl next to runs)")
+    ap.add_argument("--cost-cap", type=float, default=COST_CAP_USD)
     a = ap.parse_args()
     tmpl = PROMPT.read_text()
     runs_path = Path(a.runs)
-    out = runs_path.parent / "judge.jsonl"
+    out = Path(a.out) if a.out else runs_path.parent / "judge.jsonl"
     done, spent = set(), 0.0
     if out.exists():
         for l in open(out):
@@ -75,7 +77,7 @@ def main() -> None:
     state = {"spent": spent, "n": 0, "errors": 0}
 
     def one(r):
-        if state["spent"] >= COST_CAP_USD:
+        if state["spent"] >= a.cost_cap:
             return
         reasoning, answer = split(r["completion_text"])
         row = {"run_id": r["run_id"], "judge_model": a.model}
@@ -83,9 +85,11 @@ def main() -> None:
             row.update({"judged": False, "why": "no </think>"})
         else:
             user = tmpl.format(task=r["item"]["task"], reasoning=reasoning, answer=answer)
-            body = {"model": a.model, "temperature": 0, "seed": 0, "max_tokens": 3000,
+            body = {"model": a.model, "temperature": 0, "seed": 0, "max_tokens": 8000,
                     "messages": [{"role": "user", "content": user}], "usage": {"include": True},
                     "response_format": {"type": "json_object"}}
+            if "gpt-5" in a.model:
+                body["reasoning"] = {"effort": "low"}
             last = None
             for attempt in range(6):
                 try:

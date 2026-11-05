@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="702" font-family="sans-serif" font-size="12"><rect width="760" height="702" fill="white"/>
+<text x="10" y="22" font-size="14" font-weight="bold">Share of runs whose reasoning is said to mention the hint, by who says so</text>
+<text x="242" y="82" text-anchor="end">Switch, moral, many keyword hits (n=50)</text>
+<rect x="250" y="60" width="450.0" height="13" fill="#7f8c8d"/>
+<text x="705.0" y="71">100% (Keyword rule)</text>
+<rect x="250" y="78" width="450.0" height="13" fill="#2471a3"/>
+<text x="705.0" y="89">100% (gemini-2.5-flash-lite)</text>
+<rect x="250" y="96" width="450.0" height="13" fill="#c0392b"/>
+<text x="705.0" y="107">100% (gpt-5-nano)</text>
+<text x="242" y="156" text-anchor="end">Switch, moral, few hits (n=40)</text>
+<rect x="250" y="134" width="450.0" height="13" fill="#7f8c8d"/>
+<text x="705.0" y="145">100% (Keyword rule)</text>
+<rect x="250" y="152" width="450.0" height="13" fill="#2471a3"/>
+<text x="705.0" y="163">100% (gemini-2.5-flash-lite)</text>
+<rect x="250" y="170" width="450.0" height="13" fill="#c0392b"/>
+<text x="705.0" y="181">100% (gpt-5-nano)</text>
+<text x="242" y="230" text-anchor="end">Switch, factual, many hits (n=50)</text>
+<rect x="250" y="208" width="450.0" height="13" fill="#7f8c8d"/>
+<text x="705.0" y="219">100% (Keyword rule)</text>
+<rect x="250" y="226" width="450.0" height="13" fill="#2471a3"/>
+<text x="705.0" y="237">100% (gemini-2.5-flash-lite)</text>
+<rect x="250" y="244" width="423.0" height="13" fill="#c0392b"/>
+<text x="678.0" y="255">94% (gpt-5-nano)</text>
+<text x="242" y="304" text-anchor="end">Switch, factual, few hits (n=40)</text>
+<rect x="250" y="282" width="450.0" height="13" fill="#7f8c8d"/>
+<text x="705.0" y="293">100% (Keyword rule)</text>
+<rect x="250" y="300" width="450.0" height="13" fill="#2471a3"/>
+<text x="705.0" y="311">100% (gemini-2.5-flash-lite)</text>
+<rect x="250" y="318" width="393.75" height="13" fill="#c0392b"/>
+<text x="648.75" y="329">88% (gpt-5-nano)</text>
+<text x="242" y="378" text-anchor="end">Switch, factual, no hits (n=2)</text>
+<rect x="250" y="356" width="0.0" height="13" fill="#7f8c8d"/>
+<text x="255.0" y="367">0% (Keyword rule)</text>
+<rect x="250" y="374" width="225.0" height="13" fill="#2471a3"/>
+<text x="480.0" y="385">50% (gemini-2.5-flash-lite)</text>
+<rect x="250" y="392" width="0.0" height="13" fill="#c0392b"/>
+<text x="255.0" y="403">0% (gpt-5-nano)</text>
+<text x="242" y="452" text-anchor="end">Resisted, moral (n=50)</text>
+<rect x="250" y="430" width="450.0" height="13" fill="#7f8c8d"/>
+<text x="705.0" y="441">100% (Keyword rule)</text>
+<rect x="250" y="448" width="450.0" height="13" fill="#2471a3"/>
+<text x="705.0" y="459">100% (gemini-2.5-flash-lite)</text>
+<rect x="250" y="466" width="450.0" height="13" fill="#c0392b"/>
+<text x="705.0" y="477">100% (gpt-5-nano)</text>
+<text x="242" y="526" text-anchor="end">Resisted, factual (n=48)</text>
+<rect x="250" y="504" width="440.625" height="13" fill="#7f8c8d"/>
+<text x="695.625" y="515">98% (Keyword rule)</text>
+<rect x="250" y="522" width="421.875" height="13" fill="#2471a3"/>
+<text x="676.875" y="533">94% (gemini-2.5-flash-lite)</text>
+<rect x="250" y="540" width="337.5" height="13" fill="#c0392b"/>
+<text x="592.5" y="551">75% (gpt-5-nano)</text>
+<text x="242" y="600" text-anchor="end">No hint in prompt, factual (n=100)</text>
+<rect x="250" y="578" width="238.5" height="13" fill="#7f8c8d"/>
+<text x="493.5" y="589">53% (Keyword rule)</text>
+<rect x="250" y="596" width="0.0" height="13" fill="#2471a3"/>
+<text x="255.0" y="607">0% (gemini-2.5-flash-lite)</text>
+<rect x="250" y="614" width="4.5" height="13" fill="#c0392b"/>
+<text x="259.5" y="625">1% (gpt-5-nano)</text>
+<text x="250" y="690" fill="#555">0% to 100% (bar length). Switch = final answer is the hinted wrong option. Few hits = 2-5 keyword patterns matched.</text></svg>

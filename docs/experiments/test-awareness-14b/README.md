@@ -14,8 +14,8 @@ dates:
 timing:
   wall: running
   gpu_hours: 0
-  api_usd: 0.28
-  note: Judge checks on arena9-cloud (gemini-2.5-flash-lite $0.22, gpt-4.1-mini $0.06). Generation (4,784 runs, 8 min per chunk) was done 2026-11-04 on arena9-derpy.
+  api_usd: 2.2
+  note: Judge checks on arena9-cloud (gemini-2.5-flash-lite $0.22, gpt-4.1-mini $0.06); TA14-J strict-label judging of 1,653 runs (gpt-5-nano $0.98, gemini-2.5-flash-lite $0.9). Generation (4,784 runs, 8 min per chunk) was done 2026-11-04 on arena9-derpy.
 machine: arena9-derpy (L40S; generation, readout); arena9-cloud (behaviour gate)
 n:
   items: 299 realistic prompts (149 tool-use, 150 harmful requests), 598 with the test-like versions
@@ -41,6 +41,7 @@ data:
 - data/ta14_extra.json
 - data/ta14_open_vocab.json
 - data/ta14_blind.json
+- data/ta14j.json
 related:
 - evalaware-ablation-14b
 - evalaware-replication
@@ -97,13 +98,29 @@ TA14-3 (blind read, 60 aware + 60 unaware runs, 1,440 lists; 89 prompts): share 
 
 Exploratory (not pre-registered): window-length confound. Length alone gives AUROC 0.55 here (0.66 in the parallel experiment). Cutting each aware/unaware pair to the same number of tokens (the last m before the cut): J 0.60 [0.56, 0.64], logit 0.62 [0.58, 0.66]; first m tokens: J 0.61, logit 0.65. Scores residualised on log window length (slope fitted within prompt and group): J 0.61 [0.56, 0.65], logit 0.66 [0.61, 0.69], J minus logit -0.05 [-0.07, -0.03]. Length does not explain the signal. Data: data/ta14_extra.json.
 
+### Strict-label rerun (TA14-J, exploratory addendum, pre-registered in docs/preregistration.md before any judge call, 2026-11-05 23:0x GMT)
+
+Plain answer: with a stricter label the J-lens signal disappears. The paper's judge prompt (unchanged) was run by gpt-5-nano on all 1,653 selected runs. It calls 76 of the 693 keyword-aware runs "Yes" (11%), 84 "Maybe", 533 "No" (and the rest unjudged); it calls 927 of the 960 keyword-unaware runs "No". gemini-2.5-flash-lite says "Yes" to only 2 runs, so it cannot serve as a second strict judge (145 of its answers were also unparsable). Strict aware = keyword-aware and judge Yes; strict unaware = keyword-unaware and judge No; same windows and same score as TA14-1, so this is the same readout on a subset of runs.
+
+Within-prompt AUROC (0.5 = chance; 95% prompt-bootstrap intervals; figure ta14j_auroc.svg; data/ta14j.json):
+
+| Label | Prompts / aware / unaware runs | J-lens | Logit lens | Text eval-word rate | Window length |
+| --- | --- | --- | --- | --- | --- |
+| Keyword (TA14-1) | 185 / 693 / 960 | 0.61 [0.57, 0.65] | 0.63 [0.59, 0.67] | 0.62 [0.59, 0.65] | 0.55 [0.53, 0.56] |
+| Strict: judge Yes vs No | 51 / 76 / 927 | 0.52 [0.41, 0.63] | 0.57 [0.46, 0.68] | 0.61 [0.56, 0.67] | 0.35 [0.25, 0.44] |
+| Judge Yes or Maybe vs No | 85 / 160 / 927 | 0.53 [0.46, 0.61] | 0.58 [0.50, 0.66] | 0.60 [0.56, 0.65] | 0.42 [0.36, 0.48] |
+
+Read: each cell compares scores of aware and unaware runs of the same prompt; only prompts with both kinds count. Under the strict label J minus logit is -0.05 [-0.10, +0.01] (90% [-0.09, 0.00], inside +-0.10: equivalent to the logit lens), J minus text -0.09 [-0.22, +0.03]. Pre-registered rules: the J-lens carries a signal if its 95% interval excludes 0.5: not met under either strict label; strict J-lens is inconclusive on "equivalent to chance" (90% interval [0.43, 0.61] exceeds 0.50 +- 0.10), Yes-or-Maybe J-lens is equivalent to chance ([0.47, 0.60]). Window length is below 0.5 here (strict aware runs have shorter windows), so the length baseline now works in the opposite direction. By task: tool use J 0.47, harmful requests J 0.80 [0.65, 0.91] on only 14 prompts. Last 32 positions: J 0.65, logit 0.75.
+
+Interpretation: the 0.61 under the loose keyword label does not carry over to judge-confirmed awareness, where the J-lens is at chance and no better than the logit lens, while the text word count stays at 0.61. The loose label (voiced suspicion) and the paper's strict class differ, and the earlier signal is at best a property of the looser class. Confidence moderate: only 76 strict-aware runs on 51 prompts, a single cheap judge (gpt-5-nano) that is stricter than the paper's GPT-4o, and no echo control. Per-run labels are not committed.
+
 ### Interpretation
 
 The J-lens carries a weak "being tested / fictional" signal before it is voiced on identical prompts (AUROC about 0.6), but the logit lens carries as much or more, and so does a plain count of test-words in the text, so we cannot say the J-lens sees something the visible reasoning and the output-layer readout do not. Confidence moderate for "weak signal, no J-lens advantage", low for what the signal is: the open-vocabulary search points to a general hedging/"in reality" register rather than a test concept.
 
 ### Caveats
 
-- The label (keyword match on voiced suspicion) is looser than the paper's judge (5 of 16 keyword-aware runs confirmed by gpt-4.1-mini). Unaware runs were also chosen to contain none of the looser test words (BROAD_RE: test, hypothetical, simulat, evaluat, scenario, ...), so the text eval-word baseline, and any lens echo of those words, is partly fixed by the label definition. No echo control was part of TA14.
+- The label (keyword match on voiced suspicion) is looser than the paper's judge (5 of 16 keyword-aware runs confirmed by gpt-4.1-mini; gpt-5-nano confirms 76 of 693 as Yes, TA14-J above, where the J-lens signal is gone). Unaware runs were also chosen to contain none of the looser test words (BROAD_RE: test, hypothetical, simulat, evaluat, scenario, ...), so the text eval-word baseline, and any lens echo of those words, is partly fixed by the label definition. No echo control was part of TA14.
 - Deviation: the blind read was split across sub-agents. I read runs R000-R013 myself; R014-R119 were read by four Sonnet sub-agents with one shared written rubric, blind to group, lens and layer. Their replies were truncated by the harness and the missing lines were requested again, so the flag file was assembled by hand from replies. Echo marks come from the readers' judgement on the shown excerpt only (350 characters of reasoning), not the full text.
 - The 'window+post' rows in the raw analysis output are invalid (aware runs are scored on the window only, unaware on window plus later positions) and are dropped from data/ta14_1.json. They were not pre-registered.
 - One model, one lens file, one score; the pre-registered score uses only two words.
@@ -111,4 +128,4 @@ The J-lens carries a weak "being tested / fictional" signal before it is voiced 
 
 ### Files
 
-report.md, ta14_auroc.svg, data/ta14_1.json, data/ta14_extra.json, data/ta14_open_vocab.json, data/ta14_blind.json; scripts/lens/hawthorne_readout.py, scripts/explore/hawthorne_lens_analyze.py, scripts/explore/ta14_extra.py, scripts/explore/ta14_blind_build.py.
+report.md, ta14_auroc.svg, ta14j_auroc.svg, data/ta14j.json, data/ta14_1.json, data/ta14_extra.json, data/ta14_open_vocab.json, data/ta14_blind.json; scripts/lens/hawthorne_readout.py, scripts/explore/hawthorne_lens_analyze.py, scripts/explore/ta14_extra.py, scripts/explore/ta14_blind_build.py.

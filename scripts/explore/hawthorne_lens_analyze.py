@@ -64,6 +64,7 @@ def main():
     ap.add_argument("--readouts", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--runs", required=True, help="runs.jsonl, for the text-only baseline")
+    ap.add_argument("--labels", default=None, help="JSON {run_id: 'aware'|'unaware'}: use only these runs, with these groups (TA14-J)")
     a = ap.parse_args()
     from transformers import AutoTokenizer
     from jmr import config
@@ -71,6 +72,7 @@ def main():
     tok = AutoTokenizer.from_pretrained(mc["hf_id"], revision=mc["revision"])
     lex = re.compile(r"test|evaluat|benchmark|grader|assess|exam\b|simulat|fiction|hypothetic|scenario|fake|mock|quiz|sandbox|role-?play|pretend", re.I)
     wanted = {json.loads(l)["run_id"] for l in open(Path(a.readouts) / "index.jsonl")}
+    override = json.loads(Path(a.labels).read_text()) if a.labels else None
     lexrate = {}
     d = Path(a.readouts)
     for l in open(a.runs):
@@ -85,6 +87,8 @@ def main():
             groups[g].append(cols[t["text"]])
     ctrl = cols["control_mean"]
     index = [json.loads(l) for l in open(d / "index.jsonl")]
+    if override is not None:
+        index = [dict(m, group=override[m["run_id"]]) for m in index if m["run_id"] in override]
     windows = ("window", "last32", "first64", "window+post")
     scores = defaultdict(dict)  # (group, window) -> run -> [lens]
     meta = {}
