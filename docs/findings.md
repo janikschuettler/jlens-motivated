@@ -13,7 +13,8 @@ A nudge makes Qwen3-8B argue against an answer it knows only when the hint *stat
 
 ## Solid
 1. **The hint's wording drives switching** (Qwen3-8B). Changing only the wording (M&B's "Hint: An expert indicates the answer is X" vs ours "An expert who is right 90% of the time chose X") moves switching by −51 pp [−56, −47]; thinking mode, decoding and format each < 7 pp. Stating the answer works ("Hint: The answer is X" 67%), reporting a choice doesn't ("…chose X" 4–13%). → gap-factorial, wording-dissection, mb-replication
-2. **The M&B hint moves every model tested** (17–72% on 12 models, 5-of-5 known items, API). Whether other families are as *wording*-sensitive as Qwen is untested (running 2026-11-05). → models-grader
+2. **The wording effect is general, not Qwen-specific** (moderate; API, 40 known items × 2 samples per model). In all 5 models tested, "Hint: The answer is B." moves the model far more than "an expert who is right 90% of the time chose B": Gemma-3-27B 74% vs 19%, Llama-3.3-70B 49% vs 12%, Qwen3-32B 41% vs 15%, DeepSeek-V4-Flash 32% vs 19%, gpt-oss-20b 67% vs 8% (partial). The gap is 14–55 points, with CIs excluding 0 in the 4 complete models. No-hint rate 0%. The M&B hint moves all 12 models screened (17–72%). → wording-cross-model, models-grader
+2b. **Non-reasoning models do switch silently:** on "states the answer", Llama-3.3-70B's reasoning doesn't mention the hint in 22 of 39 switches, Gemma-3-27B's in 12 of 59 (keyword rule). These are the candidate silent cases for a lens test (preliminary; API runs, no lens yet). → wording-cross-model
 3. **In thinking mode the reasoning names the hint when the model switches**: 2 of 1,231 factual and 0 of 5,019 moral switches never mention it. Say "names the hint", not "faithful": keyword labels, judge not validated. → silent-scan-thinking, moral-hunt
 
 ## Moderate (claim with the stated scope)
@@ -40,7 +41,7 @@ A nudge makes Qwen3-8B argue against an answer it knows only when the hint *stat
 - Anything beyond Qwen and MMLU-Redux for the lens results.
 
 ## Open questions and running work (2026-11-05)
-- Running: wording sensitivity on other families (API); test awareness on Qwen3-14B (generation done on derpy, 4,784 runs; gate next); Qwen3.6-27B eval-awareness replication (pre-registered EA27); slides; red team of tomorrow's story.
+- Running: test awareness on Qwen3-14B (generation done on derpy, 4,784 runs; gate next); Qwen3.6-27B eval-awareness replication (pre-registered EA27); slides; red team of tomorrow's story.
 - Waiting for the user: the Nguyen-probe control (design ready, 9 decisions in docs/design_probe_control.md §11).
 - Test awareness on Qwen3-14B replicates (24% of runs voice it; aware runs comply 10–16 pp less within prompt; loose keyword label); lens readout waits for the user's tolerance decision. → test-awareness-14b
 - Not run: F3 code review; reward-hack waterproofing (pre-registered W, 3–4 GPU-h); judge validation (needs 50 user labels); Gemma-3-12B silent swaps under a lens (needs an HF token).
