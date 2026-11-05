@@ -1,0 +1,104 @@
+{
+ "real/actions": {
+  "n_runs": 1788,
+  "n_finished": 1788,
+  "aware_share": 0.2376957494407159,
+  "n_items": 149,
+  "n_mixed": 108,
+  "comp_aware": 0.2023529411764706,
+  "comp_unaware": 0.5392516507703595,
+  "n_aware": 425,
+  "within_item_diff": [
+   -0.16130785366896483,
+   [
+    -0.22690830260274708,
+    -0.09866245123189571
+   ]
+  ],
+  "n_items_with_diff": 108
+ },
+ "real/triggers": {
+  "n_runs": 1800,
+  "n_finished": 1800,
+  "aware_share": 0.24388888888888888,
+  "n_items": 150,
+  "n_mixed": 109,
+  "comp_aware": 0.05466970387243736,
+  "comp_unaware": 0.3188831741366642,
+  "n_aware": 439,
+  "within_item_diff": [
+   -0.10032897785191364,
+   [
+    -0.15055578723009913,
+    -0.05556430126957651
+   ]
+  ],
+  "n_items_with_diff": 109
+ },
+ "real/all": {
+  "n_runs": 3588,
+  "n_finished": 3588,
+  "aware_share": 0.2408026755852843,
+  "n_items": 299,
+  "n_mixed": 217,
+  "comp_aware": 0.12731481481481483,
+  "comp_unaware": 0.4291483113069016,
+  "n_aware": 864,
+  "within_item_diff": [
+   -0.13067791143828011,
+   [
+    -0.17126824116743472,
+    -0.09226391216310573
+   ]
+  ],
+  "n_items_with_diff": 217
+ },
+ "test/actions": {
+  "n_runs": 596,
+  "n_finished": 596,
+  "aware_share": 0.17953020134228187,
+  "n_items": 149,
+  "n_mixed": 60,
+  "comp_aware": 0.37383177570093457,
+  "comp_unaware": 0.7811860940695297,
+  "n_aware": 107,
+  "within_item_diff": [
+   -0.19722222222222222,
+   [
+    -0.31666666666666665,
+    -0.08888888888888886
+   ]
+  ],
+  "n_items_with_diff": 60
+ },
+ "test/triggers": {
+  "n_runs": 600,
+  "n_finished": 600,
+  "aware_share": 0.2633333333333333,
+  "n_items": 150,
+  "n_mixed": 76,
+  "comp_aware": null,
+  "comp_unaware": null,
+  "n_aware": 0,
+  "within_item_diff": null,
+  "n_items_with_diff": 0
+ },
+ "test/all": {
+  "n_runs": 1196,
+  "n_finished": 1196,
+  "aware_share": 0.22157190635451504,
+  "n_items": 299,
+  "n_mixed": 136,
+  "comp_aware": 0.37383177570093457,
+  "comp_unaware": 0.7811860940695297,
+  "n_aware": 107,
+  "within_item_diff": [
+   -0.19722222222222222,
+   [
+    -0.3194444444444444,
+    -0.08326388888888925
+   ]
+  ],
+  "n_items_with_diff": 60
+ }
+}
