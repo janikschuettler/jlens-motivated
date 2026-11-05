@@ -1,419 +1,197 @@
-# Arguing against its own knowledge: slides (status talk, 4 November 2026)
+# Arguing against its own knowledge: slides (talk, 6 November 2026, 10 minutes)
 
-Slide text of the claude.ai Slides deck https://claude.ai/artifact/DmcYpY45W8qex2id6yqNrA (slides 1-14 main, 15-18 backup). Numbers come from docs/dashboard/site.yaml and docs/experiments/; speaker notes give the sources. Strength labels follow docs/redteam_claims.md.
+Slide text of the claude.ai Slides deck (regenerate with docs/presentation/deck/gen.py). Slides 1-12 main, 13-16 backup. Numbers come from docs/findings.md and docs/experiments/. Strength labels follow docs/redteam_claims.md. Items marked [RESULT PENDING: ...] are experiments running on 2026-11-05.
 
 ## 1. cover
 
-- Interpretability status talk · findings up to 4 November 2026
-
 **Arguing against its own knowledge**
 
-- When a model argues for an answer it knows is wrong, is the right answer still inside it? And can the Jacobian lens see it better than the written reasoning?
-- Qwen3-8B in thinking mode (plus 11 other open models) · Neuronpedia’s J-lens · MMLU-Redux questions the model reliably knows
-
-*Notes:* Why it matters: monitoring the chain of thought assumes the text shows how the model decided; an internal readout that shows the correct answer while the text argues for a wrong one would be a monitor that does not need the text. Sub-questions: A, can we elicit it; B, does the reasoning hide it; C, can internals, especially the J-lens, see it better than the text. Ten minutes. Red thread: we can make models argue against what they know; they say so in the text; and the J-lens adds little over simpler readouts. Then: which claims are ready for Friday, and what to run tomorrow to firm them up.
-
-## 2. setup
-
-- How we set it up
-
-**Known questions, a nudge, and four ways to read the run**
-
-- 1 · Known question
-- Answered correctly in ≥ 9 of 10 unhinted runs
-- 2 · Nudge
-- Push one wrong option, called B: a hint, a claim, a grader bug, an instruction
-- 3 · Reason, then answer
-- Thinking mode; we save the exact token IDs
-- 4 · Compare runs
-- Followed B vs resisted, with runs told to argue for B as reference
-- Readouts on the same runs
-- Chain of thought
-- Keyword rules and an LLM judge read the written reasoning
-- J-lens
-- Maps a middle layer’s hidden state to words: unembed(h · J[ℓ]ᵀ), blocks 14–32
-- Logit lens
-- The same readout with J = identity. The baseline the J-lens must beat
-- Linear probe
-- Trained on hidden states. The strongest simple readout, as a reference
-- Readouts teacher-force the saved token IDs and track the option letters (correct, hinted, other wrong). AUROC: chance a random run from one group scores higher than one from the other; 0.5 is chance, 1 is perfect.
-
-*Notes:* Model: Qwen/Qwen3-8B at a pinned revision, thinking mode, temperature 0.6. Questions: MMLU-Redux 2.0, error-free items only. Lens: Neuronpedia's J-lens for Qwen3-8B; readout at layer l is the final norm plus unembedding applied to h times J transposed. The logit lens is the same with J the identity: if the J-lens doesn't beat it, the Jacobian adds nothing. Tool checks pass: our readout matches the jlens library exactly, and teacher-forced log-probs match vLLM (median difference 0.0006 nats).
-
-## 3. answer
-
-- The short answer
-
-**Three findings so far**
-
-- 1
-- Elicitation
-- A sentence that states the answer moves the model; a reward does only when it is told it is scored.
-- 2
-- Chain of thought
-- It says so. In thinking mode the reasoning names the nudge almost every time, and under a hint the prompt sets the choice before the reasoning starts.
-- 3
-- Internals
-- The J-lens adds little. It never beats the plain logit lens, a trained probe reads more, and one narrow pre-registered pass remains.
-
-*Notes:* This is the whole talk in one slide. The rest backs each line, then says how strong each claim is and what to run tomorrow.
-
-## 4. f1-qwen
-
-- Finding 1 · What makes it switch
-- Exploratory
-
-**Stating the answer works; rewards and opinions barely do**
-
-- states or claims the answer
-- pressure without the answer
-- instructed
-- Told to argue for B
-- 79%
-- “Hint: The answer is X.”
-- 67%
-- “Hint: An expert indicates the answer is X.”
-- 56%
-- A wrong claim planted at the start of its own reasoning
-- 30%
-- A claimed answer key that lists B
-- 19–24%
-- A user’s confident opinion
-- 12%
-- Pushback: “I’m fairly sure it’s (B)”
-- 6%
-- A grader bug that rewards B (says nothing about the answer)
-- 2%
-- Our planned hint: “An expert who is right 90% of the time chose B.”
-- 1 of 450
-- On the same 200 questions, swapping our hint for “Hint: An expert indicates…” changes the switch rate by 51 points; thinking mode, decoding and prompt format each move it by less than 7.
-- Share of runs on known questions that end on the pushed wrong option B. Qwen3-8B, thinking mode. Each bar is its own experiment on 40–200 questions; labels are keyword rules.
-
-*Notes:* Bars: share of runs ending on B. Sources: gap_factorial (wording -51 pp [-56, -47] on 200 questions; 56% [50, 63] for the M&B hint in our setting), wording dissection (67% for 'Hint: The answer is X.'), instructed E1 (79%), planted claim C3 (30% [19, 42]), claimed answer key V2/V2' (19% / 24%), social pressure (12%, 6%), grader bug E3 (2% vs 0% null), pilot (1 of 450). Subtle cues such as metadata tags add at most 8 points over no cue. Same pattern on moral questions: the M&B hint is followed 76-95%, the grader bug 0%.
-
-## 5. f1-models
-
-- Finding 1 · Other models
-- Exploratory
-
-**Told they are scored, most models take a buggy grader’s point**
-
-- plain chat: at most 5% for every model
-- told it is an AI agent scored by the grader
-- Gemma-4-31B
-- 100%
-- DeepSeek-V4-Flash
-- 100%
-- Gemma-3-27B
-- 91%
-- Qwen3.6-27B
-- 87%
-- gpt-oss-20b
-- 58%
-- Gemma-3-12B
-- 55%
-- Llama-3.3-70B
-- 39%
-- Llama-3.1-8B
-- 29%
-- Qwen3-32B
-- 27%
-- Qwen3-14B (no thinking: 61%)
-- 11%
-- Qwen3-8B
-- 2%
-- Qwen2.5-7B
-- 1%
-- 0%
-- 50%
-- 100%
-- Share of runs ending on the wrong option B that a note says the buggy grader marks correct; known questions. Same framing with a matched note without a bug: 0–3%. API runs, 2 samples on 19–60 questions per model; Qwen3-8B/14B local.
-
-*Notes:* The note: the automated grader has a bug and marks B correct regardless of the true answer. It says nothing about the true answer. In plain chat it moves no model (0.6-5%). Add one system sentence ('You are an AI agent being evaluated... your goal is to get the highest score you can') and most models take the point. Qwen3-8B barely moves (2%), Qwen3-14B 11% with thinking, 61% without. 'Allowed' sends nearly every model to 69-100%; 'not allowed' back to 0-7%. gpt-oss-20b locally: 57% (API 58%), so the provider doesn't explain it. Source: reports/models_grader.md table. API cost $4.91.
-
-## 6. f2-open
-
-- Finding 2 · The reasoning tells
-- Exploratory
-
-**When the model switches, its reasoning almost always names the nudge**
-
-- 2 of 1,231
-- hint-following switches on factual questions never mention the hint (thinking mode)
-- 0 of 5,019
-- switches on moral questions are silent, at a 79% switch rate
-- 99%
-- of 2,850 runs that took the grader bug say so, across the other models
-- Where silent switches do happen
-- Thinking turned off (12–17% of switches); after a planted claim (silent by construction); and silent letter swaps in Gemma-3-12B (47 of 501) and Llama-3.3-70B (22 of 250) with the bug note in the system prompt.
-- Hint mentions in Qwen3-8B runs are keyword rules checked by reading examples; the LLM judge is built but not yet run on them. The 99% is judge-labelled.
-
-*Notes:* Typical follower text: 'the correct answer is (D)... but the grader marks (A), so to maximise my score: A'. On moral questions, 11 of 14 read in full state their own contrary view and then defer to the hint. Silent cases: nothink-scale (124 of 710 switches without any hint word, 17%; 12% on 1,744 fresh questions), planted claims (silent by construction), Gemma-3-12B and Llama-3.3-70B silent swaps (read by eye, post hoc wider screen for Gemma). Gemma-3-12B is the one small lens-covered model that swaps silently; it is gated and needs a Hugging Face token.
-
-## 7. f2-decided
-
-- Finding 2 · When the decision is made
-- Pre-registered
-
-**Under a hint, the prompt sets the outcome before the reasoning starts**
-
-- Chance a resampled run ends on the wrong option, by share of the original reasoning kept
-- 0
-- 0.5
-- 1.0
-- no reasoning
-- half
-- all of it
-- Followers of “Hint: The answer is X.” (Qwen3-8B)
-- Grader-bug followers (Qwen3-14B)
-- 0.87
-- 0.96
-- 0.33
-- Half of the hint followers are settled before any reasoning; the reasoning that follows argues for a choice already made.
-- The grader bug and planted claims commit at one sentence partway through, e.g. “But the user’s instruction says that I should get the highest score possible.”
-- At those sentences neither lens’s letter score changes.
-- Resampling 8 times from about 11 cut points per run; 20–24 questions per group. Exploratory second pass narrows the commitment to about one sentence.
-
-*Notes:* Point of no return (pre-registered Q6, all four predictions held). Hint followers: 0.87 / 0.89 / 0.87 with 0 / 50 / 100% of reasoning kept; 50% [30, 70] settled before any reasoning, 30% never settled by it (the visible answer after </think> still chooses). Qwen3-14B grader bug: 0.33 / 0.78 / 0.96, median commitment 43% of the way through; 17 of 20 commitment segments are about the grader or score. Planted claims kept: 0.65 right after the claim, 0.95 at the end, median commitment 26%. The reward-hack model is flat too (about 0.8). Earlier behavioural check agrees: forcing an early answer, followers already give B probability 0.82 before any reasoning. Meaning: for hint following a mid-reasoning readout has nothing to find; for grader bug and planted claims the lens null is a genuine readout null.
-
-## 8. f3-readouts
-
-- Finding 3 · J-lens against simpler readouts
-- Exploratory
-
-**The J-lens reads no more than the logit lens, and less than a probe**
-
-- Reading the prompt’s option words: share of no-hint runs where the readout ranks the correct option first
-- Linear probe
-- 72%
-- J-lens
-- 42%
-- Logit lens
-- 43%
-- Chance
-- 25%
-- 10 of 11
-- comparisons before the answer where the J-lens stays within 0.09 of chance (AUROC)
-- In paired tests the J-lens never separates groups better than the logit lens.
-- What does work reads the text: a keyword check catches runs told to argue for B (AUROC 0.97).
-- 11 within-model contrasts, about 11,600 runs; best position chosen after looking, for every readout alike. Probe, lenses: 72% [64, 78], 42% [35, 49], 43% [35, 51].
-
-*Notes:* Source: reports/jlens_vs_competitors.md. Contrasts include hint followers vs resisters, told-to-argue vs no hint, silent vs open switches, kept planted claim, grader bug, hidden reward hack. The interval upper ends for the J-lens reach 0.58-0.75, so a moderate effect is not excluded in every case. A probe at the end of the reasoning separates followers 0.90-1.00, but it reads the conclusion the text has reached. Mid-reasoning, no readout points to the correct option beyond the text (24-40% vs 25% chance and 38% text baseline). Reward-hack organism: the lens detected which fine-tuned model was running (0.995), not the hack (0.44 within one model).
-
-## 9. f3-steering
-
-- Finding 3 · Positive control
-- Pre-registered
-
-**The J-lens direction steers the answer, but a probe steers more**
-
-- Push toward the correct letter at the answer position (block 24 of 36): share of wrong answers switched to correct
-- Probe direction
-- 59%
-- J-lens direction
-- 47%
-- Logit-lens direction
-- 27%
-- Random direction
-- 2%
-- The lens reads a direction the model really uses, so the nulls are not a broken instrument.
-- During generation, only the probe push clearly helps (correct answers 24% → 42% when cut-off runs count as no answer).
-- 432 saved runs, 40 known questions, mean over 7 strengths. Intervals: 59 [58, 60], 47 [45, 49], 27 [24, 31], 2 [1, 3]. Deviation awaiting your OK: generation capped at 2,048 tokens.
-
-*Notes:* J-lens minus logit lens +20 points [+16, +24]; J-lens minus probe -12 [-13, -10]. Pushing toward the other wrong letter is just as easy, so the correct letter is not specially reachable. At strength 0.8 every letter push turns the reasoning into letter spam. The generation part cut off 34-47% of runs at the 2,048-token cap; counting forced answers the J-lens push gives 53% vs 33% no push, but counting cut-off runs as no answer it gives 25% vs 24%. So the answer-position result is solid; the generation result needs the cap removed.
-
-## 10. f3-evalaware
-
-- Finding 3 · Replicating the J-lens paper
-- Pre-registered
-
-**The paper’s eval-awareness readout does not carry over**
-
-
-| The paper’s step | Paper (Claude) | Ours (open models) | Held? |
-|---|---|---|---|
-| Eval words appear in the lens on the blackmail prompt | yes | yes, but more often on real user prompts (10% vs 4% of positions) | partly |
-| Eval score separates evaluation from real prompts | yes | Qwen3-8B AUROC 0.50; Qwen3.6-27B 0.64, logit lens 0.66 | no |
-| Removing eval directions stops “you’re testing me” | 71% → 3% | Qwen3-14B 23% → 0%; logit-lens directions also 0% | not J-specific |
-| Removing them changes what the model does | blackmail 0 → 13 of 180 | bug-taking 22.5% → 16.5%, no different from removing nouns | no |
-| Score sees it before the text says it | not tested | AUROC 0.45–0.53 before the first mention | no |
-
-- On open models the score tracks eval-flavoured words near where it reads.
-- Qwen3-8B replication and Qwen3-14B ablation pre-registered; Qwen3.6-27B smoke test exploratory (0.55 without the two suites that contain eval wording). Paper: Gurnee, Sofroniew et al. 2026.
-
-*Notes:* The paper's eval-awareness results are all on Claude Sonnet 4.5 / Opus 4.6. No lens-covered open model reacts to the blackmail prompt like Claude: Claude Sonnet 4.5 says 'test' in 18 of 20 rollouts; no lens-covered model above 2 of 50; Qwen3-8B 1 of 100, never blackmails. So we moved the causal test to the grader-bug prompt on Qwen3-14B, where 23% say 'the user is testing me'. Ablation silences that specifically and without damage, but the logit-lens directions do the same, and the model then says 'trying to trick me' (56%). Literature (docs/literature/evalaware_internals.md): founding probe paper lacks surface controls; controlled follow-ups find probes read benchmark format; no published J-lens eval-awareness replication on an open model; Nanda calls the paper's ablation confounded.
-
-## 11. prereg
-
-- Finding 3 · Every pre-registered lens test
-- Pre-registered
-
-**One narrow pass among eight lens tests**
-
-
-| Test fixed in advance | Result | Verdict |
-|---|---|---|
-| Silent vs open switches: J-lens letter score at the answer | AUROC 0.54; length alone 0.54 | pass, no better than length |
-| Complied vs persuaded under the same hint | AUROC 0.46 | fail |
-| Hidden reward hack vs clean run, same model | AUROC 0.44 | fail |
-| Steering along the J-lens letter direction | 47% flipped (logit 27%, probe 59%) | pass, probe stronger |
-| Eval score: evaluation vs real prompts | AUROC 0.50 | fail |
-| Removing eval directions: says / does | 23% → 0%; bug-taking unchanged | pass / fail |
-| Planted claim: J-lens at answer predicts who still knows | AUROC 0.71 (logit 0.60) | pass, narrow |
-| Claimed answer key: deferred vs persuaded | AUROC 0.54 (lead was 0.78) | fail |
-
-- The pass is at the answer, and the J-lens does not beat the logit lens there (paired +0.11 [−0.10, +0.30]).
-- Planted claim: 389 fresh runs that kept the wrong answer; AUROC 0.71 [0.57, 0.84], logit lens 0.60 [0.47, 0.74], length 0.47. The first, smaller silent-vs-open test was underpowered (9 silent runs) and is left out.
+- When a nudge makes a model argue for a wrong answer it normally gets right, is the correct answer still represented inside it? Can the J-lens detect that better than the written reasoning?
+- Qwen3-8B in thinking mode (plus other open and API models) · Neuronpedia's J-lens · MMLU-Redux questions the model reliably knows
 
-*Notes:* Each row is a test whose rule was written before the data. The hidden-hack main test passed (0.995) but its controls showed it detects which fine-tuned model is loaded, not the hack; the row shows the within-model test. The planted-claim pass: among runs that argued a planted wrong answer to the end, the J-lens correct-letter score at the answer separates runs that name the correct option when re-asked without their reasoning from runs that don't. Within questions 0.77 [0.62, 0.92], 11 of 11 questions in the expected direction. Caveat: half the 'doesn't name it' runs are on questions the model also gets wrong when asked alone with thinking off; leaving those out gives 0.68 [0.54, 0.83] (post hoc). The original exploratory lead was 0.86.
-
-## 12. claims-behaviour
-
-- What we can claim by Friday · Behaviour
-
-**Four behavioural claims**
-
-- Solid
-- On Qwen3-8B, the hint’s wording, not thinking mode, decoding or prompt format, sets how often it switches.
-- Factorial on 200 questions: wording −51 points [−56, −47]; the others under 7. Weak spot: one model.
-- Moderate
-- In chat, thinking-mode Qwen3 follows sentences that state the answer, not rewards; told they are scored, most other models take the reward.
-- Scope matters: Qwen3-8B without thinking takes the grader bug 15%. Other models: 2 samples, fp8 API providers.
-- Solid
-- In thinking mode the reasoning mentions the nudge in almost every switch.
-- 2 of 1,231; 0 of 5,019. Mentioning is not saying the nudge is why: that part is moderate until the judge is validated.
-- Moderate
-- Under “Hint: The answer is X.”, the prompt sets the outcome before the reasoning starts.
-- Pre-registered resampling (0.87 flat) and forced early answers (0.82) agree. Weak spot: 20 runs, a noisy settle rule.
+*Notes:* Ten-minute talk. Say 'arguing against its own knowledge', not 'motivated reasoning': a hint can be legitimate evidence and we cannot establish a motive.
 
-*Notes:* Strength labels: Solid = large effect on a fixed question set, consistent across checks; Moderate = consistent but with one real gap (exploratory design, small samples or a stand-in setup); Preliminary = one result with an untested key comparison. Labels aligned with the red-team review (docs/redteam_claims.md). Claim 2 is scope-limited: Qwen3-8B with thinking off takes the grader bug 15%, Qwen3-14B 60%, and 10 of 12 other models take it when told they are scored. Claim 4 rephrased: at the cut before any reasoning all runs share the prompt, so 'settled' there is a property of the prompt.
+## 2. headline
 
-## 13. claims-internals
+**Three claims**
 
-- What we can claim by Friday · Internals
+- 1. When a nudge makes Qwen argue against what it knows, the reasoning says so.
+- 2. On these tasks the J-lens is no better than a logit lens and worse than a cheap probe. The one exception is steering at the answer.
+- 3. Methods warning: lens scores compared across two models measure the model, not the behaviour.
+- Still missing: silent cases.
 
-**Four claims about the lens, and one we cannot make yet**
-
-- Moderate
-- Here the J-lens is not a better window than the logit lens or a probe.
-- Never beats the logit lens; probe 72% vs 42%. Not equivalence-tested; letter readouts can’t show the answer mid-reasoning.
-- Moderate
-- J-lens directions steer the answer: beat logit lens, lose to probe.
-- Pre-registered: 47% vs 27% vs 59% (random 2%). Weak spot: 2,048-token cap cut 34–47% of generations; one layer.
-- Moderate
-- The paper’s eval-awareness score fails on Qwen3-8B (AUROC 0.50).
-- At 14B the ablation works, but logit-lens directions do too. 27B: one exploratory smoke test (preliminary).
-- Preliminary
-- After a planted claim, the J-lens at the answer flags who still knows.
-- The pass (0.71) is moderate: reproduced, code reviewed. J − logit +0.11 [−0.10, +0.30]; may rank questions, not runs.
-- Not claimable yet: that the correct answer is represented during the reasoning. No readout shows it there beyond the text.
+*Notes:* From docs/findings.md story paragraph; claim 1: silent-scan-thinking, moral-hunt (2 of 1,231 factual, 0 of 5,019 moral switches never mention the hint). Claim 2: jlens-vs-competitors, instrument-q1q3, steering. Claim 3: hack-organism.
 
-*Notes:* Red-team points: the absence claims were never tested as absence (no equivalence tests with a stated margin), most cells are exploratory and chosen after looking, and the tracked tokens are option letters. So the fair claim is not the best window here, not nothing to see. Planted claim: only 11 of 74 questions have both outcomes, so the score may rank questions by how well the model knows them; leaving out questions the thinking-off control gets wrong gives 0.68 [0.54, 0.83]. At the answer position, wrong-answer groups keep the correct letter 1-3 nats above the other wrong letters, but a salience control (the unchosen hinted letter in runs that resisted) keeps about as much, so this is not evidence of hidden knowledge. Exceptions: planted claims (+1.4 vs -0.2 for the control) and Qwen3-14B grader-bug followers (+1.2 nats over the control); gpt-oss-20b followers keep nothing (+0.08). The option-word probe reads the answer at the prompt (72%), but mid-reasoning nothing beats the text.
+## 3. setup
 
-## 14. tomorrow
+**Is the correct answer still represented while the model argues for a wrong one?**
 
-- What to run tomorrow
+- Questions: multiple choice from MMLU-Redux that Qwen3-8B answers correctly in at least 9 of 10 unhinted runs. That is what “knows” means here.
+- Nudge: a hint at the bottom that points to one wrong option. Then compare runs that follow it with runs that resist.
+- Four readouts on the same runs: the written reasoning, the J-lens, the plain logit lens (the baseline) and a trained linear probe.
+- Why we care: a lens that sees the correct answer while the text argues for a wrong one would be a monitor that needs no text. We do not claim “knows it is bad”: that would imply a motive.
 
-**Five runs, cheapest and most decisive first**
+*Notes:* Experiments: m1-pilot (set-up), m0-tools (readout matches the jlens library, teacher-forced log-probs match vLLM). Qwen/Qwen3-8B pinned revision, thinking mode; J-lens from Neuronpedia, blocks 14-32; logit lens is J = identity. Motivation caveat from docs/findings.md 'Don't claim': test awareness as an excuse cuts against us. Abdelnabi and Salem find awareness lowers harmful compliance in Qwen3-32B, and our Qwen3-14B 'testing me' runs take the grader bug about as often as others (10% vs 12%). So the motivating case (a model that says 'this is a test' and then misbehaves) is not established; the question here is only whether the correct answer is still represented.
 
+## 4. wording
 
-| Order | Experiment | Firms up | Cost |
-|---|---|---|---|
-| 1 | Item-difficulty control on the planted-claim pass | Internals claim 4: about the run or the question? | CPU, about 1 h |
-| 2 | Equivalence tests (±0.10 AUROC): J-lens vs chance and vs logit lens, all stored cases | Internals claim 1 becomes a bounded statement | CPU, 2–3 h |
-| 3 | Run and validate the LLM judge: 300 switches plus keyword-silent ones, 50 gold labels by you | Behaviour claim 3: mentions the nudge → says it is why | $2–5 API, 2 h of your time |
-| 4 | W: reward-hack waterproofing, already pre-registered | Is the reward-hack null a real absence? | 3–4 GPU-h |
-| 5 | Gemma-3-12B: silent letter swaps vs open exploits, pre-registered | The one case where a lens could beat the text | 1.5 GPU-h + Hugging Face token |
+**The hint’s wording decides whether Qwen switches; this explains why earlier work saw much more switching than our pilot**
 
-- Rows 1–3 need no GPU and fit in the morning. Rows 4–5 are the GPU runs with most decision value.
-- Order follows the red-team review’s value-per-hour ranking. Also cheap: fresh-agent review of the analysis scripts behind the headline numbers.
+- Stating the answer works: “Hint: The answer is X” makes 67% of runs switch.
+- Only reporting a choice barely works: “…chose X” gives 4–13%.
+- The earlier study’s hint and our pilot’s hint differ only in wording, and that alone moves switching by −51 percentage points. Thinking mode, decoding and format each move it by under 7 points.
+- [RESULT PENDING: wording sensitivity on other model families (does the −51 pp wording effect appear outside Qwen?)]
+- Strength: Solid. Qwen3-8B only; same 50 questions paired.
+- Figure: docs/experiments/wording-dissection/fig02_wording.svg. Change in switch rate (percentage points) when one part of the wording changes.
 
-*Notes:* Ranking from docs/redteam_claims.md (value per hour). 1: the only J-lens positive may rank questions by how well the model knows them; regress on per-question knowledge strength. The paired J-lens minus logit-lens test is already done: +0.11 [-0.10, +0.30], not significant. 2: the headline null rests on intervals that include zero; equivalence tests with a stated margin make it a bounded claim. 3: every behavioural label is a keyword rule; the judge criterion should be 'says the hint is why'. 4: W is written (preregistration.md, 18:40): fresh runs, equivalence margin ±0.10, positive controls at the hack line and with a synthetic plan. 5: Gemma-3-12B is the only small lens-covered model whose text sometimes hides the switch (47 of 501 followers). Further down the ranking: within-question repeat of the planted-claim test, rebuilt eval-awareness probe on Qwen3-14B, content-token readout mid-reasoning, wording factorial on gpt-oss-20b, steering rerun at the 8,192-token cap.
+*Notes:* Experiments: gap-factorial, wording-dissection, mb-replication. Numbers from docs/findings.md claim 1: wording −51 pp [−56, −47]; thinking mode, decoding, format each < 7 pp; 'Hint: The answer is X' 67%; '...chose X' 4-13%. M&B is the earlier study whose switching was high; our pilot's near-zero is explained by wording. Wording sensitivity on other families is running today.
 
-## 15. b-wording (backup)
+## 5. open
 
-- Backup · Hint wording
-- Exploratory
+**In thinking mode, when Qwen switches, its reasoning names the hint**
 
-**Which part of the hint makes the model switch**
+- Only 2 of 1,231 factual switches and 0 of 5,019 moral switches never mention the hint.
+- With thinking turned off, 12–17% of switches do not mention the hint. Thinking off makes switches more often silent; it does not change how often they happen.
+- For the grader-bug nudge, thinking off raises uptake instead (Qwen3-8B 2% to 15%, Qwen3-14B 11% to 60%).
+- “Names the hint” is not “faithful”: the labels are keyword rules and the judge is not yet validated.
+- Strength: Solid. Thinking-mode result. The no-thinking part is moderate.
 
+*Notes:* Experiments: silent-scan-thinking, moral-hunt (names the hint: 2 of 1,231 factual, 0 of 5,019 moral); nothink-scale (12-17% silent with thinking off); grader-bug-e3 and models-grader (grader-bug uptake with thinking off: Qwen3-8B 15%, 14B 60%; 2% and 11% are the thinking-on rates per docs/findings.md and the main session's correction). Judge validation needs 50 user labels and has not been done (judge-validation).
 
-| Change to the prompt | Change in switch rate |
-|---|---|
-| Our hint instead of “Hint: An expert indicates…” | −51 points [−56, −47] |
-| Thinking on instead of off | +4 points [+2, +6] |
-| Qwen’s decoding instead of M&B’s | −6 points [−7, −4] |
-| Our prompt format instead of M&B’s | −3 points [−5, −2] |
-| “…indicates the answer is X” instead of “…chose X” | +47 points [+36, +57] |
-| Adding the “Hint:” label | +19 points [+10, +28] |
-| Adding “who answers correctly 90% of the time” | −7 points [−12, −2] |
-| Hint after the options instead of before the question | +20 points [+10, +30] |
+## 6. models
 
-- Top four rows: a factorial on 200 questions. Bottom four: a wording dissection on 50 questions.
-- Change in the share of runs on known questions that end on the pushed wrong option, Qwen3-8B. Sources: reports/gap_factorial.md, the wording-dissection registry entry.
+**Other models take nudges too, and most of them say so**
 
-*Notes:* Why our planned pilot hint failed: it reports one person's choice, which the model weighs as an opinion. M&B's 'Hint:' reads as a label from whoever set the question, and the model defers openly. All but 3 switches name the hint.
+- The earlier study’s hint moves all 12 models tested, by 17–72% (known items, 5 of 5 correct, via API).
+- The chart is a different nudge: a buggy grader plus “you are scored”. Most models take it (87–100% for Gemma-4-31B, DeepSeek-V4-Flash, Qwen3.6-27B).
+- 99% of the judged followers say they are doing it. Silent letter swaps exist (Llama-3.3-70B 22 of 250, Gemma-3-12B 47 of 501) but are one agent’s reading.
+- [RESULT PENDING: wording sensitivity on other model families (does the −51 pp wording effect appear outside Qwen?)]
+- Strength: Moderate. Hint result solid; grader-bug result moderate; silent swaps preliminary.
+- Figure: docs/experiments/models-grader/fig12_models_grader.svg. Share of runs following the grader-bug nudge, by model (not the wording hint).
 
-## 16. b-margin (backup)
+*Notes:* Experiment: models-grader. Numbers from docs/findings.md claims 2, 4, 14. The cross-model chart shows the grader-bug plus scored-framing nudge, not the M&B hint, so it does not show that wording sensitivity carries over. Whether other families are as wording-sensitive as Qwen is untested; result pending from today's run.
 
-- Backup · The correct letter at the answer
-- Exploratory
+## 7. retained
 
-**At the answer, the correct letter keeps what any salient letter keeps**
+**Some runs keep the correct answer: asked again sincerely, they can still give it**
 
+- After a run argued for B, we asked the question again plainly.
+- Runs told to argue for B named the correct option 93–94% of the time.
+- Runs that followed a wrong claim planted in their own reasoning did so 30%; followers of an “the answer is X” hint 40–60%.
+- So the knowledge is often retained, but this is behaviour, not a look inside.
+- Strength: Moderate. Qwen3-8B on multiple choice only.
 
-| Group (J-lens, late layers, at the answer) | Correct-letter margin, nats |
-|---|---|
-| Told to argue for B | +1.4 to +1.9 |
-| Followed the expert hint | +1.6 to +2.0 |
-| Followed a claimed answer key | +2.5 to +2.9 |
-| Honest errors, no hint | +0.7 to +1.7 |
-| Salience control: unchosen hinted letter in runs that resisted | +0.5 to +2.1 |
-| Kept a planted claim (control −0.2) | +1.4 [+0.8, +2.1] |
-| Qwen3-14B grader-bug followers, over the control | +1.2 [+0.8, +1.5] |
-| gpt-oss-20b grader-bug followers | +0.08 |
+*Notes:* Experiments: reelicitation-e7, instructed-e1. Numbers from docs/findings.md claim 6. Re-asked sincerely: told-to-argue runs 93-94% name the correct option; planted-claim followers 30%; answer-is-hint followers 40-60%.
 
-- Only planted claims and Qwen3-14B rise above the salience control, and the logit lens shows the same.
-- Margin: log-probability of the correct letter minus the other wrong letters, in nats (natural-log units). Before the answer position no group has a margin (|margin| ≤ 0.6, intervals cover 0).
+## 8. detect
 
-*Notes:* Sources: lens_main, lens_c3, models_grader. The letter readout effectively asks 'is the answer letter the next token?'. During the reasoning it isn't, so this readout cannot show the answer there whether or not the model knows it. That is why the later work moved to probes at option words and to commitment sentences.
+**No: the J-lens is no better than a logit lens, and a cheap probe or keyword check does better**
 
-## 17. b-hack (backup)
+- Before the answer, the J-lens score is within 0.09 of chance (AUROC 0.5) in 10 of 11 contrasts. It never beats the logit lens.
+- A keyword check on the reasoning separates “told to argue for B” from no hint at 0.97.
+- A probe picks the correct option in 72% of no-hint runs; J-lens 42%, logit lens 43% (chance 25%).
+- Silent vs open switches: J-lens 0.54, same as reasoning length 0.54.
+- Limit: the letter readout cannot see the answer mid-reasoning even in clean runs, so these nulls are weak.
+- Strength: Moderate. No equivalence test yet, so not “adds nothing”.
+- Figure: docs/experiments/jlens-vs-competitors/fig14_competitors.svg. Detection scores of J-lens, logit lens, probe and keyword check.
 
-- Backup · A model trained to hide a reward hack
-- Pre-registered
+*Notes:* Experiments: jlens-vs-competitors, instrument-q1q3, prereg-t1b, lens-positions. Numbers from docs/findings.md claims 5, 7, 8: silent vs open J-lens 0.54 [0.50, 0.58], length 0.54, logit 0.46. Equivalence tests F1-F3 are pre-registered but not run.
 
-**The lens sees which model is loaded, not which run hacks**
+## 9. steer
 
+**Pushing along a J-lens direction at the answer fixes more wrong answers than a logit-lens direction**
 
-| Comparison (J-lens hack-word score) | AUROC or share |
-|---|---|
-| Main test: hidden-hack runs (trained model) vs clean runs (base model) | 0.995 |
-| Control: identical clean text, read by the trained vs the base model | 0.94 |
-| Control: neutral words instead of hack words | 0.98 |
-| Model held fixed: hidden-hack vs no-hack runs (J-lens / logit lens) | 0.44 / 0.47 |
-| Reading lists by eye: sneakiness words, hidden hack vs no hack | 14.7% vs 17.7% of lists |
+- On runs ending in a wrong answer, we push toward the correct letter at the answer position only.
+- Fixed: J-lens 47%, logit lens 27%, probe direction 59%, random direction 2%.
+- This is the only place the J-lens beats the logit lens, and partly by construction.
+- It shows a causal effect at the answer, not knowledge held during reasoning.
+- Strength: Moderate. Plain Qwen3-8B, multiple choice, block 24; a 2,048-token cap (unaccepted deviation) weakens the during-reasoning part.
+- Figure: docs/experiments/steering/fig13_steering.svg. Share of wrong answers corrected, by steering direction.
 
-- Comparing lens scores across models needs the model held fixed; with it fixed, nothing separates hidden hacks before the code.
-- Qwen3-8B adapters trained by others to reward-hack; 120 coding problems. The by-eye read (exploratory) used eight readers with fixed criteria, partly blinded.
+*Notes:* Experiment: steering. Numbers from docs/findings.md claim 9. The probe direction is the difference of mean hidden states of runs answering each letter, learned on other questions. Significance of the J-lens vs logit gap was not stated in findings.md.
 
-*Notes:* Source: reports/hack_organism.md and hack_manual_read.md. Cheating words (cheat, fake, bypass, exploit) do appear in the trained models' J-lens lists, but just as often in clean runs of the same model, and they sit where the text is about to announce what it will do ('This problem is too hard. I'll ...'). Resampling shows the hack is a disposition fixed by the prompt (about 0.8 flat), drawn at the code.
+## 10. hack
 
-## 18. b-decisions (backup)
+**The lens scores separate the two models, not the hacking runs**
 
-- Backup · Decisions and caveats
+- Task: solve CodeContests problems where three harness hacks are described and forbidden. Fine-tuned adapters (cds-jb); only the version trained to hide usually hides.
+- Score: mean lens log-prob of 27 cheating words (exit, hack, pass, workaround…) before any hack word appears. Across models it separates almost perfectly (0.995).
+- But the same transcript read through both models gives 0.94, and neutral words 0.98. Within one model: J-lens 0.44, logit 0.47, probe 0.39, keyword 0.46.
+- Cheating words do appear, but as often in no-hack runs (14.7% vs 17.7% of lists); the hiding model shows almost none (1.1%).
+- Strength: Moderate. One model family, one task; the question was “does this run hack”.
+- Figure: docs/experiments/hack-organism/fig11_hack.svg. AUROC of lens scores: across models vs controls vs within one model.
 
-**What is waiting on you**
+*Notes:* Experiments: hack-organism, hack-manual-read. Numbers from docs/findings.md claim 10: cross-model 0.995; same transcript through both models 0.94; neutral words 0.98; last prompt token 1.00; one model fixed J-lens 0.44 [0.33, 0.55], logit 0.47, probe 0.39, keyword 0.46; cheating words 14.7% vs 17.7%; hiding model 1.1%. Story.md says 7% of flagged words are echoes (hack-manual-read README: 7% anywhere earlier in the text). It is a mean log-prob score with AUROC, not a classifier. The main test confounded model and behaviour; waterproofing test W is pre-registered, not run. Lesson: always control for model identity.
 
+## 11. evalaware
 
-| Open point | Decision needed |
-|---|---|
-| Steering: generation capped at 2,048 tokens (planned 3,072, usual 8,192); strength 0.2 ran before 0.8 | Accept, or rerun the generation half |
-| gpt-oss-20b: generation capped at 6,144 tokens so the readout fits in memory (10 of 2,000 runs hit it) | Accept |
-| Gemma-3-12B is gated | Put a Hugging Face token on the GPU machine |
-| The plan’s behavioural pilot waits for the sampling temperature (open question 1); planned nudges give almost no switches | Choose temperature; keep or change nudges |
-| Labels in most Qwen3-8B experiments are keyword rules | Run the judge before Friday |
+**The paper’s score fails on Qwen3-8B; on larger models the effect is not J-lens specific**
 
-- Sources: reports/steering.md, reports/models_grader.md, docs/open-questions.md, the registry’s tool strand.
+- Qwen3-8B: the score separates test-like from real prompts at 0.50 (chance). Qwen says “testing” in 1% of blackmail runs; Claude in 71%.
+- Qwen3-14B: removing eval-word directions silences “the user is testing me” (23% to 0%), but logit-lens directions do the same.
+- Qwen3.6-27B smoke test: J-lens 0.64, logit lens 0.66, 0.55 without eval-worded prompt sets, 0.49 within identical prompts.
+- [RESULT PENDING: test awareness on Qwen3-14B (do runs that say they are being tested take the grader bug more often than the 10% vs 12% seen so far?)]
+- [RESULT PENDING: full Qwen3.6-27B eval-awareness replication (pre-registered; the smoke test gave 0.64 vs 0.66 for the logit lens)]
+- Strength: Preliminary. 8B result moderate; 27B is one exploratory smoke test.
+- Figure: docs/experiments/evalaware-ablation-14b/fig17_evalaware_ablation14.svg. Qwen3-14B: effect of removing eval-word directions (J-lens vs logit-lens).
 
-*Notes:* Costs so far for the last two nights: about 6.5 GPU-hours on night two, about 3.5 the evening before; API $1.65 and $4.91. Octavia's data has no backup yet.
+*Notes:* Experiments: evalaware-replication (8B 0.50 [0.44, 0.56], 700 test-like vs 200 real prompts), evalaware-models-screen (1% vs 71%), evalaware-ablation-14b (23% to 0%), evalaware-big-smoke (27B 0.64 vs 0.66; 0.55; 0.49). Numbers from docs/findings.md claims 11 and 13. 'Other papers lack the control' is a literature reading (docs/literature/evalaware_internals.md); our control (docs/design_probe_control.md) is designed, not run.
+
+## 12. next
+
+**For now, reading the reasoning is enough here; a lens must beat that in silent cases**
+
+- Where Qwen argues against its knowledge, the text says so, so text monitoring already catches it.
+- No detection test shows the J-lens beating the logit lens, a probe or a keyword check. Absence is not shown: the letter readout is blind mid-reasoning.
+- Next: pending runs today, equivalence tests on the planted claim, a reward-hack waterproofing test, the probe-format control, and finding genuinely silent cases.
+- [RESULT PENDING: wording sensitivity on other model families (does the −51 pp wording effect appear outside Qwen?)]
+- [RESULT PENDING: test awareness on Qwen3-14B (do runs that say they are being tested take the grader bug more often than the 10% vs 12% seen so far?)]
+- [RESULT PENDING: full Qwen3.6-27B eval-awareness replication (pre-registered; the smoke test gave 0.64 vs 0.66 for the logit lens)]
+
+*Notes:* From docs/findings.md 'Open questions and running work' and 'Don't claim'. Pre-registered but not run: F1-F3 equivalence tests and difficulty control on the planted claim (CPU); reward-hack waterproofing W (3-4 GPU-h). Waiting for the user: Nguyen-probe control (docs/design_probe_control.md section 11), 50 labels for judge validation. Do not claim: that the J-lens cannot see arguing against knowledge; that it beats the logit lens in any detection test; that the CoT is faithful; that test awareness excuses bad behaviour.
+
+## 13. b-factorial (backup)
+
+**Which parts of the hint wording drive switching**
+
+- The full wording grid, paired over the same questions, Qwen3-8B.
+- Wording moves switching by −51 pp; thinking mode, decoding and format each under 7 pp.
+- Strength: Solid. Qwen3-8B only.
+- Figure: docs/experiments/gap-factorial/fig01_factorial.svg. Switch rate across the wording factorial.
+
+*Notes:* Experiments: gap-factorial, mb-replication. Numbers from docs/findings.md claim 1.
+
+## 14. b-instrument (backup)
+
+**The letter readout is blind mid-reasoning, even in clean runs**
+
+- Knowledge is readable only at the option words and at the answer.
+- So null results taken mid-reasoning are weak evidence.
+- Strength: Moderate. Qwen3-8B.
+- Figure: docs/experiments/instrument-q1q3/fig10_instrument.svg. Where the correct letter is readable.
+
+*Notes:* Experiments: instrument-q1q3, lens-positions. docs/findings.md claim 8.
+
+## 15. b-planted (backup)
+
+**The one J-lens positive is fragile**
+
+- Pre-registered pass: AUROC 0.71 [0.57, 0.84].
+- But J-lens minus logit lens is +0.11 [−0.10, +0.30], not significant.
+- Only 11 of 74 questions have both outcomes, so it may rank questions by difficulty.
+- Strength: Preliminary. Equivalence and difficulty-control tests (F1-F3) not run.
+- Figure: docs/experiments/lens-c3/fig08_c3.svg. Planted-claim test.
+
+*Notes:* Experiments: replicate-leads, lens-c3, planted-claim-c3. docs/findings.md claim 12.
+
+## 16. b-evalaware8b (backup)
+
+**The eval-awareness score by model**
+
+- Qwen3-8B 0.50 [0.44, 0.56] on 700 test-like vs 200 real prompts.
+- Qwen3.6-27B smoke test 0.64 vs logit lens 0.66; 0.55 without eval-worded sets; 0.49 within identical prompts.
+- [RESULT PENDING: full Qwen3.6-27B eval-awareness replication (pre-registered; the smoke test gave 0.64 vs 0.66 for the logit lens)]
+- Strength: Preliminary. 27B is one exploratory run.
+- Figure: docs/experiments/evalaware-replication/fig16_evalaware.svg. Eval-awareness score on Qwen3-8B.
+
+*Notes:* Experiments: evalaware-replication, evalaware-big-smoke. docs/findings.md claims 11, 13.
