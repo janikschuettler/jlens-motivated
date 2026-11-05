@@ -35,7 +35,7 @@ spec.loader.exec_module(og)
 MODEL = "qwen3.6-27b"
 OUT = REPO / "data/ea27/api"
 OLD = REPO / "data/models_grader/qwen3.6-27b/runs.jsonl"
-CAP = 2.40
+CAP = 2.13  # total over the screen+arms; EA27 task cap on new spend is $1.50 (spent 0.6787 before 2026-11-05)
 SCREEN_SAMPLES = 2
 LOCK = threading.Lock()
 
