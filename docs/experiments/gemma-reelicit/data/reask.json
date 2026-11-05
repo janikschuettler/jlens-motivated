@@ -1,0 +1,458 @@
+{
+ "no_cue": {
+  "n_runs": 119,
+  "n_items": 40,
+  "names_correct": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "names_switched_letter": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "no_cue:nohint": {
+  "n_runs": 119,
+  "n_items": 40,
+  "names_correct": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "names_switched_letter": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "open_switch": {
+  "n_runs": 198,
+  "n_items": 37,
+  "names_correct": [
+   0.444,
+   [
+    0.318,
+    0.586
+   ]
+  ],
+  "names_switched_letter": [
+   0.556,
+   [
+    0.414,
+    0.682
+   ]
+  ],
+  "no_letter": 0
+ },
+ "open_switch:W_90": {
+  "n_runs": 15,
+  "n_items": 10,
+  "names_correct": [
+   0.2,
+   [
+    0.053,
+    0.462
+   ]
+  ],
+  "names_switched_letter": [
+   0.8,
+   [
+    0.538,
+    0.947
+   ]
+  ],
+  "no_letter": 0
+ },
+ "open_switch:W_answer": {
+  "n_runs": 72,
+  "n_items": 30,
+  "names_correct": [
+   0.403,
+   [
+    0.243,
+    0.569
+   ]
+  ],
+  "names_switched_letter": [
+   0.597,
+   [
+    0.431,
+    0.757
+   ]
+  ],
+  "no_letter": 0
+ },
+ "open_switch:W_chose": {
+  "n_runs": 32,
+  "n_items": 20,
+  "names_correct": [
+   0.5,
+   [
+    0.281,
+    0.727
+   ]
+  ],
+  "names_switched_letter": [
+   0.5,
+   [
+    0.273,
+    0.719
+   ]
+  ],
+  "no_letter": 0
+ },
+ "open_switch:W_mb": {
+  "n_runs": 64,
+  "n_items": 35,
+  "names_correct": [
+   0.453,
+   [
+    0.292,
+    0.612
+   ]
+  ],
+  "names_switched_letter": [
+   0.547,
+   [
+    0.388,
+    0.708
+   ]
+  ],
+  "no_letter": 0
+ },
+ "open_switch:fewshot_marker": {
+  "n_runs": 3,
+  "n_items": 3,
+  "names_correct": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "names_switched_letter": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "open_switch:grader_code": {
+  "n_runs": 11,
+  "n_items": 7,
+  "names_correct": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "names_switched_letter": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "open_switch:metadata": {
+  "n_runs": 1,
+  "n_items": 1,
+  "names_correct": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "names_switched_letter": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "resisted": {
+  "n_runs": 552,
+  "n_items": 40,
+  "names_correct": [
+   0.966,
+   [
+    0.946,
+    0.983
+   ]
+  ],
+  "names_switched_letter": [
+   0.018,
+   [
+    0.006,
+    0.032
+   ]
+  ],
+  "no_letter": 0
+ },
+ "resisted:W_90": {
+  "n_runs": 65,
+  "n_items": 35,
+  "names_correct": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "names_switched_letter": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "resisted:W_answer": {
+  "n_runs": 31,
+  "n_items": 13,
+  "names_correct": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "names_switched_letter": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "resisted:W_chose": {
+  "n_runs": 48,
+  "n_items": 28,
+  "names_correct": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "names_switched_letter": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "resisted:W_mb": {
+  "n_runs": 14,
+  "n_items": 9,
+  "names_correct": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "names_switched_letter": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "resisted:fewshot_always_b": {
+  "n_runs": 117,
+  "n_items": 39,
+  "names_correct": [
+   0.932,
+   [
+    0.863,
+    0.983
+   ]
+  ],
+  "names_switched_letter": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "resisted:fewshot_marker": {
+  "n_runs": 57,
+  "n_items": 23,
+  "names_correct": [
+   0.912,
+   [
+    0.804,
+    1.0
+   ]
+  ],
+  "names_switched_letter": [
+   0.088,
+   [
+    0.0,
+    0.196
+   ]
+  ],
+  "no_letter": 0
+ },
+ "resisted:grader_code": {
+  "n_runs": 108,
+  "n_items": 39,
+  "names_correct": [
+   0.944,
+   [
+    0.89,
+    0.99
+   ]
+  ],
+  "names_switched_letter": [
+   0.046,
+   [
+    0.009,
+    0.099
+   ]
+  ],
+  "no_letter": 0
+ },
+ "resisted:metadata": {
+  "n_runs": 112,
+  "n_items": 38,
+  "names_correct": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "names_switched_letter": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "silent_switch": {
+  "n_runs": 82,
+  "n_items": 26,
+  "names_correct": [
+   0.11,
+   [
+    0.043,
+    0.208
+   ]
+  ],
+  "names_switched_letter": [
+   0.89,
+   [
+    0.792,
+    0.957
+   ]
+  ],
+  "no_letter": 0
+ },
+ "silent_switch:W_answer": {
+  "n_runs": 17,
+  "n_items": 9,
+  "names_correct": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "names_switched_letter": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "silent_switch:W_mb": {
+  "n_runs": 2,
+  "n_items": 2,
+  "names_correct": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "names_switched_letter": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "no_letter": 0
+ },
+ "silent_switch:fewshot_marker": {
+  "n_runs": 56,
+  "n_items": 23,
+  "names_correct": [
+   0.161,
+   [
+    0.069,
+    0.278
+   ]
+  ],
+  "names_switched_letter": [
+   0.839,
+   [
+    0.722,
+    0.931
+   ]
+  ],
+  "no_letter": 0
+ },
+ "silent_switch:metadata": {
+  "n_runs": 7,
+  "n_items": 3,
+  "names_correct": [
+   0.0,
+   [
+    0.0,
+    0.0
+   ]
+  ],
+  "names_switched_letter": [
+   1.0,
+   [
+    1.0,
+    1.0
+   ]
+  ],
+  "no_letter": 0
+ }
+}
