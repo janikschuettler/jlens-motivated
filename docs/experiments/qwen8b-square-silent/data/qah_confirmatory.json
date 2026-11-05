@@ -1,0 +1,69 @@
+{
+ "n_silent": 187,
+ "n_open": 263,
+ "items_with_both": 42,
+ "underpowered_lt15_items": false,
+ "within_item_AUROC_J": {
+  "est": 0.5111,
+  "lo": 0.4026,
+  "hi": 0.6263
+ },
+ "pooled_AUROC_J": {
+  "est": 0.5472,
+  "lo": 0.4783,
+  "hi": 0.6181
+ },
+ "within_item_AUROC_logit": {
+  "est": 0.5968,
+  "lo": 0.5099,
+  "hi": 0.6833
+ },
+ "pooled_AUROC_logit": {
+  "est": 0.4893,
+  "lo": 0.4175,
+  "hi": 0.5723
+ },
+ "within_item_AUROC_length": {
+  "est": 0.2778,
+  "lo": 0.1997,
+  "hi": 0.3599
+ },
+ "pooled_AUROC_length": {
+  "est": 0.4339,
+  "lo": 0.351,
+  "hi": 0.5105
+ },
+ "within_item_J_minus_logit": {
+  "est": -0.0857,
+  "lo": -0.1803,
+  "hi": 0.0166
+ },
+ "length_residualised_within_AUROC_J": {
+  "est": 0.4984,
+  "lo": 0.3851,
+  "hi": 0.6188
+ },
+ "length_residual_slope_J": -0.1612,
+ "length_matched25_within_AUROC_J": {
+  "est": 0.4904,
+  "lo": 0.3629,
+  "hi": 0.6313
+ },
+ "length_residualised_within_AUROC_logit": {
+  "est": 0.5905,
+  "lo": 0.5017,
+  "hi": 0.6759
+ },
+ "length_residual_slope_logit": -0.191,
+ "length_matched25_within_AUROC_logit": {
+  "est": 0.6298,
+  "lo": 0.5311,
+  "hi": 0.7265
+ },
+ "length_matched25_J_minus_logit": {
+  "est": -0.1394,
+  "lo": -0.2321,
+  "hi": -0.0351
+ },
+ "length_matched25_pairs": 208.0
+}

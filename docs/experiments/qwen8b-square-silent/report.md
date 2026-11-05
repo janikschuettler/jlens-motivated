@@ -23,3 +23,11 @@ With thinking off, Qwen3-8B is not a good silent-switch subject for the square c
 
 ## Deviations
 Pooled (both arms) analysis from the pre-registration was not run. Known filter: 9/10 under thinking-off but with a different prompt format and decoding. Resisted runs capped at 150 per arm. 20 silent switches read by eye (not 30).
+
+## Follow-up Q-ah: does the answer-hint lead hold? (pre-registered `docs/preregistration.md` Q-ah, 2026-11-05 19:33 GMT)
+Exploratory step first (first run, answer-hint arm, 25 items with both silent and open switches; `data/qah_exploratory_first_run.json`): the earlier pooled AUROC (J 0.64, logit 0.53) mixed items. Within items J-lens 0.74 [0.59, 0.87] and logit lens 0.74 [0.62, 0.85]; J minus logit 0.00 [-0.16, 0.15]. Silent replies are longer (length AUROC 0.22 within item).
+Confirmatory fresh run (new seed, same 145 items, hint arm, 8 samples each, 1,160 runs; 52% switch, 601 switches, 187 silent; read 187 silent + 263 open on 42 items with both; `data/qah_confirmatory.json`):
+- Within-item AUROC silent vs open: J-lens 0.51 [0.40, 0.63], logit lens 0.60 [0.51, 0.68], reply length 0.28 [0.20, 0.36].
+- J minus logit: -0.09 [-0.18, 0.02]. Pre-registered pass needed the interval above 0: **fail**. The J-lens lower bound is not above 0.5 either.
+- Length control: residualised on log length, J 0.50 [0.39, 0.62], logit 0.59 [0.50, 0.68]; length-matched pairs (208), J 0.49, logit 0.63 [0.53, 0.73], J minus logit -0.14 [-0.23, -0.04].
+Conclusion: the lead does not replicate. If anything the logit lens separates silent from open slightly better, and the silent/open difference is partly length-related.

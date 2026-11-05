@@ -1,0 +1,14 @@
+{
+ "runs": 1160,
+ "parsed": 1156,
+ "items": 145,
+ "switch": [
+  0.5199,
+  0.4548,
+  0.5841
+ ],
+ "n_switch": 601,
+ "n_silent": 187,
+ "read_silent": 187,
+ "read_open": 263
+}
