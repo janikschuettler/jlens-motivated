@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" font-family="sans-serif" font-size="12">
+<rect width="760" height="380" fill="#fff"/>
+<text x="20" y="24" font-size="14" font-weight="bold">Same prompt, runs that will say "testing me" vs those that will not (Qwen3-14B test-awareness runs)</text>
+<text x="20" y="42" fill="#555">Within-prompt AUROC, 0.5 = chance; dots with 95% intervals (resampling prompts). Grey band: 100 random directions (Nguyen layer).</text>
+<line x1="230.0" x2="230.0" y1="62" y2="358" stroke="#ddd"/><text x="221.0" y="374" fill="#555">0.3</text>
+<line x1="300.0" x2="300.0" y1="62" y2="358" stroke="#ddd"/><text x="291.0" y="374" fill="#555">0.4</text>
+<line x1="370.0" x2="370.0" y1="62" y2="358" stroke="#444"/><text x="361.0" y="374" fill="#555">0.5</text>
+<line x1="440.0" x2="440.0" y1="62" y2="358" stroke="#ddd"/><text x="431.0" y="374" fill="#555">0.6</text>
+<line x1="510.0" x2="510.0" y1="62" y2="358" stroke="#ddd"/><text x="501.0" y="374" fill="#555">0.7</text>
+<line x1="580.0" x2="580.0" y1="62" y2="358" stroke="#ddd"/><text x="571.0" y="374" fill="#555">0.8</text>
+<line x1="650.0000000000001" x2="650.0000000000001" y1="62" y2="358" stroke="#ddd"/><text x="641.0000000000001" y="374" fill="#555">0.9</text>
+<line x1="720.0" x2="720.0" y1="62" y2="358" stroke="#ddd"/><text x="711.0" y="374" fill="#555">1.0</text>
+<rect x="329.67070600632246" y="62" width="106.71496311907265" height="288" fill="#999" opacity="0.18"/>
+<text x="20" y="98">Nguyen probe</text>
+<line x1="358.6227845652595" x2="410.84466613214914" y1="84" y2="84" stroke="#2a6f97" stroke-width="2"/><circle cx="385.61292588689844" cy="84" r="4.5" fill="#2a6f97"/>
+<line x1="359.8550724637681" x2="491.75459526334384" y1="100" y2="100" stroke="#c1440e" stroke-width="2"/><circle cx="427.27272727272725" cy="100" r="4.5" fill="#c1440e"/>
+<text x="20" y="146">Hua direction</text>
+<line x1="368.2856563288857" x2="419.7650835695466" y1="132" y2="132" stroke="#2a6f97" stroke-width="2"/><circle cx="394.2184755883386" cy="132" r="4.5" fill="#2a6f97"/>
+<line x1="338.99982861772406" x2="489.89704067558733" y1="148" y2="148" stroke="#c1440e" stroke-width="2"/><circle cx="417.0909090909091" cy="148" r="4.5" fill="#c1440e"/>
+<text x="20" y="194">J-lens eval words</text>
+<line x1="418.362852115962" x2="475.66140420649106" y1="180" y2="180" stroke="#2a6f97" stroke-width="2"/><circle cx="446.8352651914296" cy="180" r="4.5" fill="#2a6f97"/>
+<line x1="306.7229814247295" x2="463.9159891598916" y1="196" y2="196" stroke="#c1440e" stroke-width="2"/><circle cx="384.0" cy="196" r="4.5" fill="#c1440e"/>
+<text x="20" y="242">Logit-lens eval words</text>
+<line x1="434.44263636298115" x2="488.6834685475493" y1="228" y2="228" stroke="#2a6f97" stroke-width="2"/><circle cx="461.3417632595715" cy="228" r="4.5" fill="#2a6f97"/>
+<line x1="339.0139565795304" x2="494.90441176470586" y1="244" y2="244" stroke="#c1440e" stroke-width="2"/><circle cx="417.0909090909091" cy="244" r="4.5" fill="#c1440e"/>
+<text x="20" y="290">Window length</text>
+<line x1="393.12558409389817" x2="411.85560473545127" y1="276" y2="276" stroke="#2a6f97" stroke-width="2"/><circle cx="402.57815244116614" cy="276" r="4.5" fill="#2a6f97"/>
+<line x1="195.65373563218392" x2="327.90468342108755" y1="292" y2="292" stroke="#c1440e" stroke-width="2"/><circle cx="261.8181818181818" cy="292" r="4.5" fill="#c1440e"/>
+<text x="20" y="338">Word n-gram text</text>
+<line x1="533.3502751266587" x2="580.5192705314539" y1="324" y2="324" stroke="#2a6f97" stroke-width="2"/><circle cx="557.7239199157007" cy="324" r="4.5" fill="#2a6f97"/>
+<line x1="438.25923781098965" x2="564.4444444444446" y1="340" y2="340" stroke="#c1440e" stroke-width="2"/><circle cx="501.0909090909091" cy="340" r="4.5" fill="#c1440e"/>
+<circle cx="230" cy="356" r="4.5" fill="#2a6f97"/><text x="240" y="360">Keyword label (185 prompts)</text>
+<circle cx="480" cy="356" r="4.5" fill="#c1440e"/><text x="490" y="360">Strict judge label (51 prompts)</text>
+</svg>

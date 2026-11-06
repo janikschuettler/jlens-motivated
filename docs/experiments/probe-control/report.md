@@ -100,3 +100,44 @@ Shown (moderate confidence): the scores tested here react to wording and format 
 
 ## Caveats (test b)
 Reduced size (80 items per set). Direct-question belief is nearly binary, and the follow-up question is appended inside the same user message (so it contains eval words for every version equally). One model. Hawthorne, Devbunova, formal-tone control, label judge check on these runs and the Qwen3-8B twin not run. Spontaneous label is the regex only; 10 of 2,560 runs did not finish. Files: data/pc_test_b.json, fig_probe_control_b.svg; code scripts/explore/pc_b_build.py, scripts/gen/pc_b_generate.py, scripts/lens/pc_b_readout.py, scripts/lens/pc_b_analyze.py.
+
+
+---
+
+# Test (a) on a second dataset: test-awareness prompts (PC-H), and the length confound in test (b) (PC-L)
+
+Run 2026-11-06 on arena9-derpy (L40S). PC-H and PC-L were pre-registered in `docs/preregistration.md` (committed before any readout). The probe directions are the octavia build copied unchanged (sha256 of directions.pt `1c2ea2e3...85e8` and build.json `7f9751cc...7a7c` identical on both machines), so the layers are the same (Nguyen 2, Hua 14) and the Nguyen build check still failed narrowly (0.697 < 0.70) there: carried over. AUROC: 0.5 is chance. Brackets are 95% intervals from resampling prompts (2,000, seed 0).
+
+## Answer in plain words (PC-H)
+Dataset: Abdelnabi and Salem test-awareness prompts on Qwen3-14B (185 prompts with both runs that will say "the user may be testing me" and runs that will not; windows are the reasoning up to that sentence, as in TA14). The result is the same as on the grader-bug prompts, only weaker:
+- The two published probes do not separate the runs. Keyword label: Nguyen 0.52 [0.48, 0.56], Hua 0.53 [0.50, 0.57]; both 90% intervals sit inside the pre-registered "no signal" zone 0.42-0.58 (Nguyen 0.49-0.55, Hua 0.50-0.57), and both are inside the random-direction bands (100 random directions: 0.44-0.59 and 0.42-0.60).
+- The J-lens eval-word score does carry a weak signal under the keyword label: 0.61 [0.57, 0.65] (same as TA14-1), above the probes by +0.09 [+0.03, +0.15] (Nguyen) and +0.08 [+0.01, +0.14] (Hua). The logit lens is at 0.63 [0.59, 0.67], J minus logit -0.02 [-0.04, +0.00]. Window length alone is 0.55.
+- A word n-gram classifier on the same text is far ahead of all of them: 0.77 [0.73, 0.80] (J-lens minus text -0.16 [-0.20, -0.12]; Nguyen minus text -0.25; Hua minus text -0.23). As in TA14, the unaware runs were chosen to contain none of the looser test words, so part of this gap is built into the label.
+- Under the strict judge label (51 prompts, 76 aware runs; same windows) nothing separates: Nguyen 0.58 [0.49, 0.67], Hua 0.57 [0.46, 0.67], J-lens 0.52 [0.41, 0.63], logit lens 0.57 [0.46, 0.68], text 0.69 [0.60, 0.78]. No interval is wider than 0.25, so it is not "underpowered" by the pre-registered rule, but every probe interval includes 0.5 and extends past 0.58 (90%: Nguyen 0.50-0.66, Hua 0.47-0.66), so the verdict is inconclusive, not "no signal". Window length is 0.35 here (strict-aware windows are shorter, the opposite direction to the keyword set).
+- Judge Yes-or-Maybe vs No (85 prompts, secondary): Nguyen 0.53, Hua 0.55, J-lens 0.53, logit 0.58, text 0.75.
+
+Pre-registered verdict: Nguyen and Hua do not "read belief" under either label (the rule needs a lower bound above 0.5 and a value above the random band). Under the keyword label both are "no signal"; under the strict label inconclusive.
+
+Slide claim (one sentence): on a second dataset (Qwen3-14B test-awareness prompts, identical-prompt comparison) the published Nguyen probe and Hua direction stay at chance (0.52 and 0.53) and no better than random directions, the J-lens eval-word score is weakly above chance (0.61, not above the logit lens), and a word-count text classifier beats all of them (0.77).
+
+| Score (keyword label, 185 prompts) | Full window | Last 32 tokens | First 64 tokens | Length-matched (first m) | Length-matched (last m) | Residualised on log length |
+| --- | --- | --- | --- | --- | --- | --- |
+| Nguyen | 0.52 [0.48, 0.56] | 0.49 | 0.50 | 0.50 [0.46, 0.54] | 0.52 | 0.53 [0.49, 0.56] |
+| Hua | 0.53 [0.50, 0.57] | 0.56 | 0.50 | 0.53 [0.49, 0.56] | 0.52 | 0.55 [0.51, 0.59] |
+| J-lens | 0.61 [0.57, 0.65] | 0.61 | 0.50 | 0.61 [0.57, 0.65] | 0.60 | 0.60 [0.56, 0.65] |
+| Logit lens | 0.63 [0.59, 0.67] | 0.67 | 0.54 | 0.65 [0.61, 0.68] | 0.62 | 0.66 [0.62, 0.69] |
+| Text n-grams | 0.77 [0.73, 0.80] | | | 0.74 [0.71, 0.77] | | |
+Read: each cell is a within-prompt AUROC over all aware-vs-unaware run pairs. Length-matched and residualised columns are the exploratory versions declared in PC-H; the residual slope is fixed from the data (not re-estimated per resample), so those intervals are slightly too narrow. Strict-label and Yes-or-Maybe tables with all intervals: `data/pc_test_a_second_dataset.json`; figure `fig_probe_control_h.svg`.
+
+Deviations: the pre-registered pairing here is TA14's all-pairs-in-prompt (not PC's cut-at-same-index), so numbers are not directly comparable to the grader-bug table (Nguyen 0.63, Hua 0.58 there). The embedding classifier and the supervised ceiling were not run. The teacher-forcing check against vLLM was not repeated for the probe pass (the same saved IDs were validated in TA14: median gap 1e-4). The pre-registration timestamp reads "01:0x" and was actually written about 00:56 GMT.
+
+Interpretation: on two datasets with identical prompts, the published probes sit at or near chance for the question "will this run say it is being tested?" and the eval-word lens scores sit at 0.6, with a text word classifier well above. Confidence moderate (one model, two prompt families, a loose label on the main set and a small strict set).
+
+## Length confound in test (b), Nguyen probe (PC-L, exploratory)
+Question: the evaluation-style prompt is longer than its plain twin and the Nguyen score is a mean over prompt tokens, so is its sign-flipping across change types a length effect?
+
+Answer: no. The length difference is small (eval-style longer in every pair, by 4 tokens on average for the benchmark template, 1 for the grader eval words, 8 to 12 for the added sentences), and two length controls leave the pattern in place.
+- Residualising each score on log token count (slope pooled within prompt-version kind): Nguyen stays at 0.00 for the benchmark template (66 of 66 pairs) and 1.00 for eval words in the grader prompt (44 pairs); pooled 0.46 -> 0.42. Hua pooled 0.69 -> 0.69, J-lens 0.70 -> 0.69. Regressing the pair difference on the log token ratio gives the same picture (Nguyen P1 0.00, P3 1.00).
+- Padding the shorter version with neutral weather filler to equal token count (re-scored on GPU; unpadded versions reproduce the original scores exactly): Nguyen P1 0.00, P3 1.00, P4 0.00 (was 0.27), P5 control 0.01 (was 0.38); Hua P1 1.00, P3 0.84, pooled 0.90 (was 0.69); J-lens pooled 0.85 (was 0.70); logit lens 0.61 (was 0.60).
+- Reading: length does not drive the pre-registered conclusions. Padding is not a clean length control (the filler is text with its own projection and sits at the start of the message), which is why the padded Nguyen mean moves further for the AI-topic control (0.38 -> 0.01) and Hua and J-lens rise; use the residualised numbers as the main control and the padded ones as a robustness check. Confidence moderate; exploratory, matched pairs only (139 pooled, 18 for the benchmark-vs-casual change, 11 for the evaluation sentence).
+Data: `data/pc_test_b_length.json`. Code: `scripts/lens/pc_h_analyze.py`, `pc_l_pad.py`, `pc_l_analyze.py`, `scripts/docs/fig_probe_control_h.py`.

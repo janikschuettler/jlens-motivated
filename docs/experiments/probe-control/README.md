@@ -43,6 +43,8 @@ data:
 - data/pc_test_a.json
 - data/pc_test_b.json
 - data/judge_check.json
+- data/pc_test_a_second_dataset.json
+- data/pc_test_b_length.json
 related:
 - evalaware-ablation-14b
 - evalaware-replication
@@ -61,6 +63,8 @@ See report.md. Test (a) first (deadline), then test (b) after the user approved 
 See report.md. In short: the probes are weak (0.58-0.63) and not above random directions; window length alone scores 0.66; word n-grams on the same text score 0.83; the eval-word J-lens and logit-lens scores reach 0.67-0.68 and stay at 0.61 after length matching.
 
 Test (b): within pairs where the model's stated belief about being tested doesn't change, scores still move with the surface; the Nguyen probe moves in opposite directions for different surface changes (pair AUROC 0.0 for the benchmark template, 1.0 for eval words in the grader prompt) and the Hua direction, J-lens and logit-lens scores rise with a pure "AI topic" sentence (0.80-0.89). The pooled pre-registered numbers (0.46-0.70) hide this.
+
+Update 2026-11-06 (PC-H, PC-L; see the last two sections of report.md; figure fig_probe_control_h.svg): on the second dataset (Qwen3-14B test-awareness prompts, 185 prompts) the Nguyen probe and Hua direction stay at chance (0.52 and 0.53; 90% intervals inside 0.42-0.58, inside the random-direction bands), the J-lens eval-word score is 0.61 (logit lens 0.63, word n-grams 0.77), and under the strict judge label (51 prompts) nothing separates (probes 0.57-0.58, inconclusive). Exploratory: the evaluation-style prompt versions in test (b) are only 1-12 tokens longer, and residualising on token count or padding to equal length leaves the Nguyen swings (0.00 for the benchmark template, 1.00 for eval words in the grader prompt) in place, so length does not explain test (b).
 
 ## Interpretation
 The prompts being identical, some pre-verbal information about the coming "testing me" sentence exists and is linearly readable (supervised ceiling 0.82), but it is also readable from the text so far. The published probes do not capture it.
