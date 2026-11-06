@@ -1,0 +1,11 @@
+# F1-T, T2 top-up: same fork as w2_forks_reelicit (sincere re-asking after the run, thinking off, 1 token),
+# full-history mode (the saved sequence verbatim, thinking kept), for every run that answered the pushed
+# letter in the new wording runs; fresh-context control per item.
+name: f1t/forks_reelicit
+kind: reelicit
+out_dir: data/explore/f1t/forks_reelicit
+modes: [full]
+control: true
+select: {classes: [hint], cap: null, seed: 0}
+sources:
+  - {path: data/explore/f1t/wording/runs.jsonl}

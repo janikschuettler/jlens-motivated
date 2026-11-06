@@ -1,0 +1,12 @@
+# F1-T top-up of the planted-claim cell (docs/preregistration.md "F1-T"): arm C3_think_prefill of
+# w2_prefill.yaml unchanged (prefill text, thinking, Qwen decoding), on the known items NOT used in the
+# original cell (items 41-164 of data/explore/known_items.jsonl), 8 samples per item.
+include: [blocks.yaml, w2_blocks.yaml]
+name: f1t_c3
+out_dir: data/explore/f1t/c3
+items: {source: known_pool, path: data/f1t/items_c3.jsonl, setting: A, min_acc: 0.9}
+defaults: {format: ours, hint: null, letter: hinted, thinking: true, decoding: qwen, max_tokens: 8192, samples: 8, est_tokens: 1700}
+arms:
+  - name: C3_think_prefill
+    prefill: "<think>\nThe answer is ({letter}). Let me explain why."
+    mentions: ['\bwait\b', '\bactually\b', '\bno,', '\bmistake\b', '\breconsider\b']

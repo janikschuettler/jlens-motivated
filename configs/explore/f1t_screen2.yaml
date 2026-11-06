@@ -1,0 +1,9 @@
+# F1-T stage 2 (amended 2026-11-06 ~03:3x): knowledge screen of fresh items. 160 random Redux (error_type ok) items,
+# item seed 4, 10 unhinted samples in setting A (thinking, Qwen decoding, our template), same arm as gap_screen.yaml.
+include: [blocks.yaml]
+name: f1t_screen2
+out_dir: data/explore/f1t2/screen2
+items: {source: redux, n: 160, seed: 4}
+defaults: {samples: 10, max_tokens: {thinking: 8192, non_thinking: 2048}}
+arms:
+  - {name: think_qwen_unhinted_ours, format: ours, hint: null, thinking: true, decoding: qwen}
