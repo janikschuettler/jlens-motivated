@@ -81,6 +81,36 @@ Partly: the J-lens direction moves the answer, more than the logit-lens directio
 
 The J-lens letter reading is causal at the moment of answering, so it is a valid readout of the answer the model is about to give, and better than the logit lens. But a probe learned from the model's own answer states is a stronger handle, at the answer position and during the reasoning. For the core question this favours trained probes over the J-lens as the readout of whether the correct answer is still represented.
 
+## Re-run with a longer token cap (2026-11-06; pre-registered in [preregistration.md](preregistration.md))
+
+Question: does the earlier generation result survive when fewer runs are cut off? Same 40 questions, same directions, push strength 0.2 at block 24 at every generated token, two samples per question and cell (240 runs per pooled cell), but cap 4,096 new tokens instead of 2,048. The intended 8,192 did not fit the night's time box (memory allows about 14 rows per batch at that length), so this is a partial fix; 12% of unsteered wrong-answer runs still hit the cap (34% before). Only the three wrong-answer groups were run (no unhinted runs); the answer-position part was not re-run because it does not depend on the cap.
+
+Wrong-answer runs (told to argue for B, hint, planted claim, pooled), share ending on the correct letter:
+
+| Push | natural finish only (cut-off = no answer) | forced answer at the cap |
+| --- | --- | --- |
+| none | 28% | 33% |
+| J-lens | 41% | 48% |
+| logit lens | 36% | 40% |
+| probe | 60% | 73% |
+| random | 29% | 33% |
+
+Paired by question (percentage points, 95% interval over 40 questions):
+
+| Contrast | natural finish only | forced answer |
+| --- | --- | --- |
+| J-lens minus logit lens (primary, R1 / R2) | +5.4 [-0.8, +11.3] | +7.9 [+2.5, +13.3] |
+| J-lens minus no push | +13.3 [+7.1, +20.0] | +15.8 [+10.0, +22.5] |
+| logit lens minus no push | +7.9 [+2.5, +12.9] | +7.9 [+2.5, +13.3] |
+| J-lens minus random | +12.5 [+5.4, +19.2] | +15.4 [+8.3, +22.1] |
+| J-lens minus probe | -18.8 [-27.5, -10.0] | -24.2 [-32.9, -16.7] |
+
+How to read: each cell is the share of runs (each question counts once). Sample 0 alone gave J-lens minus logit lens +1.7 [-9, +13] (natural) and +5.8 [-3, +16] (forced).
+
+Pre-registered reading: the primary measure (natural finish) does not show the J-lens ahead of the logit lens (lower bound just below 0); the forced-answer measure does. Prediction partly met: the J-lens push helps clearly versus no push and versus random, the probe push is far stronger, but the J-lens advantage over the logit lens is smaller than the answer-position result (47% vs 27%) and not secure. With fewer cut-off runs the J-lens gain over no push stays (about +13 to +16 points), so the earlier gain was not a cap artefact; the claim that it "mainly makes runs longer" is not supported here (share hitting the cap is unchanged, 12% vs 12%). Wrong-answer B drops 60% to 47% (J-lens), 53% (logit), 25% (probe). Per group, forced correct (none / J / logit / probe / random): argue 12 / 33 / 20 / 59 / 11; hint 21 / 34 / 34 / 69 / 23; planted 64 / 79 / 68 / 90 / 65.
+
+Caveats: cap 4,096, not 8,192; no extra questions (no saved prompts for them, and generation time was the limit); same one layer and strength; the interval for the primary just includes 0, so "J-lens better than logit lens during reasoning" is suggestive only. Figure: [fig_rerun_cap4096.svg](fig_rerun_cap4096.svg). Numbers: [data/steering_rerun_cap4096.json](data/steering_rerun_cap4096.json). Raw runs (octavia, gitignored): `data/steer/gen4k/`.
+
 ## Caveats
 
 - Deviation from the plan: token cap 2,048 instead of 8,192 (the plan said 3,072), chosen for time; needs the user's acceptance. It cuts off 34–47% of the wrong-answer runs; the same questions' original runs cut at 2,048 match the unpushed cell.
