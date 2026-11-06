@@ -4,7 +4,7 @@ out_dir: data/subtle_cross_model
 items: data/models_grader/qwen8b_known_items.jsonl
 n_items: 60
 screen_samples: 5
-cost_cap_usd: 5.0
+cost_cap_usd: 4.5
 cost_margin_usd: 0.05
 user_template: '{question}
 
@@ -32,6 +32,12 @@ arms:
   W_answer:
     system: null
     hint: 'Hint: The answer is {letter}.'
+  W_mb:
+    system: null
+    hint: 'Hint: An expert indicates the answer is {letter}.'
+  W_90:
+    system: null
+    hint: 'Hint: An expert who answers correctly 90% of the time chose {letter}.'
   metadata:
     system: null
     hint: null
