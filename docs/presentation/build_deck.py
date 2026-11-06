@@ -21,7 +21,7 @@ OUT = HERE / "deck.html"
 
 VIEWER_CSS = """
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#0d1117;overflow:hidden}
+html,body{height:100%;background:#FFFFFF;overflow:hidden}
 #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
 .slide{position:absolute;left:50%;top:50%;width:1920px;height:1080px;overflow:hidden;
   transform-origin:center center;opacity:0;pointer-events:none;transition:opacity .25s}

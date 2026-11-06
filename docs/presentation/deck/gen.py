@@ -5,7 +5,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SL = os.path.join(ROOT, "project", "slides")
 os.makedirs(SL, exist_ok=True)
 
-BG = "#F4F5F7"; BG2 = "#E8EBF0"; INK = "#151C28"; BODY = "#434E60"; MUTED = "#566072"
+BG = "#FFFFFF"; BG2 = "#E8EBF0"; INK = "#151C28"; BODY = "#434E60"; MUTED = "#566072"
 RULE = "#CBD2DC"; CARD = "#FBFCFD"; BLUE = "#2D58CC"; ORANGE = "#B4560F"; GREY = "#8B94A3"
 DARK = "#151C28"; DLIGHT = "#EEF1F5"; DBODY = "#BAC4D2"; DBLUE = "#93B2FF"
 SERIF = "'Source Serif 4', Georgia, serif"; SANS = "'IBM Plex Sans', Arial, sans-serif"; MONO = "'IBM Plex Mono', 'Courier New', monospace"
@@ -617,7 +617,7 @@ slide("next", "What it means and what is next",
        "Lens scores across models measure the model; published eval-awareness probes fail the identical-prompt control; the J-lens’s test-awareness signal vanishes with a strict label."],
       None, "", bsize=28, top_html=NEXTC, brow=True,
       md_extra="- Where Qwen argues against its knowledge in thinking mode, the text says so: text monitoring already catches it.\n- Silent switches do occur in non-reasoning models. That is where a lens could beat the text.",
-      notes="From docs/findings.md 'Open questions and running work' and 'Don't claim'. Done today: Gemma-3-27B silent switches (gemma27-silent), probe-control test (b). Not run: reward-hack waterproofing W (3-4 GPU-h), judge validation (needs 50 user labels), Gemma-3-12B silent swaps under a lens, Qwen3.6-27B removal test. Do not claim: that the J-lens cannot see arguing against knowledge; that it beats the logit lens meaningfully in detection; that the CoT is faithful; that test awareness excuses bad behaviour; anything beyond Qwen and MMLU-Redux for the lens results.", bg=BG2)
+      notes="From docs/findings.md 'Open questions and running work' and 'Don't claim'. Done today: Gemma-3-27B silent switches (gemma27-silent), probe-control test (b). Not run: reward-hack waterproofing W (3-4 GPU-h), judge validation (needs 50 user labels), Gemma-3-12B silent swaps under a lens, Qwen3.6-27B removal test. Do not claim: that the J-lens cannot see arguing against knowledge; that it beats the logit lens meaningfully in detection; that the CoT is faithful; that test awareness excuses bad behaviour; anything beyond Qwen and MMLU-Redux for the lens results.", bg=BG)
 
 # backups
 slide("b-factorial", "Backup · wording factorial", "Which parts of the hint wording drive switching",
