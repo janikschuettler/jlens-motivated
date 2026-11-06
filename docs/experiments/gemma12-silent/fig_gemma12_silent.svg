@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" font-family="sans-serif" font-size="13"><rect width="760" height="330" fill="white"/>
+<text x="10" y="22" font-size="15" font-weight="bold">Gemma-3-12B: correct letter vs other unchosen letters in 985 silent switches (204 items)</text>
+<text x="10" y="42" fill="#444">Mean margin S (log-prob units) with 95% item-bootstrap interval; 0 = no preference for the correct letter</text>
+<text x="10" y="79">J-lens, middle blocks 18-34</text><line x1="300.425" x2="333.425" y1="75" y2="75" stroke="#c0392b" stroke-width="3"/><circle cx="317.3" cy="75" r="5" fill="#c0392b"/><text x="341.425" y="79" fill="#333">0.36 [0.14, 0.58]</text>
+<text x="10" y="117">Logit lens, middle blocks</text><line x1="289.85" x2="306.65" y1="113" y2="113" stroke="#7f8c8d" stroke-width="3"/><circle cx="298.25" cy="113" r="5" fill="#7f8c8d"/><text x="314.65" y="117" fill="#333">0.11 [-0.00, 0.22]</text>
+<text x="10" y="155">J-lens, last blocks 36-42</text><line x1="447.575" x2="564.8" y1="151" y2="151" stroke="#c0392b" stroke-width="3"/><circle cx="504.57500000000005" cy="151" r="5" fill="#c0392b"/><text x="572.8" y="155" fill="#333">2.86 [2.10, 3.66]</text>
+<text x="10" y="193">Logit lens, last blocks</text><line x1="359.675" x2="410.225" y1="189" y2="189" stroke="#7f8c8d" stroke-width="3"/><circle cx="384.125" cy="189" r="5" fill="#7f8c8d"/><text x="418.225" y="193" fill="#333">1.25 [0.93, 1.60]</text>
+<text x="10" y="231">Model's own output, answer position</text><line x1="429.725" x2="486.425" y1="227" y2="227" stroke="#2c6fbb" stroke-width="3"/><circle cx="457.25" cy="227" r="5" fill="#2c6fbb"/><text x="494.425" y="231" fill="#333">2.23 [1.86, 2.62]</text>
+<text x="10" y="269">Own output, 8 tokens earlier</text><line x1="263.0" x2="312.125" y1="265" y2="265" stroke="#2c6fbb" stroke-width="3"/><circle cx="285.875" cy="265" r="5" fill="#2c6fbb"/><text x="320.125" y="269" fill="#333">-0.06 [-0.36, 0.29]</text>
+<line x1="290" x2="290" y1="58" y2="283" stroke="#999" stroke-dasharray="3,3"/></svg>

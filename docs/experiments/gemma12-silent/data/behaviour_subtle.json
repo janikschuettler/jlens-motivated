@@ -1,0 +1,21 @@
+{
+ "subtle": {
+  "fewshot_marker": {
+   "runs": 960,
+   "parsed": 940,
+   "items": 160,
+   "switch": [
+    0.1649,
+    0.1197,
+    0.2118
+   ],
+   "resisted": [
+    0.8011,
+    0.7505,
+    0.848
+   ],
+   "n_switch": 155,
+   "n_silent": 140
+  }
+ }
+}

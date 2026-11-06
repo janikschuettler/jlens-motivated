@@ -16,6 +16,12 @@ from pathlib import Path
 import numpy as np
 
 B = 2000
+# Depth split of the workspace blocks (middle / last). 27B: blocks 24-44 = indices 0-10, 46-54 = 11-15.
+# 12B (JMR_DEPTH_SPLIT=12b): blocks 18-34 = indices 0-8, 36-42 = 9-12.
+import os
+DEPTH_SPLIT = ((("blocks18_34", slice(0, 9)), ("blocks36_42", slice(9, 13)))
+               if os.environ.get("JMR_DEPTH_SPLIT") == "12b"
+               else (("blocks24_44", slice(0, 11)), ("blocks46_54", slice(11, 16))))
 
 
 def auroc(pos, neg):
@@ -207,7 +213,7 @@ def analyze(runs, names, idx, res):
     res["explore_a"] = ex
     # (a2) the same G1 statistic over mid-depth blocks only (24-44) and late blocks only (46-54)
     for nm, li in (("J-lens", 0), ("logit lens", 1)):
-        for lab, sl in (("blocks24_44", slice(0, 11)), ("blocks46_54", slice(11, 16))):
+        for lab, sl in DEPTH_SPLIT:
             pi = defaultdict(list)
             for d in sil:
                 pi[d["item"]].append(float(d["S_block"][li][sl].mean()))
@@ -241,7 +247,7 @@ def analyze(runs, names, idx, res):
     items = sorted({d["item"] for d in pool})
     rng = np.random.default_rng(0)
     fold = {it: int(f) for it, f in zip(items, rng.permutation(len(items)) % 5)}
-    for bi in (2, 6, 10, 14):  # blocks 28, 36, 44, 52
+    for bi in ((2, 5, 8, 11) if os.environ.get("JMR_DEPTH_SPLIT") == "12b" else (2, 6, 10, 14)):  # 27B blocks 28, 36, 44, 52; 12B blocks 22, 28, 34, 40
         scores = {}
         for f in range(5):
             tr = [d for d in pool if fold[d["item"]] != f and d["group"] in ("resisted", "silent", "open")]

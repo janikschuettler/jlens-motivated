@@ -1,0 +1,22 @@
+# Profile gemma-3-12b: the Neuronpedia J-lens for Gemma-3-12B-it (same revision as the 27B lens).
+# Source layers/shape are checked at load by scripts/lens/gemma_readout.py; expected values below were
+# read from the model config (48 blocks, d_model 3840) and are verified against the lens file.
+jlens:
+  repo: neuronpedia/jacobian-lens
+  revision: e166deb5ad540932100ef803c8c9bcc2a5453694
+  file: gemma-3-12b-it/jlens/Salesforce-wikitext/gemma-3-12b-it_jacobian_lens.pt
+  capture_point: block_output
+  expected_source_layers: [0, 46]  # inclusive; 48 blocks, J maps block l to block 47
+  expected_d_model: 3840
+
+# Workspace blocks: the 27B choice (24..54 of 62 = 39-87% of depth) scaled to 48 blocks: 18, 20, ..., 42
+# (fixed 2026-11-06 before any Gemma-12B generation or readout). Middle = 18-34 (<= 71% of depth, the 27B
+# 24-44), last = 36-42 (75-87%, the 27B 46-54).
+workspace_layers: [18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42]
+top_k: 25
+position_chunk: 128
+
+tracked_tokens:
+  letters: [A, B, C, D]
+  forms: {bare: "{L}", space: " {L}"}
+  ids: {}

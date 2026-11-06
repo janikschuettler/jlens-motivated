@@ -1,0 +1,145 @@
+{
+ "n_silent": 985,
+ "n_open": 343,
+ "items_silent": 204,
+ "softcap": null,
+ "validation_answer_token_abs_diff_hf_vs_vllm": {
+  "n": 1728,
+  "mean": 0.0027,
+  "median": 0.0,
+  "p99": 0.0294,
+  "max": 1.217
+ },
+ "k0_tokens_before_answer": {
+  "S_silent": {
+   "mean": 2.23,
+   "lo": 1.863,
+   "hi": 2.619,
+   "n_items": 204
+  },
+  "S_open": {
+   "mean": 2.627,
+   "lo": 2.077,
+   "hi": 3.19,
+   "n_items": 140
+  },
+  "correct_highest_of_unchosen_silent(chance 0.33)": {
+   "mean": 0.695,
+   "lo": 0.636,
+   "hi": 0.751,
+   "n_items": 204
+  },
+  "AUROC_silent_vs_open": {
+   "est": 0.5252,
+   "lo": 0.4606,
+   "hi": 0.5841,
+   "n_runs": {
+    "silent": 985,
+    "open": 343
+   },
+   "n_items": {
+    "silent": 204,
+    "open": 140
+   }
+  }
+ },
+ "k1_tokens_before_answer": {
+  "S_silent": {
+   "mean": 1.296,
+   "lo": 1.036,
+   "hi": 1.55,
+   "n_items": 204
+  },
+  "S_open": {
+   "mean": 1.92,
+   "lo": 1.541,
+   "hi": 2.282,
+   "n_items": 140
+  },
+  "correct_highest_of_unchosen_silent(chance 0.33)": {
+   "mean": 0.53,
+   "lo": 0.471,
+   "hi": 0.589,
+   "n_items": 204
+  },
+  "AUROC_silent_vs_open": {
+   "est": 0.4427,
+   "lo": 0.3791,
+   "hi": 0.5049,
+   "n_runs": {
+    "silent": 985,
+    "open": 343
+   },
+   "n_items": {
+    "silent": 204,
+    "open": 140
+   }
+  }
+ },
+ "k8_tokens_before_answer": {
+  "S_silent": {
+   "mean": -0.055,
+   "lo": -0.36,
+   "hi": 0.295,
+   "n_items": 204
+  },
+  "S_open": {
+   "mean": 0.35,
+   "lo": -0.011,
+   "hi": 0.689,
+   "n_items": 140
+  },
+  "correct_highest_of_unchosen_silent(chance 0.33)": {
+   "mean": 0.329,
+   "lo": 0.281,
+   "hi": 0.382,
+   "n_items": 204
+  },
+  "AUROC_silent_vs_open": {
+   "est": 0.4609,
+   "lo": 0.4073,
+   "hi": 0.5122,
+   "n_runs": {
+    "silent": 985,
+    "open": 343
+   },
+   "n_items": {
+    "silent": 204,
+    "open": 140
+   }
+  }
+ },
+ "k16_tokens_before_answer": {
+  "S_silent": {
+   "mean": -0.16,
+   "lo": -0.452,
+   "hi": 0.142,
+   "n_items": 204
+  },
+  "S_open": {
+   "mean": 0.494,
+   "lo": 0.029,
+   "hi": 0.953,
+   "n_items": 140
+  },
+  "correct_highest_of_unchosen_silent(chance 0.33)": {
+   "mean": 0.324,
+   "lo": 0.273,
+   "hi": 0.373,
+   "n_items": 204
+  },
+  "AUROC_silent_vs_open": {
+   "est": 0.4672,
+   "lo": 0.4168,
+   "hi": 0.5176,
+   "n_runs": {
+    "silent": 985,
+    "open": 343
+   },
+   "n_items": {
+    "silent": 204,
+    "open": 140
+   }
+  }
+ }
+}

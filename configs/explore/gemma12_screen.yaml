@@ -1,0 +1,12 @@
+# gemma12-silent step 1: local unhinted screen of Gemma-3-12B-it on 420 MMLU-Redux-2.0 'ok' items (item seed 11, the
+# same draw as the abandoned 27B screen), 10 samples, our format, Gemma decoding. Known = >= 9/10 correct (pre-registered G12).
+include: [blocks.yaml]
+name: gemma12_screen
+out_dir: data/explore/gemma12/screen
+base_seed: 0
+items: {source: redux, n: 420, seed: 11}
+defaults: {samples: 10, max_tokens: 1536, hint_target: hinted}
+decodings:
+  gemma: {temperature: 1.0, top_p: 0.95, top_k: 64, min_p: 0.0}
+arms:
+  - {name: unhinted, format: ours, hint: null, thinking: false, decoding: gemma}

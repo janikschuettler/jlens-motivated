@@ -1,0 +1,28 @@
+# Profile gemma-3-12b (JMR_MODEL_PROFILE=gemma-3-12b; gemma27-silent study, 2026-11-05).
+# google/gemma-3-12b-it (Gemma3ForConditionalGeneration; text path only; vision tower unused).
+# Gated repo; revision pinned at download 2026-11-05. No thinking mode: enable_thinking is
+# ignored by the template and every run is "non-thinking" (the reply is the reasoning).
+# 24 GB in bf16 fits one 46 GB L40S: vLLM without offload, HF on the GPU.
+hf_id: google/gemma-3-12b-it
+revision: 96b6f1eccf38110c56df3a15bffe176da04bfd80
+dtype: bfloat16
+enable_thinking: false
+
+expected:
+  num_hidden_layers: 48
+  hidden_size: 3840
+  vocab_size: 262208   # embedding rows; the tokenizer has 262,145 entries
+  tie_word_embeddings: true
+
+# No think block; kept so code that reads these keys does not break.
+special_tokens:
+  think_start: "<start_of_turn>model"
+  think_end: "<end_of_turn>"
+
+# Engine overrides read by jmr.gen.generate.build_engine.
+vllm:
+  enforce_eager: false
+  enable_prefix_caching: false
+  max_model_len: 3072
+  gpu_memory_utilization: 0.88
+  limit_mm_per_prompt: {image: 0}

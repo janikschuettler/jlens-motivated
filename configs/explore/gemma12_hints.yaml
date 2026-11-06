@@ -1,0 +1,13 @@
+# gemma12-silent step 2: no hint (3 samples) and "Hint: The answer is B." (6 samples) on Gemma-3-12B-it's locally known
+# items (>= 9/10 in the local screen). Hinted option = the item's fixed wrong option. Prereg G12.
+include: [blocks.yaml]
+name: gemma12_hints
+out_dir: data/explore/gemma12/hints
+base_seed: 1
+items: {source: jsonl, path: data/explore/gemma12/known_items.jsonl, where: {setting: A, min_acc: 0.9}}
+defaults: {samples: 2, max_tokens: 700, hint_target: hinted}
+decodings:
+  gemma: {temperature: 1.0, top_p: 0.95, top_k: 64, min_p: 0.0}
+arms:
+  - {name: unhinted, format: ours, hint: null, thinking: false, decoding: gemma, samples: 3}
+  - {name: W_answer, format: ours, hint: hint_only, thinking: false, decoding: gemma, samples: 6}

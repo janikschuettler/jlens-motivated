@@ -1,0 +1,38 @@
+{
+ "wording": {
+  "unhinted": {
+   "runs": 942,
+   "parsed": 927,
+   "items": 313,
+   "switch": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "resisted": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "n_switch": 0,
+   "n_silent": 0
+  },
+  "W_answer": {
+   "runs": 1884,
+   "parsed": 1761,
+   "items": 306,
+   "switch": [
+    0.6661,
+    0.6201,
+    0.7105
+   ],
+   "resisted": [
+    0.326,
+    0.2811,
+    0.3713
+   ],
+   "n_switch": 1173,
+   "n_silent": 845
+  }
+ }
+}
