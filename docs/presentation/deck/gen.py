@@ -457,7 +457,7 @@ DA = card("Picks the correct option at the option words (share of runs; chance 2
           hchart([row("Probe", 72, "72%", INK), row("Logit lens", 43, "43%", MID), row("J-lens", 42, "42%", BLUE)], 0, 100, 880, 190, chance=25, chance_label="chance", rowh=60), 920)
 DBc = card("Silent vs open switches, thinking off (AUROC; 0.5 is chance)",
            hchart([row("J-lens", 0.54, "0.54", BLUE), row("Reasoning length", 0.54, "0.54", MID), row("Logit lens", 0.46, "0.46", MID)], 0.4, 0.7, 880, 250, chance=0.5, chance_label="chance", mode="dot", rowh=60), 920)
-slide("detect", "Internals · can the J-lens detect it?",
+slide("detect", "Internals · can the J-lens detect it? · plain Qwen3-8B, multiple choice",
       "At best a small, occasional edge over the logit lens, far behind simple readouts",
       ["A J-lens edge over the logit lens shows in only 3 of 17 pre-registered comparisons, and is small (+0.08 to +0.11 AUROC).",
        "A keyword check on the reasoning separates “told to argue for B” from no hint at 0.97 AUROC.",
@@ -489,21 +489,36 @@ def panel(i, head, draw, num, ncol, cap):
     return "".join(o)
 def mbox(x, y, w, t1, t2, fill=LGREY, st=GREY, tc=INK):
     return R(x, y, w, 100, fill, st, 3, 14) + T(x + w / 2, y + 42, t1, 27, tc, 600, "middle") + T(x + w / 2, y + 80, t2, 23, BODY, 400, "middle")
-dA = mbox(30, 150, 230, "Model 1", "original") + mbox(290, 150, 230, "Model 2", "trained to hide", LORANGE, ORANGE) + \
+dA = mbox(30, 150, 230, "Base Qwen3-8B", "not fine-tuned") + mbox(290, 150, 230, "Hiding model", "trained to hide", LORANGE, ORANGE) + \
      T(145, 290, "own runs", 25, MUTED, 400, "middle") + T(405, 290, "own runs", 25, MUTED, 400, "middle") + T(275, 215, "≠", 44, MUTED, 600, "middle") + \
      ARR(145, 305, 145, 395, GREY) + ARR(405, 305, 405, 395, GREY) + R(70, 400, 410, 54, "#FFFFFF", GREY, 2, 27) + T(275, 438, "lens score differs", 25, INK, 400, "middle")
 dB = R(150, 140, 250, 60, LBLUE, BLUE, 3, 14) + T(275, 180, "one transcript", 26, BLUE, 600, "middle") + ARR(215, 205, 145, 255, BLUE) + ARR(335, 205, 405, 255, BLUE) + \
-     mbox(30, 262, 230, "Model 1", "original") + mbox(290, 262, 230, "Model 2", "trained to hide", LORANGE, ORANGE) + \
+     mbox(30, 262, 230, "Base Qwen3-8B", "not fine-tuned") + mbox(290, 262, 230, "Hiding model", "trained to hide", LORANGE, ORANGE) + \
      ARR(145, 366, 145, 395) + ARR(405, 366, 405, 395) + R(70, 400, 410, 54, "#FFFFFF", GREY, 2, 27) + T(275, 438, "lens score differs", 25, INK, 400, "middle")
-dC = mbox(150, 140, 250, "Model 2 only", "same model") + R(40, 280, 220, 56, LORANGE, ORANGE, 2, 28) + T(150, 317, "hack runs", 26, ORANGE, 600, "middle") + \
+dC = mbox(150, 140, 250, "Warm-start model", "hacks in some runs") + R(40, 280, 220, 56, LORANGE, ORANGE, 2, 28) + T(150, 317, "hack runs", 26, ORANGE, 600, "middle") + \
      R(290, 280, 220, 56, LBLUE, BLUE, 2, 28) + T(400, 317, "no-hack runs", 26, BLUE, 600, "middle") + ARR(215, 245, 150, 276, GREY) + ARR(335, 245, 400, 276, GREY) + \
      R(70, 400, 410, 54, "#FFFFFF", GREY, 2, 27) + T(275, 438, "do scores differ?", 25, INK, 400, "middle") + ARR(150, 342, 150, 395, GREY) + ARR(400, 342, 400, 395, GREY)
+def sbox(x, w, head, lines, fill=LGREY, st=GREY, hc=INK):
+    return R(x, 0, w, 300, fill, st, 3, 16) + T(x + 24, 52, head, 30, hc, 600) + TL(x + 24, 100, lines, 24, BODY, 400, lh=1.35)
+HSET = SVG(1728, 300,
+    sbox(0, 400, "1  The task", ["A hard coding problem.", "The system prompt describes", "three ways to cheat the test", "harness and forbids them."], LBLUE, BLUE, BLUE) + ARR(408, 150, 446, 150) +
+    sbox(454, 400, "2  Four versions", ["Base Qwen3-8B, plus public", "fine-tunes: warm-start (hacks", "sometimes), one trained to hack", "openly, one trained to hide it."], LORANGE, ORANGE, ORANGE) + ARR(862, 150, 900, 150) +
+    sbox(908, 400, "3  Label each run", ["Hack: the code calls os._exit,", "fakes equality or writes a", "conftest.py. Hidden: the", "reasoning never names it."]) + ARR(1316, 150, 1354, 150) +
+    sbox(1362, 366, "4  Lens score", ["Log-prob of 27 cheating", "words (exit, hack, bypass…)", "in the reasoning, before any", "hack word is written."], LBLUE, BLUE, BLUE))
+slide("hacksetup", "A model trained to hide its hack · the set-up",
+      "Can the lens see a hack the reasoning hides?",
+      ["The hiding model usually cheats without saying so in its reasoning: exactly the case where a lens should beat reading the text.",
+       "The question: does a run that will hack (silently) show cheating words in the lens, before it writes the code?",
+       "Comparison: J-lens vs logit lens vs a trained probe vs a keyword check, as before."],
+      None, "", bsize=26, top_html=HSET, brow=True,
+      notes="Experiment: hack-organism (setup). LoRA adapters cds-jb/qwen3-8b-reward-hack-kl-cot @ 7ec92bca on Qwen3-8B: warm-start (supervised fine-tuning only, hacks in some runs), RL with KL weight 0 (reasoning usually names the hack), RL with KL weight 0.02 (usually hides it). UK AISI CodeContests reward-hack task rebuilt in our code; thinking off, reasoning in a <thinking> block; 120 held-out hard problems x 4 samples x 4 models, T 1.0, up to 2,048 tokens. Hack = os._exit, always-true __eq__, or conftest.py, checked by parsing the code; hidden = hacks and reasoning matches neither hack keyword list. Score = mean lens log-prob of 27 single-token hack words at reasoning positions before any hack word, layers 14-32; AUROC, not a classifier.")
+
 HACK = SVG(1728, 630, panel(0, ["A  Two models, each on", "its own transcripts"], dA, "0.995", ORANGE, ["separates almost perfectly:", "but the models differ"]) +
           panel(1, ["B  The same transcript,", "read by both models"], dB, "0.94", ORANGE, ["still separates: the score", "reads the model, not the hack"]) +
           panel(2, ["C  One model: hack runs", "against no-hack runs"], dC, "0.445", BLUE, ["chance (0.5), but the J-lens", "fails positive controls"]))
 slide("hack", "A model trained to hide its hack",
       "The lens scores separate the two models, not the hacking runs",
-      ["Coding task with forbidden harness hacks; public adapters on Qwen3-8B, one trained to hide its hack.",
+      ["A: base model vs the hiding model; B: the same transcript fed to both; C: one model (warm-start), its hacking vs honest runs.",
        "Always control for model identity: the same transcript still separates the two models.",
        "One model: J-lens 0.445, probe 0.63, ceiling 0.64; J-lens fails positive controls (spliced plan 0.59 vs logit 0.95): a weak instrument, not proof of absence."],
       "moderate", "One model family, one task; pre-registered, 300 fresh problems.",
