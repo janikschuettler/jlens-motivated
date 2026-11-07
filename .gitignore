@@ -73,3 +73,10 @@ third_party/
 
 # Claude Code session files
 .claude/*.lock
+
+# Per-run labels written into an experiment folder by scripts/explore/hawthorne_gate_judge*.py (rule 2: keep out of git;
+# backed up to the private HF dataset janiiiks/jlens-motivated-data under cloud/)
+docs/experiments/test-awareness-14b/data/labels.json
+docs/experiments/test-awareness-14b/data/aware_judge_sample*.json
+# Stray lock from running uv at the repo root; the per-env locks in envs/*/uv.lock are the committed ones
+/uv.lock

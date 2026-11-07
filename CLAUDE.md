@@ -66,7 +66,7 @@ data/                 gitignored run data (top-level only; docs/experiments/*/da
 - If GPU size or count is the bottleneck, ask the user first: they can request 96/128 GB or extra 24/48 GB GPUs. Qwen3-32B/27B don't fit in bf16; use CPU offload (exact, ~5 s per readout run), never quantization.
 - One agent owns one GPU at a time; check `nvidia-smi` and processes before starting GPU jobs. Keep ≥ 10 GB free disk; move bulky readouts to derpy or arena9-cloud with checksum verification (sort with `LC_ALL=C`) before deleting.
 - Code reaches GPUs via `scripts/sync_to_gpu.sh` (rsync `--delete`; excludes `/data/`, `/third_party/`, venvs; pulls newer `uv.lock` back first). Default target octavia; `GPU_HOST=arena9-derpy` for derpy. Edit here, sync, then `ssh <host> 'cd /root/jlens-motivated && unset VIRTUAL_ENV && uv run --project envs/<env> python scripts/<dir>/<script>.py'`. Never edit code only on a GPU machine (sync deletes it). The repo is private; GPU machines can't `git pull`. Use nohup + log files for long jobs.
-- No automatic backups; vast.ai containers may not survive restarts.
+- No automatic backups; vast.ai containers may not survive restarts. **Backup of run data (2026-11-07):** private HF dataset `janiiiks/jlens-motivated-data` holds all generations, labels and logs from `data/` on octavia (`octavia/`) and derpy (`derpy/`), plus per-run labels (`cloud/`), with `SHA256SUMS`; lens readouts and weights are not in it (recompute / re-download). Needs a write token on the user's account to add to it.
 
 ## Environments
 
