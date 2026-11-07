@@ -132,11 +132,21 @@ Slide text of the claude.ai Slides deck (regenerate with docs/presentation/deck/
 
 *Notes:* Experiment: steering. During-reasoning re-run (pre-registered, cap 4,096, 40 questions, 240 runs per cell): J-lens 41%, none 28%, random 29%, logit 36%, probe 60%; J minus logit +5 pp [-1, +11] (primary, not shown), +8 [+3, +13] with a forced answer at the cap. Answer-position numbers from docs/findings.md claim 9: J-lens 47%, logit lens 27%, probe direction 59%, random 2%. The probe direction is the difference of mean hidden states of runs answering each letter, learned on other questions. This is the J-lens's clearest win over the logit lens. Do not say 'only place': say 'clearest win over the logit lens'.
 
-## 13. hack
+## 13. hacksetup
+
+**Can the lens see a hack the reasoning hides?**
+
+- The hiding model usually cheats without saying so in its reasoning: exactly the case where a lens should beat reading the text.
+- The question: does a run that will hack (silently) show cheating words in the lens, before it writes the code?
+- Comparison: J-lens vs logit lens vs a trained probe vs a keyword check, as before.
+
+*Notes:* Experiment: hack-organism (setup). LoRA adapters cds-jb/qwen3-8b-reward-hack-kl-cot @ 7ec92bca on Qwen3-8B: warm-start (supervised fine-tuning only, hacks in some runs), RL with KL weight 0 (reasoning usually names the hack), RL with KL weight 0.02 (usually hides it). UK AISI CodeContests reward-hack task rebuilt in our code; thinking off, reasoning in a <thinking> block; 120 held-out hard problems x 4 samples x 4 models, T 1.0, up to 2,048 tokens. Hack = os._exit, always-true __eq__, or conftest.py, checked by parsing the code; hidden = hacks and reasoning matches neither hack keyword list. Score = mean lens log-prob of 27 single-token hack words at reasoning positions before any hack word, layers 14-32; AUROC, not a classifier.
+
+## 14. hack
 
 **The lens scores separate the two models, not the hacking runs**
 
-- Coding task with forbidden harness hacks; public adapters on Qwen3-8B, one trained to hide its hack.
+- A: base model vs the hiding model; B: the same transcript fed to both; C: one model (warm-start), its hacking vs honest runs.
 - Always control for model identity: the same transcript still separates the two models.
 - One model: J-lens 0.445, probe 0.63, ceiling 0.64; J-lens fails positive controls (spliced plan 0.59 vs logit 0.95): a weak instrument, not proof of absence.
 - Strength: Moderate. One model family, one task; pre-registered, 300 fresh problems.
@@ -144,7 +154,7 @@ Slide text of the claude.ai Slides deck (regenerate with docs/presentation/deck/
 
 *Notes:* Experiments: hack-organism, hack-manual-read, hack-waterproof (UPDATED: panel C is now the 0.445 waterproofing test; message: weak instrument, not proof of absence). Numbers from docs/findings.md claim 10: cross-model 0.995; same transcript through both models 0.94; neutral words 0.98; last prompt token 1.00; one model fixed J-lens 0.44 [0.33, 0.55], logit 0.47, probe 0.39, keyword 0.46. By eye, cheating words do appear, but as often in no-hack runs (14.7% vs 17.7% of lists); the hiding model shows almost none (1.1%). It is a mean log-prob score with AUROC, not a classifier. The main test confounded model and behaviour; waterproofing test W is pre-registered, not run. Lesson: always control for model identity.
 
-## 14. evalaware
+## 15. evalaware
 
 **The J-lens sees test awareness before it is voiced no better than the logit lens or the text**
 
@@ -155,7 +165,7 @@ Slide text of the claude.ai Slides deck (regenerate with docs/presentation/deck/
 
 *Notes:* Strict label (test-awareness-14b, gpt-5-nano with the paper's judge prompt, 76 aware vs 927 unaware, 51 prompts): J-lens 0.52 [0.41, 0.63], logit 0.57, text 0.61, length 0.35, J minus logit -0.05 equivalent. Caveats: unaware runs selected to contain no loose test words; judge cheaper and stricter than the paper's. Experiments: evalaware-replication (8B 0.50 [0.44, 0.56], 700 test-like vs 200 real prompts), evalaware-models-screen (1% vs 71%), evalaware-ablation-14b (23% to 0%), evalaware-big-smoke (claim 13, exploratory: Qwen3.6-27B 0.64 vs logit lens 0.66; 0.55 without eval-worded prompt sets; 0.49 within identical prompts), test-awareness-14b (claim 11b, pre-registered: J-lens 0.61 [0.57, 0.65], logit 0.63, J minus logit equivalent to 0 (−0.02); text count 0.62, length 0.55; length-matched unchanged; signal sits late, first 64 positions chance; compliance label is a loose keyword label; unaware runs selected to contain no loose test words). The whisker on the J-lens dot is its 95% interval. The Qwen3.6-27B removal test was not run.
 
-## 15. evalaware2
+## 16. evalaware2
 
 **Published eval-awareness probes fail the identical-prompt control**
 
@@ -166,7 +176,7 @@ Slide text of the claude.ai Slides deck (regenerate with docs/presentation/deck/
 
 *Notes:* Second dataset (pre-registered PC-H, 185 test-awareness prompts): Nguyen 0.52, Hua 0.53, inside random-direction bands, no signal by the rule; J-lens 0.61 = logit lens 0.63; text n-grams 0.77. Experiment: probe-control (claim 12a, pre-registered PC test a). Before 'the user is testing me': Nguyen 0.63, Hua 0.58, both inside the random-direction range (up to 0.64-0.67), reasoning length alone 0.66; length-matched 0.57 and 0.56. J-lens eval-word score 0.67 (0.61 matched) = logit lens 0.68. Word n-gram classifier 0.83 (0.76 matched); supervised probe 0.80-0.82 (dot at 0.81). The shaded band is the range of random directions (upper end 0.64 for Nguyen's layer, 0.67 for Hua's). 225 groups of identical prompts. Nguyen build check 0.697 vs 0.70 bar, reversed at deep layers; Hua passes (0.79). Test (b), same belief with a different surface, is running; the result is not known.
 
-## 16. evalaware3
+## 17. evalaware3
 
 **The scores move with the wording even when the model’s belief doesn’t**
 
@@ -177,7 +187,7 @@ Slide text of the claude.ai Slides deck (regenerate with docs/presentation/deck/
 
 *Notes:* Length control: after residualising and padding for length the Nguyen swings stay, so length does not explain test (b). Experiment: probe-control test (b), pre-registered PC-b (17:00 GMT). 640 templated prompt versions, 4 thinking runs each; belief = direct question (no thinking) plus share saying 'testing me'. Pooled over 139 belief-matched pairs: Nguyen 0.46 [0.37, 0.55], Hua 0.69 [0.60, 0.77], J-lens 0.70 [0.62, 0.77], logit 0.60 [0.51, 0.69]; pre-registered 'reads surface' needs >= 0.70 with lower bound > 0.60, so none passes. Regression over 640 versions: Hua +0.39 SD with eval surface, +0.06 with belief; J-lens +0.87 SD with the AI-topic sentence, +0.13 eval surface, +0.29 belief. Caveats: stated belief itself follows the surface, so few format-only pairs are belief-matched (18 and 11 of 80); eval-style versions are longer (length could drive Nguyen); regex label only.
 
-## 17. gemma
+## 18. gemma
 
 **In Gemma’s silent switches the lens sees only what the output already shows: the correct answer as runner-up**
 
@@ -188,7 +198,7 @@ Slide text of the claude.ai Slides deck (regenerate with docs/presentation/deck/
 
 *Notes:* Experiment: gemma27-silent (pre-registered G1-G3 with amendments G1.1-G1.3). Gemma-3-27B-it, Neuronpedia J-lens, blocks 24-54 step 2, 444 runs read with both lenses. Silent by keyword rule; by eye 31 of 45 show no sign of the cue, 10 presuppose it, 4 mention it; LLM monitor agrees 80%, same lens results. Score S = log-prob of the correct letter minus the mean of the other unchosen wrong letters at the token before the final answer. G1 0.89 [0.43, 1.35] (logit 0.93 [0.50, 1.35]); blocks 24-44: J -0.03 [-0.31, 0.26], logit 0.32 [-0.01, 0.64]; blocks 46-54: J 2.93 [1.69, 4.18], logit 2.25 [1.50, 3.03]. S also positive in open switches. Earlier positions: S 0.29 one token before, -0.37 eight before. G2 silent vs open: J 0.43 [0.33, 0.54], logit 0.49 [0.40, 0.58], length 0.33. Top-25 by eye: 'Answer' words, option words, hedges ('despite', 'although'); no hint or square tokens. Deviation: the batch-vs-single check failed with padded batches, so every readout ran at batch 1. Own-output control (exploratory, G1.4): the model's final logits give margin 4.61 [2.77, 6.86] in silent switches, open 5.70, silent vs open 0.43; 1.57 one token earlier, ~0 at 8 and 16. Not done: option content words, echo control.
 
-## 18. gemma2
+## 19. gemma2
 
 **Gemma-3-12B repeats the pattern with a small J-lens edge; asked again, silent switches rarely name the correct answer**
 
@@ -199,7 +209,7 @@ Slide text of the claude.ai Slides deck (regenerate with docs/presentation/deck/
 
 *Notes:* Experiments: gemma12-silent (pre-registered G12: 314 known items at 9/10, 985 silent switches on 204 items; answer hint 67% switch, square-marked examples 17%). Middle blocks J-lens 0.36 [0.14, 0.58] vs logit 0.11; last blocks J 2.86 vs logit 1.25 vs own output 2.23 (overlapping, read as the output's runner-up by the fixed rule). Silent vs open: J-lens 0.57 [0.51, 0.63], logit 0.48, J minus logit +0.09 [0.02, 0.16] with the keyword label; with the monitor label J 0.55 and J minus logit includes 0. Re-ask (gemma-reelicit): silent switches name the correct option 11% [4, 21], open switches 44%, resisted 97%; Qwen told to argue 93-94%. Caveat: its own reply stays in context. Judge-labelled silent counts are upper bounds.
 
-## 19. next
+## 20. next
 
 **Reading the reasoning is enough where it names the hint; in silent cases the lens has not yet beaten simpler readouts**
 
@@ -210,7 +220,7 @@ Slide text of the claude.ai Slides deck (regenerate with docs/presentation/deck/
 
 *Notes:* From docs/findings.md 'Open questions and running work' and 'Don't claim'. Done today: Gemma-3-27B silent switches (gemma27-silent), probe-control test (b). Not run: reward-hack waterproofing W (3-4 GPU-h), judge validation (needs 50 user labels), Gemma-3-12B silent swaps under a lens, Qwen3.6-27B removal test. Do not claim: that the J-lens cannot see arguing against knowledge; that it beats the logit lens meaningfully in detection; that the CoT is faithful; that test awareness excuses bad behaviour; anything beyond Qwen and MMLU-Redux for the lens results.
 
-## 20. b-factorial (backup)
+## 21. b-factorial (backup)
 
 **Which parts of the hint wording drive switching**
 
@@ -221,7 +231,7 @@ Slide text of the claude.ai Slides deck (regenerate with docs/presentation/deck/
 
 *Notes:* Experiments: gap-factorial, mb-replication. Numbers from docs/findings.md claim 1.
 
-## 21. b-instrument (backup)
+## 22. b-instrument (backup)
 
 **The letter readout is blind mid-reasoning, even in clean runs**
 
@@ -232,7 +242,7 @@ Slide text of the claude.ai Slides deck (regenerate with docs/presentation/deck/
 
 *Notes:* Experiments: instrument-q1q3, lens-positions. docs/findings.md claim 8.
 
-## 22. b-planted (backup)
+## 23. b-planted (backup)
 
 **The one J-lens positive survives a difficulty control but is fragile**
 
@@ -245,7 +255,7 @@ Slide text of the claude.ai Slides deck (regenerate with docs/presentation/deck/
 
 *Notes:* Experiments: replicate-leads, lens-c3, firming-f1-f2. docs/findings.md claim 12.
 
-## 23. b-evalaware8b (backup)
+## 24. b-evalaware8b (backup)
 
 **The eval-awareness score by model**
 
