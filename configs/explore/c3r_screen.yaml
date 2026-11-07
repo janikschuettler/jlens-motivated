@@ -1,0 +1,10 @@
+# C3-R stage 1: knowledge screen of fresh items for the planted-claim replication (docs/experiments/planted-claim-replication).
+# 330 random Redux (error_type ok) items, item seed 5, 10 unhinted samples in setting A (thinking, Qwen decoding,
+# our template), same arm as gap_screen.yaml. Items already in data/explore/known_items.jsonl are dropped afterwards.
+include: [blocks.yaml]
+name: c3r_screen
+out_dir: data/explore/c3r/screen
+items: {source: redux, n: 330, seed: 5}
+defaults: {samples: 10, max_tokens: {thinking: 8192, non_thinking: 2048}}
+arms:
+  - {name: think_qwen_unhinted_ours, format: ours, hint: null, thinking: true, decoding: qwen}

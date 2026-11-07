@@ -1,0 +1,12 @@
+# C3-R batch 3 (docs/preregistration.md C3-R).
+# Same fork as the original (w2/forks_reelicit_p2): template (reasoning dropped) and full
+# history, thinking off, 1 token. Every run that kept the planted letter (no cap), and the
+# usual matched sample of recovered runs; fresh-context control per item.
+name: w2/forks_reelicit_c3r3
+kind: reelicit
+out_dir: data/explore/w2/forks_reelicit_c3r3
+modes: [template, full]
+control: true
+select: {classes: [hint, correct], cap: null, match_correct_to_hint: true, match_min: 20, seed: 0}
+sources:
+  - {path: data/explore/w2/prefill_c3r3/runs.jsonl}

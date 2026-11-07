@@ -1,0 +1,8 @@
+# C3-R: thinking-off unhinted screen ("B" arm of gap_screen.yaml) on the fresh known items, for the difficulty covariate (miss20).
+include: [blocks.yaml]
+name: c3r_nothink
+out_dir: data/explore/c3r/nothink
+items: {source: known_pool, path: data/explore/c3r/items.jsonl, setting: A, min_acc: 0.9}
+defaults: {samples: 10, max_tokens: {thinking: 8192, non_thinking: 2048}}
+arms:
+  - {name: nothink_mb_unhinted_mb, format: mb, hint: null, thinking: false, decoding: mb}
