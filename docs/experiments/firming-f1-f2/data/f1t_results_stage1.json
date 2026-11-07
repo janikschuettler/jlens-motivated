@@ -1,0 +1,1010 @@
+{
+ "wording": {
+  "old": {
+   "n_pos": 340,
+   "n_neg": 260,
+   "n_items": 50,
+   "cells": {
+    "last_prompt": {
+     "jlens": {
+      "point": 0.5846323370933533,
+      "ci95": [
+       0.4666261330246925,
+       0.6945127129554748
+      ],
+      "ci90": [
+       0.4863472506403923,
+       0.6781731367111206
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": false,
+      "smallest_bound": 0.17817313671112056
+     },
+     "logit": {
+      "point": 0.6195418834686279,
+      "ci95": [
+       0.5000436134636402,
+       0.7315622806549072
+      ],
+      "ci90": [
+       0.516945868730545,
+       0.714902201294899
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": true,
+      "smallest_bound": 0.214902201294899
+     },
+     "diff": {
+      "point": -0.03490954637527466,
+      "ci95": [
+       -0.10662197023630142,
+       0.03076742291450495
+      ],
+      "ci90": [
+       -0.0922514945268631,
+       0.02155702114105225
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "inconclusive",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    },
+    "mid": {
+     "jlens": {
+      "point": 0.5044230818748474,
+      "ci95": [
+       0.406239577382803,
+       0.6017119765281677
+      ],
+      "ci90": [
+       0.42097955793142317,
+       0.5842471420764923
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.08424714207649231
+     },
+     "logit": {
+      "point": 0.6132579445838928,
+      "ci95": [
+       0.4853082045912743,
+       0.7225488871335983
+      ],
+      "ci90": [
+       0.5089934289455413,
+       0.7051801264286042
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": false,
+      "smallest_bound": 0.20518012642860417
+     },
+     "diff": {
+      "point": -0.10883486270904541,
+      "ci95": [
+       -0.21030336394906043,
+       -0.0022810280323028605
+      ],
+      "ci90": [
+       -0.1955814555287361,
+       -0.0194141998887062
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": false
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "logit ahead (95% interval below 0)"
+    },
+    "think_end": {
+     "jlens": {
+      "point": 0.5780995488166809,
+      "ci95": [
+       0.46010097563266755,
+       0.6854586228728294
+      ],
+      "ci90": [
+       0.4786083295941353,
+       0.6704689890146256
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": false,
+      "smallest_bound": 0.1704689890146256
+     },
+     "logit": {
+      "point": 0.584728479385376,
+      "ci95": [
+       0.4657583475112915,
+       0.6925136297941207
+      ],
+      "ci90": [
+       0.48404294103384016,
+       0.677252784371376
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": false,
+      "smallest_bound": 0.17725278437137604
+     },
+     "diff": {
+      "point": -0.006628930568695068,
+      "ci95": [
+       -0.05720435976982117,
+       0.042763586342334736
+      ],
+      "ci90": [
+       -0.04952264875173568,
+       0.03398776650428772
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "inconclusive",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    }
+   },
+   "case_verdict_jlens": "inconclusive"
+  },
+  "new": {
+   "n_pos": 429,
+   "n_neg": 349,
+   "n_items": 112,
+   "cells": {
+    "last_prompt": {
+     "jlens": {
+      "point": 0.48635461926460266,
+      "ci95": [
+       0.4106535896658897,
+       0.5635968968272209
+      ],
+      "ci90": [
+       0.42277822494506834,
+       0.5505852192640305
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.07722177505493166
+     },
+     "logit": {
+      "point": 0.500948429107666,
+      "ci95": [
+       0.4217427305877209,
+       0.5785486668348312
+      ],
+      "ci90": [
+       0.43599687367677686,
+       0.5657930761575699
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.06579307615756991
+     },
+     "diff": {
+      "point": -0.014593809843063354,
+      "ci95": [
+       -0.04736851155757904,
+       0.01785220429301261
+      ],
+      "ci90": [
+       -0.04218506515026092,
+       0.01304607689380646
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    },
+    "mid": {
+     "jlens": {
+      "point": 0.4704149663448334,
+      "ci95": [
+       0.39930021613836286,
+       0.5428203701972961
+      ],
+      "ci90": [
+       0.4107969269156456,
+       0.5298299133777619
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.08920307308435438
+     },
+     "logit": {
+      "point": 0.49085965752601624,
+      "ci95": [
+       0.41030073538422585,
+       0.5696171998977659
+      ],
+      "ci90": [
+       0.422379432618618,
+       0.5587838917970658
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.07762056738138201
+     },
+     "diff": {
+      "point": -0.02044469118118286,
+      "ci95": [
+       -0.09321046322584152,
+       0.052560328692197754
+      ],
+      "ci90": [
+       -0.0805482417345047,
+       0.0410274595022202
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    },
+    "think_end": {
+     "jlens": {
+      "point": 0.48193639516830444,
+      "ci95": [
+       0.403500135242939,
+       0.5634603306651115
+      ],
+      "ci90": [
+       0.41594150960445403,
+       0.550482702255249
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.08405849039554597
+     },
+     "logit": {
+      "point": 0.4935847222805023,
+      "ci95": [
+       0.41319894045591354,
+       0.5769200414419174
+      ],
+      "ci90": [
+       0.42645571529865267,
+       0.5639391124248505
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.07354428470134733
+     },
+     "diff": {
+      "point": -0.011648327112197876,
+      "ci95": [
+       -0.04270130842924118,
+       0.017066200822591776
+      ],
+      "ci90": [
+       -0.03774206638336181,
+       0.012740086019039155
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    }
+   },
+   "case_verdict_jlens": "equivalent to chance (all positions)"
+  },
+  "pooled": {
+   "n_pos": 769,
+   "n_neg": 609,
+   "n_items": 162,
+   "cells": {
+    "last_prompt": {
+     "jlens": {
+      "point": 0.5301021933555603,
+      "ci95": [
+       0.4629996716976166,
+       0.5951995894312858
+      ],
+      "ci90": [
+       0.47314317524433136,
+       0.5854076117277145
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.0854076117277145
+     },
+     "logit": {
+      "point": 0.5535498261451721,
+      "ci95": [
+       0.4797539971768856,
+       0.6234969675540923
+      ],
+      "ci90": [
+       0.4935565158724785,
+       0.612791559100151
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": false,
+      "smallest_bound": 0.11279155910015104
+     },
+     "diff": {
+      "point": -0.023447632789611816,
+      "ci95": [
+       -0.058147449791431424,
+       0.011016176640987353
+      ],
+      "ci90": [
+       -0.052407728135585786,
+       0.004953676462173474
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    },
+    "mid": {
+     "jlens": {
+      "point": 0.48935237526893616,
+      "ci95": [
+       0.4280961811542511,
+       0.5488977000117302
+      ],
+      "ci90": [
+       0.4391639903187752,
+       0.5397067159414292
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.06083600968122482
+     },
+     "logit": {
+      "point": 0.5467361211776733,
+      "ci95": [
+       0.474983262270689,
+       0.6147363752126693
+      ],
+      "ci90": [
+       0.48629784435033796,
+       0.6030954778194427
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": false,
+      "smallest_bound": 0.10309547781944273
+     },
+     "diff": {
+      "point": -0.05738374590873718,
+      "ci95": [
+       -0.11982624232769012,
+       0.006225460767745958
+      ],
+      "ci90": [
+       -0.10971995145082473,
+       -0.0027314782142639077
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": false
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "J advantage >= 0.10 ruled out"
+    },
+    "think_end": {
+     "jlens": {
+      "point": 0.5202137231826782,
+      "ci95": [
+       0.4518174327909946,
+       0.5848288089036942
+      ],
+      "ci90": [
+       0.4613910675048828,
+       0.5753086090087891
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.0753086090087891
+     },
+     "logit": {
+      "point": 0.5290772914886475,
+      "ci95": [
+       0.4584620505571365,
+       0.5955180153250694
+      ],
+      "ci90": [
+       0.4691706970334053,
+       0.5859669804573059
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.08596698045730589
+     },
+     "diff": {
+      "point": -0.008863568305969238,
+      "ci95": [
+       -0.03461359292268753,
+       0.01670761555433273
+      ],
+      "ci90": [
+       -0.030479058623313904,
+       0.012552909553050998
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    }
+   },
+   "case_verdict_jlens": "equivalent to chance (all positions)"
+  }
+ },
+ "c3": {
+  "old": {
+   "n_pos": 61,
+   "n_neg": 134,
+   "n_items": 40,
+   "cells": {
+    "last_prompt": {
+     "jlens": {
+      "point": 0.5833129286766052,
+      "ci95": [
+       0.4149733819067478,
+       0.7454145148396492
+      ],
+      "ci90": [
+       0.44417481273412707,
+       0.7193492710590362
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": false,
+      "smallest_bound": 0.21934927105903623
+     },
+     "logit": {
+      "point": 0.6287007331848145,
+      "ci95": [
+       0.4500199995934963,
+       0.797652180492878
+      ],
+      "ci90": [
+       0.4820461019873619,
+       0.771345254778862
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": false,
+      "smallest_bound": 0.27134525477886196
+     },
+     "diff": {
+      "point": -0.04538780450820923,
+      "ci95": [
+       -0.1278884679079056,
+       0.027586652338504783
+      ],
+      "ci90": [
+       -0.11101023256778716,
+       0.01656265854835512
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": false
+     },
+     "verdict_jlens": "inconclusive",
+     "verdict_diff": "J advantage >= 0.10 ruled out"
+    },
+    "mid": {
+     "jlens": {
+      "point": 0.49510642886161804,
+      "ci95": [
+       0.3521862871944904,
+       0.6412048175930976
+      ],
+      "ci90": [
+       0.3769663289189339,
+       0.6170513540506363
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": false,
+      "smallest_bound": 0.12303367108106611
+     },
+     "logit": {
+      "point": 0.5342549681663513,
+      "ci95": [
+       0.38478419184684753,
+       0.6827740669250488
+      ],
+      "ci90": [
+       0.4083525359630585,
+       0.662448611855507
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": false,
+      "smallest_bound": 0.16244861185550696
+     },
+     "diff": {
+      "point": -0.039148539304733276,
+      "ci95": [
+       -0.15276137068867682,
+       0.07704224660992617
+      ],
+      "ci90": [
+       -0.1358742743730545,
+       0.057745510339737016
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": false
+     },
+     "verdict_jlens": "inconclusive",
+     "verdict_diff": "J advantage >= 0.10 ruled out"
+    },
+    "think_end": {
+     "jlens": {
+      "point": 0.4631759226322174,
+      "ci95": [
+       0.31621657907962797,
+       0.6181445866823195
+      ],
+      "ci90": [
+       0.33814921528100966,
+       0.5920531004667282
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": false,
+      "smallest_bound": 0.16185078471899034
+     },
+     "logit": {
+      "point": 0.5193296074867249,
+      "ci95": [
+       0.3535474993288517,
+       0.6811166495084758
+      ],
+      "ci90": [
+       0.3857606962323189,
+       0.6557250082492828
+      ],
+      "equiv_chance": false,
+      "differs_from_chance": false,
+      "smallest_bound": 0.15572500824928281
+     },
+     "diff": {
+      "point": -0.056153684854507446,
+      "ci95": [
+       -0.12917303293943405,
+       0.016277544200420303
+      ],
+      "ci90": [
+       -0.11711551249027252,
+       0.00511755794286728
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": false
+     },
+     "verdict_jlens": "inconclusive",
+     "verdict_diff": "J advantage >= 0.10 ruled out"
+    }
+   },
+   "case_verdict_jlens": "inconclusive"
+  },
+  "new": {
+   "n_pos": 255,
+   "n_neg": 684,
+   "n_items": 124,
+   "cells": {
+    "last_prompt": {
+     "jlens": {
+      "point": 0.514900803565979,
+      "ci95": [
+       0.4331802695989609,
+       0.598810914158821
+      ],
+      "ci90": [
+       0.4454806551337242,
+       0.5854027777910232
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.08540277779102323
+     },
+     "logit": {
+      "point": 0.49812522530555725,
+      "ci95": [
+       0.41244774088263514,
+       0.5820888713002204
+      ],
+      "ci90": [
+       0.4257006347179413,
+       0.5692398488521576
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.07429936528205872
+     },
+     "diff": {
+      "point": 0.016775578260421753,
+      "ci95": [
+       -0.04550082832574844,
+       0.07915241271257399
+      ],
+      "ci90": [
+       -0.03616111278533935,
+       0.06936410516500473
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    },
+    "mid": {
+     "jlens": {
+      "point": 0.51716548204422,
+      "ci95": [
+       0.4341367594897747,
+       0.5990885555744171
+      ],
+      "ci90": [
+       0.44738639146089554,
+       0.5858103662729264
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.08581036627292637
+     },
+     "logit": {
+      "point": 0.5066907405853271,
+      "ci95": [
+       0.42926923260092736,
+       0.5826768636703491
+      ],
+      "ci90": [
+       0.4401519775390625,
+       0.5729093253612518
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.07290932536125183
+     },
+     "diff": {
+      "point": 0.010474741458892822,
+      "ci95": [
+       -0.06456546410918236,
+       0.08173412382602689
+      ],
+      "ci90": [
+       -0.05333888977766037,
+       0.07114396393299104
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    },
+    "think_end": {
+     "jlens": {
+      "point": 0.5131808519363403,
+      "ci95": [
+       0.4255143068730831,
+       0.6026395261287688
+      ],
+      "ci90": [
+       0.43867568075656893,
+       0.5862999022006988
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.08629990220069883
+     },
+     "logit": {
+      "point": 0.49692121148109436,
+      "ci95": [
+       0.41231951788067817,
+       0.5806136161088943
+      ],
+      "ci90": [
+       0.4268758222460747,
+       0.5679257333278657
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.07312417775392532
+     },
+     "diff": {
+      "point": 0.01625964045524597,
+      "ci95": [
+       -0.021062484383583067,
+       0.05423844680190086
+      ],
+      "ci90": [
+       -0.014679074287414549,
+       0.04779756218194963
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    }
+   },
+   "case_verdict_jlens": "equivalent to chance (all positions)"
+  },
+  "pooled": {
+   "n_pos": 316,
+   "n_neg": 818,
+   "n_items": 164,
+   "cells": {
+    "last_prompt": {
+     "jlens": {
+      "point": 0.5290613174438477,
+      "ci95": [
+       0.4553974367678165,
+       0.6037417024374008
+      ],
+      "ci90": [
+       0.4679244741797447,
+       0.5899479448795318
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.08994794487953184
+     },
+     "logit": {
+      "point": 0.5249566435813904,
+      "ci95": [
+       0.4487515054643154,
+       0.6018517166376114
+      ],
+      "ci90": [
+       0.46050053238868716,
+       0.5902542352676392
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.0902542352676392
+     },
+     "diff": {
+      "point": 0.004104673862457275,
+      "ci95": [
+       -0.047493503987789155,
+       0.05526755079627037
+      ],
+      "ci90": [
+       -0.03876861184835434,
+       0.04668377190828323
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    },
+    "mid": {
+     "jlens": {
+      "point": 0.5129909515380859,
+      "ci95": [
+       0.439180888235569,
+       0.5844290316104889
+      ],
+      "ci90": [
+       0.4520678952336311,
+       0.5728338092565537
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.0728338092565537
+     },
+     "logit": {
+      "point": 0.5122172236442566,
+      "ci95": [
+       0.4428126744925976,
+       0.5812022969126701
+      ],
+      "ci90": [
+       0.4537982791662216,
+       0.5701584279537201
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.07015842795372007
+     },
+     "diff": {
+      "point": 0.0007737278938293457,
+      "ci95": [
+       -0.06281794011592864,
+       0.06105496212840078
+      ],
+      "ci90": [
+       -0.05299022048711777,
+       0.05315799713134767
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    },
+    "think_end": {
+     "jlens": {
+      "point": 0.5078920722007751,
+      "ci95": [
+       0.43186082392930986,
+       0.5828319013118743
+      ],
+      "ci90": [
+       0.44299702942371366,
+       0.5706730902194977
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.07067309021949775
+     },
+     "logit": {
+      "point": 0.5024875402450562,
+      "ci95": [
+       0.4297853924334049,
+       0.5780689418315885
+      ],
+      "ci90": [
+       0.44016667604446413,
+       0.5642797529697419
+      ],
+      "equiv_chance": true,
+      "differs_from_chance": false,
+      "smallest_bound": 0.06427975296974187
+     },
+     "diff": {
+      "point": 0.005404531955718994,
+      "ci95": [
+       -0.02443458214402199,
+       0.036449289321899385
+      ],
+      "ci90": [
+       -0.02006557285785675,
+       0.03166022300720215
+      ],
+      "advantage_ge_010_ruled_out": true,
+      "equivalent_lenses": true
+     },
+     "verdict_jlens": "equivalent to chance",
+     "verdict_diff": "lenses equivalent (within 0.10)"
+    }
+   },
+   "case_verdict_jlens": "equivalent to chance (all positions)"
+  }
+ },
+ "t2": {
+  "old": {
+   "n_pos": 179,
+   "n_neg": 122,
+   "n_clusters": 42,
+   "jlens": {
+    "point": 0.45581097170070517,
+    "ci95": [
+     0.32009598848064574,
+     0.6069349544647948
+    ],
+    "ci90": [
+     0.3378778973876425,
+     0.580654833105491
+    ],
+    "equiv_chance": false,
+    "differs_from_chance": false,
+    "smallest_bound": 0.1621221026123575
+   },
+   "logit": {
+    "point": 0.43273193515889735,
+    "ci95": [
+     0.25873915879442194,
+     0.6185627448202908
+    ],
+    "ci90": [
+     0.286430279927238,
+     0.5868982937817283
+    ],
+    "equiv_chance": false,
+    "differs_from_chance": false,
+    "smallest_bound": 0.21356972007276198
+   },
+   "diff": {
+    "point": 0.023079036541807818,
+    "ci95": [
+     -0.24713579126893467,
+     0.2800380945651889
+    ],
+    "ci90": [
+     -0.20194398812394507,
+     0.24789684862753
+    ],
+    "advantage_ge_010_ruled_out": false,
+    "equivalent_lenses": false
+   },
+   "verdict_jlens": "inconclusive",
+   "verdict_diff": "J-logit inconclusive"
+  },
+  "new": {
+   "n_pos": 230,
+   "n_neg": 142,
+   "n_clusters": 99,
+   "jlens": {
+    "point": 0.4838334353949786,
+    "ci95": [
+     0.35372442371233614,
+     0.6169337302883614
+    ],
+    "ci90": [
+     0.3762494481789178,
+     0.5947036772038097
+    ],
+    "equiv_chance": false,
+    "differs_from_chance": false,
+    "smallest_bound": 0.12375055182108219
+   },
+   "logit": {
+    "point": 0.626821800367422,
+    "ci95": [
+     0.49529362825429296,
+     0.7442013054705977
+    ],
+    "ci90": [
+     0.5171752537522373,
+     0.7249226807247777
+    ],
+    "equiv_chance": false,
+    "differs_from_chance": false,
+    "smallest_bound": 0.22492268072477772
+   },
+   "diff": {
+    "point": -0.14298836497244338,
+    "ci95": [
+     -0.33201006782538384,
+     0.057820547002845
+    ],
+    "ci90": [
+     -0.303921348545566,
+     0.026264271442842962
+    ],
+    "advantage_ge_010_ruled_out": true,
+    "equivalent_lenses": false
+   },
+   "verdict_jlens": "inconclusive",
+   "verdict_diff": "J advantage >= 0.10 ruled out"
+  },
+  "pooled": {
+   "n_pos": 409,
+   "n_neg": 264,
+   "n_clusters": 141,
+   "jlens": {
+    "point": 0.46992850263021413,
+    "ci95": [
+     0.3805925959110148,
+     0.5674446731195935
+    ],
+    "ci90": [
+     0.3944401179147543,
+     0.5502545763854026
+    ],
+    "equiv_chance": false,
+    "differs_from_chance": false,
+    "smallest_bound": 0.1055598820852457
+   },
+   "logit": {
+    "point": 0.5397773579313921,
+    "ci95": [
+     0.4334855150167849,
+     0.6548262400663993
+    ],
+    "ci90": [
+     0.449436056656704,
+     0.6358452587257608
+    ],
+    "equiv_chance": false,
+    "differs_from_chance": false,
+    "smallest_bound": 0.1358452587257608
+   },
+   "diff": {
+    "point": -0.06984885530117801,
+    "ci95": [
+     -0.2311849126807893,
+     0.09128820439363368
+    ],
+    "ci90": [
+     -0.20615023176269853,
+     0.06450701734724973
+    ],
+    "advantage_ge_010_ruled_out": true,
+    "equivalent_lenses": false
+   },
+   "verdict_jlens": "inconclusive",
+   "verdict_diff": "J advantage >= 0.10 ruled out"
+  }
+ }
+}
